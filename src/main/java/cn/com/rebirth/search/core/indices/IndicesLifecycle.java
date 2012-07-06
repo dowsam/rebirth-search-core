@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesLifecycle.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesLifecycle.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.core.index.service.IndexService;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 
-
 /**
  * The Interface IndicesLifecycle.
  *
@@ -21,7 +19,6 @@ import cn.com.rebirth.search.core.index.shard.service.IndexShard;
  */
 public interface IndicesLifecycle {
 
-	
 	/**
 	 * Adds the listener.
 	 *
@@ -29,7 +26,6 @@ public interface IndicesLifecycle {
 	 */
 	void addListener(Listener listener);
 
-	
 	/**
 	 * Removes the listener.
 	 *
@@ -37,7 +33,6 @@ public interface IndicesLifecycle {
 	 */
 	void removeListener(Listener listener);
 
-	
 	/**
 	 * The Class Listener.
 	 *
@@ -45,7 +40,6 @@ public interface IndicesLifecycle {
 	 */
 	public abstract static class Listener {
 
-		
 		/**
 		 * Shard routing changed.
 		 *
@@ -58,7 +52,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * Before index created.
 		 *
@@ -68,7 +61,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * After index created.
 		 *
@@ -78,7 +70,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * Before index shard created.
 		 *
@@ -88,7 +79,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * After index shard created.
 		 *
@@ -98,7 +88,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * After index shard started.
 		 *
@@ -108,7 +97,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * Before index closed.
 		 *
@@ -119,7 +107,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * After index closed.
 		 *
@@ -130,7 +117,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * Before index shard closed.
 		 *
@@ -142,7 +128,6 @@ public interface IndicesLifecycle {
 
 		}
 
-		
 		/**
 		 * After index shard closed.
 		 *

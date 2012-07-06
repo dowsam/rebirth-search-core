@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core VersionImpl.java 2012-3-29 15:00:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestartSearchCoreVersion.java 2012-7-6 14:29:09 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core;
@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core;
 import cn.com.rebirth.commons.Version;
 
 /**
- * The Class VersionImpl.
+ * The Class RestartSearchCoreVersion.
  *
  * @author l.xue.nong
  */
@@ -18,7 +18,7 @@ public class RestartSearchCoreVersion implements Version {
 	private static final long serialVersionUID = -8043854155386241988L;
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.commons.Version#getModuleVersion()
+	 * @see cn.com.rebirth.commons.Version#getModuleVersion()
 	 */
 	@Override
 	public String getModuleVersion() {
@@ -26,7 +26,7 @@ public class RestartSearchCoreVersion implements Version {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.commons.Version#getModuleName()
+	 * @see cn.com.rebirth.commons.Version#getModuleName()
 	 */
 	@Override
 	public String getModuleName() {

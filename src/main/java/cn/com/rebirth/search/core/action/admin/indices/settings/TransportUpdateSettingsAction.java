@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportUpdateSettingsAction.java 2012-3-29 15:01:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportUpdateSettingsAction.java 2012-7-6 14:30:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.settings;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction;
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.cluster.metadata.MetaDataUpdateSettingsService
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportUpdateSettingsAction.
  *
@@ -28,11 +26,9 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportUpdateSettingsAction extends
 		TransportMasterNodeOperationAction<UpdateSettingsRequest, UpdateSettingsResponse> {
 
-	
 	/** The update settings service. */
 	private final MetaDataUpdateSettingsService updateSettingsService;
 
-	
 	/**
 	 * Instantiates a new transport update settings action.
 	 *
@@ -49,49 +45,44 @@ public class TransportUpdateSettingsAction extends
 		this.updateSettingsService = updateSettingsService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.MANAGEMENT;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return UpdateSettingsAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected UpdateSettingsRequest newRequest() {
 		return new UpdateSettingsRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected UpdateSettingsResponse newResponse() {
 		return new UpdateSettingsResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected UpdateSettingsResponse masterOperation(UpdateSettingsRequest request, ClusterState state)
-			throws RestartException {
+			throws RebirthException {
 		final AtomicReference<Throwable> failureRef = new AtomicReference<Throwable>();
 		final CountDownLatch latch = new CountDownLatch(1);
 
@@ -116,10 +107,10 @@ public class TransportUpdateSettingsAction extends
 		}
 
 		if (failureRef.get() != null) {
-			if (failureRef.get() instanceof RestartException) {
-				throw (RestartException) failureRef.get();
+			if (failureRef.get() instanceof RebirthException) {
+				throw (RebirthException) failureRef.get();
 			} else {
-				throw new RestartException(failureRef.get().getMessage(), failureRef.get());
+				throw new RebirthException(failureRef.get().getMessage(), failureRef.get());
 			}
 		}
 

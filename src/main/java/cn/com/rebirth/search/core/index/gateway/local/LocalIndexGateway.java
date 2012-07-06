@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalIndexGateway.java 2012-3-29 15:01:30 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalIndexGateway.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.gateway.local;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.index.gateway.IndexGateway;
 import cn.com.rebirth.search.core.index.gateway.IndexShardGateway;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class LocalIndexGateway.
  *
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class LocalIndexGateway extends AbstractIndexComponent implements IndexGateway {
 
-	
 	/**
 	 * Instantiates a new local index gateway.
 	 *
@@ -34,25 +31,22 @@ public class LocalIndexGateway extends AbstractIndexComponent implements IndexGa
 		super(index, indexSettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexGateway#type()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexGateway#type()
 	 */
 	@Override
 	public String type() {
 		return "local";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexGateway#shardGatewayClass()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexGateway#shardGatewayClass()
 	 */
 	@Override
 	public Class<? extends IndexShardGateway> shardGatewayClass() {
 		return LocalIndexShardGateway.class;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -61,9 +55,8 @@ public class LocalIndexGateway extends AbstractIndexComponent implements IndexGa
 		return "local";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.CloseableIndexComponent#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.CloseableIndexComponent#close(boolean)
 	 */
 	@Override
 	public void close(boolean delete) {

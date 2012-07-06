@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ConcurrentRebalanceAllocationDecider.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ConcurrentRebalanceAllocationDecider.java 2012-7-6 14:30:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.cluster.routing.ShardRoutingState;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
-
 /**
  * The Class ConcurrentRebalanceAllocationDecider.
  *
@@ -30,7 +28,6 @@ public class ConcurrentRebalanceAllocationDecider extends AllocationDecider {
 		MetaData.addDynamicSettings("cluster.routing.allocation.cluster_concurrent_rebalance");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -38,9 +35,8 @@ public class ConcurrentRebalanceAllocationDecider extends AllocationDecider {
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -56,11 +52,9 @@ public class ConcurrentRebalanceAllocationDecider extends AllocationDecider {
 		}
 	}
 
-	
 	/** The cluster concurrent rebalance. */
 	private volatile int clusterConcurrentRebalance;
 
-	
 	/**
 	 * Instantiates a new concurrent rebalance allocation decider.
 	 *
@@ -76,9 +70,8 @@ public class ConcurrentRebalanceAllocationDecider extends AllocationDecider {
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canRebalance(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canRebalance(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean canRebalance(ShardRouting shardRouting, RoutingAllocation allocation) {

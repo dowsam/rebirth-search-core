@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardSlowLogSearchService.java 2012-3-29 15:01:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardSlowLogSearchService.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.slowlog;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ShardSlowLogSearchService.
  *
@@ -28,43 +26,33 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 
-	
 	/** The reformat. */
 	private boolean reformat;
 
-	
 	/** The query warn threshold. */
 	private long queryWarnThreshold;
 
-	
 	/** The query info threshold. */
 	private long queryInfoThreshold;
 
-	
 	/** The query debug threshold. */
 	private long queryDebugThreshold;
 
-	
 	/** The query trace threshold. */
 	private long queryTraceThreshold;
 
-	
 	/** The fetch warn threshold. */
 	private long fetchWarnThreshold;
 
-	
 	/** The fetch info threshold. */
 	private long fetchInfoThreshold;
 
-	
 	/** The fetch debug threshold. */
 	private long fetchDebugThreshold;
 
-	
 	/** The fetch trace threshold. */
 	private long fetchTraceThreshold;
 
-	
 	/** The level. */
 	private String level;
 
@@ -77,7 +65,6 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 				"index.search.slowlog.level");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -85,9 +72,8 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -146,7 +132,6 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new shard slow log search service.
 	 *
@@ -184,7 +169,6 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 		indexSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/**
 	 * On query phase.
 	 *
@@ -203,7 +187,6 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * On fetch phase.
 	 *
@@ -222,7 +205,6 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SlowLogSearchContextPrinter.
 	 *
@@ -230,19 +212,15 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 	 */
 	public static class SlowLogSearchContextPrinter {
 
-		
 		/** The context. */
 		private final SearchContext context;
 
-		
 		/** The took in nanos. */
 		private final long tookInNanos;
 
-		
 		/** The reformat. */
 		private final boolean reformat;
 
-		
 		/**
 		 * Instantiates a new slow log search context printer.
 		 *
@@ -256,7 +234,6 @@ public class ShardSlowLogSearchService extends AbstractIndexShardComponent {
 			this.reformat = reformat;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OpenIndexRequestBuilder.java 2012-3-29 15:01:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OpenIndexRequestBuilder.java 2012-7-6 14:29:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.open;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 
-
 /**
  * The Class OpenIndexRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndexRequest, OpenIndexResponse> {
 
-	
 	/**
 	 * Instantiates a new open index request builder.
 	 *
@@ -29,7 +26,6 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		super(indicesClient, new OpenIndexRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new open index request builder.
 	 *
@@ -40,7 +36,6 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		super(indicesClient, new OpenIndexRequest(index));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -52,7 +47,6 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -64,7 +58,6 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -76,7 +69,6 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -88,7 +80,6 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -100,9 +91,8 @@ public class OpenIndexRequestBuilder extends BaseIndicesRequestBuilder<OpenIndex
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<OpenIndexResponse> listener) {

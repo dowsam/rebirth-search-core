@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AnalysisModule.java 2012-3-29 15:55:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AnalysisModule.java 2012-7-6 14:29:37 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.analysis;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.NoClassSettingsException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.AbstractModule;
@@ -229,7 +229,7 @@ public class AnalysisModule extends AbstractModule {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
@@ -248,7 +248,7 @@ public class AnalysisModule extends AbstractModule {
 
 			Class<? extends CharFilterFactory> type = null;
 			try {
-				type = charFilterSettings.getAsClass("type", null, "cn.com.summall.search.core.index.analysis.",
+				type = charFilterSettings.getAsClass("type", null, "cn.com.rebirth.search.core.index.analysis.",
 						"CharFilterFactory");
 			} catch (NoClassSettingsException e) {
 
@@ -260,13 +260,12 @@ public class AnalysisModule extends AbstractModule {
 					}
 				}
 				if (type == null) {
-					throw new RestartIllegalArgumentException("failed to find char filter type ["
+					throw new RebirthIllegalArgumentException("failed to find char filter type ["
 							+ charFilterSettings.get("type") + "] for [" + charFilterName + "]", e);
 				}
 			}
 			if (type == null) {
-
-				throw new RestartIllegalArgumentException("Char Filter [" + charFilterName
+				throw new RebirthIllegalArgumentException("Char Filter [" + charFilterName
 						+ "] must have a type associated with it");
 			}
 			charFilterBinder.addBinding(charFilterName)
@@ -309,7 +308,7 @@ public class AnalysisModule extends AbstractModule {
 
 			Class<? extends TokenFilterFactory> type = null;
 			try {
-				type = tokenFilterSettings.getAsClass("type", null, "cn.com.summall.search.core.index.analysis.",
+				type = tokenFilterSettings.getAsClass("type", null, "cn.com.rebirth.search.core.index.analysis.",
 						"TokenFilterFactory");
 			} catch (NoClassSettingsException e) {
 
@@ -322,12 +321,12 @@ public class AnalysisModule extends AbstractModule {
 					}
 				}
 				if (type == null) {
-					throw new RestartIllegalArgumentException("failed to find token filter type ["
+					throw new RebirthIllegalArgumentException("failed to find token filter type ["
 							+ tokenFilterSettings.get("type") + "] for [" + tokenFilterName + "]", e);
 				}
 			}
 			if (type == null) {
-				throw new RestartIllegalArgumentException("token filter [" + tokenFilterName
+				throw new RebirthIllegalArgumentException("token filter [" + tokenFilterName
 						+ "] must have a type associated with it");
 			}
 			tokenFilterBinder.addBinding(tokenFilterName)
@@ -371,7 +370,7 @@ public class AnalysisModule extends AbstractModule {
 
 			Class<? extends TokenizerFactory> type = null;
 			try {
-				type = tokenizerSettings.getAsClass("type", null, "cn.com.summall.search.core.index.analysis.",
+				type = tokenizerSettings.getAsClass("type", null, "cn.com.rebirth.search.core.index.analysis.",
 						"TokenizerFactory");
 			} catch (NoClassSettingsException e) {
 
@@ -382,12 +381,12 @@ public class AnalysisModule extends AbstractModule {
 					}
 				}
 				if (type == null) {
-					throw new RestartIllegalArgumentException("failed to find tokenizer type ["
+					throw new RebirthIllegalArgumentException("failed to find tokenizer type ["
 							+ tokenizerSettings.get("type") + "] for [" + tokenizerName + "]", e);
 				}
 			}
 			if (type == null) {
-				throw new RestartIllegalArgumentException("token filter [" + tokenizerName
+				throw new RebirthIllegalArgumentException("token filter [" + tokenizerName
 						+ "] must have a type associated with it");
 			}
 			tokenizerBinder.addBinding(tokenizerName)
@@ -397,11 +396,9 @@ public class AnalysisModule extends AbstractModule {
 		for (Map.Entry<String, Class<? extends TokenizerFactory>> entry : tokenizersBindings.tokenizers.entrySet()) {
 			String tokenizerName = entry.getKey();
 			Class<? extends TokenizerFactory> clazz = entry.getValue();
-
 			if (tokenizersSettings.containsKey(tokenizerName)) {
 				continue;
 			}
-
 			if (clazz.getAnnotation(AnalysisSettingsRequired.class) != null) {
 				continue;
 			}
@@ -427,10 +424,9 @@ public class AnalysisModule extends AbstractModule {
 		for (Map.Entry<String, Settings> entry : analyzersSettings.entrySet()) {
 			String analyzerName = entry.getKey();
 			Settings analyzerSettings = entry.getValue();
-
 			Class<? extends AnalyzerProvider> type = null;
 			try {
-				type = analyzerSettings.getAsClass("type", null, "cn.com.summall.search.core.index.analysis.",
+				type = analyzerSettings.getAsClass("type", null, "cn.com.rebirth.search.core.index.analysis.",
 						"AnalyzerProvider");
 			} catch (NoClassSettingsException e) {
 
@@ -447,7 +443,7 @@ public class AnalysisModule extends AbstractModule {
 
 						type = CustomAnalyzerProvider.class;
 					} else {
-						throw new RestartIllegalArgumentException("failed to find analyzer type ["
+						throw new RebirthIllegalArgumentException("failed to find analyzer type ["
 								+ analyzerSettings.get("type") + "] or tokenizer for [" + analyzerName + "]", e);
 					}
 				}
@@ -459,7 +455,7 @@ public class AnalysisModule extends AbstractModule {
 
 					type = CustomAnalyzerProvider.class;
 				} else {
-					throw new RestartIllegalArgumentException("failed to find analyzer type ["
+					throw new RebirthIllegalArgumentException("failed to find analyzer type ["
 							+ analyzerSettings.get("type") + "] or tokenizer for [" + analyzerName + "]");
 				}
 			}
@@ -499,7 +495,7 @@ public class AnalysisModule extends AbstractModule {
 	private static class DefaultProcessor extends AnalysisBinderProcessor {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processCharFilters(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.CharFiltersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processCharFilters(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.CharFiltersBindings)
 		 */
 		@Override
 		public void processCharFilters(CharFiltersBindings charFiltersBindings) {
@@ -507,7 +503,7 @@ public class AnalysisModule extends AbstractModule {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenFilters(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenFiltersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenFilters(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenFiltersBindings)
 		 */
 		@Override
 		public void processTokenFilters(TokenFiltersBindings tokenFiltersBindings) {
@@ -530,7 +526,7 @@ public class AnalysisModule extends AbstractModule {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenizers(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenizersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenizers(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenizersBindings)
 		 */
 		@Override
 		public void processTokenizers(TokenizersBindings tokenizersBindings) {
@@ -549,7 +545,7 @@ public class AnalysisModule extends AbstractModule {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processAnalyzers(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.AnalyzersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processAnalyzers(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.AnalyzersBindings)
 		 */
 		@Override
 		public void processAnalyzers(AnalyzersBindings analyzersBindings) {
@@ -571,7 +567,7 @@ public class AnalysisModule extends AbstractModule {
 	private static class ExtendedProcessor extends AnalysisBinderProcessor {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processCharFilters(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.CharFiltersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processCharFilters(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.CharFiltersBindings)
 		 */
 		@Override
 		public void processCharFilters(CharFiltersBindings charFiltersBindings) {
@@ -579,7 +575,7 @@ public class AnalysisModule extends AbstractModule {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenFilters(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenFiltersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenFilters(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenFiltersBindings)
 		 */
 		@Override
 		public void processTokenFilters(TokenFiltersBindings tokenFiltersBindings) {
@@ -608,7 +604,7 @@ public class AnalysisModule extends AbstractModule {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenizers(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenizersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processTokenizers(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.TokenizersBindings)
 		 */
 		@Override
 		public void processTokenizers(TokenizersBindings tokenizersBindings) {
@@ -616,7 +612,7 @@ public class AnalysisModule extends AbstractModule {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processAnalyzers(cn.com.summall.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.AnalyzersBindings)
+		 * @see cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor#processAnalyzers(cn.com.rebirth.search.core.index.analysis.AnalysisModule.AnalysisBinderProcessor.AnalyzersBindings)
 		 */
 		@Override
 		public void processAnalyzers(AnalyzersBindings analyzersBindings) {

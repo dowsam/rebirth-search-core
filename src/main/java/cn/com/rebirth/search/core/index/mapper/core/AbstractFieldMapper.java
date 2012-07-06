@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractFieldMapper.java 2012-3-29 15:02:39 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractFieldMapper.java 2012-7-6 14:29:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
@@ -39,7 +38,6 @@ import cn.com.rebirth.search.core.index.mapper.ParseContext;
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class AbstractFieldMapper.
  *
@@ -48,7 +46,6 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -56,32 +53,25 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 	 */
 	public static class Defaults {
 
-		
 		/** The Constant INDEX. */
 		public static final Field.Index INDEX = Field.Index.ANALYZED;
 
-		
 		/** The Constant STORE. */
 		public static final Field.Store STORE = Field.Store.NO;
 
-		
 		/** The Constant TERM_VECTOR. */
 		public static final Field.TermVector TERM_VECTOR = Field.TermVector.NO;
 
-		
 		/** The Constant BOOST. */
 		public static final float BOOST = 1.0f;
 
-		
 		/** The Constant OMIT_NORMS. */
 		public static final boolean OMIT_NORMS = false;
 
-		
 		/** The Constant OMIT_TERM_FREQ_AND_POSITIONS. */
 		public static final boolean OMIT_TERM_FREQ_AND_POSITIONS = false;
 	}
 
-	
 	/**
 	 * The Class OpenBuilder.
 	 *
@@ -92,7 +82,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 	public abstract static class OpenBuilder<T extends Builder, Y extends AbstractFieldMapper> extends
 			AbstractFieldMapper.Builder<T, Y> {
 
-		
 		/**
 		 * Instantiates a new open builder.
 		 *
@@ -102,81 +91,72 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			super(name);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#index(org.apache.lucene.document.Field.Index)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#index(org.apache.lucene.document.Field.Index)
 		 */
 		@Override
 		public T index(Field.Index index) {
 			return super.index(index);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
 		 */
 		@Override
 		public T store(Field.Store store) {
 			return super.store(store);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#termVector(org.apache.lucene.document.Field.TermVector)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#termVector(org.apache.lucene.document.Field.TermVector)
 		 */
 		@Override
 		public T termVector(Field.TermVector termVector) {
 			return super.termVector(termVector);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#boost(float)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#boost(float)
 		 */
 		@Override
 		public T boost(float boost) {
 			return super.boost(boost);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#omitNorms(boolean)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#omitNorms(boolean)
 		 */
 		@Override
 		public T omitNorms(boolean omitNorms) {
 			return super.omitNorms(omitNorms);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#omitTermFreqAndPositions(boolean)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#omitTermFreqAndPositions(boolean)
 		 */
 		@Override
 		public T omitTermFreqAndPositions(boolean omitTermFreqAndPositions) {
 			return super.omitTermFreqAndPositions(omitTermFreqAndPositions);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
 		 */
 		@Override
 		public T indexName(String indexName) {
 			return super.indexName(indexName);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexAnalyzer(cn.com.summall.search.index.analysis.NamedAnalyzer)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexAnalyzer(cn.com.rebirth.search.index.analysis.NamedAnalyzer)
 		 */
 		@Override
 		public T indexAnalyzer(NamedAnalyzer indexAnalyzer) {
 			return super.indexAnalyzer(indexAnalyzer);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#searchAnalyzer(cn.com.summall.search.index.analysis.NamedAnalyzer)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#searchAnalyzer(cn.com.rebirth.search.index.analysis.NamedAnalyzer)
 		 */
 		@Override
 		public T searchAnalyzer(NamedAnalyzer searchAnalyzer) {
@@ -184,7 +164,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		}
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -194,47 +173,36 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 	 */
 	public abstract static class Builder<T extends Builder, Y extends AbstractFieldMapper> extends Mapper.Builder<T, Y> {
 
-		
 		/** The index. */
 		protected Field.Index index = Defaults.INDEX;
 
-		
 		/** The store. */
 		protected Field.Store store = Defaults.STORE;
 
-		
 		/** The term vector. */
 		protected Field.TermVector termVector = Defaults.TERM_VECTOR;
 
-		
 		/** The boost. */
 		protected float boost = Defaults.BOOST;
 
-		
 		/** The omit norms. */
 		protected boolean omitNorms = Defaults.OMIT_NORMS;
 
-		
 		/** The omit term freq and positions. */
 		protected boolean omitTermFreqAndPositions = Defaults.OMIT_TERM_FREQ_AND_POSITIONS;
 
-		
 		/** The index name. */
 		protected String indexName;
 
-		
 		/** The index analyzer. */
 		protected NamedAnalyzer indexAnalyzer;
 
-		
 		/** The search analyzer. */
 		protected NamedAnalyzer searchAnalyzer;
 
-		
 		/** The include in all. */
 		protected Boolean includeInAll;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -244,7 +212,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			super(name);
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -256,7 +223,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Store.
 		 *
@@ -268,7 +234,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Term vector.
 		 *
@@ -280,7 +245,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Boost.
 		 *
@@ -292,7 +256,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Omit norms.
 		 *
@@ -304,7 +267,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Omit term freq and positions.
 		 *
@@ -316,7 +278,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Index name.
 		 *
@@ -328,7 +289,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Index analyzer.
 		 *
@@ -343,7 +303,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Search analyzer.
 		 *
@@ -355,7 +314,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Include in all.
 		 *
@@ -367,7 +325,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Builds the names.
 		 *
@@ -379,7 +336,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 					buildFullName(context), context.path().sourcePath());
 		}
 
-		
 		/**
 		 * Builds the index name.
 		 *
@@ -391,7 +347,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			return context.path().pathAsText(actualIndexName);
 		}
 
-		
 		/**
 		 * Builds the full name.
 		 *
@@ -403,47 +358,36 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		}
 	}
 
-	
 	/** The names. */
 	protected final Names names;
 
-	
 	/** The index. */
 	protected final Field.Index index;
 
-	
 	/** The store. */
 	protected final Field.Store store;
 
-	
 	/** The term vector. */
 	protected final Field.TermVector termVector;
 
-	
 	/** The boost. */
 	protected float boost;
 
-	
 	/** The omit norms. */
 	protected final boolean omitNorms;
 
-	
 	/** The omit term freq and positions. */
 	protected final boolean omitTermFreqAndPositions;
 
-	
 	/** The index options. */
 	protected final FieldInfo.IndexOptions indexOptions;
 
-	
 	/** The index analyzer. */
 	protected final NamedAnalyzer indexAnalyzer;
 
-	
 	/** The search analyzer. */
 	protected final NamedAnalyzer searchAnalyzer;
 
-	
 	/**
 	 * Instantiates a new abstract field mapper.
 	 *
@@ -481,126 +425,112 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#name()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#name()
 	 */
 	@Override
 	public String name() {
 		return names.name();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#names()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#names()
 	 */
 	@Override
 	public Names names() {
 		return this.names;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#index()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#index()
 	 */
 	@Override
 	public Field.Index index() {
 		return this.index;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#store()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#store()
 	 */
 	@Override
 	public Field.Store store() {
 		return this.store;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#stored()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#stored()
 	 */
 	@Override
 	public boolean stored() {
 		return store == Field.Store.YES;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#indexed()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#indexed()
 	 */
 	@Override
 	public boolean indexed() {
 		return index != Field.Index.NO;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#analyzed()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#analyzed()
 	 */
 	@Override
 	public boolean analyzed() {
 		return index == Field.Index.ANALYZED;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#termVector()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#termVector()
 	 */
 	@Override
 	public Field.TermVector termVector() {
 		return this.termVector;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#boost()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#boost()
 	 */
 	@Override
 	public float boost() {
 		return this.boost;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#omitNorms()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#omitNorms()
 	 */
 	@Override
 	public boolean omitNorms() {
 		return this.omitNorms;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#omitTermFreqAndPositions()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#omitTermFreqAndPositions()
 	 */
 	@Override
 	public boolean omitTermFreqAndPositions() {
 		return this.omitTermFreqAndPositions;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#indexAnalyzer()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#indexAnalyzer()
 	 */
 	@Override
 	public Analyzer indexAnalyzer() {
 		return this.indexAnalyzer;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#searchAnalyzer()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#searchAnalyzer()
 	 */
 	@Override
 	public Analyzer searchAnalyzer() {
 		return this.searchAnalyzer;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
@@ -622,7 +552,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		}
 	}
 
-	
 	/**
 	 * Parses the create field.
 	 *
@@ -632,7 +561,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 	 */
 	protected abstract Fieldable parseCreateField(ParseContext context) throws IOException;
 
-	
 	/**
 	 * Custom boost.
 	 *
@@ -642,81 +570,72 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.FieldMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.FieldMapperListener)
 	 */
 	@Override
 	public void traverse(FieldMapperListener fieldMapperListener) {
 		fieldMapperListener.fieldMapper(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.ObjectMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.ObjectMapperListener)
 	 */
 	@Override
 	public void traverse(ObjectMapperListener objectMapperListener) {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Object valueForSearch(Fieldable field) {
 		return valueAsString(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#queryStringTermQuery(org.apache.lucene.index.Term)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#queryStringTermQuery(org.apache.lucene.index.Term)
 	 */
 	@Override
 	public Query queryStringTermQuery(Term term) {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#useFieldQueryWithQueryString()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#useFieldQueryWithQueryString()
 	 */
 	@Override
 	public boolean useFieldQueryWithQueryString() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#fieldQuery(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#fieldQuery(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query fieldQuery(String value, @Nullable QueryParseContext context) {
 		return new TermQuery(names().createIndexNameTerm(indexedValue(value)));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#fieldFilter(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#fieldFilter(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter fieldFilter(String value, @Nullable QueryParseContext context) {
 		return new TermFilter(names().createIndexNameTerm(indexedValue(value)));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, String minSim, int prefixLength, int maxExpansions) {
@@ -724,18 +643,16 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 				maxExpansions);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#fuzzyQuery(java.lang.String, double, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#fuzzyQuery(java.lang.String, double, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, double minSim, int prefixLength, int maxExpansions) {
 		return new FuzzyQuery(names().createIndexNameTerm(value), (float) minSim, prefixLength, maxExpansions);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#prefixQuery(java.lang.String, org.apache.lucene.search.MultiTermQuery.RewriteMethod, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#prefixQuery(java.lang.String, org.apache.lucene.search.MultiTermQuery.RewriteMethod, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query prefixQuery(String value, @Nullable MultiTermQuery.RewriteMethod method,
@@ -747,18 +664,16 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		return query;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#prefixFilter(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#prefixFilter(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter prefixFilter(String value, @Nullable QueryParseContext context) {
 		return new PrefixFilter(names().createIndexNameTerm(indexedValue(value)));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query rangeQuery(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -767,9 +682,8 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 				upperTerm == null ? null : indexedValue(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -778,9 +692,8 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 				upperTerm == null ? null : indexedValue(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
@@ -791,7 +704,7 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			}
 			mergeContext.addConflict("mapper [" + names.fullName() + "] of different type, current_type ["
 					+ contentType() + "], merged_type [" + mergedType + "]");
-			
+
 			return;
 		}
 		AbstractFieldMapper fieldMergeWith = (AbstractFieldMapper) mergeWith;
@@ -823,23 +736,21 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 			mergeContext.addConflict("mapper [" + names.fullName() + "] has different search_analyzer");
 		}
 		if (!mergeContext.mergeFlags().simulate()) {
-			
+
 			this.boost = fieldMergeWith.boost;
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#fieldDataType()
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#fieldDataType()
 	 */
 	@Override
 	public FieldDataType fieldDataType() {
 		return FieldDataType.DefaultTypes.STRING;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -849,7 +760,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		return builder;
 	}
 
-	
 	/**
 	 * Do x content body.
 	 *
@@ -866,7 +776,7 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		}
 		if (indexAnalyzer != null && searchAnalyzer != null && indexAnalyzer.name().equals(searchAnalyzer.name())
 				&& !indexAnalyzer.name().startsWith("_")) {
-			
+
 			builder.field("analyzer", indexAnalyzer.name());
 		} else {
 			if (indexAnalyzer != null && !indexAnalyzer.name().startsWith("_")) {
@@ -878,7 +788,6 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 		}
 	}
 
-	
 	/**
 	 * Content type.
 	 *
@@ -886,13 +795,12 @@ public abstract class AbstractFieldMapper<T> implements FieldMapper<T>, Mapper {
 	 */
 	protected abstract String contentType();
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#close()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#close()
 	 */
 	@Override
 	public void close() {
-		
+
 	}
 
 }

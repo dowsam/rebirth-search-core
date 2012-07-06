@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceFacetProcessor.java 2012-3-29 15:01:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceFacetProcessor.java 2012-7-6 14:30:02 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.geodistance;
 
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class GeoDistanceFacetProcessor.
  *
@@ -35,7 +33,6 @@ import com.google.common.collect.Lists;
  */
 public class GeoDistanceFacetProcessor extends AbstractComponent implements FacetProcessor {
 
-	
 	/**
 	 * Instantiates a new geo distance facet processor.
 	 *
@@ -47,18 +44,16 @@ public class GeoDistanceFacetProcessor extends AbstractComponent implements Face
 		InternalGeoDistanceFacet.registerStreams();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#types()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#types()
 	 */
 	@Override
 	public String[] types() {
 		return new String[] { GeoDistanceFacet.TYPE, "geoDistance" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public FacetCollector parse(String facetName, XContentParser parser, SearchContext context) throws IOException {
@@ -84,10 +79,7 @@ public class GeoDistanceFacetProcessor extends AbstractComponent implements Face
 				currentName = parser.currentName();
 			} else if (token == XContentParser.Token.START_ARRAY) {
 				if ("ranges".equals(currentName) || "entries".equals(currentName)) {
-					
-					
-					
-					
+
 					while ((token = parser.nextToken()) != XContentParser.Token.END_ARRAY) {
 						double from = Double.NEGATIVE_INFINITY;
 						double to = Double.POSITIVE_INFINITY;
@@ -119,7 +111,7 @@ public class GeoDistanceFacetProcessor extends AbstractComponent implements Face
 				if ("params".equals(currentName)) {
 					params = parser.map();
 				} else {
-					
+
 					fieldName = currentName;
 					while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
 						if (token == XContentParser.Token.FIELD_NAME) {
@@ -152,7 +144,7 @@ public class GeoDistanceFacetProcessor extends AbstractComponent implements Face
 					normalizeLat = parser.booleanValue();
 					normalizeLon = parser.booleanValue();
 				} else {
-					
+
 					String value = parser.text();
 					int comma = value.indexOf(',');
 					if (comma != -1) {
@@ -199,9 +191,8 @@ public class GeoDistanceFacetProcessor extends AbstractComponent implements Face
 				entries.toArray(new GeoDistanceFacet.Entry[entries.size()]), context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractExecutableScript.java 2012-3-29 15:02:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractExecutableScript.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.script;
 
@@ -13,18 +12,18 @@ package cn.com.rebirth.search.core.script;
  */
 public abstract class AbstractExecutableScript implements ExecutableScript {
 
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.script.ExecutableScript#setNextVar(java.lang.String, java.lang.Object)
-     */
-    @Override
-    public void setNextVar(String name, Object value) {
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.script.ExecutableScript#setNextVar(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void setNextVar(String name, Object value) {
+	}
 
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.script.ExecutableScript#unwrap(java.lang.Object)
-     */
-    @Override
-    public Object unwrap(Object value) {
-        return value;
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.script.ExecutableScript#unwrap(java.lang.Object)
+	 */
+	@Override
+	public Object unwrap(Object value) {
+		return value;
+	}
 }

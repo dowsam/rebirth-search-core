@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FailedRerouteAllocation.java 2012-3-29 15:01:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FailedRerouteAllocation.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingNodes;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDeciders;
 
-
 /**
  * The Class FailedRerouteAllocation.
  *
@@ -19,11 +17,9 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationD
  */
 public class FailedRerouteAllocation extends RoutingAllocation {
 
-	
 	/** The failed shard. */
 	private final ShardRouting failedShard;
 
-	
 	/**
 	 * Instantiates a new failed reroute allocation.
 	 *
@@ -38,7 +34,6 @@ public class FailedRerouteAllocation extends RoutingAllocation {
 		this.failedShard = failedShard;
 	}
 
-	
 	/**
 	 * Failed shard.
 	 *

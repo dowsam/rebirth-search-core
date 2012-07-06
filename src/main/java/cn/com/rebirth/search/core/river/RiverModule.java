@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverModule.java 2012-3-29 15:00:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverModule.java 2012-7-6 14:29:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.inject.SpawnModules;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class RiverModule.
  *
@@ -26,23 +24,18 @@ import com.google.common.collect.ImmutableList;
  */
 public class RiverModule extends AbstractModule implements SpawnModules {
 
-	
 	/** The river name. */
 	private RiverName riverName;
 
-	
 	/** The global settings. */
 	private final Settings globalSettings;
 
-	
 	/** The settings. */
 	private final Map<String, Object> settings;
 
-	
 	/** The types registry. */
 	private final RiversTypesRegistry typesRegistry;
 
-	
 	/**
 	 * Instantiates a new river module.
 	 *
@@ -59,26 +52,23 @@ public class RiverModule extends AbstractModule implements SpawnModules {
 		this.typesRegistry = typesRegistry;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.SpawnModules#spawnModules()
+	 * @see cn.com.rebirth.search.commons.inject.SpawnModules#spawnModules()
 	 */
 	@Override
 	public Iterable<? extends Module> spawnModules() {
 		return ImmutableList.of(Modules.createModule(
-				loadTypeModule(riverName.type(), "cn.com.summall.search.core.river.", "RiverModule"), globalSettings));
+				loadTypeModule(riverName.type(), "cn.com.rebirth.search.core.river.", "RiverModule"), globalSettings));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
 		bind(RiverSettings.class).toInstance(new RiverSettings(globalSettings, settings));
 	}
 
-	
 	/**
 	 * Load type module.
 	 *

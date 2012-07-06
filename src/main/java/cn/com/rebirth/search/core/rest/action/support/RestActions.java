@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestActions.java 2012-3-29 15:02:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestActions.java 2012-7-6 14:28:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.support;
 
 import java.io.IOException;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.io.BytesStream;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.query.QueryBuilders;
 import cn.com.rebirth.search.core.index.query.QueryStringQueryBuilder;
 import cn.com.rebirth.search.core.rest.RestRequest;
 
-
 /**
  * The Class RestActions.
  *
@@ -26,7 +24,6 @@ import cn.com.rebirth.search.core.rest.RestRequest;
  */
 public class RestActions {
 
-	
 	/**
 	 * Parses the version.
 	 *
@@ -44,7 +41,6 @@ public class RestActions {
 		return 0;
 	}
 
-	
 	/**
 	 * Builds the broadcast shards header.
 	 *
@@ -76,7 +72,6 @@ public class RestActions {
 		builder.endObject();
 	}
 
-	
 	/**
 	 * Parses the query source.
 	 *
@@ -98,14 +93,13 @@ public class RestActions {
 			} else if ("AND".equals(defaultOperator)) {
 				queryBuilder.defaultOperator(QueryStringQueryBuilder.Operator.AND);
 			} else {
-				throw new RestartIllegalArgumentException("Unsupported defaultOperator [" + defaultOperator
+				throw new RebirthIllegalArgumentException("Unsupported defaultOperator [" + defaultOperator
 						+ "], can either be [OR] or [AND]");
 			}
 		}
 		return queryBuilder.buildAsBytes();
 	}
 
-	
 	/**
 	 * Split indices.
 	 *
@@ -119,7 +113,6 @@ public class RestActions {
 		return Strings.splitStringByCommaToArray(indices);
 	}
 
-	
 	/**
 	 * Split types.
 	 *
@@ -133,7 +126,6 @@ public class RestActions {
 		return Strings.splitStringByCommaToArray(typeNames);
 	}
 
-	
 	/**
 	 * Split nodes.
 	 *

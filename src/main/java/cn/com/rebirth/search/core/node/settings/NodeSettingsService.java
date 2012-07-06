@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeSettingsService.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeSettingsService.java 2012-7-6 14:30:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.node.settings;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.cluster.ClusterChangedEvent;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterStateListener;
 
-
 /**
  * The Class NodeSettingsService.
  *
@@ -24,15 +22,12 @@ import cn.com.rebirth.search.core.cluster.ClusterStateListener;
  */
 public class NodeSettingsService extends AbstractComponent implements ClusterStateListener {
 
-	
 	/** The last settings applied. */
 	private volatile Settings lastSettingsApplied;
 
-	
 	/** The listeners. */
 	private final CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/**
 	 * Instantiates a new node settings service.
 	 *
@@ -43,8 +38,6 @@ public class NodeSettingsService extends AbstractComponent implements ClusterSta
 		super(settings);
 	}
 
-	
-	
 	/**
 	 * Sets the cluster service.
 	 *
@@ -54,24 +47,23 @@ public class NodeSettingsService extends AbstractComponent implements ClusterSta
 		clusterService.add(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(ClusterChangedEvent event) {
-		
+
 		if (event.state().blocks().disableStatePersistence()) {
 			return;
 		}
 
 		if (!event.metaDataChanged()) {
-			
+
 			return;
 		}
 
 		if (lastSettingsApplied != null && event.state().metaData().settings().equals(lastSettingsApplied)) {
-			
+
 			return;
 		}
 
@@ -97,7 +89,6 @@ public class NodeSettingsService extends AbstractComponent implements ClusterSta
 		lastSettingsApplied = event.state().metaData().settings();
 	}
 
-	
 	/**
 	 * Adds the listener.
 	 *
@@ -107,7 +98,6 @@ public class NodeSettingsService extends AbstractComponent implements ClusterSta
 		this.listeners.add(listener);
 	}
 
-	
 	/**
 	 * Removes the listener.
 	 *
@@ -117,7 +107,6 @@ public class NodeSettingsService extends AbstractComponent implements ClusterSta
 		this.listeners.remove(listener);
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -125,7 +114,6 @@ public class NodeSettingsService extends AbstractComponent implements ClusterSta
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On refresh settings.
 		 *

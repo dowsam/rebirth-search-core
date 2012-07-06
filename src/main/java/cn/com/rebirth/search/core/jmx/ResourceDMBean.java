@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ResourceDMBean.java 2012-3-29 15:02:52 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ResourceDMBean.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.jmx;
 
@@ -37,7 +36,6 @@ import cn.com.rebirth.search.commons.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class ResourceDMBean.
  *
@@ -45,56 +43,43 @@ import com.google.common.collect.ImmutableMap;
  */
 public class ResourceDMBean implements DynamicMBean {
 
-	
 	/** The Constant primitives. */
 	private static final Class<?>[] primitives = { int.class, byte.class, short.class, long.class, float.class,
 			double.class, boolean.class, char.class };
 
-	
 	/** The logger. */
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	
 	/** The obj. */
 	private final Object obj;
 
-	
 	/** The object name. */
 	private final String objectName;
 
-	
 	/** The group name. */
 	private final String groupName;
 
-	
 	/** The full object name. */
 	private final String fullObjectName;
 
-	
 	/** The description. */
 	private final String description;
 
-	
 	/** The attributes info. */
 	private final MBeanAttributeInfo[] attributesInfo;
 
-	
 	/** The operations info. */
 	private final MBeanOperationInfo[] operationsInfo;
 
-	
 	/** The m bean info. */
 	private final MBeanInfo mBeanInfo;
 
-	
 	/** The attributes. */
 	private final ImmutableMap<String, AttributeEntry> attributes;
 
-	
 	/** The operations. */
 	private final ImmutableList<MBeanOperationInfo> operations;
 
-	
 	/**
 	 * Instantiates a new resource dm bean.
 	 *
@@ -115,7 +100,7 @@ public class ResourceDMBean implements DynamicMBean {
 			objectName = mBean.objectName();
 		} else {
 			if (Strings.hasLength(groupName)) {
-				
+
 				objectName = "";
 			} else {
 				objectName = obj.getClass().getSimpleName();
@@ -164,7 +149,6 @@ public class ResourceDMBean implements DynamicMBean {
 				operationsInfo, null);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see javax.management.DynamicMBean#getMBeanInfo()
 	 */
@@ -172,7 +156,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return mBeanInfo;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see javax.management.DynamicMBean#getAttribute(java.lang.String)
 	 */
@@ -188,7 +171,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return attr.getValue();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see javax.management.DynamicMBean#setAttribute(javax.management.Attribute)
 	 */
@@ -199,7 +181,6 @@ public class ResourceDMBean implements DynamicMBean {
 		setNamedAttribute(attribute);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see javax.management.DynamicMBean#getAttributes(java.lang.String[])
 	 */
@@ -216,7 +197,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return al;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see javax.management.DynamicMBean#setAttributes(javax.management.AttributeList)
 	 */
@@ -236,7 +216,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return results;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see javax.management.DynamicMBean#invoke(java.lang.String, java.lang.Object[], java.lang.String[])
 	 */
@@ -270,7 +249,6 @@ public class ResourceDMBean implements DynamicMBean {
 		}
 	}
 
-	
 	/**
 	 * Gets the object.
 	 *
@@ -280,7 +258,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return obj;
 	}
 
-	
 	/**
 	 * Gets the class for name.
 	 *
@@ -292,7 +269,7 @@ public class ResourceDMBean implements DynamicMBean {
 		try {
 			return Classes.getDefaultClassLoader().loadClass(name);
 		} catch (ClassNotFoundException cnfe) {
-			
+
 			for (Class<?> primitive : primitives) {
 				if (name.equals(primitive.getName())) {
 					return primitive;
@@ -302,7 +279,6 @@ public class ResourceDMBean implements DynamicMBean {
 		throw new ClassNotFoundException("Class " + name + " cannot be found");
 	}
 
-	
 	/**
 	 * Find group name.
 	 *
@@ -327,7 +303,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return "";
 	}
 
-	
 	/**
 	 * Find description.
 	 *
@@ -341,7 +316,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return "";
 	}
 
-	
 	/**
 	 * Find methods.
 	 *
@@ -349,13 +323,13 @@ public class ResourceDMBean implements DynamicMBean {
 	 * @param ops the ops
 	 */
 	private void findMethods(MapBuilder<String, AttributeEntry> attributesBuilder, List<MBeanOperationInfo> ops) {
-		
+
 		List<Method> methods = new ArrayList<Method>(Arrays.asList(getObject().getClass().getMethods()));
 		List<Method> objectMethods = new ArrayList<Method>(Arrays.asList(Object.class.getMethods()));
 		methods.removeAll(objectMethods);
 
 		for (Method method : methods) {
-			
+
 			ManagedAttribute attr = method.getAnnotation(ManagedAttribute.class);
 			if (attr != null) {
 				String methodName = method.getName();
@@ -367,21 +341,21 @@ public class ResourceDMBean implements DynamicMBean {
 					MBeanAttributeInfo info;
 					String attributeName = null;
 					boolean writeAttribute = false;
-					if (isSetMethod(method)) { 
+					if (isSetMethod(method)) {
 						attributeName = methodName.substring(3);
 						info = new MBeanAttributeInfo(attributeName, method.getParameterTypes()[0].getCanonicalName(),
 								attr.description(), true, true, false);
 						writeAttribute = true;
-					} else { 
+					} else {
 						if (method.getParameterTypes().length == 0 && method.getReturnType() != java.lang.Void.TYPE) {
 							boolean hasSetter = attributesBuilder.containsKey(attributeName);
-							
+
 							if (methodName.startsWith("is")) {
 								attributeName = methodName.substring(2);
 								info = new MBeanAttributeInfo(attributeName, method.getReturnType().getCanonicalName(),
 										attr.description(), true, hasSetter, true);
 							} else {
-								
+
 								attributeName = methodName.substring(3);
 								info = new MBeanAttributeInfo(attributeName, method.getReturnType().getCanonicalName(),
 										attr.description(), true, hasSetter, false);
@@ -396,34 +370,31 @@ public class ResourceDMBean implements DynamicMBean {
 					}
 
 					AttributeEntry ae = attributesBuilder.get(attributeName);
-					
+
 					if (!writeAttribute) {
-						
+
 						if (ae instanceof FieldAttributeEntry && ae.getInfo().isReadable()) {
 							logger.warn("not adding annotated method " + method
 									+ " since we already have read attribute");
 						}
-						
+
 						else if (ae instanceof MethodAttributeEntry) {
 							MethodAttributeEntry mae = (MethodAttributeEntry) ae;
 							if (mae.hasSetMethod()) {
 								attributesBuilder.put(attributeName,
 										new MethodAttributeEntry(mae.getInfo(), mae.getSetMethod(), method));
 							}
-						} 
-						else {
+						} else {
 							attributesBuilder.put(attributeName, new MethodAttributeEntry(info, null, method));
 						}
-					}
-					else {
+					} else {
 						if (ae instanceof FieldAttributeEntry) {
-							
+
 							if (ae.getInfo().isWritable()) {
 								logger.warn("Not adding annotated method " + methodName
 										+ " since we already have writable attribute");
 							} else {
-								
-								
+
 								Field f = ((FieldAttributeEntry) ae).getField();
 								MBeanAttributeInfo i = new MBeanAttributeInfo(ae.getInfo().getName(), f.getType()
 										.getCanonicalName(), attr.description(), true, !Modifier.isFinal(f
@@ -431,15 +402,14 @@ public class ResourceDMBean implements DynamicMBean {
 								attributesBuilder.put(attributeName, new FieldAttributeEntry(i, f));
 							}
 						}
-						
+
 						else if (ae instanceof MethodAttributeEntry) {
 							MethodAttributeEntry mae = (MethodAttributeEntry) ae;
 							if (mae.hasIsOrGetMethod()) {
 								attributesBuilder.put(attributeName,
 										new MethodAttributeEntry(info, method, mae.getIsOrGetMethod()));
 							}
-						} 
-						else {
+						} else {
 							attributesBuilder.put(attributeName, new MethodAttributeEntry(info, method, null));
 						}
 					}
@@ -452,7 +422,7 @@ public class ResourceDMBean implements DynamicMBean {
 				} else if (isIsMethod(method)) {
 					attName = attName.substring(2);
 				}
-				
+
 				boolean isAlreadyExposed = attributesBuilder.containsKey(attName);
 				if (!isAlreadyExposed) {
 					ops.add(new MBeanOperationInfo(op != null ? op.description() : "", method));
@@ -461,7 +431,6 @@ public class ResourceDMBean implements DynamicMBean {
 		}
 	}
 
-	
 	/**
 	 * Checks if is sets the method.
 	 *
@@ -472,7 +441,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return (method.getName().startsWith("set") && method.getParameterTypes().length == 1 && method.getReturnType() == java.lang.Void.TYPE);
 	}
 
-	
 	/**
 	 * Checks if is gets the method.
 	 *
@@ -484,7 +452,6 @@ public class ResourceDMBean implements DynamicMBean {
 				.getName().startsWith("get"));
 	}
 
-	
 	/**
 	 * Checks if is checks if is method.
 	 *
@@ -497,14 +464,13 @@ public class ResourceDMBean implements DynamicMBean {
 				.getName().startsWith("is"));
 	}
 
-	
 	/**
 	 * Find fields.
 	 *
 	 * @param attributesBuilder the attributes builder
 	 */
 	private void findFields(MapBuilder<String, AttributeEntry> attributesBuilder) {
-		
+
 		for (Class<?> clazz = getObject().getClass(); clazz != null; clazz = clazz.getSuperclass()) {
 			Field[] fields = clazz.getDeclaredFields();
 			for (Field field : fields) {
@@ -519,7 +485,6 @@ public class ResourceDMBean implements DynamicMBean {
 		}
 	}
 
-	
 	/**
 	 * Gets the named attribute.
 	 *
@@ -545,7 +510,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return result;
 	}
 
-	
 	/**
 	 * Sets the named attribute.
 	 *
@@ -572,7 +536,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return result;
 	}
 
-	
 	/**
 	 * Rename to java coding convention.
 	 *
@@ -602,7 +565,6 @@ public class ResourceDMBean implements DynamicMBean {
 		}
 	}
 
-	
 	/**
 	 * The Class MethodAttributeEntry.
 	 *
@@ -610,19 +572,15 @@ public class ResourceDMBean implements DynamicMBean {
 	 */
 	private class MethodAttributeEntry implements AttributeEntry {
 
-		
 		/** The info. */
 		final MBeanAttributeInfo info;
 
-		
 		/** The is or getmethod. */
 		final Method isOrGetmethod;
 
-		
 		/** The set method. */
 		final Method setMethod;
 
-		
 		/**
 		 * Instantiates a new method attribute entry.
 		 *
@@ -637,9 +595,8 @@ public class ResourceDMBean implements DynamicMBean {
 			this.isOrGetmethod = isOrGetMethod;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.jmx.ResourceDMBean.AttributeEntry#invoke(javax.management.Attribute)
+		 * @see cn.com.rebirth.search.core.jmx.ResourceDMBean.AttributeEntry#invoke(javax.management.Attribute)
 		 */
 		public Object invoke(Attribute a) throws Exception {
 			if (a == null && isOrGetmethod != null)
@@ -650,15 +607,13 @@ public class ResourceDMBean implements DynamicMBean {
 				return null;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.jmx.ResourceDMBean.AttributeEntry#getInfo()
+		 * @see cn.com.rebirth.search.core.jmx.ResourceDMBean.AttributeEntry#getInfo()
 		 */
 		public MBeanAttributeInfo getInfo() {
 			return info;
 		}
 
-		
 		/**
 		 * Checks for is or get method.
 		 *
@@ -668,7 +623,6 @@ public class ResourceDMBean implements DynamicMBean {
 			return isOrGetmethod != null;
 		}
 
-		
 		/**
 		 * Checks for set method.
 		 *
@@ -678,7 +632,6 @@ public class ResourceDMBean implements DynamicMBean {
 			return setMethod != null;
 		}
 
-		
 		/**
 		 * Gets the checks if is or get method.
 		 *
@@ -688,7 +641,6 @@ public class ResourceDMBean implements DynamicMBean {
 			return isOrGetmethod;
 		}
 
-		
 		/**
 		 * Gets the sets the method.
 		 *
@@ -699,7 +651,6 @@ public class ResourceDMBean implements DynamicMBean {
 		}
 	}
 
-	
 	/**
 	 * The Class FieldAttributeEntry.
 	 *
@@ -707,15 +658,12 @@ public class ResourceDMBean implements DynamicMBean {
 	 */
 	private class FieldAttributeEntry implements AttributeEntry {
 
-		
 		/** The info. */
 		private final MBeanAttributeInfo info;
 
-		
 		/** The field. */
 		private final Field field;
 
-		
 		/**
 		 * Instantiates a new field attribute entry.
 		 *
@@ -731,7 +679,6 @@ public class ResourceDMBean implements DynamicMBean {
 			}
 		}
 
-		
 		/**
 		 * Gets the field.
 		 *
@@ -741,9 +688,8 @@ public class ResourceDMBean implements DynamicMBean {
 			return field;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.jmx.ResourceDMBean.AttributeEntry#invoke(javax.management.Attribute)
+		 * @see cn.com.rebirth.search.core.jmx.ResourceDMBean.AttributeEntry#invoke(javax.management.Attribute)
 		 */
 		public Object invoke(Attribute a) throws Exception {
 			if (a == null) {
@@ -754,16 +700,14 @@ public class ResourceDMBean implements DynamicMBean {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.jmx.ResourceDMBean.AttributeEntry#getInfo()
+		 * @see cn.com.rebirth.search.core.jmx.ResourceDMBean.AttributeEntry#getInfo()
 		 */
 		public MBeanAttributeInfo getInfo() {
 			return info;
 		}
 	}
 
-	
 	/**
 	 * The Interface AttributeEntry.
 	 *
@@ -771,7 +715,6 @@ public class ResourceDMBean implements DynamicMBean {
 	 */
 	private interface AttributeEntry {
 
-		
 		/**
 		 * Invoke.
 		 *
@@ -781,7 +724,6 @@ public class ResourceDMBean implements DynamicMBean {
 		 */
 		public Object invoke(Attribute a) throws Exception;
 
-		
 		/**
 		 * Gets the info.
 		 *
@@ -790,7 +732,6 @@ public class ResourceDMBean implements DynamicMBean {
 		public MBeanAttributeInfo getInfo();
 	}
 
-	
 	/**
 	 * Checks if is managed resource.
 	 *
@@ -800,7 +741,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return !attributes.isEmpty() || !operations.isEmpty();
 	}
 
-	
 	/**
 	 * Gets the full object name.
 	 *
@@ -810,7 +750,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return this.fullObjectName;
 	}
 
-	
 	/**
 	 * Gets the object name.
 	 *
@@ -820,7 +759,6 @@ public class ResourceDMBean implements DynamicMBean {
 		return this.objectName;
 	}
 
-	
 	/**
 	 * Gets the group name.
 	 *

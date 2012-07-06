@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardIndexingService.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardIndexingService.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.indexing;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class ShardIndexingService.
  *
@@ -31,19 +29,15 @@ import com.google.common.collect.ImmutableMap;
  */
 public class ShardIndexingService extends AbstractIndexShardComponent {
 
-	
 	/** The total stats. */
 	private final StatsHolder totalStats = new StatsHolder();
 
-	
 	/** The types stats. */
 	private volatile Map<String, StatsHolder> typesStats = ImmutableMap.of();
 
-	
 	/** The listeners. */
 	private CopyOnWriteArrayList<IndexingOperationListener> listeners = null;
 
-	
 	/**
 	 * Instantiates a new shard indexing service.
 	 *
@@ -55,7 +49,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		super(shardId, indexSettings);
 	}
 
-	
 	/**
 	 * Stats.
 	 *
@@ -84,7 +77,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		return new IndexingStats(total, typesSt);
 	}
 
-	
 	/**
 	 * Adds the listener.
 	 *
@@ -97,7 +89,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		listeners.add(listener);
 	}
 
-	
 	/**
 	 * Removes the listener.
 	 *
@@ -113,7 +104,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Pre create.
 	 *
@@ -129,7 +119,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		return create;
 	}
 
-	
 	/**
 	 * Post create.
 	 *
@@ -146,7 +135,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Pre index.
 	 *
@@ -164,7 +152,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		return index;
 	}
 
-	
 	/**
 	 * Post index.
 	 *
@@ -184,7 +171,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Failed index.
 	 *
@@ -195,7 +181,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		typeStats(index.type()).indexCurrent.dec();
 	}
 
-	
 	/**
 	 * Pre delete.
 	 *
@@ -213,7 +198,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		return delete;
 	}
 
-	
 	/**
 	 * Post delete.
 	 *
@@ -233,7 +217,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Failed delete.
 	 *
@@ -244,7 +227,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		typeStats(delete.type()).deleteCurrent.dec();
 	}
 
-	
 	/**
 	 * Pre delete by query.
 	 *
@@ -260,7 +242,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		return deleteByQuery;
 	}
 
-	
 	/**
 	 * Post delete by query.
 	 *
@@ -274,7 +255,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Clear.
 	 */
@@ -294,7 +274,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Type stats.
 	 *
@@ -315,7 +294,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 		return stats;
 	}
 
-	
 	/**
 	 * The Class StatsHolder.
 	 *
@@ -323,23 +301,18 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 	 */
 	static class StatsHolder {
 
-		
 		/** The index metric. */
 		public final MeanMetric indexMetric = new MeanMetric();
 
-		
 		/** The delete metric. */
 		public final MeanMetric deleteMetric = new MeanMetric();
 
-		
 		/** The index current. */
 		public final CounterMetric indexCurrent = new CounterMetric();
 
-		
 		/** The delete current. */
 		public final CounterMetric deleteCurrent = new CounterMetric();
 
-		
 		/**
 		 * Stats.
 		 *
@@ -351,7 +324,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 					deleteCurrent.count());
 		}
 
-		
 		/**
 		 * Total current.
 		 *
@@ -361,7 +333,6 @@ public class ShardIndexingService extends AbstractIndexShardComponent {
 			return indexCurrent.count() + deleteMetric.count();
 		}
 
-		
 		/**
 		 * Clear.
 		 */

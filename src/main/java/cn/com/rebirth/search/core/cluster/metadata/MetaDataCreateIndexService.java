@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataCreateIndexService.java 2012-3-29 15:01:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataCreateIndexService.java 2012-7-6 14:29:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -28,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.compress.CompressedString;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.regex.Regex;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
@@ -69,7 +68,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.Closeables;
 
-
 /**
  * The Class MetaDataCreateIndexService.
  *
@@ -77,39 +75,30 @@ import com.google.common.io.Closeables;
  */
 public class MetaDataCreateIndexService extends AbstractComponent {
 
-	
 	/** The environment. */
 	private final Environment environment;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The allocation service. */
 	private final AllocationService allocationService;
 
-	
 	/** The node index created action. */
 	private final NodeIndexCreatedAction nodeIndexCreatedAction;
 
-	
 	/** The meta data service. */
 	private final MetaDataService metaDataService;
 
-	
 	/** The river index name. */
 	private final String riverIndexName;
 
-	
 	/**
 	 * Instantiates a new meta data create index service.
 	 *
@@ -139,7 +128,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		this.riverIndexName = riverIndexName;
 	}
 
-	
 	/**
 	 * Creates the index.
 	 *
@@ -157,8 +145,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		}
 		request.settings(updatedSettingsBuilder.build());
 
-		
-		
 		MetaDataService.MdLock mdLock = metaDataService.indexMetaDataLock(request.index);
 		try {
 			mdLock.lock();
@@ -181,17 +167,13 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 								return currentState;
 							}
 
-							
-							
 							List<IndexTemplateMetaData> templates = findTemplates(request, currentState);
 
-							
 							Map<String, Map<String, Object>> mappings = Maps.newHashMap();
 							for (Map.Entry<String, String> entry : request.mappings.entrySet()) {
 								mappings.put(entry.getKey(), parseMapping(entry.getValue()));
 							}
 
-							
 							for (IndexTemplateMetaData template : templates) {
 								for (Map.Entry<String, CompressedString> entry : template.mappings().entrySet()) {
 									if (mappings.containsKey(entry.getKey())) {
@@ -203,16 +185,14 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 								}
 							}
 
-							
 							File mappingsDir = new File(environment.configFile(), "mappings");
 							if (mappingsDir.exists() && mappingsDir.isDirectory()) {
-								
+
 								File indexMappingsDir = new File(mappingsDir, request.index);
 								if (indexMappingsDir.exists() && indexMappingsDir.isDirectory()) {
 									addMappings(mappings, indexMappingsDir);
 								}
 
-								
 								File defaultMappingsDir = new File(mappingsDir, "_default");
 								if (defaultMappingsDir.exists() && defaultMappingsDir.isDirectory()) {
 									addMappings(mappings, defaultMappingsDir);
@@ -220,15 +200,15 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 							}
 
 							ImmutableSettings.Builder indexSettingsBuilder = ImmutableSettings.settingsBuilder();
-							
+
 							for (int i = templates.size() - 1; i >= 0; i--) {
 								indexSettingsBuilder.put(templates.get(i).settings());
 							}
-							
+
 							indexSettingsBuilder.put(request.settings);
 
 							if (request.index.equals(PercolatorService.INDEX_NAME)) {
-								
+
 								indexSettingsBuilder.put(SETTING_NUMBER_OF_SHARDS, 1);
 							} else {
 								if (indexSettingsBuilder.get(SETTING_NUMBER_OF_SHARDS) == null) {
@@ -242,7 +222,7 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 								}
 							}
 							if (request.index.equals(PercolatorService.INDEX_NAME)) {
-								
+
 								indexSettingsBuilder.put(SETTING_NUMBER_OF_REPLICAS, 0);
 								indexSettingsBuilder.put(SETTING_AUTO_EXPAND_REPLICAS, "0-all");
 							} else {
@@ -257,19 +237,17 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 								}
 							}
 
-							indexSettingsBuilder.put(SETTING_VERSION_CREATED, new RestartSearchCoreVersion().getModuleVersion());
+							indexSettingsBuilder.put(SETTING_VERSION_CREATED,
+									new RestartSearchCoreVersion().getModuleVersion());
 
 							Settings actualIndexSettings = indexSettingsBuilder.build();
 
-							
-
-							
 							indicesService.createIndex(request.index, actualIndexSettings, clusterService.state()
 									.nodes().localNode().id());
-							
+
 							IndexService indexService = indicesService.indexServiceSafe(request.index);
 							MapperService mapperService = indexService.mapperService();
-							
+
 							if (mappings.containsKey(MapperService.DEFAULT_MAPPING)) {
 								try {
 									mapperService.add(
@@ -296,7 +274,7 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 									throw new MapperParsingException("mapping [" + entry.getKey() + "]", e);
 								}
 							}
-							
+
 							Map<String, MappingMetaData> mappingsMetaData = Maps.newHashMap();
 							for (DocumentMapper mapper : mapperService) {
 								MappingMetaData mappingMd = new MappingMetaData(mapper);
@@ -345,7 +323,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 										.routingResult(routingResult).build();
 							}
 
-							
 							final AtomicInteger counter = new AtomicInteger(currentState.nodes().size());
 
 							final NodeIndexCreatedAction.Listener nodeIndexCreatedListener = new NodeIndexCreatedAction.Listener() {
@@ -385,7 +362,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 				});
 	}
 
-	
 	/**
 	 * The listener interface for receiving createIndex events.
 	 * The class that is interested in processing a createIndex
@@ -399,27 +375,21 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 	 */
 	class CreateIndexListener implements Listener {
 
-		
 		/** The notified. */
 		private final AtomicBoolean notified = new AtomicBoolean();
 
-		
 		/** The md lock. */
 		private final MetaDataService.MdLock mdLock;
 
-		
 		/** The request. */
 		private final Request request;
 
-		
 		/** The listener. */
 		private final Listener listener;
 
-		
 		/** The future. */
 		volatile ScheduledFuture future;
 
-		
 		/**
 		 * Instantiates a new creates the index listener.
 		 *
@@ -433,9 +403,8 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			this.listener = listener;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.metadata.MetaDataCreateIndexService.Listener#onResponse(cn.com.summall.search.core.cluster.metadata.MetaDataCreateIndexService.Response)
+		 * @see cn.com.rebirth.search.core.cluster.metadata.MetaDataCreateIndexService.Listener#onResponse(cn.com.rebirth.search.core.cluster.metadata.MetaDataCreateIndexService.Response)
 		 */
 		@Override
 		public void onResponse(final Response response) {
@@ -448,9 +417,8 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.metadata.MetaDataCreateIndexService.Listener#onFailure(java.lang.Throwable)
+		 * @see cn.com.rebirth.search.core.cluster.metadata.MetaDataCreateIndexService.Listener#onFailure(java.lang.Throwable)
 		 */
 		@Override
 		public void onFailure(Throwable t) {
@@ -464,7 +432,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Parses the mapping.
 	 *
@@ -476,7 +443,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		return XContentFactory.xContent(mappingSource).createParser(mappingSource).mapAndClose();
 	}
 
-	
 	/**
 	 * Adds the mappings.
 	 *
@@ -504,7 +470,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Find templates.
 	 *
@@ -520,7 +485,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			}
 		}
 
-		
 		File templatesDir = new File(environment.configFile(), "templates");
 		if (templatesDir.exists() && templatesDir.isDirectory()) {
 			File[] templatesFiles = templatesDir.listFiles();
@@ -553,15 +517,14 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		return templates;
 	}
 
-	
 	/**
 	 * Validate.
 	 *
 	 * @param request the request
 	 * @param state the state
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	private void validate(Request request, ClusterState state) throws RestartException {
+	private void validate(Request request, ClusterState state) throws RebirthException {
 		if (state.routingTable().hasIndex(request.index)) {
 			throw new IndexAlreadyExistsException(new Index(request.index));
 		}
@@ -594,7 +557,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -602,7 +564,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On response.
 		 *
@@ -610,7 +571,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		 */
 		void onResponse(Response response);
 
-		
 		/**
 		 * On failure.
 		 *
@@ -619,7 +579,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		void onFailure(Throwable t);
 	}
 
-	
 	/**
 	 * The Class Request.
 	 *
@@ -627,35 +586,27 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 	 */
 	public static class Request {
 
-		
 		/** The cause. */
 		final String cause;
 
-		
 		/** The index. */
 		final String index;
 
-		
 		/** The state. */
 		State state = State.OPEN;
 
-		
 		/** The settings. */
 		Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-		
 		/** The mappings. */
 		Map<String, String> mappings = Maps.newHashMap();
 
-		
 		/** The timeout. */
 		TimeValue timeout = TimeValue.timeValueSeconds(5);
 
-		
 		/** The blocks. */
 		Set<ClusterBlock> blocks = Sets.newHashSet();
 
-		
 		/**
 		 * Instantiates a new request.
 		 *
@@ -667,7 +618,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			this.index = index;
 		}
 
-		
 		/**
 		 * Settings.
 		 *
@@ -679,7 +629,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Mappings.
 		 *
@@ -691,7 +640,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Mappings meta data.
 		 *
@@ -706,7 +654,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Mappings compressed.
 		 *
@@ -721,7 +668,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Blocks.
 		 *
@@ -733,7 +679,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * State.
 		 *
@@ -745,7 +690,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Timeout.
 		 *
@@ -758,7 +702,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Response.
 	 *
@@ -766,15 +709,12 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 	 */
 	public static class Response {
 
-		
 		/** The acknowledged. */
 		private final boolean acknowledged;
 
-		
 		/** The index meta data. */
 		private final IndexMetaData indexMetaData;
 
-		
 		/**
 		 * Instantiates a new response.
 		 *
@@ -786,7 +726,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			this.indexMetaData = indexMetaData;
 		}
 
-		
 		/**
 		 * Acknowledged.
 		 *
@@ -796,7 +735,6 @@ public class MetaDataCreateIndexService extends AbstractComponent {
 			return acknowledged;
 		}
 
-		
 		/**
 		 * Index meta data.
 		 *

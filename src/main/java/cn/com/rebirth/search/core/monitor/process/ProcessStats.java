@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ProcessStats.java 2012-3-29 15:02:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ProcessStats.java 2012-7-6 14:28:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.process;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class ProcessStats.
  *
@@ -26,34 +24,27 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class ProcessStats implements Streamable, Serializable, ToXContent {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8615214950636329226L;
 
-	
 	/** The timestamp. */
 	long timestamp = -1;
 
-	
 	/** The open file descriptors. */
 	long openFileDescriptors;
 
-	
 	/** The cpu. */
 	Cpu cpu = null;
 
-	
 	/** The mem. */
 	Mem mem = null;
 
-	
 	/**
 	 * Instantiates a new process stats.
 	 */
 	ProcessStats() {
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -63,7 +54,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return this.timestamp;
 	}
 
-	
 	/**
 	 * Gets the timestamp.
 	 *
@@ -73,7 +63,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return timestamp();
 	}
 
-	
 	/**
 	 * Open file descriptors.
 	 *
@@ -83,7 +72,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return this.openFileDescriptors;
 	}
 
-	
 	/**
 	 * Gets the open file descriptors.
 	 *
@@ -93,7 +81,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return openFileDescriptors;
 	}
 
-	
 	/**
 	 * Cpu.
 	 *
@@ -103,7 +90,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return cpu;
 	}
 
-	
 	/**
 	 * Gets the cpu.
 	 *
@@ -113,7 +99,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return cpu();
 	}
 
-	
 	/**
 	 * Mem.
 	 *
@@ -123,7 +108,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return mem;
 	}
 
-	
 	/**
 	 * Gets the mem.
 	 *
@@ -133,7 +117,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return mem();
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -141,82 +124,63 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant PROCESS. */
 		static final XContentBuilderString PROCESS = new XContentBuilderString("process");
 
-		
 		/** The Constant TIMESTAMP. */
 		static final XContentBuilderString TIMESTAMP = new XContentBuilderString("timestamp");
 
-		
 		/** The Constant OPEN_FILE_DESCRIPTORS. */
 		static final XContentBuilderString OPEN_FILE_DESCRIPTORS = new XContentBuilderString("open_file_descriptors");
 
-		
 		/** The Constant CPU. */
 		static final XContentBuilderString CPU = new XContentBuilderString("cpu");
 
-		
 		/** The Constant PERCENT. */
 		static final XContentBuilderString PERCENT = new XContentBuilderString("percent");
 
-		
 		/** The Constant SYS. */
 		static final XContentBuilderString SYS = new XContentBuilderString("sys");
 
-		
 		/** The Constant SYS_IN_MILLIS. */
 		static final XContentBuilderString SYS_IN_MILLIS = new XContentBuilderString("sys_in_millis");
 
-		
 		/** The Constant USER. */
 		static final XContentBuilderString USER = new XContentBuilderString("user");
 
-		
 		/** The Constant USER_IN_MILLIS. */
 		static final XContentBuilderString USER_IN_MILLIS = new XContentBuilderString("user_in_millis");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant TOTAL_IN_MILLIS. */
 		static final XContentBuilderString TOTAL_IN_MILLIS = new XContentBuilderString("total_in_millis");
 
-		
 		/** The Constant MEM. */
 		static final XContentBuilderString MEM = new XContentBuilderString("mem");
 
-		
 		/** The Constant RESIDENT. */
 		static final XContentBuilderString RESIDENT = new XContentBuilderString("resident");
 
-		
 		/** The Constant RESIDENT_IN_BYTES. */
 		static final XContentBuilderString RESIDENT_IN_BYTES = new XContentBuilderString("resident_in_bytes");
 
-		
 		/** The Constant SHARE. */
 		static final XContentBuilderString SHARE = new XContentBuilderString("share");
 
-		
 		/** The Constant SHARE_IN_BYTES. */
 		static final XContentBuilderString SHARE_IN_BYTES = new XContentBuilderString("share_in_bytes");
 
-		
 		/** The Constant TOTAL_VIRTUAL. */
 		static final XContentBuilderString TOTAL_VIRTUAL = new XContentBuilderString("total_virtual");
 
-		
 		/** The Constant TOTAL_VIRTUAL_IN_BYTES. */
 		static final XContentBuilderString TOTAL_VIRTUAL_IN_BYTES = new XContentBuilderString("total_virtual_in_bytes");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -248,7 +212,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * Read process stats.
 	 *
@@ -262,9 +225,8 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		return stats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -278,9 +240,8 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -300,7 +261,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * The Class Mem.
 	 *
@@ -308,30 +268,24 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Mem implements Streamable, Serializable {
 
-		
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 6436300006737234567L;
 
-		
 		/** The total virtual. */
 		long totalVirtual = -1;
 
-		
 		/** The resident. */
 		long resident = -1;
 
-		
 		/** The share. */
 		long share = -1;
 
-		
 		/**
 		 * Instantiates a new mem.
 		 */
 		Mem() {
 		}
 
-		
 		/**
 		 * Read mem.
 		 *
@@ -345,9 +299,8 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return mem;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -356,9 +309,8 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			share = in.readLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -367,7 +319,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			out.writeLong(share);
 		}
 
-		
 		/**
 		 * Total virtual.
 		 *
@@ -377,7 +328,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(totalVirtual);
 		}
 
-		
 		/**
 		 * Gets the total virtual.
 		 *
@@ -387,7 +337,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return totalVirtual();
 		}
 
-		
 		/**
 		 * Resident.
 		 *
@@ -397,7 +346,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(resident);
 		}
 
-		
 		/**
 		 * Gets the resident.
 		 *
@@ -407,7 +355,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return resident();
 		}
 
-		
 		/**
 		 * Share.
 		 *
@@ -417,7 +364,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(share);
 		}
 
-		
 		/**
 		 * Gets the share.
 		 *
@@ -428,7 +374,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * The Class Cpu.
 	 *
@@ -436,27 +381,21 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Cpu implements Streamable, Serializable {
 
-		
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1443613038752835426L;
 
-		
 		/** The percent. */
 		short percent = -1;
 
-		
 		/** The sys. */
 		long sys = -1;
 
-		
 		/** The user. */
 		long user = -1;
 
-		
 		/** The total. */
 		long total = -1;
 
-		
 		/**
 		 * Instantiates a new cpu.
 		 */
@@ -464,7 +403,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 
 		}
 
-		
 		/**
 		 * Read cpu.
 		 *
@@ -478,9 +416,8 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return cpu;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -490,9 +427,8 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			total = in.readLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -502,7 +438,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			out.writeLong(total);
 		}
 
-		
 		/**
 		 * Percent.
 		 *
@@ -512,7 +447,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return percent;
 		}
 
-		
 		/**
 		 * Gets the percent.
 		 *
@@ -522,7 +456,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return percent();
 		}
 
-		
 		/**
 		 * Sys.
 		 *
@@ -532,7 +465,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return new TimeValue(sys);
 		}
 
-		
 		/**
 		 * Gets the sys.
 		 *
@@ -542,7 +474,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return sys();
 		}
 
-		
 		/**
 		 * User.
 		 *
@@ -552,7 +483,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return new TimeValue(user);
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -562,7 +492,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return new TimeValue(total);
 		}
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -572,7 +501,6 @@ public class ProcessStats implements Streamable, Serializable, ToXContent {
 			return total();
 		}
 
-		
 		/**
 		 * Gets the user.
 		 *

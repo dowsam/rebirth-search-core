@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IpFieldMapper.java 2012-3-29 15:02:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IpFieldMapper.java 2012-7-6 14:29:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.ip;
 
@@ -26,7 +25,7 @@ import org.apache.lucene.util.NumericUtils;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.Numbers;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
@@ -45,7 +44,6 @@ import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.core.index.search.NumericRangeFieldDataFilter;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class IpFieldMapper.
  *
@@ -53,11 +51,9 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public class IpFieldMapper extends NumberFieldMapper<Long> {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "ip";
 
-	
 	/**
 	 * Long to ip.
 	 *
@@ -72,36 +68,33 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		return octet3 + "." + octet2 + "." + octet1 + "." + octet0;
 	}
 
-	
 	/** The Constant pattern. */
 	private static final Pattern pattern = Pattern.compile("\\.");
 
-	
 	/**
 	 * Ip to long.
 	 *
 	 * @param ip the ip
 	 * @return the long
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public static long ipToLong(String ip) throws RestartIllegalArgumentException {
+	public static long ipToLong(String ip) throws RebirthIllegalArgumentException {
 		try {
 			String[] octets = pattern.split(ip);
 			if (octets.length != 4) {
-				throw new RestartIllegalArgumentException("failed to parse ip [" + ip
+				throw new RebirthIllegalArgumentException("failed to parse ip [" + ip
 						+ "], not full ip address (4 dots)");
 			}
 			return (Long.parseLong(octets[0]) << 24) + (Integer.parseInt(octets[1]) << 16)
 					+ (Integer.parseInt(octets[2]) << 8) + Integer.parseInt(octets[3]);
 		} catch (Exception e) {
-			if (e instanceof RestartIllegalArgumentException) {
-				throw (RestartIllegalArgumentException) e;
+			if (e instanceof RebirthIllegalArgumentException) {
+				throw (RebirthIllegalArgumentException) e;
 			}
-			throw new RestartIllegalArgumentException("failed to parse ip [" + ip + "]", e);
+			throw new RebirthIllegalArgumentException("failed to parse ip [" + ip + "]", e);
 		}
 	}
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -109,12 +102,10 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 	 */
 	public static class Defaults extends NumberFieldMapper.Defaults {
 
-		
 		/** The Constant NULL_VALUE. */
 		public static final String NULL_VALUE = null;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -122,11 +113,9 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 	 */
 	public static class Builder extends NumberFieldMapper.Builder<Builder, IpFieldMapper> {
 
-		
 		/** The null value. */
 		protected String nullValue = Defaults.NULL_VALUE;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -137,7 +126,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 			builder = this;
 		}
 
-		
 		/**
 		 * Null value.
 		 *
@@ -149,9 +137,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public IpFieldMapper build(BuilderContext context) {
@@ -162,7 +149,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -170,9 +156,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -190,11 +175,9 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		}
 	}
 
-	
 	/** The null value. */
 	private String nullValue;
 
-	
 	/**
 	 * Instantiates a new ip field mapper.
 	 *
@@ -215,18 +198,16 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		this.nullValue = nullValue;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#maxPrecisionStep()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#maxPrecisionStep()
 	 */
 	@Override
 	protected int maxPrecisionStep() {
 		return 64;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Long value(Fieldable field) {
@@ -237,27 +218,24 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		return Numbers.bytesToLong(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public Long valueFromString(String value) {
 		return ipToLong(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Object valueForSearch(Fieldable field) {
 		return valueAsString(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
@@ -268,18 +246,16 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		return longToIp(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return NumericUtils.longToPrefixCoded(ipToLong(value));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, String minSim, int prefixLength, int maxExpansions) {
@@ -287,7 +263,7 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		long iSim;
 		try {
 			iSim = ipToLong(minSim);
-		} catch (RestartIllegalArgumentException e) {
+		} catch (RebirthIllegalArgumentException e) {
 			try {
 				iSim = Long.parseLong(minSim);
 			} catch (NumberFormatException e1) {
@@ -298,18 +274,16 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 				true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, double minSim, int prefixLength, int maxExpansions) {
 		return new FuzzyQuery(names().createIndexNameTerm(value), (float) minSim, prefixLength, maxExpansions);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query rangeQuery(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -318,9 +292,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 				: ipToLong(lowerTerm), upperTerm == null ? null : ipToLong(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -329,9 +302,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 				: ipToLong(lowerTerm), upperTerm == null ? null : ipToLong(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(cn.com.summall.search.core.index.cache.field.data.FieldDataCache, java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache, java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(FieldDataCache fieldDataCache, String lowerTerm, String upperTerm, boolean includeLower,
@@ -340,9 +312,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 				: ipToLong(lowerTerm), upperTerm == null ? null : ipToLong(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException {
@@ -371,27 +342,24 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		return new LongFieldMapper.CustomLongNumericField(this, value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fieldDataType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fieldDataType()
 	 */
 	@Override
 	public FieldDataType fieldDataType() {
 		return FieldDataType.DefaultTypes.LONG;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
@@ -404,9 +372,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.summall.search.commons.xcontent.XContentBuilder)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.rebirth.search.commons.xcontent.XContentBuilder)
 	 */
 	@Override
 	protected void doXContentBody(XContentBuilder builder) throws IOException {
@@ -437,7 +404,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		}
 	}
 
-	
 	/**
 	 * The Class NumericIpAnalyzer.
 	 *
@@ -445,11 +411,9 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 	 */
 	public static class NumericIpAnalyzer extends NumericAnalyzer<NumericIpTokenizer> {
 
-		
 		/** The precision step. */
 		private final int precisionStep;
 
-		
 		/**
 		 * Instantiates a new numeric ip analyzer.
 		 */
@@ -457,7 +421,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 			this(NumericUtils.PRECISION_STEP_DEFAULT);
 		}
 
-		
 		/**
 		 * Instantiates a new numeric ip analyzer.
 		 *
@@ -467,9 +430,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 			this.precisionStep = precisionStep;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.NumericAnalyzer#createNumericTokenizer(java.io.Reader, char[])
+		 * @see cn.com.rebirth.search.core.index.analysis.NumericAnalyzer#createNumericTokenizer(java.io.Reader, char[])
 		 */
 		@Override
 		protected NumericIpTokenizer createNumericTokenizer(Reader reader, char[] buffer) throws IOException {
@@ -477,7 +439,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 		}
 	}
 
-	
 	/**
 	 * The Class NumericIpTokenizer.
 	 *
@@ -485,7 +446,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 	 */
 	public static class NumericIpTokenizer extends NumericTokenizer {
 
-		
 		/**
 		 * Instantiates a new numeric ip tokenizer.
 		 *
@@ -497,7 +457,6 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 			super(reader, new NumericTokenStream(precisionStep), null);
 		}
 
-		
 		/**
 		 * Instantiates a new numeric ip tokenizer.
 		 *
@@ -510,9 +469,8 @@ public class IpFieldMapper extends NumberFieldMapper<Long> {
 			super(reader, new NumericTokenStream(precisionStep), buffer, null);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.analysis.NumericTokenizer#setValue(org.apache.lucene.analysis.NumericTokenStream, java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.analysis.NumericTokenizer#setValue(org.apache.lucene.analysis.NumericTokenStream, java.lang.String)
 		 */
 		@Override
 		protected void setValue(NumericTokenStream tokenStream, String value) {

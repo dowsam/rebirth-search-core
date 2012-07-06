@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JmxClusterService.java 2012-3-29 15:02:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JmxClusterService.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.jmx;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.cluster.ClusterStateListener;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.jmx.action.GetJmxServiceUrlAction;
 
-
 /**
  * The Class JmxClusterService.
  *
@@ -32,23 +30,18 @@ import cn.com.rebirth.search.core.jmx.action.GetJmxServiceUrlAction;
  */
 public class JmxClusterService extends AbstractComponent {
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The jmx service. */
 	private final JmxService jmxService;
 
-	
 	/** The get jmx service url action. */
 	private final GetJmxServiceUrlAction getJmxServiceUrlAction;
 
-	
 	/** The cluster nodes jmx updater. */
 	private final ExecutorService clusterNodesJmxUpdater;
 
-	
 	/**
 	 * Instantiates a new jmx cluster service.
 	 *
@@ -81,7 +74,6 @@ public class JmxClusterService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -91,7 +83,6 @@ public class JmxClusterService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Register node.
 	 *
@@ -105,21 +96,11 @@ public class JmxClusterService extends AbstractComponent {
 
 			MBeanServerConnection connection = jmxConnector.getMBeanServerConnection();
 
-			
-			
-			
-			
-			
-			
-			
-			
-			
 		} catch (Exception e) {
 			logger.warn("Failed to register node [" + node + "] with serviceUrl [" + nodeServiceUrl + "]", e);
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving jmxClusterEvent events.
 	 * The class that is interested in processing a jmxClusterEvent
@@ -133,9 +114,8 @@ public class JmxClusterService extends AbstractComponent {
 	 */
 	private class JmxClusterEventListener implements ClusterStateListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+		 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 		 */
 		@Override
 		public void clusterChanged(ClusterChangedEvent event) {

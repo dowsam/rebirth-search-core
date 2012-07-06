@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterHealthRequestBuilder.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterHealthRequestBuilder.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.health;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.cluster.support.BaseClusterRequestBuilder;
 import cn.com.rebirth.search.core.client.ClusterAdminClient;
 
-
 /**
  * The Class ClusterHealthRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.ClusterAdminClient;
  */
 public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<ClusterHealthRequest, ClusterHealthResponse> {
 
-	
 	/**
 	 * Instantiates a new cluster health request builder.
 	 *
@@ -29,7 +26,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		super(clusterClient, new ClusterHealthRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -41,7 +37,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -53,7 +48,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -65,7 +59,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -77,7 +70,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for status.
 	 *
@@ -89,7 +81,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for green status.
 	 *
@@ -100,7 +91,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for yellow status.
 	 *
@@ -111,7 +101,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for relocating shards.
 	 *
@@ -123,7 +112,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for active shards.
 	 *
@@ -135,7 +123,6 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for nodes.
 	 *
@@ -147,9 +134,8 @@ public class ClusterHealthRequestBuilder extends BaseClusterRequestBuilder<Clust
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.cluster.support.BaseClusterRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.cluster.support.BaseClusterRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<ClusterHealthResponse> listener) {

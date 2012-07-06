@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JmxConnectorCreationException.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JmxConnectorCreationException.java 2012-7-6 14:30:21 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.jmx;
-
 
 /**
  * The Class JmxConnectorCreationException.
@@ -14,11 +12,9 @@ package cn.com.rebirth.search.core.jmx;
  */
 public class JmxConnectorCreationException extends JmxException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7638694021399974018L;
 
-	
 	/**
 	 * Instantiates a new jmx connector creation exception.
 	 *
@@ -28,7 +24,6 @@ public class JmxConnectorCreationException extends JmxException {
 		super(message);
 	}
 
-	
 	/**
 	 * Instantiates a new jmx connector creation exception.
 	 *

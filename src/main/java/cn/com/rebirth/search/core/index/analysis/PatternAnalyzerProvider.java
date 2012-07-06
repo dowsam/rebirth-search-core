@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PatternAnalyzerProvider.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PatternAnalyzerProvider.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -12,7 +11,7 @@ import java.util.regex.Pattern;
 import org.apache.lucene.analysis.StopAnalyzer;
 import org.apache.lucene.analysis.miscellaneous.PatternAnalyzer;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.regex.Regex;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class PatternAnalyzerProvider.
  *
@@ -29,11 +27,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class PatternAnalyzerProvider extends AbstractIndexAnalyzerProvider<PatternAnalyzer> {
 
-	
 	/** The analyzer. */
 	private final PatternAnalyzer analyzer;
 
-	
 	/**
 	 * Instantiates a new pattern analyzer provider.
 	 *
@@ -52,9 +48,9 @@ public class PatternAnalyzerProvider extends AbstractIndexAnalyzerProvider<Patte
 
 		Set<?> stopWords = Analysis.parseStopWords(env, settings, StopAnalyzer.ENGLISH_STOP_WORDS_SET, version);
 
-		String sPattern = settings.get("pattern", "\\W+" );
+		String sPattern = settings.get("pattern", "\\W+");
 		if (sPattern == null) {
-			throw new RestartIllegalArgumentException("Analyzer [" + name
+			throw new RebirthIllegalArgumentException("Analyzer [" + name
 					+ "] of type pattern must have a `pattern` set");
 		}
 		Pattern pattern = Regex.compile(sPattern, settings.get("flags"));
@@ -62,9 +58,8 @@ public class PatternAnalyzerProvider extends AbstractIndexAnalyzerProvider<Patte
 		analyzer = new PatternAnalyzer(version, pattern, lowercase, stopWords);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#get()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#get()
 	 */
 	@Override
 	public PatternAnalyzer get() {

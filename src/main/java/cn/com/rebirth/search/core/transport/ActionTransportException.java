@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ActionTransportException.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ActionTransportException.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport;
 
 import cn.com.rebirth.search.commons.transport.TransportAddress;
-
 
 /**
  * The Class ActionTransportException.
@@ -19,15 +17,12 @@ public class ActionTransportException extends TransportException {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2984862862556114256L;
 
-	
 	/** The address. */
 	private TransportAddress address;
 
-	
 	/** The action. */
 	private String action;
 
-	
 	/**
 	 * Instantiates a new action transport exception.
 	 *
@@ -38,7 +33,6 @@ public class ActionTransportException extends TransportException {
 		super(msg, cause);
 	}
 
-	
 	/**
 	 * Instantiates a new action transport exception.
 	 *
@@ -53,7 +47,6 @@ public class ActionTransportException extends TransportException {
 		this.action = action;
 	}
 
-	
 	/**
 	 * Instantiates a new action transport exception.
 	 *
@@ -69,7 +62,6 @@ public class ActionTransportException extends TransportException {
 		this.action = action;
 	}
 
-	
 	/**
 	 * Address.
 	 *
@@ -79,7 +71,6 @@ public class ActionTransportException extends TransportException {
 		return address;
 	}
 
-	
 	/**
 	 * Action.
 	 *
@@ -89,7 +80,6 @@ public class ActionTransportException extends TransportException {
 		return action;
 	}
 
-	
 	/**
 	 * Builds the message.
 	 *

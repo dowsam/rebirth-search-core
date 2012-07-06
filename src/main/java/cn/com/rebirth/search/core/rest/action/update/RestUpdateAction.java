@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestUpdateAction.java 2012-3-29 15:02:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestUpdateAction.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.update;
 
@@ -34,7 +33,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestUpdateAction.
  *
@@ -42,7 +40,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestUpdateAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest update action.
 	 *
@@ -56,16 +53,15 @@ public class RestUpdateAction extends BaseRestHandler {
 		controller.registerHandler(POST, "/{index}/{type}/{id}/_update", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
 		UpdateRequest updateRequest = new UpdateRequest(request.param("index"), request.param("type"),
 				request.param("id"));
 		updateRequest.routing(request.param("routing"));
-		updateRequest.parent(request.param("parent")); 
+		updateRequest.parent(request.param("parent"));
 		updateRequest.timeout(request.paramAsTime("timeout", updateRequest.timeout()));
 		updateRequest.refresh(request.paramAsBoolean("refresh", updateRequest.refresh()));
 		String replicationType = request.param("replication");
@@ -77,7 +73,7 @@ public class RestUpdateAction extends BaseRestHandler {
 			updateRequest.consistencyLevel(WriteConsistencyLevel.fromString(consistencyLevel));
 		}
 		updateRequest.percolate(request.param("percolate", null));
-		
+
 		updateRequest.listenerThreaded(false);
 		updateRequest.script(request.param("script"));
 		updateRequest.scriptLang(request.param("lang"));
@@ -88,7 +84,6 @@ public class RestUpdateAction extends BaseRestHandler {
 		}
 		updateRequest.retryOnConflict(request.paramAsInt("retry_on_conflict", updateRequest.retryOnConflict()));
 
-		
 		if (request.hasContent()) {
 			XContentType xContentType = XContentFactory.xContentType(request.contentByteArray(),
 					request.contentByteArrayOffset(), request.contentLength());
@@ -155,7 +150,6 @@ public class RestUpdateAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -163,27 +157,21 @@ public class RestUpdateAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant OK. */
 		static final XContentBuilderString OK = new XContentBuilderString("ok");
 
-		
 		/** The Constant _INDEX. */
 		static final XContentBuilderString _INDEX = new XContentBuilderString("_index");
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant _ID. */
 		static final XContentBuilderString _ID = new XContentBuilderString("_id");
 
-		
 		/** The Constant _VERSION. */
 		static final XContentBuilderString _VERSION = new XContentBuilderString("_version");
 
-		
 		/** The Constant MATCHES. */
 		static final XContentBuilderString MATCHES = new XContentBuilderString("matches");
 	}

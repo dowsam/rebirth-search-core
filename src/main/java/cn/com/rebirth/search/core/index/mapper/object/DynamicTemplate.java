@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DynamicTemplate.java 2012-3-29 15:02:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DynamicTemplate.java 2012-7-6 14:30:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.object;
 
@@ -12,13 +11,12 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.regex.Regex;
 import cn.com.rebirth.search.core.index.mapper.ContentPath;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;
 
 import com.google.common.collect.Maps;
-
 
 /**
  * The Class DynamicTemplate.
@@ -27,7 +25,6 @@ import com.google.common.collect.Maps;
  */
 public class DynamicTemplate {
 
-	
 	/**
 	 * The Enum MatchType.
 	 *
@@ -35,15 +32,12 @@ public class DynamicTemplate {
 	 */
 	public static enum MatchType {
 
-		
-		/** The SIMPLE. */
+		/** The simple. */
 		SIMPLE,
 
-		
-		/** The REGEX. */
+		/** The regex. */
 		REGEX;
 
-		
 		/**
 		 * From string.
 		 *
@@ -56,11 +50,10 @@ public class DynamicTemplate {
 			} else if ("regex".equals(value)) {
 				return REGEX;
 			}
-			throw new RestartIllegalArgumentException("No matching pattern matched on [" + value + "]");
+			throw new RebirthIllegalArgumentException("No matching pattern matched on [" + value + "]");
 		}
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -107,43 +100,33 @@ public class DynamicTemplate {
 				MatchType.fromString(matchPattern), mapping);
 	}
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The conf. */
 	private final Map<String, Object> conf;
 
-	
 	/** The path match. */
 	private final String pathMatch;
 
-	
 	/** The path unmatch. */
 	private final String pathUnmatch;
 
-	
 	/** The match. */
 	private final String match;
 
-	
 	/** The unmatch. */
 	private final String unmatch;
 
-	
 	/** The match type. */
 	private final MatchType matchType;
 
-	
 	/** The match mapping type. */
 	private final String matchMappingType;
 
-	
 	/** The mapping. */
 	private final Map<String, Object> mapping;
 
-	
 	/**
 	 * Instantiates a new dynamic template.
 	 *
@@ -170,7 +153,6 @@ public class DynamicTemplate {
 		this.mapping = mapping;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -180,7 +162,6 @@ public class DynamicTemplate {
 		return this.name;
 	}
 
-	
 	/**
 	 * Conf.
 	 *
@@ -190,7 +171,6 @@ public class DynamicTemplate {
 		return this.conf;
 	}
 
-	
 	/**
 	 * Match.
 	 *
@@ -223,7 +203,6 @@ public class DynamicTemplate {
 		return true;
 	}
 
-	
 	/**
 	 * Checks for type.
 	 *
@@ -233,7 +212,6 @@ public class DynamicTemplate {
 		return mapping.containsKey("type");
 	}
 
-	
 	/**
 	 * Mapping type.
 	 *
@@ -244,7 +222,6 @@ public class DynamicTemplate {
 		return mapping.containsKey("type") ? mapping.get("type").toString() : dynamicType;
 	}
 
-	
 	/**
 	 * Pattern match.
 	 *
@@ -259,7 +236,6 @@ public class DynamicTemplate {
 		return str.matches(pattern);
 	}
 
-	
 	/**
 	 * Mapping for name.
 	 *
@@ -271,7 +247,6 @@ public class DynamicTemplate {
 		return processMap(mapping, name, dynamicType);
 	}
 
-	
 	/**
 	 * Process map.
 	 *
@@ -299,7 +274,6 @@ public class DynamicTemplate {
 		return processedMap;
 	}
 
-	
 	/**
 	 * Process list.
 	 *
@@ -324,7 +298,6 @@ public class DynamicTemplate {
 		return processedList;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -337,7 +310,6 @@ public class DynamicTemplate {
 
 		DynamicTemplate that = (DynamicTemplate) o;
 
-		
 		if (match != null ? !match.equals(that.match) : that.match != null)
 			return false;
 		if (matchMappingType != null ? !matchMappingType.equals(that.matchMappingType) : that.matchMappingType != null)
@@ -350,13 +322,12 @@ public class DynamicTemplate {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
 	public int hashCode() {
-		
+
 		int result = match != null ? match.hashCode() : 0;
 		result = 31 * result + (unmatch != null ? unmatch.hashCode() : 0);
 		result = 31 * result + (matchType != null ? matchType.hashCode() : 0);

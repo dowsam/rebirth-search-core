@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptRangeFacetCollector.java 2012-3-29 15:02:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptRangeFacetCollector.java 2012-7-6 14:30:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetCollector;
 import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ScriptRangeFacetCollector.
  *
@@ -25,19 +23,15 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ScriptRangeFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The key script. */
 	private final SearchScript keyScript;
 
-	
 	/** The value script. */
 	private final SearchScript valueScript;
 
-	
 	/** The entries. */
 	private final RangeFacet.Entry[] entries;
 
-	
 	/**
 	 * Instantiates a new script range facet collector.
 	 *
@@ -57,9 +51,8 @@ public class ScriptRangeFacetCollector extends AbstractFacetCollector {
 		this.entries = entries;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
@@ -67,9 +60,8 @@ public class ScriptRangeFacetCollector extends AbstractFacetCollector {
 		valueScript.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -77,9 +69,8 @@ public class ScriptRangeFacetCollector extends AbstractFacetCollector {
 		valueScript.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -103,9 +94,8 @@ public class ScriptRangeFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {

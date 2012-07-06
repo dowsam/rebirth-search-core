@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DictionaryCompoundWordTokenFilterFactory.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DictionaryCompoundWordTokenFilterFactory.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis.compound;
 
@@ -17,14 +16,12 @@ import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.analysis.AnalysisSettingsRequired;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating DictionaryCompoundWordTokenFilter objects.
  */
 @AnalysisSettingsRequired
 public class DictionaryCompoundWordTokenFilterFactory extends AbstractCompoundWordTokenFilterFactory {
 
-	
 	/**
 	 * Instantiates a new dictionary compound word token filter factory.
 	 *
@@ -40,9 +37,8 @@ public class DictionaryCompoundWordTokenFilterFactory extends AbstractCompoundWo
 		super(index, indexSettings, env, name, settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {

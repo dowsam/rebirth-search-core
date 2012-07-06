@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptService.java 2012-3-29 15:02:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptService.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.script;
 
@@ -16,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -32,7 +31,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class ScriptService.
  *
@@ -40,28 +38,21 @@ import com.google.common.collect.ImmutableSet;
  */
 public class ScriptService extends AbstractComponent {
 
-	
 	/** The default lang. */
 	private final String defaultLang;
 
-	
 	/** The script engines. */
 	private final ImmutableMap<String, ScriptEngineService> scriptEngines;
 
-	
 	/** The static cache. */
 	private final ConcurrentMap<String, CompiledScript> staticCache = ConcurrentCollections.newConcurrentMap();
 
-	
-	
 	/** The cache. */
 	private final Cache<CacheKey, CompiledScript> cache = CacheBuilder.newBuilder().build();
 
-	
 	/** The disable dynamic. */
 	private final boolean disableDynamic;
 
-	
 	/**
 	 * Instantiates a new script service.
 	 *
@@ -72,7 +63,6 @@ public class ScriptService extends AbstractComponent {
 				.add(new MvelScriptEngineService(settings)).build());
 	}
 
-	
 	/**
 	 * Instantiates a new script service.
 	 *
@@ -95,17 +85,14 @@ public class ScriptService extends AbstractComponent {
 		}
 		this.scriptEngines = builder.build();
 
-		
 		staticCache.put("doc.score", new CompiledScript("native", new DocScoreNativeScriptFactory()));
 
-		
 		File scriptsFile = new File(env.configFile(), "scripts");
 		if (scriptsFile.exists()) {
 			processScriptsDirectory("", scriptsFile);
 		}
 	}
 
-	
 	/**
 	 * Process scripts directory.
 	 *
@@ -149,7 +136,6 @@ public class ScriptService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -159,7 +145,6 @@ public class ScriptService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Compile.
 	 *
@@ -170,7 +155,6 @@ public class ScriptService extends AbstractComponent {
 		return compile(defaultLang, script);
 	}
 
-	
 	/**
 	 * Compile.
 	 *
@@ -194,17 +178,16 @@ public class ScriptService extends AbstractComponent {
 		if (compiled != null) {
 			return compiled;
 		}
-		
+
 		ScriptEngineService service = scriptEngines.get(lang);
 		if (service == null) {
-			throw new RestartIllegalArgumentException("script_lang not supported [" + lang + "]");
+			throw new RebirthIllegalArgumentException("script_lang not supported [" + lang + "]");
 		}
 		compiled = new CompiledScript(lang, service.compile(script));
 		cache.put(cacheKey, compiled);
 		return compiled;
 	}
 
-	
 	/**
 	 * Executable.
 	 *
@@ -217,7 +200,6 @@ public class ScriptService extends AbstractComponent {
 		return executable(compile(lang, script), vars);
 	}
 
-	
 	/**
 	 * Executable.
 	 *
@@ -229,7 +211,6 @@ public class ScriptService extends AbstractComponent {
 		return scriptEngines.get(compiledScript.lang()).executable(compiledScript.compiled(), vars);
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -242,7 +223,6 @@ public class ScriptService extends AbstractComponent {
 		return scriptEngines.get(compiledScript.lang()).search(compiledScript.compiled(), lookup, vars);
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -256,7 +236,6 @@ public class ScriptService extends AbstractComponent {
 		return search(compile(lang, script), lookup, vars);
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -272,7 +251,6 @@ public class ScriptService extends AbstractComponent {
 		return search(compile(lang, script), new SearchLookup(mapperService, fieldDataCache), vars);
 	}
 
-	
 	/**
 	 * Execute.
 	 *
@@ -284,7 +262,6 @@ public class ScriptService extends AbstractComponent {
 		return scriptEngines.get(compiledScript.lang()).execute(compiledScript.compiled(), vars);
 	}
 
-	
 	/**
 	 * Clear.
 	 */
@@ -292,7 +269,6 @@ public class ScriptService extends AbstractComponent {
 		cache.invalidateAll();
 	}
 
-	
 	/**
 	 * Dynamic script disabled.
 	 *
@@ -303,11 +279,10 @@ public class ScriptService extends AbstractComponent {
 		if (!disableDynamic) {
 			return false;
 		}
-		
+
 		return !"native".equals(lang);
 	}
 
-	
 	/**
 	 * The Class CacheKey.
 	 *
@@ -315,15 +290,12 @@ public class ScriptService extends AbstractComponent {
 	 */
 	public static class CacheKey {
 
-		
 		/** The lang. */
 		public final String lang;
 
-		
 		/** The script. */
 		public final String script;
 
-		
 		/**
 		 * Instantiates a new cache key.
 		 *
@@ -335,7 +307,6 @@ public class ScriptService extends AbstractComponent {
 			this.script = script;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -345,7 +316,6 @@ public class ScriptService extends AbstractComponent {
 			return lang.equals(other.lang) && script.equals(other.script);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -355,15 +325,13 @@ public class ScriptService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * A factory for creating DocScoreNativeScript objects.
 	 */
 	public static class DocScoreNativeScriptFactory implements NativeScriptFactory {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.script.NativeScriptFactory#newScript(java.util.Map)
+		 * @see cn.com.rebirth.search.core.script.NativeScriptFactory#newScript(java.util.Map)
 		 */
 		@Override
 		public ExecutableScript newScript(@Nullable Map<String, Object> params) {
@@ -371,7 +339,6 @@ public class ScriptService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class DocScoreSearchScript.
 	 *
@@ -379,9 +346,8 @@ public class ScriptService extends AbstractComponent {
 	 */
 	public static class DocScoreSearchScript extends AbstractFloatSearchScript {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.script.AbstractFloatSearchScript#runAsFloat()
+		 * @see cn.com.rebirth.search.core.script.AbstractFloatSearchScript#runAsFloat()
 		 */
 		@Override
 		public float runAsFloat() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Mapper.java 2012-3-29 15:01:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Mapper.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.index.analysis.AnalysisService;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Interface Mapper.
  *
@@ -25,11 +23,9 @@ import com.google.common.collect.ImmutableMap;
  */
 public interface Mapper extends ToXContent {
 
-	
 	/** The Constant EMPTY_ARRAY. */
 	public static final Mapper[] EMPTY_ARRAY = new Mapper[0];
 
-	
 	/**
 	 * The Class BuilderContext.
 	 *
@@ -37,15 +33,12 @@ public interface Mapper extends ToXContent {
 	 */
 	public static class BuilderContext {
 
-		
 		/** The index settings. */
 		private final Settings indexSettings;
 
-		
 		/** The content path. */
 		private final ContentPath contentPath;
 
-		
 		/**
 		 * Instantiates a new builder context.
 		 *
@@ -57,7 +50,6 @@ public interface Mapper extends ToXContent {
 			this.indexSettings = indexSettings;
 		}
 
-		
 		/**
 		 * Path.
 		 *
@@ -67,7 +59,6 @@ public interface Mapper extends ToXContent {
 			return this.contentPath;
 		}
 
-		
 		/**
 		 * Index settings.
 		 *
@@ -79,7 +70,6 @@ public interface Mapper extends ToXContent {
 		}
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -90,15 +80,12 @@ public interface Mapper extends ToXContent {
 	@SuppressWarnings("rawtypes")
 	public static abstract class Builder<T extends Builder, Y extends Mapper> {
 
-		
 		/** The name. */
 		public String name;
 
-		
 		/** The builder. */
 		protected T builder;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -108,7 +95,6 @@ public interface Mapper extends ToXContent {
 			this.name = name;
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -118,7 +104,6 @@ public interface Mapper extends ToXContent {
 			return this.name;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -128,7 +113,6 @@ public interface Mapper extends ToXContent {
 		public abstract Y build(BuilderContext context);
 	}
 
-	
 	/**
 	 * The Interface TypeParser.
 	 *
@@ -136,7 +120,6 @@ public interface Mapper extends ToXContent {
 	 */
 	public interface TypeParser {
 
-		
 		/**
 		 * The Class ParserContext.
 		 *
@@ -144,15 +127,12 @@ public interface Mapper extends ToXContent {
 		 */
 		public static class ParserContext {
 
-			
 			/** The analysis service. */
 			private final AnalysisService analysisService;
 
-			
 			/** The type parsers. */
 			private final ImmutableMap<String, TypeParser> typeParsers;
 
-			
 			/**
 			 * Instantiates a new parser context.
 			 *
@@ -164,7 +144,6 @@ public interface Mapper extends ToXContent {
 				this.typeParsers = typeParsers;
 			}
 
-			
 			/**
 			 * Analysis service.
 			 *
@@ -174,7 +153,6 @@ public interface Mapper extends ToXContent {
 				return analysisService;
 			}
 
-			
 			/**
 			 * Type parser.
 			 *
@@ -186,7 +164,6 @@ public interface Mapper extends ToXContent {
 			}
 		}
 
-		
 		/**
 		 * Parses the.
 		 *
@@ -201,7 +178,6 @@ public interface Mapper extends ToXContent {
 				throws MapperParsingException;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -209,7 +185,6 @@ public interface Mapper extends ToXContent {
 	 */
 	String name();
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -218,7 +193,6 @@ public interface Mapper extends ToXContent {
 	 */
 	void parse(ParseContext context) throws IOException;
 
-	
 	/**
 	 * Merge.
 	 *
@@ -228,7 +202,6 @@ public interface Mapper extends ToXContent {
 	 */
 	void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException;
 
-	
 	/**
 	 * Traverse.
 	 *
@@ -236,7 +209,6 @@ public interface Mapper extends ToXContent {
 	 */
 	void traverse(FieldMapperListener fieldMapperListener);
 
-	
 	/**
 	 * Traverse.
 	 *
@@ -244,7 +216,6 @@ public interface Mapper extends ToXContent {
 	 */
 	void traverse(ObjectMapperListener objectMapperListener);
 
-	
 	/**
 	 * Close.
 	 */

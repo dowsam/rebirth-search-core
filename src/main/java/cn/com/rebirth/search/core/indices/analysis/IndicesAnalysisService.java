@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesAnalysisService.java 2012-3-29 15:02:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesAnalysisService.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.analysis;
 
@@ -91,7 +90,7 @@ import org.apache.lucene.analysis.th.ThaiAnalyzer;
 import org.apache.lucene.analysis.tr.TurkishAnalyzer;
 
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.regex.Regex;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
@@ -112,8 +111,6 @@ import cn.com.rebirth.search.core.index.analysis.TokenizerFactory;
 import cn.com.rebirth.search.core.index.analysis.TokenizerFactoryFactory;
 import cn.com.rebirth.search.index.analysis.AnalyzerScope;
 
-
-
 /**
  * The Class IndicesAnalysisService.
  *
@@ -121,27 +118,22 @@ import cn.com.rebirth.search.index.analysis.AnalyzerScope;
  */
 public class IndicesAnalysisService extends AbstractComponent {
 
-	
 	/** The analyzer provider factories. */
 	private final Map<String, PreBuiltAnalyzerProviderFactory> analyzerProviderFactories = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/** The tokenizer factories. */
 	private final Map<String, PreBuiltTokenizerFactoryFactory> tokenizerFactories = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/** The token filter factories. */
 	private final Map<String, PreBuiltTokenFilterFactoryFactory> tokenFilterFactories = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/** The char filter factories. */
 	private final Map<String, PreBuiltCharFilterFactoryFactory> charFilterFactories = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/**
 	 * Instantiates a new indices analysis service.
 	 */
@@ -149,7 +141,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		super(ImmutableSettings.Builder.EMPTY_SETTINGS);
 	}
 
-	
 	/**
 	 * Instantiates a new indices analysis service.
 	 *
@@ -175,11 +166,9 @@ public class IndicesAnalysisService extends AbstractComponent {
 		analyzerProviderFactories.put("classic", new PreBuiltAnalyzerProviderFactory("classic", AnalyzerScope.INDICES,
 				new ClassicAnalyzer(Lucene.ANALYZER_VERSION)));
 
-		
-		analyzerProviderFactories.put("pattern",
-				new PreBuiltAnalyzerProviderFactory("pattern", AnalyzerScope.INDICES, new PatternAnalyzer(
-						Lucene.ANALYZER_VERSION, Regex.compile("\\W+" , null),
-						true, StopAnalyzer.ENGLISH_STOP_WORDS_SET)));
+		analyzerProviderFactories.put("pattern", new PreBuiltAnalyzerProviderFactory("pattern", AnalyzerScope.INDICES,
+				new PatternAnalyzer(Lucene.ANALYZER_VERSION, Regex.compile("\\W+", null), true,
+						StopAnalyzer.ENGLISH_STOP_WORDS_SET)));
 		analyzerProviderFactories.put("snowball", new PreBuiltAnalyzerProviderFactory("snowball",
 				AnalyzerScope.INDICES, new SnowballAnalyzer(Lucene.ANALYZER_VERSION, "English",
 						StopAnalyzer.ENGLISH_STOP_WORDS_SET)));
@@ -247,7 +236,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		analyzerProviderFactories.put("thai", new PreBuiltAnalyzerProviderFactory("thai", AnalyzerScope.INDICES,
 				new ThaiAnalyzer(Lucene.ANALYZER_VERSION)));
 
-		
 		tokenizerFactories.put("standard", new PreBuiltTokenizerFactoryFactory(new TokenizerFactory() {
 			@Override
 			public String name() {
@@ -405,12 +393,11 @@ public class IndicesAnalysisService extends AbstractComponent {
 				try {
 					return new PatternTokenizer(reader, Regex.compile("\\W+", null), -1);
 				} catch (IOException e) {
-					throw new RestartIllegalStateException("failed to parse default pattern");
+					throw new RebirthIllegalStateException("failed to parse default pattern");
 				}
 			}
 		}));
 
-		
 		tokenFilterFactories.put("word_delimiter", new PreBuiltTokenFilterFactoryFactory(new TokenFilterFactory() {
 			@Override
 			public String name() {
@@ -630,7 +617,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 			}
 		}));
 
-		
 		tokenFilterFactories.put("snowball", new PreBuiltTokenFilterFactoryFactory(new TokenFilterFactory() {
 			@Override
 			public String name() {
@@ -742,7 +728,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 			}
 		}));
 
-		
 		charFilterFactories.put("html_strip", new PreBuiltCharFilterFactoryFactory(new CharFilterFactory() {
 			@Override
 			public String name() {
@@ -768,7 +753,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		}));
 	}
 
-	
 	/**
 	 * Checks for char filter.
 	 *
@@ -779,7 +763,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return charFilterFactoryFactory(name) != null;
 	}
 
-	
 	/**
 	 * Char filter factories.
 	 *
@@ -789,7 +772,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return charFilterFactories;
 	}
 
-	
 	/**
 	 * Char filter factory factory.
 	 *
@@ -800,7 +782,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return charFilterFactories.get(name);
 	}
 
-	
 	/**
 	 * Checks for token filter.
 	 *
@@ -811,7 +792,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return tokenFilterFactoryFactory(name) != null;
 	}
 
-	
 	/**
 	 * Token filter factories.
 	 *
@@ -821,7 +801,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return tokenFilterFactories;
 	}
 
-	
 	/**
 	 * Token filter factory factory.
 	 *
@@ -832,7 +811,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return tokenFilterFactories.get(name);
 	}
 
-	
 	/**
 	 * Checks for tokenizer.
 	 *
@@ -843,7 +821,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return tokenizerFactoryFactory(name) != null;
 	}
 
-	
 	/**
 	 * Tokenizer factories.
 	 *
@@ -853,7 +830,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return tokenizerFactories;
 	}
 
-	
 	/**
 	 * Tokenizer factory factory.
 	 *
@@ -864,7 +840,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return tokenizerFactories.get(name);
 	}
 
-	
 	/**
 	 * Analyzer provider factories.
 	 *
@@ -874,7 +849,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return analyzerProviderFactories;
 	}
 
-	
 	/**
 	 * Analyzer provider factory.
 	 *
@@ -885,7 +859,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return analyzerProviderFactories.get(name);
 	}
 
-	
 	/**
 	 * Checks for analyzer.
 	 *
@@ -896,7 +869,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return analyzer(name) != null;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -911,7 +883,6 @@ public class IndicesAnalysisService extends AbstractComponent {
 		return analyzerProviderFactory.analyzer();
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -920,7 +891,7 @@ public class IndicesAnalysisService extends AbstractComponent {
 			try {
 				analyzerProviderFactory.analyzer().close();
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}

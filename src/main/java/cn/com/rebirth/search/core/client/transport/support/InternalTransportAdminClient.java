@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalTransportAdminClient.java 2012-3-29 15:00:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalTransportAdminClient.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.transport.support;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.client.ClusterAdminClient;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 import cn.com.rebirth.search.core.client.transport.TransportClientNodesService;
 
-
 /**
  * The Class InternalTransportAdminClient.
  *
@@ -22,19 +20,15 @@ import cn.com.rebirth.search.core.client.transport.TransportClientNodesService;
  */
 public class InternalTransportAdminClient extends AbstractComponent implements AdminClient {
 
-	
 	/** The nodes service. */
 	private final TransportClientNodesService nodesService;
 
-	
 	/** The indices admin client. */
 	private final InternalTransportIndicesAdminClient indicesAdminClient;
 
-	
 	/** The cluster admin client. */
 	private final InternalTransportClusterAdminClient clusterAdminClient;
 
-	
 	/**
 	 * Instantiates a new internal transport admin client.
 	 *
@@ -53,18 +47,16 @@ public class InternalTransportAdminClient extends AbstractComponent implements A
 		this.clusterAdminClient = clusterAdminClient;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.AdminClient#indices()
+	 * @see cn.com.rebirth.search.core.client.AdminClient#indices()
 	 */
 	@Override
 	public IndicesAdminClient indices() {
 		return indicesAdminClient;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.AdminClient#cluster()
+	 * @see cn.com.rebirth.search.core.client.AdminClient#cluster()
 	 */
 	@Override
 	public ClusterAdminClient cluster() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesStore.java 2012-3-29 15:01:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesStore.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.store;
 
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class IndicesStore.
  *
@@ -39,35 +37,27 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class IndicesStore extends AbstractComponent implements ClusterStateListener {
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The dangling timeout. */
 	private final TimeValue danglingTimeout;
 
-	
 	/** The dangling indices. */
 	private final Map<String, DanglingIndex> danglingIndices = ConcurrentCollections.newConcurrentMap();
 
-	
 	/** The dangling mutex. */
 	private final Object danglingMutex = new Object();
 
-	
 	/**
 	 * The Class DanglingIndex.
 	 *
@@ -75,15 +65,12 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 	 */
 	static class DanglingIndex {
 
-		
 		/** The index. */
 		public final String index;
 
-		
 		/** The future. */
 		public final ScheduledFuture future;
 
-		
 		/**
 		 * Instantiates a new dangling index.
 		 *
@@ -96,7 +83,6 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new indices store.
 	 *
@@ -120,7 +106,6 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 		clusterService.addLast(this);
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -128,9 +113,8 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 		clusterService.remove(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(ClusterChangedEvent event) {
@@ -142,27 +126,26 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 			return;
 		}
 
-		
 		RoutingTable routingTable = event.state().routingTable();
 		for (IndexRoutingTable indexRoutingTable : routingTable) {
 			IndexService indexService = indicesService.indexService(indexRoutingTable.index());
 			if (indexService == null) {
-				
+
 				continue;
 			}
-			
+
 			if (!indexService.store().persistent()) {
 				continue;
 			}
 			for (IndexShardRoutingTable indexShardRoutingTable : indexRoutingTable) {
-				
+
 				if (indexService.hasShard(indexShardRoutingTable.shardId().id())) {
 					continue;
 				}
 				if (!indexService.store().canDeleteUnallocated(indexShardRoutingTable.shardId())) {
 					continue;
 				}
-				
+
 				if (indexShardRoutingTable.countWithState(ShardRoutingState.STARTED) == indexShardRoutingTable.size()) {
 					if (logger.isDebugEnabled()) {
 						logger.debug("[{}][{}] deleting unallocated shard", indexShardRoutingTable.shardId().index()
@@ -179,28 +162,26 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 			}
 		}
 
-		
-		
 		if (nodeEnv.hasNodeFile()) {
-			
+
 			for (IndexRoutingTable indexRoutingTable : routingTable) {
 				IndexService indexService = indicesService.indexService(indexRoutingTable.index());
-				if (indexService != null) { 
+				if (indexService != null) {
 					continue;
 				}
 				for (IndexShardRoutingTable indexShardRoutingTable : indexRoutingTable) {
 					boolean shardCanBeDeleted = true;
 					for (ShardRouting shardRouting : indexShardRoutingTable) {
-						
+
 						if (!shardRouting.active()) {
 							shardCanBeDeleted = false;
 							break;
 						}
 						String localNodeId = clusterService.localNode().id();
-						
+
 						if (localNodeId.equals(shardRouting.currentNodeId())
 								|| localNodeId.equals(shardRouting.relocatingNodeId())) {
-							
+
 							shardCanBeDeleted = false;
 							break;
 						}
@@ -227,15 +208,15 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 							removed.future.cancel(false);
 						}
 					}
-					
+
 					try {
 						for (String indexName : nodeEnv.findAllIndices()) {
-							
+
 							if (event.state().metaData().hasIndex(indexName)) {
 								continue;
 							}
 							if (danglingIndices.containsKey(indexName)) {
-								
+
 								continue;
 							}
 							if (danglingTimeout.millis() == 0) {
@@ -261,7 +242,6 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 		}
 	}
 
-	
 	/**
 	 * The Class RemoveDanglingIndex.
 	 *
@@ -269,11 +249,9 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 	 */
 	class RemoveDanglingIndex implements Runnable {
 
-		
 		/** The index. */
 		private final String index;
 
-		
 		/**
 		 * Instantiates a new removes the dangling index.
 		 *
@@ -283,7 +261,6 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 			this.index = index;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -291,7 +268,7 @@ public class IndicesStore extends AbstractComponent implements ClusterStateListe
 		public void run() {
 			synchronized (danglingMutex) {
 				DanglingIndex remove = danglingIndices.remove(index);
-				
+
 				if (remove == null) {
 					return;
 				}

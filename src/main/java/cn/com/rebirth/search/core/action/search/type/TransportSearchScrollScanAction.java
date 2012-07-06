@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchScrollScanAction.java 2012-3-29 15:02:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchScrollScanAction.java 2012-7-6 14:29:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -40,7 +39,6 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchHits;
 import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class TransportSearchScrollScanAction.
  *
@@ -48,27 +46,21 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class TransportSearchScrollScanAction extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The search service. */
 	private final SearchServiceTransportAction searchService;
 
-	
 	/** The search phase controller. */
 	private final SearchPhaseController searchPhaseController;
 
-	
 	/** The search cache. */
 	private final TransportSearchCache searchCache;
 
-	
 	/**
 	 * Instantiates a new transport search scroll scan action.
 	 *
@@ -91,7 +83,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 		this.searchPhaseController = searchPhaseController;
 	}
 
-	
 	/**
 	 * Execute.
 	 *
@@ -103,7 +94,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 		new AsyncAction(request, scrollId, listener).start();
 	}
 
-	
 	/**
 	 * The Class AsyncAction.
 	 *
@@ -111,44 +101,34 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 	 */
 	private class AsyncAction {
 
-		
 		/** The request. */
 		private final SearchScrollRequest request;
 
-		
 		/** The listener. */
 		private final ActionListener<SearchResponse> listener;
 
-		
 		/** The scroll id. */
 		private final ParsedScrollId scrollId;
 
-		
 		/** The nodes. */
 		private final DiscoveryNodes nodes;
 
-		
 		/** The shard failures. */
 		protected volatile LinkedTransferQueue<ShardSearchFailure> shardFailures;
 
-		
 		/** The query fetch results. */
 		private final Map<SearchShardTarget, QueryFetchSearchResult> queryFetchResults = searchCache
 				.obtainQueryFetchResults();
 
-		
 		/** The successful ops. */
 		private final AtomicInteger successfulOps;
 
-		
 		/** The counter. */
 		private final AtomicInteger counter;
 
-		
 		/** The start time. */
 		private final long startTime = System.currentTimeMillis();
 
-		
 		/**
 		 * Instantiates a new async action.
 		 *
@@ -166,7 +146,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 			this.counter = new AtomicInteger(scrollId.context().length);
 		}
 
-		
 		/**
 		 * Builds the shard failures.
 		 *
@@ -180,9 +159,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 			return localFailures.toArray(ShardSearchFailure.EMPTY_ARRAY);
 		}
 
-		
-		
-		
 		/**
 		 * Adds the shard failure.
 		 *
@@ -195,7 +171,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 			shardFailures.add(failure);
 		}
 
-		
 		/**
 		 * Start.
 		 */
@@ -280,7 +255,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 			}
 		}
 
-		
 		/**
 		 * Execute phase.
 		 *
@@ -312,7 +286,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 					});
 		}
 
-		
 		/**
 		 * Finish him.
 		 */
@@ -331,7 +304,6 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 			}
 		}
 
-		
 		/**
 		 * Inner finish him.
 		 *
@@ -357,16 +329,16 @@ public class TransportSearchScrollScanAction extends AbstractComponent {
 
 			for (QueryFetchSearchResult shardResult : queryFetchResults.values()) {
 				if (shardResult.queryResult().topDocs().scoreDocs.length < shardResult.queryResult().size()) {
-					
+
 					queryFetchResults.remove(shardResult.shardTarget());
 				}
 			}
 
 			String scrollId = null;
 			if (request.scroll() != null) {
-				
+
 				scrollId = TransportSearchHelper.buildScrollId(this.scrollId.type(), queryFetchResults.values(),
-						this.scrollId.attributes()); 
+						this.scrollId.attributes());
 			}
 			listener.onResponse(new SearchResponse(internalResponse, scrollId, this.scrollId.context().length,
 					successfulOps.get(), System.currentTimeMillis() - startTime, buildShardFailures()));

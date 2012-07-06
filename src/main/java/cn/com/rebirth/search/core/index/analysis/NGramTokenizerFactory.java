@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NGramTokenizerFactory.java 2012-3-29 15:02:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NGramTokenizerFactory.java 2012-7-6 14:30:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -17,42 +16,38 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating NGramTokenizer objects.
  */
 public class NGramTokenizerFactory extends AbstractTokenizerFactory {
 
-    
-    /** The min gram. */
-    private final int minGram;
+	/** The min gram. */
+	private final int minGram;
 
-    
-    /** The max gram. */
-    private final int maxGram;
+	/** The max gram. */
+	private final int maxGram;
 
-    
-    /**
-     * Instantiates a new n gram tokenizer factory.
-     *
-     * @param index the index
-     * @param indexSettings the index settings
-     * @param name the name
-     * @param settings the settings
-     */
-    @Inject
-    public NGramTokenizerFactory(Index index, @IndexSettings Settings indexSettings, @Assisted String name, @Assisted Settings settings) {
-        super(index, indexSettings, name, settings);
-        this.minGram = settings.getAsInt("min_gram", NGramTokenizer.DEFAULT_MIN_NGRAM_SIZE);
-        this.maxGram = settings.getAsInt("max_gram", NGramTokenizer.DEFAULT_MAX_NGRAM_SIZE);
-    }
+	/**
+	 * Instantiates a new n gram tokenizer factory.
+	 *
+	 * @param index the index
+	 * @param indexSettings the index settings
+	 * @param name the name
+	 * @param settings the settings
+	 */
+	@Inject
+	public NGramTokenizerFactory(Index index, @IndexSettings Settings indexSettings, @Assisted String name,
+			@Assisted Settings settings) {
+		super(index, indexSettings, name, settings);
+		this.minGram = settings.getAsInt("min_gram", NGramTokenizer.DEFAULT_MIN_NGRAM_SIZE);
+		this.maxGram = settings.getAsInt("max_gram", NGramTokenizer.DEFAULT_MAX_NGRAM_SIZE);
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
-     */
-    @Override
-    public Tokenizer create(Reader reader) {
-        return new NGramTokenizer(reader, minGram, maxGram);
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
+	 */
+	@Override
+	public Tokenizer create(Reader reader) {
+		return new NGramTokenizer(reader, minGram, maxGram);
+	}
 }

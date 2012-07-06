@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SigarOsProbe.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SigarOsProbe.java 2012-7-6 14:28:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.os;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.monitor.sigar.SigarService;
 
-
 /**
  * The Class SigarOsProbe.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.monitor.sigar.SigarService;
  */
 public class SigarOsProbe extends AbstractComponent implements OsProbe {
 
-	
 	/** The sigar service. */
 	private final SigarService sigarService;
 
-	
 	/**
 	 * Instantiates a new sigar os probe.
 	 *
@@ -43,9 +39,8 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 		this.sigarService = sigarService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.os.OsProbe#osInfo()
+	 * @see cn.com.rebirth.search.core.monitor.os.OsProbe#osInfo()
 	 */
 	@Override
 	public OsInfo osInfo() {
@@ -64,7 +59,7 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 				info.cpu.cacheSize = infos[0].getCacheSize();
 			}
 		} catch (SigarException e) {
-			
+
 		}
 
 		try {
@@ -72,7 +67,7 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 			info.mem = new OsInfo.Mem();
 			info.mem.total = mem.getTotal();
 		} catch (SigarException e) {
-			
+
 		}
 
 		try {
@@ -80,15 +75,14 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 			info.swap = new OsInfo.Swap();
 			info.swap.total = swap.getTotal();
 		} catch (SigarException e) {
-			
+
 		}
 
 		return info;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.os.OsProbe#osStats()
+	 * @see cn.com.rebirth.search.core.monitor.os.OsProbe#osStats()
 	 */
 	@Override
 	public OsStats osStats() {
@@ -98,13 +92,13 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 		try {
 			stats.loadAverage = sigar.getLoadAverage();
 		} catch (SigarException e) {
-			
+
 		}
 
 		try {
 			stats.uptime = (long) sigar.getUptime().getUptime();
 		} catch (SigarException e) {
-			
+
 		}
 
 		try {
@@ -114,7 +108,7 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 			stats.cpu.user = (short) (cpuPerc.getUser() * 100);
 			stats.cpu.idle = (short) (cpuPerc.getIdle() * 100);
 		} catch (SigarException e) {
-			
+
 		}
 
 		try {
@@ -127,7 +121,7 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 			stats.mem.actualFree = mem.getActualFree();
 			stats.mem.actualUsed = mem.getActualUsed();
 		} catch (SigarException e) {
-			
+
 		}
 
 		try {
@@ -136,7 +130,7 @@ public class SigarOsProbe extends AbstractComponent implements OsProbe {
 			stats.swap.free = swap.getFree();
 			stats.swap.used = swap.getUsed();
 		} catch (SigarException e) {
-			
+
 		}
 
 		return stats;

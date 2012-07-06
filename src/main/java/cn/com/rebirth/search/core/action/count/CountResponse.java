@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CountResponse.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CountResponse.java 2012-7-6 14:29:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.count;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse;
 
-
 /**
  * The Class CountResponse.
  *
@@ -22,11 +20,9 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRes
  */
 public class CountResponse extends BroadcastOperationResponse {
 
-	
 	/** The count. */
 	private long count;
 
-	
 	/**
 	 * Instantiates a new count response.
 	 */
@@ -34,7 +30,6 @@ public class CountResponse extends BroadcastOperationResponse {
 
 	}
 
-	
 	/**
 	 * Instantiates a new count response.
 	 *
@@ -50,7 +45,6 @@ public class CountResponse extends BroadcastOperationResponse {
 		this.count = count;
 	}
 
-	
 	/**
 	 * Count.
 	 *
@@ -60,7 +54,6 @@ public class CountResponse extends BroadcastOperationResponse {
 		return count;
 	}
 
-	
 	/**
 	 * Gets the count.
 	 *
@@ -70,9 +63,8 @@ public class CountResponse extends BroadcastOperationResponse {
 		return count;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -80,9 +72,8 @@ public class CountResponse extends BroadcastOperationResponse {
 		count = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

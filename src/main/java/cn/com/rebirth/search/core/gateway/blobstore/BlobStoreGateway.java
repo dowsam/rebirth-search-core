@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BlobStoreGateway.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BlobStoreGateway.java 2012-7-6 14:29:27 l.xue.nong$$
  */
+
 package cn.com.rebirth.search.core.gateway.blobstore;
 
 import java.io.ByteArrayInputStream;
@@ -131,7 +132,7 @@ public abstract class BlobStoreGateway extends SharedStorageGateway {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#reset()
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#reset()
 	 */
 	@Override
 	public void reset() throws Exception {
@@ -139,7 +140,7 @@ public abstract class BlobStoreGateway extends SharedStorageGateway {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.shared.SharedStorageGateway#read()
+	 * @see cn.com.rebirth.search.core.gateway.shared.SharedStorageGateway#read()
 	 */
 	@Override
 	public MetaData read() throws GatewayException {
@@ -194,7 +195,7 @@ public abstract class BlobStoreGateway extends SharedStorageGateway {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.shared.SharedStorageGateway#write(cn.com.summall.search.core.cluster.metadata.MetaData)
+	 * @see cn.com.rebirth.search.core.gateway.shared.SharedStorageGateway#write(cn.com.rebirth.search.core.cluster.metadata.MetaData)
 	 */
 	@Override
 	public void write(MetaData metaData) throws GatewayException {

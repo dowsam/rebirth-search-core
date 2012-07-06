@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DateHistogramFacetBuilder.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DateHistogramFacetBuilder.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.datehistogram;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class DateHistogramFacetBuilder.
  *
@@ -25,59 +23,45 @@ import com.google.common.collect.Maps;
  */
 public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The key field name. */
 	private String keyFieldName;
 
-	
 	/** The value field name. */
 	private String valueFieldName;
 
-	
 	/** The interval. */
 	private String interval = null;
 
-	
 	/** The pre zone. */
 	private String preZone = null;
 
-	
 	/** The post zone. */
 	private String postZone = null;
 
-	
 	/** The pre zone adjust large interval. */
 	private Boolean preZoneAdjustLargeInterval;
 
-	
 	/** The pre offset. */
 	long preOffset = 0;
 
-	
 	/** The post offset. */
 	long postOffset = 0;
 
-	
 	/** The factor. */
 	float factor = 1.0f;
 
-	
 	/** The comparator type. */
 	private DateHistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The value script. */
 	private String valueScript;
 
-	
 	/** The params. */
 	private Map<String, Object> params;
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/**
 	 * Instantiates a new date histogram facet builder.
 	 *
@@ -87,7 +71,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -99,7 +82,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Key field.
 	 *
@@ -111,7 +93,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value field.
 	 *
@@ -123,7 +104,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value script.
 	 *
@@ -135,7 +115,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -151,7 +130,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -163,7 +141,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Interval.
 	 *
@@ -175,7 +152,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Pre zone adjust large interval.
 	 *
@@ -187,7 +163,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Pre zone.
 	 *
@@ -199,7 +174,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Post zone.
 	 *
@@ -211,7 +185,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Pre offset.
 	 *
@@ -223,7 +196,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Post offset.
 	 *
@@ -235,7 +207,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Factor.
 	 *
@@ -247,7 +218,6 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Comparator.
 	 *
@@ -259,9 +229,8 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	@Override
 	public DateHistogramFacetBuilder global(boolean global) {
@@ -269,9 +238,8 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public DateHistogramFacetBuilder scope(String scope) {
@@ -279,9 +247,8 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	@Override
 	public DateHistogramFacetBuilder facetFilter(FilterBuilder filter) {
@@ -289,18 +256,16 @@ public class DateHistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public DateHistogramFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

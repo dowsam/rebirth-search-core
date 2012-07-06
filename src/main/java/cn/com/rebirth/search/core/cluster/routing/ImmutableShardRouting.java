@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ImmutableShardRouting.java 2012-3-29 15:01:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ImmutableShardRouting.java 2012-7-6 14:28:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class ImmutableShardRouting.
  *
@@ -27,43 +25,33 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1722885034961889998L;
 
-	
 	/** The index. */
 	protected String index;
 
-	
 	/** The shard id. */
 	protected int shardId;
 
-	
 	/** The current node id. */
 	protected String currentNodeId;
 
-	
 	/** The relocating node id. */
 	protected String relocatingNodeId;
 
-	
 	/** The primary. */
 	protected boolean primary;
 
-	
 	/** The state. */
 	protected ShardRoutingState state;
 
-	
 	/** The version. */
 	protected long version;
 
-	
 	/** The shard identifier. */
 	private transient ShardId shardIdentifier;
 
-	
 	/** The as list. */
 	private final transient ImmutableList<ShardRouting> asList;
 
-	
 	/**
 	 * Instantiates a new immutable shard routing.
 	 */
@@ -71,7 +59,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		this.asList = ImmutableList.of((ShardRouting) this);
 	}
 
-	
 	/**
 	 * Instantiates a new immutable shard routing.
 	 *
@@ -82,7 +69,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		this.relocatingNodeId = copy.relocatingNodeId();
 	}
 
-	
 	/**
 	 * Instantiates a new immutable shard routing.
 	 *
@@ -95,7 +81,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		this.version = version;
 	}
 
-	
 	/**
 	 * Instantiates a new immutable shard routing.
 	 *
@@ -113,7 +98,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		this.relocatingNodeId = relocatingNodeId;
 	}
 
-	
 	/**
 	 * Instantiates a new immutable shard routing.
 	 *
@@ -135,144 +119,128 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		this.version = version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#index()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#index()
 	 */
 	@Override
 	public String index() {
 		return this.index;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#getIndex()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#getIndex()
 	 */
 	@Override
 	public String getIndex() {
 		return index();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#id()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#id()
 	 */
 	@Override
 	public int id() {
 		return this.shardId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#getId()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#getId()
 	 */
 	@Override
 	public int getId() {
 		return id();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#version()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#version()
 	 */
 	@Override
 	public long version() {
 		return this.version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#unassigned()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#unassigned()
 	 */
 	@Override
 	public boolean unassigned() {
 		return state == ShardRoutingState.UNASSIGNED;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#initializing()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#initializing()
 	 */
 	@Override
 	public boolean initializing() {
 		return state == ShardRoutingState.INITIALIZING;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#active()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#active()
 	 */
 	@Override
 	public boolean active() {
 		return started() || relocating();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#started()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#started()
 	 */
 	@Override
 	public boolean started() {
 		return state == ShardRoutingState.STARTED;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#relocating()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#relocating()
 	 */
 	@Override
 	public boolean relocating() {
 		return state == ShardRoutingState.RELOCATING;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#assignedToNode()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#assignedToNode()
 	 */
 	@Override
 	public boolean assignedToNode() {
 		return currentNodeId != null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#currentNodeId()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#currentNodeId()
 	 */
 	@Override
 	public String currentNodeId() {
 		return this.currentNodeId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#relocatingNodeId()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#relocatingNodeId()
 	 */
 	@Override
 	public String relocatingNodeId() {
 		return this.relocatingNodeId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#primary()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#primary()
 	 */
 	@Override
 	public boolean primary() {
 		return this.primary;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#state()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#state()
 	 */
 	@Override
 	public ShardRoutingState state() {
 		return this.state;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#shardId()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#shardId()
 	 */
 	@Override
 	public ShardId shardId() {
@@ -283,16 +251,14 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		return shardIdentifier;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#shardsIt()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#shardsIt()
 	 */
 	@Override
 	public ShardIterator shardsIt() {
 		return new PlainShardIterator(shardId(), asList);
 	}
 
-	
 	/**
 	 * Read shard routing entry.
 	 *
@@ -306,7 +272,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		return entry;
 	}
 
-	
 	/**
 	 * Read shard routing entry.
 	 *
@@ -323,7 +288,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		return entry;
 	}
 
-	
 	/**
 	 * Read from.
 	 *
@@ -338,9 +302,8 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		readFromThin(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#readFromThin(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#readFromThin(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFromThin(StreamInput in) throws IOException {
@@ -357,18 +320,16 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		state = ShardRoutingState.fromValue(in.readByte());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		readFrom(in, in.readUTF(), in.readVInt());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#writeToThin(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#writeToThin(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	public void writeToThin(StreamOutput out) throws IOException {
 		out.writeLong(version);
@@ -390,9 +351,8 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		out.writeByte(state.value());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -401,7 +361,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		writeToThin(out);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -430,7 +389,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -445,7 +403,6 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -454,9 +411,8 @@ public class ImmutableShardRouting implements Streamable, Serializable, ShardRou
 		return shortSummary();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardRouting#shortSummary()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardRouting#shortSummary()
 	 */
 	@Override
 	public String shortSummary() {

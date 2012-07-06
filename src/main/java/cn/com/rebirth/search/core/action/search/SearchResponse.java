@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchResponse.java 2012-3-29 15:01:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchResponse.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.search.SearchHits;
 import cn.com.rebirth.search.core.search.facet.Facets;
 import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
 
-
 /**
  * The Class SearchResponse.
  *
@@ -30,38 +28,30 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
  */
 public class SearchResponse implements ActionResponse, ToXContent {
 
-	
 	/** The internal response. */
 	private InternalSearchResponse internalResponse;
 
-	
 	/** The scroll id. */
 	private String scrollId;
 
-	
 	/** The total shards. */
 	private int totalShards;
 
-	
 	/** The successful shards. */
 	private int successfulShards;
 
-	
 	/** The shard failures. */
 	private ShardSearchFailure[] shardFailures;
 
-	
 	/** The took in millis. */
 	private long tookInMillis;
 
-	
 	/**
 	 * Instantiates a new search response.
 	 */
 	public SearchResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new search response.
 	 *
@@ -82,7 +72,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		this.shardFailures = shardFailures;
 	}
 
-	
 	/**
 	 * Status.
 	 *
@@ -106,7 +95,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return RestStatus.OK;
 	}
 
-	
 	/**
 	 * Hits.
 	 *
@@ -116,7 +104,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return internalResponse.hits();
 	}
 
-	
 	/**
 	 * Gets the hits.
 	 *
@@ -126,7 +113,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return hits();
 	}
 
-	
 	/**
 	 * Facets.
 	 *
@@ -136,7 +122,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return internalResponse.facets();
 	}
 
-	
 	/**
 	 * Gets the facets.
 	 *
@@ -146,7 +131,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return facets();
 	}
 
-	
 	/**
 	 * Timed out.
 	 *
@@ -156,7 +140,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return internalResponse.timedOut();
 	}
 
-	
 	/**
 	 * Checks if is timed out.
 	 *
@@ -166,7 +149,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return timedOut();
 	}
 
-	
 	/**
 	 * Took.
 	 *
@@ -176,7 +158,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return new TimeValue(tookInMillis);
 	}
 
-	
 	/**
 	 * Gets the took.
 	 *
@@ -186,7 +167,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return took();
 	}
 
-	
 	/**
 	 * Took in millis.
 	 *
@@ -196,7 +176,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return tookInMillis;
 	}
 
-	
 	/**
 	 * Gets the took in millis.
 	 *
@@ -206,7 +185,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return tookInMillis();
 	}
 
-	
 	/**
 	 * Total shards.
 	 *
@@ -216,7 +194,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return totalShards;
 	}
 
-	
 	/**
 	 * Gets the total shards.
 	 *
@@ -226,7 +203,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return totalShards;
 	}
 
-	
 	/**
 	 * Successful shards.
 	 *
@@ -236,7 +212,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return successfulShards;
 	}
 
-	
 	/**
 	 * Gets the successful shards.
 	 *
@@ -246,7 +221,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return successfulShards;
 	}
 
-	
 	/**
 	 * Failed shards.
 	 *
@@ -256,7 +230,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return totalShards - successfulShards;
 	}
 
-	
 	/**
 	 * Gets the failed shards.
 	 *
@@ -266,7 +239,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return failedShards();
 	}
 
-	
 	/**
 	 * Shard failures.
 	 *
@@ -276,7 +248,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return this.shardFailures;
 	}
 
-	
 	/**
 	 * Gets the shard failures.
 	 *
@@ -286,7 +257,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return shardFailures;
 	}
 
-	
 	/**
 	 * Scroll id.
 	 *
@@ -296,7 +266,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return scrollId;
 	}
 
-	
 	/**
 	 * Gets the scroll id.
 	 *
@@ -306,7 +275,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return scrollId;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -314,58 +282,45 @@ public class SearchResponse implements ActionResponse, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _SCROLL_ID. */
 		static final XContentBuilderString _SCROLL_ID = new XContentBuilderString("_scroll_id");
 
-		
 		/** The Constant _SHARDS. */
 		static final XContentBuilderString _SHARDS = new XContentBuilderString("_shards");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant SUCCESSFUL. */
 		static final XContentBuilderString SUCCESSFUL = new XContentBuilderString("successful");
 
-		
 		/** The Constant FAILED. */
 		static final XContentBuilderString FAILED = new XContentBuilderString("failed");
 
-		
 		/** The Constant FAILURES. */
 		static final XContentBuilderString FAILURES = new XContentBuilderString("failures");
 
-		
 		/** The Constant STATUS. */
 		static final XContentBuilderString STATUS = new XContentBuilderString("status");
 
-		
 		/** The Constant INDEX. */
 		static final XContentBuilderString INDEX = new XContentBuilderString("index");
 
-		
 		/** The Constant SHARD. */
 		static final XContentBuilderString SHARD = new XContentBuilderString("shard");
 
-		
 		/** The Constant REASON. */
 		static final XContentBuilderString REASON = new XContentBuilderString("reason");
 
-		
 		/** The Constant TOOK. */
 		static final XContentBuilderString TOOK = new XContentBuilderString("took");
 
-		
 		/** The Constant TIMED_OUT. */
 		static final XContentBuilderString TIMED_OUT = new XContentBuilderString("timed_out");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -399,7 +354,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * Read search response.
 	 *
@@ -413,9 +367,8 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		return response;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -437,9 +390,8 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		tookInMillis = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -461,7 +413,6 @@ public class SearchResponse implements ActionResponse, ToXContent {
 		out.writeVLong(tookInMillis);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

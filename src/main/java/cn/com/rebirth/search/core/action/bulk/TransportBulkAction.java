@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportBulkAction.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportBulkAction.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -41,7 +40,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class TransportBulkAction.
  *
@@ -49,27 +47,21 @@ import com.google.common.collect.Sets;
  */
 public class TransportBulkAction extends TransportAction<BulkRequest, BulkResponse> {
 
-	
 	/** The auto create index. */
 	private final boolean autoCreateIndex;
 
-	
 	/** The allow id generation. */
 	private final boolean allowIdGeneration;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The shard bulk action. */
 	private final TransportShardBulkAction shardBulkAction;
 
-	
 	/** The create index action. */
 	private final TransportCreateIndexAction createIndexAction;
 
-	
 	/**
 	 * Instantiates a new transport bulk action.
 	 *
@@ -95,9 +87,8 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 		transportService.registerHandler(BulkAction.NAME, new TransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final BulkRequest bulkRequest, final ActionListener<BulkResponse> listener) {
@@ -134,7 +125,7 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 								@Override
 								public void onFailure(Throwable e) {
 									if (ExceptionsHelper.unwrapCause(e) instanceof IndexAlreadyExistsException) {
-										
+
 										if (counter.decrementAndGet() == 0) {
 											executeBulk(bulkRequest, startTime, listener);
 										}
@@ -154,7 +145,6 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 		}
 	}
 
-	
 	/**
 	 * Execute bulk.
 	 *
@@ -165,7 +155,7 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 	private void executeBulk(final BulkRequest bulkRequest, final long startTime,
 			final ActionListener<BulkResponse> listener) {
 		ClusterState clusterState = clusterService.state();
-		
+
 		clusterState.blocks().globalBlockedRaiseException(ClusterBlockLevel.WRITE);
 
 		MetaData metaData = clusterState.metaData();
@@ -189,7 +179,6 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 		}
 		final BulkItemResponse[] responses = new BulkItemResponse[bulkRequest.requests.size()];
 
-		
 		Map<ShardId, List<BulkItemRequest>> requestsByShard = Maps.newHashMap();
 		for (int i = 0; i < bulkRequest.requests.size(); i++) {
 			ActionRequest request = bulkRequest.requests.get(i);
@@ -210,7 +199,7 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 				MappingMetaData mappingMd = clusterState.metaData().index(deleteRequest.index())
 						.mapping(deleteRequest.type());
 				if (mappingMd != null && mappingMd.routing().required() && deleteRequest.routing() == null) {
-					
+
 					GroupShardsIterator groupShards = clusterService.operationRouting().broadcastDeleteShards(
 							clusterState, deleteRequest.index());
 					for (ShardIterator shardIt : groupShards) {
@@ -264,7 +253,7 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 
 				@Override
 				public void onFailure(Throwable e) {
-					
+
 					String message = ExceptionsHelper.detailedMessage(e);
 					synchronized (responses) {
 						for (BulkItemRequest request : requests) {
@@ -293,7 +282,6 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -301,22 +289,20 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 	 */
 	class TransportHandler extends BaseTransportRequestHandler<BulkRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public BulkRequest newInstance() {
 			return new BulkRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final BulkRequest request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<BulkResponse>() {
 				@Override
@@ -340,9 +326,8 @@ public class TransportBulkAction extends TransportAction<BulkRequest, BulkRespon
 			});
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

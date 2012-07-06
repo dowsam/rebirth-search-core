@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexCache.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexCache.java 2012-7-6 14:29:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache;
 
 import org.apache.lucene.index.IndexReader;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.CloseableComponent;
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.index.cache.id.IdCache;
 import cn.com.rebirth.search.core.index.cache.query.parser.QueryParserCache;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class IndexCache.
  *
@@ -34,209 +32,191 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class IndexCache extends AbstractIndexComponent implements CloseableComponent, ClusterStateListener {
 
-    
-    /** The filter cache. */
-    private final FilterCache filterCache;
+	/** The filter cache. */
+	private final FilterCache filterCache;
 
-    
-    /** The field data cache. */
-    private final FieldDataCache fieldDataCache;
+	/** The field data cache. */
+	private final FieldDataCache fieldDataCache;
 
-    
-    /** The query parser cache. */
-    private final QueryParserCache queryParserCache;
+	/** The query parser cache. */
+	private final QueryParserCache queryParserCache;
 
-    
-    /** The id cache. */
-    private final IdCache idCache;
+	/** The id cache. */
+	private final IdCache idCache;
 
-    
-    /** The bloom cache. */
-    private final BloomCache bloomCache;
+	/** The bloom cache. */
+	private final BloomCache bloomCache;
 
-    
-    /** The refresh interval. */
-    private final TimeValue refreshInterval;
+	/** The refresh interval. */
+	private final TimeValue refreshInterval;
 
-    
-    /** The cluster service. */
-    private ClusterService clusterService;
+	/** The cluster service. */
+	private ClusterService clusterService;
 
-    
-    /** The latest cache stats timestamp. */
-    private long latestCacheStatsTimestamp = -1;
-    
-    
-    /** The latest cache stats. */
-    private CacheStats latestCacheStats;
+	/** The latest cache stats timestamp. */
+	private long latestCacheStatsTimestamp = -1;
 
-    
-    /**
-     * Instantiates a new index cache.
-     *
-     * @param index the index
-     * @param indexSettings the index settings
-     * @param filterCache the filter cache
-     * @param fieldDataCache the field data cache
-     * @param queryParserCache the query parser cache
-     * @param idCache the id cache
-     * @param bloomCache the bloom cache
-     */
-    @Inject
-    public IndexCache(Index index, @IndexSettings Settings indexSettings, FilterCache filterCache, FieldDataCache fieldDataCache,
-                      QueryParserCache queryParserCache, IdCache idCache, BloomCache bloomCache) {
-        super(index, indexSettings);
-        this.filterCache = filterCache;
-        this.fieldDataCache = fieldDataCache;
-        this.queryParserCache = queryParserCache;
-        this.idCache = idCache;
-        this.bloomCache = bloomCache;
+	/** The latest cache stats. */
+	private CacheStats latestCacheStats;
 
-        this.refreshInterval = componentSettings.getAsTime("stats.refresh_interval", TimeValue.timeValueSeconds(1));
+	/**
+	 * Instantiates a new index cache.
+	 *
+	 * @param index the index
+	 * @param indexSettings the index settings
+	 * @param filterCache the filter cache
+	 * @param fieldDataCache the field data cache
+	 * @param queryParserCache the query parser cache
+	 * @param idCache the id cache
+	 * @param bloomCache the bloom cache
+	 */
+	@Inject
+	public IndexCache(Index index, @IndexSettings Settings indexSettings, FilterCache filterCache,
+			FieldDataCache fieldDataCache, QueryParserCache queryParserCache, IdCache idCache, BloomCache bloomCache) {
+		super(index, indexSettings);
+		this.filterCache = filterCache;
+		this.fieldDataCache = fieldDataCache;
+		this.queryParserCache = queryParserCache;
+		this.idCache = idCache;
+		this.bloomCache = bloomCache;
 
-        logger.debug("Using stats.refresh_interval [{}]", refreshInterval);
-    }
+		this.refreshInterval = componentSettings.getAsTime("stats.refresh_interval", TimeValue.timeValueSeconds(1));
 
-    
-    /**
-     * Sets the cluster service.
-     *
-     * @param clusterService the new cluster service
-     */
-    @Inject(optional = true)
-    public void setClusterService(@Nullable ClusterService clusterService) {
-        this.clusterService = clusterService;
-        if (clusterService != null) {
-            clusterService.add(this);
-        }
-    }
+		logger.debug("Using stats.refresh_interval [{}]", refreshInterval);
+	}
 
-    
-    /**
-     * Invalidate cache.
-     */
-    public synchronized void invalidateCache() {
-        FilterCache.EntriesStats filterEntriesStats = filterCache.entriesStats();
-        latestCacheStats = new CacheStats(fieldDataCache.evictions(), filterCache.evictions(), fieldDataCache.sizeInBytes(), filterEntriesStats.sizeInBytes, filterEntriesStats.count, bloomCache.sizeInBytes());
-        latestCacheStatsTimestamp = System.currentTimeMillis();
-    }
+	/**
+	 * Sets the cluster service.
+	 *
+	 * @param clusterService the new cluster service
+	 */
+	@Inject(optional = true)
+	public void setClusterService(@Nullable ClusterService clusterService) {
+		this.clusterService = clusterService;
+		if (clusterService != null) {
+			clusterService.add(this);
+		}
+	}
 
-    
-    /**
-     * Stats.
-     *
-     * @return the cache stats
-     */
-    public synchronized CacheStats stats() {
-        long timestamp = System.currentTimeMillis();
-        if ((timestamp - latestCacheStatsTimestamp) > refreshInterval.millis()) {
-            FilterCache.EntriesStats filterEntriesStats = filterCache.entriesStats();
-            latestCacheStats = new CacheStats(fieldDataCache.evictions(), filterCache.evictions(), fieldDataCache.sizeInBytes(), filterEntriesStats.sizeInBytes, filterEntriesStats.count, bloomCache.sizeInBytes());
-            latestCacheStatsTimestamp = timestamp;
-        }
-        return latestCacheStats;
-    }
+	/**
+	 * Invalidate cache.
+	 */
+	public synchronized void invalidateCache() {
+		FilterCache.EntriesStats filterEntriesStats = filterCache.entriesStats();
+		latestCacheStats = new CacheStats(fieldDataCache.evictions(), filterCache.evictions(),
+				fieldDataCache.sizeInBytes(), filterEntriesStats.sizeInBytes, filterEntriesStats.count,
+				bloomCache.sizeInBytes());
+		latestCacheStatsTimestamp = System.currentTimeMillis();
+	}
 
-    
-    /**
-     * Filter.
-     *
-     * @return the filter cache
-     */
-    public FilterCache filter() {
-        return filterCache;
-    }
+	/**
+	 * Stats.
+	 *
+	 * @return the cache stats
+	 */
+	public synchronized CacheStats stats() {
+		long timestamp = System.currentTimeMillis();
+		if ((timestamp - latestCacheStatsTimestamp) > refreshInterval.millis()) {
+			FilterCache.EntriesStats filterEntriesStats = filterCache.entriesStats();
+			latestCacheStats = new CacheStats(fieldDataCache.evictions(), filterCache.evictions(),
+					fieldDataCache.sizeInBytes(), filterEntriesStats.sizeInBytes, filterEntriesStats.count,
+					bloomCache.sizeInBytes());
+			latestCacheStatsTimestamp = timestamp;
+		}
+		return latestCacheStats;
+	}
 
-    
-    /**
-     * Field data.
-     *
-     * @return the field data cache
-     */
-    public FieldDataCache fieldData() {
-        return fieldDataCache;
-    }
+	/**
+	 * Filter.
+	 *
+	 * @return the filter cache
+	 */
+	public FilterCache filter() {
+		return filterCache;
+	}
 
-    
-    /**
-     * Id cache.
-     *
-     * @return the id cache
-     */
-    public IdCache idCache() {
-        return this.idCache;
-    }
+	/**
+	 * Field data.
+	 *
+	 * @return the field data cache
+	 */
+	public FieldDataCache fieldData() {
+		return fieldDataCache;
+	}
 
-    
-    /**
-     * Bloom cache.
-     *
-     * @return the bloom cache
-     */
-    public BloomCache bloomCache() {
-        return this.bloomCache;
-    }
+	/**
+	 * Id cache.
+	 *
+	 * @return the id cache
+	 */
+	public IdCache idCache() {
+		return this.idCache;
+	}
 
-    
-    /**
-     * Query parser cache.
-     *
-     * @return the query parser cache
-     */
-    public QueryParserCache queryParserCache() {
-        return this.queryParserCache;
-    }
+	/**
+	 * Bloom cache.
+	 *
+	 * @return the bloom cache
+	 */
+	public BloomCache bloomCache() {
+		return this.bloomCache;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.commons.component.CloseableComponent#close()
-     */
-    @Override
-    public void close() throws RestartException {
-        filterCache.close();
-        fieldDataCache.close();
-        idCache.close();
-        queryParserCache.close();
-        bloomCache.close();
-        if (clusterService != null) {
-            clusterService.remove(this);
-        }
-    }
+	/**
+	 * Query parser cache.
+	 *
+	 * @return the query parser cache
+	 */
+	public QueryParserCache queryParserCache() {
+		return this.queryParserCache;
+	}
 
-    
-    /**
-     * Clear.
-     *
-     * @param reader the reader
-     */
-    public void clear(IndexReader reader) {
-        filterCache.clear(reader);
-        fieldDataCache.clear(reader);
-        idCache.clear(reader);
-        bloomCache.clear(reader);
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.commons.component.CloseableComponent#close()
+	 */
+	@Override
+	public void close() throws RebirthException {
+		filterCache.close();
+		fieldDataCache.close();
+		idCache.close();
+		queryParserCache.close();
+		bloomCache.close();
+		if (clusterService != null) {
+			clusterService.remove(this);
+		}
+	}
 
-    
-    /**
-     * Clear.
-     */
-    public void clear() {
-        filterCache.clear();
-        fieldDataCache.clear();
-        idCache.clear();
-        queryParserCache.clear();
-        bloomCache.clear();
-    }
+	/**
+	 * Clear.
+	 *
+	 * @param reader the reader
+	 */
+	public void clear(IndexReader reader) {
+		filterCache.clear(reader);
+		fieldDataCache.clear(reader);
+		idCache.clear(reader);
+		bloomCache.clear(reader);
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
-     */
-    @Override
-    public void clusterChanged(ClusterChangedEvent event) {
-        
-        if (event.metaDataChanged()) {
-            queryParserCache.clear();
-        }
-    }
+	/**
+	 * Clear.
+	 */
+	public void clear() {
+		filterCache.clear();
+		fieldDataCache.clear();
+		idCache.clear();
+		queryParserCache.clear();
+		bloomCache.clear();
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
+	 */
+	@Override
+	public void clusterChanged(ClusterChangedEvent event) {
+
+		if (event.metaDataChanged()) {
+			queryParserCache.clear();
+		}
+	}
 }

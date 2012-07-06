@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScrollQueryFetchSearchResult.java 2012-3-29 15:01:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScrollQueryFetchSearchResult.java 2012-7-6 14:28:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.search.SearchShardTarget;
 
-
 /**
  * The Class ScrollQueryFetchSearchResult.
  *
@@ -21,22 +19,18 @@ import cn.com.rebirth.search.core.search.SearchShardTarget;
  */
 public class ScrollQueryFetchSearchResult implements Streamable {
 
-	
 	/** The result. */
 	private QueryFetchSearchResult result;
 
-	
 	/** The shard target. */
 	private SearchShardTarget shardTarget;
 
-	
 	/**
 	 * Instantiates a new scroll query fetch search result.
 	 */
 	public ScrollQueryFetchSearchResult() {
 	}
 
-	
 	/**
 	 * Instantiates a new scroll query fetch search result.
 	 *
@@ -48,7 +42,6 @@ public class ScrollQueryFetchSearchResult implements Streamable {
 		this.shardTarget = shardTarget;
 	}
 
-	
 	/**
 	 * Result.
 	 *
@@ -58,7 +51,6 @@ public class ScrollQueryFetchSearchResult implements Streamable {
 		return result;
 	}
 
-	
 	/**
 	 * Shard target.
 	 *
@@ -68,9 +60,8 @@ public class ScrollQueryFetchSearchResult implements Streamable {
 		return shardTarget;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -79,9 +70,8 @@ public class ScrollQueryFetchSearchResult implements Streamable {
 		result.shardTarget(shardTarget);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

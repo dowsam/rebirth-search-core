@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PublishClusterStateAction.java 2012-3-29 15:02:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PublishClusterStateAction.java 2012-7-6 14:29:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.publish;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.transport.TransportRequestOptions;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class PublishClusterStateAction.
  *
@@ -38,7 +36,6 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class PublishClusterStateAction extends AbstractComponent {
 
-	
 	/**
 	 * The listener interface for receiving newClusterState events.
 	 * The class that is interested in processing a newClusterState
@@ -52,7 +49,6 @@ public class PublishClusterStateAction extends AbstractComponent {
 	 */
 	public static interface NewClusterStateListener {
 
-		
 		/**
 		 * On new cluster state.
 		 *
@@ -61,19 +57,15 @@ public class PublishClusterStateAction extends AbstractComponent {
 		void onNewClusterState(ClusterState clusterState);
 	}
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The nodes provider. */
 	private final DiscoveryNodesProvider nodesProvider;
 
-	
 	/** The listener. */
 	private final NewClusterStateListener listener;
 
-	
 	/**
 	 * Instantiates a new publish cluster state action.
 	 *
@@ -93,7 +85,6 @@ public class PublishClusterStateAction extends AbstractComponent {
 				new PublishClusterStateRequestHandler());
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -101,7 +92,6 @@ public class PublishClusterStateAction extends AbstractComponent {
 		transportService.removeHandler(PublishClusterStateRequestHandler.ACTION);
 	}
 
-	
 	/**
 	 * Publish.
 	 *
@@ -110,7 +100,6 @@ public class PublishClusterStateAction extends AbstractComponent {
 	public void publish(ClusterState clusterState) {
 		DiscoveryNode localNode = nodesProvider.nodes().localNode();
 
-		
 		CachedStreamOutput.Entry cachedEntry = CachedStreamOutput.popEntry();
 		byte[] clusterStateInBytes;
 		try {
@@ -127,12 +116,12 @@ public class PublishClusterStateAction extends AbstractComponent {
 
 		for (final DiscoveryNode node : clusterState.nodes()) {
 			if (node.equals(localNode)) {
-				
+
 				continue;
 			}
 			transportService.sendRequest(node, PublishClusterStateRequestHandler.ACTION,
 					new PublishClusterStateRequest(clusterStateInBytes), TransportRequestOptions.options()
-							.withHighType().withCompress(false), 
+							.withHighType().withCompress(false),
 
 					new VoidTransportResponseHandler(ThreadPool.Names.SAME) {
 						@Override
@@ -144,7 +133,6 @@ public class PublishClusterStateAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PublishClusterStateRequest.
 	 *
@@ -152,18 +140,15 @@ public class PublishClusterStateAction extends AbstractComponent {
 	 */
 	class PublishClusterStateRequest implements Streamable {
 
-		
 		/** The cluster state in bytes. */
 		BytesHolder clusterStateInBytes;
 
-		
 		/**
 		 * Instantiates a new publish cluster state request.
 		 */
 		private PublishClusterStateRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new publish cluster state request.
 		 *
@@ -173,18 +158,16 @@ public class PublishClusterStateAction extends AbstractComponent {
 			this.clusterStateInBytes = new BytesHolder(clusterStateInBytes);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			clusterStateInBytes = in.readBytesReference();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -192,7 +175,6 @@ public class PublishClusterStateAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PublishClusterStateRequestHandler.
 	 *
@@ -200,22 +182,19 @@ public class PublishClusterStateAction extends AbstractComponent {
 	 */
 	private class PublishClusterStateRequestHandler extends BaseTransportRequestHandler<PublishClusterStateRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "discovery/zen/publish";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public PublishClusterStateRequest newInstance() {
 			return new PublishClusterStateRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(PublishClusterStateRequest request, TransportChannel channel) throws Exception {
@@ -226,9 +205,8 @@ public class PublishClusterStateAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

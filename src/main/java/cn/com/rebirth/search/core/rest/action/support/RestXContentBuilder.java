@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestXContentBuilder.java 2012-3-29 15:01:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestXContentBuilder.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.support;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.commons.xcontent.XContentType;
 import cn.com.rebirth.search.core.rest.RestRequest;
 
-
 /**
  * The Class RestXContentBuilder.
  *
@@ -28,7 +26,6 @@ import cn.com.rebirth.search.core.rest.RestRequest;
  */
 public class RestXContentBuilder {
 
-	
 	/**
 	 * Rest content builder.
 	 *
@@ -39,14 +36,14 @@ public class RestXContentBuilder {
 	public static XContentBuilder restContentBuilder(RestRequest request) throws IOException {
 		XContentType contentType = XContentType.fromRestContentType(request.header("Content-Type"));
 		if (contentType == null) {
-			
+
 			if (request.hasContent()) {
 				contentType = XContentFactory.xContentType(request.contentByteArray(),
 						request.contentByteArrayOffset(), request.contentLength());
 			}
 		}
 		if (contentType == null) {
-			
+
 			contentType = XContentType.JSON;
 		}
 		CachedStreamOutput.Entry cachedEntry = CachedStreamOutput.popEntry();
@@ -59,14 +56,12 @@ public class RestXContentBuilder {
 		if (casing != null && "camelCase".equals(casing)) {
 			builder.fieldCaseConversion(XContentBuilder.FieldCaseConversion.CAMELCASE);
 		} else {
-			
-			
+
 			builder.fieldCaseConversion(XContentBuilder.FieldCaseConversion.NONE);
 		}
 		return builder;
 	}
 
-	
 	/**
 	 * Rest document source.
 	 *
@@ -80,7 +75,6 @@ public class RestXContentBuilder {
 		restDocumentSource(source, 0, source.length, builder, params);
 	}
 
-	
 	/**
 	 * Rest document source.
 	 *

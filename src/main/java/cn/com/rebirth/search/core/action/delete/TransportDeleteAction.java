@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportDeleteAction.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportDeleteAction.java 2012-7-6 14:29:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete;
 
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportDeleteAction.
  *
@@ -41,19 +39,15 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportDeleteAction extends
 		TransportShardReplicationOperationAction<DeleteRequest, DeleteRequest, DeleteResponse> {
 
-	
 	/** The auto create index. */
 	private final boolean autoCreateIndex;
 
-	
 	/** The create index action. */
 	private final TransportCreateIndexAction createIndexAction;
 
-	
 	/** The index delete action. */
 	private final TransportIndexDeleteAction indexDeleteAction;
 
-	
 	/**
 	 * Instantiates a new transport delete action.
 	 *
@@ -76,18 +70,16 @@ public class TransportDeleteAction extends
 		this.autoCreateIndex = settings.getAsBoolean("action.auto_create_index", true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.INDEX;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#doExecute(cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#doExecute(cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final DeleteRequest request, final ActionListener<DeleteResponse> listener) {
@@ -103,7 +95,7 @@ public class TransportDeleteAction extends
 				@Override
 				public void onFailure(Throwable e) {
 					if (ExceptionsHelper.unwrapCause(e) instanceof IndexAlreadyExistsException) {
-						
+
 						innerExecute(request, listener);
 					} else {
 						listener.onFailure(e);
@@ -115,9 +107,8 @@ public class TransportDeleteAction extends
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#resolveRequest(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#resolveRequest(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected boolean resolveRequest(final ClusterState state, final DeleteRequest request,
@@ -125,7 +116,7 @@ public class TransportDeleteAction extends
 		request.routing(state.metaData().resolveIndexRouting(request.routing(), request.index()));
 		request.index(state.metaData().concreteIndex(request.index()));
 		if (state.metaData().hasIndex(request.index())) {
-			
+
 			MappingMetaData mappingMd = state.metaData().index(request.index()).mapping(request.type());
 			if (mappingMd != null && mappingMd.routing().required()) {
 				if (request.routing() == null) {
@@ -133,7 +124,7 @@ public class TransportDeleteAction extends
 							new ActionListener<IndexDeleteResponse>() {
 								@Override
 								public void onResponse(IndexDeleteResponse indexDeleteResponse) {
-									
+
 									long version = 0;
 									boolean found = false;
 									for (ShardDeleteResponse deleteResponse : indexDeleteResponse.responses()) {
@@ -159,7 +150,6 @@ public class TransportDeleteAction extends
 		return true;
 	}
 
-	
 	/**
 	 * Inner execute.
 	 *
@@ -170,72 +160,64 @@ public class TransportDeleteAction extends
 		super.doExecute(request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
 	 */
 	@Override
 	protected boolean checkWriteConsistency() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
 	 */
 	@Override
 	protected DeleteRequest newRequestInstance() {
 		return new DeleteRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
 	 */
 	@Override
 	protected DeleteRequest newReplicaRequestInstance() {
 		return new DeleteRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
 	 */
 	@Override
 	protected DeleteResponse newResponseInstance() {
 		return new DeleteResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return DeleteAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, DeleteRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.WRITE);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, DeleteRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.WRITE, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
 	 */
 	@Override
 	protected PrimaryResponse<DeleteResponse, DeleteRequest> shardOperationOnPrimary(ClusterState clusterState,
@@ -246,14 +228,14 @@ public class TransportDeleteAction extends
 		Engine.Delete delete = indexShard.prepareDelete(request.type(), request.id(), request.version())
 				.versionType(request.versionType()).origin(Engine.Operation.Origin.PRIMARY);
 		indexShard.delete(delete);
-		
+
 		request.version(delete.version());
 
 		if (request.refresh()) {
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 
@@ -262,9 +244,8 @@ public class TransportDeleteAction extends
 		return new PrimaryResponse<DeleteResponse, DeleteRequest>(shardRequest.request, response, null);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
 	 */
 	@Override
 	protected void shardOperationOnReplica(ReplicaOperationRequest shardRequest) {
@@ -280,15 +261,14 @@ public class TransportDeleteAction extends
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ShardIterator shards(ClusterState clusterState, DeleteRequest request) {

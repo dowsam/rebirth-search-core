@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardState.java 2012-3-29 15:02:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardState.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum IndexShardState.
@@ -17,31 +14,24 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum IndexShardState {
 
-	
-	/** The CREATED. */
+	/** The created. */
 	CREATED((byte) 0),
 
-	
-	/** The RECOVERING. */
+	/** The recovering. */
 	RECOVERING((byte) 1),
 
-	
-	/** The STARTED. */
+	/** The started. */
 	STARTED((byte) 2),
 
-	
-	/** The RELOCATED. */
+	/** The relocated. */
 	RELOCATED((byte) 3),
 
-	
-	/** The CLOSED. */
+	/** The closed. */
 	CLOSED((byte) 4);
 
-	
 	/** The id. */
 	private final byte id;
 
-	
 	/**
 	 * Instantiates a new index shard state.
 	 *
@@ -51,7 +41,6 @@ public enum IndexShardState {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -61,15 +50,14 @@ public enum IndexShardState {
 		return this.id;
 	}
 
-	
 	/**
 	 * From id.
 	 *
 	 * @param id the id
 	 * @return the index shard state
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public static IndexShardState fromId(byte id) throws RestartIllegalArgumentException {
+	public static IndexShardState fromId(byte id) throws RebirthIllegalArgumentException {
 		if (id == 0) {
 			return CREATED;
 		} else if (id == 1) {
@@ -81,6 +69,6 @@ public enum IndexShardState {
 		} else if (id == 4) {
 			return CLOSED;
 		}
-		throw new RestartIllegalArgumentException("No mapping for id [" + id + "]");
+		throw new RebirthIllegalArgumentException("No mapping for id [" + id + "]");
 	}
 }

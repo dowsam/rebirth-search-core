@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ProcessInfo.java 2012-3-29 15:02:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ProcessInfo.java 2012-7-6 14:29:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.process;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class ProcessInfo.
  *
@@ -24,23 +22,18 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class ProcessInfo implements Streamable, Serializable, ToXContent {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7804950551112597330L;
 
-	
 	/** The refresh interval. */
 	long refreshInterval;
 
-	
 	/** The id. */
 	private long id;
 
-	
 	/** The max file descriptors. */
 	private long maxFileDescriptors = -1;
 
-	
 	/**
 	 * Instantiates a new process info.
 	 */
@@ -48,7 +41,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 
 	}
 
-	
 	/**
 	 * Instantiates a new process info.
 	 *
@@ -60,7 +52,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		this.maxFileDescriptors = maxFileDescriptors;
 	}
 
-	
 	/**
 	 * Refresh interval.
 	 *
@@ -70,7 +61,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return this.refreshInterval;
 	}
 
-	
 	/**
 	 * Gets the refresh interval.
 	 *
@@ -80,7 +70,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return this.refreshInterval;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -90,7 +79,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return this.id;
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -100,7 +88,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return id();
 	}
 
-	
 	/**
 	 * Max file descriptors.
 	 *
@@ -110,7 +97,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return this.maxFileDescriptors;
 	}
 
-	
 	/**
 	 * Gets the max file descriptors.
 	 *
@@ -120,7 +106,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return maxFileDescriptors;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -128,26 +113,21 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant PROCESS. */
 		static final XContentBuilderString PROCESS = new XContentBuilderString("process");
 
-		
 		/** The Constant REFRESH_INTERVAL. */
 		static final XContentBuilderString REFRESH_INTERVAL = new XContentBuilderString("refresh_interval");
 
-		
 		/** The Constant ID. */
 		static final XContentBuilderString ID = new XContentBuilderString("id");
 
-		
 		/** The Constant MAX_FILE_DESCRIPTORS. */
 		static final XContentBuilderString MAX_FILE_DESCRIPTORS = new XContentBuilderString("max_file_descriptors");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -159,7 +139,6 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * Read process info.
 	 *
@@ -173,9 +152,8 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		return info;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -184,9 +162,8 @@ public class ProcessInfo implements Streamable, Serializable, ToXContent {
 		maxFileDescriptors = in.readLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

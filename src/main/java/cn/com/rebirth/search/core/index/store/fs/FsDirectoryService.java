@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FsDirectoryService.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FsDirectoryService.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.fs;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.store.DirectoryService;
 import cn.com.rebirth.search.core.index.store.IndexStore;
 
-
 /**
  * The Class FsDirectoryService.
  *
@@ -34,11 +32,9 @@ import cn.com.rebirth.search.core.index.store.IndexStore;
  */
 public abstract class FsDirectoryService extends AbstractIndexShardComponent implements DirectoryService {
 
-	
 	/** The index store. */
 	protected final FsIndexStore indexStore;
 
-	
 	/**
 	 * Instantiates a new fs directory service.
 	 *
@@ -51,7 +47,6 @@ public abstract class FsDirectoryService extends AbstractIndexShardComponent imp
 		this.indexStore = (FsIndexStore) indexStore;
 	}
 
-	
 	/**
 	 * Builds the lock factory.
 	 *
@@ -62,7 +57,7 @@ public abstract class FsDirectoryService extends AbstractIndexShardComponent imp
 		String fsLock = componentSettings.get("lock", componentSettings.get("fs_lock", "native"));
 		LockFactory lockFactory = NoLockFactory.getNoLockFactory();
 		if (fsLock.equals("native")) {
-			
+
 			lockFactory = new NativeFSLockFactory();
 		} else if (fsLock.equals("simple")) {
 			lockFactory = new SimpleFSLockFactory();
@@ -72,9 +67,8 @@ public abstract class FsDirectoryService extends AbstractIndexShardComponent imp
 		return lockFactory;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#renameFile(org.apache.lucene.store.Directory, java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#renameFile(org.apache.lucene.store.Directory, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public void renameFile(Directory dir, String from, String to) throws IOException {
@@ -106,15 +100,14 @@ public abstract class FsDirectoryService extends AbstractIndexShardComponent imp
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#fullDelete(org.apache.lucene.store.Directory)
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#fullDelete(org.apache.lucene.store.Directory)
 	 */
 	@Override
 	public void fullDelete(Directory dir) throws IOException {
 		FSDirectory fsDirectory = (FSDirectory) dir;
 		FileSystemUtils.deleteRecursively(fsDirectory.getDirectory());
-		
+
 		String[] list = fsDirectory.getDirectory().getParentFile().list();
 		if (list == null || list.length == 0) {
 			FileSystemUtils.deleteRecursively(fsDirectory.getDirectory().getParentFile());

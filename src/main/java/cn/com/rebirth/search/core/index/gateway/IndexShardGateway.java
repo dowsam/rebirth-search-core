@@ -1,17 +1,15 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardGateway.java 2012-3-29 15:01:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardGateway.java 2012-7-6 14:30:38 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.gateway;
 
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.search.core.index.CloseableIndexComponent;
 import cn.com.rebirth.search.core.index.deletionpolicy.SnapshotIndexCommit;
 import cn.com.rebirth.search.core.index.shard.IndexShardComponent;
 import cn.com.rebirth.search.core.index.translog.Translog;
-
 
 /**
  * The Interface IndexShardGateway.
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.index.translog.Translog;
  */
 public interface IndexShardGateway extends IndexShardComponent, CloseableIndexComponent {
 
-	
 	/**
 	 * Type.
 	 *
@@ -28,7 +25,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	String type();
 
-	
 	/**
 	 * Recovery status.
 	 *
@@ -36,7 +32,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	RecoveryStatus recoveryStatus();
 
-	
 	/**
 	 * Last snapshot status.
 	 *
@@ -44,7 +39,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	SnapshotStatus lastSnapshotStatus();
 
-	
 	/**
 	 * Current snapshot status.
 	 *
@@ -52,7 +46,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	SnapshotStatus currentSnapshotStatus();
 
-	
 	/**
 	 * Recover.
 	 *
@@ -62,7 +55,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	void recover(boolean indexShouldExists, RecoveryStatus recoveryStatus) throws IndexShardGatewayRecoveryException;
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -72,7 +64,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	SnapshotStatus snapshot(Snapshot snapshot) throws IndexShardGatewaySnapshotFailedException;
 
-	
 	/**
 	 * Requires snapshot.
 	 *
@@ -80,7 +71,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	boolean requiresSnapshot();
 
-	
 	/**
 	 * Requires snapshot scheduling.
 	 *
@@ -88,7 +78,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	boolean requiresSnapshotScheduling();
 
-	
 	/**
 	 * Obtain snapshot lock.
 	 *
@@ -97,7 +86,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	SnapshotLock obtainSnapshotLock() throws Exception;
 
-	
 	/**
 	 * The Interface SnapshotLock.
 	 *
@@ -105,14 +93,12 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	public static interface SnapshotLock {
 
-		
 		/**
 		 * Release.
 		 */
 		void release();
 	}
 
-	
 	/** The Constant NO_SNAPSHOT_LOCK. */
 	public static final SnapshotLock NO_SNAPSHOT_LOCK = new SnapshotLock() {
 		@Override
@@ -120,7 +106,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 		}
 	};
 
-	
 	/**
 	 * The Class Snapshot.
 	 *
@@ -128,31 +113,24 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 	 */
 	public static class Snapshot {
 
-		
 		/** The index commit. */
 		private final SnapshotIndexCommit indexCommit;
 
-		
 		/** The translog snapshot. */
 		private final Translog.Snapshot translogSnapshot;
 
-		
 		/** The last index version. */
 		private final long lastIndexVersion;
 
-		
 		/** The last translog id. */
 		private final long lastTranslogId;
 
-		
 		/** The last translog length. */
 		private final long lastTranslogLength;
 
-		
 		/** The last total translog operations. */
 		private final int lastTotalTranslogOperations;
 
-		
 		/**
 		 * Instantiates a new snapshot.
 		 *
@@ -173,7 +151,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			this.lastTotalTranslogOperations = lastTotalTranslogOperations;
 		}
 
-		
 		/**
 		 * Index changed.
 		 *
@@ -183,7 +160,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return lastIndexVersion != indexCommit.getVersion();
 		}
 
-		
 		/**
 		 * New translog created.
 		 *
@@ -193,7 +169,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return translogSnapshot.translogId() != lastTranslogId;
 		}
 
-		
 		/**
 		 * Same translog new operations.
 		 *
@@ -201,12 +176,11 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 		 */
 		public boolean sameTranslogNewOperations() {
 			if (newTranslogCreated()) {
-				throw new RestartIllegalStateException("Should not be called when there is a new translog");
+				throw new RebirthIllegalStateException("Should not be called when there is a new translog");
 			}
 			return translogSnapshot.length() > lastTranslogLength;
 		}
 
-		
 		/**
 		 * Index commit.
 		 *
@@ -216,7 +190,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return indexCommit;
 		}
 
-		
 		/**
 		 * Translog snapshot.
 		 *
@@ -226,7 +199,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return translogSnapshot;
 		}
 
-		
 		/**
 		 * Last index version.
 		 *
@@ -236,7 +208,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return lastIndexVersion;
 		}
 
-		
 		/**
 		 * Last translog id.
 		 *
@@ -246,7 +217,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return lastTranslogId;
 		}
 
-		
 		/**
 		 * Last translog length.
 		 *
@@ -256,7 +226,6 @@ public interface IndexShardGateway extends IndexShardComponent, CloseableIndexCo
 			return lastTranslogLength;
 		}
 
-		
 		/**
 		 * Last total translog operations.
 		 *

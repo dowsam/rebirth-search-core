@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RefreshRequestBuilder.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RefreshRequestBuilder.java 2012-7-6 14:29:53 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.refresh;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesReques
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 
-
 /**
  * The Class RefreshRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class RefreshRequestBuilder extends BaseIndicesRequestBuilder<RefreshRequest, RefreshResponse> {
 
-	
 	/**
 	 * Instantiates a new refresh request builder.
 	 *
@@ -29,7 +26,6 @@ public class RefreshRequestBuilder extends BaseIndicesRequestBuilder<RefreshRequ
 		super(indicesClient, new RefreshRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -41,7 +37,6 @@ public class RefreshRequestBuilder extends BaseIndicesRequestBuilder<RefreshRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for operations.
 	 *
@@ -53,7 +48,6 @@ public class RefreshRequestBuilder extends BaseIndicesRequestBuilder<RefreshRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -65,7 +59,6 @@ public class RefreshRequestBuilder extends BaseIndicesRequestBuilder<RefreshRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -77,9 +70,8 @@ public class RefreshRequestBuilder extends BaseIndicesRequestBuilder<RefreshRequ
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<RefreshResponse> listener) {

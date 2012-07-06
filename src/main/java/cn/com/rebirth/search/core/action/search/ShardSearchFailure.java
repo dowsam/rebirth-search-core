@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardSearchFailure.java 2012-3-29 15:01:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardSearchFailure.java 2012-7-6 14:29:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.rest.RestStatus;
 import cn.com.rebirth.search.core.search.SearchException;
 import cn.com.rebirth.search.core.search.SearchShardTarget;
 
-
 /**
  * The Class ShardSearchFailure.
  *
@@ -28,23 +26,18 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2726939437618729061L;
 
-	
 	/** The Constant EMPTY_ARRAY. */
 	public static final ShardSearchFailure[] EMPTY_ARRAY = new ShardSearchFailure[0];
 
-	
 	/** The shard target. */
 	private SearchShardTarget shardTarget;
 
-	
 	/** The reason. */
 	private String reason;
 
-	
 	/** The status. */
 	private RestStatus status;
 
-	
 	/**
 	 * Instantiates a new shard search failure.
 	 */
@@ -52,7 +45,6 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 
 	}
 
-	
 	/**
 	 * Instantiates a new shard search failure.
 	 *
@@ -67,7 +59,6 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		this.reason = ExceptionsHelper.detailedMessage(t);
 	}
 
-	
 	/**
 	 * Instantiates a new shard search failure.
 	 *
@@ -80,7 +71,6 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		this.status = RestStatus.INTERNAL_SERVER_ERROR;
 	}
 
-	
 	/**
 	 * Shard.
 	 *
@@ -91,7 +81,6 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		return this.shardTarget;
 	}
 
-	
 	/**
 	 * Status.
 	 *
@@ -101,9 +90,8 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		return this.status;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ShardOperationFailedException#index()
+	 * @see cn.com.rebirth.search.core.action.ShardOperationFailedException#index()
 	 */
 	@Override
 	public String index() {
@@ -113,9 +101,8 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ShardOperationFailedException#shardId()
+	 * @see cn.com.rebirth.search.core.action.ShardOperationFailedException#shardId()
 	 */
 	@Override
 	public int shardId() {
@@ -125,15 +112,13 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		return -1;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ShardOperationFailedException#reason()
+	 * @see cn.com.rebirth.search.core.action.ShardOperationFailedException#reason()
 	 */
 	public String reason() {
 		return this.reason;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -142,7 +127,6 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		return "shard [" + (shardTarget == null ? "_na" : shardTarget) + "], reason [" + reason + "]";
 	}
 
-	
 	/**
 	 * Read shard search failure.
 	 *
@@ -156,9 +140,8 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		return shardSearchFailure;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -169,9 +152,8 @@ public class ShardSearchFailure implements ShardOperationFailedException {
 		status = RestStatus.readFrom(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

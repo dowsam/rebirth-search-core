@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchRequestBuilder.java 2012-3-29 15:02:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchRequestBuilder.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
 import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.search.highlight.HighlightBuilder;
 import cn.com.rebirth.search.core.search.sort.SortBuilder;
 import cn.com.rebirth.search.core.search.sort.SortOrder;
 
-
 /**
  * The Class SearchRequestBuilder.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.search.sort.SortOrder;
  */
 public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, SearchResponse> {
 
-	
 	/** The source builder. */
 	private SearchSourceBuilder sourceBuilder;
 
-	
 	/**
 	 * Instantiates a new search request builder.
 	 *
@@ -46,7 +42,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		super(client, new SearchRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -58,7 +53,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the types.
 	 *
@@ -70,7 +64,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search type.
 	 *
@@ -82,20 +75,18 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search type.
 	 *
 	 * @param searchType the search type
 	 * @return the search request builder
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public SearchRequestBuilder setSearchType(String searchType) throws RestartIllegalArgumentException {
+	public SearchRequestBuilder setSearchType(String searchType) throws RebirthIllegalArgumentException {
 		request.searchType(searchType);
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll.
 	 *
@@ -107,7 +98,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll.
 	 *
@@ -119,7 +109,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll.
 	 *
@@ -131,7 +120,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -143,7 +131,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -155,7 +142,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query hint.
 	 *
@@ -167,7 +153,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -179,7 +164,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -191,7 +175,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the preference.
 	 *
@@ -203,7 +186,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -215,7 +197,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -227,7 +208,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -239,7 +219,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -251,7 +230,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -263,7 +241,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -275,7 +252,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -289,7 +265,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -301,7 +276,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -313,7 +287,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter.
 	 *
@@ -325,7 +298,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter.
 	 *
@@ -337,7 +309,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter.
 	 *
@@ -349,7 +320,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter.
 	 *
@@ -363,7 +333,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter.
 	 *
@@ -375,7 +344,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter.
 	 *
@@ -387,7 +355,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the min score.
 	 *
@@ -399,7 +366,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the from.
 	 *
@@ -411,7 +377,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the size.
 	 *
@@ -423,7 +388,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the explain.
 	 *
@@ -435,7 +399,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the version.
 	 *
@@ -447,7 +410,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the index boost.
 	 *
@@ -460,7 +422,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the stats.
 	 *
@@ -472,7 +433,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the no fields.
 	 *
@@ -483,7 +443,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the field.
 	 *
@@ -495,7 +454,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the script field.
 	 *
@@ -508,7 +466,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the script field.
 	 *
@@ -522,7 +479,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the partial field.
 	 *
@@ -536,7 +492,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the partial field.
 	 *
@@ -550,7 +505,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the script field.
 	 *
@@ -565,7 +519,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the sort.
 	 *
@@ -578,7 +531,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the sort.
 	 *
@@ -590,7 +542,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the track scores.
 	 *
@@ -602,7 +553,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the fields.
 	 *
@@ -614,7 +564,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the facet.
 	 *
@@ -626,7 +575,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the facets.
 	 *
@@ -638,7 +586,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the facets.
 	 *
@@ -652,7 +599,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the facets.
 	 *
@@ -664,7 +610,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the facets.
 	 *
@@ -676,7 +621,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the highlighted field.
 	 *
@@ -688,7 +632,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the highlighted field.
 	 *
@@ -701,7 +644,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the highlighted field.
 	 *
@@ -715,7 +657,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the highlighted field.
 	 *
@@ -731,7 +672,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Adds the highlighted field.
 	 *
@@ -743,7 +683,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the highlighter tags schema.
 	 *
@@ -755,7 +694,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the highlighter pre tags.
 	 *
@@ -767,7 +705,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the highlighter post tags.
 	 *
@@ -779,7 +716,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the highlighter order.
 	 *
@@ -791,7 +727,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the highlighter encoder.
 	 *
@@ -803,7 +738,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the highlighter require field match.
 	 *
@@ -815,7 +749,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -827,7 +760,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the extra source.
 	 *
@@ -839,7 +771,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -851,7 +782,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the extra source.
 	 *
@@ -863,7 +793,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -877,7 +806,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the extra source.
 	 *
@@ -891,7 +819,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -903,7 +830,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the extra source.
 	 *
@@ -915,7 +841,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -927,7 +852,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Sets the extra source.
 	 *
@@ -939,7 +863,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Internal builder.
 	 *
@@ -951,7 +874,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return this;
 	}
 
-	
 	/**
 	 * Internal builder.
 	 *
@@ -961,7 +883,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return sourceBuilder();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -970,9 +891,8 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return internalBuilder().toString();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#request()
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#request()
 	 */
 	@Override
 	public SearchRequest request() {
@@ -982,9 +902,8 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return request;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<SearchResponse> listener) {
@@ -994,7 +913,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		client.search(request, listener);
 	}
 
-	
 	/**
 	 * Source builder.
 	 *
@@ -1007,7 +925,6 @@ public class SearchRequestBuilder extends BaseRequestBuilder<SearchRequest, Sear
 		return sourceBuilder;
 	}
 
-	
 	/**
 	 * Highlight builder.
 	 *

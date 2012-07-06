@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesAliasesRequest.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesAliasesRequest.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.alias;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.index.query.FilterBuilder;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class IndicesAliasesRequest.
  *
@@ -34,15 +32,12 @@ import com.google.common.collect.Lists;
  */
 public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 
-	
 	/** The alias actions. */
 	private List<AliasAction> aliasActions = Lists.newArrayList();
 
-	
 	/** The timeout. */
 	private TimeValue timeout = TimeValue.timeValueSeconds(10);
 
-	
 	/**
 	 * Instantiates a new indices aliases request.
 	 */
@@ -50,7 +45,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -63,7 +57,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -77,7 +70,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -101,7 +93,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -125,7 +116,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Removes the alias.
 	 *
@@ -138,7 +128,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias action.
 	 *
@@ -150,7 +139,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Alias actions.
 	 *
@@ -160,7 +148,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return this.aliasActions;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -170,7 +157,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -182,7 +168,6 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -193,9 +178,8 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, TimeValue.timeValueSeconds(10)));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -207,9 +191,8 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -221,9 +204,8 @@ public class IndicesAliasesRequest extends MasterNodeOperationRequest {
 		timeout = TimeValue.readTimeValue(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

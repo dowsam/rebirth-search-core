@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalSearchHit.java 2012-3-29 15:01:37 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalSearchHit.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.internal;
 
@@ -18,7 +17,7 @@ import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.Unicode;
 import cn.com.rebirth.commons.compress.lzf.LZF;
 import cn.com.rebirth.commons.compress.lzf.LZFDecoder;
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.commons.lucene.Lucene;
@@ -34,7 +33,6 @@ import cn.com.rebirth.search.core.search.highlight.HighlightField;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class InternalSearchHit.
  *
@@ -42,64 +40,49 @@ import com.google.common.collect.ImmutableMap;
  */
 public class InternalSearchHit implements SearchHit {
 
-	
 	/** The Constant EMPTY_SORT_VALUES. */
 	private static final Object[] EMPTY_SORT_VALUES = new Object[0];
 
-	
 	/** The doc id. */
 	private transient int docId;
 
-	
 	/** The score. */
 	private float score = Float.NEGATIVE_INFINITY;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The version. */
 	private long version = -1;
 
-	
 	/** The source. */
 	private BytesHolder source;
 
-	
 	/** The fields. */
 	private Map<String, SearchHitField> fields = ImmutableMap.of();
 
-	
 	/** The highlight fields. */
 	private Map<String, HighlightField> highlightFields = null;
 
-	
 	/** The sort values. */
 	private Object[] sortValues = EMPTY_SORT_VALUES;
 
-	
 	/** The matched filters. */
 	private String[] matchedFilters = Strings.EMPTY_ARRAY;
 
-	
 	/** The explanation. */
 	private Explanation explanation;
 
-	
 	/** The shard. */
 	@Nullable
 	private SearchShardTarget shard;
 
-	
 	/** The source as map. */
 	private Map<String, Object> sourceAsMap;
 
-	
 	/**
 	 * Instantiates a new internal search hit.
 	 */
@@ -107,7 +90,6 @@ public class InternalSearchHit implements SearchHit {
 
 	}
 
-	
 	/**
 	 * Instantiates a new internal search hit.
 	 *
@@ -125,7 +107,6 @@ public class InternalSearchHit implements SearchHit {
 		this.fields = fields;
 	}
 
-	
 	/**
 	 * Doc id.
 	 *
@@ -135,7 +116,6 @@ public class InternalSearchHit implements SearchHit {
 		return this.docId;
 	}
 
-	
 	/**
 	 * Shard target.
 	 *
@@ -145,7 +125,6 @@ public class InternalSearchHit implements SearchHit {
 		this.shard = shardTarget;
 	}
 
-	
 	/**
 	 * Score.
 	 *
@@ -155,25 +134,22 @@ public class InternalSearchHit implements SearchHit {
 		this.score = score;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#score()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#score()
 	 */
 	@Override
 	public float score() {
 		return this.score;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getScore()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getScore()
 	 */
 	@Override
 	public float getScore() {
 		return score();
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -183,81 +159,72 @@ public class InternalSearchHit implements SearchHit {
 		this.version = version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#version()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#version()
 	 */
 	@Override
 	public long version() {
 		return this.version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getVersion()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getVersion()
 	 */
 	@Override
 	public long getVersion() {
 		return this.version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#index()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#index()
 	 */
 	@Override
 	public String index() {
 		return shard.index();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getIndex()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getIndex()
 	 */
 	@Override
 	public String getIndex() {
 		return index();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#id()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#id()
 	 */
 	@Override
 	public String id() {
 		return id;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getId()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getId()
 	 */
 	@Override
 	public String getId() {
 		return id();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#type()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#type()
 	 */
 	@Override
 	public String type() {
 		return type;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getType()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getType()
 	 */
 	@Override
 	public String getType() {
 		return type();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#source()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#source()
 	 */
 	@Override
 	public byte[] source() {
@@ -268,33 +235,30 @@ public class InternalSearchHit implements SearchHit {
 			try {
 				this.source = new BytesHolder(LZFDecoder.decode(source.bytes(), source.offset(), source.length()));
 			} catch (IOException e) {
-				throw new RestartParseException("failed to decompress source", e);
+				throw new RebirthParseException("failed to decompress source", e);
 			}
 		}
 		return this.source.copyBytes();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#isSourceEmpty()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#isSourceEmpty()
 	 */
 	@Override
 	public boolean isSourceEmpty() {
 		return source == null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getSource()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getSource()
 	 */
 	@Override
 	public Map<String, Object> getSource() {
 		return sourceAsMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#sourceAsString()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#sourceAsString()
 	 */
 	@Override
 	public String sourceAsString() {
@@ -304,13 +268,12 @@ public class InternalSearchHit implements SearchHit {
 		return Unicode.fromBytes(source.bytes(), source.offset(), source.length());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#sourceAsMap()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#sourceAsMap()
 	 */
 	@SuppressWarnings({ "unchecked" })
 	@Override
-	public Map<String, Object> sourceAsMap() throws RestartParseException {
+	public Map<String, Object> sourceAsMap() throws RebirthParseException {
 		if (source == null) {
 			return null;
 		}
@@ -325,7 +288,7 @@ public class InternalSearchHit implements SearchHit {
 			parser.close();
 			return sourceAsMap;
 		} catch (Exception e) {
-			throw new RestartParseException("Failed to parse source to map", e);
+			throw new RebirthParseException("Failed to parse source to map", e);
 		} finally {
 			if (parser != null) {
 				parser.close();
@@ -333,7 +296,6 @@ public class InternalSearchHit implements SearchHit {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -342,18 +304,16 @@ public class InternalSearchHit implements SearchHit {
 		return fields.values().iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#field(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.SearchHit#field(java.lang.String)
 	 */
 	@Override
 	public SearchHitField field(String fieldName) {
 		return fields().get(fieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#fields()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#fields()
 	 */
 	@Override
 	public Map<String, SearchHitField> fields() {
@@ -363,8 +323,6 @@ public class InternalSearchHit implements SearchHit {
 		return fields;
 	}
 
-	
-	
 	/**
 	 * Fields or null.
 	 *
@@ -374,16 +332,14 @@ public class InternalSearchHit implements SearchHit {
 		return this.fields;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getFields()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getFields()
 	 */
 	@Override
 	public Map<String, SearchHitField> getFields() {
 		return fields();
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -393,7 +349,6 @@ public class InternalSearchHit implements SearchHit {
 		this.fields = fields;
 	}
 
-	
 	/**
 	 * Internal highlight fields.
 	 *
@@ -403,9 +358,8 @@ public class InternalSearchHit implements SearchHit {
 		return highlightFields;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#highlightFields()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#highlightFields()
 	 */
 	@Override
 	public Map<String, HighlightField> highlightFields() {
@@ -415,16 +369,14 @@ public class InternalSearchHit implements SearchHit {
 		return this.highlightFields;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getHighlightFields()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getHighlightFields()
 	 */
 	@Override
 	public Map<String, HighlightField> getHighlightFields() {
 		return highlightFields();
 	}
 
-	
 	/**
 	 * Highlight fields.
 	 *
@@ -434,7 +386,6 @@ public class InternalSearchHit implements SearchHit {
 		this.highlightFields = highlightFields;
 	}
 
-	
 	/**
 	 * Sort values.
 	 *
@@ -444,43 +395,38 @@ public class InternalSearchHit implements SearchHit {
 		this.sortValues = sortValues;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#sortValues()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#sortValues()
 	 */
 	@Override
 	public Object[] sortValues() {
 		return sortValues;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getSortValues()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getSortValues()
 	 */
 	@Override
 	public Object[] getSortValues() {
 		return sortValues();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#explanation()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#explanation()
 	 */
 	@Override
 	public Explanation explanation() {
 		return explanation;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getExplanation()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getExplanation()
 	 */
 	@Override
 	public Explanation getExplanation() {
 		return explanation();
 	}
 
-	
 	/**
 	 * Explanation.
 	 *
@@ -490,25 +436,22 @@ public class InternalSearchHit implements SearchHit {
 		this.explanation = explanation;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#shard()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#shard()
 	 */
 	@Override
 	public SearchShardTarget shard() {
 		return shard;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getShard()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getShard()
 	 */
 	@Override
 	public SearchShardTarget getShard() {
 		return shard();
 	}
 
-	
 	/**
 	 * Shard.
 	 *
@@ -518,7 +461,6 @@ public class InternalSearchHit implements SearchHit {
 		this.shard = target;
 	}
 
-	
 	/**
 	 * Matched filters.
 	 *
@@ -528,24 +470,21 @@ public class InternalSearchHit implements SearchHit {
 		this.matchedFilters = matchedFilters;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#matchedFilters()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#matchedFilters()
 	 */
 	public String[] matchedFilters() {
 		return this.matchedFilters;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHit#getMatchedFilters()
+	 * @see cn.com.rebirth.search.core.search.SearchHit#getMatchedFilters()
 	 */
 	@Override
 	public String[] getMatchedFilters() {
 		return this.matchedFilters;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -553,62 +492,48 @@ public class InternalSearchHit implements SearchHit {
 	 */
 	public static class Fields {
 
-		
 		/** The Constant _INDEX. */
 		static final XContentBuilderString _INDEX = new XContentBuilderString("_index");
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant _ID. */
 		static final XContentBuilderString _ID = new XContentBuilderString("_id");
 
-		
 		/** The Constant _VERSION. */
 		static final XContentBuilderString _VERSION = new XContentBuilderString("_version");
 
-		
 		/** The Constant _SCORE. */
 		static final XContentBuilderString _SCORE = new XContentBuilderString("_score");
 
-		
 		/** The Constant FIELDS. */
 		static final XContentBuilderString FIELDS = new XContentBuilderString("fields");
 
-		
 		/** The Constant HIGHLIGHT. */
 		static final XContentBuilderString HIGHLIGHT = new XContentBuilderString("highlight");
 
-		
 		/** The Constant SORT. */
 		static final XContentBuilderString SORT = new XContentBuilderString("sort");
 
-		
 		/** The Constant MATCH_FILTERS. */
 		static final XContentBuilderString MATCH_FILTERS = new XContentBuilderString("matched_filters");
 
-		
 		/** The Constant _EXPLANATION. */
 		static final XContentBuilderString _EXPLANATION = new XContentBuilderString("_explanation");
 
-		
 		/** The Constant VALUE. */
 		static final XContentBuilderString VALUE = new XContentBuilderString("value");
 
-		
 		/** The Constant DESCRIPTION. */
 		static final XContentBuilderString DESCRIPTION = new XContentBuilderString("description");
 
-		
 		/** The Constant DETAILS. */
 		static final XContentBuilderString DETAILS = new XContentBuilderString("details");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -688,7 +613,6 @@ public class InternalSearchHit implements SearchHit {
 		return builder;
 	}
 
-	
 	/**
 	 * Builds the explanation.
 	 *
@@ -711,7 +635,6 @@ public class InternalSearchHit implements SearchHit {
 		builder.endObject();
 	}
 
-	
 	/**
 	 * Read search hit.
 	 *
@@ -727,9 +650,8 @@ public class InternalSearchHit implements SearchHit {
 		return hit;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -739,7 +661,6 @@ public class InternalSearchHit implements SearchHit {
 						InternalSearchHits.StreamContext.ShardTargetType.STREAM));
 	}
 
-	
 	/**
 	 * Read from.
 	 *
@@ -879,9 +800,8 @@ public class InternalSearchHit implements SearchHit {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -890,7 +810,6 @@ public class InternalSearchHit implements SearchHit {
 						InternalSearchHits.StreamContext.ShardTargetType.STREAM));
 	}
 
-	
 	/**
 	 * Write to.
 	 *

@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DjbHashFunction.java 2012-3-29 15:01:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DjbHashFunction.java 2012-7-6 14:29:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.operation.hash.djb;
 
 import cn.com.rebirth.search.core.cluster.routing.operation.hash.HashFunction;
-
 
 /**
  * The Class DjbHashFunction.
@@ -16,9 +14,8 @@ import cn.com.rebirth.search.core.cluster.routing.operation.hash.HashFunction;
  */
 public class DjbHashFunction implements HashFunction {
 
-	
 	/**
-	 * DJ b_ hash.
+	 * Djb hash.
 	 *
 	 * @param value the value
 	 * @return the int
@@ -33,18 +30,16 @@ public class DjbHashFunction implements HashFunction {
 		return (int) hash;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.hash.HashFunction#hash(java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.hash.HashFunction#hash(java.lang.String)
 	 */
 	@Override
 	public int hash(String routing) {
 		return DJB_HASH(routing);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.hash.HashFunction#hash(java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.hash.HashFunction#hash(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public int hash(String type, String id) {

@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalTransportClient.java 2012-3-29 15:01:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalTransportClient.java 2012-7-6 14:29:26 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.transport.support;
 
 import java.util.Map;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.Action;
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class InternalTransportClient.
  *
@@ -38,23 +36,18 @@ import com.google.common.collect.ImmutableMap;
  */
 public class InternalTransportClient extends AbstractClient implements InternalClient {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The nodes service. */
 	private final TransportClientNodesService nodesService;
 
-	
 	/** The admin client. */
 	private final InternalTransportAdminClient adminClient;
 
-	
 	/** The actions. */
 	private final ImmutableMap<Action, TransportActionNodeProxy> actions;
 
-	
 	/**
 	 * Instantiates a new internal transport client.
 	 *
@@ -82,36 +75,32 @@ public class InternalTransportClient extends AbstractClient implements InternalC
 		this.actions = actionsBuilder.immutableMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#close()
+	 * @see cn.com.rebirth.search.core.client.Client#close()
 	 */
 	@Override
 	public void close() {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.internal.InternalClient#threadPool()
+	 * @see cn.com.rebirth.search.core.client.internal.InternalClient#threadPool()
 	 */
 	@Override
 	public ThreadPool threadPool() {
 		return this.threadPool;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#admin()
+	 * @see cn.com.rebirth.search.core.client.Client#admin()
 	 */
 	@Override
 	public AdminClient admin() {
 		return adminClient;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#execute(cn.com.summall.search.core.action.Action, cn.com.summall.search.core.action.ActionRequest)
+	 * @see cn.com.rebirth.search.core.client.Client#execute(cn.com.rebirth.search.core.action.Action, cn.com.rebirth.search.core.action.ActionRequest)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> ActionFuture<Response> execute(
@@ -119,15 +108,14 @@ public class InternalTransportClient extends AbstractClient implements InternalC
 		final TransportActionNodeProxy<Request, Response> proxy = actions.get(action);
 		return nodesService.execute(new TransportClientNodesService.NodeCallback<ActionFuture<Response>>() {
 			@Override
-			public ActionFuture<Response> doWithNode(DiscoveryNode node) throws RestartException {
+			public ActionFuture<Response> doWithNode(DiscoveryNode node) throws RebirthException {
 				return proxy.execute(node, request);
 			}
 		});
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#execute(cn.com.summall.search.core.action.Action, cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.Client#execute(cn.com.rebirth.search.core.action.Action, cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> void execute(
@@ -136,7 +124,7 @@ public class InternalTransportClient extends AbstractClient implements InternalC
 		final TransportActionNodeProxy<Request, Response> proxy = actions.get(action);
 		nodesService.execute(new TransportClientNodesService.NodeListenerCallback<Response>() {
 			@Override
-			public void doWithNode(DiscoveryNode node, ActionListener<Response> listener) throws RestartException {
+			public void doWithNode(DiscoveryNode node, ActionListener<Response> listener) throws RebirthException {
 				proxy.execute(node, request, listener);
 			}
 		}, listener);

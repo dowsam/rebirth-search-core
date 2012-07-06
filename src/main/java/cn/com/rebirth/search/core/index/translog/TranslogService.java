@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TranslogService.java 2012-3-29 15:01:39 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TranslogService.java 2012-7-6 14:29:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.translog;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class TranslogService.
  *
@@ -33,51 +31,39 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class TranslogService extends AbstractIndexShardComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The index shard. */
 	private final IndexShard indexShard;
 
-	
 	/** The translog. */
 	private final Translog translog;
 
-	
 	/** The flush threshold operations. */
 	private int flushThresholdOperations;
 
-	
 	/** The flush threshold size. */
 	private ByteSizeValue flushThresholdSize;
 
-	
 	/** The flush threshold period. */
 	private TimeValue flushThresholdPeriod;
 
-	
 	/** The disable flush. */
 	private boolean disableFlush;
 
-	
 	/** The interval. */
 	private final TimeValue interval;
 
-	
 	/** The future. */
 	private ScheduledFuture future;
 
-	
 	/** The apply settings. */
 	private final ApplySettings applySettings = new ApplySettings();
 
-	
 	/**
 	 * Instantiates a new translog service.
 	 *
@@ -114,7 +100,6 @@ public class TranslogService extends AbstractIndexShardComponent {
 		indexSettingsService.addListener(applySettings);
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -128,7 +113,6 @@ public class TranslogService extends AbstractIndexShardComponent {
 				"index.translog.flush_threshold_period", "index.translog.disable_flush");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -136,9 +120,8 @@ public class TranslogService extends AbstractIndexShardComponent {
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -172,7 +155,6 @@ public class TranslogService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class TranslogBasedFlush.
 	 *
@@ -180,11 +162,9 @@ public class TranslogService extends AbstractIndexShardComponent {
 	 */
 	private class TranslogBasedFlush implements Runnable {
 
-		
 		/** The last flush time. */
 		private volatile long lastFlushTime = System.currentTimeMillis();
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -194,7 +174,6 @@ public class TranslogService extends AbstractIndexShardComponent {
 				return;
 			}
 
-			
 			if (disableFlush) {
 				reschedule();
 				return;
@@ -237,7 +216,6 @@ public class TranslogService extends AbstractIndexShardComponent {
 			reschedule();
 		}
 
-		
 		/**
 		 * Reschedule.
 		 */
@@ -245,7 +223,6 @@ public class TranslogService extends AbstractIndexShardComponent {
 			future = threadPool.schedule(interval, ThreadPool.Names.SAME, this);
 		}
 
-		
 		/**
 		 * Async flush and reschedule.
 		 */
@@ -256,9 +233,9 @@ public class TranslogService extends AbstractIndexShardComponent {
 					try {
 						indexShard.flush(new Engine.Flush());
 					} catch (IllegalIndexShardStateException e) {
-						
+
 					} catch (FlushNotAllowedEngineException e) {
-						
+
 					} catch (Exception e) {
 						logger.warn("failed to flush shard on translog threshold", e);
 					}

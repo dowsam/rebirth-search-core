@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DefaultShardOperationFailedException.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DefaultShardOperationFailedException.java 2012-7-6 14:29:38 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
 import cn.com.rebirth.search.core.index.shard.IndexShardException;
 
-
 /**
  * The Class DefaultShardOperationFailedException.
  *
@@ -22,23 +20,18 @@ import cn.com.rebirth.search.core.index.shard.IndexShardException;
  */
 public class DefaultShardOperationFailedException implements ShardOperationFailedException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1998881884554928751L;
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The shard id. */
 	private int shardId;
 
-	
 	/** The reason. */
 	private String reason;
 
-	
 	/**
 	 * Instantiates a new default shard operation failed exception.
 	 */
@@ -46,7 +39,6 @@ public class DefaultShardOperationFailedException implements ShardOperationFaile
 
 	}
 
-	
 	/**
 	 * Instantiates a new default shard operation failed exception.
 	 *
@@ -58,7 +50,6 @@ public class DefaultShardOperationFailedException implements ShardOperationFaile
 		this.reason = ExceptionsHelper.detailedMessage(e);
 	}
 
-	
 	/**
 	 * Instantiates a new default shard operation failed exception.
 	 *
@@ -72,34 +63,30 @@ public class DefaultShardOperationFailedException implements ShardOperationFaile
 		this.reason = ExceptionsHelper.detailedMessage(t);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ShardOperationFailedException#index()
+	 * @see cn.com.rebirth.search.core.action.ShardOperationFailedException#index()
 	 */
 	@Override
 	public String index() {
 		return this.index;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ShardOperationFailedException#shardId()
+	 * @see cn.com.rebirth.search.core.action.ShardOperationFailedException#shardId()
 	 */
 	@Override
 	public int shardId() {
 		return this.shardId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ShardOperationFailedException#reason()
+	 * @see cn.com.rebirth.search.core.action.ShardOperationFailedException#reason()
 	 */
 	@Override
 	public String reason() {
 		return this.reason;
 	}
 
-	
 	/**
 	 * Read shard operation failed.
 	 *
@@ -113,9 +100,8 @@ public class DefaultShardOperationFailedException implements ShardOperationFaile
 		return exp;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -126,9 +112,8 @@ public class DefaultShardOperationFailedException implements ShardOperationFaile
 		reason = in.readUTF();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

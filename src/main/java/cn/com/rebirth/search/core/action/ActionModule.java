@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ActionModule.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ActionModule.java 2012-7-6 14:29:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action;
 
@@ -113,7 +112,6 @@ import cn.com.rebirth.search.core.action.update.UpdateAction;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ActionModule.
  *
@@ -121,11 +119,9 @@ import com.google.common.collect.Maps;
  */
 public class ActionModule extends AbstractModule {
 
-	
 	/** The actions. */
 	private final Map<String, ActionEntry> actions = Maps.newHashMap();
 
-	
 	/**
 	 * The Class ActionEntry.
 	 *
@@ -135,19 +131,15 @@ public class ActionModule extends AbstractModule {
 	 */
 	static class ActionEntry<Request extends ActionRequest, Response extends ActionResponse> {
 
-		
 		/** The action. */
 		public final GenericAction<Request, Response> action;
 
-		
 		/** The transport action. */
 		public final Class<? extends TransportAction<Request, Response>> transportAction;
 
-		
 		/** The support transport actions. */
 		public final Class[] supportTransportActions;
 
-		
 		/**
 		 * Instantiates a new action entry.
 		 *
@@ -164,11 +156,9 @@ public class ActionModule extends AbstractModule {
 
 	}
 
-	
 	/** The proxy. */
 	private final boolean proxy;
 
-	
 	/**
 	 * Instantiates a new action module.
 	 *
@@ -178,7 +168,6 @@ public class ActionModule extends AbstractModule {
 		this.proxy = proxy;
 	}
 
-	
 	/**
 	 * Register action.
 	 *
@@ -194,9 +183,8 @@ public class ActionModule extends AbstractModule {
 		actions.put(action.name(), new ActionEntry<Request, Response>(action, transportAction, supportTransportActions));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
@@ -254,7 +242,6 @@ public class ActionModule extends AbstractModule {
 		registerAction(MoreLikeThisAction.INSTANCE, TransportMoreLikeThisAction.class);
 		registerAction(PercolateAction.INSTANCE, TransportPercolateAction.class);
 
-		
 		MapBinder<String, GenericAction> actionsBinder = MapBinder.newMapBinder(binder(), String.class,
 				GenericAction.class);
 
@@ -262,13 +249,11 @@ public class ActionModule extends AbstractModule {
 			actionsBinder.addBinding(entry.getKey()).toInstance(entry.getValue().action);
 		}
 
-		
-		
 		if (!proxy) {
 			MapBinder<GenericAction, TransportAction> transportActionsBinder = MapBinder.newMapBinder(binder(),
 					GenericAction.class, TransportAction.class);
 			for (Map.Entry<String, ActionEntry> entry : actions.entrySet()) {
-				
+
 				bind(entry.getValue().transportAction).asEagerSingleton();
 				transportActionsBinder.addBinding(entry.getValue().action).to(entry.getValue().transportAction)
 						.asEagerSingleton();

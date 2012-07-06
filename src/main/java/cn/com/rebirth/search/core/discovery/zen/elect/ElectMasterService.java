@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ElectMasterService.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ElectMasterService.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.elect;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class ElectMasterService.
  *
@@ -31,15 +29,12 @@ public class ElectMasterService extends AbstractComponent {
 		MetaData.addDynamicSettings("discovery.zen.minimum_master_nodes");
 	}
 
-	
 	/** The node comparator. */
 	private final NodeComparator nodeComparator = new NodeComparator();
 
-	
 	/** The minimum master nodes. */
 	private volatile int minimumMasterNodes;
 
-	
 	/**
 	 * Instantiates a new elect master service.
 	 *
@@ -53,7 +48,6 @@ public class ElectMasterService extends AbstractComponent {
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/**
 	 * Checks for enough master nodes.
 	 *
@@ -73,7 +67,6 @@ public class ElectMasterService extends AbstractComponent {
 		return count >= minimumMasterNodes;
 	}
 
-	
 	/**
 	 * Next possible masters.
 	 *
@@ -97,7 +90,6 @@ public class ElectMasterService extends AbstractComponent {
 		return nextPossibleMasters.toArray(new DiscoveryNode[nextPossibleMasters.size()]);
 	}
 
-	
 	/**
 	 * Elect master.
 	 *
@@ -112,7 +104,6 @@ public class ElectMasterService extends AbstractComponent {
 		return sortedNodes.get(0);
 	}
 
-	
 	/**
 	 * Sorted master nodes.
 	 *
@@ -124,7 +115,7 @@ public class ElectMasterService extends AbstractComponent {
 		if (possibleNodes.isEmpty()) {
 			return null;
 		}
-		
+
 		for (Iterator<DiscoveryNode> it = possibleNodes.iterator(); it.hasNext();) {
 			DiscoveryNode node = it.next();
 			if (!node.masterNode()) {
@@ -135,7 +126,6 @@ public class ElectMasterService extends AbstractComponent {
 		return possibleNodes;
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -143,9 +133,8 @@ public class ElectMasterService extends AbstractComponent {
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -159,7 +148,6 @@ public class ElectMasterService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class NodeComparator.
 	 *
@@ -167,7 +155,6 @@ public class ElectMasterService extends AbstractComponent {
 	 */
 	private static class NodeComparator implements Comparator<DiscoveryNode> {
 
-		
 		/* (non-Javadoc)
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */

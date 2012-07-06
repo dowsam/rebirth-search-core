@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NettyHttpRequest.java 2012-4-25 10:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NettyHttpRequest.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.http.netty;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.rest.support.RestUtils;
 
 import com.google.common.base.Charsets;
 
-
 /**
  * The Class NettyHttpRequest.
  *
@@ -25,23 +23,18 @@ import com.google.common.base.Charsets;
  */
 public class NettyHttpRequest extends AbstractRestRequest implements HttpRequest {
 
-	
 	/** The request. */
 	private final org.jboss.netty.handler.codec.http.HttpRequest request;
 
-	
 	/** The params. */
 	private final Map<String, String> params;
 
-	
 	/** The raw path. */
 	private final String rawPath;
 
-	
 	/** The cached data. */
 	private byte[] cachedData;
 
-	
 	/**
 	 * Instantiates a new netty http request.
 	 *
@@ -61,9 +54,8 @@ public class NettyHttpRequest extends AbstractRestRequest implements HttpRequest
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#method()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#method()
 	 */
 	@Override
 	public Method method() {
@@ -91,66 +83,58 @@ public class NettyHttpRequest extends AbstractRestRequest implements HttpRequest
 		return Method.GET;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#uri()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#uri()
 	 */
 	@Override
 	public String uri() {
 		return request.getUri();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#rawPath()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#rawPath()
 	 */
 	@Override
 	public String rawPath() {
 		return rawPath;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#params()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#params()
 	 */
 	@Override
 	public Map<String, String> params() {
 		return params;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#hasContent()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#hasContent()
 	 */
 	@Override
 	public boolean hasContent() {
 		return request.getContent().readableBytes() > 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#contentLength()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#contentLength()
 	 */
 	@Override
 	public int contentLength() {
 		return request.getContent().readableBytes();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#contentUnsafe()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#contentUnsafe()
 	 */
 	@Override
 	public boolean contentUnsafe() {
-		
-		
+
 		return false;
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#contentByteArray()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#contentByteArray()
 	 */
 	@Override
 	public byte[] contentByteArray() {
@@ -165,58 +149,52 @@ public class NettyHttpRequest extends AbstractRestRequest implements HttpRequest
 		return cachedData;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#contentByteArrayOffset()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#contentByteArrayOffset()
 	 */
 	@Override
 	public int contentByteArrayOffset() {
 		if (request.getContent().hasArray()) {
-			
+
 			return request.getContent().arrayOffset() + request.getContent().readerIndex();
 		}
 		return 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#contentAsString()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#contentAsString()
 	 */
 	@Override
 	public String contentAsString() {
 		return request.getContent().toString(Charsets.UTF_8);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#header(java.lang.String)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#header(java.lang.String)
 	 */
 	@Override
 	public String header(String name) {
 		return request.getHeader(name);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#hasParam(java.lang.String)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#hasParam(java.lang.String)
 	 */
 	@Override
 	public boolean hasParam(String key) {
 		return params.containsKey(key);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#param(java.lang.String)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#param(java.lang.String)
 	 */
 	@Override
 	public String param(String key) {
 		return params.get(key);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent.Params#param(java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent.Params#param(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public String param(String key, String defaultValue) {

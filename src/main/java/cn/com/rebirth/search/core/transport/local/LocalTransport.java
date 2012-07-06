@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalTransport.java 2012-3-29 15:02:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalTransport.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport.local;
 
@@ -13,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.CachedStreamInput;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -45,7 +44,6 @@ import cn.com.rebirth.search.core.transport.TransportSerializationException;
 import cn.com.rebirth.search.core.transport.TransportServiceAdapter;
 import cn.com.rebirth.search.core.transport.support.TransportStreams;
 
-
 /**
  * The Class LocalTransport.
  *
@@ -53,37 +51,29 @@ import cn.com.rebirth.search.core.transport.support.TransportStreams;
  */
 public class LocalTransport extends AbstractLifecycleComponent<Transport> implements Transport {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service adapter. */
 	private volatile TransportServiceAdapter transportServiceAdapter;
 
-	
 	/** The bound address. */
 	private volatile BoundTransportAddress boundAddress;
 
-	
 	/** The local address. */
 	private volatile LocalTransportAddress localAddress;
 
-	
 	/** The Constant transports. */
 	private final static ConcurrentMap<TransportAddress, LocalTransport> transports = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/** The Constant transportAddressIdGenerator. */
 	private static final AtomicLong transportAddressIdGenerator = new AtomicLong();
 
-	
 	/** The connected nodes. */
 	private final ConcurrentMap<DiscoveryNode, LocalTransport> connectedNodes = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/**
 	 * Instantiates a new local transport.
 	 *
@@ -93,7 +83,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS, threadPool);
 	}
 
-	
 	/**
 	 * Instantiates a new local transport.
 	 *
@@ -106,43 +95,39 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		this.threadPool = threadPool;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#addressesFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.transport.Transport#addressesFromString(java.lang.String)
 	 */
 	@Override
 	public TransportAddress[] addressesFromString(String address) {
 		return new TransportAddress[] { new LocalTransportAddress(address) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#addressSupported(java.lang.Class)
+	 * @see cn.com.rebirth.search.core.transport.Transport#addressSupported(java.lang.Class)
 	 */
 	@Override
 	public boolean addressSupported(Class<? extends TransportAddress> address) {
 		return LocalTransportAddress.class.equals(address);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		localAddress = new LocalTransportAddress(Long.toString(transportAddressIdGenerator.incrementAndGet()));
 		transports.put(localAddress, this);
 		boundAddress = new BoundTransportAddress(localAddress, localAddress);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		transports.remove(localAddress);
-		
+
 		for (final LocalTransport targetTransport : transports.values()) {
 			for (final Map.Entry<DiscoveryNode, LocalTransport> entry : targetTransport.connectedNodes.entrySet()) {
 				if (entry.getValue() == this) {
@@ -152,53 +137,47 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#transportServiceAdapter(cn.com.summall.search.core.transport.TransportServiceAdapter)
+	 * @see cn.com.rebirth.search.core.transport.Transport#transportServiceAdapter(cn.com.rebirth.search.core.transport.TransportServiceAdapter)
 	 */
 	@Override
 	public void transportServiceAdapter(TransportServiceAdapter transportServiceAdapter) {
 		this.transportServiceAdapter = transportServiceAdapter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#boundAddress()
+	 * @see cn.com.rebirth.search.core.transport.Transport#boundAddress()
 	 */
 	@Override
 	public BoundTransportAddress boundAddress() {
 		return boundAddress;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#nodeConnected(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#nodeConnected(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public boolean nodeConnected(DiscoveryNode node) {
 		return connectedNodes.containsKey(node);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#connectToNodeLight(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#connectToNodeLight(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public void connectToNodeLight(DiscoveryNode node) throws ConnectTransportException {
 		connectToNode(node);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#connectToNode(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#connectToNode(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public void connectToNode(DiscoveryNode node) throws ConnectTransportException {
@@ -215,9 +194,8 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#disconnectFromNode(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#disconnectFromNode(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public void disconnectFromNode(DiscoveryNode node) {
@@ -229,18 +207,16 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#serverOpen()
+	 * @see cn.com.rebirth.search.core.transport.Transport#serverOpen()
 	 */
 	@Override
 	public long serverOpen() {
 		return 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#sendRequest(cn.com.summall.search.core.cluster.node.DiscoveryNode, long, java.lang.String, cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportRequestOptions)
+	 * @see cn.com.rebirth.search.core.transport.Transport#sendRequest(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, long, java.lang.String, cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportRequestOptions)
 	 */
 	@Override
 	public <T extends Streamable> void sendRequest(final DiscoveryNode node, final long requestId, final String action,
@@ -252,7 +228,7 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 			stream.writeLong(requestId);
 			byte status = 0;
 			status = TransportStreams.statusSetRequest(status);
-			stream.writeByte(status); 
+			stream.writeByte(status);
 
 			stream.writeUTF(action);
 			message.writeTo(stream);
@@ -277,7 +253,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		}
 	}
 
-	
 	/**
 	 * Thread pool.
 	 *
@@ -287,7 +262,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		return this.threadPool;
 	}
 
-	
 	/**
 	 * Message received.
 	 *
@@ -310,7 +284,7 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 				handleRequest(stream, requestId, sourceTransport);
 			} else {
 				final TransportResponseHandler handler = transportServiceAdapter.remove(requestId);
-				
+
 				if (handler != null) {
 					if (TransportStreams.statusIsError(status)) {
 						handlerResponseError(stream, handler);
@@ -331,7 +305,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		}
 	}
 
-	
 	/**
 	 * Handle request.
 	 *
@@ -362,7 +335,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		}
 	}
 
-	
 	/**
 	 * Handle response.
 	 *
@@ -391,7 +363,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		});
 	}
 
-	
 	/**
 	 * Handler response error.
 	 *
@@ -409,7 +380,6 @@ public class LocalTransport extends AbstractLifecycleComponent<Transport> implem
 		handleException(handler, error);
 	}
 
-	
 	/**
 	 * Handle exception.
 	 *

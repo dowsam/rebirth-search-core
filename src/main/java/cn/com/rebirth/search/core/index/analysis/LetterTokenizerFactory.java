@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LetterTokenizerFactory.java 2012-3-29 15:01:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LetterTokenizerFactory.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -17,13 +16,11 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating LetterTokenizer objects.
  */
 public class LetterTokenizerFactory extends AbstractTokenizerFactory {
 
-	
 	/**
 	 * Instantiates a new letter tokenizer factory.
 	 *
@@ -38,9 +35,8 @@ public class LetterTokenizerFactory extends AbstractTokenizerFactory {
 		super(index, indexSettings, name, settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
 	 */
 	@Override
 	public Tokenizer create(Reader reader) {

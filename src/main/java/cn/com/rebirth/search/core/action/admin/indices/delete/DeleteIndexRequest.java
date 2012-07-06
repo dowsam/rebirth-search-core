@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteIndexRequest.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteIndexRequest.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.delete;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class DeleteIndexRequest.
  *
@@ -23,22 +21,18 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class DeleteIndexRequest extends MasterNodeOperationRequest {
 
-	
 	/** The indices. */
 	private String[] indices;
 
-	
 	/** The timeout. */
 	private TimeValue timeout = TimeValue.timeValueSeconds(10);
 
-	
 	/**
 	 * Instantiates a new delete index request.
 	 */
 	DeleteIndexRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new delete index request.
 	 *
@@ -48,7 +42,6 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		this.indices = new String[] { index };
 	}
 
-	
 	/**
 	 * Instantiates a new delete index request.
 	 *
@@ -58,9 +51,8 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		this.indices = indices;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -71,7 +63,6 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -83,7 +74,6 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -93,7 +83,6 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		return indices;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -103,7 +92,6 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -115,7 +103,6 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -126,9 +113,8 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -140,9 +126,8 @@ public class DeleteIndexRequest extends MasterNodeOperationRequest {
 		timeout = TimeValue.readTimeValue(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

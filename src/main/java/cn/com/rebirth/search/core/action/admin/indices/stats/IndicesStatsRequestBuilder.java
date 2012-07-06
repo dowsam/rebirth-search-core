@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesStatsRequestBuilder.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesStatsRequestBuilder.java 2012-7-6 14:30:24 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.stats;
 
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
-
 
 /**
  * The Class IndicesStatsRequestBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<IndicesStatsRequest, IndicesStats> {
 
-	
 	/**
 	 * Instantiates a new indices stats request builder.
 	 *
@@ -28,7 +25,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		super(indicesClient, new IndicesStatsRequest());
 	}
 
-	
 	/**
 	 * All.
 	 *
@@ -39,7 +35,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Clear.
 	 *
@@ -50,7 +45,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -62,7 +56,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the types.
 	 *
@@ -74,7 +67,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the groups.
 	 *
@@ -86,7 +78,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the docs.
 	 *
@@ -98,7 +89,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the store.
 	 *
@@ -110,7 +100,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the indexing.
 	 *
@@ -122,7 +111,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the get.
 	 *
@@ -134,7 +122,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search.
 	 *
@@ -146,7 +133,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the merge.
 	 *
@@ -158,7 +144,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -170,7 +155,6 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/**
 	 * Sets the flush.
 	 *
@@ -182,9 +166,8 @@ public class IndicesStatsRequestBuilder extends BaseIndicesRequestBuilder<Indice
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<IndicesStats> listener) {

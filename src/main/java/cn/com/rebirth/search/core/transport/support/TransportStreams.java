@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportStreams.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportStreams.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport.support;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.io.stream.HandlesStreamOutput;
 import cn.com.rebirth.search.core.transport.TransportRequestOptions;
 import cn.com.rebirth.search.core.transport.TransportResponseOptions;
 
-
 /**
  * The Class TransportStreams.
  *
@@ -22,15 +20,12 @@ import cn.com.rebirth.search.core.transport.TransportResponseOptions;
  */
 public class TransportStreams {
 
-	
 	/** The Constant HEADER_SIZE. */
 	public static final int HEADER_SIZE = 4 + 8 + 1;
 
-	
 	/** The Constant HEADER_PLACEHOLDER. */
 	public static final byte[] HEADER_PLACEHOLDER = new byte[HEADER_SIZE];
 
-	
 	/**
 	 * Write header.
 	 *
@@ -40,14 +35,11 @@ public class TransportStreams {
 	 * @param status the status
 	 */
 	public static void writeHeader(byte[] data, int dataLength, long requestId, byte status) {
-		writeInt(data, 0, dataLength - 4); 
+		writeInt(data, 0, dataLength - 4);
 		writeLong(data, 4, requestId);
 		data[12] = status;
 	}
 
-	
-
-	
 	/**
 	 * Write long.
 	 *
@@ -66,9 +58,6 @@ public class TransportStreams {
 		buffer[offset] = ((byte) (value));
 	}
 
-	
-
-	
 	/**
 	 * Write int.
 	 *
@@ -83,19 +72,15 @@ public class TransportStreams {
 		buffer[offset] = ((byte) (value));
 	}
 
-	
 	/** The Constant STATUS_REQRES. */
 	private static final byte STATUS_REQRES = 1 << 0;
 
-	
 	/** The Constant STATUS_ERROR. */
 	private static final byte STATUS_ERROR = 1 << 1;
 
-	
 	/** The Constant STATUS_COMPRESS. */
 	private static final byte STATUS_COMPRESS = 1 << 2;
 
-	
 	/**
 	 * Status is request.
 	 *
@@ -106,7 +91,6 @@ public class TransportStreams {
 		return (value & STATUS_REQRES) == 0;
 	}
 
-	
 	/**
 	 * Status set request.
 	 *
@@ -118,7 +102,6 @@ public class TransportStreams {
 		return value;
 	}
 
-	
 	/**
 	 * Status set response.
 	 *
@@ -130,7 +113,6 @@ public class TransportStreams {
 		return value;
 	}
 
-	
 	/**
 	 * Status is error.
 	 *
@@ -141,7 +123,6 @@ public class TransportStreams {
 		return (value & STATUS_ERROR) != 0;
 	}
 
-	
 	/**
 	 * Status set error.
 	 *
@@ -153,7 +134,6 @@ public class TransportStreams {
 		return value;
 	}
 
-	
 	/**
 	 * Status is compress.
 	 *
@@ -164,7 +144,6 @@ public class TransportStreams {
 		return (value & STATUS_COMPRESS) != 0;
 	}
 
-	
 	/**
 	 * Status set compress.
 	 *
@@ -176,7 +155,6 @@ public class TransportStreams {
 		return value;
 	}
 
-	
 	/**
 	 * Builds the request.
 	 *
@@ -210,7 +188,6 @@ public class TransportStreams {
 				status);
 	}
 
-	
 	/**
 	 * Builds the response.
 	 *

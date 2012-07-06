@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardsAllocator.java 2012-3-29 15:01:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardsAllocator.java 2012-7-6 14:28:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.allocator;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.FailedRerouteAlloca
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAllocation;
 
-
 /**
  * The Interface ShardsAllocator.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAlloc
  */
 public interface ShardsAllocator {
 
-	
 	/**
 	 * Apply started shards.
 	 *
@@ -28,7 +25,6 @@ public interface ShardsAllocator {
 	 */
 	void applyStartedShards(StartedRerouteAllocation allocation);
 
-	
 	/**
 	 * Apply failed shards.
 	 *
@@ -36,7 +32,6 @@ public interface ShardsAllocator {
 	 */
 	void applyFailedShards(FailedRerouteAllocation allocation);
 
-	
 	/**
 	 * Allocate unassigned.
 	 *
@@ -45,7 +40,6 @@ public interface ShardsAllocator {
 	 */
 	boolean allocateUnassigned(RoutingAllocation allocation);
 
-	
 	/**
 	 * Rebalance.
 	 *
@@ -54,7 +48,6 @@ public interface ShardsAllocator {
 	 */
 	boolean rebalance(RoutingAllocation allocation);
 
-	
 	/**
 	 * Move.
 	 *

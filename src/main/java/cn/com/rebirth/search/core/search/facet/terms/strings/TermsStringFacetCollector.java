@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsStringFacetCollector.java 2012-3-29 15:01:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsStringFacetCollector.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.strings;
 
@@ -38,7 +37,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class TermsStringFacetCollector.
  *
@@ -46,7 +44,6 @@ import com.google.common.collect.ImmutableSet;
  */
 public class TermsStringFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The cache. */
 	static ThreadLocal<ThreadLocals.CleanableValue<Deque<TObjectIntHashMap<String>>>> cache = new ThreadLocal<ThreadLocals.CleanableValue<Deque<TObjectIntHashMap<String>>>>() {
 		@Override
@@ -56,43 +53,33 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 		}
 	};
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The index field name. */
 	private final String indexFieldName;
 
-	
 	/** The comparator type. */
 	private final TermsFacet.ComparatorType comparatorType;
 
-	
 	/** The size. */
 	private final int size;
 
-	
 	/** The number of shards. */
 	private final int numberOfShards;
 
-	
 	/** The field data type. */
 	private final FieldDataType fieldDataType;
 
-	
 	/** The field data. */
 	private FieldData fieldData;
 
-	
 	/** The aggregator. */
 	private final StaticAggregatorValueProc aggregator;
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/**
 	 * Instantiates a new terms string facet collector.
 	 *
@@ -122,7 +109,7 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 			this.indexFieldName = fieldName;
 			this.fieldDataType = FieldDataType.DefaultTypes.STRING;
 		} else {
-			
+
 			if (smartMappers.hasDocMapper()) {
 				setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 			}
@@ -156,9 +143,8 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
@@ -167,9 +153,8 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -179,18 +164,16 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		fieldData.forEachValueInDoc(doc, aggregator);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
@@ -227,7 +210,6 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/**
 	 * The Class AggregatorValueProc.
 	 *
@@ -235,19 +217,15 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class AggregatorValueProc extends StaticAggregatorValueProc {
 
-		
 		/** The excluded. */
 		private final ImmutableSet<String> excluded;
 
-		
 		/** The matcher. */
 		private final Matcher matcher;
 
-		
 		/** The script. */
 		private final SearchScript script;
 
-		
 		/**
 		 * Instantiates a new aggregator value proc.
 		 *
@@ -264,9 +242,8 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 			this.script = script;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.strings.TermsStringFacetCollector.StaticAggregatorValueProc#onValue(int, java.lang.String)
+		 * @see cn.com.rebirth.search.core.search.facet.terms.strings.TermsStringFacetCollector.StaticAggregatorValueProc#onValue(int, java.lang.String)
 		 */
 		@Override
 		public void onValue(int docId, String value) {
@@ -295,7 +272,6 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/**
 	 * The Class StaticAggregatorValueProc.
 	 *
@@ -303,19 +279,15 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class StaticAggregatorValueProc implements FieldData.StringValueInDocProc, FieldData.StringValueProc {
 
-		
 		/** The facets. */
 		private final TObjectIntHashMap<String> facets;
 
-		
 		/** The missing. */
 		private int missing = 0;
 
-		
 		/** The total. */
 		private int total = 0;
 
-		
 		/**
 		 * Instantiates a new static aggregator value proc.
 		 *
@@ -325,18 +297,16 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 			this.facets = facets;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.FieldData.StringValueProc#onValue(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.field.data.FieldData.StringValueProc#onValue(java.lang.String)
 		 */
 		@Override
 		public void onValue(String value) {
 			facets.putIfAbsent(value, 0);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.FieldData.StringValueInDocProc#onValue(int, java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.field.data.FieldData.StringValueInDocProc#onValue(int, java.lang.String)
 		 */
 		@Override
 		public void onValue(int docId, String value) {
@@ -344,16 +314,14 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 			total++;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.FieldData.StringValueInDocProc#onMissing(int)
+		 * @see cn.com.rebirth.search.core.index.field.data.FieldData.StringValueInDocProc#onMissing(int)
 		 */
 		@Override
 		public void onMissing(int docId) {
 			missing++;
 		}
 
-		
 		/**
 		 * Facets.
 		 *
@@ -363,7 +331,6 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 			return facets;
 		}
 
-		
 		/**
 		 * Missing.
 		 *
@@ -373,7 +340,6 @@ public class TermsStringFacetCollector extends AbstractFacetCollector {
 			return this.missing;
 		}
 
-		
 		/**
 		 * Total.
 		 *

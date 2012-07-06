@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DocLookup.java 2012-3-29 15:02:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DocLookup.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.lookup;
 
@@ -14,8 +13,8 @@ import java.util.Set;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.Scorer;
 
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.field.data.DocFieldData;
 import cn.com.rebirth.search.core.index.field.data.FieldData;
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.index.mapper.MapperService;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class DocLookup.
  *
@@ -33,31 +31,24 @@ import com.google.common.collect.Maps;
  */
 public class DocLookup implements Map {
 
-	
 	/** The local cache field data. */
 	private final Map<String, FieldData> localCacheFieldData = Maps.newHashMapWithExpectedSize(4);
 
-	
 	/** The mapper service. */
 	private final MapperService mapperService;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The reader. */
 	private IndexReader reader;
 
-	
 	/** The scorer. */
 	private Scorer scorer;
 
-	
 	/** The doc id. */
 	private int docId = -1;
 
-	
 	/**
 	 * Instantiates a new doc lookup.
 	 *
@@ -69,7 +60,6 @@ public class DocLookup implements Map {
 		this.fieldDataCache = fieldDataCache;
 	}
 
-	
 	/**
 	 * Mapper service.
 	 *
@@ -79,7 +69,6 @@ public class DocLookup implements Map {
 		return this.mapperService;
 	}
 
-	
 	/**
 	 * Field data cache.
 	 *
@@ -89,14 +78,13 @@ public class DocLookup implements Map {
 		return this.fieldDataCache;
 	}
 
-	
 	/**
 	 * Sets the next reader.
 	 *
 	 * @param reader the new next reader
 	 */
 	public void setNextReader(IndexReader reader) {
-		if (this.reader == reader) { 
+		if (this.reader == reader) {
 			return;
 		}
 		this.reader = reader;
@@ -104,7 +92,6 @@ public class DocLookup implements Map {
 		localCacheFieldData.clear();
 	}
 
-	
 	/**
 	 * Sets the scorer.
 	 *
@@ -114,7 +101,6 @@ public class DocLookup implements Map {
 		this.scorer = scorer;
 	}
 
-	
 	/**
 	 * Sets the next doc id.
 	 *
@@ -124,7 +110,6 @@ public class DocLookup implements Map {
 		this.docId = docId;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -136,7 +121,6 @@ public class DocLookup implements Map {
 		return (T) get(key);
 	}
 
-	
 	/**
 	 * Numeric.
 	 *
@@ -148,7 +132,6 @@ public class DocLookup implements Map {
 		return (T) get(key);
 	}
 
-	
 	/**
 	 * Score.
 	 *
@@ -159,7 +142,6 @@ public class DocLookup implements Map {
 		return scorer.score();
 	}
 
-	
 	/**
 	 * Gets the score.
 	 *
@@ -170,36 +152,34 @@ public class DocLookup implements Map {
 		return scorer.score();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
 	@Override
 	public Object get(Object key) {
-		
+
 		String fieldName = key.toString();
 		FieldData fieldData = localCacheFieldData.get(fieldName);
 		if (fieldData == null) {
 			FieldMapper mapper = mapperService.smartNameFieldMapper(fieldName);
 			if (mapper == null) {
-				throw new RestartIllegalArgumentException("No field found for [" + fieldName + "]");
+				throw new RebirthIllegalArgumentException("No field found for [" + fieldName + "]");
 			}
 			try {
 				fieldData = fieldDataCache.cache(mapper.fieldDataType(), reader, mapper.names().indexName());
 			} catch (IOException e) {
-				throw new RestartException("Failed to load field data for [" + fieldName + "]", e);
+				throw new RebirthException("Failed to load field data for [" + fieldName + "]", e);
 			}
 			localCacheFieldData.put(fieldName, fieldData);
 		}
 		return fieldData.docFieldData(docId);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#containsKey(java.lang.Object)
 	 */
 	public boolean containsKey(Object key) {
-		
+
 		String fieldName = key.toString();
 		FieldData fieldData = localCacheFieldData.get(fieldName);
 		if (fieldData == null) {
@@ -211,7 +191,6 @@ public class DocLookup implements Map {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#size()
 	 */
@@ -219,7 +198,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#isEmpty()
 	 */
@@ -227,7 +205,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#containsValue(java.lang.Object)
 	 */
@@ -235,7 +212,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
 	 */
@@ -243,7 +219,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#remove(java.lang.Object)
 	 */
@@ -251,7 +226,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#putAll(java.util.Map)
 	 */
@@ -259,7 +233,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#clear()
 	 */
@@ -267,7 +240,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#keySet()
 	 */
@@ -275,7 +247,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#values()
 	 */
@@ -283,7 +254,6 @@ public class DocLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#entrySet()
 	 */

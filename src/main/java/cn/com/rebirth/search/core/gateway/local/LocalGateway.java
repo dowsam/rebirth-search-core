@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalGateway.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalGateway.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway.local;
 
@@ -10,7 +9,7 @@ import gnu.trove.map.hash.TObjectIntHashMap;
 
 import java.util.Set;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.index.gateway.local.LocalIndexGatewayModule;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class LocalGateway.
  *
@@ -41,31 +39,24 @@ import com.google.common.collect.Sets;
  */
 public class LocalGateway extends AbstractLifecycleComponent<Gateway> implements Gateway, ClusterStateListener {
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/** The shards state. */
 	private final LocalGatewayShardsState shardsState;
 
-	
 	/** The meta state. */
 	private final LocalGatewayMetaState metaState;
 
-	
 	/** The list gateway meta state. */
 	private final TransportNodesListGatewayMetaState listGatewayMetaState;
 
-	
 	/** The initial meta. */
 	private final String initialMeta;
 
-	
 	/**
 	 * Instantiates a new local gateway.
 	 *
@@ -90,48 +81,42 @@ public class LocalGateway extends AbstractLifecycleComponent<Gateway> implements
 
 		clusterService.addLast(this);
 
-		
 		this.initialMeta = componentSettings.get("initial_meta",
 				settings.get("discovery.zen.minimum_master_nodes", "1"));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#type()
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#type()
 	 */
 	@Override
 	public String type() {
 		return "local";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		clusterService.remove(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#performStateRecovery(cn.com.summall.search.core.gateway.Gateway.GatewayStateRecoveredListener)
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#performStateRecovery(cn.com.rebirth.search.core.gateway.Gateway.GatewayStateRecoveredListener)
 	 */
 	@Override
 	public void performStateRecovery(final GatewayStateRecoveredListener listener) throws GatewayException {
@@ -193,7 +178,7 @@ public class LocalGateway extends AbstractLifecycleComponent<Gateway> implements
 			listener.onFailure("found [" + found + "] metadata states, required [" + requiredAllocation + "]");
 			return;
 		}
-		
+
 		metaDataBuilder.metaData(electedGlobalState).removeAllIndices();
 		for (String index : indices.keySet()) {
 			IndexMetaData electedIndexMetaData = null;
@@ -226,31 +211,28 @@ public class LocalGateway extends AbstractLifecycleComponent<Gateway> implements
 		listener.onSuccess(builder.build());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#suggestIndexGateway()
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#suggestIndexGateway()
 	 */
 	@Override
 	public Class<? extends Module> suggestIndexGateway() {
 		return LocalIndexGatewayModule.class;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#reset()
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#reset()
 	 */
 	@Override
 	public void reset() throws Exception {
 		FileSystemUtils.deleteRecursively(nodeEnv.nodeDataLocations());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(final ClusterChangedEvent event) {
-		
+
 		if (event.state().blocks().disableStatePersistence()) {
 			return;
 		}

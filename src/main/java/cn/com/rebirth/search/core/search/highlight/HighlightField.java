@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HighlightField.java 2012-3-29 15:00:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HighlightField.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.highlight;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 
-
 /**
  * The Class HighlightField.
  *
@@ -22,22 +20,18 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public class HighlightField implements Streamable {
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The fragments. */
 	private String[] fragments;
 
-	
 	/**
 	 * Instantiates a new highlight field.
 	 */
 	HighlightField() {
 	}
 
-	
 	/**
 	 * Instantiates a new highlight field.
 	 *
@@ -49,7 +43,6 @@ public class HighlightField implements Streamable {
 		this.fragments = fragments;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -59,7 +52,6 @@ public class HighlightField implements Streamable {
 		return name;
 	}
 
-	
 	/**
 	 * Gets the name.
 	 *
@@ -69,7 +61,6 @@ public class HighlightField implements Streamable {
 		return name();
 	}
 
-	
 	/**
 	 * Fragments.
 	 *
@@ -79,7 +70,6 @@ public class HighlightField implements Streamable {
 		return fragments;
 	}
 
-	
 	/**
 	 * Gets the fragments.
 	 *
@@ -89,7 +79,6 @@ public class HighlightField implements Streamable {
 		return fragments();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -98,7 +87,6 @@ public class HighlightField implements Streamable {
 		return "[" + name + "], fragments[" + Arrays.toString(fragments) + "]";
 	}
 
-	
 	/**
 	 * Read highlight field.
 	 *
@@ -112,9 +100,8 @@ public class HighlightField implements Streamable {
 		return field;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -132,9 +119,8 @@ public class HighlightField implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

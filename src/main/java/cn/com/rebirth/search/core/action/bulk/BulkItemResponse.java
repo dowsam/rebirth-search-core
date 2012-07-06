@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulkItemResponse.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulkItemResponse.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
 import cn.com.rebirth.search.core.action.delete.DeleteResponse;
 import cn.com.rebirth.search.core.action.index.IndexResponse;
 
-
 /**
  * The Class BulkItemResponse.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.search.core.action.index.IndexResponse;
  */
 public class BulkItemResponse implements Streamable {
 
-	
 	/**
 	 * The Class Failure.
 	 *
@@ -31,23 +28,18 @@ public class BulkItemResponse implements Streamable {
 	 */
 	public static class Failure {
 
-		
 		/** The index. */
 		private final String index;
 
-		
 		/** The type. */
 		private final String type;
 
-		
 		/** The id. */
 		private final String id;
 
-		
 		/** The message. */
 		private final String message;
 
-		
 		/**
 		 * Instantiates a new failure.
 		 *
@@ -63,7 +55,6 @@ public class BulkItemResponse implements Streamable {
 			this.message = message;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -73,7 +64,6 @@ public class BulkItemResponse implements Streamable {
 			return this.index;
 		}
 
-		
 		/**
 		 * Gets the index.
 		 *
@@ -83,7 +73,6 @@ public class BulkItemResponse implements Streamable {
 			return index();
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -93,7 +82,6 @@ public class BulkItemResponse implements Streamable {
 			return type;
 		}
 
-		
 		/**
 		 * Gets the type.
 		 *
@@ -103,7 +91,6 @@ public class BulkItemResponse implements Streamable {
 			return type();
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -113,7 +100,6 @@ public class BulkItemResponse implements Streamable {
 			return id;
 		}
 
-		
 		/**
 		 * Gets the id.
 		 *
@@ -123,7 +109,6 @@ public class BulkItemResponse implements Streamable {
 			return this.id;
 		}
 
-		
 		/**
 		 * Message.
 		 *
@@ -133,7 +118,6 @@ public class BulkItemResponse implements Streamable {
 			return this.message;
 		}
 
-		
 		/**
 		 * Gets the message.
 		 *
@@ -144,23 +128,18 @@ public class BulkItemResponse implements Streamable {
 		}
 	}
 
-	
 	/** The id. */
 	private int id;
 
-	
 	/** The op type. */
 	private String opType;
 
-	
 	/** The response. */
 	private ActionResponse response;
 
-	
 	/** The failure. */
 	private Failure failure;
 
-	
 	/**
 	 * Instantiates a new bulk item response.
 	 */
@@ -168,7 +147,6 @@ public class BulkItemResponse implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new bulk item response.
 	 *
@@ -182,7 +160,6 @@ public class BulkItemResponse implements Streamable {
 		this.response = response;
 	}
 
-	
 	/**
 	 * Instantiates a new bulk item response.
 	 *
@@ -196,7 +173,6 @@ public class BulkItemResponse implements Streamable {
 		this.failure = failure;
 	}
 
-	
 	/**
 	 * Item id.
 	 *
@@ -206,7 +182,6 @@ public class BulkItemResponse implements Streamable {
 		return id;
 	}
 
-	
 	/**
 	 * Op type.
 	 *
@@ -216,7 +191,6 @@ public class BulkItemResponse implements Streamable {
 		return this.opType;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -234,7 +208,6 @@ public class BulkItemResponse implements Streamable {
 		return null;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -244,7 +217,6 @@ public class BulkItemResponse implements Streamable {
 		return index();
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -262,7 +234,6 @@ public class BulkItemResponse implements Streamable {
 		return null;
 	}
 
-	
 	/**
 	 * Gets the type.
 	 *
@@ -272,7 +243,6 @@ public class BulkItemResponse implements Streamable {
 		return this.type();
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -290,7 +260,6 @@ public class BulkItemResponse implements Streamable {
 		return null;
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -300,7 +269,6 @@ public class BulkItemResponse implements Streamable {
 		return id();
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -318,7 +286,6 @@ public class BulkItemResponse implements Streamable {
 		return -1;
 	}
 
-	
 	/**
 	 * Response.
 	 *
@@ -329,7 +296,6 @@ public class BulkItemResponse implements Streamable {
 		return (T) response;
 	}
 
-	
 	/**
 	 * Failed.
 	 *
@@ -339,7 +305,6 @@ public class BulkItemResponse implements Streamable {
 		return failure != null;
 	}
 
-	
 	/**
 	 * Checks if is failed.
 	 *
@@ -349,7 +314,6 @@ public class BulkItemResponse implements Streamable {
 		return failed();
 	}
 
-	
 	/**
 	 * Failure message.
 	 *
@@ -362,7 +326,6 @@ public class BulkItemResponse implements Streamable {
 		return null;
 	}
 
-	
 	/**
 	 * Gets the failure message.
 	 *
@@ -372,7 +335,6 @@ public class BulkItemResponse implements Streamable {
 		return failureMessage();
 	}
 
-	
 	/**
 	 * Failure.
 	 *
@@ -382,7 +344,6 @@ public class BulkItemResponse implements Streamable {
 		return this.failure;
 	}
 
-	
 	/**
 	 * Gets the failure.
 	 *
@@ -392,7 +353,6 @@ public class BulkItemResponse implements Streamable {
 		return failure();
 	}
 
-	
 	/**
 	 * Read bulk item.
 	 *
@@ -406,9 +366,8 @@ public class BulkItemResponse implements Streamable {
 		return response;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -429,9 +388,8 @@ public class BulkItemResponse implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

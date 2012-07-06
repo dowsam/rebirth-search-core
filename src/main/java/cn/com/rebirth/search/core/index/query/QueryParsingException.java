@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryParsingException.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryParsingException.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.IndexException;
-
 
 /**
  * The Class QueryParsingException.
@@ -17,11 +15,9 @@ import cn.com.rebirth.search.core.index.IndexException;
  */
 public class QueryParsingException extends IndexException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8302119892955758197L;
 
-	
 	/**
 	 * Instantiates a new query parsing exception.
 	 *
@@ -32,7 +28,6 @@ public class QueryParsingException extends IndexException {
 		super(index, msg);
 	}
 
-	
 	/**
 	 * Instantiates a new query parsing exception.
 	 *

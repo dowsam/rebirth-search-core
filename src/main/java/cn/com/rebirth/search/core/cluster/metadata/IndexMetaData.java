@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexMetaData.java 2012-3-29 15:01:18 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexMetaData.java 2012-7-6 14:28:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -14,7 +13,7 @@ import java.util.Map;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.compress.CompressedString;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.regex.Regex;
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.rest.RestStatus;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class IndexMetaData.
  *
@@ -41,34 +39,28 @@ import com.google.common.collect.ImmutableSet;
  */
 public class IndexMetaData {
 
-	
 	/** The dynamic settings. */
 	private static ImmutableSet<String> dynamicSettings = ImmutableSet.<String> builder()
 			.add(IndexMetaData.SETTING_NUMBER_OF_REPLICAS).add(IndexMetaData.SETTING_AUTO_EXPAND_REPLICAS)
 			.add(IndexMetaData.SETTING_READ_ONLY).add(IndexMetaData.SETTING_BLOCKS_READ)
 			.add(IndexMetaData.SETTING_BLOCKS_WRITE).add(IndexMetaData.SETTING_BLOCKS_METADATA).build();
 
-	
 	/** The Constant INDEX_READ_ONLY_BLOCK. */
 	public static final ClusterBlock INDEX_READ_ONLY_BLOCK = new ClusterBlock(5, "index read-only (api)", false, false,
 			RestStatus.FORBIDDEN, ClusterBlockLevel.WRITE, ClusterBlockLevel.METADATA);
 
-	
 	/** The Constant INDEX_READ_BLOCK. */
 	public static final ClusterBlock INDEX_READ_BLOCK = new ClusterBlock(7, "index read (api)", false, false,
 			RestStatus.FORBIDDEN, ClusterBlockLevel.READ);
 
-	
 	/** The Constant INDEX_WRITE_BLOCK. */
 	public static final ClusterBlock INDEX_WRITE_BLOCK = new ClusterBlock(8, "index write (api)", false, false,
 			RestStatus.FORBIDDEN, ClusterBlockLevel.WRITE);
 
-	
 	/** The Constant INDEX_METADATA_BLOCK. */
 	public static final ClusterBlock INDEX_METADATA_BLOCK = new ClusterBlock(9, "index metadata (api)", false, false,
 			RestStatus.FORBIDDEN, ClusterBlockLevel.METADATA);
 
-	
 	/**
 	 * Dynamic settings.
 	 *
@@ -78,7 +70,6 @@ public class IndexMetaData {
 		return dynamicSettings;
 	}
 
-	
 	/**
 	 * Checks for dynamic setting.
 	 *
@@ -94,7 +85,6 @@ public class IndexMetaData {
 		return false;
 	}
 
-	
 	/**
 	 * Adds the dynamic settings.
 	 *
@@ -106,7 +96,6 @@ public class IndexMetaData {
 		dynamicSettings = ImmutableSet.copyOf(updatedSettings);
 	}
 
-	
 	/**
 	 * The Enum State.
 	 *
@@ -114,19 +103,15 @@ public class IndexMetaData {
 	 */
 	public static enum State {
 
-		
-		/** The OPEN. */
+		/** The open. */
 		OPEN((byte) 0),
 
-		
-		/** The CLOSE. */
+		/** The close. */
 		CLOSE((byte) 1);
 
-		
 		/** The id. */
 		private final byte id;
 
-		
 		/**
 		 * Instantiates a new state.
 		 *
@@ -136,7 +121,6 @@ public class IndexMetaData {
 			this.id = id;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -146,7 +130,6 @@ public class IndexMetaData {
 			return this.id;
 		}
 
-		
 		/**
 		 * From id.
 		 *
@@ -159,10 +142,9 @@ public class IndexMetaData {
 			} else if (id == 1) {
 				return CLOSE;
 			}
-			throw new RestartIllegalStateException("No state match for id [" + id + "]");
+			throw new RebirthIllegalStateException("No state match for id [" + id + "]");
 		}
 
-		
 		/**
 		 * From string.
 		 *
@@ -175,79 +157,61 @@ public class IndexMetaData {
 			} else if ("close".equals(state)) {
 				return CLOSE;
 			}
-			throw new RestartIllegalStateException("No state match for [" + state + "]");
+			throw new RebirthIllegalStateException("No state match for [" + state + "]");
 		}
 	}
 
-	
 	/** The Constant SETTING_NUMBER_OF_SHARDS. */
 	public static final String SETTING_NUMBER_OF_SHARDS = "index.number_of_shards";
 
-	
 	/** The Constant SETTING_NUMBER_OF_REPLICAS. */
 	public static final String SETTING_NUMBER_OF_REPLICAS = "index.number_of_replicas";
 
-	
 	/** The Constant SETTING_AUTO_EXPAND_REPLICAS. */
 	public static final String SETTING_AUTO_EXPAND_REPLICAS = "index.auto_expand_replicas";
 
-	
 	/** The Constant SETTING_READ_ONLY. */
 	public static final String SETTING_READ_ONLY = "index.blocks.read_only";
 
-	
 	/** The Constant SETTING_BLOCKS_READ. */
 	public static final String SETTING_BLOCKS_READ = "index.blocks.read";
 
-	
 	/** The Constant SETTING_BLOCKS_WRITE. */
 	public static final String SETTING_BLOCKS_WRITE = "index.blocks.write";
 
-	
 	/** The Constant SETTING_BLOCKS_METADATA. */
 	public static final String SETTING_BLOCKS_METADATA = "index.blocks.metadata";
 
-	
 	/** The Constant SETTING_VERSION_CREATED. */
 	public static final String SETTING_VERSION_CREATED = "index.version.created";
 
-	
 	/** The index. */
 	private final String index;
 
-	
 	/** The version. */
 	private final long version;
 
-	
 	/** The state. */
 	private final State state;
 
-	
 	/** The aliases. */
 	private final ImmutableMap<String, AliasMetaData> aliases;
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The mappings. */
 	private final ImmutableMap<String, MappingMetaData> mappings;
 
-	
 	/** The total number of shards. */
 	private transient final int totalNumberOfShards;
 
-	
 	/** The include filters. */
 	private final DiscoveryNodeFilters includeFilters;
 
-	
 	/** The exclude filters. */
 	private final DiscoveryNodeFilters excludeFilters;
 
-	
 	/**
 	 * Instantiates a new index meta data.
 	 *
@@ -287,7 +251,6 @@ public class IndexMetaData {
 		}
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -297,7 +260,6 @@ public class IndexMetaData {
 		return index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -307,7 +269,6 @@ public class IndexMetaData {
 		return index();
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -317,7 +278,6 @@ public class IndexMetaData {
 		return this.version;
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -327,7 +287,6 @@ public class IndexMetaData {
 		return this.version;
 	}
 
-	
 	/**
 	 * State.
 	 *
@@ -337,7 +296,6 @@ public class IndexMetaData {
 		return this.state;
 	}
 
-	
 	/**
 	 * Gets the state.
 	 *
@@ -347,7 +305,6 @@ public class IndexMetaData {
 		return state();
 	}
 
-	
 	/**
 	 * Number of shards.
 	 *
@@ -357,7 +314,6 @@ public class IndexMetaData {
 		return settings.getAsInt(SETTING_NUMBER_OF_SHARDS, -1);
 	}
 
-	
 	/**
 	 * Gets the number of shards.
 	 *
@@ -367,7 +323,6 @@ public class IndexMetaData {
 		return numberOfShards();
 	}
 
-	
 	/**
 	 * Number of replicas.
 	 *
@@ -377,7 +332,6 @@ public class IndexMetaData {
 		return settings.getAsInt(SETTING_NUMBER_OF_REPLICAS, -1);
 	}
 
-	
 	/**
 	 * Gets the number of replicas.
 	 *
@@ -387,7 +341,6 @@ public class IndexMetaData {
 		return numberOfReplicas();
 	}
 
-	
 	/**
 	 * Total number of shards.
 	 *
@@ -397,7 +350,6 @@ public class IndexMetaData {
 		return totalNumberOfShards;
 	}
 
-	
 	/**
 	 * Gets the total number of shards.
 	 *
@@ -407,7 +359,6 @@ public class IndexMetaData {
 		return totalNumberOfShards();
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -417,7 +368,6 @@ public class IndexMetaData {
 		return settings;
 	}
 
-	
 	/**
 	 * Gets the settings.
 	 *
@@ -427,7 +377,6 @@ public class IndexMetaData {
 		return settings();
 	}
 
-	
 	/**
 	 * Aliases.
 	 *
@@ -437,7 +386,6 @@ public class IndexMetaData {
 		return this.aliases;
 	}
 
-	
 	/**
 	 * Gets the aliases.
 	 *
@@ -447,7 +395,6 @@ public class IndexMetaData {
 		return aliases();
 	}
 
-	
 	/**
 	 * Mappings.
 	 *
@@ -457,7 +404,6 @@ public class IndexMetaData {
 		return mappings;
 	}
 
-	
 	/**
 	 * Gets the mappings.
 	 *
@@ -467,7 +413,6 @@ public class IndexMetaData {
 		return mappings();
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -478,7 +423,6 @@ public class IndexMetaData {
 		return mappings.get(mappingType);
 	}
 
-	
 	/**
 	 * Include filters.
 	 *
@@ -489,7 +433,6 @@ public class IndexMetaData {
 		return includeFilters;
 	}
 
-	
 	/**
 	 * Exclude filters.
 	 *
@@ -500,7 +443,6 @@ public class IndexMetaData {
 		return excludeFilters;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -527,7 +469,6 @@ public class IndexMetaData {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -541,7 +482,6 @@ public class IndexMetaData {
 		return result;
 	}
 
-	
 	/**
 	 * New index meta data builder.
 	 *
@@ -552,7 +492,6 @@ public class IndexMetaData {
 		return new Builder(index);
 	}
 
-	
 	/**
 	 * New index meta data builder.
 	 *
@@ -563,7 +502,6 @@ public class IndexMetaData {
 		return new Builder(indexMetaData);
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -571,31 +509,24 @@ public class IndexMetaData {
 	 */
 	public static class Builder {
 
-		
 		/** The index. */
 		private String index;
 
-		
 		/** The state. */
 		private State state = State.OPEN;
 
-		
 		/** The version. */
 		private long version = 1;
 
-		
 		/** The settings. */
 		private Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-		
 		/** The mappings. */
 		private MapBuilder<String, MappingMetaData> mappings = MapBuilder.newMapBuilder();
 
-		
 		/** The aliases. */
 		private MapBuilder<String, AliasMetaData> aliases = MapBuilder.newMapBuilder();
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -605,7 +536,6 @@ public class IndexMetaData {
 			this.index = index;
 		}
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -620,7 +550,6 @@ public class IndexMetaData {
 			this.version = indexMetaData.version;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -630,7 +559,6 @@ public class IndexMetaData {
 			return index;
 		}
 
-		
 		/**
 		 * Number of shards.
 		 *
@@ -643,7 +571,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Number of shards.
 		 *
@@ -653,7 +580,6 @@ public class IndexMetaData {
 			return settings.getAsInt(SETTING_NUMBER_OF_SHARDS, -1);
 		}
 
-		
 		/**
 		 * Number of replicas.
 		 *
@@ -666,7 +592,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Number of replicas.
 		 *
@@ -676,7 +601,6 @@ public class IndexMetaData {
 			return settings.getAsInt(SETTING_NUMBER_OF_REPLICAS, -1);
 		}
 
-		
 		/**
 		 * Settings.
 		 *
@@ -688,7 +612,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Settings.
 		 *
@@ -700,7 +623,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the mapping.
 		 *
@@ -712,7 +634,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Put mapping.
 		 *
@@ -731,7 +652,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Put mapping.
 		 *
@@ -743,7 +663,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * State.
 		 *
@@ -755,7 +674,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Put alias.
 		 *
@@ -767,7 +685,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Put alias.
 		 *
@@ -779,7 +696,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Remover alias.
 		 *
@@ -791,7 +707,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -801,7 +716,6 @@ public class IndexMetaData {
 			return this.version;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -813,7 +727,6 @@ public class IndexMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -823,7 +736,6 @@ public class IndexMetaData {
 			MapBuilder<String, AliasMetaData> tmpAliases = aliases;
 			Settings tmpSettings = settings;
 
-			
 			String[] legacyAliases = settings.getAsArray("index.aliases");
 			if (legacyAliases.length > 0) {
 				tmpAliases = MapBuilder.newMapBuilder();
@@ -832,7 +744,7 @@ public class IndexMetaData {
 					tmpAliases.put(alias, aliasMd);
 				}
 				tmpAliases.putAll(aliases.immutableMap());
-				
+
 				tmpSettings = ImmutableSettings.settingsBuilder().put(settings).putArray("index.aliases").build();
 			}
 
@@ -840,7 +752,6 @@ public class IndexMetaData {
 					tmpAliases.immutableMap());
 		}
 
-		
 		/**
 		 * To x content.
 		 *
@@ -887,7 +798,6 @@ public class IndexMetaData {
 			builder.endObject();
 		}
 
-		
 		/**
 		 * From x content.
 		 *
@@ -957,7 +867,6 @@ public class IndexMetaData {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Read from.
 		 *
@@ -983,7 +892,6 @@ public class IndexMetaData {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *

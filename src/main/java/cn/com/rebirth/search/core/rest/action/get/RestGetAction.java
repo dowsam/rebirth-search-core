@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestGetAction.java 2012-3-29 15:01:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestGetAction.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.get;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.RestRequest.Method;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestGetAction.
  *
@@ -34,7 +32,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestGetAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest get action.
 	 *
@@ -48,16 +45,15 @@ public class RestGetAction extends BaseRestHandler {
 		controller.registerHandler(Method.GET, "/{index}/{type}/{id}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
 		final GetRequest getRequest = new GetRequest(request.param("index"), request.param("type"), request.param("id"));
-		
+
 		getRequest.listenerThreaded(false);
-		
+
 		getRequest.operationThreaded(true);
 		getRequest.refresh(request.paramAsBoolean("refresh", getRequest.refresh()));
 		getRequest.routing(request.param("routing"));

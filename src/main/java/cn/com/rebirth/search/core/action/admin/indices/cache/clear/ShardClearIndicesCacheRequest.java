@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardClearIndicesCacheRequest.java 2012-3-29 15:02:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardClearIndicesCacheRequest.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.cache.clear;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest;
 
-
 /**
  * The Class ShardClearIndicesCacheRequest.
  *
@@ -20,34 +18,27 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperati
  */
 class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 
-	
 	/** The filter cache. */
 	private boolean filterCache = false;
 
-	
 	/** The field data cache. */
 	private boolean fieldDataCache = false;
 
-	
 	/** The id cache. */
 	private boolean idCache = false;
 
-	
 	/** The bloom cache. */
 	private boolean bloomCache = false;
 
-	
 	/** The fields. */
 	private String[] fields = null;
 
-	
 	/**
 	 * Instantiates a new shard clear indices cache request.
 	 */
 	ShardClearIndicesCacheRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new shard clear indices cache request.
 	 *
@@ -64,7 +55,6 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		fields = request.fields();
 	}
 
-	
 	/**
 	 * Filter cache.
 	 *
@@ -74,7 +64,6 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		return filterCache;
 	}
 
-	
 	/**
 	 * Field data cache.
 	 *
@@ -84,7 +73,6 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		return this.fieldDataCache;
 	}
 
-	
 	/**
 	 * Id cache.
 	 *
@@ -94,7 +82,6 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		return this.idCache;
 	}
 
-	
 	/**
 	 * Bloom cache.
 	 *
@@ -104,7 +91,6 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		return this.bloomCache;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -114,7 +100,6 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		return this.fields;
 	}
 
-	
 	/**
 	 * Wait for operations.
 	 *
@@ -126,9 +111,8 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -146,9 +130,8 @@ class ShardClearIndicesCacheRequest extends BroadcastShardOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportService.java 2012-3-30 14:47:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportService.java 2012-7-6 14:30:37 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.transport;
@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
 import cn.com.rebirth.commons.concurrent.ConcurrentMapLong;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.search.SearchConstants;
 import cn.com.rebirth.commons.search.config.support.ZooKeeperExpand;
@@ -73,9 +73,6 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 	/** The adapter. */
 	private final TransportService.Adapter adapter = new Adapter();
 
-	/** The expand. */
-	private final ZooKeeperExpand expand;
-
 	/**
 	 * Instantiates a new transport service.
 	 *
@@ -98,14 +95,27 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		super(settings);
 		this.transport = transport;
 		this.threadPool = threadPool;
-		this.expand = ZooKeeperExpand.getInstance();
+	}
+
+	/**
+	 * Check zk jar.
+	 *
+	 * @return true, if successful
+	 */
+	protected boolean checkZkJar() {
+		try {
+			Class.forName("org.apache.zookeeper.ZooKeeper", false, Thread.currentThread().getContextClassLoader());
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		adapter.rxMetric.clear();
 		adapter.txMetric.clear();
 		transport.transportServiceAdapter(adapter);
@@ -113,34 +123,34 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		if (transport.boundAddress() != null && logger.isInfoEnabled()) {
 			logger.info("{}", transport.boundAddress());
 		}
-		//Write zk config
+
 		boolean isClientNode = settings.getAsBoolean("node.client", false);
-		if (!isClientNode) {
+		if (!isClientNode && checkZkJar()) {
 			String nodeName = settings.get("name");
-			expand.create(SearchConstants.getRestartSearchBulidZKConfig() + "/" + nodeName, transport
-					.boundAddress().publishAddress());
+			ZooKeeperExpand.getInstance().create(SearchConstants.getRebirthSearchBulidZKConfig() + "/" + nodeName,
+					transport.boundAddress().publishAddress());
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
-		//delete zk config
+	protected void doStop() throws RebirthException {
+
 		boolean isClientNode = settings.getAsBoolean("node.client", false);
-		if (!isClientNode) {
+		if (!isClientNode && checkZkJar()) {
 			String nodeName = settings.get("name");
-			expand.delete(SearchConstants.getRestartSearchBulidZKConfig() + "/" + nodeName);
+			ZooKeeperExpand.getInstance().delete(SearchConstants.getRebirthSearchBulidZKConfig() + "/" + nodeName);
 		}
 		transport.stop();
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		transport.close();
 	}
 
@@ -417,7 +427,7 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		final MeanMetric txMetric = new MeanMetric();
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportServiceAdapter#received(long)
+		 * @see cn.com.rebirth.search.core.transport.TransportServiceAdapter#received(long)
 		 */
 		@Override
 		public void received(long size) {
@@ -425,7 +435,7 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportServiceAdapter#sent(long)
+		 * @see cn.com.rebirth.search.core.transport.TransportServiceAdapter#sent(long)
 		 */
 		@Override
 		public void sent(long size) {
@@ -433,7 +443,7 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportServiceAdapter#handler(java.lang.String)
+		 * @see cn.com.rebirth.search.core.transport.TransportServiceAdapter#handler(java.lang.String)
 		 */
 		@Override
 		public TransportRequestHandler handler(String action) {
@@ -441,7 +451,7 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportServiceAdapter#remove(long)
+		 * @see cn.com.rebirth.search.core.transport.TransportServiceAdapter#remove(long)
 		 */
 		@Override
 		public TransportResponseHandler remove(long requestId) {
@@ -466,7 +476,7 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportServiceAdapter#raiseNodeConnected(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+		 * @see cn.com.rebirth.search.core.transport.TransportServiceAdapter#raiseNodeConnected(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 		 */
 		@Override
 		public void raiseNodeConnected(final DiscoveryNode node) {
@@ -481,7 +491,7 @@ public class TransportService extends AbstractLifecycleComponent<TransportServic
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportServiceAdapter#raiseNodeDisconnected(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+		 * @see cn.com.rebirth.search.core.transport.TransportServiceAdapter#raiseNodeDisconnected(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 		 */
 		@Override
 		public void raiseNodeDisconnected(final DiscoveryNode node) {

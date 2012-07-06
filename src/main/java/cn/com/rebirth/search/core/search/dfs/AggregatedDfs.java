@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AggregatedDfs.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AggregatedDfs.java 2012-7-6 14:30:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.dfs;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.trove.ExtTObjectIntHasMap;
 
-
 /**
  * The Class AggregatedDfs.
  *
@@ -27,15 +25,12 @@ import cn.com.rebirth.commons.trove.ExtTObjectIntHasMap;
  */
 public class AggregatedDfs implements Streamable {
 
-	
 	/** The df map. */
 	private TObjectIntHashMap<Term> dfMap;
 
-	
 	/** The max doc. */
 	private long maxDoc;
 
-	
 	/**
 	 * Instantiates a new aggregated dfs.
 	 */
@@ -43,7 +38,6 @@ public class AggregatedDfs implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new aggregated dfs.
 	 *
@@ -55,7 +49,6 @@ public class AggregatedDfs implements Streamable {
 		this.maxDoc = maxDoc;
 	}
 
-	
 	/**
 	 * Df map.
 	 *
@@ -65,7 +58,6 @@ public class AggregatedDfs implements Streamable {
 		return dfMap;
 	}
 
-	
 	/**
 	 * Max doc.
 	 *
@@ -75,7 +67,6 @@ public class AggregatedDfs implements Streamable {
 		return maxDoc;
 	}
 
-	
 	/**
 	 * Read aggregated dfs.
 	 *
@@ -89,9 +80,8 @@ public class AggregatedDfs implements Streamable {
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -103,9 +93,8 @@ public class AggregatedDfs implements Streamable {
 		maxDoc = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(final StreamOutput out) throws IOException {

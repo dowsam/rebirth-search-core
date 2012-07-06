@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SerialMergeSchedulerProvider.java 2012-3-29 15:01:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SerialMergeSchedulerProvider.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.merge.scheduler;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 
-
 /**
  * The Class SerialMergeSchedulerProvider.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent implements MergeSchedulerProvider {
 
-	
 	/** The schedulers. */
 	private Set<CustomSerialMergeScheduler> schedulers = new CopyOnWriteArraySet<CustomSerialMergeScheduler>();
 
-	
 	/**
 	 * Instantiates a new serial merge scheduler provider.
 	 *
@@ -49,9 +45,8 @@ public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent im
 		logger.trace("using [serial] merge scheduler");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.merge.scheduler.MergeSchedulerProvider#newMergeScheduler()
+	 * @see cn.com.rebirth.search.core.index.merge.scheduler.MergeSchedulerProvider#newMergeScheduler()
 	 */
 	@Override
 	public MergeScheduler newMergeScheduler() {
@@ -60,9 +55,8 @@ public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent im
 		return scheduler;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.merge.scheduler.MergeSchedulerProvider#stats()
+	 * @see cn.com.rebirth.search.core.index.merge.scheduler.MergeSchedulerProvider#stats()
 	 */
 	@Override
 	public MergeStats stats() {
@@ -75,7 +69,6 @@ public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent im
 		return mergeStats;
 	}
 
-	
 	/**
 	 * The Class CustomSerialMergeScheduler.
 	 *
@@ -83,11 +76,9 @@ public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent im
 	 */
 	public static class CustomSerialMergeScheduler extends TrackingSerialMergeScheduler {
 
-		
 		/** The provider. */
 		private final SerialMergeSchedulerProvider provider;
 
-		
 		/**
 		 * Instantiates a new custom serial merge scheduler.
 		 *
@@ -98,23 +89,20 @@ public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent im
 			this.provider = provider;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.TrackingSerialMergeScheduler#merge(org.apache.lucene.index.IndexWriter)
 		 */
 		@Override
 		public void merge(IndexWriter writer) throws CorruptIndexException, IOException {
 			try {
-				
+
 				if (writer.getConfig().getMergePolicy() instanceof EnableMergePolicy) {
 					if (!((EnableMergePolicy) writer.getConfig().getMergePolicy()).isMergeEnabled()) {
 						return;
 					}
 				}
 			} catch (AlreadyClosedException e) {
-				
-				
-				
+
 				return;
 			}
 			try {
@@ -125,7 +113,6 @@ public class SerialMergeSchedulerProvider extends AbstractIndexShardComponent im
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.TrackingSerialMergeScheduler#close()
 		 */

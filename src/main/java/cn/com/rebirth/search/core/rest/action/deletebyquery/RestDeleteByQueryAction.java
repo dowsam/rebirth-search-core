@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestDeleteByQueryAction.java 2012-3-29 15:02:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestDeleteByQueryAction.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.deletebyquery;
 
@@ -34,7 +33,6 @@ import static cn.com.rebirth.search.core.rest.RestStatus.PRECONDITION_FAILED;
 import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
 import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitTypes;
 
-
 /**
  * The Class RestDeleteByQueryAction.
  *
@@ -42,7 +40,6 @@ import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitTy
  */
 public class RestDeleteByQueryAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest delete by query action.
 	 *
@@ -57,14 +54,13 @@ public class RestDeleteByQueryAction extends BaseRestHandler {
 		controller.registerHandler(Method.DELETE, "/{index}/{type}/_query", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
 		DeleteByQueryRequest deleteByQueryRequest = new DeleteByQueryRequest(splitIndices(request.param("index")));
-		
+
 		deleteByQueryRequest.listenerThreaded(false);
 		try {
 			if (request.hasContent()) {

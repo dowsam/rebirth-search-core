@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NettyTransportManagement.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NettyTransportManagement.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport.netty;
 
@@ -10,7 +9,6 @@ import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.jmx.MBean;
 import cn.com.rebirth.search.core.jmx.ManagedAttribute;
 import cn.com.rebirth.search.core.transport.Transport;
-
 
 /**
  * The Class NettyTransportManagement.
@@ -20,11 +18,9 @@ import cn.com.rebirth.search.core.transport.Transport;
 @MBean(objectName = "service=transport,transportType=netty", description = "Netty Transport")
 public class NettyTransportManagement {
 
-	
 	/** The transport. */
 	private final NettyTransport transport;
 
-	
 	/**
 	 * Instantiates a new netty transport management.
 	 *
@@ -35,7 +31,6 @@ public class NettyTransportManagement {
 		this.transport = (NettyTransport) transport;
 	}
 
-	
 	/**
 	 * Gets the number of outbound connections.
 	 *
@@ -46,7 +41,6 @@ public class NettyTransportManagement {
 		return transport.connectedNodes.size();
 	}
 
-	
 	/**
 	 * Gets the worker count.
 	 *
@@ -57,7 +51,6 @@ public class NettyTransportManagement {
 		return transport.workerCount;
 	}
 
-	
 	/**
 	 * Gets the port.
 	 *
@@ -68,7 +61,6 @@ public class NettyTransportManagement {
 		return transport.port;
 	}
 
-	
 	/**
 	 * Gets the bind host.
 	 *
@@ -79,7 +71,6 @@ public class NettyTransportManagement {
 		return transport.bindHost;
 	}
 
-	
 	/**
 	 * Gets the publish host.
 	 *
@@ -90,7 +81,6 @@ public class NettyTransportManagement {
 		return transport.publishHost;
 	}
 
-	
 	/**
 	 * Gets the connect timeout.
 	 *
@@ -101,7 +91,6 @@ public class NettyTransportManagement {
 		return transport.connectTimeout.toString();
 	}
 
-	
 	/**
 	 * Gets the tcp no delay.
 	 *
@@ -112,7 +101,6 @@ public class NettyTransportManagement {
 		return transport.tcpNoDelay;
 	}
 
-	
 	/**
 	 * Gets the tcp keep alive.
 	 *
@@ -123,7 +111,6 @@ public class NettyTransportManagement {
 		return transport.tcpKeepAlive;
 	}
 
-	
 	/**
 	 * Gets the reuse address.
 	 *
@@ -134,7 +121,6 @@ public class NettyTransportManagement {
 		return transport.reuseAddress;
 	}
 
-	
 	/**
 	 * Gets the tcp send buffer size.
 	 *
@@ -148,7 +134,6 @@ public class NettyTransportManagement {
 		return transport.tcpSendBufferSize.toString();
 	}
 
-	
 	/**
 	 * Gets the tcp receive buffer size.
 	 *

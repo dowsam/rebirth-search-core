@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CustomFiltersScoreQueryBuilder.java 2012-3-29 15:00:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CustomFiltersScoreQueryBuilder.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class CustomFiltersScoreQueryBuilder.
  *
@@ -24,39 +22,30 @@ import com.google.common.collect.Maps;
  */
 public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The params. */
 	private Map<String, Object> params = null;
 
-	
 	/** The score mode. */
 	private String scoreMode;
 
-	
 	/** The filters. */
 	private ArrayList<FilterBuilder> filters = new ArrayList<FilterBuilder>();
 
-	
 	/** The scripts. */
 	private ArrayList<String> scripts = new ArrayList<String>();
 
-	
 	/** The boosts. */
 	private TFloatArrayList boosts = new TFloatArrayList();
 
-	
 	/**
 	 * Instantiates a new custom filters score query builder.
 	 *
@@ -66,7 +55,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		this.queryBuilder = queryBuilder;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -81,7 +69,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -96,7 +83,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Score mode.
 	 *
@@ -108,7 +94,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -120,7 +105,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Params.
 	 *
@@ -136,7 +120,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -152,7 +135,6 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -164,9 +146,8 @@ public class CustomFiltersScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

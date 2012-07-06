@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportBroadcastOperationAction.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportBroadcastOperationAction.java 2012-7-6 14:30:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.broadcast;
 
@@ -10,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.TransportAction;
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportBroadcastOperationAction.
  *
@@ -42,31 +40,24 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public abstract class TransportBroadcastOperationAction<Request extends BroadcastOperationRequest, Response extends BroadcastOperationResponse, ShardRequest extends BroadcastShardOperationRequest, ShardResponse extends BroadcastShardOperationResponse>
 		extends TransportAction<Request, Response> {
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The transport service. */
 	protected final TransportService transportService;
 
-	
 	/** The thread pool. */
 	protected final ThreadPool threadPool;
 
-	
 	/** The transport action. */
 	final String transportAction;
 
-	
 	/** The transport shard action. */
 	final String transportShardAction;
 
-	
 	/** The executor. */
 	final String executor;
 
-	
 	/**
 	 * Instantiates a new transport broadcast operation action.
 	 *
@@ -90,16 +81,14 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		transportService.registerHandler(transportShardAction, new ShardTransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(Request request, ActionListener<Response> listener) {
 		new AsyncBroadcastAction(request, listener).start();
 	}
 
-	
 	/**
 	 * Transport action.
 	 *
@@ -107,7 +96,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract String transportAction();
 
-	
 	/**
 	 * Executor.
 	 *
@@ -115,7 +103,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract String executor();
 
-	
 	/**
 	 * New request.
 	 *
@@ -123,7 +110,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract Request newRequest();
 
-	
 	/**
 	 * New response.
 	 *
@@ -135,7 +121,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	protected abstract Response newResponse(Request request, AtomicReferenceArray shardsResponses,
 			ClusterState clusterState);
 
-	
 	/**
 	 * New shard request.
 	 *
@@ -143,7 +128,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract ShardRequest newShardRequest();
 
-	
 	/**
 	 * New shard request.
 	 *
@@ -153,7 +137,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract ShardRequest newShardRequest(ShardRouting shard, Request request);
 
-	
 	/**
 	 * New shard response.
 	 *
@@ -161,17 +144,15 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract ShardResponse newShardResponse();
 
-	
 	/**
 	 * Shard operation.
 	 *
 	 * @param request the request
 	 * @return the shard response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract ShardResponse shardOperation(ShardRequest request) throws RestartException;
+	protected abstract ShardResponse shardOperation(ShardRequest request) throws RebirthException;
 
-	
 	/**
 	 * Shards.
 	 *
@@ -182,7 +163,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract GroupShardsIterator shards(ClusterState clusterState, Request request, String[] concreteIndices);
 
-	
 	/**
 	 * Accumulate exceptions.
 	 *
@@ -192,7 +172,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		return true;
 	}
 
-	
 	/**
 	 * Ignore exception.
 	 *
@@ -203,7 +182,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		return false;
 	}
 
-	
 	/**
 	 * Ignore non active exceptions.
 	 *
@@ -213,7 +191,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		return false;
 	}
 
-	
 	/**
 	 * Check global block.
 	 *
@@ -223,7 +200,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	protected abstract ClusterBlockException checkGlobalBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Check request block.
 	 *
@@ -235,7 +211,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	protected abstract ClusterBlockException checkRequestBlock(ClusterState state, Request request,
 			String[] concreteIndices);
 
-	
 	/**
 	 * The Class AsyncBroadcastAction.
 	 *
@@ -243,43 +218,33 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	class AsyncBroadcastAction {
 
-		
 		/** The request. */
 		private final Request request;
 
-		
 		/** The listener. */
 		private final ActionListener<Response> listener;
 
-		
 		/** The cluster state. */
 		private final ClusterState clusterState;
 
-		
 		/** The nodes. */
 		private final DiscoveryNodes nodes;
 
-		
 		/** The shards its. */
 		private final GroupShardsIterator shardsIts;
 
-		
 		/** The expected ops. */
 		private final int expectedOps;
 
-		
 		/** The counter ops. */
 		private final AtomicInteger counterOps = new AtomicInteger();
 
-		
 		/** The index counter. */
 		private final AtomicInteger indexCounter = new AtomicInteger();
 
-		
 		/** The shards responses. */
 		private final AtomicReferenceArray shardsResponses;
 
-		
 		/**
 		 * Instantiates a new async broadcast action.
 		 *
@@ -296,7 +261,7 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			if (blockException != null) {
 				throw blockException;
 			}
-			
+
 			String[] concreteIndices = clusterState.metaData().concreteIndices(request.indices(), false, true);
 			blockException = checkRequestBlock(clusterState, request, concreteIndices);
 			if (blockException != null) {
@@ -310,17 +275,16 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			shardsResponses = new AtomicReferenceArray<Object>(expectedOps);
 		}
 
-		
 		/**
 		 * Start.
 		 */
 		public void start() {
 			if (shardsIts.size() == 0) {
-				
+
 				listener.onResponse(newResponse(request, new AtomicReferenceArray(0), clusterState));
 			}
 			request.beforeStart();
-			
+
 			int localOperations = 0;
 			for (final ShardIterator shardIt : shardsIts) {
 				final ShardRouting shard = shardIt.firstOrNull();
@@ -328,15 +292,15 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 					if (shard.currentNodeId().equals(nodes.localNodeId())) {
 						localOperations++;
 					} else {
-						
+
 						performOperation(shardIt, true);
 					}
 				} else {
-					
+
 					onOperation(null, shardIt, null);
 				}
 			}
-			
+
 			if (localOperations > 0) {
 				if (request.operationThreading() == BroadcastOperationThreading.SINGLE_THREAD) {
 					request.beforeLocalFork();
@@ -370,7 +334,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			}
 		}
 
-		
 		/**
 		 * Perform operation.
 		 *
@@ -381,7 +344,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			performOperation(shardIt, shardIt.nextOrNull(), localAsync);
 		}
 
-		
 		/**
 		 * Perform operation.
 		 *
@@ -391,7 +353,7 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		 */
 		void performOperation(final ShardIterator shardIt, final ShardRouting shard, boolean localAsync) {
 			if (shard == null) {
-				
+
 				onOperation(null, shardIt, null);
 			} else {
 				final ShardRequest shardRequest = newShardRequest(shard, request);
@@ -417,7 +379,7 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 				} else {
 					DiscoveryNode node = nodes.get(shard.currentNodeId());
 					if (node == null) {
-						
+
 						onOperation(shard, shardIt, null);
 					} else {
 						transportService.sendRequest(node, transportShardAction, shardRequest,
@@ -447,7 +409,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			}
 		}
 
-		
 		/**
 		 * On operation.
 		 *
@@ -462,7 +423,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			}
 		}
 
-		
 		/**
 		 * On operation.
 		 *
@@ -475,7 +435,7 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			ShardRouting nextShard = shardIt.nextOrNull();
 			if (nextShard != null) {
 				if (t != null) {
-					
+
 					if (logger.isTraceEnabled()) {
 						if (!ignoreException(t)) {
 							if (shard != null) {
@@ -486,13 +446,10 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 						}
 					}
 				}
-				
-				
-				
-				
+
 				performOperation(shardIt, nextShard, true);
 			} else {
-				
+
 				if (logger.isDebugEnabled()) {
 					if (t != null) {
 						if (!ignoreException(t)) {
@@ -504,7 +461,7 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 						}
 					}
 				}
-				
+
 				int index = indexCounter.getAndIncrement();
 				if (accumulateExceptions()) {
 					if (t == null) {
@@ -528,7 +485,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 			}
 		}
 
-		
 		/**
 		 * Finish him.
 		 */
@@ -537,7 +493,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -545,33 +500,30 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	class TransportHandler extends BaseTransportRequestHandler<Request> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public Request newInstance() {
 			return newRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(Request request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
-			
+
 			if (request.operationThreading() == BroadcastOperationThreading.NO_THREADS) {
 				request.operationThreading(BroadcastOperationThreading.SINGLE_THREAD);
 			}
@@ -597,7 +549,6 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 		}
 	}
 
-	
 	/**
 	 * The Class ShardTransportHandler.
 	 *
@@ -605,27 +556,24 @@ public abstract class TransportBroadcastOperationAction<Request extends Broadcas
 	 */
 	class ShardTransportHandler extends BaseTransportRequestHandler<ShardRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public ShardRequest newInstance() {
 			return newShardRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return executor;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final ShardRequest request, final TransportChannel channel) throws Exception {

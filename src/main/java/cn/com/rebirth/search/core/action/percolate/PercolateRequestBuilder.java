@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PercolateRequestBuilder.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PercolateRequestBuilder.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.percolate;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;
 
-
 /**
  * The Class PercolateRequestBuilder.
  *
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest, PercolateResponse> {
 
-	
 	/**
 	 * Instantiates a new percolate request builder.
 	 *
@@ -32,7 +29,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		super(client, new PercolateRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new percolate request builder.
 	 *
@@ -44,7 +40,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		super(client, new PercolateRequest(index, type));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -56,7 +51,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the type.
 	 *
@@ -68,7 +62,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -80,7 +73,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -93,7 +85,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -105,7 +96,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -117,7 +107,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -129,7 +118,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -143,7 +131,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -158,7 +145,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -170,7 +156,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the prefer local.
 	 *
@@ -182,7 +167,6 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threaded.
 	 *
@@ -194,9 +178,8 @@ public class PercolateRequestBuilder extends BaseRequestBuilder<PercolateRequest
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<PercolateResponse> listener) {

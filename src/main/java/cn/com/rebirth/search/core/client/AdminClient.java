@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AdminClient.java 2012-3-29 15:01:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AdminClient.java 2012-7-6 14:29:54 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.client;
-
 
 /**
  * The Interface AdminClient.
@@ -14,7 +12,6 @@ package cn.com.rebirth.search.core.client;
  */
 public interface AdminClient {
 
-	
 	/**
 	 * Cluster.
 	 *
@@ -22,7 +19,6 @@ public interface AdminClient {
 	 */
 	ClusterAdminClient cluster();
 
-	
 	/**
 	 * Indices.
 	 *

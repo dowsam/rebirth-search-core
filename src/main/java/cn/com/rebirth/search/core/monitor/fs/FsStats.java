@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FsStats.java 2012-3-29 15:02:27 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FsStats.java 2012-7-6 14:30:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.fs;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class FsStats.
  *
@@ -29,7 +27,6 @@ import com.google.common.collect.Iterators;
  */
 public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 
-	
 	/**
 	 * The Class Info.
 	 *
@@ -37,59 +34,46 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 	 */
 	public static class Info implements Streamable {
 
-		
 		/** The path. */
 		String path;
 
-		
 		/** The mount. */
 		@Nullable
 		String mount;
 
-		
 		/** The dev. */
 		@Nullable
 		String dev;
 
-		
 		/** The total. */
 		long total = -1;
 
-		
 		/** The free. */
 		long free = -1;
 
-		
 		/** The available. */
 		long available = -1;
 
-		
 		/** The disk reads. */
 		long diskReads = -1;
 
-		
 		/** The disk writes. */
 		long diskWrites = -1;
 
-		
 		/** The disk read bytes. */
 		long diskReadBytes = -1;
 
-		
 		/** The disk write bytes. */
 		long diskWriteBytes = -1;
 
-		
 		/** The disk queue. */
 		double diskQueue = -1;
 
-		
 		/** The disk service time. */
 		double diskServiceTime = -1;
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -107,9 +91,8 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			diskServiceTime = in.readDouble();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -127,7 +110,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			out.writeDouble(diskServiceTime);
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -137,7 +119,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(total);
 		}
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -147,7 +128,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return total();
 		}
 
-		
 		/**
 		 * Free.
 		 *
@@ -157,7 +137,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(free);
 		}
 
-		
 		/**
 		 * Gets the free.
 		 *
@@ -167,7 +146,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return free();
 		}
 
-		
 		/**
 		 * Available.
 		 *
@@ -177,7 +155,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(available);
 		}
 
-		
 		/**
 		 * Gets the available.
 		 *
@@ -187,7 +164,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return available();
 		}
 
-		
 		/**
 		 * Disk reads.
 		 *
@@ -197,7 +173,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return this.diskReads;
 		}
 
-		
 		/**
 		 * Gets the disk reads.
 		 *
@@ -207,7 +182,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return this.diskReads;
 		}
 
-		
 		/**
 		 * Disk writes.
 		 *
@@ -217,7 +191,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return this.diskWrites;
 		}
 
-		
 		/**
 		 * Gets the disk writes.
 		 *
@@ -227,7 +200,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return this.diskWrites;
 		}
 
-		
 		/**
 		 * Disk read size in bytes.
 		 *
@@ -237,7 +209,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskReadBytes;
 		}
 
-		
 		/**
 		 * Gets the disk read size in bytes.
 		 *
@@ -247,7 +218,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskReadBytes;
 		}
 
-		
 		/**
 		 * Disk read size size.
 		 *
@@ -257,7 +227,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(diskReadBytes);
 		}
 
-		
 		/**
 		 * Gets the disk read size size.
 		 *
@@ -267,7 +236,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(diskReadBytes);
 		}
 
-		
 		/**
 		 * Disk write size in bytes.
 		 *
@@ -277,7 +245,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskWriteBytes;
 		}
 
-		
 		/**
 		 * Gets the disk write size in bytes.
 		 *
@@ -287,7 +254,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskWriteBytes;
 		}
 
-		
 		/**
 		 * Disk write size size.
 		 *
@@ -297,7 +263,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(diskWriteBytes);
 		}
 
-		
 		/**
 		 * Gets the disk write size size.
 		 *
@@ -307,7 +272,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return new ByteSizeValue(diskWriteBytes);
 		}
 
-		
 		/**
 		 * Disk queue.
 		 *
@@ -317,7 +281,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskQueue;
 		}
 
-		
 		/**
 		 * Gets the disk queue.
 		 *
@@ -327,7 +290,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskQueue;
 		}
 
-		
 		/**
 		 * Disk service time.
 		 *
@@ -337,7 +299,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 			return diskServiceTime;
 		}
 
-		
 		/**
 		 * Gets the disk service time.
 		 *
@@ -348,15 +309,12 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		}
 	}
 
-	
 	/** The timestamp. */
 	long timestamp;
 
-	
 	/** The infos. */
 	Info[] infos;
 
-	
 	/**
 	 * Instantiates a new fs stats.
 	 */
@@ -364,7 +322,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 
 	}
 
-	
 	/**
 	 * Instantiates a new fs stats.
 	 *
@@ -376,7 +333,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		this.infos = infos;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -386,7 +342,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		return timestamp;
 	}
 
-	
 	/**
 	 * Gets the timestamp.
 	 *
@@ -396,7 +351,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		return timestamp();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -405,7 +359,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		return Iterators.forArray(infos);
 	}
 
-	
 	/**
 	 * Read fs stats.
 	 *
@@ -419,9 +372,8 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		return stats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -433,9 +385,8 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -446,7 +397,6 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -454,92 +404,71 @@ public class FsStats implements Iterable<FsStats.Info>, Streamable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant FS. */
 		static final XContentBuilderString FS = new XContentBuilderString("fs");
 
-		
 		/** The Constant TIMESTAMP. */
 		static final XContentBuilderString TIMESTAMP = new XContentBuilderString("timestamp");
 
-		
 		/** The Constant DATA. */
 		static final XContentBuilderString DATA = new XContentBuilderString("data");
 
-		
 		/** The Constant PATH. */
 		static final XContentBuilderString PATH = new XContentBuilderString("path");
 
-		
 		/** The Constant MOUNT. */
 		static final XContentBuilderString MOUNT = new XContentBuilderString("mount");
 
-		
 		/** The Constant DEV. */
 		static final XContentBuilderString DEV = new XContentBuilderString("dev");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant TOTAL_IN_BYTES. */
 		static final XContentBuilderString TOTAL_IN_BYTES = new XContentBuilderString("total_in_bytes");
 
-		
 		/** The Constant FREE. */
 		static final XContentBuilderString FREE = new XContentBuilderString("free");
 
-		
 		/** The Constant FREE_IN_BYTES. */
 		static final XContentBuilderString FREE_IN_BYTES = new XContentBuilderString("free_in_bytes");
 
-		
 		/** The Constant AVAILABLE. */
 		static final XContentBuilderString AVAILABLE = new XContentBuilderString("available");
 
-		
 		/** The Constant AVAILABLE_IN_BYTES. */
 		static final XContentBuilderString AVAILABLE_IN_BYTES = new XContentBuilderString("available_in_bytes");
 
-		
 		/** The Constant DISK_READS. */
 		static final XContentBuilderString DISK_READS = new XContentBuilderString("disk_reads");
 
-		
 		/** The Constant DISK_WRITES. */
 		static final XContentBuilderString DISK_WRITES = new XContentBuilderString("disk_writes");
 
-		
 		/** The Constant DISK_READ_SIZE. */
 		static final XContentBuilderString DISK_READ_SIZE = new XContentBuilderString("disk_read_size");
 
-		
 		/** The Constant DISK_READ_SIZE_IN_BYTES. */
 		static final XContentBuilderString DISK_READ_SIZE_IN_BYTES = new XContentBuilderString(
 				"disk_read_size_in_bytes");
 
-		
 		/** The Constant DISK_WRITE_SIZE. */
 		static final XContentBuilderString DISK_WRITE_SIZE = new XContentBuilderString("disk_write_size");
 
-		
 		/** The Constant DISK_WRITE_SIZE_IN_BYTES. */
 		static final XContentBuilderString DISK_WRITE_SIZE_IN_BYTES = new XContentBuilderString(
 				"disk_write_size_in_bytes");
 
-		
 		/** The Constant DISK_QUEUE. */
 		static final XContentBuilderString DISK_QUEUE = new XContentBuilderString("disk_queue");
 
-		
 		/** The Constant DISK_SERVICE_TIME. */
 		static final XContentBuilderString DISK_SERVICE_TIME = new XContentBuilderString("disk_service_time");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

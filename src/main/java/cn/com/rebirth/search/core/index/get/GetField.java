@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GetField.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GetField.java 2012-7-6 14:30:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.get;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 
-
 /**
  * The Class GetField.
  *
@@ -23,15 +21,12 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public class GetField implements Streamable, Iterable<Object> {
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The values. */
 	private List<Object> values;
 
-	
 	/**
 	 * Instantiates a new gets the field.
 	 */
@@ -39,7 +34,6 @@ public class GetField implements Streamable, Iterable<Object> {
 
 	}
 
-	
 	/**
 	 * Instantiates a new gets the field.
 	 *
@@ -51,7 +45,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -61,7 +54,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return name;
 	}
 
-	
 	/**
 	 * Gets the name.
 	 *
@@ -71,7 +63,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return name;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -84,7 +75,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return null;
 	}
 
-	
 	/**
 	 * Gets the value.
 	 *
@@ -94,7 +84,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return value();
 	}
 
-	
 	/**
 	 * Values.
 	 *
@@ -104,7 +93,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return values;
 	}
 
-	
 	/**
 	 * Gets the values.
 	 *
@@ -114,7 +102,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return values;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -123,7 +110,6 @@ public class GetField implements Streamable, Iterable<Object> {
 		return values.iterator();
 	}
 
-	
 	/**
 	 * Read get field.
 	 *
@@ -137,9 +123,8 @@ public class GetField implements Streamable, Iterable<Object> {
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -151,9 +136,8 @@ public class GetField implements Streamable, Iterable<Object> {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

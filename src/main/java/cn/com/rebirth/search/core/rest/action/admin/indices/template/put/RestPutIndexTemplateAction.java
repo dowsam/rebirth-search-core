@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestPutIndexTemplateAction.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestPutIndexTemplateAction.java 2012-7-6 14:28:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.template.put;
 
 import java.io.IOException;
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestPutIndexTemplateAction.
  *
@@ -39,7 +37,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestPutIndexTemplateAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest put index template action.
 	 *
@@ -54,7 +51,6 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 		controller.registerHandler(RestRequest.Method.POST, "/_template/{name}", new CreateHandler());
 	}
 
-	
 	/**
 	 * The Class CreateHandler.
 	 *
@@ -62,9 +58,8 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 	 */
 	final class CreateHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(RestRequest request, RestChannel channel) {
@@ -73,9 +68,8 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@SuppressWarnings({ "unchecked" })
 	@Override
@@ -87,7 +81,6 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 			putRequest.cause(request.param("cause", ""));
 			putRequest.timeout(request.paramAsTime("timeout", TimeValue.timeValueSeconds(10)));
 
-			
 			Map<String, Object> source = XContentFactory
 					.xContent(request.contentByteArray(), request.contentByteArrayOffset(), request.contentLength())
 					.createParser(request.contentByteArray(), request.contentByteArrayOffset(), request.contentLength())
@@ -101,7 +94,7 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 			}
 			if (source.containsKey("settings")) {
 				if (!(source.get("settings") instanceof Map)) {
-					throw new RestartIllegalArgumentException(
+					throw new RebirthIllegalArgumentException(
 							"Malformed settings section, should include an inner object");
 				}
 				putRequest.settings((Map<String, Object>) source.get("settings"));
@@ -110,7 +103,7 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 				Map<String, Object> mappings = (Map<String, Object>) source.get("mappings");
 				for (Map.Entry<String, Object> entry : mappings.entrySet()) {
 					if (!(entry.getValue() instanceof Map)) {
-						throw new RestartIllegalArgumentException("Malformed mappings section for type ["
+						throw new RebirthIllegalArgumentException("Malformed mappings section for type ["
 								+ entry.getKey() + "], should include an inner object describing the mapping");
 					}
 					putRequest.mapping(entry.getKey(), (Map<String, Object>) entry.getValue());
@@ -152,7 +145,6 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -160,11 +152,9 @@ public class RestPutIndexTemplateAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant OK. */
 		static final XContentBuilderString OK = new XContentBuilderString("ok");
 
-		
 		/** The Constant ACKNOWLEDGED. */
 		static final XContentBuilderString ACKNOWLEDGED = new XContentBuilderString("acknowledged");
 	}

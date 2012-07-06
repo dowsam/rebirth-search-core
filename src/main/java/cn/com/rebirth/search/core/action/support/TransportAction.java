@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportAction.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportAction.java 2012-7-6 14:28:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.core.action.ActionFuture;
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionRequest;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ActionResponse;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
-
 
 /**
  * The Class TransportAction.
@@ -27,11 +25,9 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
 public abstract class TransportAction<Request extends ActionRequest, Response extends ActionResponse> extends
 		AbstractComponent {
 
-	
 	/** The thread pool. */
 	protected final ThreadPool threadPool;
 
-	
 	/**
 	 * Instantiates a new transport action.
 	 *
@@ -43,24 +39,21 @@ public abstract class TransportAction<Request extends ActionRequest, Response ex
 		this.threadPool = threadPool;
 	}
 
-	
 	/**
 	 * Execute.
 	 *
 	 * @param request the request
 	 * @return the action future
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public ActionFuture<Response> execute(Request request) throws RestartException {
+	public ActionFuture<Response> execute(Request request) throws RebirthException {
 		PlainActionFuture<Response> future = PlainActionFuture.newFuture();
-		
-		
+
 		request.listenerThreaded(false);
 		execute(request, future);
 		return future;
 	}
 
-	
 	/**
 	 * Execute.
 	 *
@@ -83,7 +76,6 @@ public abstract class TransportAction<Request extends ActionRequest, Response ex
 		}
 	}
 
-	
 	/**
 	 * Do execute.
 	 *
@@ -92,7 +84,6 @@ public abstract class TransportAction<Request extends ActionRequest, Response ex
 	 */
 	protected abstract void doExecute(Request request, ActionListener<Response> listener);
 
-	
 	/**
 	 * The listener interface for receiving threadedAction events.
 	 * The class that is interested in processing a threadedAction
@@ -107,15 +98,12 @@ public abstract class TransportAction<Request extends ActionRequest, Response ex
 	 */
 	static class ThreadedActionListener<Response> implements ActionListener<Response> {
 
-		
 		/** The thread pool. */
 		private final ThreadPool threadPool;
 
-		
 		/** The listener. */
 		private final ActionListener<Response> listener;
 
-		
 		/**
 		 * Instantiates a new threaded action listener.
 		 *
@@ -127,9 +115,8 @@ public abstract class TransportAction<Request extends ActionRequest, Response ex
 			this.listener = listener;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.ActionListener#onResponse(java.lang.Object)
+		 * @see cn.com.rebirth.search.core.action.ActionListener#onResponse(java.lang.Object)
 		 */
 		@Override
 		public void onResponse(final Response response) {
@@ -145,9 +132,8 @@ public abstract class TransportAction<Request extends ActionRequest, Response ex
 			});
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.ActionListener#onFailure(java.lang.Throwable)
+		 * @see cn.com.rebirth.search.core.action.ActionListener#onFailure(java.lang.Throwable)
 		 */
 		@Override
 		public void onFailure(final Throwable e) {

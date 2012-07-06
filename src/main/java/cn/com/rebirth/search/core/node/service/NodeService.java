@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeService.java 2012-3-29 16:18:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeService.java 2012-7-6 14:29:47 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.node.service;
@@ -46,6 +46,8 @@ public class NodeService extends AbstractComponent {
 
 	/** The indices service. */
 	private final IndicesService indicesService;
+
+	/** The http server. */
 	@Nullable
 	private HttpServer httpServer;
 
@@ -83,6 +85,11 @@ public class NodeService extends AbstractComponent {
 		}
 	}
 
+	/**
+	 * Sets the http server.
+	 *
+	 * @param httpServer the new http server
+	 */
 	public void setHttpServer(@Nullable HttpServer httpServer) {
 		this.httpServer = httpServer;
 	}

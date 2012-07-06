@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ChildCollector.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ChildCollector.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.child;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.commons.BytesWrap;
 import cn.com.rebirth.search.core.index.cache.id.IdReaderTypeCache;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ChildCollector.
  *
@@ -28,27 +26,21 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ChildCollector extends Collector {
 
-	
 	/** The parent type. */
 	private final String parentType;
 
-	
 	/** The context. */
 	private final SearchContext context;
 
-	
 	/** The readers. */
 	private final Tuple<IndexReader, IdReaderTypeCache>[] readers;
 
-	
 	/** The parent docs. */
 	private final Map<Object, FixedBitSet> parentDocs;
 
-	
 	/** The type cache. */
 	private IdReaderTypeCache typeCache;
 
-	
 	/**
 	 * Instantiates a new child collector.
 	 *
@@ -60,7 +52,6 @@ public class ChildCollector extends Collector {
 		this.context = context;
 		this.parentDocs = new HashMap<Object, FixedBitSet>();
 
-		
 		this.readers = new Tuple[context.searcher().subReaders().length];
 		for (int i = 0; i < readers.length; i++) {
 			IndexReader reader = context.searcher().subReaders()[i];
@@ -69,7 +60,6 @@ public class ChildCollector extends Collector {
 		}
 	}
 
-	
 	/**
 	 * Parent docs.
 	 *
@@ -79,7 +69,6 @@ public class ChildCollector extends Collector {
 		return this.parentDocs;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 	 */
@@ -88,7 +77,6 @@ public class ChildCollector extends Collector {
 
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#collect(int)
 	 */
@@ -101,7 +89,7 @@ public class ChildCollector extends Collector {
 		for (Tuple<IndexReader, IdReaderTypeCache> tuple : readers) {
 			IndexReader indexReader = tuple.v1();
 			IdReaderTypeCache idReaderTypeCache = tuple.v2();
-			if (idReaderTypeCache == null) { 
+			if (idReaderTypeCache == null) {
 				continue;
 			}
 			int parentDocId = idReaderTypeCache.docById(parentId);
@@ -117,7 +105,6 @@ public class ChildCollector extends Collector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
@@ -126,7 +113,6 @@ public class ChildCollector extends Collector {
 		typeCache = context.idCache().reader(reader).type(parentType);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 	 */

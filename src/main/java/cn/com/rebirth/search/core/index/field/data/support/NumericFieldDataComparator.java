@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NumericFieldDataComparator.java 2012-3-29 15:02:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NumericFieldDataComparator.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data.support;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 import cn.com.rebirth.search.core.index.field.data.NumericFieldData;
 
-
 /**
  * The Class NumericFieldDataComparator.
  *
@@ -23,19 +21,15 @@ import cn.com.rebirth.search.core.index.field.data.NumericFieldData;
  */
 public abstract class NumericFieldDataComparator extends FieldComparator {
 
-	
 	/** The field name. */
 	private final String fieldName;
 
-	
 	/** The field data cache. */
 	protected final FieldDataCache fieldDataCache;
 
-	
 	/** The current field data. */
 	protected NumericFieldData currentFieldData;
 
-	
 	/**
 	 * Instantiates a new numeric field data comparator.
 	 *
@@ -47,7 +41,6 @@ public abstract class NumericFieldDataComparator extends FieldComparator {
 		this.fieldDataCache = fieldDataCache;
 	}
 
-	
 	/**
 	 * Field data type.
 	 *
@@ -55,7 +48,6 @@ public abstract class NumericFieldDataComparator extends FieldComparator {
 	 */
 	public abstract FieldDataType fieldDataType();
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#setNextReader(org.apache.lucene.index.IndexReader, int)
 	 */

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MapperService.java 2012-3-29 15:01:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MapperService.java 2012-7-6 14:30:33 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.mapper;
@@ -126,10 +126,10 @@ public class MapperService extends AbstractIndexComponent implements Iterable<Do
 				defaultMappingUrl = environment.resolveConfig("default-mapping.json");
 			} catch (FailedToResolveConfigException e) {
 				defaultMappingUrl = indexSettings.getClassLoader().getResource(
-						"cn/com/summall/search/core/index/mapper/default-mapping.json");
+						"cn/com/rebirth/search/core/index/mapper/default-mapping.json");
 				if (defaultMappingUrl == null) {
 					defaultMappingUrl = MapperService.class
-							.getResource("cn/com/summall/search/core/index/mapper/default-mapping.json");
+							.getResource("cn/com/rebirth/search/core/index/mapper/default-mapping.json");
 				}
 			}
 		} else {
@@ -1122,7 +1122,7 @@ public class MapperService extends AbstractIndexComponent implements Iterable<Do
 	class InternalFieldMapperListener implements FieldMapperListener {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.FieldMapperListener#fieldMapper(cn.com.summall.search.core.index.mapper.FieldMapper)
+		 * @see cn.com.rebirth.search.core.index.mapper.FieldMapperListener#fieldMapper(cn.com.rebirth.search.core.index.mapper.FieldMapper)
 		 */
 		@Override
 		public void fieldMapper(FieldMapper fieldMapper) {
@@ -1172,7 +1172,7 @@ public class MapperService extends AbstractIndexComponent implements Iterable<Do
 	class InternalObjectMapperListener implements ObjectMapperListener {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.ObjectMapperListener#objectMapper(cn.com.summall.search.core.index.mapper.object.ObjectMapper)
+		 * @see cn.com.rebirth.search.core.index.mapper.ObjectMapperListener#objectMapper(cn.com.rebirth.search.core.index.mapper.object.ObjectMapper)
 		 */
 		@Override
 		public void objectMapper(ObjectMapper objectMapper) {

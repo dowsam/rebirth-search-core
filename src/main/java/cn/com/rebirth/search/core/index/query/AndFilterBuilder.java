@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AndFilterBuilder.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AndFilterBuilder.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class AndFilterBuilder.
  *
@@ -21,23 +19,18 @@ import com.google.common.collect.Lists;
  */
 public class AndFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The filters. */
 	private ArrayList<FilterBuilder> filters = Lists.newArrayList();
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new and filter builder.
 	 *
@@ -49,7 +42,6 @@ public class AndFilterBuilder extends BaseFilterBuilder {
 		}
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -61,7 +53,6 @@ public class AndFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -73,7 +64,6 @@ public class AndFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -85,7 +75,6 @@ public class AndFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -97,9 +86,8 @@ public class AndFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

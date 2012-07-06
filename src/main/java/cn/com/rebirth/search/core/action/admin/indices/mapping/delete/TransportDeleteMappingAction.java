@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportDeleteMappingAction.java 2012-3-29 15:02:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportDeleteMappingAction.java 2012-7-6 14:29:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.mapping.delete;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -29,152 +28,149 @@ import cn.com.rebirth.search.core.index.query.QueryBuilders;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportDeleteMappingAction.
  *
  * @author l.xue.nong
  */
-public class TransportDeleteMappingAction extends TransportMasterNodeOperationAction<DeleteMappingRequest, DeleteMappingResponse> {
+public class TransportDeleteMappingAction extends
+		TransportMasterNodeOperationAction<DeleteMappingRequest, DeleteMappingResponse> {
 
-    
-    /** The meta data mapping service. */
-    private final MetaDataMappingService metaDataMappingService;
+	/** The meta data mapping service. */
+	private final MetaDataMappingService metaDataMappingService;
 
-    
-    /** The delete by query action. */
-    private final TransportDeleteByQueryAction deleteByQueryAction;
+	/** The delete by query action. */
+	private final TransportDeleteByQueryAction deleteByQueryAction;
 
-    
-    /** The refresh action. */
-    private final TransportRefreshAction refreshAction;
+	/** The refresh action. */
+	private final TransportRefreshAction refreshAction;
 
-    
-    /**
-     * Instantiates a new transport delete mapping action.
-     *
-     * @param settings the settings
-     * @param transportService the transport service
-     * @param clusterService the cluster service
-     * @param threadPool the thread pool
-     * @param metaDataMappingService the meta data mapping service
-     * @param deleteByQueryAction the delete by query action
-     * @param refreshAction the refresh action
-     */
-    @Inject
-    public TransportDeleteMappingAction(Settings settings, TransportService transportService, ClusterService clusterService,
-                                        ThreadPool threadPool, MetaDataMappingService metaDataMappingService,
-                                        TransportDeleteByQueryAction deleteByQueryAction, TransportRefreshAction refreshAction) {
-        super(settings, transportService, clusterService, threadPool);
-        this.metaDataMappingService = metaDataMappingService;
-        this.deleteByQueryAction = deleteByQueryAction;
-        this.refreshAction = refreshAction;
-    }
+	/**
+	 * Instantiates a new transport delete mapping action.
+	 *
+	 * @param settings the settings
+	 * @param transportService the transport service
+	 * @param clusterService the cluster service
+	 * @param threadPool the thread pool
+	 * @param metaDataMappingService the meta data mapping service
+	 * @param deleteByQueryAction the delete by query action
+	 * @param refreshAction the refresh action
+	 */
+	@Inject
+	public TransportDeleteMappingAction(Settings settings, TransportService transportService,
+			ClusterService clusterService, ThreadPool threadPool, MetaDataMappingService metaDataMappingService,
+			TransportDeleteByQueryAction deleteByQueryAction, TransportRefreshAction refreshAction) {
+		super(settings, transportService, clusterService, threadPool);
+		this.metaDataMappingService = metaDataMappingService;
+		this.deleteByQueryAction = deleteByQueryAction;
+		this.refreshAction = refreshAction;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
-     */
-    @Override
-    protected String executor() {
-        return ThreadPool.Names.MANAGEMENT;
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 */
+	@Override
+	protected String executor() {
+		return ThreadPool.Names.MANAGEMENT;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
-     */
-    @Override
-    protected String transportAction() {
-        return DeleteMappingAction.NAME;
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 */
+	@Override
+	protected String transportAction() {
+		return DeleteMappingAction.NAME;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
-     */
-    @Override
-    protected DeleteMappingRequest newRequest() {
-        return new DeleteMappingRequest();
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 */
+	@Override
+	protected DeleteMappingRequest newRequest() {
+		return new DeleteMappingRequest();
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
-     */
-    @Override
-    protected DeleteMappingResponse newResponse() {
-        return new DeleteMappingResponse();
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 */
+	@Override
+	protected DeleteMappingResponse newResponse() {
+		return new DeleteMappingResponse();
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#doExecute(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.action.ActionListener)
-     */
-    @Override
-    protected void doExecute(DeleteMappingRequest request, ActionListener<DeleteMappingResponse> listener) {
-        
-        request.indices(clusterService.state().metaData().concreteIndices(request.indices()));
-        super.doExecute(request, listener);
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#doExecute(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
+	 */
+	@Override
+	protected void doExecute(DeleteMappingRequest request, ActionListener<DeleteMappingResponse> listener) {
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
-     */
-    @Override
-    protected ClusterBlockException checkBlock(DeleteMappingRequest request, ClusterState state) {
-        return state.blocks().indicesBlockedException(ClusterBlockLevel.METADATA, request.indices());
-    }
+		request.indices(clusterService.state().metaData().concreteIndices(request.indices()));
+		super.doExecute(request, listener);
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
-     */
-    @Override
-    protected DeleteMappingResponse masterOperation(final DeleteMappingRequest request, final ClusterState state) throws RestartException {
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
+	 */
+	@Override
+	protected ClusterBlockException checkBlock(DeleteMappingRequest request, ClusterState state) {
+		return state.blocks().indicesBlockedException(ClusterBlockLevel.METADATA, request.indices());
+	}
 
-        final AtomicReference<Throwable> failureRef = new AtomicReference<Throwable>();
-        final CountDownLatch latch = new CountDownLatch(1);
-        deleteByQueryAction.execute(Requests.deleteByQueryRequest(request.indices()).query(QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(), FilterBuilders.typeFilter(request.type()))), new ActionListener<DeleteByQueryResponse>() {
-            @Override
-            public void onResponse(DeleteByQueryResponse deleteByQueryResponse) {
-                refreshAction.execute(Requests.refreshRequest(request.indices()), new ActionListener<RefreshResponse>() {
-                    @Override
-                    public void onResponse(RefreshResponse refreshResponse) {
-                        metaDataMappingService.removeMapping(new MetaDataMappingService.RemoveRequest(request.indices(), request.type()));
-                        latch.countDown();
-                    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
+	 */
+	@Override
+	protected DeleteMappingResponse masterOperation(final DeleteMappingRequest request, final ClusterState state)
+			throws RebirthException {
 
-                    @Override
-                    public void onFailure(Throwable e) {
-                        metaDataMappingService.removeMapping(new MetaDataMappingService.RemoveRequest(request.indices(), request.type()));
-                        latch.countDown();
-                    }
-                });
-            }
+		final AtomicReference<Throwable> failureRef = new AtomicReference<Throwable>();
+		final CountDownLatch latch = new CountDownLatch(1);
+		deleteByQueryAction.execute(
+				Requests.deleteByQueryRequest(request.indices()).query(
+						QueryBuilders.filteredQuery(QueryBuilders.matchAllQuery(),
+								FilterBuilders.typeFilter(request.type()))),
+				new ActionListener<DeleteByQueryResponse>() {
+					@Override
+					public void onResponse(DeleteByQueryResponse deleteByQueryResponse) {
+						refreshAction.execute(Requests.refreshRequest(request.indices()),
+								new ActionListener<RefreshResponse>() {
+									@Override
+									public void onResponse(RefreshResponse refreshResponse) {
+										metaDataMappingService.removeMapping(new MetaDataMappingService.RemoveRequest(
+												request.indices(), request.type()));
+										latch.countDown();
+									}
 
-            @Override
-            public void onFailure(Throwable e) {
-                failureRef.set(e);
-                latch.countDown();
-            }
-        });
+									@Override
+									public void onFailure(Throwable e) {
+										metaDataMappingService.removeMapping(new MetaDataMappingService.RemoveRequest(
+												request.indices(), request.type()));
+										latch.countDown();
+									}
+								});
+					}
 
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            failureRef.set(e);
-        }
+					@Override
+					public void onFailure(Throwable e) {
+						failureRef.set(e);
+						latch.countDown();
+					}
+				});
 
-        if (failureRef.get() != null) {
-            if (failureRef.get() instanceof RestartException) {
-                throw (RestartException) failureRef.get();
-            } else {
-                throw new RestartException(failureRef.get().getMessage(), failureRef.get());
-            }
-        }
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			failureRef.set(e);
+		}
 
-        return new DeleteMappingResponse();
-    }
+		if (failureRef.get() != null) {
+			if (failureRef.get() instanceof RebirthException) {
+				throw (RebirthException) failureRef.get();
+			} else {
+				throw new RebirthException(failureRef.get().getMessage(), failureRef.get());
+			}
+		}
+
+		return new DeleteMappingResponse();
+	}
 }

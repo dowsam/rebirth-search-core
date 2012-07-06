@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SnapshotIndexCommits.java 2012-3-29 15:02:11 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SnapshotIndexCommits.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.deletionpolicy;
 
@@ -11,7 +10,6 @@ import java.util.List;
 
 import cn.com.rebirth.search.commons.lease.Releasable;
 
-
 /**
  * The Class SnapshotIndexCommits.
  *
@@ -19,11 +17,9 @@ import cn.com.rebirth.search.commons.lease.Releasable;
  */
 public class SnapshotIndexCommits implements Iterable<SnapshotIndexCommit>, Releasable {
 
-	
 	/** The commits. */
 	private final List<SnapshotIndexCommit> commits;
 
-	
 	/**
 	 * Instantiates a new snapshot index commits.
 	 *
@@ -33,7 +29,6 @@ public class SnapshotIndexCommits implements Iterable<SnapshotIndexCommit>, Rele
 		this.commits = commits;
 	}
 
-	
 	/**
 	 * Size.
 	 *
@@ -43,7 +38,6 @@ public class SnapshotIndexCommits implements Iterable<SnapshotIndexCommit>, Rele
 		return commits.size();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -52,9 +46,8 @@ public class SnapshotIndexCommits implements Iterable<SnapshotIndexCommit>, Rele
 		return commits.iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.lease.Releasable#release()
+	 * @see cn.com.rebirth.search.commons.lease.Releasable#release()
 	 */
 	public boolean release() {
 		boolean result = false;

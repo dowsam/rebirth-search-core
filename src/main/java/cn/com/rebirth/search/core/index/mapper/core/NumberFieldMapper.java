@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NumberFieldMapper.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NumberFieldMapper.java 2012-7-6 14:29:30 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper;
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class NumberFieldMapper.
  *
@@ -36,7 +34,7 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldMapper<T> implements
 		AllFieldMapper.IncludeInAll {
-	
+
 	/**
 	 * The Class Defaults.
 	 *
@@ -44,28 +42,22 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
 
-		
 		/** The Constant PRECISION_STEP. */
 		public static final int PRECISION_STEP = NumericUtils.PRECISION_STEP_DEFAULT;
 
-		
 		/** The Constant INDEX. */
 		public static final Field.Index INDEX = Field.Index.NOT_ANALYZED;
 
-		
 		/** The Constant OMIT_NORMS. */
 		public static final boolean OMIT_NORMS = true;
 
-		
 		/** The Constant OMIT_TERM_FREQ_AND_POSITIONS. */
 		public static final boolean OMIT_TERM_FREQ_AND_POSITIONS = true;
 
-		
 		/** The Constant FUZZY_FACTOR. */
 		public static final String FUZZY_FACTOR = null;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -76,15 +68,12 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 	public abstract static class Builder<T extends Builder, Y extends NumberFieldMapper> extends
 			AbstractFieldMapper.Builder<T, Y> {
 
-		
 		/** The precision step. */
 		protected int precisionStep = Defaults.PRECISION_STEP;
 
-		
 		/** The fuzzy factor. */
 		protected String fuzzyFactor = Defaults.FUZZY_FACTOR;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -97,43 +86,38 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 			this.omitTermFreqAndPositions = Defaults.OMIT_TERM_FREQ_AND_POSITIONS;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
 		 */
 		@Override
 		public T store(Field.Store store) {
 			return super.store(store);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#boost(float)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#boost(float)
 		 */
 		@Override
 		public T boost(float boost) {
 			return super.boost(boost);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
 		 */
 		@Override
 		public T indexName(String indexName) {
 			return super.indexName(indexName);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#includeInAll(java.lang.Boolean)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#includeInAll(java.lang.Boolean)
 		 */
 		@Override
 		public T includeInAll(Boolean includeInAll) {
 			return super.includeInAll(includeInAll);
 		}
 
-		
 		/**
 		 * Precision step.
 		 *
@@ -145,7 +129,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 			return builder;
 		}
 
-		
 		/**
 		 * Fuzzy factor.
 		 *
@@ -158,23 +141,18 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		}
 	}
 
-	
 	/** The precision step. */
 	protected int precisionStep;
 
-	
 	/** The fuzzy factor. */
 	protected String fuzzyFactor;
 
-	
 	/** The d fuzzy factor. */
 	protected double dFuzzyFactor;
 
-	
 	/** The include in all. */
 	protected Boolean includeInAll;
 
-	
 	/** The token stream. */
 	private ThreadLocal<NumericTokenStream> tokenStream = new ThreadLocal<NumericTokenStream>() {
 		@Override
@@ -183,7 +161,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		}
 	};
 
-	
 	/**
 	 * Instantiates a new number field mapper.
 	 *
@@ -212,7 +189,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		this.dFuzzyFactor = parseFuzzyFactor(fuzzyFactor);
 	}
 
-	
 	/**
 	 * Parses the fuzzy factor.
 	 *
@@ -226,9 +202,8 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		return Double.parseDouble(fuzzyFactor);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAll(Boolean includeInAll) {
@@ -237,9 +212,8 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAllIfNotSet(Boolean includeInAll) {
@@ -248,7 +222,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		}
 	}
 
-	
 	/**
 	 * Max precision step.
 	 *
@@ -256,7 +229,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 	 */
 	protected abstract int maxPrecisionStep();
 
-	
 	/**
 	 * Precision step.
 	 *
@@ -266,64 +238,56 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		return this.precisionStep;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#useFieldQueryWithQueryString()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#useFieldQueryWithQueryString()
 	 */
 	@Override
 	public boolean useFieldQueryWithQueryString() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#fieldQuery(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#fieldQuery(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query fieldQuery(String value, @Nullable QueryParseContext context) {
 		return rangeQuery(value, value, true, true, context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
 	 */
 	@Override
 	public abstract Query fuzzyQuery(String value, String minSim, int prefixLength, int maxExpansions);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
 	 */
 	@Override
 	public abstract Query fuzzyQuery(String value, double minSim, int prefixLength, int maxExpansions);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#fieldFilter(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#fieldFilter(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter fieldFilter(String value, @Nullable QueryParseContext context) {
 		return rangeFilter(value, value, true, true, context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public abstract Query rangeQuery(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
 			@Nullable QueryParseContext context);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public abstract Filter rangeFilter(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
 			@Nullable QueryParseContext context);
 
-	
 	/**
 	 * Range filter.
 	 *
@@ -338,18 +302,16 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 	public abstract Filter rangeFilter(FieldDataCache fieldDataCache, String lowerTerm, String upperTerm,
 			boolean includeLower, boolean includeUpper, @Nullable QueryParseContext context);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Object valueForSearch(Fieldable field) {
 		return value(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
@@ -357,9 +319,8 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		return num == null ? null : num.toString();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
@@ -375,23 +336,20 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#close()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#close()
 	 */
 	@Override
 	public void close() {
 		tokenStream.remove();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#fieldDataType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#fieldDataType()
 	 */
 	@Override
 	public abstract FieldDataType fieldDataType();
 
-	
 	/**
 	 * Pop cached stream.
 	 *
@@ -401,8 +359,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 		return tokenStream.get();
 	}
 
-	
-	
 	/**
 	 * The Class CustomNumericField.
 	 *
@@ -410,11 +366,9 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 	 */
 	public abstract static class CustomNumericField extends AbstractField {
 
-		
 		/** The mapper. */
 		protected final NumberFieldMapper mapper;
 
-		
 		/**
 		 * Instantiates a new custom numeric field.
 		 *
@@ -441,7 +395,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 			setStoreTermVector(Field.TermVector.NO);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.document.Fieldable#stringValue()
 		 */
@@ -450,7 +403,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 			return null;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.document.Fieldable#readerValue()
 		 */
@@ -459,7 +411,6 @@ public abstract class NumberFieldMapper<T extends Number> extends AbstractFieldM
 			return null;
 		}
 
-		
 		/**
 		 * Numeric as string.
 		 *

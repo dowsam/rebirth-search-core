@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractIndexComponent.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractIndexComponent.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.jmx.ManagedGroupName;
 
-
 /**
  * The Class AbstractIndexComponent.
  *
@@ -21,23 +19,18 @@ import cn.com.rebirth.search.core.jmx.ManagedGroupName;
  */
 public abstract class AbstractIndexComponent implements IndexComponent {
 
-	
 	/** The logger. */
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	
 	/** The index. */
 	protected final Index index;
 
-	
 	/** The index settings. */
 	protected final Settings indexSettings;
 
-	
 	/** The component settings. */
 	protected final Settings componentSettings;
 
-	
 	/**
 	 * Instantiates a new abstract index component.
 	 *
@@ -50,7 +43,6 @@ public abstract class AbstractIndexComponent implements IndexComponent {
 		this.componentSettings = indexSettings.getComponentSettings(getClass());
 	}
 
-	
 	/**
 	 * Instantiates a new abstract index component.
 	 *
@@ -64,16 +56,14 @@ public abstract class AbstractIndexComponent implements IndexComponent {
 		this.componentSettings = indexSettings.getComponentSettings(prefixSettings, getClass());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.IndexComponent#index()
+	 * @see cn.com.rebirth.search.core.index.IndexComponent#index()
 	 */
 	@Override
 	public Index index() {
 		return this.index;
 	}
 
-	
 	/**
 	 * Node name.
 	 *
@@ -83,7 +73,6 @@ public abstract class AbstractIndexComponent implements IndexComponent {
 		return indexSettings.get("name", "");
 	}
 
-	
 	/**
 	 * Management group name.
 	 *

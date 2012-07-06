@@ -1,13 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportShardMultiGetAction.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportShardMultiGetAction.java 2012-7-6 14:28:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction;
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportShardMultiGetAction.
  *
@@ -33,15 +31,12 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportShardMultiGetAction extends
 		TransportShardSingleOperationAction<MultiGetShardRequest, MultiGetShardResponse> {
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The realtime. */
 	private final boolean realtime;
 
-	
 	/**
 	 * Instantiates a new transport shard multi get action.
 	 *
@@ -60,63 +55,56 @@ public class TransportShardMultiGetAction extends
 		this.realtime = settings.getAsBoolean("action.get.realtime", true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.GET;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return MultiGetAction.NAME + "/shard";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#newRequest()
 	 */
 	@Override
 	protected MultiGetShardRequest newRequest() {
 		return new MultiGetShardRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#newResponse()
 	 */
 	@Override
 	protected MultiGetShardResponse newResponse() {
 		return new MultiGetShardResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, MultiGetShardRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.READ);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, MultiGetShardRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.READ, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected ShardIterator shards(ClusterState state, MultiGetShardRequest request) {
@@ -124,26 +112,22 @@ public class TransportShardMultiGetAction extends
 				request.preference());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#resolveRequest(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#resolveRequest(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected void resolveRequest(ClusterState state, MultiGetShardRequest request) {
 		if (request.realtime == null) {
 			request.realtime = this.realtime;
 		}
-		
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#shardOperation(cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest, int)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest, int)
 	 */
 	@Override
-	protected MultiGetShardResponse shardOperation(MultiGetShardRequest request, int shardId)
-			throws RestartException {
+	protected MultiGetShardResponse shardOperation(MultiGetShardRequest request, int shardId) throws RebirthException {
 		IndexService indexService = indicesService.indexServiceSafe(request.index());
 		IndexShard indexShard = indexService.shardSafe(shardId);
 

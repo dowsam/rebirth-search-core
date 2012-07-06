@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportMoreLikeThisAction.java 2012-3-29 15:01:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportMoreLikeThisAction.java 2012-7-6 14:28:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.mlt;
 
@@ -21,7 +20,7 @@ import java.util.Set;
 import org.apache.lucene.document.Fieldable;
 import org.apache.lucene.index.Term;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -49,7 +48,6 @@ import cn.com.rebirth.search.core.transport.BaseTransportRequestHandler;
 import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportMoreLikeThisAction.
  *
@@ -57,23 +55,18 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisRequest, SearchResponse> {
 
-	
 	/** The search action. */
 	private final TransportSearchAction searchAction;
 
-	
 	/** The get action. */
 	private final TransportGetAction getAction;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/**
 	 * Instantiates a new transport more like this action.
 	 *
@@ -98,22 +91,21 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 		transportService.registerHandler(MoreLikeThisAction.NAME, new TransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final MoreLikeThisRequest request, final ActionListener<SearchResponse> listener) {
-		
+
 		ClusterState clusterState = clusterService.state();
-		
+
 		final String concreteIndex = clusterState.metaData().concreteIndex(request.index());
 
 		Set<String> getFields = newHashSet();
 		if (request.fields() != null) {
 			Collections.addAll(getFields, request.fields());
 		}
-		
+
 		getFields.add(SourceFieldMapper.NAME);
 
 		GetRequest getRequest = getRequest(concreteIndex).fields(getFields.toArray(new String[getFields.size()]))
@@ -124,7 +116,7 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 			@Override
 			public void onResponse(GetResponse getResponse) {
 				if (!getResponse.exists()) {
-					listener.onFailure(new RestartException("document missing"));
+					listener.onFailure(new RebirthException("document missing"));
 					return;
 				}
 				final BoolQueryBuilder boolBuilder = boolQuery();
@@ -144,7 +136,7 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 					}
 
 					if (!fields.isEmpty()) {
-						
+
 						for (Iterator<String> it = fields.iterator(); it.hasNext();) {
 							String field = it.next();
 							GetField getField = getResponse.field(field);
@@ -156,21 +148,20 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 							}
 						}
 						if (!fields.isEmpty()) {
-							
+
 							parseSource(getResponse, boolBuilder, docMapper, fields, request);
 						}
 					} else {
-						
+
 						parseSource(getResponse, boolBuilder, docMapper, fields, request);
 					}
 
 					if (!boolBuilder.hasClauses()) {
-						
-						listener.onFailure(new RestartException("No fields found to fetch the 'likeText' from"));
+
+						listener.onFailure(new RebirthException("No fields found to fetch the 'likeText' from"));
 						return;
 					}
 
-					
 					Term uidTerm = docMapper.uidMapper().term(request.type(), request.id());
 					boolBuilder.mustNot(termQuery(uidTerm.field(), uidTerm.text()));
 				} catch (Exception e) {
@@ -218,7 +209,6 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 		});
 	}
 
-	
 	/**
 	 * Parses the source.
 	 *
@@ -257,7 +247,6 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 				});
 	}
 
-	
 	/**
 	 * Adds the more like this.
 	 *
@@ -271,7 +260,6 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 		addMoreLikeThis(request, boolBuilder, field.name(), fieldMapper.valueAsString(field));
 	}
 
-	
 	/**
 	 * Adds the more like this.
 	 *
@@ -290,7 +278,6 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 		boolBuilder.should(mlt);
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -298,22 +285,20 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 	 */
 	private class TransportHandler extends BaseTransportRequestHandler<MoreLikeThisRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public MoreLikeThisRequest newInstance() {
 			return new MoreLikeThisRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(MoreLikeThisRequest request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<SearchResponse>() {
 				@Override
@@ -336,9 +321,8 @@ public class TransportMoreLikeThisAction extends TransportAction<MoreLikeThisReq
 			});
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ThreadPool.java 2012-3-29 15:01:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ThreadPool.java 2012-7-6 14:29:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.threadpool;
 
@@ -26,7 +25,7 @@ import jsr166y.LinkedTransferQueue;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
 import cn.com.rebirth.commons.concurrent.EsThreadPoolExecutor;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -45,7 +44,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.MoreExecutors;
 
-
 /**
  * The Class ThreadPool.
  *
@@ -53,7 +51,6 @@ import com.google.common.util.concurrent.MoreExecutors;
  */
 public class ThreadPool extends AbstractComponent {
 
-	
 	/**
 	 * The Class Names.
 	 *
@@ -61,72 +58,55 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	public static class Names {
 
-		
 		/** The Constant SAME. */
 		public static final String SAME = "same";
 
-		
 		/** The Constant GENERIC. */
 		public static final String GENERIC = "generic";
 
-		
 		/** The Constant GET. */
 		public static final String GET = "get";
 
-		
 		/** The Constant INDEX. */
 		public static final String INDEX = "index";
 
-		
 		/** The Constant BULK. */
 		public static final String BULK = "bulk";
 
-		
 		/** The Constant SEARCH. */
 		public static final String SEARCH = "search";
 
-		
 		/** The Constant PERCOLATE. */
 		public static final String PERCOLATE = "percolate";
 
-		
 		/** The Constant MANAGEMENT. */
 		public static final String MANAGEMENT = "management";
 
-		
 		/** The Constant FLUSH. */
 		public static final String FLUSH = "flush";
 
-		
 		/** The Constant MERGE. */
 		public static final String MERGE = "merge";
 
-		
 		/** The Constant CACHE. */
 		public static final String CACHE = "cache";
 
-		
 		/** The Constant REFRESH. */
 		public static final String REFRESH = "refresh";
 
-		
 		/** The Constant SNAPSHOT. */
 		public static final String SNAPSHOT = "snapshot";
 	}
 
-	
 	/** The executors. */
 	private final ImmutableMap<String, ExecutorHolder> executors;
 
-	
 	/** The scheduler. */
 	private final ScheduledThreadPoolExecutor scheduler;
 
-	
 	/** The estimated time thread. */
 	private final EstimatedTimeThread estimatedTimeThread;
 
-	
 	/**
 	 * Instantiates a new thread pool.
 	 */
@@ -134,7 +114,6 @@ public class ThreadPool extends AbstractComponent {
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS);
 	}
 
-	
 	/**
 	 * Instantiates a new thread pool.
 	 *
@@ -203,7 +182,6 @@ public class ThreadPool extends AbstractComponent {
 		this.estimatedTimeThread.start();
 	}
 
-	
 	/**
 	 * Estimated time in millis.
 	 *
@@ -213,7 +191,6 @@ public class ThreadPool extends AbstractComponent {
 		return estimatedTimeThread.estimatedTimeInMillis();
 	}
 
-	
 	/**
 	 * Info.
 	 *
@@ -223,7 +200,7 @@ public class ThreadPool extends AbstractComponent {
 		List<Info> infos = new ArrayList<Info>();
 		for (ExecutorHolder holder : executors.values()) {
 			String name = holder.info.name();
-			
+
 			if ("same".equals(name)) {
 				continue;
 			}
@@ -232,7 +209,6 @@ public class ThreadPool extends AbstractComponent {
 		return new ThreadPoolInfo(infos);
 	}
 
-	
 	/**
 	 * Stats.
 	 *
@@ -242,7 +218,7 @@ public class ThreadPool extends AbstractComponent {
 		List<ThreadPoolStats.Stats> stats = new ArrayList<ThreadPoolStats.Stats>();
 		for (ExecutorHolder holder : executors.values()) {
 			String name = holder.info.name();
-			
+
 			if ("same".equals(name)) {
 				continue;
 			}
@@ -260,7 +236,6 @@ public class ThreadPool extends AbstractComponent {
 		return new ThreadPoolStats(stats);
 	}
 
-	
 	/**
 	 * Generic.
 	 *
@@ -270,7 +245,6 @@ public class ThreadPool extends AbstractComponent {
 		return executor(Names.GENERIC);
 	}
 
-	
 	/**
 	 * Executor.
 	 *
@@ -280,12 +254,11 @@ public class ThreadPool extends AbstractComponent {
 	public Executor executor(String name) {
 		Executor executor = executors.get(name).executor;
 		if (executor == null) {
-			throw new RestartIllegalArgumentException("No executor found for [" + name + "]");
+			throw new RebirthIllegalArgumentException("No executor found for [" + name + "]");
 		}
 		return executor;
 	}
 
-	
 	/**
 	 * Scheduler.
 	 *
@@ -295,7 +268,6 @@ public class ThreadPool extends AbstractComponent {
 		return this.scheduler;
 	}
 
-	
 	/**
 	 * Schedule with fixed delay.
 	 *
@@ -308,7 +280,6 @@ public class ThreadPool extends AbstractComponent {
 				TimeUnit.MILLISECONDS);
 	}
 
-	
 	/**
 	 * Schedule.
 	 *
@@ -324,7 +295,6 @@ public class ThreadPool extends AbstractComponent {
 		return scheduler.schedule(command, delay.millis(), TimeUnit.MILLISECONDS);
 	}
 
-	
 	/**
 	 * Shutdown.
 	 */
@@ -339,7 +309,6 @@ public class ThreadPool extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Shutdown now.
 	 */
@@ -354,7 +323,6 @@ public class ThreadPool extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Await termination.
 	 *
@@ -373,7 +341,6 @@ public class ThreadPool extends AbstractComponent {
 		return result;
 	}
 
-	
 	/**
 	 * Builds the.
 	 *
@@ -410,7 +377,7 @@ public class ThreadPool extends AbstractComponent {
 			} else if ("caller".equals(rejectSetting)) {
 				rejectedExecutionHandler = new ThreadPoolExecutor.CallerRunsPolicy();
 			} else {
-				throw new RestartIllegalArgumentException("reject_policy [" + rejectSetting + "] not valid for ["
+				throw new RebirthIllegalArgumentException("reject_policy [" + rejectSetting + "] not valid for ["
 						+ name + "] thread pool");
 			}
 			Executor executor = new EsThreadPoolExecutor(size, size, 0L, TimeUnit.MILLISECONDS,
@@ -445,10 +412,9 @@ public class ThreadPool extends AbstractComponent {
 					TimeUnit.MILLISECONDS);
 			return new ExecutorHolder(executor, new Info(name, type, min, size, keepAlive, capacity));
 		}
-		throw new RestartIllegalArgumentException("No type found [" + type + "], for [" + name + "]");
+		throw new RebirthIllegalArgumentException("No type found [" + type + "], for [" + name + "]");
 	}
 
-	
 	/**
 	 * The Class LoggingRunnable.
 	 *
@@ -456,11 +422,9 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	class LoggingRunnable implements Runnable {
 
-		
 		/** The runnable. */
 		private final Runnable runnable;
 
-		
 		/**
 		 * Instantiates a new logging runnable.
 		 *
@@ -470,7 +434,6 @@ public class ThreadPool extends AbstractComponent {
 			this.runnable = runnable;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -483,7 +446,6 @@ public class ThreadPool extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -492,7 +454,6 @@ public class ThreadPool extends AbstractComponent {
 			return runnable.hashCode();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -501,7 +462,6 @@ public class ThreadPool extends AbstractComponent {
 			return runnable.equals(obj);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -511,7 +471,6 @@ public class ThreadPool extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class ThreadedRunnable.
 	 *
@@ -519,15 +478,12 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	class ThreadedRunnable implements Runnable {
 
-		
 		/** The runnable. */
 		private final Runnable runnable;
 
-		
 		/** The executor. */
 		private final Executor executor;
 
-		
 		/**
 		 * Instantiates a new threaded runnable.
 		 *
@@ -539,7 +495,6 @@ public class ThreadPool extends AbstractComponent {
 			this.executor = executor;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -548,7 +503,6 @@ public class ThreadPool extends AbstractComponent {
 			executor.execute(runnable);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -557,7 +511,6 @@ public class ThreadPool extends AbstractComponent {
 			return runnable.hashCode();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -566,7 +519,6 @@ public class ThreadPool extends AbstractComponent {
 			return runnable.equals(obj);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -576,7 +528,6 @@ public class ThreadPool extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class EstimatedTimeThread.
 	 *
@@ -584,19 +535,15 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	static class EstimatedTimeThread extends Thread {
 
-		
 		/** The interval. */
 		final long interval;
 
-		
 		/** The running. */
 		volatile boolean running = true;
 
-		
 		/** The estimated time in millis. */
 		volatile long estimatedTimeInMillis;
 
-		
 		/**
 		 * Instantiates a new estimated time thread.
 		 *
@@ -609,7 +556,6 @@ public class ThreadPool extends AbstractComponent {
 			setDaemon(true);
 		}
 
-		
 		/**
 		 * Estimated time in millis.
 		 *
@@ -619,7 +565,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.estimatedTimeInMillis;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Thread#run()
 		 */
@@ -636,13 +581,12 @@ public class ThreadPool extends AbstractComponent {
 				try {
 					FileSystemUtils.checkMkdirsStall(estimatedTimeInMillis);
 				} catch (Exception e) {
-					
+
 				}
 			}
 		}
 	}
 
-	
 	/**
 	 * The Class AbortPolicy.
 	 *
@@ -650,14 +594,12 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	public static class AbortPolicy implements RejectedExecutionHandler {
 
-		
 		/**
 		 * Instantiates a new abort policy.
 		 */
 		public AbortPolicy() {
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.util.concurrent.RejectedExecutionHandler#rejectedExecution(java.lang.Runnable, java.util.concurrent.ThreadPoolExecutor)
 		 */
@@ -666,7 +608,6 @@ public class ThreadPool extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class ExecutorHolder.
 	 *
@@ -674,15 +615,12 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	static class ExecutorHolder {
 
-		
 		/** The executor. */
 		public final Executor executor;
 
-		
 		/** The info. */
 		public final Info info;
 
-		
 		/**
 		 * Instantiates a new executor holder.
 		 *
@@ -695,7 +633,6 @@ public class ThreadPool extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Info.
 	 *
@@ -703,31 +640,24 @@ public class ThreadPool extends AbstractComponent {
 	 */
 	public static class Info implements Streamable, ToXContent {
 
-		
 		/** The name. */
 		private String name;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/** The min. */
 		private int min;
 
-		
 		/** The max. */
 		private int max;
 
-		
 		/** The keep alive. */
 		private TimeValue keepAlive;
 
-		
 		/** The capacity. */
 		private SizeValue capacity;
 
-		
 		/**
 		 * Instantiates a new info.
 		 */
@@ -735,7 +665,6 @@ public class ThreadPool extends AbstractComponent {
 
 		}
 
-		
 		/**
 		 * Instantiates a new info.
 		 *
@@ -746,7 +675,6 @@ public class ThreadPool extends AbstractComponent {
 			this(name, type, -1);
 		}
 
-		
 		/**
 		 * Instantiates a new info.
 		 *
@@ -758,7 +686,6 @@ public class ThreadPool extends AbstractComponent {
 			this(name, type, size, size, null, null);
 		}
 
-		
 		/**
 		 * Instantiates a new info.
 		 *
@@ -779,7 +706,6 @@ public class ThreadPool extends AbstractComponent {
 			this.capacity = capacity;
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -789,7 +715,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.name;
 		}
 
-		
 		/**
 		 * Gets the name.
 		 *
@@ -799,7 +724,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.name;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -809,7 +733,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.type;
 		}
 
-		
 		/**
 		 * Gets the type.
 		 *
@@ -819,7 +742,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.type;
 		}
 
-		
 		/**
 		 * Min.
 		 *
@@ -829,7 +751,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.min;
 		}
 
-		
 		/**
 		 * Gets the min.
 		 *
@@ -839,7 +760,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.min;
 		}
 
-		
 		/**
 		 * Max.
 		 *
@@ -849,7 +769,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.max;
 		}
 
-		
 		/**
 		 * Gets the max.
 		 *
@@ -859,7 +778,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.max;
 		}
 
-		
 		/**
 		 * Keep alive.
 		 *
@@ -870,7 +788,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.keepAlive;
 		}
 
-		
 		/**
 		 * Gets the keep alive.
 		 *
@@ -881,7 +798,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.keepAlive;
 		}
 
-		
 		/**
 		 * Capacity.
 		 *
@@ -892,7 +808,6 @@ public class ThreadPool extends AbstractComponent {
 			return this.capacity;
 		}
 
-		
 		/**
 		 * Gets the capacity.
 		 *
@@ -903,9 +818,8 @@ public class ThreadPool extends AbstractComponent {
 			return this.capacity;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -921,9 +835,8 @@ public class ThreadPool extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -945,9 +858,8 @@ public class ThreadPool extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+		 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 		 */
 		@Override
 		public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -969,7 +881,6 @@ public class ThreadPool extends AbstractComponent {
 			return builder;
 		}
 
-		
 		/**
 		 * The Class Fields.
 		 *
@@ -977,23 +888,18 @@ public class ThreadPool extends AbstractComponent {
 		 */
 		static final class Fields {
 
-			
 			/** The Constant TYPE. */
 			static final XContentBuilderString TYPE = new XContentBuilderString("type");
 
-			
 			/** The Constant MIN. */
 			static final XContentBuilderString MIN = new XContentBuilderString("min");
 
-			
 			/** The Constant MAX. */
 			static final XContentBuilderString MAX = new XContentBuilderString("max");
 
-			
 			/** The Constant KEEP_ALIVE. */
 			static final XContentBuilderString KEEP_ALIVE = new XContentBuilderString("keep_alive");
 
-			
 			/** The Constant CAPACITY. */
 			static final XContentBuilderString CAPACITY = new XContentBuilderString("capacity");
 		}

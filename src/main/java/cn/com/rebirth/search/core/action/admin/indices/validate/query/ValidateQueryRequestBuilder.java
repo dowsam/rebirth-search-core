@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ValidateQueryRequestBuilder.java 2012-3-29 15:01:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ValidateQueryRequestBuilder.java 2012-7-6 14:30:11 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.action.admin.indices.validate.query;
@@ -11,7 +11,6 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThr
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 
-
 /**
  * The Class ValidateQueryRequestBuilder.
  *
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.index.query.QueryBuilder;
  */
 public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<ValidateQueryRequest, ValidateQueryResponse> {
 
-	
 	/**
 	 * Instantiates a new validate query request builder.
 	 *
@@ -29,7 +27,6 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		super(client, new ValidateQueryRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -41,7 +38,6 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		return this;
 	}
 
-	
 	/**
 	 * Sets the types.
 	 *
@@ -53,7 +49,6 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -65,7 +60,6 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -77,7 +71,6 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -89,7 +82,6 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -101,9 +93,8 @@ public class ValidateQueryRequestBuilder extends BaseIndicesRequestBuilder<Valid
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<ValidateQueryResponse> listener) {

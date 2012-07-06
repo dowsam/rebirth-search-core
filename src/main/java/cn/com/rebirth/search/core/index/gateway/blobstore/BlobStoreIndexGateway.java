@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BlobStoreIndexGateway.java 2012-3-29 15:00:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BlobStoreIndexGateway.java 2012-7-6 14:29:53 l.xue.nong$$
  */
+
 package cn.com.rebirth.search.core.index.gateway.blobstore;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.search.commons.blobstore.BlobPath;
@@ -107,10 +108,10 @@ public abstract class BlobStoreIndexGateway extends AbstractIndexComponent imple
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.CloseableIndexComponent#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.CloseableIndexComponent#close(boolean)
 	 */
 	@Override
-	public void close(boolean delete) throws RestartException {
+	public void close(boolean delete) throws RebirthException {
 		if (delete) {
 			blobStore.delete(indexPath);
 		}

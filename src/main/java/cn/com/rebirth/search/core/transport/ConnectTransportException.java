@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ConnectTransportException.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ConnectTransportException.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport;
 
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
-
 
 /**
  * The Class ConnectTransportException.
@@ -16,15 +14,12 @@ import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
  */
 public class ConnectTransportException extends ActionTransportException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1703335216831057661L;
-	
-	
+
 	/** The node. */
 	private final DiscoveryNode node;
 
-	
 	/**
 	 * Instantiates a new connect transport exception.
 	 *
@@ -35,7 +30,6 @@ public class ConnectTransportException extends ActionTransportException {
 		this(node, msg, null, null);
 	}
 
-	
 	/**
 	 * Instantiates a new connect transport exception.
 	 *
@@ -47,7 +41,6 @@ public class ConnectTransportException extends ActionTransportException {
 		this(node, msg, action, null);
 	}
 
-	
 	/**
 	 * Instantiates a new connect transport exception.
 	 *
@@ -59,7 +52,6 @@ public class ConnectTransportException extends ActionTransportException {
 		this(node, msg, null, cause);
 	}
 
-	
 	/**
 	 * Instantiates a new connect transport exception.
 	 *
@@ -73,7 +65,6 @@ public class ConnectTransportException extends ActionTransportException {
 		this.node = node;
 	}
 
-	
 	/**
 	 * Node.
 	 *

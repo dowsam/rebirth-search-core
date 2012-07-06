@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsFilterBuilder.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsFilterBuilder.java 2012-7-6 14:29:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class TermsFilterBuilder.
@@ -18,31 +16,24 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class TermsFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The values. */
 	private final Object values;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/** The execution. */
 	private String execution;
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -53,7 +44,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this(name, (Object[]) values);
 	}
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -65,7 +55,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -77,7 +66,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -89,7 +77,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -101,7 +88,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -113,7 +99,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Instantiates a new terms filter builder.
 	 *
@@ -125,7 +110,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Execution.
 	 *
@@ -137,7 +121,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -149,7 +132,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -161,7 +143,6 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -173,9 +154,8 @@ public class TermsFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

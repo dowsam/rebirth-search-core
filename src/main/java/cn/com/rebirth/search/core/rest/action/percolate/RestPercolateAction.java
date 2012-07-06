@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestPercolateAction.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestPercolateAction.java 2012-7-6 14:29:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.percolate;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.RestRequest.Method;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestPercolateAction.
  *
@@ -34,7 +32,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestPercolateAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest percolate action.
 	 *
@@ -49,9 +46,8 @@ public class RestPercolateAction extends BaseRestHandler {
 		controller.registerHandler(Method.POST, "/{index}/{type}/_percolate", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -59,9 +55,8 @@ public class RestPercolateAction extends BaseRestHandler {
 		percolateRequest.source(request.contentByteArray(), request.contentByteArrayOffset(), request.contentLength(),
 				request.contentUnsafe());
 
-		
 		percolateRequest.listenerThreaded(false);
-		
+
 		percolateRequest.operationThreaded(true);
 
 		percolateRequest.preferLocal(request.paramAsBoolean("prefer_local", percolateRequest.preferLocalShard()));
@@ -98,7 +93,6 @@ public class RestPercolateAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -106,11 +100,9 @@ public class RestPercolateAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant OK. */
 		static final XContentBuilderString OK = new XContentBuilderString("ok");
 
-		
 		/** The Constant MATCHES. */
 		static final XContentBuilderString MATCHES = new XContentBuilderString("matches");
 	}

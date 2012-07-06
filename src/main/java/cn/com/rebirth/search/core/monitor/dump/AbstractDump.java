@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractDump.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractDump.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.commons.Nullable;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class AbstractDump.
  *
@@ -28,23 +26,18 @@ import com.google.common.collect.ImmutableMap;
  */
 public abstract class AbstractDump implements Dump {
 
-	
 	/** The timestamp. */
 	private final long timestamp;
 
-	
 	/** The cause. */
 	private final String cause;
 
-	
 	/** The context. */
 	private final Map<String, Object> context;
 
-	
 	/** The files. */
 	private final ArrayList<File> files = new ArrayList<File>();
 
-	
 	/**
 	 * Instantiates a new abstract dump.
 	 *
@@ -61,45 +54,40 @@ public abstract class AbstractDump implements Dump {
 		this.context = context;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#timestamp()
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#timestamp()
 	 */
 	@Override
 	public long timestamp() {
 		return timestamp;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#context()
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#context()
 	 */
 	@Override
 	public Map<String, Object> context() {
 		return this.context;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#cause()
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#cause()
 	 */
 	@Override
 	public String cause() {
 		return cause;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#files()
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#files()
 	 */
 	@Override
 	public File[] files() {
 		return files.toArray(new File[files.size()]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#createFile(java.lang.String)
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#createFile(java.lang.String)
 	 */
 	@Override
 	public File createFile(String name) throws DumpException {
@@ -108,7 +96,6 @@ public abstract class AbstractDump implements Dump {
 		return file;
 	}
 
-	
 	/**
 	 * Do create file.
 	 *
@@ -118,9 +105,8 @@ public abstract class AbstractDump implements Dump {
 	 */
 	protected abstract File doCreateFile(String name) throws DumpException;
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#createFileOutputStream(java.lang.String)
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#createFileOutputStream(java.lang.String)
 	 */
 	@Override
 	public OutputStream createFileOutputStream(String name) throws DumpException {
@@ -131,9 +117,8 @@ public abstract class AbstractDump implements Dump {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#createFileWriter(java.lang.String)
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#createFileWriter(java.lang.String)
 	 */
 	@Override
 	public Writer createFileWriter(String name) throws DumpException {

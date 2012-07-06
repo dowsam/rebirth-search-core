@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardsLimitAllocationDecider.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardsLimitAllocationDecider.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingNode;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 
-
 /**
  * The Class ShardsLimitAllocationDecider.
  *
@@ -24,7 +22,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
  */
 public class ShardsLimitAllocationDecider extends AllocationDecider {
 
-	
 	/** The Constant INDEX_TOTAL_SHARDS_PER_NODE. */
 	public static final String INDEX_TOTAL_SHARDS_PER_NODE = "index.routing.allocation.total_shards_per_node";
 
@@ -32,7 +29,6 @@ public class ShardsLimitAllocationDecider extends AllocationDecider {
 		IndexMetaData.addDynamicSettings(INDEX_TOTAL_SHARDS_PER_NODE);
 	}
 
-	
 	/**
 	 * Instantiates a new shards limit allocation decider.
 	 *
@@ -43,9 +39,8 @@ public class ShardsLimitAllocationDecider extends AllocationDecider {
 		super(settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public Decision canAllocate(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
@@ -62,7 +57,7 @@ public class ShardsLimitAllocationDecider extends AllocationDecider {
 			if (!nodeShard.index().equals(shardRouting.index())) {
 				continue;
 			}
-			
+
 			if (nodeShard.relocating()) {
 				continue;
 			}
@@ -74,9 +69,8 @@ public class ShardsLimitAllocationDecider extends AllocationDecider {
 		return Decision.YES;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canRemain(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canRemain(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean canRemain(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
@@ -93,7 +87,7 @@ public class ShardsLimitAllocationDecider extends AllocationDecider {
 			if (!nodeShard.index().equals(shardRouting.index())) {
 				continue;
 			}
-			
+
 			if (nodeShard.relocating()) {
 				continue;
 			}

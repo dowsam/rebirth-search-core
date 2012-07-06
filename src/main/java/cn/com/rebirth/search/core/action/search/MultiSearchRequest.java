@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiSearchRequest.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiSearchRequest.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.action.ValidateActions;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class MultiSearchRequest.
  *
@@ -30,15 +28,12 @@ import com.google.common.collect.Lists;
  */
 public class MultiSearchRequest implements ActionRequest {
 
-	
 	/** The requests. */
 	private List<SearchRequest> requests = Lists.newArrayList();
 
-	
 	/** The listener threaded. */
 	private boolean listenerThreaded = false;
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -50,7 +45,6 @@ public class MultiSearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -62,7 +56,6 @@ public class MultiSearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -84,7 +77,7 @@ public class MultiSearchRequest implements ActionRequest {
 			if (nextMarker == -1) {
 				break;
 			}
-			
+
 			if (nextMarker == 0) {
 				from = nextMarker + 1;
 				continue;
@@ -95,11 +88,10 @@ public class MultiSearchRequest implements ActionRequest {
 				searchRequest.types(types);
 			}
 
-			
 			if (nextMarker - from > 0) {
 				XContentParser parser = xContent.createParser(data, from, nextMarker - from);
 				try {
-					
+
 					XContentParser.Token token = parser.nextToken();
 					if (token != null) {
 						assert token == XContentParser.Token.START_OBJECT;
@@ -131,16 +123,15 @@ public class MultiSearchRequest implements ActionRequest {
 				}
 			}
 
-			
 			from = nextMarker + 1;
-			
+
 			nextMarker = findNextMarker(marker, from, data, length);
 			if (nextMarker == -1) {
 				break;
 			}
 
 			searchRequest.source(data, from, nextMarker - from, contentUnsafe);
-			
+
 			from = nextMarker + 1;
 
 			add(searchRequest);
@@ -149,7 +140,6 @@ public class MultiSearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Find next marker.
 	 *
@@ -168,7 +158,6 @@ public class MultiSearchRequest implements ActionRequest {
 		return -1;
 	}
 
-	
 	/**
 	 * Requests.
 	 *
@@ -178,9 +167,8 @@ public class MultiSearchRequest implements ActionRequest {
 		return this.requests;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -201,18 +189,16 @@ public class MultiSearchRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return listenerThreaded;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public MultiSearchRequest listenerThreaded(boolean listenerThreaded) {
@@ -220,9 +206,8 @@ public class MultiSearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -234,9 +219,8 @@ public class MultiSearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

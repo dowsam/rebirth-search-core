@@ -1,26 +1,22 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GatewayException.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GatewayException.java 2012-7-6 14:29:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class GatewayException.
  *
  * @author l.xue.nong
  */
-public class GatewayException extends RestartException {
+public class GatewayException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7723514873497530289L;
 
-	
 	/**
 	 * Instantiates a new gateway exception.
 	 *
@@ -30,7 +26,6 @@ public class GatewayException extends RestartException {
 		super(msg);
 	}
 
-	
 	/**
 	 * Instantiates a new gateway exception.
 	 *

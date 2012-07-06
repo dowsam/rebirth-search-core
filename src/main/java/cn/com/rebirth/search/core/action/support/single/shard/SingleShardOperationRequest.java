@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SingleShardOperationRequest.java 2012-3-29 15:02:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SingleShardOperationRequest.java 2012-7-6 14:29:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.single.shard;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.action.ActionRequest;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 
-
 /**
  * The Class SingleShardOperationRequest.
  *
@@ -22,26 +20,21 @@ import cn.com.rebirth.search.core.action.ValidateActions;
  */
 public abstract class SingleShardOperationRequest implements ActionRequest {
 
-	
 	/** The index. */
 	protected String index;
 
-	
 	/** The threaded listener. */
 	private boolean threadedListener = false;
 
-	
 	/** The threaded operation. */
 	private boolean threadedOperation = true;
 
-	
 	/**
 	 * Instantiates a new single shard operation request.
 	 */
 	protected SingleShardOperationRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new single shard operation request.
 	 *
@@ -51,9 +44,8 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		this.index = index;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -64,7 +56,6 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -74,7 +65,6 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		return index;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -86,18 +76,16 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return threadedListener;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public SingleShardOperationRequest listenerThreaded(boolean threadedListener) {
@@ -105,7 +93,6 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Operation threaded.
 	 *
@@ -115,7 +102,6 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		return threadedOperation;
 	}
 
-	
 	/**
 	 * Operation threaded.
 	 *
@@ -127,19 +113,17 @@ public abstract class SingleShardOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		index = in.readUTF();
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

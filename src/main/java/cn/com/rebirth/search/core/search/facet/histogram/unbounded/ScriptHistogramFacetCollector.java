@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptHistogramFacetCollector.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptHistogramFacetCollector.java 2012-7-6 14:29:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram.unbounded;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.histogram.HistogramFacet;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ScriptHistogramFacetCollector.
  *
@@ -28,27 +26,21 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ScriptHistogramFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The key script. */
 	private final SearchScript keyScript;
 
-	
 	/** The value script. */
 	private final SearchScript valueScript;
 
-	
 	/** The interval. */
 	private final long interval;
 
-	
 	/** The comparator type. */
 	private final HistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The entries. */
 	final ExtTLongObjectHashMap<InternalFullHistogramFacet.FullEntry> entries = CacheRecycler.popLongObjectMap();
 
-	
 	/**
 	 * Instantiates a new script histogram facet collector.
 	 *
@@ -71,9 +63,8 @@ public class ScriptHistogramFacetCollector extends AbstractFacetCollector {
 		this.comparatorType = comparatorType;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -104,9 +95,8 @@ public class ScriptHistogramFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
@@ -114,9 +104,8 @@ public class ScriptHistogramFacetCollector extends AbstractFacetCollector {
 		valueScript.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -124,16 +113,14 @@ public class ScriptHistogramFacetCollector extends AbstractFacetCollector {
 		valueScript.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalFullHistogramFacet(facetName, comparatorType, entries, true);
 	}
 
-	
 	/**
 	 * Bucket.
 	 *

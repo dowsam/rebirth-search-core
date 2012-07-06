@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesStats.java 2012-3-29 15:01:30 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesStats.java 2012-7-6 14:30:38 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.stats;
 
@@ -25,7 +24,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class IndicesStats.
  *
@@ -33,11 +31,9 @@ import com.google.common.collect.Sets;
  */
 public class IndicesStats extends BroadcastOperationResponse implements ToXContent {
 
-	
 	/** The shards. */
 	private ShardStats[] shards;
 
-	
 	/**
 	 * Instantiates a new indices stats.
 	 */
@@ -45,7 +41,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 
 	}
 
-	
 	/**
 	 * Instantiates a new indices stats.
 	 *
@@ -62,7 +57,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		this.shards = shards;
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -72,7 +66,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -82,7 +75,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the at.
 	 *
@@ -93,7 +85,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return shards[position];
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -104,7 +95,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return indices().get(index);
 	}
 
-	
 	/**
 	 * Gets the indices.
 	 *
@@ -114,11 +104,9 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return indices();
 	}
 
-	
 	/** The indices stats. */
 	private Map<String, IndexStats> indicesStats;
 
-	
 	/**
 	 * Indices.
 	 *
@@ -148,11 +136,9 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return indicesStats;
 	}
 
-	
 	/** The total. */
 	private CommonStats total = null;
 
-	
 	/**
 	 * Gets the total.
 	 *
@@ -162,7 +148,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return total();
 	}
 
-	
 	/**
 	 * Total.
 	 *
@@ -180,11 +165,9 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return stats;
 	}
 
-	
 	/** The primary. */
 	private CommonStats primary = null;
 
-	
 	/**
 	 * Gets the primaries.
 	 *
@@ -194,7 +177,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return primaries();
 	}
 
-	
 	/**
 	 * Primaries.
 	 *
@@ -214,9 +196,8 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return stats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -227,9 +208,8 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -240,9 +220,8 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -298,7 +277,6 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -306,31 +284,24 @@ public class IndicesStats extends BroadcastOperationResponse implements ToXConte
 	 */
 	static final class Fields {
 
-		
 		/** The Constant INDICES. */
 		static final XContentBuilderString INDICES = new XContentBuilderString("indices");
 
-		
 		/** The Constant SHARDS. */
 		static final XContentBuilderString SHARDS = new XContentBuilderString("shards");
 
-		
 		/** The Constant ROUTING. */
 		static final XContentBuilderString ROUTING = new XContentBuilderString("routing");
 
-		
 		/** The Constant STATE. */
 		static final XContentBuilderString STATE = new XContentBuilderString("state");
 
-		
 		/** The Constant PRIMARY. */
 		static final XContentBuilderString PRIMARY = new XContentBuilderString("primary");
 
-		
 		/** The Constant NODE. */
 		static final XContentBuilderString NODE = new XContentBuilderString("node");
 
-		
 		/** The Constant RELOCATING_NODE. */
 		static final XContentBuilderString RELOCATING_NODE = new XContentBuilderString("relocating_node");
 	}

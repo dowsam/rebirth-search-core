@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MappingCharFilterFactory.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MappingCharFilterFactory.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -14,7 +13,7 @@ import org.apache.lucene.analysis.CharStream;
 import org.apache.lucene.analysis.MappingCharFilter;
 import org.apache.lucene.analysis.NormalizeCharMap;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
@@ -22,18 +21,15 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating MappingCharFilter objects.
  */
 @AnalysisSettingsRequired
 public class MappingCharFilterFactory extends AbstractCharFilterFactory {
 
-	
 	/** The norm map. */
 	private final NormalizeCharMap normMap;
 
-	
 	/**
 	 * Instantiates a new mapping char filter factory.
 	 *
@@ -50,7 +46,7 @@ public class MappingCharFilterFactory extends AbstractCharFilterFactory {
 
 		List<String> rules = Analysis.getWordList(env, settings, "mappings");
 		if (rules == null) {
-			throw new RestartIllegalArgumentException(
+			throw new RebirthIllegalArgumentException(
 					"mapping requires either `mappings` or `mappings_path` to be configured");
 		}
 
@@ -58,21 +54,17 @@ public class MappingCharFilterFactory extends AbstractCharFilterFactory {
 		parseRules(rules, normMap);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.CharFilterFactory#create(org.apache.lucene.analysis.CharStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.CharFilterFactory#create(org.apache.lucene.analysis.CharStream)
 	 */
 	@Override
 	public CharStream create(CharStream tokenStream) {
 		return new MappingCharFilter(normMap, tokenStream);
 	}
 
-	
-	
 	/** The rule pattern. */
 	private static Pattern rulePattern = Pattern.compile("(.*)\\s*=>\\s*(.*)\\s*$");
 
-	
 	/**
 	 * Parses the rules.
 	 *
@@ -92,11 +84,9 @@ public class MappingCharFilterFactory extends AbstractCharFilterFactory {
 		}
 	}
 
-	
 	/** The out. */
 	char[] out = new char[256];
 
-	
 	/**
 	 * Parses the string.
 	 *

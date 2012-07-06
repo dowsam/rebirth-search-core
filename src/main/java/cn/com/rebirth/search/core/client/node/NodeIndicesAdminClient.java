@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeIndicesAdminClient.java 2012-3-29 15:02:18 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeIndicesAdminClient.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.node;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class NodeIndicesAdminClient.
  *
@@ -33,15 +31,12 @@ import com.google.common.collect.ImmutableMap;
  */
 public class NodeIndicesAdminClient extends AbstractIndicesAdminClient implements IndicesAdminClient {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The actions. */
 	private final ImmutableMap<IndicesAction, TransportAction> actions;
 
-	
 	/**
 	 * Instantiates a new node indices admin client.
 	 *
@@ -61,18 +56,16 @@ public class NodeIndicesAdminClient extends AbstractIndicesAdminClient implement
 		this.actions = actionsBuilder.immutableMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.internal.InternalIndicesAdminClient#threadPool()
+	 * @see cn.com.rebirth.search.core.client.internal.InternalIndicesAdminClient#threadPool()
 	 */
 	@Override
 	public ThreadPool threadPool() {
 		return this.threadPool;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#execute(cn.com.summall.search.core.action.admin.indices.IndicesAction, cn.com.summall.search.core.action.ActionRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#execute(cn.com.rebirth.search.core.action.admin.indices.IndicesAction, cn.com.rebirth.search.core.action.ActionRequest)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> ActionFuture<Response> execute(
@@ -81,9 +74,8 @@ public class NodeIndicesAdminClient extends AbstractIndicesAdminClient implement
 		return transportAction.execute(request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#execute(cn.com.summall.search.core.action.admin.indices.IndicesAction, cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#execute(cn.com.rebirth.search.core.action.admin.indices.IndicesAction, cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> void execute(

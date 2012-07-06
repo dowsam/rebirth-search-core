@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexTemplateMetaData.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexTemplateMetaData.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class IndexTemplateMetaData.
  *
@@ -30,28 +28,21 @@ import com.google.common.collect.ImmutableMap;
  */
 public class IndexTemplateMetaData {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The order. */
 	private final int order;
 
-	
 	/** The template. */
 	private final String template;
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
-	
 	/** The mappings. */
 	private final ImmutableMap<String, CompressedString> mappings;
 
-	
 	/**
 	 * Instantiates a new index template meta data.
 	 *
@@ -70,7 +61,6 @@ public class IndexTemplateMetaData {
 		this.mappings = mappings;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -80,7 +70,6 @@ public class IndexTemplateMetaData {
 		return this.name;
 	}
 
-	
 	/**
 	 * Order.
 	 *
@@ -90,7 +79,6 @@ public class IndexTemplateMetaData {
 		return this.order;
 	}
 
-	
 	/**
 	 * Gets the order.
 	 *
@@ -100,7 +88,6 @@ public class IndexTemplateMetaData {
 		return order();
 	}
 
-	
 	/**
 	 * Gets the name.
 	 *
@@ -110,7 +97,6 @@ public class IndexTemplateMetaData {
 		return this.name;
 	}
 
-	
 	/**
 	 * Template.
 	 *
@@ -120,7 +106,6 @@ public class IndexTemplateMetaData {
 		return this.template;
 	}
 
-	
 	/**
 	 * Gets the template.
 	 *
@@ -130,7 +115,6 @@ public class IndexTemplateMetaData {
 		return this.template;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -140,7 +124,6 @@ public class IndexTemplateMetaData {
 		return this.settings;
 	}
 
-	
 	/**
 	 * Gets the settings.
 	 *
@@ -150,7 +133,6 @@ public class IndexTemplateMetaData {
 		return settings();
 	}
 
-	
 	/**
 	 * Mappings.
 	 *
@@ -160,7 +142,6 @@ public class IndexTemplateMetaData {
 		return this.mappings;
 	}
 
-	
 	/**
 	 * Gets the mappings.
 	 *
@@ -170,7 +151,6 @@ public class IndexTemplateMetaData {
 		return this.mappings;
 	}
 
-	
 	/**
 	 * Builder.
 	 *
@@ -181,7 +161,6 @@ public class IndexTemplateMetaData {
 		return new Builder(name);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -208,7 +187,6 @@ public class IndexTemplateMetaData {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -222,7 +200,6 @@ public class IndexTemplateMetaData {
 		return result;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -230,27 +207,21 @@ public class IndexTemplateMetaData {
 	 */
 	public static class Builder {
 
-		
 		/** The name. */
 		private String name;
 
-		
 		/** The order. */
 		private int order;
 
-		
 		/** The template. */
 		private String template;
 
-		
 		/** The settings. */
 		private Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-		
 		/** The mappings. */
 		private MapBuilder<String, CompressedString> mappings = MapBuilder.newMapBuilder();
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -260,7 +231,6 @@ public class IndexTemplateMetaData {
 			this.name = name;
 		}
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -274,7 +244,6 @@ public class IndexTemplateMetaData {
 			mappings.putAll(indexTemplateMetaData.mappings());
 		}
 
-		
 		/**
 		 * Order.
 		 *
@@ -286,7 +255,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Template.
 		 *
@@ -298,7 +266,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Template.
 		 *
@@ -308,7 +275,6 @@ public class IndexTemplateMetaData {
 			return template;
 		}
 
-		
 		/**
 		 * Settings.
 		 *
@@ -320,7 +286,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Settings.
 		 *
@@ -332,7 +297,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the mapping.
 		 *
@@ -344,7 +308,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Put mapping.
 		 *
@@ -358,7 +321,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Put mapping.
 		 *
@@ -372,7 +334,6 @@ public class IndexTemplateMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -382,7 +343,6 @@ public class IndexTemplateMetaData {
 			return new IndexTemplateMetaData(name, order, template, settings, mappings.immutableMap());
 		}
 
-		
 		/**
 		 * To x content.
 		 *
@@ -416,7 +376,6 @@ public class IndexTemplateMetaData {
 			builder.endObject();
 		}
 
-		
 		/**
 		 * From x content standalone.
 		 *
@@ -439,7 +398,6 @@ public class IndexTemplateMetaData {
 			return fromXContent(parser);
 		}
 
-		
 		/**
 		 * From x content.
 		 *
@@ -487,7 +445,7 @@ public class IndexTemplateMetaData {
 								String mappingSource = XContentFactory.jsonBuilder().map(mapping).string();
 
 								if (mappingSource == null) {
-									
+
 								} else {
 									builder.putMapping(mappingType, mappingSource);
 								}
@@ -505,7 +463,6 @@ public class IndexTemplateMetaData {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Read from.
 		 *
@@ -525,7 +482,6 @@ public class IndexTemplateMetaData {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *

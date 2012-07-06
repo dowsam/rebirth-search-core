@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BaseIndicesRequestBuilder.java 2012-3-29 15:02:18 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BaseIndicesRequestBuilder.java 2012-7-6 14:30:26 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.support;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.support.PlainListenableActionFuture;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 import cn.com.rebirth.search.core.client.internal.InternalIndicesAdminClient;
 
-
 /**
  * The Class BaseIndicesRequestBuilder.
  *
@@ -26,15 +24,12 @@ import cn.com.rebirth.search.core.client.internal.InternalIndicesAdminClient;
 public abstract class BaseIndicesRequestBuilder<Request extends ActionRequest, Response extends ActionResponse>
 		implements ActionRequestBuilder<Request, Response> {
 
-	
 	/** The client. */
 	protected final InternalIndicesAdminClient client;
 
-	
 	/** The request. */
 	protected final Request request;
 
-	
 	/**
 	 * Instantiates a new base indices request builder.
 	 *
@@ -46,18 +41,16 @@ public abstract class BaseIndicesRequestBuilder<Request extends ActionRequest, R
 		this.request = request;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequestBuilder#request()
+	 * @see cn.com.rebirth.search.core.action.ActionRequestBuilder#request()
 	 */
 	@Override
 	public Request request() {
 		return request;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequestBuilder#execute()
+	 * @see cn.com.rebirth.search.core.action.ActionRequestBuilder#execute()
 	 */
 	@Override
 	public ListenableActionFuture<Response> execute() {
@@ -67,16 +60,14 @@ public abstract class BaseIndicesRequestBuilder<Request extends ActionRequest, R
 		return future;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequestBuilder#execute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.ActionRequestBuilder#execute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void execute(ActionListener<Response> listener) {
 		doExecute(listener);
 	}
 
-	
 	/**
 	 * Do execute.
 	 *

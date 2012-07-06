@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ReplicationType.java 2012-3-29 15:01:37 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ReplicationType.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.replication;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum ReplicationType.
@@ -17,23 +14,18 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum ReplicationType {
 
-	
-	/** The SYNC. */
+	/** The sync. */
 	SYNC((byte) 0),
 
-	
-	/** The ASYNC. */
+	/** The async. */
 	ASYNC((byte) 1),
 
-	
-	/** The DEFAULT. */
+	/** The default. */
 	DEFAULT((byte) 2);
 
-	
 	/** The id. */
 	private byte id;
 
-	
 	/**
 	 * Instantiates a new replication type.
 	 *
@@ -43,7 +35,6 @@ public enum ReplicationType {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -53,7 +44,6 @@ public enum ReplicationType {
 		return id;
 	}
 
-	
 	/**
 	 * From id.
 	 *
@@ -68,11 +58,10 @@ public enum ReplicationType {
 		} else if (id == 2) {
 			return DEFAULT;
 		} else {
-			throw new RestartIllegalArgumentException("No type match for [" + id + "]");
+			throw new RebirthIllegalArgumentException("No type match for [" + id + "]");
 		}
 	}
 
-	
 	/**
 	 * From string.
 	 *
@@ -87,7 +76,7 @@ public enum ReplicationType {
 		} else if ("default".equals(type)) {
 			return DEFAULT;
 		}
-		throw new RestartIllegalArgumentException("No replication type match for [" + type
+		throw new RebirthIllegalArgumentException("No replication type match for [" + type
 				+ "], should be either `async`, or `sync`");
 	}
 }

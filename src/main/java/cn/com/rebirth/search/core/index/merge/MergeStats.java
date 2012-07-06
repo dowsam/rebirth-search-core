@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MergeStats.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MergeStats.java 2012-7-6 14:30:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.merge;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class MergeStats.
  *
@@ -25,298 +23,263 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class MergeStats implements Streamable, ToXContent {
 
-    
-    /** The total. */
-    private long total;
-    
-    
-    /** The total time in millis. */
-    private long totalTimeInMillis;
-    
-    
-    /** The total num docs. */
-    private long totalNumDocs;
-    
-    
-    /** The total size in bytes. */
-    private long totalSizeInBytes;
-    
-    
-    /** The current. */
-    private long current;
-    
-    
-    /** The current num docs. */
-    private long currentNumDocs;
-    
-    
-    /** The current size in bytes. */
-    private long currentSizeInBytes;
+	/** The total. */
+	private long total;
 
-    
-    /**
-     * Instantiates a new merge stats.
-     */
-    public MergeStats() {
+	/** The total time in millis. */
+	private long totalTimeInMillis;
 
-    }
+	/** The total num docs. */
+	private long totalNumDocs;
 
-    
-    /**
-     * Adds the.
-     *
-     * @param totalMerges the total merges
-     * @param totalMergeTime the total merge time
-     * @param totalNumDocs the total num docs
-     * @param totalSizeInBytes the total size in bytes
-     * @param currentMerges the current merges
-     * @param currentNumDocs the current num docs
-     * @param currentSizeInBytes the current size in bytes
-     */
-    public void add(long totalMerges, long totalMergeTime, long totalNumDocs, long totalSizeInBytes, long currentMerges, long currentNumDocs, long currentSizeInBytes) {
-        this.total += totalMerges;
-        this.totalTimeInMillis += totalMergeTime;
-        this.totalNumDocs += totalNumDocs;
-        this.totalSizeInBytes += totalSizeInBytes;
-        this.current += currentMerges;
-        this.currentNumDocs += currentNumDocs;
-        this.currentSizeInBytes += currentSizeInBytes;
-    }
+	/** The total size in bytes. */
+	private long totalSizeInBytes;
 
-    
-    /**
-     * Adds the.
-     *
-     * @param mergeStats the merge stats
-     */
-    public void add(MergeStats mergeStats) {
-        if (mergeStats == null) {
-            return;
-        }
-        this.total += mergeStats.total;
-        this.totalTimeInMillis += mergeStats.totalTimeInMillis;
-        this.totalNumDocs += mergeStats.totalNumDocs;
-        this.totalSizeInBytes += mergeStats.totalSizeInBytes;
-        this.current += mergeStats.current;
-        this.currentNumDocs += mergeStats.currentNumDocs;
-        this.currentSizeInBytes += mergeStats.currentSizeInBytes;
-    }
+	/** The current. */
+	private long current;
 
-    
-    /**
-     * Total.
-     *
-     * @return the long
-     */
-    public long total() {
-        return this.total;
-    }
+	/** The current num docs. */
+	private long currentNumDocs;
 
-    
-    /**
-     * Total time in millis.
-     *
-     * @return the long
-     */
-    public long totalTimeInMillis() {
-        return this.totalTimeInMillis;
-    }
+	/** The current size in bytes. */
+	private long currentSizeInBytes;
 
-    
-    /**
-     * Total time.
-     *
-     * @return the time value
-     */
-    public TimeValue totalTime() {
-        return new TimeValue(totalTimeInMillis);
-    }
+	/**
+	 * Instantiates a new merge stats.
+	 */
+	public MergeStats() {
 
-    
-    /**
-     * Total num docs.
-     *
-     * @return the long
-     */
-    public long totalNumDocs() {
-        return this.totalNumDocs;
-    }
+	}
 
-    
-    /**
-     * Total size in bytes.
-     *
-     * @return the long
-     */
-    public long totalSizeInBytes() {
-        return this.totalSizeInBytes;
-    }
+	/**
+	 * Adds the.
+	 *
+	 * @param totalMerges the total merges
+	 * @param totalMergeTime the total merge time
+	 * @param totalNumDocs the total num docs
+	 * @param totalSizeInBytes the total size in bytes
+	 * @param currentMerges the current merges
+	 * @param currentNumDocs the current num docs
+	 * @param currentSizeInBytes the current size in bytes
+	 */
+	public void add(long totalMerges, long totalMergeTime, long totalNumDocs, long totalSizeInBytes,
+			long currentMerges, long currentNumDocs, long currentSizeInBytes) {
+		this.total += totalMerges;
+		this.totalTimeInMillis += totalMergeTime;
+		this.totalNumDocs += totalNumDocs;
+		this.totalSizeInBytes += totalSizeInBytes;
+		this.current += currentMerges;
+		this.currentNumDocs += currentNumDocs;
+		this.currentSizeInBytes += currentSizeInBytes;
+	}
 
-    
-    /**
-     * Total size.
-     *
-     * @return the byte size value
-     */
-    public ByteSizeValue totalSize() {
-        return new ByteSizeValue(totalSizeInBytes);
-    }
+	/**
+	 * Adds the.
+	 *
+	 * @param mergeStats the merge stats
+	 */
+	public void add(MergeStats mergeStats) {
+		if (mergeStats == null) {
+			return;
+		}
+		this.total += mergeStats.total;
+		this.totalTimeInMillis += mergeStats.totalTimeInMillis;
+		this.totalNumDocs += mergeStats.totalNumDocs;
+		this.totalSizeInBytes += mergeStats.totalSizeInBytes;
+		this.current += mergeStats.current;
+		this.currentNumDocs += mergeStats.currentNumDocs;
+		this.currentSizeInBytes += mergeStats.currentSizeInBytes;
+	}
 
-    
-    /**
-     * Current.
-     *
-     * @return the long
-     */
-    public long current() {
-        return this.current;
-    }
+	/**
+	 * Total.
+	 *
+	 * @return the long
+	 */
+	public long total() {
+		return this.total;
+	}
 
-    
-    /**
-     * Current num docs.
-     *
-     * @return the long
-     */
-    public long currentNumDocs() {
-        return this.currentNumDocs;
-    }
+	/**
+	 * Total time in millis.
+	 *
+	 * @return the long
+	 */
+	public long totalTimeInMillis() {
+		return this.totalTimeInMillis;
+	}
 
-    
-    /**
-     * Current size in bytes.
-     *
-     * @return the long
-     */
-    public long currentSizeInBytes() {
-        return this.currentSizeInBytes;
-    }
+	/**
+	 * Total time.
+	 *
+	 * @return the time value
+	 */
+	public TimeValue totalTime() {
+		return new TimeValue(totalTimeInMillis);
+	}
 
-    
-    /**
-     * Current size.
-     *
-     * @return the byte size value
-     */
-    public ByteSizeValue currentSize() {
-        return new ByteSizeValue(currentSizeInBytes);
-    }
+	/**
+	 * Total num docs.
+	 *
+	 * @return the long
+	 */
+	public long totalNumDocs() {
+		return this.totalNumDocs;
+	}
 
-    
-    /**
-     * Read merge stats.
-     *
-     * @param in the in
-     * @return the merge stats
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
-    public static MergeStats readMergeStats(StreamInput in) throws IOException {
-        MergeStats stats = new MergeStats();
-        stats.readFrom(in);
-        return stats;
-    }
+	/**
+	 * Total size in bytes.
+	 *
+	 * @return the long
+	 */
+	public long totalSizeInBytes() {
+		return this.totalSizeInBytes;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
-     */
-    @Override
-    public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-        builder.startObject(Fields.MERGES);
-        builder.field(Fields.CURRENT, current);
-        builder.field(Fields.CURRENT_DOCS, currentNumDocs);
-        builder.field(Fields.CURRENT_SIZE, currentSize().toString());
-        builder.field(Fields.CURRENT_SIZE_IN_BYTES, currentSizeInBytes);
-        builder.field(Fields.TOTAL, total);
-        builder.field(Fields.TOTAL_TIME, totalTime().toString());
-        builder.field(Fields.TOTAL_TIME_IN_MILLIS, totalTimeInMillis);
-        builder.field(Fields.TOTAL_DOCS, totalNumDocs);
-        builder.field(Fields.TOTAL_SIZE, totalSize().toString());
-        builder.field(Fields.TOTAL_SIZE_IN_BYTES, totalSizeInBytes);
-        builder.endObject();
-        return builder;
-    }
+	/**
+	 * Total size.
+	 *
+	 * @return the byte size value
+	 */
+	public ByteSizeValue totalSize() {
+		return new ByteSizeValue(totalSizeInBytes);
+	}
 
-    
-    /**
-     * The Class Fields.
-     *
-     * @author l.xue.nong
-     */
-    static final class Fields {
-        
-        
-        /** The Constant MERGES. */
-        static final XContentBuilderString MERGES = new XContentBuilderString("merges");
-        
-        
-        /** The Constant CURRENT. */
-        static final XContentBuilderString CURRENT = new XContentBuilderString("current");
-        
-        
-        /** The Constant CURRENT_DOCS. */
-        static final XContentBuilderString CURRENT_DOCS = new XContentBuilderString("current_docs");
-        
-        
-        /** The Constant CURRENT_SIZE. */
-        static final XContentBuilderString CURRENT_SIZE = new XContentBuilderString("current_size");
-        
-        
-        /** The Constant CURRENT_SIZE_IN_BYTES. */
-        static final XContentBuilderString CURRENT_SIZE_IN_BYTES = new XContentBuilderString("current_size_in_bytes");
-        
-        
-        /** The Constant TOTAL. */
-        static final XContentBuilderString TOTAL = new XContentBuilderString("total");
-        
-        
-        /** The Constant TOTAL_TIME. */
-        static final XContentBuilderString TOTAL_TIME = new XContentBuilderString("total_time");
-        
-        
-        /** The Constant TOTAL_TIME_IN_MILLIS. */
-        static final XContentBuilderString TOTAL_TIME_IN_MILLIS = new XContentBuilderString("total_time_in_millis");
-        
-        
-        /** The Constant TOTAL_DOCS. */
-        static final XContentBuilderString TOTAL_DOCS = new XContentBuilderString("total_docs");
-        
-        
-        /** The Constant TOTAL_SIZE. */
-        static final XContentBuilderString TOTAL_SIZE = new XContentBuilderString("total_size");
-        
-        
-        /** The Constant TOTAL_SIZE_IN_BYTES. */
-        static final XContentBuilderString TOTAL_SIZE_IN_BYTES = new XContentBuilderString("total_size_in_bytes");
-    }
+	/**
+	 * Current.
+	 *
+	 * @return the long
+	 */
+	public long current() {
+		return this.current;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
-     */
-    @Override
-    public void readFrom(StreamInput in) throws IOException {
-        total = in.readVLong();
-        totalTimeInMillis = in.readVLong();
-        totalNumDocs = in.readVLong();
-        totalSizeInBytes = in.readVLong();
-        current = in.readVLong();
-        currentNumDocs = in.readVLong();
-        currentSizeInBytes = in.readVLong();
-    }
+	/**
+	 * Current num docs.
+	 *
+	 * @return the long
+	 */
+	public long currentNumDocs() {
+		return this.currentNumDocs;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
-     */
-    @Override
-    public void writeTo(StreamOutput out) throws IOException {
-        out.writeVLong(total);
-        out.writeVLong(totalTimeInMillis);
-        out.writeVLong(totalNumDocs);
-        out.writeVLong(totalSizeInBytes);
-        out.writeVLong(current);
-        out.writeVLong(currentNumDocs);
-        out.writeVLong(currentSizeInBytes);
-    }
+	/**
+	 * Current size in bytes.
+	 *
+	 * @return the long
+	 */
+	public long currentSizeInBytes() {
+		return this.currentSizeInBytes;
+	}
+
+	/**
+	 * Current size.
+	 *
+	 * @return the byte size value
+	 */
+	public ByteSizeValue currentSize() {
+		return new ByteSizeValue(currentSizeInBytes);
+	}
+
+	/**
+	 * Read merge stats.
+	 *
+	 * @param in the in
+	 * @return the merge stats
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static MergeStats readMergeStats(StreamInput in) throws IOException {
+		MergeStats stats = new MergeStats();
+		stats.readFrom(in);
+		return stats;
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
+	 */
+	@Override
+	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
+		builder.startObject(Fields.MERGES);
+		builder.field(Fields.CURRENT, current);
+		builder.field(Fields.CURRENT_DOCS, currentNumDocs);
+		builder.field(Fields.CURRENT_SIZE, currentSize().toString());
+		builder.field(Fields.CURRENT_SIZE_IN_BYTES, currentSizeInBytes);
+		builder.field(Fields.TOTAL, total);
+		builder.field(Fields.TOTAL_TIME, totalTime().toString());
+		builder.field(Fields.TOTAL_TIME_IN_MILLIS, totalTimeInMillis);
+		builder.field(Fields.TOTAL_DOCS, totalNumDocs);
+		builder.field(Fields.TOTAL_SIZE, totalSize().toString());
+		builder.field(Fields.TOTAL_SIZE_IN_BYTES, totalSizeInBytes);
+		builder.endObject();
+		return builder;
+	}
+
+	/**
+	 * The Class Fields.
+	 *
+	 * @author l.xue.nong
+	 */
+	static final class Fields {
+
+		/** The Constant MERGES. */
+		static final XContentBuilderString MERGES = new XContentBuilderString("merges");
+
+		/** The Constant CURRENT. */
+		static final XContentBuilderString CURRENT = new XContentBuilderString("current");
+
+		/** The Constant CURRENT_DOCS. */
+		static final XContentBuilderString CURRENT_DOCS = new XContentBuilderString("current_docs");
+
+		/** The Constant CURRENT_SIZE. */
+		static final XContentBuilderString CURRENT_SIZE = new XContentBuilderString("current_size");
+
+		/** The Constant CURRENT_SIZE_IN_BYTES. */
+		static final XContentBuilderString CURRENT_SIZE_IN_BYTES = new XContentBuilderString("current_size_in_bytes");
+
+		/** The Constant TOTAL. */
+		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
+
+		/** The Constant TOTAL_TIME. */
+		static final XContentBuilderString TOTAL_TIME = new XContentBuilderString("total_time");
+
+		/** The Constant TOTAL_TIME_IN_MILLIS. */
+		static final XContentBuilderString TOTAL_TIME_IN_MILLIS = new XContentBuilderString("total_time_in_millis");
+
+		/** The Constant TOTAL_DOCS. */
+		static final XContentBuilderString TOTAL_DOCS = new XContentBuilderString("total_docs");
+
+		/** The Constant TOTAL_SIZE. */
+		static final XContentBuilderString TOTAL_SIZE = new XContentBuilderString("total_size");
+
+		/** The Constant TOTAL_SIZE_IN_BYTES. */
+		static final XContentBuilderString TOTAL_SIZE_IN_BYTES = new XContentBuilderString("total_size_in_bytes");
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
+	 */
+	@Override
+	public void readFrom(StreamInput in) throws IOException {
+		total = in.readVLong();
+		totalTimeInMillis = in.readVLong();
+		totalNumDocs = in.readVLong();
+		totalSizeInBytes = in.readVLong();
+		current = in.readVLong();
+		currentNumDocs = in.readVLong();
+		currentSizeInBytes = in.readVLong();
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
+	 */
+	@Override
+	public void writeTo(StreamOutput out) throws IOException {
+		out.writeVLong(total);
+		out.writeVLong(totalTimeInMillis);
+		out.writeVLong(totalNumDocs);
+		out.writeVLong(totalSizeInBytes);
+		out.writeVLong(current);
+		out.writeVLong(currentNumDocs);
+		out.writeVLong(currentSizeInBytes);
+	}
 }

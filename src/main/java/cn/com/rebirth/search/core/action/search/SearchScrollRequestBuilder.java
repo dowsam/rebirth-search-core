@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchScrollRequestBuilder.java 2012-3-29 15:01:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchScrollRequestBuilder.java 2012-7-6 14:29:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;
 import cn.com.rebirth.search.core.search.Scroll;
 
-
 /**
  * The Class SearchScrollRequestBuilder.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.search.Scroll;
  */
 public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollRequest, SearchResponse> {
 
-	
 	/**
 	 * Instantiates a new search scroll request builder.
 	 *
@@ -30,7 +27,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		super(client, new SearchScrollRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new search scroll request builder.
 	 *
@@ -41,7 +37,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		super(client, new SearchScrollRequest(scrollId));
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -53,7 +48,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		return this;
 	}
 
-	
 	/**
 	 * Listener threaded.
 	 *
@@ -65,7 +59,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll id.
 	 *
@@ -77,7 +70,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll.
 	 *
@@ -89,7 +81,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll.
 	 *
@@ -101,7 +92,6 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the scroll.
 	 *
@@ -113,9 +103,8 @@ public class SearchScrollRequestBuilder extends BaseRequestBuilder<SearchScrollR
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<SearchResponse> listener) {

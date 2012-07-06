@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AllFieldMapper.java 2012-3-29 15:01:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AllFieldMapper.java 2012-7-6 14:28:51 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -34,7 +33,6 @@ import cn.com.rebirth.search.core.index.mapper.core.TypeParsers;
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class AllFieldMapper.
  *
@@ -42,7 +40,6 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public class AllFieldMapper extends AbstractFieldMapper<Void> implements InternalMapper, RootMapper {
 
-	
 	/**
 	 * The Interface IncludeInAll.
 	 *
@@ -50,7 +47,6 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 	 */
 	public interface IncludeInAll extends Mapper {
 
-		
 		/**
 		 * Include in all.
 		 *
@@ -58,7 +54,6 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		 */
 		void includeInAll(Boolean includeInAll);
 
-		
 		/**
 		 * Include in all if not set.
 		 *
@@ -67,15 +62,12 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		void includeInAllIfNotSet(Boolean includeInAll);
 	}
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_all";
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_all";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -83,20 +75,16 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
 
-		
 		/** The Constant NAME. */
 		public static final String NAME = AllFieldMapper.NAME;
 
-		
 		/** The Constant INDEX_NAME. */
 		public static final String INDEX_NAME = AllFieldMapper.NAME;
 
-		
 		/** The Constant ENABLED. */
 		public static final boolean ENABLED = true;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -104,11 +92,9 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 	 */
 	public static class Builder extends AbstractFieldMapper.Builder<Builder, AllFieldMapper> {
 
-		
 		/** The enabled. */
 		private boolean enabled = Defaults.ENABLED;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 */
@@ -118,7 +104,6 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 			indexName = Defaults.INDEX_NAME;
 		}
 
-		
 		/**
 		 * Enabled.
 		 *
@@ -130,45 +115,40 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
 		 */
 		@Override
 		public Builder store(Field.Store store) {
 			return super.store(store);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#termVector(org.apache.lucene.document.Field.TermVector)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#termVector(org.apache.lucene.document.Field.TermVector)
 		 */
 		@Override
 		public Builder termVector(Field.TermVector termVector) {
 			return super.termVector(termVector);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexAnalyzer(cn.com.summall.search.index.analysis.NamedAnalyzer)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexAnalyzer(cn.com.rebirth.search.index.analysis.NamedAnalyzer)
 		 */
 		@Override
 		protected Builder indexAnalyzer(NamedAnalyzer indexAnalyzer) {
 			return super.indexAnalyzer(indexAnalyzer);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#searchAnalyzer(cn.com.summall.search.index.analysis.NamedAnalyzer)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#searchAnalyzer(cn.com.rebirth.search.index.analysis.NamedAnalyzer)
 		 */
 		@Override
 		protected Builder searchAnalyzer(NamedAnalyzer searchAnalyzer) {
 			return super.searchAnalyzer(searchAnalyzer);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public AllFieldMapper build(BuilderContext context) {
@@ -177,7 +157,6 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -185,9 +164,8 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -205,11 +183,9 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		}
 	}
 
-	
 	/** The enabled. */
 	private boolean enabled;
 
-	
 	/**
 	 * Instantiates a new all field mapper.
 	 */
@@ -218,7 +194,6 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 				Defaults.OMIT_TERM_FREQ_AND_POSITIONS, null, null, Defaults.ENABLED);
 	}
 
-	
 	/**
 	 * Instantiates a new all field mapper.
 	 *
@@ -238,7 +213,6 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		this.enabled = enabled;
 	}
 
-	
 	/**
 	 * Enabled.
 	 *
@@ -248,84 +222,75 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		return this.enabled;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#queryStringTermQuery(org.apache.lucene.index.Term)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#queryStringTermQuery(org.apache.lucene.index.Term)
 	 */
 	@Override
 	public Query queryStringTermQuery(Term term) {
 		return new AllTermQuery(term);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#fieldQuery(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#fieldQuery(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query fieldQuery(String value, QueryParseContext context) {
 		return new AllTermQuery(names().createIndexNameTerm(value));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
 		super.parse(context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException {
 		if (!enabled) {
 			return null;
 		}
-		
+
 		context.allEntries().reset();
 
 		Analyzer analyzer = findAnalyzer(context);
 		return new AllField(names.indexName(), store, termVector, context.allEntries(), analyzer);
 	}
 
-	
 	/**
 	 * Find analyzer.
 	 *
@@ -339,7 +304,7 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 			if (analyzer == null) {
 				analyzer = context.docMapper().indexAnalyzer();
 				if (analyzer == null) {
-					
+
 					analyzer = Lucene.STANDARD_ANALYZER;
 				}
 			}
@@ -347,58 +312,52 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		return analyzer;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Void value(Fieldable field) {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public Void valueFromString(String value) {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Object valueForSearch(Fieldable field) {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-		
+
 		if (enabled == Defaults.ENABLED && store == Defaults.STORE && termVector == Defaults.TERM_VECTOR
 				&& indexAnalyzer == null && searchAnalyzer == null) {
 			return builder;
@@ -415,7 +374,7 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		}
 		if (indexAnalyzer != null && searchAnalyzer != null && indexAnalyzer.name().equals(searchAnalyzer.name())
 				&& !indexAnalyzer.name().startsWith("_")) {
-			
+
 			builder.field("analyzer", indexAnalyzer.name());
 		} else {
 			if (indexAnalyzer != null && !indexAnalyzer.name().startsWith("_")) {
@@ -429,12 +388,11 @@ public class AllFieldMapper extends AbstractFieldMapper<Void> implements Interna
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
-		
+
 	}
 }

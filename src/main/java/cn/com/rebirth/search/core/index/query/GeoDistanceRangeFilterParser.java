@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceRangeFilterParser.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceRangeFilterParser.java 2012-7-6 14:28:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.search.geo.GeoDistanceRangeFilter;
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
 import cn.com.rebirth.search.core.index.search.geo.GeoUtils;
 
-
 /**
  * The Class GeoDistanceRangeFilterParser.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.index.search.geo.GeoUtils;
  */
 public class GeoDistanceRangeFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "geo_distance_range";
 
-	
 	/**
 	 * Instantiates a new geo distance range filter parser.
 	 */
@@ -44,18 +40,16 @@ public class GeoDistanceRangeFilterParser implements FilterParser {
 	public GeoDistanceRangeFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "geoDistanceRange" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -74,7 +68,7 @@ public class GeoDistanceRangeFilterParser implements FilterParser {
 		Object vTo = null;
 		boolean includeLower = true;
 		boolean includeUpper = true;
-		DistanceUnit unit = DistanceUnit.KILOMETERS; 
+		DistanceUnit unit = DistanceUnit.KILOMETERS;
 		GeoDistance geoDistance = GeoDistance.ARC;
 		String optimizeBbox = "memory";
 		boolean normalizeLon = true;
@@ -92,7 +86,7 @@ public class GeoDistanceRangeFilterParser implements FilterParser {
 				}
 				fieldName = currentFieldName;
 			} else if (token == XContentParser.Token.START_OBJECT) {
-				
+
 				String currentName = parser.currentName();
 				fieldName = currentFieldName;
 				while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
@@ -114,17 +108,17 @@ public class GeoDistanceRangeFilterParser implements FilterParser {
 				if (currentFieldName.equals("from")) {
 					if (token == XContentParser.Token.VALUE_NULL) {
 					} else if (token == XContentParser.Token.VALUE_STRING) {
-						vFrom = parser.text(); 
+						vFrom = parser.text();
 					} else {
-						vFrom = parser.numberValue(); 
+						vFrom = parser.numberValue();
 					}
 				} else if (currentFieldName.equals("to")) {
 					if (token == XContentParser.Token.VALUE_NULL) {
 					}
 					if (token == XContentParser.Token.VALUE_STRING) {
-						vTo = parser.text(); 
+						vTo = parser.text();
 					} else {
-						vTo = parser.numberValue(); 
+						vTo = parser.numberValue();
 					}
 				} else if ("include_lower".equals(currentFieldName) || "includeLower".equals(currentFieldName)) {
 					includeLower = parser.booleanValue();
@@ -133,35 +127,35 @@ public class GeoDistanceRangeFilterParser implements FilterParser {
 				} else if ("gt".equals(currentFieldName)) {
 					if (token == XContentParser.Token.VALUE_NULL) {
 					} else if (token == XContentParser.Token.VALUE_STRING) {
-						vFrom = parser.text(); 
+						vFrom = parser.text();
 					} else {
-						vFrom = parser.numberValue(); 
+						vFrom = parser.numberValue();
 					}
 					includeLower = false;
 				} else if ("gte".equals(currentFieldName) || "ge".equals(currentFieldName)) {
 					if (token == XContentParser.Token.VALUE_NULL) {
 					} else if (token == XContentParser.Token.VALUE_STRING) {
-						vFrom = parser.text(); 
+						vFrom = parser.text();
 					} else {
-						vFrom = parser.numberValue(); 
+						vFrom = parser.numberValue();
 					}
 					includeLower = true;
 				} else if ("lt".equals(currentFieldName)) {
 					if (token == XContentParser.Token.VALUE_NULL) {
 					}
 					if (token == XContentParser.Token.VALUE_STRING) {
-						vTo = parser.text(); 
+						vTo = parser.text();
 					} else {
-						vTo = parser.numberValue(); 
+						vTo = parser.numberValue();
 					}
 					includeUpper = false;
 				} else if ("lte".equals(currentFieldName) || "le".equals(currentFieldName)) {
 					if (token == XContentParser.Token.VALUE_NULL) {
 					}
 					if (token == XContentParser.Token.VALUE_STRING) {
-						vTo = parser.text(); 
+						vTo = parser.text();
 					} else {
-						vTo = parser.numberValue(); 
+						vTo = parser.numberValue();
 					}
 					includeUpper = true;
 				} else if (currentFieldName.equals("unit")) {
@@ -194,7 +188,7 @@ public class GeoDistanceRangeFilterParser implements FilterParser {
 					normalizeLat = parser.booleanValue();
 					normalizeLon = parser.booleanValue();
 				} else {
-					
+
 					String value = parser.text();
 					int comma = value.indexOf(',');
 					if (comma != -1) {

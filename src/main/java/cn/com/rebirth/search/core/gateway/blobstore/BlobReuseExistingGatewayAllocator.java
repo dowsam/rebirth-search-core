@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BlobReuseExistingGatewayAllocator.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BlobReuseExistingGatewayAllocator.java 2012-7-6 14:30:17 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.gateway.blobstore;
@@ -81,7 +81,7 @@ public class BlobReuseExistingGatewayAllocator extends AbstractComponent impleme
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyStartedShards(cn.com.summall.search.core.cluster.routing.allocation.StartedRerouteAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyStartedShards(cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAllocation)
 	 */
 	@Override
 	public void applyStartedShards(StartedRerouteAllocation allocation) {
@@ -92,7 +92,7 @@ public class BlobReuseExistingGatewayAllocator extends AbstractComponent impleme
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyFailedShards(cn.com.summall.search.core.cluster.routing.allocation.FailedRerouteAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyFailedShards(cn.com.rebirth.search.core.cluster.routing.allocation.FailedRerouteAllocation)
 	 */
 	@Override
 	public void applyFailedShards(FailedRerouteAllocation allocation) {
@@ -101,7 +101,7 @@ public class BlobReuseExistingGatewayAllocator extends AbstractComponent impleme
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.GatewayAllocator#allocateUnassigned(cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.GatewayAllocator#allocateUnassigned(cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean allocateUnassigned(RoutingAllocation allocation) {

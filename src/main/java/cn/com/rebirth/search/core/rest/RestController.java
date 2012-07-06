@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestController.java 2012-3-29 15:01:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestController.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest;
 
@@ -11,15 +10,14 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.path.PathTrie;
 import cn.com.rebirth.search.core.rest.support.RestUtils;
-
 
 /**
  * The Class RestController.
@@ -28,40 +26,30 @@ import cn.com.rebirth.search.core.rest.support.RestUtils;
  */
 public class RestController extends AbstractLifecycleComponent<RestController> {
 
-	
 	/** The get handlers. */
 	private final PathTrie<RestHandler> getHandlers = new PathTrie<RestHandler>(RestUtils.REST_DECODER);
 
-	
 	/** The post handlers. */
 	private final PathTrie<RestHandler> postHandlers = new PathTrie<RestHandler>(RestUtils.REST_DECODER);
 
-	
 	/** The put handlers. */
 	private final PathTrie<RestHandler> putHandlers = new PathTrie<RestHandler>(RestUtils.REST_DECODER);
 
-	
 	/** The delete handlers. */
 	private final PathTrie<RestHandler> deleteHandlers = new PathTrie<RestHandler>(RestUtils.REST_DECODER);
 
-	
 	/** The head handlers. */
 	private final PathTrie<RestHandler> headHandlers = new PathTrie<RestHandler>(RestUtils.REST_DECODER);
 
-	
 	/** The options handlers. */
 	private final PathTrie<RestHandler> optionsHandlers = new PathTrie<RestHandler>(RestUtils.REST_DECODER);
 
-	
 	/** The handler filter. */
 	private final RestHandlerFilter handlerFilter = new RestHandlerFilter();
 
-	
-	
 	/** The filters. */
 	private RestFilter[] filters = new RestFilter[0];
 
-	
 	/**
 	 * Instantiates a new rest controller.
 	 *
@@ -72,34 +60,30 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		super(settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		for (RestFilter filter : filters) {
 			filter.close();
 		}
 	}
 
-	
 	/**
 	 * Register filter.
 	 *
@@ -118,7 +102,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		filters = copy;
 	}
 
-	
 	/**
 	 * Register handler.
 	 *
@@ -147,11 +130,10 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 			headHandlers.insert(path, handler);
 			break;
 		default:
-			throw new RestartIllegalArgumentException("Can't handle [" + method + "] for path [" + path + "]");
+			throw new RebirthIllegalArgumentException("Can't handle [" + method + "] for path [" + path + "]");
 		}
 	}
 
-	
 	/**
 	 * Filter chain or null.
 	 *
@@ -166,7 +148,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		return new ControllerFilterChain(executionFilter);
 	}
 
-	
 	/**
 	 * Filter chain.
 	 *
@@ -177,7 +158,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		return new ControllerFilterChain(executionFilter);
 	}
 
-	
 	/**
 	 * Dispatch request.
 	 *
@@ -201,7 +181,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		}
 	}
 
-	
 	/**
 	 * Execute handler.
 	 *
@@ -214,7 +193,7 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 			handler.handleRequest(request, channel);
 		} else {
 			if (request.method() == RestRequest.Method.OPTIONS) {
-				
+
 				StringRestResponse response = new StringRestResponse(RestStatus.OK);
 				channel.sendResponse(response);
 			} else {
@@ -224,7 +203,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		}
 	}
 
-	
 	/**
 	 * Gets the handler.
 	 *
@@ -251,7 +229,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		}
 	}
 
-	
 	/**
 	 * Gets the path.
 	 *
@@ -259,13 +236,10 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 	 * @return the path
 	 */
 	private String getPath(RestRequest request) {
-		
-		
-		
+
 		return request.rawPath();
 	}
 
-	
 	/**
 	 * The Class ControllerFilterChain.
 	 *
@@ -273,15 +247,12 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 	 */
 	class ControllerFilterChain implements RestFilterChain {
 
-		
 		/** The execution filter. */
 		private final RestFilter executionFilter;
 
-		
 		/** The index. */
 		private volatile int index;
 
-		
 		/**
 		 * Instantiates a new controller filter chain.
 		 *
@@ -291,17 +262,15 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 			this.executionFilter = executionFilter;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestFilterChain#continueProcessing(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestFilterChain#continueProcessing(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void continueProcessing(RestRequest request, RestChannel channel) {
 			try {
 				int loc = index;
 				if (loc > filters.length) {
-					throw new RestartIllegalStateException(
-							"filter continueProcessing was called more than expected");
+					throw new RebirthIllegalStateException("filter continueProcessing was called more than expected");
 				} else if (loc == filters.length) {
 					executionFilter.process(request, channel, this);
 				} else {
@@ -319,7 +288,6 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 		}
 	}
 
-	
 	/**
 	 * The Class RestHandlerFilter.
 	 *
@@ -327,9 +295,8 @@ public class RestController extends AbstractLifecycleComponent<RestController> {
 	 */
 	class RestHandlerFilter extends RestFilter {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestFilter#process(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel, cn.com.summall.search.core.rest.RestFilterChain)
+		 * @see cn.com.rebirth.search.core.rest.RestFilter#process(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel, cn.com.rebirth.search.core.rest.RestFilterChain)
 		 */
 		@Override
 		public void process(RestRequest request, RestChannel channel, RestFilterChain filterChain) {

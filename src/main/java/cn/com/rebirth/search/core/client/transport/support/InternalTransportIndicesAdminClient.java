@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalTransportIndicesAdminClient.java 2012-3-29 15:00:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalTransportIndicesAdminClient.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.transport.support;
 
 import java.util.Map;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionFuture;
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class InternalTransportIndicesAdminClient.
  *
@@ -37,19 +35,15 @@ import com.google.common.collect.ImmutableMap;
  */
 public class InternalTransportIndicesAdminClient extends AbstractIndicesAdminClient implements IndicesAdminClient {
 
-	
 	/** The nodes service. */
 	private final TransportClientNodesService nodesService;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The actions. */
 	private final ImmutableMap<IndicesAction, TransportActionNodeProxy> actions;
 
-	
 	/**
 	 * Instantiates a new internal transport indices admin client.
 	 *
@@ -73,18 +67,16 @@ public class InternalTransportIndicesAdminClient extends AbstractIndicesAdminCli
 		this.actions = actionsBuilder.immutableMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.internal.InternalIndicesAdminClient#threadPool()
+	 * @see cn.com.rebirth.search.core.client.internal.InternalIndicesAdminClient#threadPool()
 	 */
 	@Override
 	public ThreadPool threadPool() {
 		return this.threadPool;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#execute(cn.com.summall.search.core.action.admin.indices.IndicesAction, cn.com.summall.search.core.action.ActionRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#execute(cn.com.rebirth.search.core.action.admin.indices.IndicesAction, cn.com.rebirth.search.core.action.ActionRequest)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> ActionFuture<Response> execute(
@@ -92,15 +84,14 @@ public class InternalTransportIndicesAdminClient extends AbstractIndicesAdminCli
 		final TransportActionNodeProxy<Request, Response> proxy = actions.get(action);
 		return nodesService.execute(new TransportClientNodesService.NodeCallback<ActionFuture<Response>>() {
 			@Override
-			public ActionFuture<Response> doWithNode(DiscoveryNode node) throws RestartException {
+			public ActionFuture<Response> doWithNode(DiscoveryNode node) throws RebirthException {
 				return proxy.execute(node, request);
 			}
 		});
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#execute(cn.com.summall.search.core.action.admin.indices.IndicesAction, cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#execute(cn.com.rebirth.search.core.action.admin.indices.IndicesAction, cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> void execute(
@@ -109,7 +100,7 @@ public class InternalTransportIndicesAdminClient extends AbstractIndicesAdminCli
 		final TransportActionNodeProxy<Request, Response> proxy = actions.get(action);
 		nodesService.execute(new TransportClientNodesService.NodeListenerCallback<Response>() {
 			@Override
-			public void doWithNode(DiscoveryNode node, ActionListener<Response> listener) throws RestartException {
+			public void doWithNode(DiscoveryNode node, ActionListener<Response> listener) throws RebirthException {
 				proxy.execute(node, request, listener);
 			}
 		}, listener);

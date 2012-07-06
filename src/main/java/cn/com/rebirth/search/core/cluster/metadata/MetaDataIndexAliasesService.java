@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataIndexAliasesService.java 2012-3-29 15:01:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataIndexAliasesService.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -16,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
@@ -36,7 +35,6 @@ import cn.com.rebirth.search.core.indices.InvalidAliasNameException;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 
 /**
  * The Class MetaDataIndexAliasesService.
@@ -93,7 +91,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 						return currentState;
 					}
 					if (aliasAction.indexRouting() != null && aliasAction.indexRouting().indexOf(',') != -1) {
-						listener.onFailure(new RestartIllegalArgumentException("alias [" + aliasAction.alias()
+						listener.onFailure(new RebirthIllegalArgumentException("alias [" + aliasAction.alias()
 								+ "] has several routing values associated with it"));
 						return currentState;
 					}
@@ -113,12 +111,12 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 						if (aliasAction.actionType() == AliasAction.Type.ADD) {
 							String filter = aliasAction.filter();
 							if (Strings.hasLength(filter)) {
-								
+
 								IndexService indexService = indices.get(indexMetaData.index());
 								if (indexService == null) {
 									indexService = indicesService.indexService(indexMetaData.index());
 									if (indexService == null) {
-										
+
 										try {
 											indexService = indicesService.createIndex(indexMetaData.index(),
 													indexMetaData.settings(), currentState.nodes().localNode().id());
@@ -133,7 +131,6 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 									indices.put(indexMetaData.index(), indexService);
 								}
 
-								
 								IndexQueryParserService indexQueryParser = indexService.queryParserService();
 								try {
 									XContentParser parser = XContentFactory.xContent(filter).createParser(filter);
@@ -143,7 +140,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 										parser.close();
 									}
 								} catch (Exception e) {
-									listener.onFailure(new RestartIllegalArgumentException(
+									listener.onFailure(new RebirthIllegalArgumentException(
 											"failed to parse filter for [" + aliasAction.alias() + "]", e));
 									return currentState;
 								}
@@ -151,16 +148,16 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 							AliasMetaData newAliasMd = AliasMetaData.newAliasMetaDataBuilder(aliasAction.alias())
 									.filter(filter).indexRouting(aliasAction.indexRouting())
 									.searchRouting(aliasAction.searchRouting()).build();
-							
+
 							AliasMetaData aliasMd = indexMetaData.aliases().get(aliasAction.alias());
 							if (aliasMd != null && aliasMd.equals(newAliasMd)) {
-								
+
 								continue;
 							}
 							indexMetaDataBuilder.putAlias(newAliasMd);
 						} else if (aliasAction.actionType() == AliasAction.Type.REMOVE) {
 							if (!indexMetaData.aliases().containsKey(aliasAction.alias())) {
-								
+
 								continue;
 							}
 							indexMetaDataBuilder.removerAlias(aliasAction.alias());
@@ -172,7 +169,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 					if (changed) {
 						ClusterState updatedState = newClusterStateBuilder().state(currentState).metaData(builder)
 								.build();
-						
+
 						int responseCount = updatedState.getNodes().size();
 						long version = updatedState.version() + 1;
 						logger.trace("Waiting for [{}] notifications with version [{}]", responseCount, version);
@@ -181,7 +178,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 
 						return updatedState;
 					} else {
-						
+
 						listener.onResponse(new Response(true));
 						return currentState;
 					}
@@ -251,7 +248,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	public static class Response {
-		
+
 		/** The acknowledged. */
 		private final boolean acknowledged;
 
@@ -289,13 +286,13 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 
 		/** The notified. */
 		private final AtomicBoolean notified = new AtomicBoolean();
-		
+
 		/** The count down. */
 		private final AtomicInteger countDown;
-		
+
 		/** The listener. */
 		private final Listener listener;
-		
+
 		/** The version. */
 		private final long version;
 
@@ -313,7 +310,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.action.index.NodeAliasesUpdatedAction.Listener#onAliasesUpdated(cn.com.summall.search.core.cluster.action.index.NodeAliasesUpdatedAction.NodeAliasesUpdatedResponse)
+		 * @see cn.com.rebirth.search.core.cluster.action.index.NodeAliasesUpdatedAction.Listener#onAliasesUpdated(cn.com.rebirth.search.core.cluster.action.index.NodeAliasesUpdatedAction.NodeAliasesUpdatedResponse)
 		 */
 		@Override
 		public void onAliasesUpdated(NodeAliasesUpdatedAction.NodeAliasesUpdatedResponse response) {
@@ -330,7 +327,7 @@ public class MetaDataIndexAliasesService extends AbstractComponent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.action.index.NodeAliasesUpdatedAction.Listener#onTimeout()
+		 * @see cn.com.rebirth.search.core.cluster.action.index.NodeAliasesUpdatedAction.Listener#onTimeout()
 		 */
 		@Override
 		public void onTimeout() {

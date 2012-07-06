@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StatisticalFieldsFacetCollector.java 2012-3-29 15:01:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StatisticalFieldsFacetCollector.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.statistical;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class StatisticalFieldsFacetCollector.
  *
@@ -27,27 +25,21 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index fields names. */
 	private final String[] indexFieldsNames;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The fields data type. */
 	private final FieldDataType[] fieldsDataType;
 
-	
 	/** The fields data. */
 	private NumericFieldData[] fieldsData;
 
-	
 	/** The stats proc. */
 	private final StatsProc statsProc = new StatsProc();
 
-	
 	/**
 	 * Instantiates a new statistical fields facet collector.
 	 *
@@ -73,9 +65,8 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -84,9 +75,8 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -95,9 +85,8 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
@@ -105,7 +94,6 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 				statsProc.sumOfSquares(), statsProc.count());
 	}
 
-	
 	/**
 	 * The Class StatsProc.
 	 *
@@ -113,33 +101,26 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class StatsProc implements NumericFieldData.MissingDoubleValueInDocProc {
 
-		
 		/** The min. */
 		double min = Double.POSITIVE_INFINITY;
 
-		
 		/** The max. */
 		double max = Double.NEGATIVE_INFINITY;
 
-		
 		/** The total. */
 		double total = 0;
 
-		
 		/** The sum of squares. */
 		double sumOfSquares = 0.0;
 
-		
 		/** The count. */
 		long count;
 
-		
 		/** The missing. */
 		int missing;
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {
@@ -154,16 +135,14 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 			count++;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onMissing(int)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onMissing(int)
 		 */
 		@Override
 		public void onMissing(int docId) {
 			missing++;
 		}
 
-		
 		/**
 		 * Min.
 		 *
@@ -173,7 +152,6 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 			return min;
 		}
 
-		
 		/**
 		 * Max.
 		 *
@@ -183,7 +161,6 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 			return max;
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -193,7 +170,6 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 			return total;
 		}
 
-		
 		/**
 		 * Count.
 		 *
@@ -203,7 +179,6 @@ public class StatisticalFieldsFacetCollector extends AbstractFacetCollector {
 			return count;
 		}
 
-		
 		/**
 		 * Sum of squares.
 		 *

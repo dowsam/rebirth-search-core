@@ -1,17 +1,15 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HistogramFacet.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HistogramFacet.java 2012-7-6 14:30:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram;
 
 import java.util.Comparator;
 import java.util.List;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.core.search.facet.Facet;
-
 
 /**
  * The Interface HistogramFacet.
@@ -20,11 +18,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 
-	
 	/** The Constant TYPE. */
 	public static final String TYPE = "histogram";
 
-	
 	/**
 	 * Entries.
 	 *
@@ -32,7 +28,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 	 */
 	List<? extends Entry> entries();
 
-	
 	/**
 	 * Gets the entries.
 	 *
@@ -40,7 +35,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 	 */
 	List<? extends Entry> getEntries();
 
-	
 	/**
 	 * The Enum ComparatorType.
 	 *
@@ -48,13 +42,12 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 	 */
 	public static enum ComparatorType {
 
-		
-		/** The KEY. */
+		/** The key. */
 		KEY((byte) 0, "key", new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -68,13 +61,12 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			}
 		}),
 
-		
-		/** The COUNT. */
+		/** The count. */
 		COUNT((byte) 1, "count", new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -88,13 +80,12 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			}
 		}),
 
-		
-		/** The TOTAL. */
+		/** The total. */
 		TOTAL((byte) 2, "total", new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -108,19 +99,15 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			}
 		});
 
-		
 		/** The id. */
 		private final byte id;
 
-		
 		/** The description. */
 		private final String description;
 
-		
 		/** The comparator. */
 		private final Comparator<Entry> comparator;
 
-		
 		/**
 		 * Instantiates a new comparator type.
 		 *
@@ -134,7 +121,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			this.comparator = comparator;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -144,7 +130,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			return this.id;
 		}
 
-		
 		/**
 		 * Description.
 		 *
@@ -154,7 +139,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			return this.description;
 		}
 
-		
 		/**
 		 * Comparator.
 		 *
@@ -164,7 +148,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			return comparator;
 		}
 
-		
 		/**
 		 * From id.
 		 *
@@ -179,11 +162,9 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			} else if (id == 2) {
 				return TOTAL;
 			}
-			throw new RestartIllegalArgumentException("No type argument match for histogram comparator [" + id
-					+ "]");
+			throw new RebirthIllegalArgumentException("No type argument match for histogram comparator [" + id + "]");
 		}
 
-		
 		/**
 		 * From string.
 		 *
@@ -198,12 +179,10 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 			} else if ("total".equals(type)) {
 				return TOTAL;
 			}
-			throw new RestartIllegalArgumentException("No type argument match for histogram comparator [" + type
-					+ "]");
+			throw new RebirthIllegalArgumentException("No type argument match for histogram comparator [" + type + "]");
 		}
 	}
 
-	
 	/**
 	 * The Interface Entry.
 	 *
@@ -211,7 +190,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 	 */
 	public interface Entry {
 
-		
 		/**
 		 * Key.
 		 *
@@ -219,7 +197,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		long key();
 
-		
 		/**
 		 * Gets the key.
 		 *
@@ -227,7 +204,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		long getKey();
 
-		
 		/**
 		 * Count.
 		 *
@@ -235,7 +211,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		long count();
 
-		
 		/**
 		 * Gets the count.
 		 *
@@ -243,7 +218,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		long getCount();
 
-		
 		/**
 		 * Total count.
 		 *
@@ -251,7 +225,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		long totalCount();
 
-		
 		/**
 		 * Gets the total count.
 		 *
@@ -259,7 +232,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		long getTotalCount();
 
-		
 		/**
 		 * Total.
 		 *
@@ -267,7 +239,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double total();
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -275,7 +246,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double getTotal();
 
-		
 		/**
 		 * Mean.
 		 *
@@ -283,7 +253,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double mean();
 
-		
 		/**
 		 * Gets the mean.
 		 *
@@ -291,7 +260,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double getMean();
 
-		
 		/**
 		 * Min.
 		 *
@@ -299,7 +267,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double min();
 
-		
 		/**
 		 * Gets the min.
 		 *
@@ -307,7 +274,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double getMin();
 
-		
 		/**
 		 * Max.
 		 *
@@ -315,7 +281,6 @@ public interface HistogramFacet extends Facet, Iterable<HistogramFacet.Entry> {
 		 */
 		double max();
 
-		
 		/**
 		 * Gets the max.
 		 *

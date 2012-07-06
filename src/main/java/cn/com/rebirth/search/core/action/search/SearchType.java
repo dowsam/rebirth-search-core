@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchType.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchType.java 2012-7-6 14:29:59 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.action.search;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum SearchType.
@@ -15,22 +14,22 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum SearchType {
 
-	/** The DF s_ quer y_ the n_ fetch. */
+	/** The dfs query then fetch. */
 	DFS_QUERY_THEN_FETCH((byte) 0),
 
-	/** The QUER y_ the n_ fetch. */
+	/** The query then fetch. */
 	QUERY_THEN_FETCH((byte) 1),
 
-	/** The DF s_ quer y_ an d_ fetch. */
+	/** The dfs query and fetch. */
 	DFS_QUERY_AND_FETCH((byte) 2),
 
-	/** The QUER y_ an d_ fetch. */
+	/** The query and fetch. */
 	QUERY_AND_FETCH((byte) 3),
 
-	/** The SCAN. */
+	/** The scan. */
 	SCAN((byte) 4),
 
-	/** The COUNT. */
+	/** The count. */
 	COUNT((byte) 5);
 
 	/** The Constant DEFAULT. */
@@ -77,7 +76,7 @@ public enum SearchType {
 		} else if (id == 5) {
 			return COUNT;
 		} else {
-			throw new RestartIllegalArgumentException("No search type for [" + id + "]");
+			throw new RebirthIllegalArgumentException("No search type for [" + id + "]");
 		}
 	}
 
@@ -86,9 +85,9 @@ public enum SearchType {
 	 *
 	 * @param searchType the search type
 	 * @return the search type
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public static SearchType fromString(String searchType) throws RestartIllegalArgumentException {
+	public static SearchType fromString(String searchType) throws RebirthIllegalArgumentException {
 		if (searchType == null) {
 			return SearchType.DEFAULT;
 		}
@@ -105,7 +104,7 @@ public enum SearchType {
 		} else if ("count".equals(searchType)) {
 			return SearchType.COUNT;
 		} else {
-			throw new RestartIllegalArgumentException("No search type for [" + searchType + "]");
+			throw new RebirthIllegalArgumentException("No search type for [" + searchType + "]");
 		}
 	}
 }

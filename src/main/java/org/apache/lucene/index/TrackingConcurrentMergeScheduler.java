@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TrackingConcurrentMergeScheduler.java 2012-3-29 15:04:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TrackingConcurrentMergeScheduler.java 2012-7-6 14:30:34 l.xue.nong$$
  */
+
 package org.apache.lucene.index;
 
 import java.io.IOException;
@@ -13,7 +14,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.metrics.CounterMetric;
 import cn.com.rebirth.search.commons.metrics.MeanMetric;
 
-
 /**
  * The Class TrackingConcurrentMergeScheduler.
  *
@@ -21,35 +21,27 @@ import cn.com.rebirth.search.commons.metrics.MeanMetric;
  */
 public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 
-	
 	/** The logger. */
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	
 	/** The total merges. */
 	private final MeanMetric totalMerges = new MeanMetric();
 
-	
 	/** The total merges num docs. */
 	private final CounterMetric totalMergesNumDocs = new CounterMetric();
 
-	
 	/** The total merges size in bytes. */
 	private final CounterMetric totalMergesSizeInBytes = new CounterMetric();
 
-	
 	/** The current merges. */
 	private final CounterMetric currentMerges = new CounterMetric();
 
-	
 	/** The current merges num docs. */
 	private final CounterMetric currentMergesNumDocs = new CounterMetric();
 
-	
 	/** The current merges size in bytes. */
 	private final CounterMetric currentMergesSizeInBytes = new CounterMetric();
 
-	
 	/**
 	 * Instantiates a new tracking concurrent merge scheduler.
 	 */
@@ -57,7 +49,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		super();
 	}
 
-	
 	/**
 	 * Total merges.
 	 *
@@ -67,7 +58,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return totalMerges.count();
 	}
 
-	
 	/**
 	 * Total merge time.
 	 *
@@ -77,7 +67,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return totalMerges.sum();
 	}
 
-	
 	/**
 	 * Total merge num docs.
 	 *
@@ -87,7 +76,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return totalMergesNumDocs.count();
 	}
 
-	
 	/**
 	 * Total merge size in bytes.
 	 *
@@ -97,7 +85,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return totalMergesSizeInBytes.count();
 	}
 
-	
 	/**
 	 * Current merges.
 	 *
@@ -107,7 +94,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return currentMerges.count();
 	}
 
-	
 	/**
 	 * Current merges num docs.
 	 *
@@ -117,7 +103,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return currentMergesNumDocs.count();
 	}
 
-	
 	/**
 	 * Current merges size in bytes.
 	 *
@@ -127,7 +112,6 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 		return currentMergesSizeInBytes.count();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.ConcurrentMergeScheduler#doMerge(org.apache.lucene.index.MergePolicy.OneMerge)
 	 */
@@ -156,7 +140,7 @@ public class TrackingConcurrentMergeScheduler extends ConcurrentMergeScheduler {
 			totalMergesNumDocs.inc(totalNumDocs);
 			totalMergesSizeInBytes.inc(totalSizeInBytes);
 			totalMerges.inc(took);
-			if (took > 20000) { 
+			if (took > 20000) {
 				logger.debug("merge [{}] done, took [{}]", merge.info.name, TimeValue.timeValueMillis(took));
 			} else if (logger.isTraceEnabled()) {
 				logger.trace("merge [{}] done, took [{}]", merge.info.name, TimeValue.timeValueMillis(took));

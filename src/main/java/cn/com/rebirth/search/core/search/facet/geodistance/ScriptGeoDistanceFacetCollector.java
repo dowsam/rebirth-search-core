@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptGeoDistanceFacetCollector.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptGeoDistanceFacetCollector.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.geodistance;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 import cn.com.rebirth.search.core.script.SearchScript;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ScriptGeoDistanceFacetCollector.
  *
@@ -26,15 +24,12 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ScriptGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/** The script aggregator. */
 	private Aggregator scriptAggregator;
 
-	
 	/**
 	 * Instantiates a new script geo distance facet collector.
 	 *
@@ -60,18 +55,16 @@ public class ScriptGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 		this.scriptAggregator = (Aggregator) this.aggregator;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
 		script.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.geodistance.GeoDistanceFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.geodistance.GeoDistanceFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -79,9 +72,8 @@ public class ScriptGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 		script.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.geodistance.GeoDistanceFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.geodistance.GeoDistanceFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -90,26 +82,22 @@ public class ScriptGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 		super.doCollect(doc);
 	}
 
-	
 	/**
 	 * The Class Aggregator.
 	 *
 	 * @author l.xue.nong
 	 */
 	public static class Aggregator implements GeoPointFieldData.ValueInDocProc {
-		
+
 		/** The fixed source distance. */
 		private final GeoDistance.FixedSourceDistance fixedSourceDistance;
 
-		
 		/** The entries. */
 		private final GeoDistanceFacet.Entry[] entries;
 
-		
 		/** The script value. */
 		double scriptValue;
 
-		
 		/**
 		 * Instantiates a new aggregator.
 		 *
@@ -121,9 +109,8 @@ public class ScriptGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 			this.entries = entries;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc#onValue(int, double, double)
+		 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc#onValue(int, double, double)
 		 */
 		@Override
 		public void onValue(int docId, double lat, double lon) {

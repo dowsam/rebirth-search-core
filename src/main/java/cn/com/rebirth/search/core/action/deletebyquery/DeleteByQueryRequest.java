@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteByQueryRequest.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteByQueryRequest.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.deletebyquery;
 
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.action.support.replication.ReplicationType;
 import cn.com.rebirth.search.core.client.Requests;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 
-
 /**
  * The Class DeleteByQueryRequest.
  *
@@ -41,36 +39,28 @@ import cn.com.rebirth.search.core.index.query.QueryBuilder;
  */
 public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 
-	
 	/** The Constant contentType. */
 	private static final XContentType contentType = Requests.CONTENT_TYPE;
 
-	
 	/** The query source. */
 	private byte[] querySource;
 
-	
 	/** The query source offset. */
 	private int querySourceOffset;
 
-	
 	/** The query source length. */
 	private int querySourceLength;
 
-	
 	/** The query source unsafe. */
 	private boolean querySourceUnsafe;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/** The routing. */
 	@Nullable
 	private String routing;
 
-	
 	/**
 	 * Instantiates a new delete by query request.
 	 *
@@ -80,16 +70,14 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * Instantiates a new delete by query request.
 	 */
 	public DeleteByQueryRequest() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndicesReplicationOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndicesReplicationOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public DeleteByQueryRequest listenerThreaded(boolean threadedListener) {
@@ -97,9 +85,8 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndicesReplicationOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndicesReplicationOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -110,16 +97,14 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndicesReplicationOperationRequest#indices(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndicesReplicationOperationRequest#indices(java.lang.String[])
 	 */
 	public DeleteByQueryRequest indices(String... indices) {
 		this.indices = indices;
 		return this;
 	}
 
-	
 	/**
 	 * Query source.
 	 *
@@ -134,7 +119,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return new BytesHolder(querySource, querySourceOffset, querySourceLength);
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -151,7 +135,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -168,7 +151,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -186,7 +168,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -206,7 +187,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -218,7 +198,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return query(querySource, 0, querySource.length, false);
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -237,7 +216,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -247,16 +225,14 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this.types;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndicesReplicationOperationRequest#routing()
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndicesReplicationOperationRequest#routing()
 	 */
 	@Override
 	public String routing() {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -268,7 +244,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -280,7 +255,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -292,7 +266,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -304,7 +277,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -316,7 +288,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -328,7 +299,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -340,7 +310,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -352,9 +321,8 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndicesReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndicesReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	public void readFrom(StreamInput in) throws IOException {
 		super.readFrom(in);
@@ -380,9 +348,8 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndicesReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndicesReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	public void writeTo(StreamOutput out) throws IOException {
 		super.writeTo(out);
@@ -402,7 +369,6 @@ public class DeleteByQueryRequest extends IndicesReplicationOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

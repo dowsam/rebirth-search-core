@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HistogramFacetBuilder.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HistogramFacetBuilder.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.index.query.FilterBuilder;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilderException;
 import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
-
 /**
  * The Class HistogramFacetBuilder.
  *
@@ -23,31 +21,24 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
  */
 public class HistogramFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The key field name. */
 	private String keyFieldName;
 
-	
 	/** The value field name. */
 	private String valueFieldName;
 
-	
 	/** The interval. */
 	private long interval = -1;
 
-	
 	/** The comparator type. */
 	private HistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The from. */
 	private Object from;
 
-	
 	/** The to. */
 	private Object to;
 
-	
 	/**
 	 * Instantiates a new histogram facet builder.
 	 *
@@ -57,7 +48,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -69,7 +59,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Key field.
 	 *
@@ -81,7 +70,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value field.
 	 *
@@ -93,7 +81,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Interval.
 	 *
@@ -105,7 +92,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Interval.
 	 *
@@ -117,7 +103,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return interval(unit.toMillis(interval));
 	}
 
-	
 	/**
 	 * Bounds.
 	 *
@@ -131,7 +116,6 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Comparator.
 	 *
@@ -143,18 +127,16 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	public HistogramFacetBuilder global(boolean global) {
 		super.global(global);
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public HistogramFacetBuilder scope(String scope) {
@@ -162,27 +144,24 @@ public class HistogramFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	public HistogramFacetBuilder facetFilter(FilterBuilder filter) {
 		this.facetFilter = filter;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public HistogramFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchPhaseController.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchPhaseController.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.controller;
 
@@ -46,7 +45,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Ordering;
 
-
 /**
  * The Class SearchPhaseController.
  *
@@ -54,8 +52,7 @@ import com.google.common.collect.Ordering;
  */
 public class SearchPhaseController extends AbstractComponent {
 
-	
-	/** The QUER y_ resul t_ ordering. */
+	/** The query result ordering. */
 	public static Ordering<QuerySearchResultProvider> QUERY_RESULT_ORDERING = new Ordering<QuerySearchResultProvider>() {
 		@Override
 		public int compare(@Nullable QuerySearchResultProvider o1, @Nullable QuerySearchResultProvider o2) {
@@ -67,19 +64,15 @@ public class SearchPhaseController extends AbstractComponent {
 		}
 	};
 
-	
 	/** The Constant EMPTY. */
 	private static final ShardDoc[] EMPTY = new ShardDoc[0];
 
-	
 	/** The facet processors. */
 	private final FacetProcessors facetProcessors;
 
-	
 	/** The optimize single shard. */
 	private final boolean optimizeSingleShard;
 
-	
 	/**
 	 * Instantiates a new search phase controller.
 	 *
@@ -93,7 +86,6 @@ public class SearchPhaseController extends AbstractComponent {
 		this.optimizeSingleShard = componentSettings.getAsBoolean("optimize_single_shard", true);
 	}
 
-	
 	/**
 	 * Optimize single shard.
 	 *
@@ -103,7 +95,6 @@ public class SearchPhaseController extends AbstractComponent {
 		return optimizeSingleShard;
 	}
 
-	
 	/**
 	 * Aggregate dfs.
 	 *
@@ -123,7 +114,6 @@ public class SearchPhaseController extends AbstractComponent {
 		return new AggregatedDfs(dfMap, aggMaxDoc);
 	}
 
-	
 	/**
 	 * Sort docs.
 	 *
@@ -142,10 +132,10 @@ public class SearchPhaseController extends AbstractComponent {
 				canOptimize = true;
 				result = results1.iterator().next().queryResult();
 			} else {
-				
+
 				for (QuerySearchResultProvider queryResult : results1) {
 					if (queryResult.queryResult().topDocs().scoreDocs.length > 0) {
-						if (result != null) { 
+						if (result != null) {
 							canOptimize = false;
 							break;
 						}
@@ -190,13 +180,12 @@ public class SearchPhaseController extends AbstractComponent {
 
 		int queueSize = queryResultProvider.queryResult().from() + queryResultProvider.queryResult().size();
 		if (queryResultProvider.includeFetch()) {
-			
-			
+
 			queueSize *= results.size();
 		}
 		PriorityQueue queue;
 		if (queryResultProvider.queryResult().topDocs() instanceof TopFieldDocs) {
-			
+
 			TopFieldDocs fieldDocs = (TopFieldDocs) queryResultProvider.queryResult().topDocs();
 			for (int i = 0; i < fieldDocs.fields.length; i++) {
 				boolean allValuesAreNull = true;
@@ -219,14 +208,13 @@ public class SearchPhaseController extends AbstractComponent {
 					}
 				}
 				if (!resolvedField && allValuesAreNull && fieldDocs.fields[i].getField() != null) {
-					
+
 					fieldDocs.fields[i] = new SortField(fieldDocs.fields[i].getField(), SortField.STRING,
 							fieldDocs.fields[i].getReverse());
 				}
 			}
 			queue = new ShardFieldDocSortedHitQueue(fieldDocs.fields, queueSize);
 
-			
 			for (QuerySearchResultProvider resultProvider : results) {
 				QuerySearchResult result = resultProvider.queryResult();
 				ScoreDoc[] scoreDocs = result.topDocs().scoreDocs;
@@ -235,13 +223,13 @@ public class SearchPhaseController extends AbstractComponent {
 					ShardFieldDoc nodeFieldDoc = new ShardFieldDoc(result.shardTarget(), doc.doc, doc.score,
 							((FieldDoc) doc).fields);
 					if (queue.insertWithOverflow(nodeFieldDoc) == nodeFieldDoc) {
-						
+
 						break;
 					}
 				}
 			}
 		} else {
-			queue = new ScoreDocQueue(queueSize); 
+			queue = new ScoreDocQueue(queueSize);
 			for (QuerySearchResultProvider resultProvider : results) {
 				QuerySearchResult result = resultProvider.queryResult();
 				ScoreDoc[] scoreDocs = result.topDocs().scoreDocs;
@@ -249,7 +237,7 @@ public class SearchPhaseController extends AbstractComponent {
 				for (ScoreDoc doc : scoreDocs) {
 					ShardScoreDoc nodeScoreDoc = new ShardScoreDoc(result.shardTarget(), doc.doc, doc.score);
 					if (queue.insertWithOverflow(nodeScoreDoc) == nodeScoreDoc) {
-						
+
 						break;
 					}
 				}
@@ -259,7 +247,7 @@ public class SearchPhaseController extends AbstractComponent {
 
 		int resultDocsSize = queryResultProvider.queryResult().size();
 		if (queryResultProvider.includeFetch()) {
-			
+
 			resultDocsSize *= results.size();
 		}
 		if (totalNumDocs < queueSize) {
@@ -270,16 +258,13 @@ public class SearchPhaseController extends AbstractComponent {
 			return EMPTY;
 		}
 
-		
-		
 		ShardDoc[] shardDocs = new ShardDoc[resultDocsSize];
 		for (int i = resultDocsSize - 1; i >= 0; i--)
-			
+
 			shardDocs[i] = (ShardDoc) queue.pop();
 		return shardDocs;
 	}
 
-	
 	/**
 	 * Doc ids to load.
 	 *
@@ -291,7 +276,7 @@ public class SearchPhaseController extends AbstractComponent {
 		for (ShardDoc shardDoc : shardDocs) {
 			ExtTIntArrayList list = result.get(shardDoc.shardTarget());
 			if (list == null) {
-				list = new ExtTIntArrayList(); 
+				list = new ExtTIntArrayList();
 				result.put(shardDoc.shardTarget(), list);
 			}
 			list.add(shardDoc.docId());
@@ -299,7 +284,6 @@ public class SearchPhaseController extends AbstractComponent {
 		return result;
 	}
 
-	
 	/**
 	 * Merge.
 	 *
@@ -318,7 +302,7 @@ public class SearchPhaseController extends AbstractComponent {
 		try {
 			querySearchResult = Iterables.get(queryResults.values(), 0).queryResult();
 		} catch (IndexOutOfBoundsException e) {
-			
+
 			return InternalSearchResponse.EMPTY;
 		}
 
@@ -332,16 +316,15 @@ public class SearchPhaseController extends AbstractComponent {
 			}
 		}
 
-		
 		InternalFacets facets = null;
 		if (!queryResults.isEmpty()) {
-			
+
 			if (querySearchResult.facets() != null && querySearchResult.facets().facets() != null
 					&& !querySearchResult.facets().facets().isEmpty()) {
 				List<Facet> aggregatedFacets = Lists.newArrayList();
 				List<Facet> namedFacets = Lists.newArrayList();
 				for (Facet facet : querySearchResult.facets()) {
-					
+
 					namedFacets.clear();
 					for (QuerySearchResultProvider queryResultProvider : queryResults.values()) {
 						for (Facet facet1 : queryResultProvider.queryResult().facets()) {
@@ -357,7 +340,6 @@ public class SearchPhaseController extends AbstractComponent {
 			}
 		}
 
-		
 		long totalHits = 0;
 		float maxScore = Float.NEGATIVE_INFINITY;
 		boolean timedOut = false;
@@ -374,12 +356,10 @@ public class SearchPhaseController extends AbstractComponent {
 			maxScore = Float.NaN;
 		}
 
-		
 		for (FetchSearchResultProvider fetchSearchResultProvider : fetchResults.values()) {
 			fetchSearchResultProvider.fetchResult().initCounter();
 		}
 
-		
 		List<InternalSearchHit> hits = new ArrayList<InternalSearchHit>();
 		if (!fetchResults.isEmpty()) {
 			for (ShardDoc shardDoc : sortedDocs) {

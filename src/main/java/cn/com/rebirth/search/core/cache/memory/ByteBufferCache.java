@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ByteBufferCache.java 2012-3-29 15:02:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ByteBufferCache.java 2012-7-6 14:30:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cache.memory;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 
-
 /**
  * The Class ByteBufferCache.
  *
@@ -28,31 +26,24 @@ import cn.com.rebirth.search.commons.settings.ImmutableSettings;
  */
 public class ByteBufferCache extends AbstractComponent implements ByteBufferAllocator {
 
-	
 	/** The direct. */
 	private final boolean direct;
 
-	
 	/** The small buffer size. */
 	private final ByteSizeValue smallBufferSize;
 
-	
 	/** The large buffer size. */
 	private final ByteSizeValue largeBufferSize;
 
-	
 	/** The small cache size. */
 	private final ByteSizeValue smallCacheSize;
 
-	
 	/** The large cache size. */
 	private final ByteSizeValue largeCacheSize;
 
-	
 	/** The allocator. */
 	private final ByteBufferAllocator allocator;
 
-	
 	/**
 	 * Instantiates a new byte buffer cache.
 	 */
@@ -60,8 +51,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS);
 	}
 
-	
-	
 	/**
 	 * Instantiates a new byte buffer cache.
 	 *
@@ -76,7 +65,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 				.put("cache.memory.large_cache_size", cacheSizeInBytes).put("cache.memory.direct", direct).build());
 	}
 
-	
 	/**
 	 * Instantiates a new byte buffer cache.
 	 *
@@ -111,7 +99,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 		}
 	}
 
-	
 	/**
 	 * Direct.
 	 *
@@ -121,7 +108,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 		return this.direct;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.store.bytebuffer.ByteBufferAllocator#close()
 	 */
@@ -129,7 +115,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 		allocator.close();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.store.bytebuffer.ByteBufferAllocator#sizeInBytes(org.apache.lucene.store.bytebuffer.ByteBufferAllocator.Type)
 	 */
@@ -138,7 +123,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 		return allocator.sizeInBytes(type);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.store.bytebuffer.ByteBufferAllocator#allocate(org.apache.lucene.store.bytebuffer.ByteBufferAllocator.Type)
 	 */
@@ -147,7 +131,6 @@ public class ByteBufferCache extends AbstractComponent implements ByteBufferAllo
 		return allocator.allocate(type);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.store.bytebuffer.ByteBufferAllocator#release(java.nio.ByteBuffer)
 	 */

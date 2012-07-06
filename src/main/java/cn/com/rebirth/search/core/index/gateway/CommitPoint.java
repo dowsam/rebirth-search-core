@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CommitPoint.java 2012-3-29 15:01:26 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CommitPoint.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.gateway;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.core.index.store.StoreFileMetaData;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class CommitPoint.
  *
@@ -21,12 +19,10 @@ import com.google.common.collect.ImmutableList;
  */
 public class CommitPoint {
 
-	
 	/** The Constant NULL. */
 	public static final CommitPoint NULL = new CommitPoint(-1, "_null_", Type.GENERATED,
 			ImmutableList.<CommitPoint.FileInfo> of(), ImmutableList.<CommitPoint.FileInfo> of());
 
-	
 	/**
 	 * The Class FileInfo.
 	 *
@@ -34,23 +30,18 @@ public class CommitPoint {
 	 */
 	public static class FileInfo {
 
-		
 		/** The name. */
 		private final String name;
 
-		
 		/** The physical name. */
 		private final String physicalName;
 
-		
 		/** The length. */
 		private final long length;
 
-		
 		/** The checksum. */
 		private final String checksum;
 
-		
 		/**
 		 * Instantiates a new file info.
 		 *
@@ -66,7 +57,6 @@ public class CommitPoint {
 			this.checksum = checksum;
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -76,7 +66,6 @@ public class CommitPoint {
 			return name;
 		}
 
-		
 		/**
 		 * Physical name.
 		 *
@@ -86,7 +75,6 @@ public class CommitPoint {
 			return this.physicalName;
 		}
 
-		
 		/**
 		 * Length.
 		 *
@@ -96,7 +84,6 @@ public class CommitPoint {
 			return length;
 		}
 
-		
 		/**
 		 * Checksum.
 		 *
@@ -107,7 +94,6 @@ public class CommitPoint {
 			return checksum;
 		}
 
-		
 		/**
 		 * Checks if is same.
 		 *
@@ -122,7 +108,6 @@ public class CommitPoint {
 		}
 	}
 
-	
 	/**
 	 * The Enum Type.
 	 *
@@ -130,36 +115,28 @@ public class CommitPoint {
 	 */
 	public static enum Type {
 
-		
-		/** The GENERATED. */
+		/** The generated. */
 		GENERATED,
 
-		
-		/** The SAVED. */
+		/** The saved. */
 		SAVED
 	}
 
-	
 	/** The version. */
 	private final long version;
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The type. */
 	private final Type type;
 
-	
 	/** The index files. */
 	private final ImmutableList<FileInfo> indexFiles;
 
-	
 	/** The translog files. */
 	private final ImmutableList<FileInfo> translogFiles;
 
-	
 	/**
 	 * Instantiates a new commit point.
 	 *
@@ -177,7 +154,6 @@ public class CommitPoint {
 		this.translogFiles = ImmutableList.copyOf(translogFiles);
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -187,7 +163,6 @@ public class CommitPoint {
 		return version;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -197,7 +172,6 @@ public class CommitPoint {
 		return this.name;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -207,7 +181,6 @@ public class CommitPoint {
 		return this.type;
 	}
 
-	
 	/**
 	 * Index files.
 	 *
@@ -217,7 +190,6 @@ public class CommitPoint {
 		return this.indexFiles;
 	}
 
-	
 	/**
 	 * Translog files.
 	 *
@@ -227,7 +199,6 @@ public class CommitPoint {
 		return this.translogFiles;
 	}
 
-	
 	/**
 	 * Contain physical index file.
 	 *
@@ -238,7 +209,6 @@ public class CommitPoint {
 		return findPhysicalIndexFile(physicalName) != null;
 	}
 
-	
 	/**
 	 * Find physical index file.
 	 *
@@ -254,7 +224,6 @@ public class CommitPoint {
 		return null;
 	}
 
-	
 	/**
 	 * Find name file.
 	 *
@@ -269,7 +238,6 @@ public class CommitPoint {
 		return findNameTranslogFile(name);
 	}
 
-	
 	/**
 	 * Find name index file.
 	 *
@@ -285,7 +253,6 @@ public class CommitPoint {
 		return null;
 	}
 
-	
 	/**
 	 * Find name translog file.
 	 *

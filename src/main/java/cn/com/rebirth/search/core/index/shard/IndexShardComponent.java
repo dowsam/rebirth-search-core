@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardComponent.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardComponent.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard;
 
 import cn.com.rebirth.commons.settings.Settings;
-
 
 /**
  * The Interface IndexShardComponent.
@@ -16,7 +14,6 @@ import cn.com.rebirth.commons.settings.Settings;
  */
 public interface IndexShardComponent {
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -24,7 +21,6 @@ public interface IndexShardComponent {
 	 */
 	ShardId shardId();
 
-	
 	/**
 	 * Index settings.
 	 *

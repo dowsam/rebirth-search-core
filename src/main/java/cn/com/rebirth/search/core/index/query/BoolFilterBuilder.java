@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BoolFilterBuilder.java 2012-3-29 15:02:27 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BoolFilterBuilder.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import org.apache.lucene.search.BooleanClause;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class BoolFilterBuilder.
  *
@@ -21,23 +19,18 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class BoolFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The clauses. */
 	private ArrayList<Clause> clauses = new ArrayList<Clause>();
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Must.
 	 *
@@ -49,7 +42,6 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Must not.
 	 *
@@ -61,7 +53,6 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Should.
 	 *
@@ -73,7 +64,6 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -85,7 +75,6 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -97,7 +86,6 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -109,9 +97,8 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {
@@ -140,7 +127,6 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 		builder.endObject();
 	}
 
-	
 	/**
 	 * The Class Clause.
 	 *
@@ -148,15 +134,12 @@ public class BoolFilterBuilder extends BaseFilterBuilder {
 	 */
 	private static class Clause {
 
-		
 		/** The filter builder. */
 		final FilterBuilder filterBuilder;
 
-		
 		/** The occur. */
 		final BooleanClause.Occur occur;
 
-		
 		/**
 		 * Instantiates a new clause.
 		 *

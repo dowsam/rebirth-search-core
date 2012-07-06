@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PluginsService.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PluginsService.java 2012-7-6 14:29:49 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.plugins;
@@ -21,7 +21,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.component.LifecycleComponent;
@@ -104,7 +104,7 @@ public class PluginsService extends AbstractComponent {
 				}
 			}
 			if (!missingPlugins.isEmpty()) {
-				throw new RestartException("Missing mandatory plugins " + missingPlugins);
+				throw new RebirthException("Missing mandatory plugins " + missingPlugins);
 			}
 		}
 
@@ -410,7 +410,7 @@ public class PluginsService extends AbstractComponent {
 		Map<String, Plugin> plugins = newHashMap();
 		Enumeration<URL> pluginUrls = null;
 		try {
-			pluginUrls = settings.getClassLoader().getResources("summall-search-plugin.properties");
+			pluginUrls = settings.getClassLoader().getResources("rebirth-search-plugin.properties");
 		} catch (IOException e) {
 			logger.warn("failed to find plugins from classpath", e);
 			return ImmutableMap.of();
@@ -432,7 +432,7 @@ public class PluginsService extends AbstractComponent {
 					try {
 						plugin = pluginClass.getConstructor().newInstance();
 					} catch (NoSuchMethodException e1) {
-						throw new RestartException("No constructor for [" + pluginClass + "]");
+						throw new RebirthException("No constructor for [" + pluginClass + "]");
 					}
 				}
 				plugins.put(plugin.name(), plugin);

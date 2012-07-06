@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportIndexDeleteAction.java 2012-3-29 15:02:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportIndexDeleteAction.java 2012-7-6 14:30:16 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete.index;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.cluster.routing.GroupShardsIterator;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportIndexDeleteAction.
  *
@@ -30,7 +28,6 @@ public class TransportIndexDeleteAction
 		extends
 		TransportIndexReplicationOperationAction<IndexDeleteRequest, IndexDeleteResponse, ShardDeleteRequest, ShardDeleteRequest, ShardDeleteResponse> {
 
-	
 	/**
 	 * Instantiates a new transport index delete action.
 	 *
@@ -46,18 +43,16 @@ public class TransportIndexDeleteAction
 		super(settings, transportService, clusterService, threadPool, deleteAction);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#newRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#newRequestInstance()
 	 */
 	@Override
 	protected IndexDeleteRequest newRequestInstance() {
 		return new IndexDeleteRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#newResponseInstance(cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#newResponseInstance(cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
 	 */
 	@Override
 	protected IndexDeleteResponse newResponseInstance(IndexDeleteRequest request, AtomicReferenceArray shardsResponses) {
@@ -76,54 +71,48 @@ public class TransportIndexDeleteAction
 				responses.toArray(new ShardDeleteResponse[responses.size()]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#accumulateExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#accumulateExceptions()
 	 */
 	@Override
 	protected boolean accumulateExceptions() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return "indices/index/delete";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, IndexDeleteRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.WRITE);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, IndexDeleteRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.WRITE, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#shards(cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#shards(cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest)
 	 */
 	@Override
 	protected GroupShardsIterator shards(IndexDeleteRequest request) {
 		return clusterService.operationRouting().broadcastDeleteShards(clusterService.state(), request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportIndexReplicationOperationAction#newShardRequestInstance(cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest, int)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportIndexReplicationOperationAction#newShardRequestInstance(cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest, int)
 	 */
 	@Override
 	protected ShardDeleteRequest newShardRequestInstance(IndexDeleteRequest request, int shardId) {

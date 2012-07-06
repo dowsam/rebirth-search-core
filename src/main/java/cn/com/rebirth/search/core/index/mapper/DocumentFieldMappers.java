@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DocumentFieldMappers.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DocumentFieldMappers.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
@@ -23,7 +22,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.common.collect.UnmodifiableIterator;
 
-
 /**
  * The Class DocumentFieldMappers.
  *
@@ -31,31 +29,24 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class DocumentFieldMappers implements Iterable<FieldMapper> {
 
-	
 	/** The field mappers. */
 	private final ImmutableList<FieldMapper> fieldMappers;
 
-	
 	/** The full name field mappers. */
 	private final Map<String, FieldMappers> fullNameFieldMappers;
 
-	
 	/** The name field mappers. */
 	private final Map<String, FieldMappers> nameFieldMappers;
 
-	
 	/** The index name field mappers. */
 	private final Map<String, FieldMappers> indexNameFieldMappers;
 
-	
 	/** The index analyzer. */
 	private final FieldNameAnalyzer indexAnalyzer;
 
-	
 	/** The search analyzer. */
 	private final FieldNameAnalyzer searchAnalyzer;
 
-	
 	/**
 	 * Instantiates a new document field mappers.
 	 *
@@ -111,7 +102,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		this.searchAnalyzer = new FieldNameAnalyzer(searchAnalyzers, docMapper.searchAnalyzer());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -120,7 +110,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return fieldMappers.iterator();
 	}
 
-	
 	/**
 	 * Mappers.
 	 *
@@ -130,7 +119,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return this.fieldMappers;
 	}
 
-	
 	/**
 	 * Checks for mapper.
 	 *
@@ -141,7 +129,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return fieldMappers.contains(fieldMapper);
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -152,7 +139,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return nameFieldMappers.get(name);
 	}
 
-	
 	/**
 	 * Index name.
 	 *
@@ -163,7 +149,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return indexNameFieldMappers.get(indexName);
 	}
 
-	
 	/**
 	 * Full name.
 	 *
@@ -174,7 +159,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return fullNameFieldMappers.get(fullName);
 	}
 
-	
 	/**
 	 * Simple match to index names.
 	 *
@@ -195,7 +179,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return fields;
 	}
 
-	
 	/**
 	 * Smart name.
 	 *
@@ -214,7 +197,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return name(name);
 	}
 
-	
 	/**
 	 * Smart name field mapper.
 	 *
@@ -229,7 +211,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return fieldMappers.mapper();
 	}
 
-	
 	/**
 	 * Index analyzer.
 	 *
@@ -239,7 +220,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return this.indexAnalyzer;
 	}
 
-	
 	/**
 	 * Index analyzer.
 	 *
@@ -250,7 +230,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return new FieldNameAnalyzer(indexAnalyzer.analyzers(), defaultAnalyzer);
 	}
 
-	
 	/**
 	 * Search analyzer.
 	 *
@@ -260,7 +239,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return this.searchAnalyzer;
 	}
 
-	
 	/**
 	 * Concat.
 	 *
@@ -272,7 +250,6 @@ public class DocumentFieldMappers implements Iterable<FieldMapper> {
 		return concat(docMapper, newArrayList(fieldMappers));
 	}
 
-	
 	/**
 	 * Concat.
 	 *

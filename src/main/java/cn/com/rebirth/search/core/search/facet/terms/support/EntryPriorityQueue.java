@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core EntryPriorityQueue.java 2012-3-29 15:01:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core EntryPriorityQueue.java 2012-7-6 14:29:36 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.support;
 
@@ -12,7 +11,6 @@ import org.apache.lucene.util.PriorityQueue;
 
 import cn.com.rebirth.search.core.search.facet.terms.TermsFacet;
 
-
 /**
  * The Class EntryPriorityQueue.
  *
@@ -20,15 +18,12 @@ import cn.com.rebirth.search.core.search.facet.terms.TermsFacet;
  */
 public class EntryPriorityQueue extends PriorityQueue<TermsFacet.Entry> {
 
-	
 	/** The Constant LIMIT. */
 	public static final int LIMIT = 5000;
 
-	
 	/** The comparator. */
 	private final Comparator<TermsFacet.Entry> comparator;
 
-	
 	/**
 	 * Instantiates a new entry priority queue.
 	 *
@@ -40,12 +35,11 @@ public class EntryPriorityQueue extends PriorityQueue<TermsFacet.Entry> {
 		this.comparator = comparator;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.util.PriorityQueue#lessThan(java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	protected boolean lessThan(TermsFacet.Entry a, TermsFacet.Entry b) {
-		return comparator.compare(a, b) > 0; 
+		return comparator.compare(a, b) > 0;
 	}
 }

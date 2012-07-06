@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsFacetBuilder.java 2012-3-29 15:01:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsFacetBuilder.java 2012-7-6 14:29:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class TermsFacetBuilder.
  *
@@ -25,55 +23,42 @@ import com.google.common.collect.Maps;
  */
 public class TermsFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The field name. */
 	private String fieldName;
 
-	
 	/** The fields names. */
 	private String[] fieldsNames;
 
-	
 	/** The size. */
 	private int size = 10;
 
-	
 	/** The all terms. */
 	private Boolean allTerms;
 
-	
 	/** The exclude. */
 	private Object[] exclude;
 
-	
 	/** The regex. */
 	private String regex;
 
-	
 	/** The regex flags. */
 	private int regexFlags = 0;
 
-	
 	/** The comparator type. */
 	private TermsFacet.ComparatorType comparatorType;
 
-	
 	/** The script. */
 	private String script;
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The params. */
 	private Map<String, Object> params;
 
-	
 	/** The execution hint. */
 	String executionHint;
 
-	
 	/**
 	 * Instantiates a new terms facet builder.
 	 *
@@ -83,18 +68,16 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	public TermsFacetBuilder global(boolean global) {
 		super.global(global);
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public TermsFacetBuilder scope(String scope) {
@@ -102,25 +85,22 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	public TermsFacetBuilder facetFilter(FilterBuilder filter) {
 		this.facetFilter = filter;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public TermsFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -132,7 +112,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -144,7 +123,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Script field.
 	 *
@@ -156,7 +134,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Exclude.
 	 *
@@ -168,7 +145,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Size.
 	 *
@@ -180,7 +156,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Regex.
 	 *
@@ -191,7 +166,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return regex(regex, 0);
 	}
 
-	
 	/**
 	 * Regex.
 	 *
@@ -205,7 +179,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Order.
 	 *
@@ -217,7 +190,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Script.
 	 *
@@ -229,7 +201,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -241,7 +212,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Execution hint.
 	 *
@@ -253,7 +223,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -269,7 +238,6 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * All terms.
 	 *
@@ -281,9 +249,8 @@ public class TermsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

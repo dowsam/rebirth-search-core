@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardStatus.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardStatus.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class IndexShardStatus.
  *
@@ -24,15 +22,12 @@ import com.google.common.collect.Iterators;
  */
 public class IndexShardStatus implements Iterable<ShardStatus> {
 
-	
 	/** The shard id. */
 	private final ShardId shardId;
 
-	
 	/** The shards. */
 	private final ShardStatus[] shards;
 
-	
 	/**
 	 * Instantiates a new index shard status.
 	 *
@@ -44,7 +39,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		this.shards = shards;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -54,7 +48,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Gets the shard id.
 	 *
@@ -64,7 +57,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return shardId();
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -74,7 +66,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -84,7 +75,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return shards();
 	}
 
-	
 	/**
 	 * Gets the at.
 	 *
@@ -95,7 +85,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return shards[position];
 	}
 
-	
 	/**
 	 * Primary store size.
 	 *
@@ -105,7 +94,7 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		long bytes = -1;
 		for (ShardStatus shard : shards()) {
 			if (!shard.shardRouting().primary()) {
-				
+
 				continue;
 			}
 			if (shard.storeSize() != null) {
@@ -121,7 +110,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return new ByteSizeValue(bytes);
 	}
 
-	
 	/**
 	 * Gets the primary store size.
 	 *
@@ -131,7 +119,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return primaryStoreSize();
 	}
 
-	
 	/**
 	 * Store size.
 	 *
@@ -153,7 +140,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return new ByteSizeValue(bytes);
 	}
 
-	
 	/**
 	 * Gets the store size.
 	 *
@@ -163,7 +149,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return storeSize();
 	}
 
-	
 	/**
 	 * Translog operations.
 	 *
@@ -182,7 +167,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return translogOperations;
 	}
 
-	
 	/**
 	 * Gets the translog operations.
 	 *
@@ -192,11 +176,9 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return translogOperations();
 	}
 
-	
 	/** The docs. */
 	private transient DocsStatus docs;
 
-	
 	/**
 	 * Docs.
 	 *
@@ -209,7 +191,7 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		DocsStatus docs = null;
 		for (ShardStatus shard : shards()) {
 			if (!shard.shardRouting().primary()) {
-				
+
 				continue;
 			}
 			if (shard.docs() == null) {
@@ -226,7 +208,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return this.docs;
 	}
 
-	
 	/**
 	 * Gets the docs.
 	 *
@@ -236,7 +217,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return docs();
 	}
 
-	
 	/**
 	 * Merge stats.
 	 *
@@ -250,7 +230,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return mergeStats;
 	}
 
-	
 	/**
 	 * Gets the merge stats.
 	 *
@@ -260,7 +239,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return this.mergeStats();
 	}
 
-	
 	/**
 	 * Refresh stats.
 	 *
@@ -274,7 +252,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return refreshStats;
 	}
 
-	
 	/**
 	 * Gets the refresh stats.
 	 *
@@ -284,7 +261,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return refreshStats();
 	}
 
-	
 	/**
 	 * Flush stats.
 	 *
@@ -298,7 +274,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return flushStats;
 	}
 
-	
 	/**
 	 * Gets the flush stats.
 	 *
@@ -308,7 +283,6 @@ public class IndexShardStatus implements Iterable<ShardStatus> {
 		return flushStats();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */

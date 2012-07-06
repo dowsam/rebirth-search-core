@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GetJmxServiceUrlAction.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GetJmxServiceUrlAction.java 2012-7-6 14:28:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.jmx.action;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.transport.FutureTransportResponseHandler;
 import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class GetJmxServiceUrlAction.
  *
@@ -29,19 +27,15 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class GetJmxServiceUrlAction extends AbstractComponent {
 
-	
 	/** The jmx service. */
 	private final JmxService jmxService;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/**
 	 * Instantiates a new gets the jmx service url action.
 	 *
@@ -62,15 +56,14 @@ public class GetJmxServiceUrlAction extends AbstractComponent {
 				new GetJmxServiceUrlTransportHandler());
 	}
 
-	
 	/**
 	 * Obtain publish url.
 	 *
 	 * @param node the node
 	 * @return the string
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public String obtainPublishUrl(final DiscoveryNode node) throws RestartException {
+	public String obtainPublishUrl(final DiscoveryNode node) throws RebirthException {
 		if (clusterService.state().nodes().localNodeId().equals(node.id())) {
 			return jmxService.publishUrl();
 		} else {
@@ -85,7 +78,6 @@ public class GetJmxServiceUrlAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class GetJmxServiceUrlTransportHandler.
 	 *
@@ -93,31 +85,27 @@ public class GetJmxServiceUrlAction extends AbstractComponent {
 	 */
 	private class GetJmxServiceUrlTransportHandler extends BaseTransportRequestHandler<VoidStreamable> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "jmx/publishUrl";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public VoidStreamable newInstance() {
 			return VoidStreamable.INSTANCE;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(VoidStreamable request, TransportChannel channel) throws Exception {

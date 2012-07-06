@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardGatewayService.java 2012-3-29 15:02:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardGatewayService.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.gateway;
 
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.index.shard.service.InternalIndexShard;
 import cn.com.rebirth.search.core.index.translog.Translog;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class IndexShardGatewayService.
  *
@@ -39,67 +37,51 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class IndexShardGatewayService extends AbstractIndexShardComponent implements CloseableIndexComponent {
 
-	
 	/** The snapshot on close. */
 	private final boolean snapshotOnClose;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The index shard. */
 	private final InternalIndexShard indexShard;
 
-	
 	/** The shard gateway. */
 	private final IndexShardGateway shardGateway;
 
-	
 	/** The last index version. */
 	private volatile long lastIndexVersion;
 
-	
 	/** The last translog id. */
 	private volatile long lastTranslogId = -1;
 
-	
 	/** The last total translog operations. */
 	private volatile int lastTotalTranslogOperations;
 
-	
 	/** The last translog length. */
 	private volatile long lastTranslogLength;
 
-	
 	/** The snapshot interval. */
 	private volatile TimeValue snapshotInterval;
 
-	
 	/** The snapshot schedule future. */
 	private volatile ScheduledFuture snapshotScheduleFuture;
 
-	
 	/** The recovery status. */
 	private RecoveryStatus recoveryStatus;
 
-	
 	/** The snapshot lock. */
 	private IndexShardGateway.SnapshotLock snapshotLock;
 
-	
 	/** The snapshot runnable. */
 	private final SnapshotRunnable snapshotRunnable = new SnapshotRunnable();
 
-	
 	/** The apply settings. */
 	private final ApplySettings applySettings = new ApplySettings();
 
-	
 	/**
 	 * Instantiates a new index shard gateway service.
 	 *
@@ -130,7 +112,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		IndexMetaData.addDynamicSettings("index.gateway.snapshot_interval");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -138,9 +119,8 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -159,7 +139,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		}
 	}
 
-	
 	/**
 	 * Routing state changed.
 	 */
@@ -167,7 +146,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		scheduleSnapshotIfNeeded();
 	}
 
-	
 	/**
 	 * The listener interface for receiving recovery events.
 	 * The class that is interested in processing a recovery
@@ -181,13 +159,11 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 	 */
 	public static interface RecoveryListener {
 
-		
 		/**
 		 * On recovery done.
 		 */
 		void onRecoveryDone();
 
-		
 		/**
 		 * On ignore recovery.
 		 *
@@ -195,7 +171,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		 */
 		void onIgnoreRecovery(String reason);
 
-		
 		/**
 		 * On recovery failed.
 		 *
@@ -204,7 +179,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		void onRecoveryFailed(IndexShardGatewayRecoveryException e);
 	}
 
-	
 	/**
 	 * Recovery status.
 	 *
@@ -220,7 +194,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		return recoveryStatus;
 	}
 
-	
 	/**
 	 * Snapshot status.
 	 *
@@ -234,7 +207,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		return shardGateway.lastSnapshotStatus();
 	}
 
-	
 	/**
 	 * Recover.
 	 *
@@ -246,7 +218,7 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 	public void recover(final boolean indexShouldExists, final RecoveryListener listener)
 			throws IndexShardGatewayRecoveryException, IgnoreGatewayRecoveryException {
 		if (indexShard.state() == IndexShardState.CLOSED) {
-			
+
 			listener.onIgnoreRecovery("shard closed");
 			return;
 		}
@@ -258,7 +230,7 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		try {
 			indexShard.recovering("from gateway");
 		} catch (IllegalIndexShardStateException e) {
-			
+
 			listener.onIgnoreRecovery("already in recovering process, " + e.getMessage());
 			return;
 		}
@@ -278,11 +250,10 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 					lastTranslogLength = 0;
 					lastTotalTranslogOperations = recoveryStatus.translog().currentTranslogOperations();
 
-					
 					if (indexShard.state() != IndexShardState.STARTED) {
 						indexShard.start("post recovery from gateway");
 					}
-					
+
 					indexShard.refresh(new Engine.Refresh(false));
 
 					recoveryStatus.time(System.currentTimeMillis() - recoveryStatus.startTime());
@@ -316,13 +287,13 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 					scheduleSnapshotIfNeeded();
 				} catch (IndexShardGatewayRecoveryException e) {
 					if (indexShard.state() == IndexShardState.CLOSED) {
-						
+
 						listener.onIgnoreRecovery("shard closed");
 						return;
 					}
 					if ((e.getCause() instanceof IndexShardClosedException)
 							|| (e.getCause() instanceof IndexShardNotStartedException)) {
-						
+
 						listener.onIgnoreRecovery("shard closed");
 						return;
 					}
@@ -333,7 +304,7 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 					listener.onIgnoreRecovery("shard closed");
 				} catch (Exception e) {
 					if (indexShard.state() == IndexShardState.CLOSED) {
-						
+
 						listener.onIgnoreRecovery("shard closed");
 						return;
 					}
@@ -343,7 +314,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		});
 	}
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -353,17 +323,17 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 	public synchronized void snapshot(final String reason) throws IndexShardGatewaySnapshotFailedException {
 		if (!indexShard.routingEntry().primary()) {
 			return;
-			
+
 		}
 		if (indexShard.routingEntry().relocating()) {
 			return;
 		}
 		if (indexShard.state() == IndexShardState.CREATED) {
-			
+
 			return;
 		}
 		if (indexShard.state() == IndexShardState.RECOVERING) {
-			
+
 			return;
 		}
 
@@ -416,12 +386,12 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 			}
 		} catch (SnapshotFailedEngineException e) {
 			if (e.getCause() instanceof IllegalStateException) {
-				
+
 			} else {
 				throw new IndexShardGatewaySnapshotFailedException(shardId, "Failed to snapshot", e);
 			}
 		} catch (IllegalIndexShardStateException e) {
-			
+
 		} catch (IndexShardGatewaySnapshotFailedException e) {
 			throw e;
 		} catch (Exception e) {
@@ -429,7 +399,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		}
 	}
 
-	
 	/**
 	 * Snapshot on close.
 	 */
@@ -443,9 +412,8 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.CloseableIndexComponent#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.CloseableIndexComponent#close(boolean)
 	 */
 	public synchronized void close(boolean delete) {
 		indexSettingsService.removeListener(applySettings);
@@ -453,8 +421,7 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 			snapshotScheduleFuture.cancel(true);
 			snapshotScheduleFuture = null;
 		}
-		
-		
+
 		if (!indexShard.routingEntry().primary()) {
 			delete = false;
 		}
@@ -464,7 +431,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		}
 	}
 
-	
 	/**
 	 * Schedule snapshot if needed.
 	 */
@@ -476,19 +442,19 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 			return;
 		}
 		if (!indexShard.routingEntry().primary()) {
-			
+
 			return;
 		}
 		if (!indexShard.routingEntry().started()) {
-			
+
 			return;
 		}
 		if (snapshotScheduleFuture != null) {
-			
+
 			return;
 		}
 		if (snapshotInterval.millis() != -1) {
-			
+
 			if (logger.isDebugEnabled()) {
 				logger.debug("scheduling snapshot every [{}]", snapshotInterval);
 			}
@@ -496,7 +462,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 		}
 	}
 
-	
 	/**
 	 * The Class SnapshotRunnable.
 	 *
@@ -504,7 +469,6 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 	 */
 	private class SnapshotRunnable implements Runnable {
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -518,7 +482,7 @@ public class IndexShardGatewayService extends AbstractIndexShardComponent implem
 				}
 				logger.warn("failed to snapshot (scheduled)", e);
 			}
-			
+
 			if (indexShard.state() != IndexShardState.CLOSED) {
 				snapshotScheduleFuture = threadPool.schedule(snapshotInterval, ThreadPool.Names.SNAPSHOT, this);
 			}

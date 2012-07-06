@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexSettingsProvider.java 2012-3-29 15:02:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexSettingsProvider.java 2012-7-6 14:29:24 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.settings;
@@ -30,7 +30,7 @@ public class IndexSettingsProvider implements Provider<Settings> {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.Provider#get()
+	 * @see cn.com.rebirth.search.commons.inject.Provider#get()
 	 */
 	@Override
 	public Settings get() {

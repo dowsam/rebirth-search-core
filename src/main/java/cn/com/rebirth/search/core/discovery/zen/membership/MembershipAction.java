@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MembershipAction.java 2012-3-29 15:00:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MembershipAction.java 2012-7-6 14:30:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.membership;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class MembershipAction.
  *
@@ -35,7 +33,6 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class MembershipAction extends AbstractComponent {
 
-	
 	/**
 	 * The listener interface for receiving membership events.
 	 * The class that is interested in processing a membership
@@ -49,7 +46,6 @@ public class MembershipAction extends AbstractComponent {
 	 */
 	public static interface MembershipListener {
 
-		
 		/**
 		 * On join.
 		 *
@@ -58,7 +54,6 @@ public class MembershipAction extends AbstractComponent {
 		 */
 		ClusterState onJoin(DiscoveryNode node);
 
-		
 		/**
 		 * On leave.
 		 *
@@ -67,19 +62,15 @@ public class MembershipAction extends AbstractComponent {
 		void onLeave(DiscoveryNode node);
 	}
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The nodes provider. */
 	private final DiscoveryNodesProvider nodesProvider;
 
-	
 	/** The listener. */
 	private final MembershipListener listener;
 
-	
 	/**
 	 * Instantiates a new membership action.
 	 *
@@ -99,7 +90,6 @@ public class MembershipAction extends AbstractComponent {
 		transportService.registerHandler(LeaveRequestRequestHandler.ACTION, new LeaveRequestRequestHandler());
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -108,7 +98,6 @@ public class MembershipAction extends AbstractComponent {
 		transportService.removeHandler(LeaveRequestRequestHandler.ACTION);
 	}
 
-	
 	/**
 	 * Send leave request.
 	 *
@@ -120,22 +109,20 @@ public class MembershipAction extends AbstractComponent {
 				VoidTransportResponseHandler.INSTANCE_SAME);
 	}
 
-	
 	/**
 	 * Send leave request blocking.
 	 *
 	 * @param masterNode the master node
 	 * @param node the node
 	 * @param timeout the timeout
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	public void sendLeaveRequestBlocking(DiscoveryNode masterNode, DiscoveryNode node, TimeValue timeout)
-			throws RestartException {
+			throws RebirthException {
 		transportService.submitRequest(masterNode, LeaveRequestRequestHandler.ACTION, new LeaveRequest(node),
 				VoidTransportResponseHandler.INSTANCE_SAME).txGet(timeout.millis(), TimeUnit.MILLISECONDS);
 	}
 
-	
 	/**
 	 * Send join request.
 	 *
@@ -147,7 +134,6 @@ public class MembershipAction extends AbstractComponent {
 				VoidTransportResponseHandler.INSTANCE_SAME);
 	}
 
-	
 	/**
 	 * Send join request blocking.
 	 *
@@ -155,10 +141,10 @@ public class MembershipAction extends AbstractComponent {
 	 * @param node the node
 	 * @param timeout the timeout
 	 * @return the cluster state
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	public ClusterState sendJoinRequestBlocking(DiscoveryNode masterNode, DiscoveryNode node, TimeValue timeout)
-			throws RestartException {
+			throws RebirthException {
 		return transportService.submitRequest(masterNode, JoinRequestRequestHandler.ACTION,
 				new JoinRequest(node, true), new FutureTransportResponseHandler<JoinResponse>() {
 					@Override
@@ -168,7 +154,6 @@ public class MembershipAction extends AbstractComponent {
 				}).txGet(timeout.millis(), TimeUnit.MILLISECONDS).clusterState;
 	}
 
-	
 	/**
 	 * The Class JoinRequest.
 	 *
@@ -176,22 +161,18 @@ public class MembershipAction extends AbstractComponent {
 	 */
 	static class JoinRequest implements Streamable {
 
-		
 		/** The node. */
 		DiscoveryNode node;
 
-		
 		/** The with cluster state. */
 		boolean withClusterState;
 
-		
 		/**
 		 * Instantiates a new join request.
 		 */
 		private JoinRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new join request.
 		 *
@@ -203,9 +184,8 @@ public class MembershipAction extends AbstractComponent {
 			this.withClusterState = withClusterState;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -213,9 +193,8 @@ public class MembershipAction extends AbstractComponent {
 			withClusterState = in.readBoolean();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -224,7 +203,6 @@ public class MembershipAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class JoinResponse.
 	 *
@@ -232,18 +210,15 @@ public class MembershipAction extends AbstractComponent {
 	 */
 	class JoinResponse implements Streamable {
 
-		
 		/** The cluster state. */
 		ClusterState clusterState;
 
-		
 		/**
 		 * Instantiates a new join response.
 		 */
 		JoinResponse() {
 		}
 
-		
 		/**
 		 * Instantiates a new join response.
 		 *
@@ -253,18 +228,16 @@ public class MembershipAction extends AbstractComponent {
 			this.clusterState = clusterState;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			clusterState = ClusterState.Builder.readFrom(in, nodesProvider.nodes().localNode());
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -272,7 +245,6 @@ public class MembershipAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class JoinRequestRequestHandler.
 	 *
@@ -280,22 +252,19 @@ public class MembershipAction extends AbstractComponent {
 	 */
 	private class JoinRequestRequestHandler extends BaseTransportRequestHandler<JoinRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "discovery/zen/join";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public JoinRequest newInstance() {
 			return new JoinRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(JoinRequest request, TransportChannel channel) throws Exception {
@@ -307,9 +276,8 @@ public class MembershipAction extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -317,7 +285,6 @@ public class MembershipAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class LeaveRequest.
 	 *
@@ -325,18 +292,15 @@ public class MembershipAction extends AbstractComponent {
 	 */
 	private static class LeaveRequest implements Streamable {
 
-		
 		/** The node. */
 		private DiscoveryNode node;
 
-		
 		/**
 		 * Instantiates a new leave request.
 		 */
 		private LeaveRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new leave request.
 		 *
@@ -346,18 +310,16 @@ public class MembershipAction extends AbstractComponent {
 			this.node = node;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			node = DiscoveryNode.readNode(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -365,7 +327,6 @@ public class MembershipAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class LeaveRequestRequestHandler.
 	 *
@@ -373,22 +334,19 @@ public class MembershipAction extends AbstractComponent {
 	 */
 	private class LeaveRequestRequestHandler extends BaseTransportRequestHandler<LeaveRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "discovery/zen/leave";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public LeaveRequest newInstance() {
 			return new LeaveRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(LeaveRequest request, TransportChannel channel) throws Exception {
@@ -396,9 +354,8 @@ public class MembershipAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchOperationThreading.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchOperationThreading.java 2012-7-6 14:29:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum SearchOperationThreading.
@@ -17,23 +15,18 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum SearchOperationThreading {
 
-	
-	/** The N o_ threads. */
+	/** The no threads. */
 	NO_THREADS((byte) 0),
 
-	
-	/** The SINGL e_ thread. */
+	/** The single thread. */
 	SINGLE_THREAD((byte) 1),
 
-	
-	/** The THREA d_ pe r_ shard. */
+	/** The thread per shard. */
 	THREAD_PER_SHARD((byte) 2);
 
-	
 	/** The id. */
 	private final byte id;
 
-	
 	/**
 	 * Instantiates a new search operation threading.
 	 *
@@ -43,7 +36,6 @@ public enum SearchOperationThreading {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -53,7 +45,6 @@ public enum SearchOperationThreading {
 		return this.id;
 	}
 
-	
 	/**
 	 * From id.
 	 *
@@ -70,10 +61,9 @@ public enum SearchOperationThreading {
 		if (id == 2) {
 			return THREAD_PER_SHARD;
 		}
-		throw new RestartIllegalArgumentException("No type matching id [" + id + "]");
+		throw new RebirthIllegalArgumentException("No type matching id [" + id + "]");
 	}
 
-	
 	/**
 	 * From string.
 	 *
@@ -92,7 +82,6 @@ public enum SearchOperationThreading {
 		} else if ("thread_per_shard".equals(value) || "threadPerShard".equals(value)) {
 			return THREAD_PER_SHARD;
 		}
-		throw new RestartIllegalArgumentException("No value for search operation threading matching [" + value
-				+ "]");
+		throw new RebirthIllegalArgumentException("No value for search operation threading matching [" + value + "]");
 	}
 }

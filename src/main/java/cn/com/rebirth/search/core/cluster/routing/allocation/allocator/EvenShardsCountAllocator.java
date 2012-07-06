@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core EvenShardsCountAllocator.java 2012-3-29 15:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core EvenShardsCountAllocator.java 2012-7-6 14:30:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.allocator;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.FailedRerouteAlloca
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAllocation;
 
-
 /**
  * The Class EvenShardsCountAllocator.
  *
@@ -33,7 +31,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAlloc
  */
 public class EvenShardsCountAllocator extends AbstractComponent implements ShardsAllocator {
 
-	
 	/**
 	 * Instantiates a new even shards count allocator.
 	 *
@@ -44,25 +41,22 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 		super(settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.ShardsAllocator#applyStartedShards(cn.com.summall.search.core.cluster.routing.allocation.StartedRerouteAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.ShardsAllocator#applyStartedShards(cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAllocation)
 	 */
 	@Override
 	public void applyStartedShards(StartedRerouteAllocation allocation) {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.ShardsAllocator#applyFailedShards(cn.com.summall.search.core.cluster.routing.allocation.FailedRerouteAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.ShardsAllocator#applyFailedShards(cn.com.rebirth.search.core.cluster.routing.allocation.FailedRerouteAllocation)
 	 */
 	@Override
 	public void applyFailedShards(FailedRerouteAllocation allocation) {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.ShardsAllocator#allocateUnassigned(cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.ShardsAllocator#allocateUnassigned(cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean allocateUnassigned(RoutingAllocation allocation) {
@@ -76,7 +70,7 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 
 		while (unassignedIterator.hasNext()) {
 			MutableShardRouting shard = unassignedIterator.next();
-			
+
 			for (int i = 0; i < nodes.length; i++) {
 				RoutingNode node = nodes[lastNode];
 				lastNode++;
@@ -99,10 +93,9 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 			}
 		}
 
-		
 		for (Iterator<MutableShardRouting> it = routingNodes.unassigned().iterator(); it.hasNext();) {
 			MutableShardRouting shard = it.next();
-			
+
 			for (RoutingNode routingNode : sortedNodesLeastToHigh(allocation)) {
 				if (allocation.deciders().canAllocate(shard, routingNode, allocation).allocate()) {
 					changed = true;
@@ -115,9 +108,8 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 		return changed;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.ShardsAllocator#rebalance(cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.ShardsAllocator#rebalance(cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean rebalance(RoutingAllocation allocation) {
@@ -136,7 +128,6 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 				RoutingNode highRoutingNode = sortedNodesLeastToHigh[highIndex];
 				int averageNumOfShards = allocation.routingNodes().requiredAverageNumberOfShardsPerNode();
 
-				
 				if (highRoutingNode.numberOfOwningShards() <= averageNumOfShards) {
 					highIndex--;
 					continue;
@@ -175,9 +166,8 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 		return changed;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.ShardsAllocator#move(cn.com.summall.search.core.cluster.routing.MutableShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.ShardsAllocator#move(cn.com.rebirth.search.core.cluster.routing.MutableShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean move(MutableShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
@@ -189,7 +179,7 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 		}
 
 		for (RoutingNode nodeToCheck : sortedNodesLeastToHigh) {
-			
+
 			if (nodeToCheck.nodeId().equals(node.nodeId())) {
 				continue;
 			}
@@ -207,7 +197,6 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 		return changed;
 	}
 
-	
 	/**
 	 * Sorted nodes least to high.
 	 *
@@ -215,7 +204,7 @@ public class EvenShardsCountAllocator extends AbstractComponent implements Shard
 	 * @return the routing node[]
 	 */
 	private RoutingNode[] sortedNodesLeastToHigh(RoutingAllocation allocation) {
-		
+
 		final TObjectIntHashMap<String> nodeCounts = new TObjectIntHashMap<String>();
 		for (RoutingNode node : allocation.routingNodes()) {
 			for (int i = 0; i < node.shards().size(); i++) {

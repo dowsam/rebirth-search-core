@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchServiceTransportAction.java 2012-3-29 15:02:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchServiceTransportAction.java 2012-7-6 14:30:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.action;
 
@@ -35,7 +34,6 @@ import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class SearchServiceTransportAction.
  *
@@ -43,7 +41,6 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class SearchServiceTransportAction extends AbstractComponent {
 
-	
 	/**
 	 * The Class FreeContextResponseHandler.
 	 *
@@ -51,11 +48,9 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	static final class FreeContextResponseHandler extends VoidTransportResponseHandler {
 
-		
 		/** The logger. */
 		private final Logger logger = LoggerFactory.getLogger(getClass());
 
-		
 		/**
 		 * Instantiates a new free context response handler.
 		 */
@@ -63,9 +58,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			super(ThreadPool.Names.SAME);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.VoidTransportResponseHandler#handleException(cn.com.summall.search.core.transport.TransportException)
+		 * @see cn.com.rebirth.search.core.transport.VoidTransportResponseHandler#handleException(cn.com.rebirth.search.core.transport.TransportException)
 		 */
 		@Override
 		public void handleException(TransportException exp) {
@@ -73,23 +67,18 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The search service. */
 	private final SearchService searchService;
 
-	
 	/** The free context response handler. */
 	private final FreeContextResponseHandler freeContextResponseHandler = new FreeContextResponseHandler();
 
-	
 	/**
 	 * Instantiates a new search service transport action.
 	 *
@@ -125,7 +114,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 				new SearchScanScrollTransportHandler());
 	}
 
-	
 	/**
 	 * Send free context.
 	 *
@@ -141,7 +129,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute dfs.
 	 *
@@ -185,7 +172,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute query.
 	 *
@@ -229,7 +215,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute query.
 	 *
@@ -273,7 +258,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute query.
 	 *
@@ -317,7 +301,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute fetch.
 	 *
@@ -361,7 +344,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute fetch.
 	 *
@@ -405,7 +387,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute fetch.
 	 *
@@ -449,7 +430,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute fetch.
 	 *
@@ -493,7 +473,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute scan.
 	 *
@@ -537,7 +516,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Send execute scan.
 	 *
@@ -581,7 +559,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchFreeContextTransportHandler.
 	 *
@@ -589,22 +566,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchFreeContextTransportHandler extends BaseTransportRequestHandler<LongStreamable> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/freeContext";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public LongStreamable newInstance() {
 			return new LongStreamable();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(LongStreamable request, TransportChannel channel) throws Exception {
@@ -612,9 +586,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -622,7 +595,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchDfsTransportHandler.
 	 *
@@ -630,22 +602,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchDfsTransportHandler extends BaseTransportRequestHandler<InternalSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/dfs";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalSearchRequest newInstance() {
 			return new InternalSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalSearchRequest request, TransportChannel channel) throws Exception {
@@ -653,9 +622,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -663,7 +631,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchQueryTransportHandler.
 	 *
@@ -671,22 +638,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchQueryTransportHandler extends BaseTransportRequestHandler<InternalSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/query";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalSearchRequest newInstance() {
 			return new InternalSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalSearchRequest request, TransportChannel channel) throws Exception {
@@ -694,9 +658,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -704,7 +667,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchQueryByIdTransportHandler.
 	 *
@@ -712,22 +674,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchQueryByIdTransportHandler extends BaseTransportRequestHandler<QuerySearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/query/id";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public QuerySearchRequest newInstance() {
 			return new QuerySearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(QuerySearchRequest request, TransportChannel channel) throws Exception {
@@ -735,9 +694,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -745,7 +703,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchQueryScrollTransportHandler.
 	 *
@@ -753,22 +710,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchQueryScrollTransportHandler extends BaseTransportRequestHandler<InternalScrollSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/query/scroll";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalScrollSearchRequest newInstance() {
 			return new InternalScrollSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalScrollSearchRequest request, TransportChannel channel) throws Exception {
@@ -776,9 +730,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -786,7 +739,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchQueryFetchTransportHandler.
 	 *
@@ -794,22 +746,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchQueryFetchTransportHandler extends BaseTransportRequestHandler<InternalSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/query+fetch";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalSearchRequest newInstance() {
 			return new InternalSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalSearchRequest request, TransportChannel channel) throws Exception {
@@ -817,9 +766,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -827,7 +775,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchQueryQueryFetchTransportHandler.
 	 *
@@ -835,22 +782,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchQueryQueryFetchTransportHandler extends BaseTransportRequestHandler<QuerySearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/query/query+fetch";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public QuerySearchRequest newInstance() {
 			return new QuerySearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(QuerySearchRequest request, TransportChannel channel) throws Exception {
@@ -858,9 +802,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -868,7 +811,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchFetchByIdTransportHandler.
 	 *
@@ -876,22 +818,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchFetchByIdTransportHandler extends BaseTransportRequestHandler<FetchSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/fetch/id";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public FetchSearchRequest newInstance() {
 			return new FetchSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(FetchSearchRequest request, TransportChannel channel) throws Exception {
@@ -899,9 +838,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -909,7 +847,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchQueryFetchScrollTransportHandler.
 	 *
@@ -918,22 +855,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	private class SearchQueryFetchScrollTransportHandler extends
 			BaseTransportRequestHandler<InternalScrollSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/query+fetch/scroll";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalScrollSearchRequest newInstance() {
 			return new InternalScrollSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalScrollSearchRequest request, TransportChannel channel) throws Exception {
@@ -941,9 +875,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -951,7 +884,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchScanTransportHandler.
 	 *
@@ -959,22 +891,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchScanTransportHandler extends BaseTransportRequestHandler<InternalSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/scan";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalSearchRequest newInstance() {
 			return new InternalSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalSearchRequest request, TransportChannel channel) throws Exception {
@@ -982,9 +911,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -992,7 +920,6 @@ public class SearchServiceTransportAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class SearchScanScrollTransportHandler.
 	 *
@@ -1000,22 +927,19 @@ public class SearchServiceTransportAction extends AbstractComponent {
 	 */
 	private class SearchScanScrollTransportHandler extends BaseTransportRequestHandler<InternalScrollSearchRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "search/phase/scan/scroll";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public InternalScrollSearchRequest newInstance() {
 			return new InternalScrollSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(InternalScrollSearchRequest request, TransportChannel channel) throws Exception {
@@ -1023,9 +947,8 @@ public class SearchServiceTransportAction extends AbstractComponent {
 			channel.sendResponse(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeMappingRefreshAction.java 2012-3-29 15:00:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeMappingRefreshAction.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.action.index;
 
 import java.io.IOException;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class NodeMappingRefreshAction.
  *
@@ -33,23 +31,18 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class NodeMappingRefreshAction extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The meta data mapping service. */
 	private final MetaDataMappingService metaDataMappingService;
 
-	
 	/**
 	 * Instantiates a new node mapping refresh action.
 	 *
@@ -71,14 +64,13 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 				new NodeMappingRefreshTransportHandler());
 	}
 
-	
 	/**
 	 * Node mapping refresh.
 	 *
 	 * @param request the request
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void nodeMappingRefresh(final NodeMappingRefreshRequest request) throws RestartException {
+	public void nodeMappingRefresh(final NodeMappingRefreshRequest request) throws RebirthException {
 		DiscoveryNodes nodes = clusterService.state().nodes();
 		if (nodes.localNodeMaster()) {
 			threadPool.generic().execute(new Runnable() {
@@ -93,7 +85,6 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Inner mapping refresh.
 	 *
@@ -103,7 +94,6 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 		metaDataMappingService.refreshMapping(request.index(), request.types());
 	}
 
-	
 	/**
 	 * The Class NodeMappingRefreshTransportHandler.
 	 *
@@ -111,22 +101,19 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 	 */
 	private class NodeMappingRefreshTransportHandler extends BaseTransportRequestHandler<NodeMappingRefreshRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "cluster/nodeMappingRefresh";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public NodeMappingRefreshRequest newInstance() {
 			return new NodeMappingRefreshRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(NodeMappingRefreshRequest request, TransportChannel channel) throws Exception {
@@ -134,9 +121,8 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -144,7 +130,6 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class NodeMappingRefreshRequest.
 	 *
@@ -152,26 +137,21 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 	 */
 	public static class NodeMappingRefreshRequest implements Streamable {
 
-		
 		/** The index. */
 		private String index;
 
-		
 		/** The types. */
 		private String[] types;
 
-		
 		/** The node id. */
 		private String nodeId;
 
-		
 		/**
 		 * Instantiates a new node mapping refresh request.
 		 */
 		private NodeMappingRefreshRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new node mapping refresh request.
 		 *
@@ -185,7 +165,6 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 			this.nodeId = nodeId;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -195,7 +174,6 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 			return index;
 		}
 
-		
 		/**
 		 * Types.
 		 *
@@ -205,7 +183,6 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 			return types;
 		}
 
-		
 		/**
 		 * Node id.
 		 *
@@ -215,9 +192,8 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 			return nodeId;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -229,9 +205,8 @@ public class NodeMappingRefreshAction extends AbstractComponent {
 			out.writeUTF(nodeId);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {

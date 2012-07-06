@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptTermsStringFieldFacetCollector.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptTermsStringFieldFacetCollector.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.strings;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class ScriptTermsStringFieldFacetCollector.
  *
@@ -37,43 +35,33 @@ import com.google.common.collect.ImmutableSet;
  */
 public class ScriptTermsStringFieldFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The comparator type. */
 	private final InternalStringTermsFacet.ComparatorType comparatorType;
 
-	
 	/** The size. */
 	private final int size;
 
-	
 	/** The number of shards. */
 	private final int numberOfShards;
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/** The matcher. */
 	private final Matcher matcher;
 
-	
 	/** The excluded. */
 	private final ImmutableSet<String> excluded;
 
-	
 	/** The facets. */
 	private final TObjectIntHashMap<String> facets;
 
-	
 	/** The missing. */
 	private int missing;
 
-	
 	/** The total. */
 	private int total;
 
-	
 	/**
 	 * Instantiates a new script terms string field facet collector.
 	 *
@@ -102,27 +90,24 @@ public class ScriptTermsStringFieldFacetCollector extends AbstractFacetCollector
 		this.facets = CacheRecycler.popObjectIntMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
 		script.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		script.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -169,7 +154,6 @@ public class ScriptTermsStringFieldFacetCollector extends AbstractFacetCollector
 		}
 	}
 
-	
 	/**
 	 * Match.
 	 *
@@ -186,9 +170,8 @@ public class ScriptTermsStringFieldFacetCollector extends AbstractFacetCollector
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {

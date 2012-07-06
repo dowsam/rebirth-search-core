@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataDeleteIndexService.java 2012-3-29 15:02:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataDeleteIndexService.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.indices.IndexMissingException;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class MetaDataDeleteIndexService.
  *
@@ -37,27 +35,21 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class MetaDataDeleteIndexService extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The allocation service. */
 	private final AllocationService allocationService;
 
-	
 	/** The node index deleted action. */
 	private final NodeIndexDeletedAction nodeIndexDeletedAction;
 
-	
 	/** The meta data service. */
 	private final MetaDataService metaDataService;
 
-	
 	/**
 	 * Instantiates a new meta data delete index service.
 	 *
@@ -80,7 +72,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 		this.metaDataService = metaDataService;
 	}
 
-	
 	/**
 	 * Delete index.
 	 *
@@ -88,8 +79,7 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 	 * @param userListener the user listener
 	 */
 	public void deleteIndex(final Request request, final Listener userListener) {
-		
-		
+
 		MetaDataService.MdLock mdLock = metaDataService.indexMetaDataLock(request.index);
 		try {
 			mdLock.lock();
@@ -156,7 +146,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 		});
 	}
 
-	
 	/**
 	 * The listener interface for receiving deleteIndex events.
 	 * The class that is interested in processing a deleteIndex
@@ -170,27 +159,21 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 	 */
 	class DeleteIndexListener implements Listener {
 
-		
 		/** The notified. */
 		private final AtomicBoolean notified = new AtomicBoolean();
 
-		
 		/** The md lock. */
 		private final MetaDataService.MdLock mdLock;
 
-		
 		/** The request. */
 		private final Request request;
 
-		
 		/** The listener. */
 		private final Listener listener;
 
-		
 		/** The future. */
 		volatile ScheduledFuture future;
 
-		
 		/**
 		 * Instantiates a new delete index listener.
 		 *
@@ -204,9 +187,8 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 			this.listener = listener;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.metadata.MetaDataDeleteIndexService.Listener#onResponse(cn.com.summall.search.core.cluster.metadata.MetaDataDeleteIndexService.Response)
+		 * @see cn.com.rebirth.search.core.cluster.metadata.MetaDataDeleteIndexService.Listener#onResponse(cn.com.rebirth.search.core.cluster.metadata.MetaDataDeleteIndexService.Response)
 		 */
 		@Override
 		public void onResponse(final Response response) {
@@ -219,9 +201,8 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.metadata.MetaDataDeleteIndexService.Listener#onFailure(java.lang.Throwable)
+		 * @see cn.com.rebirth.search.core.cluster.metadata.MetaDataDeleteIndexService.Listener#onFailure(java.lang.Throwable)
 		 */
 		@Override
 		public void onFailure(Throwable t) {
@@ -235,7 +216,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -243,7 +223,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On response.
 		 *
@@ -251,7 +230,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 		 */
 		void onResponse(Response response);
 
-		
 		/**
 		 * On failure.
 		 *
@@ -260,7 +238,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 		void onFailure(Throwable t);
 	}
 
-	
 	/**
 	 * The Class Request.
 	 *
@@ -268,15 +245,12 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 	 */
 	public static class Request {
 
-		
 		/** The index. */
 		final String index;
 
-		
 		/** The timeout. */
 		TimeValue timeout = TimeValue.timeValueSeconds(10);
 
-		
 		/**
 		 * Instantiates a new request.
 		 *
@@ -286,7 +260,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 			this.index = index;
 		}
 
-		
 		/**
 		 * Timeout.
 		 *
@@ -299,7 +272,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Response.
 	 *
@@ -307,11 +279,9 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 	 */
 	public static class Response {
 
-		
 		/** The acknowledged. */
 		private final boolean acknowledged;
 
-		
 		/**
 		 * Instantiates a new response.
 		 *
@@ -321,7 +291,6 @@ public class MetaDataDeleteIndexService extends AbstractComponent {
 			this.acknowledged = acknowledged;
 		}
 
-		
 		/**
 		 * Acknowledged.
 		 *

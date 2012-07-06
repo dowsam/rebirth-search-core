@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HasChildFilterParser.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HasChildFilterParser.java 2012-7-6 14:29:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.index.mapper.DocumentMapper;
 import cn.com.rebirth.search.core.index.search.child.HasChildFilter;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class HasChildFilterParser.
  *
@@ -27,11 +25,9 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class HasChildFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "has_child";
 
-	
 	/**
 	 * Instantiates a new checks for child filter parser.
 	 */
@@ -39,18 +35,16 @@ public class HasChildFilterParser implements FilterParser {
 	public HasChildFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -68,8 +62,7 @@ public class HasChildFilterParser implements FilterParser {
 				currentFieldName = parser.currentName();
 			} else if (token == XContentParser.Token.START_OBJECT) {
 				if ("query".equals(currentFieldName)) {
-					
-					
+
 					String[] origTypes = QueryParseContext.setTypesWithPrevious(childType == null ? null
 							: new String[] { childType });
 					try {
@@ -111,7 +104,6 @@ public class HasChildFilterParser implements FilterParser {
 		}
 		String parentType = childDocMapper.parentFieldMapper().type();
 
-		
 		query = new FilteredQuery(query, parseContext.cacheFilter(childDocMapper.typeFilter(), null));
 
 		SearchContext searchContext = SearchContext.current();

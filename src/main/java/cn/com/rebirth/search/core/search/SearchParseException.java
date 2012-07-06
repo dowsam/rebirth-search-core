@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchParseException.java 2012-3-29 15:02:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchParseException.java 2012-7-6 14:30:16 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search;
 
 import cn.com.rebirth.search.core.search.internal.SearchContext;
-
 
 /**
  * The Class SearchParseException.
@@ -15,11 +13,10 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  * @author l.xue.nong
  */
 public class SearchParseException extends SearchContextException {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1867082159123322504L;
 
-	
 	/**
 	 * Instantiates a new search parse exception.
 	 *
@@ -30,7 +27,6 @@ public class SearchParseException extends SearchContextException {
 		super(context, "Parse Failure [" + msg + "]");
 	}
 
-	
 	/**
 	 * Instantiates a new search parse exception.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportIndicesAliasesAction.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportIndicesAliasesAction.java 2012-7-6 14:28:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.alias;
 
@@ -10,7 +9,7 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction;
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class TransportIndicesAliasesAction.
  *
@@ -34,11 +32,9 @@ import com.google.common.collect.Sets;
 public class TransportIndicesAliasesAction extends
 		TransportMasterNodeOperationAction<IndicesAliasesRequest, IndicesAliasesResponse> {
 
-	
 	/** The index aliases service. */
 	private final MetaDataIndexAliasesService indexAliasesService;
 
-	
 	/**
 	 * Instantiates a new transport indices aliases action.
 	 *
@@ -55,45 +51,40 @@ public class TransportIndicesAliasesAction extends
 		this.indexAliasesService = indexAliasesService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.MANAGEMENT;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return IndicesAliasesAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected IndicesAliasesRequest newRequest() {
 		return new IndicesAliasesRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected IndicesAliasesResponse newResponse() {
 		return new IndicesAliasesResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected ClusterBlockException checkBlock(IndicesAliasesRequest request, ClusterState state) {
@@ -105,13 +96,12 @@ public class TransportIndicesAliasesAction extends
 				indices.toArray(new String[indices.size()]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected IndicesAliasesResponse masterOperation(IndicesAliasesRequest request, ClusterState state)
-			throws RestartException {
+			throws RebirthException {
 		final AtomicReference<IndicesAliasesResponse> responseRef = new AtomicReference<IndicesAliasesResponse>();
 		final AtomicReference<Throwable> failureRef = new AtomicReference<Throwable>();
 		final CountDownLatch latch = new CountDownLatch(1);
@@ -139,10 +129,10 @@ public class TransportIndicesAliasesAction extends
 		}
 
 		if (failureRef.get() != null) {
-			if (failureRef.get() instanceof RestartException) {
-				throw (RestartException) failureRef.get();
+			if (failureRef.get() instanceof RebirthException) {
+				throw (RebirthException) failureRef.get();
 			} else {
-				throw new RestartException(failureRef.get().getMessage(), failureRef.get());
+				throw new RebirthException(failureRef.get().getMessage(), failureRef.get());
 			}
 		}
 

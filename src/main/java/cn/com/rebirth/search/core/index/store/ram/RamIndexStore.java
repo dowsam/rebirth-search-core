@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RamIndexStore.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RamIndexStore.java 2012-7-6 14:30:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.ram;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.index.store.support.AbstractIndexStore;
 import cn.com.rebirth.search.core.monitor.jvm.JvmInfo;
 import cn.com.rebirth.search.core.monitor.jvm.JvmStats;
 
-
 /**
  * The Class RamIndexStore.
  *
@@ -25,7 +23,6 @@ import cn.com.rebirth.search.core.monitor.jvm.JvmStats;
  */
 public class RamIndexStore extends AbstractIndexStore {
 
-	
 	/**
 	 * Instantiates a new ram index store.
 	 *
@@ -38,36 +35,32 @@ public class RamIndexStore extends AbstractIndexStore {
 		super(index, indexSettings, indexService);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#persistent()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#persistent()
 	 */
 	@Override
 	public boolean persistent() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#shardDirectory()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#shardDirectory()
 	 */
 	@Override
 	public Class<? extends DirectoryService> shardDirectory() {
 		return RamDirectoryService.class;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#backingStoreTotalSpace()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#backingStoreTotalSpace()
 	 */
 	@Override
 	public ByteSizeValue backingStoreTotalSpace() {
 		return JvmInfo.jvmInfo().getMem().heapMax();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#backingStoreFreeSpace()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#backingStoreFreeSpace()
 	 */
 	@Override
 	public ByteSizeValue backingStoreFreeSpace() {

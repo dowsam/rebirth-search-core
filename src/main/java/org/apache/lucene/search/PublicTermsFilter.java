@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PublicTermsFilter.java 2012-3-29 15:04:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PublicTermsFilter.java 2012-7-6 14:30:27 l.xue.nong$$
  */
 
 package org.apache.lucene.search;
@@ -22,7 +22,9 @@ import java.util.TreeSet;
  */
 public class PublicTermsFilter extends Filter {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2151598365150915730L;
+
 	/** The terms. */
 	Set<Term> terms = new TreeSet<Term>();
 

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PercolateRequest.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PercolateRequest.java 2012-7-6 14:29:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.percolate;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest;
 
-
 /**
  * The Class PercolateRequest.
  *
@@ -33,31 +31,24 @@ import cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOpera
  */
 public class PercolateRequest extends SingleCustomOperationRequest {
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The source. */
 	private byte[] source;
 
-	
 	/** The source offset. */
 	private int sourceOffset;
 
-	
 	/** The source length. */
 	private int sourceLength;
 
-	
 	/** The source unsafe. */
 	private boolean sourceUnsafe;
 
-	
 	/**
 	 * Instantiates a new percolate request.
 	 */
@@ -65,7 +56,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new percolate request.
 	 *
@@ -77,7 +67,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		this.type = type;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -89,7 +78,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -101,7 +89,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -111,7 +98,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this.index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -121,9 +107,8 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this.type;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#beforeLocalFork()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#beforeLocalFork()
 	 */
 	@Override
 	public void beforeLocalFork() {
@@ -132,7 +117,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -147,7 +131,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return source;
 	}
 
-	
 	/**
 	 * Underlying source.
 	 *
@@ -160,7 +143,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this.source;
 	}
 
-	
 	/**
 	 * Underlying source offset.
 	 *
@@ -173,7 +155,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this.sourceOffset;
 	}
 
-	
 	/**
 	 * Underlying source length.
 	 *
@@ -186,27 +167,25 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this.sourceLength;
 	}
 
-	
 	/**
 	 * Source.
 	 *
 	 * @param source the source
 	 * @return the percolate request
-	 * @throws RestartGenerationException the sum mall search generation exception
+	 * @throws RestartGenerationException the restart generation exception
 	 */
 	@Required
 	public PercolateRequest source(Map source) throws RestartGenerationException {
 		return source(source, XContentType.SMILE);
 	}
 
-	
 	/**
 	 * Source.
 	 *
 	 * @param source the source
 	 * @param contentType the content type
 	 * @return the percolate request
-	 * @throws RestartGenerationException the sum mall search generation exception
+	 * @throws RestartGenerationException the restart generation exception
 	 */
 	@Required
 	public PercolateRequest source(Map source, XContentType contentType) throws RestartGenerationException {
@@ -219,7 +198,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -236,7 +214,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -256,7 +233,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -267,7 +243,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return source(source, 0, source.length);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -281,7 +256,6 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return source(source, offset, length, false);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -300,9 +274,8 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#preferLocal(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#preferLocal(boolean)
 	 */
 	@Override
 	public PercolateRequest preferLocal(boolean preferLocal) {
@@ -310,9 +283,8 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -329,9 +301,8 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -346,9 +317,8 @@ public class PercolateRequest extends SingleCustomOperationRequest {
 		sourceLength = bytes.length();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

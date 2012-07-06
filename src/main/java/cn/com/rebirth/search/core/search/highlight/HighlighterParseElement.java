@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HighlighterParseElement.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HighlighterParseElement.java 2012-7-6 14:28:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.highlight;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class HighlighterParseElement.
  *
@@ -26,27 +24,22 @@ import com.google.common.collect.Lists;
  */
 public class HighlighterParseElement implements SearchParseElement {
 
-	
 	/** The Constant DEFAULT_PRE_TAGS. */
 	private static final String[] DEFAULT_PRE_TAGS = new String[] { "<em>" };
 
-	
 	/** The Constant DEFAULT_POST_TAGS. */
 	private static final String[] DEFAULT_POST_TAGS = new String[] { "</em>" };
 
-	
 	/** The Constant STYLED_PRE_TAG. */
 	private static final String[] STYLED_PRE_TAG = { "<em class=\"hlt1\">", "<em class=\"hlt2\">",
 			"<em class=\"hlt3\">", "<em class=\"hlt4\">", "<em class=\"hlt5\">", "<em class=\"hlt6\">",
 			"<em class=\"hlt7\">", "<em class=\"hlt8\">", "<em class=\"hlt9\">", "<em class=\"hlt10\">" };
 
-	
 	/** The Constant STYLED_POST_TAGS. */
 	private static final String[] STYLED_POST_TAGS = { "</em>" };
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchParseElement#parse(cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchParseElement#parse(cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void parse(XContentParser parser, SearchContext context) throws Exception {
@@ -171,7 +164,6 @@ public class HighlighterParseElement implements SearchParseElement {
 					"Highlighter global preTags are set, but global postTags are not set");
 		}
 
-		
 		for (SearchContextHighlight.Field field : fields) {
 			if (field.preTags() == null) {
 				field.preTags(globalPreTags);

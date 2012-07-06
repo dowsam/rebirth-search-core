@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulkResponse.java 2012-3-29 15:02:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulkResponse.java 2012-7-6 14:28:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class BulkResponse.
  *
@@ -24,22 +22,18 @@ import com.google.common.collect.Iterators;
  */
 public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> {
 
-	
 	/** The responses. */
 	private BulkItemResponse[] responses;
 
-	
 	/** The took in millis. */
 	private long tookInMillis;
 
-	
 	/**
 	 * Instantiates a new bulk response.
 	 */
 	BulkResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new bulk response.
 	 *
@@ -51,7 +45,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		this.tookInMillis = tookInMillis;
 	}
 
-	
 	/**
 	 * Took.
 	 *
@@ -61,7 +54,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return new TimeValue(tookInMillis);
 	}
 
-	
 	/**
 	 * Gets the took.
 	 *
@@ -71,7 +63,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return took();
 	}
 
-	
 	/**
 	 * Took in millis.
 	 *
@@ -81,7 +72,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return tookInMillis;
 	}
 
-	
 	/**
 	 * Gets the took in millis.
 	 *
@@ -91,7 +81,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return tookInMillis();
 	}
 
-	
 	/**
 	 * Checks for failures.
 	 *
@@ -106,7 +95,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return false;
 	}
 
-	
 	/**
 	 * Builds the failure message.
 	 *
@@ -126,7 +114,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return sb.toString();
 	}
 
-	
 	/**
 	 * Items.
 	 *
@@ -136,7 +123,6 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return responses;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -145,9 +131,8 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		return Iterators.forArray(responses);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -158,9 +143,8 @@ public class BulkResponse implements ActionResponse, Iterable<BulkItemResponse> 
 		tookInMillis = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

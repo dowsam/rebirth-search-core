@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteByQueryRequestBuilder.java 2012-3-29 15:02:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteByQueryRequestBuilder.java 2012-7-6 14:30:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.deletebyquery;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.action.support.replication.ReplicationType;
 import cn.com.rebirth.search.core.client.Client;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 
-
 /**
  * The Class DeleteByQueryRequestBuilder.
  *
@@ -25,7 +23,6 @@ import cn.com.rebirth.search.core.index.query.QueryBuilder;
  */
 public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQueryRequest, DeleteByQueryResponse> {
 
-	
 	/**
 	 * Instantiates a new delete by query request builder.
 	 *
@@ -35,7 +32,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		super(client, new DeleteByQueryRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -47,7 +43,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the types.
 	 *
@@ -59,7 +54,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -71,7 +65,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -83,7 +76,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -95,7 +87,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -107,7 +98,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -119,7 +109,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -131,7 +120,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -143,7 +131,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -158,7 +145,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -170,7 +156,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -182,7 +167,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the replication type.
 	 *
@@ -194,7 +178,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the replication type.
 	 *
@@ -206,7 +189,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the consistency level.
 	 *
@@ -218,7 +200,6 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -230,9 +211,8 @@ public class DeleteByQueryRequestBuilder extends BaseRequestBuilder<DeleteByQuer
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<DeleteByQueryResponse> listener) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core KeywordAnalyzerProvider.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core KeywordAnalyzerProvider.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class KeywordAnalyzerProvider.
  *
@@ -22,11 +20,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class KeywordAnalyzerProvider extends AbstractIndexAnalyzerProvider<KeywordAnalyzer> {
 
-	
 	/** The keyword analyzer. */
 	private final KeywordAnalyzer keywordAnalyzer;
 
-	
 	/**
 	 * Instantiates a new keyword analyzer provider.
 	 *
@@ -42,9 +38,8 @@ public class KeywordAnalyzerProvider extends AbstractIndexAnalyzerProvider<Keywo
 		this.keywordAnalyzer = new KeywordAnalyzer();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#get()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#get()
 	 */
 	@Override
 	public KeywordAnalyzer get() {

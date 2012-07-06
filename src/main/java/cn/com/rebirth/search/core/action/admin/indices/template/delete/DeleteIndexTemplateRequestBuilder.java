@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteIndexTemplateRequestBuilder.java 2012-3-29 15:01:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteIndexTemplateRequestBuilder.java 2012-7-6 14:28:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.template.delete;
 
@@ -10,7 +9,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
-
 
 /**
  * The Class DeleteIndexTemplateRequestBuilder.
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
 public class DeleteIndexTemplateRequestBuilder extends
 		BaseIndicesRequestBuilder<DeleteIndexTemplateRequest, DeleteIndexTemplateResponse> {
 
-	
 	/**
 	 * Instantiates a new delete index template request builder.
 	 *
@@ -30,7 +27,6 @@ public class DeleteIndexTemplateRequestBuilder extends
 		super(indicesClient, new DeleteIndexTemplateRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new delete index template request builder.
 	 *
@@ -41,7 +37,6 @@ public class DeleteIndexTemplateRequestBuilder extends
 		super(indicesClient, new DeleteIndexTemplateRequest(name));
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -53,7 +48,6 @@ public class DeleteIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -65,7 +59,6 @@ public class DeleteIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -77,7 +70,6 @@ public class DeleteIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -89,9 +81,8 @@ public class DeleteIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<DeleteIndexTemplateResponse> listener) {

@@ -1,18 +1,16 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FsTranslogFile.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FsTranslogFile.java 2012-7-6 14:30:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.translog.fs;
 
 import java.io.IOException;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.translog.Translog;
 import cn.com.rebirth.search.core.index.translog.TranslogException;
-
 
 /**
  * The Interface FsTranslogFile.
@@ -21,7 +19,6 @@ import cn.com.rebirth.search.core.index.translog.TranslogException;
  */
 public interface FsTranslogFile {
 
-	
 	/**
 	 * The Enum Type.
 	 *
@@ -29,8 +26,7 @@ public interface FsTranslogFile {
 	 */
 	public static enum Type {
 
-		
-		/** The SIMPLE. */
+		/** The simple. */
 		SIMPLE() {
 			@Override
 			public FsTranslogFile create(ShardId shardId, long id, RafReference raf, int bufferSize) throws IOException {
@@ -38,8 +34,7 @@ public interface FsTranslogFile {
 			}
 		},
 
-		
-		/** The BUFFERED. */
+		/** The buffered. */
 		BUFFERED() {
 			@Override
 			public FsTranslogFile create(ShardId shardId, long id, RafReference raf, int bufferSize) throws IOException {
@@ -47,7 +42,6 @@ public interface FsTranslogFile {
 			}
 		};
 
-		
 		/**
 		 * Creates the.
 		 *
@@ -61,25 +55,23 @@ public interface FsTranslogFile {
 		public abstract FsTranslogFile create(ShardId shardId, long id, RafReference raf, int bufferSize)
 				throws IOException;
 
-		
 		/**
 		 * From string.
 		 *
 		 * @param type the type
 		 * @return the type
-		 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+		 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 		 */
-		public static Type fromString(String type) throws RestartIllegalArgumentException {
+		public static Type fromString(String type) throws RebirthIllegalArgumentException {
 			if (SIMPLE.name().equalsIgnoreCase(type)) {
 				return SIMPLE;
 			} else if (BUFFERED.name().equalsIgnoreCase(type)) {
 				return BUFFERED;
 			}
-			throw new RestartIllegalArgumentException("No translog fs type [" + type + "]");
+			throw new RebirthIllegalArgumentException("No translog fs type [" + type + "]");
 		}
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -87,7 +79,6 @@ public interface FsTranslogFile {
 	 */
 	long id();
 
-	
 	/**
 	 * Estimated number of operations.
 	 *
@@ -95,7 +86,6 @@ public interface FsTranslogFile {
 	 */
 	int estimatedNumberOfOperations();
 
-	
 	/**
 	 * Translog size in bytes.
 	 *
@@ -103,7 +93,6 @@ public interface FsTranslogFile {
 	 */
 	long translogSizeInBytes();
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -115,7 +104,6 @@ public interface FsTranslogFile {
 	 */
 	Translog.Location add(byte[] data, int from, int size) throws IOException;
 
-	
 	/**
 	 * Read.
 	 *
@@ -125,7 +113,6 @@ public interface FsTranslogFile {
 	 */
 	byte[] read(Translog.Location location) throws IOException;
 
-	
 	/**
 	 * Close.
 	 *
@@ -134,7 +121,6 @@ public interface FsTranslogFile {
 	 */
 	void close(boolean delete) throws TranslogException;
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -143,7 +129,6 @@ public interface FsTranslogFile {
 	 */
 	FsChannelSnapshot snapshot() throws TranslogException;
 
-	
 	/**
 	 * Reuse.
 	 *
@@ -152,13 +137,11 @@ public interface FsTranslogFile {
 	 */
 	void reuse(FsTranslogFile other) throws TranslogException;
 
-	
 	/**
 	 * Sync.
 	 */
 	void sync();
 
-	
 	/**
 	 * Sync needed.
 	 *

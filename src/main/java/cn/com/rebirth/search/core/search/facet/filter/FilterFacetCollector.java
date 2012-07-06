@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FilterFacetCollector.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FilterFacetCollector.java 2012-7-6 14:28:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.filter;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.OptimizeGlobalFacetCollector;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class FilterFacetCollector.
  *
@@ -31,19 +29,15 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class FilterFacetCollector extends AbstractFacetCollector implements OptimizeGlobalFacetCollector {
 
-	
 	/** The filter. */
 	private final Filter filter;
 
-	
 	/** The doc set. */
 	private DocSet docSet;
 
-	
 	/** The count. */
 	private int count = 0;
 
-	
 	/**
 	 * Instantiates a new filter facet collector.
 	 *
@@ -56,9 +50,8 @@ public class FilterFacetCollector extends AbstractFacetCollector implements Opti
 		this.filter = filter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.OptimizeGlobalFacetCollector#optimizedGlobalExecution(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.facet.OptimizeGlobalFacetCollector#optimizedGlobalExecution(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void optimizedGlobalExecution(SearchContext searchContext) throws IOException {
@@ -75,18 +68,16 @@ public class FilterFacetCollector extends AbstractFacetCollector implements Opti
 		count = collector.getTotalHits();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		docSet = DocSets.convert(reader, filter.getDocIdSet(reader));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -95,9 +86,8 @@ public class FilterFacetCollector extends AbstractFacetCollector implements Opti
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {

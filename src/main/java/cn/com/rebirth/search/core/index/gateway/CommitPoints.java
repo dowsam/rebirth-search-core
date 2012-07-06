@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CommitPoints.java 2012-3-29 15:02:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CommitPoints.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.gateway;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentType;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class CommitPoints.
  *
@@ -28,11 +26,9 @@ import com.google.common.collect.Lists;
  */
 public class CommitPoints implements Iterable<CommitPoint> {
 
-	
 	/** The commit points. */
 	private final ImmutableList<CommitPoint> commitPoints;
 
-	
 	/**
 	 * Instantiates a new commit points.
 	 *
@@ -48,7 +44,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		this.commitPoints = ImmutableList.copyOf(commitPoints);
 	}
 
-	
 	/**
 	 * Commits.
 	 *
@@ -58,7 +53,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		return this.commitPoints;
 	}
 
-	
 	/**
 	 * Checks for version.
 	 *
@@ -74,7 +68,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		return false;
 	}
 
-	
 	/**
 	 * Find physical index file.
 	 *
@@ -91,7 +84,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		return null;
 	}
 
-	
 	/**
 	 * Find name file.
 	 *
@@ -108,7 +100,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -117,7 +108,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		return commitPoints.iterator();
 	}
 
-	
 	/**
 	 * To x content.
 	 *
@@ -157,7 +147,6 @@ public class CommitPoints implements Iterable<CommitPoint> {
 		return builder.copiedBytes();
 	}
 
-	
 	/**
 	 * From x content.
 	 *
@@ -171,7 +160,7 @@ public class CommitPoints implements Iterable<CommitPoint> {
 			String currentFieldName = null;
 			XContentParser.Token token = parser.nextToken();
 			if (token == null) {
-				
+
 				throw new IOException("No commit point data");
 			}
 			long version = -1;

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoBoundingBoxFilterBuilder.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoBoundingBoxFilterBuilder.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -11,7 +10,6 @@ import java.io.IOException;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.search.geo.Point;
 
-
 /**
  * The Class GeoBoundingBoxFilterBuilder.
  *
@@ -19,43 +17,33 @@ import cn.com.rebirth.search.core.index.search.geo.Point;
  */
 public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The top left. */
 	private Point topLeft;
 
-	
 	/** The top left geohash. */
 	private String topLeftGeohash;
 
-	
 	/** The bottom right. */
 	private Point bottomRight;
 
-	
 	/** The bottom right geohash. */
 	private String bottomRightGeohash;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/**
 	 * Instantiates a new geo bounding box filter builder.
 	 *
@@ -65,7 +53,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		this.name = name;
 	}
 
-	
 	/**
 	 * Top left.
 	 *
@@ -80,7 +67,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Bottom right.
 	 *
@@ -95,7 +81,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Top left.
 	 *
@@ -107,7 +92,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Bottom right.
 	 *
@@ -119,7 +103,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -131,7 +114,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -143,7 +125,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -155,7 +136,6 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -167,9 +147,8 @@ public class GeoBoundingBoxFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Translog.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Translog.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.translog;
 
@@ -14,14 +13,13 @@ import org.apache.lucene.index.Term;
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.commons.lease.Releasable;
 import cn.com.rebirth.search.core.index.engine.Engine;
 import cn.com.rebirth.search.core.index.shard.IndexShardComponent;
-
 
 /**
  * The Interface Translog.
@@ -30,11 +28,9 @@ import cn.com.rebirth.search.core.index.shard.IndexShardComponent;
  */
 public interface Translog extends IndexShardComponent {
 
-	
 	/** The Constant TRANSLOG_ID_KEY. */
 	public static final String TRANSLOG_ID_KEY = "translog_id";
 
-	
 	/**
 	 * Current id.
 	 *
@@ -42,7 +38,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	long currentId();
 
-	
 	/**
 	 * Estimated number of operations.
 	 *
@@ -50,7 +45,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	int estimatedNumberOfOperations();
 
-	
 	/**
 	 * Memory size in bytes.
 	 *
@@ -58,7 +52,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	long memorySizeInBytes();
 
-	
 	/**
 	 * Translog size in bytes.
 	 *
@@ -66,7 +59,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	long translogSizeInBytes();
 
-	
 	/**
 	 * New translog.
 	 *
@@ -75,7 +67,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	void newTranslog(long id) throws TranslogException;
 
-	
 	/**
 	 * New transient translog.
 	 *
@@ -84,19 +75,16 @@ public interface Translog extends IndexShardComponent {
 	 */
 	void newTransientTranslog(long id) throws TranslogException;
 
-	
 	/**
 	 * Make transient current.
 	 */
 	void makeTransientCurrent();
 
-	
 	/**
 	 * Revert transient.
 	 */
 	void revertTransient();
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -106,7 +94,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	Location add(Operation operation) throws TranslogException;
 
-	
 	/**
 	 * Read.
 	 *
@@ -115,7 +102,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	byte[] read(Location location);
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -124,7 +110,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	Snapshot snapshot() throws TranslogException;
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -133,19 +118,16 @@ public interface Translog extends IndexShardComponent {
 	 */
 	Snapshot snapshot(Snapshot snapshot);
 
-	
 	/**
 	 * Clear unreferenced.
 	 */
 	void clearUnreferenced();
 
-	
 	/**
 	 * Sync.
 	 */
 	void sync();
 
-	
 	/**
 	 * Sync needed.
 	 *
@@ -153,7 +135,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	boolean syncNeeded();
 
-	
 	/**
 	 * Sync on each operation.
 	 *
@@ -161,7 +142,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	void syncOnEachOperation(boolean syncOnEachOperation);
 
-	
 	/**
 	 * Close.
 	 *
@@ -169,7 +149,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	void close(boolean delete);
 
-	
 	/**
 	 * The Class Location.
 	 *
@@ -177,19 +156,15 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static class Location {
 
-		
 		/** The translog id. */
 		public final long translogId;
 
-		
 		/** The translog location. */
 		public final long translogLocation;
 
-		
 		/** The size. */
 		public final int size;
 
-		
 		/**
 		 * Instantiates a new location.
 		 *
@@ -204,7 +179,6 @@ public interface Translog extends IndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Snapshot.
 	 *
@@ -212,7 +186,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static interface Snapshot extends Releasable {
 
-		
 		/**
 		 * Translog id.
 		 *
@@ -220,7 +193,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		long translogId();
 
-		
 		/**
 		 * Position.
 		 *
@@ -228,7 +200,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		long position();
 
-		
 		/**
 		 * Length.
 		 *
@@ -236,7 +207,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		long length();
 
-		
 		/**
 		 * Estimated total operations.
 		 *
@@ -244,7 +214,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		int estimatedTotalOperations();
 
-		
 		/**
 		 * Checks for next.
 		 *
@@ -252,7 +221,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		boolean hasNext();
 
-		
 		/**
 		 * Next.
 		 *
@@ -260,7 +228,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		Operation next();
 
-		
 		/**
 		 * Seek forward.
 		 *
@@ -268,7 +235,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		void seekForward(long length);
 
-		
 		/**
 		 * Stream.
 		 *
@@ -277,7 +243,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		InputStream stream() throws IOException;
 
-		
 		/**
 		 * Length in bytes.
 		 *
@@ -286,7 +251,6 @@ public interface Translog extends IndexShardComponent {
 		long lengthInBytes();
 	}
 
-	
 	/**
 	 * The Interface Operation.
 	 *
@@ -294,7 +258,6 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static interface Operation extends Streamable {
 
-		
 		/**
 		 * The Enum Type.
 		 *
@@ -302,27 +265,21 @@ public interface Translog extends IndexShardComponent {
 		 */
 		static enum Type {
 
-			
-			/** The CREATE. */
+			/** The create. */
 			CREATE((byte) 1),
 
-			
-			/** The SAVE. */
+			/** The save. */
 			SAVE((byte) 2),
 
-			
-			/** The DELETE. */
+			/** The delete. */
 			DELETE((byte) 3),
 
-			
-			/** The DELET e_ b y_ query. */
+			/** The delete by query. */
 			DELETE_BY_QUERY((byte) 4);
 
-			
 			/** The id. */
 			private final byte id;
 
-			
 			/**
 			 * Instantiates a new type.
 			 *
@@ -332,7 +289,6 @@ public interface Translog extends IndexShardComponent {
 				this.id = id;
 			}
 
-			
 			/**
 			 * Id.
 			 *
@@ -342,7 +298,6 @@ public interface Translog extends IndexShardComponent {
 				return this.id;
 			}
 
-			
 			/**
 			 * From id.
 			 *
@@ -365,7 +320,6 @@ public interface Translog extends IndexShardComponent {
 			}
 		}
 
-		
 		/**
 		 * Op type.
 		 *
@@ -373,7 +327,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		Type opType();
 
-		
 		/**
 		 * Estimate size.
 		 *
@@ -381,7 +334,6 @@ public interface Translog extends IndexShardComponent {
 		 */
 		long estimateSize();
 
-		
 		/**
 		 * Read source.
 		 *
@@ -392,7 +344,6 @@ public interface Translog extends IndexShardComponent {
 		Source readSource(StreamInput in) throws IOException;
 	}
 
-	
 	/**
 	 * The Class Source.
 	 *
@@ -400,27 +351,21 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static class Source {
 
-		
 		/** The source. */
 		public final BytesHolder source;
 
-		
 		/** The routing. */
 		public final String routing;
 
-		
 		/** The parent. */
 		public final String parent;
 
-		
 		/** The timestamp. */
 		public final long timestamp;
 
-		
 		/** The ttl. */
 		public final long ttl;
 
-		
 		/**
 		 * Instantiates a new source.
 		 *
@@ -439,7 +384,6 @@ public interface Translog extends IndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Create.
 	 *
@@ -447,46 +391,36 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static class Create implements Operation {
 
-		
 		/** The id. */
 		private String id;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/** The source. */
 		private BytesHolder source;
 
-		
 		/** The routing. */
 		private String routing;
 
-		
 		/** The parent. */
 		private String parent;
 
-		
 		/** The timestamp. */
 		private long timestamp;
 
-		
 		/** The ttl. */
 		private long ttl;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/**
 		 * Instantiates a new creates the.
 		 */
 		public Create() {
 		}
 
-		
 		/**
 		 * Instantiates a new creates the.
 		 *
@@ -503,7 +437,6 @@ public interface Translog extends IndexShardComponent {
 			this.version = create.version();
 		}
 
-		
 		/**
 		 * Instantiates a new creates the.
 		 *
@@ -517,25 +450,22 @@ public interface Translog extends IndexShardComponent {
 			this.source = new BytesHolder(source);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.CREATE;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#estimateSize()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#estimateSize()
 		 */
 		@Override
 		public long estimateSize() {
 			return ((id.length() + type.length()) * 2) + source.length() + 12;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -545,7 +475,6 @@ public interface Translog extends IndexShardComponent {
 			return this.id;
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -555,7 +484,6 @@ public interface Translog extends IndexShardComponent {
 			return this.source;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -565,7 +493,6 @@ public interface Translog extends IndexShardComponent {
 			return this.type;
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -575,7 +502,6 @@ public interface Translog extends IndexShardComponent {
 			return this.routing;
 		}
 
-		
 		/**
 		 * Parent.
 		 *
@@ -585,7 +511,6 @@ public interface Translog extends IndexShardComponent {
 			return this.parent;
 		}
 
-		
 		/**
 		 * Timestamp.
 		 *
@@ -595,7 +520,6 @@ public interface Translog extends IndexShardComponent {
 			return this.timestamp;
 		}
 
-		
 		/**
 		 * Ttl.
 		 *
@@ -605,7 +529,6 @@ public interface Translog extends IndexShardComponent {
 			return this.ttl;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -615,9 +538,8 @@ public interface Translog extends IndexShardComponent {
 			return this.version;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#readSource(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#readSource(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public Source readSource(StreamInput in) throws IOException {
@@ -625,13 +547,12 @@ public interface Translog extends IndexShardComponent {
 			return new Source(source, routing, parent, timestamp, ttl);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
-			int version = in.readVInt(); 
+			int version = in.readVInt();
 			id = in.readUTF();
 			type = in.readUTF();
 			source = in.readBytesReference();
@@ -656,13 +577,12 @@ public interface Translog extends IndexShardComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
-			out.writeVInt(5); 
+			out.writeVInt(5);
 			out.writeUTF(id);
 			out.writeUTF(type);
 			out.writeBytesHolder(source);
@@ -684,7 +604,6 @@ public interface Translog extends IndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Index.
 	 *
@@ -692,46 +611,36 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static class Index implements Operation {
 
-		
 		/** The id. */
 		private String id;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/** The source. */
 		private BytesHolder source;
 
-		
 		/** The routing. */
 		private String routing;
 
-		
 		/** The parent. */
 		private String parent;
 
-		
 		/** The timestamp. */
 		private long timestamp;
 
-		
 		/** The ttl. */
 		private long ttl;
 
-		
 		/**
 		 * Instantiates a new index.
 		 */
 		public Index() {
 		}
 
-		
 		/**
 		 * Instantiates a new index.
 		 *
@@ -748,7 +657,6 @@ public interface Translog extends IndexShardComponent {
 			this.ttl = index.ttl();
 		}
 
-		
 		/**
 		 * Instantiates a new index.
 		 *
@@ -762,25 +670,22 @@ public interface Translog extends IndexShardComponent {
 			this.source = new BytesHolder(source);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.SAVE;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#estimateSize()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#estimateSize()
 		 */
 		@Override
 		public long estimateSize() {
 			return ((id.length() + type.length()) * 2) + source.length() + 12;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -790,7 +695,6 @@ public interface Translog extends IndexShardComponent {
 			return this.type;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -800,7 +704,6 @@ public interface Translog extends IndexShardComponent {
 			return this.id;
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -810,7 +713,6 @@ public interface Translog extends IndexShardComponent {
 			return this.routing;
 		}
 
-		
 		/**
 		 * Parent.
 		 *
@@ -820,7 +722,6 @@ public interface Translog extends IndexShardComponent {
 			return this.parent;
 		}
 
-		
 		/**
 		 * Timestamp.
 		 *
@@ -830,7 +731,6 @@ public interface Translog extends IndexShardComponent {
 			return this.timestamp;
 		}
 
-		
 		/**
 		 * Ttl.
 		 *
@@ -840,7 +740,6 @@ public interface Translog extends IndexShardComponent {
 			return this.ttl;
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -850,7 +749,6 @@ public interface Translog extends IndexShardComponent {
 			return this.source;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -860,9 +758,8 @@ public interface Translog extends IndexShardComponent {
 			return this.version;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#readSource(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#readSource(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public Source readSource(StreamInput in) throws IOException {
@@ -870,13 +767,12 @@ public interface Translog extends IndexShardComponent {
 			return new Source(source, routing, parent, timestamp, ttl);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
-			int version = in.readVInt(); 
+			int version = in.readVInt();
 			id = in.readUTF();
 			type = in.readUTF();
 			source = in.readBytesReference();
@@ -901,13 +797,12 @@ public interface Translog extends IndexShardComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
-			out.writeVInt(5); 
+			out.writeVInt(5);
 			out.writeUTF(id);
 			out.writeUTF(type);
 			out.writeBytesHolder(source);
@@ -929,7 +824,6 @@ public interface Translog extends IndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Delete.
 	 *
@@ -937,22 +831,18 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static class Delete implements Operation {
 
-		
 		/** The uid. */
 		private Term uid;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/**
 		 * Instantiates a new delete.
 		 */
 		public Delete() {
 		}
 
-		
 		/**
 		 * Instantiates a new delete.
 		 *
@@ -963,7 +853,6 @@ public interface Translog extends IndexShardComponent {
 			this.version = delete.version();
 		}
 
-		
 		/**
 		 * Instantiates a new delete.
 		 *
@@ -973,25 +862,22 @@ public interface Translog extends IndexShardComponent {
 			this.uid = uid;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.DELETE;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#estimateSize()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#estimateSize()
 		 */
 		@Override
 		public long estimateSize() {
 			return ((uid.field().length() + uid.text().length()) * 2) + 20;
 		}
 
-		
 		/**
 		 * Uid.
 		 *
@@ -1001,7 +887,6 @@ public interface Translog extends IndexShardComponent {
 			return this.uid;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1011,42 +896,38 @@ public interface Translog extends IndexShardComponent {
 			return this.version;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#readSource(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#readSource(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public Source readSource(StreamInput in) throws IOException {
-			throw new RestartIllegalStateException("trying to read doc source from delete operation");
+			throw new RebirthIllegalStateException("trying to read doc source from delete operation");
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
-			int version = in.readVInt(); 
+			int version = in.readVInt();
 			uid = new Term(in.readUTF(), in.readUTF());
 			if (version >= 1) {
 				this.version = in.readLong();
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
-			out.writeVInt(1); 
+			out.writeVInt(1);
 			out.writeUTF(uid.field());
 			out.writeUTF(uid.text());
 			out.writeLong(version);
 		}
 	}
 
-	
 	/**
 	 * The Class DeleteByQuery.
 	 *
@@ -1054,27 +935,22 @@ public interface Translog extends IndexShardComponent {
 	 */
 	static class DeleteByQuery implements Operation {
 
-		
 		/** The source. */
 		private BytesHolder source;
 
-		
 		/** The filtering aliases. */
 		@Nullable
 		private String[] filteringAliases;
 
-		
 		/** The types. */
 		private String[] types = Strings.EMPTY_ARRAY;
 
-		
 		/**
 		 * Instantiates a new delete by query.
 		 */
 		public DeleteByQuery() {
 		}
 
-		
 		/**
 		 * Instantiates a new delete by query.
 		 *
@@ -1084,7 +960,6 @@ public interface Translog extends IndexShardComponent {
 			this(deleteByQuery.source(), deleteByQuery.filteringAliases(), deleteByQuery.types());
 		}
 
-		
 		/**
 		 * Instantiates a new delete by query.
 		 *
@@ -1098,25 +973,22 @@ public interface Translog extends IndexShardComponent {
 			this.filteringAliases = filteringAliases;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.DELETE_BY_QUERY;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#estimateSize()
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#estimateSize()
 		 */
 		@Override
 		public long estimateSize() {
 			return source.length() + 8;
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -1126,7 +998,6 @@ public interface Translog extends IndexShardComponent {
 			return this.source;
 		}
 
-		
 		/**
 		 * Filtering aliases.
 		 *
@@ -1136,7 +1007,6 @@ public interface Translog extends IndexShardComponent {
 			return filteringAliases;
 		}
 
-		
 		/**
 		 * Types.
 		 *
@@ -1146,25 +1016,23 @@ public interface Translog extends IndexShardComponent {
 			return this.types;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.translog.Translog.Operation#readSource(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.index.translog.Translog.Operation#readSource(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public Source readSource(StreamInput in) throws IOException {
-			throw new RestartIllegalStateException("trying to read doc source from delete_by_query operation");
+			throw new RebirthIllegalStateException("trying to read doc source from delete_by_query operation");
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
-			int version = in.readVInt(); 
+			int version = in.readVInt();
 			source = in.readBytesReference();
 			if (version < 2) {
-				
+
 				if (in.readBoolean()) {
 					in.readUTF();
 				}
@@ -1187,13 +1055,12 @@ public interface Translog extends IndexShardComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
-			out.writeVInt(2); 
+			out.writeVInt(2);
 			out.writeBytesHolder(source);
 			out.writeVInt(types.length);
 			for (String type : types) {

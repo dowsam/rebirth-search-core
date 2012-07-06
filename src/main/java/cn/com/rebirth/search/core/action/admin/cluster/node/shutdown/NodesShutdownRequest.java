@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodesShutdownRequest.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodesShutdownRequest.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.node.shutdown;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class NodesShutdownRequest.
  *
@@ -23,26 +21,21 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class NodesShutdownRequest extends MasterNodeOperationRequest {
 
-	
 	/** The nodes ids. */
 	String[] nodesIds = Strings.EMPTY_ARRAY;
 
-	
 	/** The delay. */
 	TimeValue delay = TimeValue.timeValueSeconds(1);
 
-	
 	/** The exit. */
 	boolean exit = true;
 
-	
 	/**
 	 * Instantiates a new nodes shutdown request.
 	 */
 	NodesShutdownRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new nodes shutdown request.
 	 *
@@ -52,7 +45,6 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		this.nodesIds = nodesIds;
 	}
 
-	
 	/**
 	 * Nodes ids.
 	 *
@@ -64,7 +56,6 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Delay.
 	 *
@@ -76,7 +67,6 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Delay.
 	 *
@@ -86,7 +76,6 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		return this.delay;
 	}
 
-	
 	/**
 	 * Delay.
 	 *
@@ -97,7 +86,6 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		return delay(TimeValue.parseTimeValue(delay, null));
 	}
 
-	
 	/**
 	 * Exit.
 	 *
@@ -109,7 +97,6 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Exit.
 	 *
@@ -119,18 +106,16 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		return exit;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -146,9 +131,8 @@ public class NodesShutdownRequest extends MasterNodeOperationRequest {
 		exit = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

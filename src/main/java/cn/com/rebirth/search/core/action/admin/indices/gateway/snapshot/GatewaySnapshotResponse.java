@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GatewaySnapshotResponse.java 2012-3-29 15:01:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GatewaySnapshotResponse.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.gateway.snapshot;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse;
 
-
 /**
  * The Class GatewaySnapshotResponse.
  *
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRes
  */
 public class GatewaySnapshotResponse extends BroadcastOperationResponse {
 
-	
 	/**
 	 * Instantiates a new gateway snapshot response.
 	 */
@@ -30,7 +27,6 @@ public class GatewaySnapshotResponse extends BroadcastOperationResponse {
 
 	}
 
-	
 	/**
 	 * Instantiates a new gateway snapshot response.
 	 *
@@ -44,18 +40,16 @@ public class GatewaySnapshotResponse extends BroadcastOperationResponse {
 		super(totalShards, successfulShards, failedShards, shardFailures);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		super.readFrom(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

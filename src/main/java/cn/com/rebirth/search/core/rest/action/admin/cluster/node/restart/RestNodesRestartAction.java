@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestNodesRestartAction.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestNodesRestartAction.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.cluster.node.restart;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestActions;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestNodesRestartAction.
  *
@@ -33,7 +31,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestNodesRestartAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest nodes restart action.
 	 *
@@ -49,9 +46,8 @@ public class RestNodesRestartAction extends BaseRestHandler {
 		controller.registerHandler(RestRequest.Method.POST, "/_cluster/nodes/{nodeId}/_restart", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {

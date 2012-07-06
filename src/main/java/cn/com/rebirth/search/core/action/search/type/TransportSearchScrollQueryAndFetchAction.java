@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchScrollQueryAndFetchAction.java 2012-3-29 15:00:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchScrollQueryAndFetchAction.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -35,7 +34,6 @@ import cn.com.rebirth.search.core.search.fetch.QueryFetchSearchResult;
 import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class TransportSearchScrollQueryAndFetchAction.
  *
@@ -43,27 +41,21 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The search service. */
 	private final SearchServiceTransportAction searchService;
 
-	
 	/** The search phase controller. */
 	private final SearchPhaseController searchPhaseController;
 
-	
 	/** The search cache. */
 	private final TransportSearchCache searchCache;
 
-	
 	/**
 	 * Instantiates a new transport search scroll query and fetch action.
 	 *
@@ -86,7 +78,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 		this.searchPhaseController = searchPhaseController;
 	}
 
-	
 	/**
 	 * Execute.
 	 *
@@ -98,7 +89,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 		new AsyncAction(request, scrollId, listener).start();
 	}
 
-	
 	/**
 	 * The Class AsyncAction.
 	 *
@@ -106,44 +96,34 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 	 */
 	private class AsyncAction {
 
-		
 		/** The request. */
 		private final SearchScrollRequest request;
 
-		
 		/** The listener. */
 		private final ActionListener<SearchResponse> listener;
 
-		
 		/** The scroll id. */
 		private final ParsedScrollId scrollId;
 
-		
 		/** The nodes. */
 		private final DiscoveryNodes nodes;
 
-		
 		/** The shard failures. */
 		private volatile LinkedTransferQueue<ShardSearchFailure> shardFailures;
 
-		
 		/** The query fetch results. */
 		private final Map<SearchShardTarget, QueryFetchSearchResult> queryFetchResults = searchCache
 				.obtainQueryFetchResults();
 
-		
 		/** The successful ops. */
 		private final AtomicInteger successfulOps;
 
-		
 		/** The counter. */
 		private final AtomicInteger counter;
 
-		
 		/** The start time. */
 		private final long startTime = System.currentTimeMillis();
 
-		
 		/**
 		 * Instantiates a new async action.
 		 *
@@ -161,7 +141,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 			this.counter = new AtomicInteger(scrollId.context().length);
 		}
 
-		
 		/**
 		 * Builds the shard failures.
 		 *
@@ -175,9 +154,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 			return localFailures.toArray(ShardSearchFailure.EMPTY_ARRAY);
 		}
 
-		
-		
-		
 		/**
 		 * Adds the shard failure.
 		 *
@@ -190,7 +166,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 			shardFailures.add(failure);
 		}
 
-		
 		/**
 		 * Start.
 		 */
@@ -270,7 +245,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 			}
 		}
 
-		
 		/**
 		 * Execute phase.
 		 *
@@ -302,7 +276,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 					});
 		}
 
-		
 		/**
 		 * Finish him.
 		 */
@@ -314,7 +287,6 @@ public class TransportSearchScrollQueryAndFetchAction extends AbstractComponent 
 			}
 		}
 
-		
 		/**
 		 * Inner finish him.
 		 */

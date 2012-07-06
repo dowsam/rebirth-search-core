@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalLongTermsFacet.java 2012-3-29 15:01:20 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalLongTermsFacet.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.longs;
 
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.search.facet.terms.TermsFacet;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class InternalLongTermsFacet.
  *
@@ -35,11 +33,9 @@ import com.google.common.collect.ImmutableList;
  */
 public class InternalLongTermsFacet extends InternalTermsFacet {
 
-	
 	/** The Constant STREAM_TYPE. */
 	private static final String STREAM_TYPE = "lTerms";
 
-	
 	/**
 	 * Register stream.
 	 */
@@ -47,8 +43,7 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		Streams.registerStream(STREAM, STREAM_TYPE);
 	}
 
-	
-	/** The STREAM. */
+	/** The stream. */
 	static Stream STREAM = new Stream() {
 		@Override
 		public Facet readFacet(String type, StreamInput in) throws IOException {
@@ -56,16 +51,14 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		}
 	};
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.InternalFacet#streamType()
+	 * @see cn.com.rebirth.search.core.search.facet.InternalFacet#streamType()
 	 */
 	@Override
 	public String streamType() {
 		return STREAM_TYPE;
 	}
 
-	
 	/**
 	 * The Class LongEntry.
 	 *
@@ -73,15 +66,12 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 	 */
 	public static class LongEntry implements Entry {
 
-		
 		/** The term. */
 		long term;
 
-		
 		/** The count. */
 		int count;
 
-		
 		/**
 		 * Instantiates a new long entry.
 		 *
@@ -93,57 +83,50 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 			this.count = count;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet.Entry#term()
+		 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet.Entry#term()
 		 */
 		public String term() {
 			return Long.toString(term);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet.Entry#getTerm()
+		 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet.Entry#getTerm()
 		 */
 		public String getTerm() {
 			return term();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet.Entry#termAsNumber()
+		 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet.Entry#termAsNumber()
 		 */
 		@Override
 		public Number termAsNumber() {
 			return term;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet.Entry#getTermAsNumber()
+		 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet.Entry#getTermAsNumber()
 		 */
 		@Override
 		public Number getTermAsNumber() {
 			return termAsNumber();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet.Entry#count()
+		 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet.Entry#count()
 		 */
 		public int count() {
 			return count;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet.Entry#getCount()
+		 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet.Entry#getCount()
 		 */
 		public int getCount() {
 			return count();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 */
@@ -164,38 +147,30 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		}
 	}
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The required size. */
 	int requiredSize;
 
-	
 	/** The missing. */
 	long missing;
 
-	
 	/** The total. */
 	long total;
 
-	
 	/** The entries. */
 	Collection<LongEntry> entries = ImmutableList.of();
 
-	
 	/** The comparator type. */
 	ComparatorType comparatorType;
 
-	
 	/**
 	 * Instantiates a new internal long terms facet.
 	 */
 	InternalLongTermsFacet() {
 	}
 
-	
 	/**
 	 * Instantiates a new internal long terms facet.
 	 *
@@ -216,45 +191,40 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		this.total = total;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#name()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getName()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getName()
 	 */
 	@Override
 	public String getName() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#type()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#type()
 	 */
 	@Override
 	public String type() {
 		return TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getType()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getType()
 	 */
 	@Override
 	public String getType() {
 		return type();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#entries()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#entries()
 	 */
 	@Override
 	public List<LongEntry> entries() {
@@ -264,16 +234,14 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		return (List<LongEntry>) entries;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#getEntries()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#getEntries()
 	 */
 	@Override
 	public List<LongEntry> getEntries() {
 		return entries();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -283,45 +251,40 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		return (Iterator) entries.iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#missingCount()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#missingCount()
 	 */
 	@Override
 	public long missingCount() {
 		return this.missing;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#getMissingCount()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#getMissingCount()
 	 */
 	@Override
 	public long getMissingCount() {
 		return missingCount();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#totalCount()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#totalCount()
 	 */
 	@Override
 	public long totalCount() {
 		return this.total;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#getTotalCount()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#getTotalCount()
 	 */
 	@Override
 	public long getTotalCount() {
 		return totalCount();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#otherCount()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#otherCount()
 	 */
 	@Override
 	public long otherCount() {
@@ -332,18 +295,16 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		return other;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.TermsFacet#getOtherCount()
+	 * @see cn.com.rebirth.search.core.search.facet.terms.TermsFacet#getOtherCount()
 	 */
 	@Override
 	public long getOtherCount() {
 		return otherCount();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.terms.InternalTermsFacet#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.terms.InternalTermsFacet#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {
@@ -378,7 +339,6 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		return first;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -386,38 +346,30 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant MISSING. */
 		static final XContentBuilderString MISSING = new XContentBuilderString("missing");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant OTHER. */
 		static final XContentBuilderString OTHER = new XContentBuilderString("other");
 
-		
 		/** The Constant TERMS. */
 		static final XContentBuilderString TERMS = new XContentBuilderString("terms");
 
-		
 		/** The Constant TERM. */
 		static final XContentBuilderString TERM = new XContentBuilderString("term");
 
-		
 		/** The Constant COUNT. */
 		static final XContentBuilderString COUNT = new XContentBuilderString("count");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -438,7 +390,6 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		return builder;
 	}
 
-	
 	/**
 	 * Read terms facet.
 	 *
@@ -452,9 +403,8 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		return facet;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -471,9 +421,8 @@ public class InternalLongTermsFacet extends InternalTermsFacet {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

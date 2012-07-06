@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiValueLongFieldData.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiValueLongFieldData.java 2012-7-6 14:30:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data.longs;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.thread.ThreadLocals;
 import cn.com.rebirth.search.commons.RamUsage;
 import cn.com.rebirth.search.core.index.field.data.doubles.DoubleFieldData;
 
-
 /**
  * The Class MultiValueLongFieldData.
  *
@@ -21,11 +19,9 @@ import cn.com.rebirth.search.core.index.field.data.doubles.DoubleFieldData;
  */
 public class MultiValueLongFieldData extends LongFieldData {
 
-	
 	/** The Constant VALUE_CACHE_SIZE. */
 	private static final int VALUE_CACHE_SIZE = 10;
 
-	
 	/** The doubles values cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<double[][]>> doublesValuesCache = new ThreadLocal<ThreadLocals.CleanableValue<double[][]>>() {
 		@Override
@@ -38,7 +34,6 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	};
 
-	
 	/** The date times cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<MutableDateTime[][]>> dateTimesCache = new ThreadLocal<ThreadLocals.CleanableValue<MutableDateTime[][]>>() {
 		@Override
@@ -54,7 +49,6 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	};
 
-	
 	/** The values cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<long[][]>> valuesCache = new ThreadLocal<ThreadLocals.CleanableValue<long[][]>>() {
 		@Override
@@ -67,12 +61,9 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	};
 
-	
-	
 	/** The ordinals. */
 	private final int[][] ordinals;
 
-	
 	/**
 	 * Instantiates a new multi value long field data.
 	 *
@@ -85,32 +76,29 @@ public class MultiValueLongFieldData extends LongFieldData {
 		this.ordinals = ordinals;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#computeSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#computeSizeInBytes()
 	 */
 	@Override
 	protected long computeSizeInBytes() {
 		long size = super.computeSizeInBytes();
-		size += RamUsage.NUM_BYTES_ARRAY_HEADER; 
+		size += RamUsage.NUM_BYTES_ARRAY_HEADER;
 		for (int[] ordinal : ordinals) {
 			size += RamUsage.NUM_BYTES_INT * ordinal.length + RamUsage.NUM_BYTES_ARRAY_HEADER;
 		}
 		return size;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#multiValued()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#multiValued()
 	 */
 	@Override
 	public boolean multiValued() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#hasValue(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#hasValue(int)
 	 */
 	@Override
 	public boolean hasValue(int docId) {
@@ -122,9 +110,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.StringValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.StringValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, StringValueInDocProc proc) {
@@ -141,9 +128,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, DoubleValueInDocProc proc) {
@@ -155,9 +141,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.LongValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.LongValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, LongValueInDocProc proc) {
@@ -169,9 +154,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, MissingDoubleValueInDocProc proc) {
@@ -188,9 +172,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, MissingLongValueInDocProc proc) {
@@ -207,9 +190,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.OrdinalInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.OrdinalInDocProc)
 	 */
 	@Override
 	public void forEachOrdinalInDoc(int docId, OrdinalInDocProc proc) {
@@ -226,9 +208,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.longs.LongFieldData.ValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.longs.LongFieldData.ValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, ValueInDocProc proc) {
@@ -245,9 +226,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.longs.LongFieldData.DateValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.longs.LongFieldData.DateValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, DateValueInDocProc proc) {
@@ -261,9 +241,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#forEachValueInDoc(int, org.joda.time.MutableDateTime, cn.com.summall.search.core.index.field.data.longs.LongFieldData.DateValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#forEachValueInDoc(int, org.joda.time.MutableDateTime, cn.com.rebirth.search.core.index.field.data.longs.LongFieldData.DateValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, MutableDateTime dateTime, DateValueInDocProc proc) {
@@ -276,9 +255,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#dates(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#dates(int)
 	 */
 	@Override
 	public MutableDateTime[] dates(int docId) {
@@ -310,9 +288,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		return dates;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#doubleValues(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#doubleValues(int)
 	 */
 	@Override
 	public double[] doubleValues(int docId) {
@@ -341,9 +318,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		return doubles;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#value(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#value(int)
 	 */
 	@Override
 	public long value(int docId) {
@@ -356,9 +332,8 @@ public class MultiValueLongFieldData extends LongFieldData {
 		return 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.longs.LongFieldData#values(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.longs.LongFieldData#values(int)
 	 */
 	@Override
 	public long[] values(int docId) {

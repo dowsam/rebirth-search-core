@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core WordDelimiterTokenFilterFactory.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core WordDelimiterTokenFilterFactory.java 2012-7-6 14:29:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -28,57 +27,44 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating WordDelimiterTokenFilter objects.
  */
 public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/** The char type table. */
 	private final byte[] charTypeTable;
 
-	
 	/** The generate word parts. */
 	private final boolean generateWordParts;
 
-	
 	/** The generate number parts. */
 	private final boolean generateNumberParts;
 
-	
 	/** The catenate words. */
 	private final boolean catenateWords;
 
-	
 	/** The catenate numbers. */
 	private final boolean catenateNumbers;
 
-	
 	/** The catenate all. */
 	private final boolean catenateAll;
 
-	
 	/** The split on case change. */
 	private final boolean splitOnCaseChange;
 
-	
 	/** The preserve original. */
 	private final boolean preserveOriginal;
 
-	
 	/** The split on numerics. */
 	private final boolean splitOnNumerics;
 
-	
 	/** The stem english possessive. */
 	private final boolean stemEnglishPossessive;
 
-	
 	/** The proto words. */
 	private final CharArraySet protoWords;
 
-	
 	/**
 	 * Instantiates a new word delimiter token filter factory.
 	 *
@@ -93,12 +79,6 @@ public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory 
 			@Assisted String name, @Assisted Settings settings) {
 		super(index, indexSettings, name, settings);
 
-		
-		
-		
-		
-		
-		
 		List<String> charTypeTableValues = Analysis.getWordList(env, settings, "type_table");
 		if (charTypeTableValues == null) {
 			this.charTypeTable = WordDelimiterIterator.DEFAULT_WORD_DELIM_TABLE;
@@ -106,32 +86,30 @@ public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory 
 			this.charTypeTable = parseTypes(charTypeTableValues);
 		}
 
-		
 		this.generateWordParts = settings.getAsBoolean("generate_word_parts", true);
-		
+
 		this.generateNumberParts = settings.getAsBoolean("generate_number_parts", true);
-		
+
 		this.catenateWords = settings.getAsBoolean("catenate_words", false);
-		
+
 		this.catenateNumbers = settings.getAsBoolean("catenate_numbers", false);
-		
+
 		this.catenateAll = settings.getAsBoolean("catenate_all", false);
-		
+
 		this.splitOnCaseChange = settings.getAsBoolean("split_on_case_change", true);
-		
+
 		this.preserveOriginal = settings.getAsBoolean("preserve_original", false);
-		
+
 		this.splitOnNumerics = settings.getAsBoolean("split_on_numerics", true);
-		
+
 		this.stemEnglishPossessive = settings.getAsBoolean("stem_english_possessive", true);
-		
+
 		Set<?> protectedWords = Analysis.getWordSet(env, settings, "protected_words", version);
 		this.protoWords = protectedWords == null ? null : CharArraySet.copy(Lucene.VERSION, protectedWords);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {
@@ -141,12 +119,9 @@ public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory 
 				stemEnglishPossessive ? 1 : 0, protoWords);
 	}
 
-	
-	
 	/** The type pattern. */
 	private static Pattern typePattern = Pattern.compile("(.*)\\s*=>\\s*(.*)\\s*$");
 
-	
 	/**
 	 * Parses the types.
 	 *
@@ -168,7 +143,6 @@ public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory 
 			typeMap.put(lhs.charAt(0), rhs);
 		}
 
-		
 		byte types[] = new byte[Math.max(typeMap.lastKey() + 1, WordDelimiterIterator.DEFAULT_WORD_DELIM_TABLE.length)];
 		for (int i = 0; i < types.length; i++)
 			types[i] = WordDelimiterIterator.getType(i);
@@ -177,7 +151,6 @@ public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory 
 		return types;
 	}
 
-	
 	/**
 	 * Parses the type.
 	 *
@@ -201,11 +174,9 @@ public class WordDelimiterTokenFilterFactory extends AbstractTokenFilterFactory 
 			return null;
 	}
 
-	
 	/** The out. */
 	char[] out = new char[256];
 
-	
 	/**
 	 * Parses the string.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexDeleteRequest.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexDeleteRequest.java 2012-7-6 14:30:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete.index;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.delete.DeleteRequest;
 import cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest;
 
-
 /**
  * The Class IndexDeleteRequest.
  *
@@ -21,30 +19,24 @@ import cn.com.rebirth.search.core.action.support.replication.IndexReplicationOpe
  */
 public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The version. */
 	private long version;
 
-	
 	/**
 	 * Instantiates a new index delete request.
 	 */
 	IndexDeleteRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new index delete request.
 	 *
@@ -61,7 +53,6 @@ public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 		this.version = request.version();
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -71,7 +62,6 @@ public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 		return this.type;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -81,7 +71,6 @@ public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 		return this.id;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -91,7 +80,6 @@ public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -101,9 +89,8 @@ public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 		return this.version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -114,9 +101,8 @@ public class IndexDeleteRequest extends IndexReplicationOperationRequest {
 		version = in.readLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

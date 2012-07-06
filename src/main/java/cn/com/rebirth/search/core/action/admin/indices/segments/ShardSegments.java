@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardSegments.java 2012-3-29 15:02:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardSegments.java 2012-7-6 14:30:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.segments;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.index.engine.Segment;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class ShardSegments.
  *
@@ -28,22 +26,18 @@ import com.google.common.collect.ImmutableList;
  */
 public class ShardSegments extends BroadcastShardOperationResponse implements Iterable<Segment> {
 
-	
 	/** The shard routing. */
 	private ShardRouting shardRouting;
 
-	
 	/** The segments. */
 	private List<Segment> segments;
 
-	
 	/**
 	 * Instantiates a new shard segments.
 	 */
 	ShardSegments() {
 	}
 
-	
 	/**
 	 * Instantiates a new shard segments.
 	 *
@@ -56,7 +50,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		this.segments = segments;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -65,7 +58,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return segments.iterator();
 	}
 
-	
 	/**
 	 * Shard routing.
 	 *
@@ -75,7 +67,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return this.shardRouting;
 	}
 
-	
 	/**
 	 * Gets the shard routing.
 	 *
@@ -85,7 +76,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return this.shardRouting;
 	}
 
-	
 	/**
 	 * Segments.
 	 *
@@ -95,7 +85,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return this.segments;
 	}
 
-	
 	/**
 	 * Gets the segments.
 	 *
@@ -105,7 +94,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return segments;
 	}
 
-	
 	/**
 	 * Number of committed.
 	 *
@@ -121,7 +109,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return count;
 	}
 
-	
 	/**
 	 * Number of search.
 	 *
@@ -137,7 +124,6 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return count;
 	}
 
-	
 	/**
 	 * Read shard segments.
 	 *
@@ -151,14 +137,13 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		return shard;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		super.readFrom(in);
-		shardRouting =ImmutableShardRouting. readShardRoutingEntry(in);
+		shardRouting = ImmutableShardRouting.readShardRoutingEntry(in);
 		int size = in.readVInt();
 		if (size == 0) {
 			segments = ImmutableList.of();
@@ -170,9 +155,8 @@ public class ShardSegments extends BroadcastShardOperationResponse implements It
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

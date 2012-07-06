@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DocsStats.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DocsStats.java 2012-7-6 14:29:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class DocsStats.
  *
@@ -23,15 +21,12 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class DocsStats implements Streamable, ToXContent {
 
-	
 	/** The count. */
 	long count = 0;
 
-	
 	/** The deleted. */
 	long deleted = 0;
 
-	
 	/**
 	 * Instantiates a new docs stats.
 	 */
@@ -39,7 +34,6 @@ public class DocsStats implements Streamable, ToXContent {
 
 	}
 
-	
 	/**
 	 * Instantiates a new docs stats.
 	 *
@@ -51,7 +45,6 @@ public class DocsStats implements Streamable, ToXContent {
 		this.deleted = deleted;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -65,7 +58,6 @@ public class DocsStats implements Streamable, ToXContent {
 		deleted += docsStats.deleted;
 	}
 
-	
 	/**
 	 * Count.
 	 *
@@ -75,7 +67,6 @@ public class DocsStats implements Streamable, ToXContent {
 		return this.count;
 	}
 
-	
 	/**
 	 * Gets the count.
 	 *
@@ -85,7 +76,6 @@ public class DocsStats implements Streamable, ToXContent {
 		return this.count;
 	}
 
-	
 	/**
 	 * Deleted.
 	 *
@@ -95,7 +85,6 @@ public class DocsStats implements Streamable, ToXContent {
 		return this.deleted;
 	}
 
-	
 	/**
 	 * Gets the deleted.
 	 *
@@ -105,7 +94,6 @@ public class DocsStats implements Streamable, ToXContent {
 		return this.deleted;
 	}
 
-	
 	/**
 	 * Read doc stats.
 	 *
@@ -119,9 +107,8 @@ public class DocsStats implements Streamable, ToXContent {
 		return docsStats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -129,9 +116,8 @@ public class DocsStats implements Streamable, ToXContent {
 		deleted = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -139,9 +125,8 @@ public class DocsStats implements Streamable, ToXContent {
 		out.writeVLong(deleted);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -152,7 +137,6 @@ public class DocsStats implements Streamable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -160,15 +144,12 @@ public class DocsStats implements Streamable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant DOCS. */
 		static final XContentBuilderString DOCS = new XContentBuilderString("docs");
 
-		
 		/** The Constant COUNT. */
 		static final XContentBuilderString COUNT = new XContentBuilderString("count");
 
-		
 		/** The Constant DELETED. */
 		static final XContentBuilderString DELETED = new XContentBuilderString("deleted");
 	}

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Segment.java 2012-3-29 15:01:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Segment.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.engine;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 
-
 /**
  * The Class Segment.
  *
@@ -21,42 +19,33 @@ import cn.com.rebirth.commons.unit.ByteSizeValue;
  */
 public class Segment implements Streamable {
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The generation. */
 	private long generation;
 
-	
 	/** The committed. */
 	public boolean committed;
 
-	
 	/** The search. */
 	public boolean search;
 
-	
 	/** The size in bytes. */
 	public long sizeInBytes = -1;
 
-	
 	/** The doc count. */
 	public int docCount = -1;
 
-	
 	/** The del doc count. */
 	public int delDocCount = -1;
 
-	
 	/**
 	 * Instantiates a new segment.
 	 */
 	Segment() {
 	}
 
-	
 	/**
 	 * Instantiates a new segment.
 	 *
@@ -67,7 +56,6 @@ public class Segment implements Streamable {
 		this.generation = Long.parseLong(name.substring(1), Character.MAX_RADIX);
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -77,7 +65,6 @@ public class Segment implements Streamable {
 		return this.name;
 	}
 
-	
 	/**
 	 * Gets the name.
 	 *
@@ -87,7 +74,6 @@ public class Segment implements Streamable {
 		return name();
 	}
 
-	
 	/**
 	 * Generation.
 	 *
@@ -97,7 +83,6 @@ public class Segment implements Streamable {
 		return this.generation;
 	}
 
-	
 	/**
 	 * Gets the generation.
 	 *
@@ -107,7 +92,6 @@ public class Segment implements Streamable {
 		return this.generation;
 	}
 
-	
 	/**
 	 * Committed.
 	 *
@@ -117,7 +101,6 @@ public class Segment implements Streamable {
 		return this.committed;
 	}
 
-	
 	/**
 	 * Checks if is committed.
 	 *
@@ -127,7 +110,6 @@ public class Segment implements Streamable {
 		return this.committed;
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -137,7 +119,6 @@ public class Segment implements Streamable {
 		return this.search;
 	}
 
-	
 	/**
 	 * Checks if is search.
 	 *
@@ -147,7 +128,6 @@ public class Segment implements Streamable {
 		return this.search;
 	}
 
-	
 	/**
 	 * Num docs.
 	 *
@@ -157,7 +137,6 @@ public class Segment implements Streamable {
 		return this.docCount;
 	}
 
-	
 	/**
 	 * Gets the num docs.
 	 *
@@ -167,7 +146,6 @@ public class Segment implements Streamable {
 		return this.docCount;
 	}
 
-	
 	/**
 	 * Deleted docs.
 	 *
@@ -177,7 +155,6 @@ public class Segment implements Streamable {
 		return this.delDocCount;
 	}
 
-	
 	/**
 	 * Gets the deleted docs.
 	 *
@@ -187,7 +164,6 @@ public class Segment implements Streamable {
 		return this.delDocCount;
 	}
 
-	
 	/**
 	 * Size.
 	 *
@@ -197,7 +173,6 @@ public class Segment implements Streamable {
 		return new ByteSizeValue(sizeInBytes);
 	}
 
-	
 	/**
 	 * Gets the size.
 	 *
@@ -207,7 +182,6 @@ public class Segment implements Streamable {
 		return size();
 	}
 
-	
 	/**
 	 * Size in bytes.
 	 *
@@ -217,7 +191,6 @@ public class Segment implements Streamable {
 		return sizeInBytes;
 	}
 
-	
 	/**
 	 * Gets the size in bytes.
 	 *
@@ -227,7 +200,6 @@ public class Segment implements Streamable {
 		return sizeInBytes();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -246,7 +218,6 @@ public class Segment implements Streamable {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -255,7 +226,6 @@ public class Segment implements Streamable {
 		return name != null ? name.hashCode() : 0;
 	}
 
-	
 	/**
 	 * Read segment.
 	 *
@@ -269,9 +239,8 @@ public class Segment implements Streamable {
 		return segment;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -284,9 +253,8 @@ public class Segment implements Streamable {
 		sizeInBytes = in.readLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

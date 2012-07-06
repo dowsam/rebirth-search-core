@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PathHierarchyTokenizerFactory.java 2012-3-29 15:01:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PathHierarchyTokenizerFactory.java 2012-7-6 14:29:22 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -12,40 +11,33 @@ import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.path.PathHierarchyTokenizer;
 import org.apache.lucene.analysis.path.ReversePathHierarchyTokenizer;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating PathHierarchyTokenizer objects.
  */
 public class PathHierarchyTokenizerFactory extends AbstractTokenizerFactory {
 
-	
 	/** The buffer size. */
 	private final int bufferSize;
 
-	
 	/** The delimiter. */
 	private final char delimiter;
 
-	
 	/** The replacement. */
 	private final char replacement;
 
-	
 	/** The skip. */
 	private final int skip;
 
-	
 	/** The reverse. */
 	private final boolean reverse;
 
-	
 	/**
 	 * Instantiates a new path hierarchy tokenizer factory.
 	 *
@@ -63,7 +55,7 @@ public class PathHierarchyTokenizerFactory extends AbstractTokenizerFactory {
 		if (delimiter == null) {
 			this.delimiter = PathHierarchyTokenizer.DEFAULT_DELIMITER;
 		} else if (delimiter.length() > 1) {
-			throw new RestartIllegalArgumentException("delimiter can only be a one char value");
+			throw new RebirthIllegalArgumentException("delimiter can only be a one char value");
 		} else {
 			this.delimiter = delimiter.charAt(0);
 		}
@@ -72,7 +64,7 @@ public class PathHierarchyTokenizerFactory extends AbstractTokenizerFactory {
 		if (replacement == null) {
 			this.replacement = this.delimiter;
 		} else if (replacement.length() > 1) {
-			throw new RestartIllegalArgumentException("replacement can only be a one char value");
+			throw new RebirthIllegalArgumentException("replacement can only be a one char value");
 		} else {
 			this.replacement = replacement.charAt(0);
 		}
@@ -80,9 +72,8 @@ public class PathHierarchyTokenizerFactory extends AbstractTokenizerFactory {
 		this.reverse = settings.getAsBoolean("reverse", false);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
 	 */
 	@Override
 	public Tokenizer create(Reader reader) {

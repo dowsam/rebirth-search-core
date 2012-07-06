@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BlobStoreIndexShardGateway.java 2012-3-29 15:02:26 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BlobStoreIndexShardGateway.java 2012-7-6 14:29:08 l.xue.nong$$
  */
+
 package cn.com.rebirth.search.core.index.gateway.blobstore;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.IndexInput;
 import org.apache.lucene.store.IndexOutput;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.search.commons.blobstore.BlobContainer;
@@ -123,7 +124,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#recoveryStatus()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#recoveryStatus()
 	 */
 	@Override
 	public RecoveryStatus recoveryStatus() {
@@ -139,7 +140,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#requiresSnapshot()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#requiresSnapshot()
 	 */
 	@Override
 	public boolean requiresSnapshot() {
@@ -147,7 +148,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#requiresSnapshotScheduling()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#requiresSnapshotScheduling()
 	 */
 	@Override
 	public boolean requiresSnapshotScheduling() {
@@ -155,7 +156,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#obtainSnapshotLock()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#obtainSnapshotLock()
 	 */
 	@Override
 	public SnapshotLock obtainSnapshotLock() throws Exception {
@@ -163,17 +164,17 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.CloseableIndexComponent#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.CloseableIndexComponent#close(boolean)
 	 */
 	@Override
-	public void close(boolean delete) throws RestartException {
+	public void close(boolean delete) throws RebirthException {
 		if (delete) {
 			blobStore.delete(shardPath);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#lastSnapshotStatus()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#lastSnapshotStatus()
 	 */
 	@Override
 	public SnapshotStatus lastSnapshotStatus() {
@@ -181,7 +182,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#currentSnapshotStatus()
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#currentSnapshotStatus()
 	 */
 	@Override
 	public SnapshotStatus currentSnapshotStatus() {
@@ -197,7 +198,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#snapshot(cn.com.summall.search.core.index.gateway.IndexShardGateway.Snapshot)
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#snapshot(cn.com.rebirth.search.core.index.gateway.IndexShardGateway.Snapshot)
 	 */
 	@Override
 	public SnapshotStatus snapshot(final Snapshot snapshot) throws IndexShardGatewaySnapshotFailedException {
@@ -425,7 +426,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.gateway.IndexShardGateway#recover(boolean, cn.com.summall.search.core.index.gateway.RecoveryStatus)
+	 * @see cn.com.rebirth.search.core.index.gateway.IndexShardGateway#recover(boolean, cn.com.rebirth.search.core.index.gateway.RecoveryStatus)
 	 */
 	@Override
 	public void recover(boolean indexShouldExists, RecoveryStatus recoveryStatus)
@@ -452,7 +453,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 			}
 		}
 		if (atLeastOneCommitPointExists && commitPointsList.isEmpty()) {
-			//throw new IndexShardGatewayRecoveryException(shardId, "Commit points exists but none could be loaded", null);
+
 			return;
 		}
 		CommitPoints commitPoints = new CommitPoints(commitPointsList);
@@ -487,7 +488,7 @@ public abstract class BlobStoreIndexShardGateway extends AbstractIndexShardCompo
 						+ commitPoint.name() + "]/[" + commitPoint.version() + "]", e);
 			}
 		}
-		//throw new IndexShardGatewayRecoveryException(shardId, "No commit point data is available in gateway", null);
+
 	}
 
 	/**

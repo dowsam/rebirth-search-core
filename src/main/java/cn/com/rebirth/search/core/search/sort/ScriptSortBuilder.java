@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptSortBuilder.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptSortBuilder.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.sort;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ScriptSortBuilder.
  *
@@ -21,27 +19,21 @@ import com.google.common.collect.Maps;
  */
 public class ScriptSortBuilder extends SortBuilder {
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The script. */
 	private final String script;
 
-	
 	/** The type. */
 	private final String type;
 
-	
 	/** The order. */
 	private SortOrder order;
 
-	
 	/** The params. */
 	private Map<String, Object> params;
 
-	
 	/**
 	 * Instantiates a new script sort builder.
 	 *
@@ -53,7 +45,6 @@ public class ScriptSortBuilder extends SortBuilder {
 		this.type = type;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -69,9 +60,8 @@ public class ScriptSortBuilder extends SortBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.sort.SortBuilder#order(cn.com.summall.search.core.search.sort.SortOrder)
+	 * @see cn.com.rebirth.search.core.search.sort.SortBuilder#order(cn.com.rebirth.search.core.search.sort.SortOrder)
 	 */
 	@Override
 	public ScriptSortBuilder order(SortOrder order) {
@@ -79,16 +69,14 @@ public class ScriptSortBuilder extends SortBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.sort.SortBuilder#missing(java.lang.Object)
+	 * @see cn.com.rebirth.search.core.search.sort.SortBuilder#missing(java.lang.Object)
 	 */
 	@Override
 	public SortBuilder missing(Object missing) {
 		return this;
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -100,9 +88,8 @@ public class ScriptSortBuilder extends SortBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

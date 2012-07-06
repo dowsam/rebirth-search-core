@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Plugin.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Plugin.java 2012-7-6 14:30:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.plugins;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Module;
 import cn.com.rebirth.search.core.index.CloseableIndexComponent;
 
-
 /**
  * The Interface Plugin.
  *
@@ -21,7 +19,6 @@ import cn.com.rebirth.search.core.index.CloseableIndexComponent;
  */
 public interface Plugin {
 
-	
 	/**
 	 * Name.
 	 *
@@ -29,7 +26,6 @@ public interface Plugin {
 	 */
 	String name();
 
-	
 	/**
 	 * Description.
 	 *
@@ -37,7 +33,6 @@ public interface Plugin {
 	 */
 	String description();
 
-	
 	/**
 	 * Modules.
 	 *
@@ -45,7 +40,6 @@ public interface Plugin {
 	 */
 	Collection<Class<? extends Module>> modules();
 
-	
 	/**
 	 * Modules.
 	 *
@@ -54,7 +48,6 @@ public interface Plugin {
 	 */
 	Collection<Module> modules(Settings settings);
 
-	
 	/**
 	 * Services.
 	 *
@@ -62,7 +55,6 @@ public interface Plugin {
 	 */
 	Collection<Class<? extends LifecycleComponent>> services();
 
-	
 	/**
 	 * Index modules.
 	 *
@@ -70,7 +62,6 @@ public interface Plugin {
 	 */
 	Collection<Class<? extends Module>> indexModules();
 
-	
 	/**
 	 * Index modules.
 	 *
@@ -79,7 +70,6 @@ public interface Plugin {
 	 */
 	Collection<Module> indexModules(Settings settings);
 
-	
 	/**
 	 * Index services.
 	 *
@@ -87,7 +77,6 @@ public interface Plugin {
 	 */
 	Collection<Class<? extends CloseableIndexComponent>> indexServices();
 
-	
 	/**
 	 * Shard modules.
 	 *
@@ -95,7 +84,6 @@ public interface Plugin {
 	 */
 	Collection<Class<? extends Module>> shardModules();
 
-	
 	/**
 	 * Shard modules.
 	 *
@@ -104,7 +92,6 @@ public interface Plugin {
 	 */
 	Collection<Module> shardModules(Settings settings);
 
-	
 	/**
 	 * Shard services.
 	 *
@@ -112,7 +99,6 @@ public interface Plugin {
 	 */
 	Collection<Class<? extends CloseableIndexComponent>> shardServices();
 
-	
 	/**
 	 * Process module.
 	 *
@@ -120,7 +106,6 @@ public interface Plugin {
 	 */
 	void processModule(Module module);
 
-	
 	/**
 	 * Additional settings.
 	 *

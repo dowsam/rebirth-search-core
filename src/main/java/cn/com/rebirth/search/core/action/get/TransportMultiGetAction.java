@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportMultiGetAction.java 2012-3-29 15:02:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportMultiGetAction.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -57,7 +56,7 @@ public class TransportMultiGetAction extends TransportAction<MultiGetRequest, Mu
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final MultiGetRequest request, final ActionListener<MultiGetResponse> listener) {
@@ -104,7 +103,7 @@ public class TransportMultiGetAction extends TransportAction<MultiGetRequest, Mu
 
 				@Override
 				public void onFailure(Throwable e) {
-					
+
 					String message = ExceptionsHelper.detailedMessage(e);
 					synchronized (responses) {
 						for (int i = 0; i < shardRequest.locations.size(); i++) {
@@ -133,7 +132,7 @@ public class TransportMultiGetAction extends TransportAction<MultiGetRequest, Mu
 	class TransportHandler extends BaseTransportRequestHandler<MultiGetRequest> {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public MultiGetRequest newInstance() {
@@ -141,11 +140,11 @@ public class TransportMultiGetAction extends TransportAction<MultiGetRequest, Mu
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final MultiGetRequest request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<MultiGetResponse>() {
 				@Override
@@ -170,7 +169,7 @@ public class TransportMultiGetAction extends TransportAction<MultiGetRequest, Mu
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

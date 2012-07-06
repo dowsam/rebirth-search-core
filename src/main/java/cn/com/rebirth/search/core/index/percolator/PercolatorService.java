@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PercolatorService.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PercolatorService.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.percolator;
 
@@ -39,7 +38,6 @@ import cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class PercolatorService.
  *
@@ -47,35 +45,27 @@ import com.google.common.collect.Maps;
  */
 public class PercolatorService extends AbstractIndexComponent {
 
-	
 	/** The Constant INDEX_NAME. */
 	public static final String INDEX_NAME = "_percolator";
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The percolator. */
 	private final PercolatorExecutor percolator;
 
-	
 	/** The shard lifecycle listener. */
 	private final ShardLifecycleListener shardLifecycleListener;
 
-	
 	/** The real time percolator operation listener. */
 	private final RealTimePercolatorOperationListener realTimePercolatorOperationListener = new RealTimePercolatorOperationListener();
 
-	
 	/** The mutex. */
 	private final Object mutex = new Object();
 
-	
 	/** The initial queries fetch done. */
 	private boolean initialQueriesFetchDone = false;
 
-	
 	/**
 	 * Instantiates a new percolator service.
 	 *
@@ -94,7 +84,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		this.indicesService.indicesLifecycle().addListener(shardLifecycleListener);
 		this.percolator.setIndicesService(indicesService);
 
-		
 		if (percolatorAllocated()) {
 			IndexService percolatorIndexService = percolatorIndexService();
 			if (percolatorIndexService != null) {
@@ -102,34 +91,31 @@ public class PercolatorService extends AbstractIndexComponent {
 					try {
 						indexShard.indexingService().addListener(realTimePercolatorOperationListener);
 					} catch (Exception e) {
-						
+
 					}
 				}
 			}
 		}
 	}
 
-	
 	/**
 	 * Close.
 	 */
 	public void close() {
 		this.indicesService.indicesLifecycle().removeListener(shardLifecycleListener);
 
-		
 		IndexService percolatorIndexService = percolatorIndexService();
 		if (percolatorIndexService != null) {
 			for (IndexShard indexShard : percolatorIndexService) {
 				try {
 					indexShard.indexingService().removeListener(realTimePercolatorOperationListener);
 				} catch (Exception e) {
-					
+
 				}
 			}
 		}
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
@@ -141,7 +127,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		return percolator.percolate(request);
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
@@ -154,7 +139,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		return percolator.percolate(request);
 	}
 
-	
 	/**
 	 * Load queries.
 	 *
@@ -166,8 +150,7 @@ public class PercolatorService extends AbstractIndexComponent {
 		shard.refresh(new Engine.Refresh(true));
 		Engine.Searcher searcher = shard.searcher();
 		try {
-			
-			
+
 			Query query = new DeletionAwareConstantScoreQuery(indexQueriesFilter(indexName));
 			QueriesLoaderCollector queries = new QueriesLoaderCollector();
 			searcher.searcher().search(query, queries);
@@ -179,7 +162,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Index queries filter.
 	 *
@@ -191,7 +173,6 @@ public class PercolatorService extends AbstractIndexComponent {
 				.cache(new TermFilter(TypeFieldMapper.TERM_FACTORY.createTerm(indexName)));
 	}
 
-	
 	/**
 	 * Percolator allocated.
 	 *
@@ -210,7 +191,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		return true;
 	}
 
-	
 	/**
 	 * Percolator index service.
 	 *
@@ -220,7 +200,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		return indicesService.indexService(INDEX_NAME);
 	}
 
-	
 	/**
 	 * The Class QueriesLoaderCollector.
 	 *
@@ -228,15 +207,12 @@ public class PercolatorService extends AbstractIndexComponent {
 	 */
 	class QueriesLoaderCollector extends Collector {
 
-		
 		/** The reader. */
 		private IndexReader reader;
 
-		
 		/** The queries. */
 		private Map<String, Query> queries = Maps.newHashMap();
 
-		
 		/**
 		 * Queries.
 		 *
@@ -246,7 +222,6 @@ public class PercolatorService extends AbstractIndexComponent {
 			return this.queries;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 		 */
@@ -254,13 +229,12 @@ public class PercolatorService extends AbstractIndexComponent {
 		public void setScorer(Scorer scorer) throws IOException {
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#collect(int)
 		 */
 		@Override
 		public void collect(int doc) throws IOException {
-			
+
 			Document document = reader.document(doc, new UidAndSourceFieldSelector());
 			String id = Uid.createUid(document.get(UidFieldMapper.NAME)).id();
 			try {
@@ -272,7 +246,6 @@ public class PercolatorService extends AbstractIndexComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 		 */
@@ -281,7 +254,6 @@ public class PercolatorService extends AbstractIndexComponent {
 			this.reader = reader;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 		 */
@@ -291,7 +263,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving shardLifecycle events.
 	 * The class that is interested in processing a shardLifecycle
@@ -305,35 +276,31 @@ public class PercolatorService extends AbstractIndexComponent {
 	 */
 	class ShardLifecycleListener extends Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.indices.IndicesLifecycle.Listener#afterIndexShardCreated(cn.com.summall.search.core.index.shard.service.IndexShard)
+		 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener#afterIndexShardCreated(cn.com.rebirth.search.core.index.shard.service.IndexShard)
 		 */
 		@Override
 		public void afterIndexShardCreated(IndexShard indexShard) {
-			
-			
+
 			if (indexShard.shardId().index().name().equals(INDEX_NAME)) {
 				indexShard.indexingService().addListener(realTimePercolatorOperationListener);
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.indices.IndicesLifecycle.Listener#afterIndexShardStarted(cn.com.summall.search.core.index.shard.service.IndexShard)
+		 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener#afterIndexShardStarted(cn.com.rebirth.search.core.index.shard.service.IndexShard)
 		 */
 		@Override
 		public void afterIndexShardStarted(IndexShard indexShard) {
 			if (indexShard.shardId().index().name().equals(INDEX_NAME)) {
-				
-				
+
 				synchronized (mutex) {
 					if (initialQueriesFetchDone) {
 						return;
 					}
-					
+
 					for (IndexService indexService : indicesService) {
-						
+
 						if (indexService.index().equals(index())) {
 							logger.debug("loading percolator queries for index [{}]...", indexService.index().name());
 							loadQueries(indexService.index().name());
@@ -344,14 +311,13 @@ public class PercolatorService extends AbstractIndexComponent {
 				}
 			}
 			if (!indexShard.shardId().index().equals(index())) {
-				
+
 				return;
 			}
 			if (!percolatorAllocated()) {
 				return;
 			}
-			
-			
+
 			IndexService indexService = indicesService.indexService(indexShard.shardId().index().name());
 			if (indexService == null) {
 				return;
@@ -363,7 +329,7 @@ public class PercolatorService extends AbstractIndexComponent {
 				if (initialQueriesFetchDone) {
 					return;
 				}
-				
+
 				logger.debug("loading percolator queries for index [{}]...", indexService.index().name());
 				loadQueries(index.name());
 				logger.trace("done loading percolator queries for index [{}]", indexService.index().name());
@@ -372,7 +338,6 @@ public class PercolatorService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving realTimePercolatorOperation events.
 	 * The class that is interested in processing a realTimePercolatorOperation
@@ -386,9 +351,8 @@ public class PercolatorService extends AbstractIndexComponent {
 	 */
 	class RealTimePercolatorOperationListener extends IndexingOperationListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.indexing.IndexingOperationListener#preCreate(cn.com.summall.search.core.index.engine.Engine.Create)
+		 * @see cn.com.rebirth.search.core.index.indexing.IndexingOperationListener#preCreate(cn.com.rebirth.search.core.index.engine.Engine.Create)
 		 */
 		@Override
 		public Engine.Create preCreate(Engine.Create create) {
@@ -398,9 +362,8 @@ public class PercolatorService extends AbstractIndexComponent {
 			return create;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.indexing.IndexingOperationListener#preIndex(cn.com.summall.search.core.index.engine.Engine.Index)
+		 * @see cn.com.rebirth.search.core.index.indexing.IndexingOperationListener#preIndex(cn.com.rebirth.search.core.index.engine.Engine.Index)
 		 */
 		@Override
 		public Engine.Index preIndex(Engine.Index index) {
@@ -410,9 +373,8 @@ public class PercolatorService extends AbstractIndexComponent {
 			return index;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.indexing.IndexingOperationListener#preDelete(cn.com.summall.search.core.index.engine.Engine.Delete)
+		 * @see cn.com.rebirth.search.core.index.indexing.IndexingOperationListener#preDelete(cn.com.rebirth.search.core.index.engine.Engine.Delete)
 		 */
 		@Override
 		public Engine.Delete preDelete(Engine.Delete delete) {

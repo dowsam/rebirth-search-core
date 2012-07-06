@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ZenPingService.java 2012-3-29 16:35:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ZenPingService.java 2012-7-6 14:30:28 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.discovery.zen.ping;
@@ -11,8 +11,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
@@ -91,12 +91,12 @@ public class ZenPingService extends AbstractLifecycleComponent<ZenPing> implemen
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing#setNodesProvider(cn.com.summall.search.core.discovery.zen.DiscoveryNodesProvider)
+	 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing#setNodesProvider(cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider)
 	 */
 	@Override
 	public void setNodesProvider(DiscoveryNodesProvider nodesProvider) {
 		if (lifecycle.started()) {
-			throw new RestartIllegalStateException("Can't set nodes provider when started");
+			throw new RebirthIllegalStateException("Can't set nodes provider when started");
 		}
 		for (ZenPing zenPing : zenPings) {
 			zenPing.setNodesProvider(nodesProvider);
@@ -104,30 +104,30 @@ public class ZenPingService extends AbstractLifecycleComponent<ZenPing> implemen
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		for (ZenPing zenPing : zenPings) {
 			zenPing.start();
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		for (ZenPing zenPing : zenPings) {
 			zenPing.stop();
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		for (ZenPing zenPing : zenPings) {
 			zenPing.close();
 		}
@@ -158,10 +158,10 @@ public class ZenPingService extends AbstractLifecycleComponent<ZenPing> implemen
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing#ping(cn.com.summall.search.core.discovery.zen.ping.ZenPing.PingListener, cn.com.summall.search.commons.unit.TimeValue)
+	 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing#ping(cn.com.rebirth.search.core.discovery.zen.ping.ZenPing.PingListener, cn.com.rebirth.commons.unit.TimeValue)
 	 */
 	@Override
-	public void ping(PingListener listener, TimeValue timeout) throws RestartException {
+	public void ping(PingListener listener, TimeValue timeout) throws RebirthException {
 		ImmutableList<? extends ZenPing> zenPings = this.zenPings;
 		CompoundPingListener compoundPingListener = new CompoundPingListener(listener, zenPings);
 		for (ZenPing zenPing : zenPings) {
@@ -207,7 +207,7 @@ public class ZenPingService extends AbstractLifecycleComponent<ZenPing> implemen
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing.PingListener#onPing(cn.com.summall.search.core.discovery.zen.ping.ZenPing.PingResponse[])
+		 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing.PingListener#onPing(cn.com.rebirth.search.core.discovery.zen.ping.ZenPing.PingResponse[])
 		 */
 		@Override
 		public void onPing(PingResponse[] pings) {

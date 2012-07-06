@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractIndicesAdminClient.java 2012-3-29 15:01:26 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractIndicesAdminClient.java 2012-7-6 14:28:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.support;
 
@@ -99,7 +98,6 @@ import cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQu
 import cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQueryResponse;
 import cn.com.rebirth.search.core.client.internal.InternalIndicesAdminClient;
 
-
 /**
  * The Class AbstractIndicesAdminClient.
  *
@@ -107,9 +105,8 @@ import cn.com.rebirth.search.core.client.internal.InternalIndicesAdminClient;
  */
 public abstract class AbstractIndicesAdminClient implements InternalIndicesAdminClient {
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareExecute(cn.com.summall.search.core.action.admin.indices.IndicesAction)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareExecute(cn.com.rebirth.search.core.action.admin.indices.IndicesAction)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> RequestBuilder prepareExecute(
@@ -117,72 +114,64 @@ public abstract class AbstractIndicesAdminClient implements InternalIndicesAdmin
 		return action.newRequestBuilder(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#exists(cn.com.summall.search.core.action.admin.indices.exists.IndicesExistsRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#exists(cn.com.rebirth.search.core.action.admin.indices.exists.IndicesExistsRequest)
 	 */
 	@Override
 	public ActionFuture<IndicesExistsResponse> exists(final IndicesExistsRequest request) {
 		return execute(IndicesExistsAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#exists(cn.com.summall.search.core.action.admin.indices.exists.IndicesExistsRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#exists(cn.com.rebirth.search.core.action.admin.indices.exists.IndicesExistsRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void exists(final IndicesExistsRequest request, final ActionListener<IndicesExistsResponse> listener) {
 		execute(IndicesExistsAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareExists(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareExists(java.lang.String[])
 	 */
 	@Override
 	public IndicesExistsRequestBuilder prepareExists(String... indices) {
 		return new IndicesExistsRequestBuilder(this, indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#aliases(cn.com.summall.search.core.action.admin.indices.alias.IndicesAliasesRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#aliases(cn.com.rebirth.search.core.action.admin.indices.alias.IndicesAliasesRequest)
 	 */
 	@Override
 	public ActionFuture<IndicesAliasesResponse> aliases(final IndicesAliasesRequest request) {
 		return execute(IndicesAliasesAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#aliases(cn.com.summall.search.core.action.admin.indices.alias.IndicesAliasesRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#aliases(cn.com.rebirth.search.core.action.admin.indices.alias.IndicesAliasesRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void aliases(final IndicesAliasesRequest request, final ActionListener<IndicesAliasesResponse> listener) {
 		execute(IndicesAliasesAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareAliases()
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareAliases()
 	 */
 	@Override
 	public IndicesAliasesRequestBuilder prepareAliases() {
 		return new IndicesAliasesRequestBuilder(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#clearCache(cn.com.summall.search.core.action.admin.indices.cache.clear.ClearIndicesCacheRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#clearCache(cn.com.rebirth.search.core.action.admin.indices.cache.clear.ClearIndicesCacheRequest)
 	 */
 	@Override
 	public ActionFuture<ClearIndicesCacheResponse> clearCache(final ClearIndicesCacheRequest request) {
 		return execute(ClearIndicesCacheAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#clearCache(cn.com.summall.search.core.action.admin.indices.cache.clear.ClearIndicesCacheRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#clearCache(cn.com.rebirth.search.core.action.admin.indices.cache.clear.ClearIndicesCacheRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void clearCache(final ClearIndicesCacheRequest request,
@@ -190,162 +179,144 @@ public abstract class AbstractIndicesAdminClient implements InternalIndicesAdmin
 		execute(ClearIndicesCacheAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareClearCache(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareClearCache(java.lang.String[])
 	 */
 	@Override
 	public ClearIndicesCacheRequestBuilder prepareClearCache(String... indices) {
 		return new ClearIndicesCacheRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#create(cn.com.summall.search.core.action.admin.indices.create.CreateIndexRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#create(cn.com.rebirth.search.core.action.admin.indices.create.CreateIndexRequest)
 	 */
 	@Override
 	public ActionFuture<CreateIndexResponse> create(final CreateIndexRequest request) {
 		return execute(CreateIndexAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#create(cn.com.summall.search.core.action.admin.indices.create.CreateIndexRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#create(cn.com.rebirth.search.core.action.admin.indices.create.CreateIndexRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void create(final CreateIndexRequest request, final ActionListener<CreateIndexResponse> listener) {
 		execute(CreateIndexAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareCreate(java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareCreate(java.lang.String)
 	 */
 	@Override
 	public CreateIndexRequestBuilder prepareCreate(String index) {
 		return new CreateIndexRequestBuilder(this, index);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#delete(cn.com.summall.search.core.action.admin.indices.delete.DeleteIndexRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#delete(cn.com.rebirth.search.core.action.admin.indices.delete.DeleteIndexRequest)
 	 */
 	@Override
 	public ActionFuture<DeleteIndexResponse> delete(final DeleteIndexRequest request) {
 		return execute(DeleteIndexAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#delete(cn.com.summall.search.core.action.admin.indices.delete.DeleteIndexRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#delete(cn.com.rebirth.search.core.action.admin.indices.delete.DeleteIndexRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void delete(final DeleteIndexRequest request, final ActionListener<DeleteIndexResponse> listener) {
 		execute(DeleteIndexAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareDelete(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareDelete(java.lang.String[])
 	 */
 	@Override
 	public DeleteIndexRequestBuilder prepareDelete(String... indices) {
 		return new DeleteIndexRequestBuilder(this, indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#close(cn.com.summall.search.core.action.admin.indices.close.CloseIndexRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#close(cn.com.rebirth.search.core.action.admin.indices.close.CloseIndexRequest)
 	 */
 	@Override
 	public ActionFuture<CloseIndexResponse> close(final CloseIndexRequest request) {
 		return execute(CloseIndexAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#close(cn.com.summall.search.core.action.admin.indices.close.CloseIndexRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#close(cn.com.rebirth.search.core.action.admin.indices.close.CloseIndexRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void close(final CloseIndexRequest request, final ActionListener<CloseIndexResponse> listener) {
 		execute(CloseIndexAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareClose(java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareClose(java.lang.String)
 	 */
 	@Override
 	public CloseIndexRequestBuilder prepareClose(String index) {
 		return new CloseIndexRequestBuilder(this, index);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#open(cn.com.summall.search.core.action.admin.indices.open.OpenIndexRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#open(cn.com.rebirth.search.core.action.admin.indices.open.OpenIndexRequest)
 	 */
 	@Override
 	public ActionFuture<OpenIndexResponse> open(final OpenIndexRequest request) {
 		return execute(OpenIndexAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#open(cn.com.summall.search.core.action.admin.indices.open.OpenIndexRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#open(cn.com.rebirth.search.core.action.admin.indices.open.OpenIndexRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void open(final OpenIndexRequest request, final ActionListener<OpenIndexResponse> listener) {
 		execute(OpenIndexAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareOpen(java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareOpen(java.lang.String)
 	 */
 	@Override
 	public OpenIndexRequestBuilder prepareOpen(String index) {
 		return new OpenIndexRequestBuilder(this, index);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#flush(cn.com.summall.search.core.action.admin.indices.flush.FlushRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#flush(cn.com.rebirth.search.core.action.admin.indices.flush.FlushRequest)
 	 */
 	@Override
 	public ActionFuture<FlushResponse> flush(final FlushRequest request) {
 		return execute(FlushAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#flush(cn.com.summall.search.core.action.admin.indices.flush.FlushRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#flush(cn.com.rebirth.search.core.action.admin.indices.flush.FlushRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void flush(final FlushRequest request, final ActionListener<FlushResponse> listener) {
 		execute(FlushAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareFlush(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareFlush(java.lang.String[])
 	 */
 	@Override
 	public FlushRequestBuilder prepareFlush(String... indices) {
 		return new FlushRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#gatewaySnapshot(cn.com.summall.search.core.action.admin.indices.gateway.snapshot.GatewaySnapshotRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#gatewaySnapshot(cn.com.rebirth.search.core.action.admin.indices.gateway.snapshot.GatewaySnapshotRequest)
 	 */
 	@Override
 	public ActionFuture<GatewaySnapshotResponse> gatewaySnapshot(final GatewaySnapshotRequest request) {
 		return execute(GatewaySnapshotAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#gatewaySnapshot(cn.com.summall.search.core.action.admin.indices.gateway.snapshot.GatewaySnapshotRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#gatewaySnapshot(cn.com.rebirth.search.core.action.admin.indices.gateway.snapshot.GatewaySnapshotRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void gatewaySnapshot(final GatewaySnapshotRequest request,
@@ -353,216 +324,192 @@ public abstract class AbstractIndicesAdminClient implements InternalIndicesAdmin
 		execute(GatewaySnapshotAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareGatewaySnapshot(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareGatewaySnapshot(java.lang.String[])
 	 */
 	@Override
 	public GatewaySnapshotRequestBuilder prepareGatewaySnapshot(String... indices) {
 		return new GatewaySnapshotRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#putMapping(cn.com.summall.search.core.action.admin.indices.mapping.put.PutMappingRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#putMapping(cn.com.rebirth.search.core.action.admin.indices.mapping.put.PutMappingRequest)
 	 */
 	@Override
 	public ActionFuture<PutMappingResponse> putMapping(final PutMappingRequest request) {
 		return execute(PutMappingAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#putMapping(cn.com.summall.search.core.action.admin.indices.mapping.put.PutMappingRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#putMapping(cn.com.rebirth.search.core.action.admin.indices.mapping.put.PutMappingRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void putMapping(final PutMappingRequest request, final ActionListener<PutMappingResponse> listener) {
 		execute(PutMappingAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#preparePutMapping(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#preparePutMapping(java.lang.String[])
 	 */
 	@Override
 	public PutMappingRequestBuilder preparePutMapping(String... indices) {
 		return new PutMappingRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#deleteMapping(cn.com.summall.search.core.action.admin.indices.mapping.delete.DeleteMappingRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#deleteMapping(cn.com.rebirth.search.core.action.admin.indices.mapping.delete.DeleteMappingRequest)
 	 */
 	@Override
 	public ActionFuture<DeleteMappingResponse> deleteMapping(final DeleteMappingRequest request) {
 		return execute(DeleteMappingAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#deleteMapping(cn.com.summall.search.core.action.admin.indices.mapping.delete.DeleteMappingRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#deleteMapping(cn.com.rebirth.search.core.action.admin.indices.mapping.delete.DeleteMappingRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void deleteMapping(final DeleteMappingRequest request, final ActionListener<DeleteMappingResponse> listener) {
 		execute(DeleteMappingAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareDeleteMapping(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareDeleteMapping(java.lang.String[])
 	 */
 	@Override
 	public DeleteMappingRequestBuilder prepareDeleteMapping(String... indices) {
 		return new DeleteMappingRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#optimize(cn.com.summall.search.core.action.admin.indices.optimize.OptimizeRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#optimize(cn.com.rebirth.search.core.action.admin.indices.optimize.OptimizeRequest)
 	 */
 	@Override
 	public ActionFuture<OptimizeResponse> optimize(final OptimizeRequest request) {
 		return execute(OptimizeAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#optimize(cn.com.summall.search.core.action.admin.indices.optimize.OptimizeRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#optimize(cn.com.rebirth.search.core.action.admin.indices.optimize.OptimizeRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void optimize(final OptimizeRequest request, final ActionListener<OptimizeResponse> listener) {
 		execute(OptimizeAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareOptimize(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareOptimize(java.lang.String[])
 	 */
 	@Override
 	public OptimizeRequestBuilder prepareOptimize(String... indices) {
 		return new OptimizeRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#refresh(cn.com.summall.search.core.action.admin.indices.refresh.RefreshRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#refresh(cn.com.rebirth.search.core.action.admin.indices.refresh.RefreshRequest)
 	 */
 	@Override
 	public ActionFuture<RefreshResponse> refresh(final RefreshRequest request) {
 		return execute(RefreshAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#refresh(cn.com.summall.search.core.action.admin.indices.refresh.RefreshRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#refresh(cn.com.rebirth.search.core.action.admin.indices.refresh.RefreshRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void refresh(final RefreshRequest request, final ActionListener<RefreshResponse> listener) {
 		execute(RefreshAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareRefresh(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareRefresh(java.lang.String[])
 	 */
 	@Override
 	public RefreshRequestBuilder prepareRefresh(String... indices) {
 		return new RefreshRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#stats(cn.com.summall.search.core.action.admin.indices.stats.IndicesStatsRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#stats(cn.com.rebirth.search.core.action.admin.indices.stats.IndicesStatsRequest)
 	 */
 	@Override
 	public ActionFuture<IndicesStats> stats(final IndicesStatsRequest request) {
 		return execute(IndicesStatsAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#stats(cn.com.summall.search.core.action.admin.indices.stats.IndicesStatsRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#stats(cn.com.rebirth.search.core.action.admin.indices.stats.IndicesStatsRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void stats(final IndicesStatsRequest request, final ActionListener<IndicesStats> listener) {
 		execute(IndicesStatsAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareStats(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareStats(java.lang.String[])
 	 */
 	@Override
 	public IndicesStatsRequestBuilder prepareStats(String... indices) {
 		return new IndicesStatsRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#status(cn.com.summall.search.core.action.admin.indices.status.IndicesStatusRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#status(cn.com.rebirth.search.core.action.admin.indices.status.IndicesStatusRequest)
 	 */
 	@Override
 	public ActionFuture<IndicesStatusResponse> status(final IndicesStatusRequest request) {
 		return execute(IndicesStatusAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#status(cn.com.summall.search.core.action.admin.indices.status.IndicesStatusRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#status(cn.com.rebirth.search.core.action.admin.indices.status.IndicesStatusRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void status(final IndicesStatusRequest request, final ActionListener<IndicesStatusResponse> listener) {
 		execute(IndicesStatusAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareStatus(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareStatus(java.lang.String[])
 	 */
 	@Override
 	public IndicesStatusRequestBuilder prepareStatus(String... indices) {
 		return new IndicesStatusRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#segments(cn.com.summall.search.core.action.admin.indices.segments.IndicesSegmentsRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#segments(cn.com.rebirth.search.core.action.admin.indices.segments.IndicesSegmentsRequest)
 	 */
 	@Override
 	public ActionFuture<IndicesSegmentResponse> segments(final IndicesSegmentsRequest request) {
 		return execute(IndicesSegmentsAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#segments(cn.com.summall.search.core.action.admin.indices.segments.IndicesSegmentsRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#segments(cn.com.rebirth.search.core.action.admin.indices.segments.IndicesSegmentsRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void segments(final IndicesSegmentsRequest request, final ActionListener<IndicesSegmentResponse> listener) {
 		execute(IndicesSegmentsAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareSegments(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareSegments(java.lang.String[])
 	 */
 	@Override
 	public IndicesSegmentsRequestBuilder prepareSegments(String... indices) {
 		return new IndicesSegmentsRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#updateSettings(cn.com.summall.search.core.action.admin.indices.settings.UpdateSettingsRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#updateSettings(cn.com.rebirth.search.core.action.admin.indices.settings.UpdateSettingsRequest)
 	 */
 	@Override
 	public ActionFuture<UpdateSettingsResponse> updateSettings(final UpdateSettingsRequest request) {
 		return execute(UpdateSettingsAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#updateSettings(cn.com.summall.search.core.action.admin.indices.settings.UpdateSettingsRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#updateSettings(cn.com.rebirth.search.core.action.admin.indices.settings.UpdateSettingsRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void updateSettings(final UpdateSettingsRequest request,
@@ -570,63 +517,56 @@ public abstract class AbstractIndicesAdminClient implements InternalIndicesAdmin
 		execute(UpdateSettingsAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareUpdateSettings(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareUpdateSettings(java.lang.String[])
 	 */
 	@Override
 	public UpdateSettingsRequestBuilder prepareUpdateSettings(String... indices) {
 		return new UpdateSettingsRequestBuilder(this).setIndices(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#analyze(cn.com.summall.search.core.action.admin.indices.analyze.AnalyzeRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#analyze(cn.com.rebirth.search.core.action.admin.indices.analyze.AnalyzeRequest)
 	 */
 	@Override
 	public ActionFuture<AnalyzeResponse> analyze(final AnalyzeRequest request) {
 		return execute(AnalyzeAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#analyze(cn.com.summall.search.core.action.admin.indices.analyze.AnalyzeRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#analyze(cn.com.rebirth.search.core.action.admin.indices.analyze.AnalyzeRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void analyze(final AnalyzeRequest request, final ActionListener<AnalyzeResponse> listener) {
 		execute(AnalyzeAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareAnalyze(java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareAnalyze(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public AnalyzeRequestBuilder prepareAnalyze(@Nullable String index, String text) {
 		return new AnalyzeRequestBuilder(this, index, text);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareAnalyze(java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareAnalyze(java.lang.String)
 	 */
 	@Override
 	public AnalyzeRequestBuilder prepareAnalyze(String text) {
 		return new AnalyzeRequestBuilder(this, null, text);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#putTemplate(cn.com.summall.search.core.action.admin.indices.template.put.PutIndexTemplateRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#putTemplate(cn.com.rebirth.search.core.action.admin.indices.template.put.PutIndexTemplateRequest)
 	 */
 	@Override
 	public ActionFuture<PutIndexTemplateResponse> putTemplate(final PutIndexTemplateRequest request) {
 		return execute(PutIndexTemplateAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#putTemplate(cn.com.summall.search.core.action.admin.indices.template.put.PutIndexTemplateRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#putTemplate(cn.com.rebirth.search.core.action.admin.indices.template.put.PutIndexTemplateRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void putTemplate(final PutIndexTemplateRequest request,
@@ -634,27 +574,24 @@ public abstract class AbstractIndicesAdminClient implements InternalIndicesAdmin
 		execute(PutIndexTemplateAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#preparePutTemplate(java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#preparePutTemplate(java.lang.String)
 	 */
 	@Override
 	public PutIndexTemplateRequestBuilder preparePutTemplate(String name) {
 		return new PutIndexTemplateRequestBuilder(this, name);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#deleteTemplate(cn.com.summall.search.core.action.admin.indices.template.delete.DeleteIndexTemplateRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#deleteTemplate(cn.com.rebirth.search.core.action.admin.indices.template.delete.DeleteIndexTemplateRequest)
 	 */
 	@Override
 	public ActionFuture<DeleteIndexTemplateResponse> deleteTemplate(final DeleteIndexTemplateRequest request) {
 		return execute(DeleteIndexTemplateAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#deleteTemplate(cn.com.summall.search.core.action.admin.indices.template.delete.DeleteIndexTemplateRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#deleteTemplate(cn.com.rebirth.search.core.action.admin.indices.template.delete.DeleteIndexTemplateRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void deleteTemplate(final DeleteIndexTemplateRequest request,
@@ -662,36 +599,32 @@ public abstract class AbstractIndicesAdminClient implements InternalIndicesAdmin
 		execute(DeleteIndexTemplateAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareDeleteTemplate(java.lang.String)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareDeleteTemplate(java.lang.String)
 	 */
 	@Override
 	public DeleteIndexTemplateRequestBuilder prepareDeleteTemplate(String name) {
 		return new DeleteIndexTemplateRequestBuilder(this, name);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#validateQuery(cn.com.summall.search.core.action.admin.indices.validate.query.ValidateQueryRequest)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#validateQuery(cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQueryRequest)
 	 */
 	@Override
 	public ActionFuture<ValidateQueryResponse> validateQuery(final ValidateQueryRequest request) {
 		return execute(ValidateQueryAction.INSTANCE, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#validateQuery(cn.com.summall.search.core.action.admin.indices.validate.query.ValidateQueryRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#validateQuery(cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQueryRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public void validateQuery(final ValidateQueryRequest request, final ActionListener<ValidateQueryResponse> listener) {
 		execute(ValidateQueryAction.INSTANCE, request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.IndicesAdminClient#prepareValidateQuery(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.client.IndicesAdminClient#prepareValidateQuery(java.lang.String[])
 	 */
 	@Override
 	public ValidateQueryRequestBuilder prepareValidateQuery(String... indices) {

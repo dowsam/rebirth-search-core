@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataUpdateSettingsService.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataUpdateSettingsService.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.com.rebirth.commons.Booleans;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -28,7 +27,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.AllocationService;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 
 import com.google.common.collect.Sets;
-
 
 /**
  * The Class MetaDataUpdateSettingsService.
@@ -60,18 +58,18 @@ public class MetaDataUpdateSettingsService extends AbstractComponent implements 
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(ClusterChangedEvent event) {
-		
+
 		if (!event.state().nodes().localNodeMaster()) {
 			return;
 		}
-		
+
 		for (final IndexMetaData indexMetaData : event.state().metaData()) {
 			String autoExpandReplicas = indexMetaData.settings().get(IndexMetaData.SETTING_AUTO_EXPAND_REPLICAS);
-			if (autoExpandReplicas != null && Booleans.parseBoolean(autoExpandReplicas, true)) { 
+			if (autoExpandReplicas != null && Booleans.parseBoolean(autoExpandReplicas, true)) {
 				try {
 					int min;
 					int max;
@@ -96,7 +94,6 @@ public class MetaDataUpdateSettingsService extends AbstractComponent implements 
 						numberOfReplicas = max;
 					}
 
-					
 					if (numberOfReplicas == indexMetaData.numberOfReplicas()) {
 						continue;
 					}
@@ -145,11 +142,10 @@ public class MetaDataUpdateSettingsService extends AbstractComponent implements 
 				updatedSettingsBuilder.put(entry.getKey(), entry.getValue());
 			}
 		}
-		
+
 		for (String key : updatedSettingsBuilder.internalMap().keySet()) {
 			if (key.equals(IndexMetaData.SETTING_NUMBER_OF_SHARDS)) {
-				listener.onFailure(new RestartIllegalArgumentException(
-						"can't change the number of shards for an index"));
+				listener.onFailure(new RebirthIllegalArgumentException("can't change the number of shards for an index"));
 				return;
 			}
 		}
@@ -231,8 +227,6 @@ public class MetaDataUpdateSettingsService extends AbstractComponent implements 
 						}
 					}
 
-					
-					
 					Set<String> openIndices = Sets.newHashSet();
 					Set<String> closeIndices = Sets.newHashSet();
 					for (String index : actualIndices) {
@@ -260,7 +254,6 @@ public class MetaDataUpdateSettingsService extends AbstractComponent implements 
 					ClusterState updatedState = ClusterState.builder().state(currentState).metaData(metaDataBuilder)
 							.routingTable(routingTableBuilder).blocks(blocks).build();
 
-					
 					RoutingAllocation.Result routingResult = allocationService.reroute(updatedState);
 					updatedState = newClusterStateBuilder().state(updatedState).routingResult(routingResult).build();
 
@@ -284,7 +277,7 @@ public class MetaDataUpdateSettingsService extends AbstractComponent implements 
 	 * @author l.xue.nong
 	 */
 	public static interface Listener {
-		
+
 		/**
 		 * On success.
 		 */

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AnalyzeResponse.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AnalyzeResponse.java 2012-7-6 14:29:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.analyze;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionResponse;
 
-
 /**
  * The Class AnalyzeResponse.
  *
@@ -26,7 +24,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
  */
 public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse.AnalyzeToken>, ToXContent {
 
-	
 	/**
 	 * The Class AnalyzeToken.
 	 *
@@ -34,34 +31,27 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 	 */
 	public static class AnalyzeToken implements Streamable {
 
-		
 		/** The term. */
 		private String term;
 
-		
 		/** The start offset. */
 		private int startOffset;
 
-		
 		/** The end offset. */
 		private int endOffset;
 
-		
 		/** The position. */
 		private int position;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/**
 		 * Instantiates a new analyze token.
 		 */
 		AnalyzeToken() {
 		}
 
-		
 		/**
 		 * Instantiates a new analyze token.
 		 *
@@ -79,7 +69,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			this.type = type;
 		}
 
-		
 		/**
 		 * Term.
 		 *
@@ -89,7 +78,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return this.term;
 		}
 
-		
 		/**
 		 * Gets the term.
 		 *
@@ -99,7 +87,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return term();
 		}
 
-		
 		/**
 		 * Start offset.
 		 *
@@ -109,7 +96,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return this.startOffset;
 		}
 
-		
 		/**
 		 * Gets the start offset.
 		 *
@@ -119,7 +105,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return startOffset();
 		}
 
-		
 		/**
 		 * End offset.
 		 *
@@ -129,7 +114,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return this.endOffset;
 		}
 
-		
 		/**
 		 * Gets the end offset.
 		 *
@@ -139,7 +123,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return endOffset();
 		}
 
-		
 		/**
 		 * Position.
 		 *
@@ -149,7 +132,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return this.position;
 		}
 
-		
 		/**
 		 * Gets the position.
 		 *
@@ -159,7 +141,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return position();
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -169,7 +150,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return this.type;
 		}
 
-		
 		/**
 		 * Gets the type.
 		 *
@@ -179,7 +159,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return this.type;
 		}
 
-		
 		/**
 		 * Read analyze token.
 		 *
@@ -193,9 +172,8 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			return analyzeToken;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -208,9 +186,8 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -227,18 +204,15 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		}
 	}
 
-	
 	/** The tokens. */
 	private List<AnalyzeToken> tokens;
 
-	
 	/**
 	 * Instantiates a new analyze response.
 	 */
 	AnalyzeResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new analyze response.
 	 *
@@ -248,7 +222,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		this.tokens = tokens;
 	}
 
-	
 	/**
 	 * Tokens.
 	 *
@@ -258,7 +231,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		return this.tokens;
 	}
 
-	
 	/**
 	 * Gets the tokens.
 	 *
@@ -268,7 +240,6 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		return tokens();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -277,9 +248,8 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		return tokens.iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -314,9 +284,8 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -327,9 +296,8 @@ public class AnalyzeResponse implements ActionResponse, Iterable<AnalyzeResponse
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

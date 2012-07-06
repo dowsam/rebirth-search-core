@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LengthTokenFilterFactory.java 2012-3-29 15:02:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LengthTokenFilterFactory.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -15,25 +14,20 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating LengthTokenFilter objects.
  */
 public class LengthTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/** The min. */
 	private final int min;
 
-	
 	/** The max. */
 	private final int max;
 
-	
 	/** The enable position increments. */
 	private final boolean enablePositionIncrements;
 
-	
 	/**
 	 * Instantiates a new length token filter factory.
 	 *
@@ -51,9 +45,8 @@ public class LengthTokenFilterFactory extends AbstractTokenFilterFactory {
 		enablePositionIncrements = settings.getAsBoolean("enabled_position_increments", true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {

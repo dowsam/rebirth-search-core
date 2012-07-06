@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeInfo.java 2012-3-29 16:19:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeInfo.java 2012-7-6 14:29:07 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.action.admin.cluster.node.info;
@@ -67,6 +67,8 @@ public class NodeInfo extends NodeOperationResponse {
 	/** The transport. */
 	@Nullable
 	private TransportInfo transport;
+
+	/** The http. */
 	@Nullable
 	private HttpInfo http;
 
@@ -89,6 +91,7 @@ public class NodeInfo extends NodeOperationResponse {
 	 * @param threadPool the thread pool
 	 * @param network the network
 	 * @param transport the transport
+	 * @param http the http
 	 */
 	public NodeInfo(@Nullable String hostname, DiscoveryNode node,
 			@Nullable ImmutableMap<String, String> serviceAttributes, @Nullable Settings settings, @Nullable OsInfo os,
@@ -287,11 +290,21 @@ public class NodeInfo extends NodeOperationResponse {
 		return transport();
 	}
 
+	/**
+	 * Http.
+	 *
+	 * @return the http info
+	 */
 	@Nullable
 	public HttpInfo http() {
 		return http;
 	}
 
+	/**
+	 * Gets the http.
+	 *
+	 * @return the http
+	 */
 	@Nullable
 	public HttpInfo getHttp() {
 		return http();
@@ -311,7 +324,7 @@ public class NodeInfo extends NodeOperationResponse {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -354,7 +367,7 @@ public class NodeInfo extends NodeOperationResponse {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

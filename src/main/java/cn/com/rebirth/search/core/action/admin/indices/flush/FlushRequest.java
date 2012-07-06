@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FlushRequest.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FlushRequest.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.flush;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading;
 
-
 /**
  * The Class FlushRequest.
  *
@@ -21,19 +19,15 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThr
  */
 public class FlushRequest extends BroadcastOperationRequest {
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The force. */
 	private boolean force = false;
 
-	
 	/** The full. */
 	private boolean full = false;
 
-	
 	/**
 	 * Instantiates a new flush request.
 	 */
@@ -41,7 +35,6 @@ public class FlushRequest extends BroadcastOperationRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new flush request.
 	 *
@@ -49,11 +42,10 @@ public class FlushRequest extends BroadcastOperationRequest {
 	 */
 	public FlushRequest(String... indices) {
 		super(indices);
-		
+
 		operationThreading(BroadcastOperationThreading.THREAD_PER_SHARD);
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -63,7 +55,6 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -75,7 +66,6 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Full.
 	 *
@@ -85,7 +75,6 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this.full;
 	}
 
-	
 	/**
 	 * Full.
 	 *
@@ -97,7 +86,6 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Force.
 	 *
@@ -107,7 +95,6 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return force;
 	}
 
-	
 	/**
 	 * Force.
 	 *
@@ -119,9 +106,8 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public FlushRequest listenerThreaded(boolean threadedListener) {
@@ -129,9 +115,8 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationThreading)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading)
 	 */
 	@Override
 	public FlushRequest operationThreading(BroadcastOperationThreading operationThreading) {
@@ -139,9 +124,8 @@ public class FlushRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -151,9 +135,8 @@ public class FlushRequest extends BroadcastOperationRequest {
 		out.writeBoolean(force);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {

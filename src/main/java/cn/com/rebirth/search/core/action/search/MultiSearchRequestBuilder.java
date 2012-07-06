@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiSearchRequestBuilder.java 2012-3-29 15:02:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiSearchRequestBuilder.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;
-
 
 /**
  * The Class MultiSearchRequestBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class MultiSearchRequestBuilder extends BaseRequestBuilder<MultiSearchRequest, MultiSearchResponse> {
 
-	
 	/**
 	 * Instantiates a new multi search request builder.
 	 *
@@ -28,7 +25,6 @@ public class MultiSearchRequestBuilder extends BaseRequestBuilder<MultiSearchReq
 		super(client, new MultiSearchRequest());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -40,7 +36,6 @@ public class MultiSearchRequestBuilder extends BaseRequestBuilder<MultiSearchReq
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -52,9 +47,8 @@ public class MultiSearchRequestBuilder extends BaseRequestBuilder<MultiSearchReq
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<MultiSearchResponse> listener) {

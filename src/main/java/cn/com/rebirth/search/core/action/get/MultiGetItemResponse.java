@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiGetItemResponse.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiGetItemResponse.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 
-
 /**
  * The Class MultiGetItemResponse.
  *
@@ -20,15 +18,12 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public class MultiGetItemResponse implements Streamable {
 
-	
 	/** The response. */
 	private GetResponse response;
 
-	
 	/** The failure. */
 	private MultiGetResponse.Failure failure;
 
-	
 	/**
 	 * Instantiates a new multi get item response.
 	 */
@@ -36,7 +31,6 @@ public class MultiGetItemResponse implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new multi get item response.
 	 *
@@ -48,7 +42,6 @@ public class MultiGetItemResponse implements Streamable {
 		this.failure = failure;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -61,7 +54,6 @@ public class MultiGetItemResponse implements Streamable {
 		return response.index();
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -71,7 +63,6 @@ public class MultiGetItemResponse implements Streamable {
 		return index();
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -84,7 +75,6 @@ public class MultiGetItemResponse implements Streamable {
 		return response.type();
 	}
 
-	
 	/**
 	 * Gets the type.
 	 *
@@ -94,7 +84,6 @@ public class MultiGetItemResponse implements Streamable {
 		return type();
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -107,7 +96,6 @@ public class MultiGetItemResponse implements Streamable {
 		return response.id();
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -117,7 +105,6 @@ public class MultiGetItemResponse implements Streamable {
 		return id();
 	}
 
-	
 	/**
 	 * Failed.
 	 *
@@ -127,7 +114,6 @@ public class MultiGetItemResponse implements Streamable {
 		return failure != null;
 	}
 
-	
 	/**
 	 * Checks if is failed.
 	 *
@@ -137,7 +123,6 @@ public class MultiGetItemResponse implements Streamable {
 		return failed();
 	}
 
-	
 	/**
 	 * Response.
 	 *
@@ -147,7 +132,6 @@ public class MultiGetItemResponse implements Streamable {
 		return this.response;
 	}
 
-	
 	/**
 	 * Gets the response.
 	 *
@@ -157,7 +141,6 @@ public class MultiGetItemResponse implements Streamable {
 		return this.response;
 	}
 
-	
 	/**
 	 * Failure.
 	 *
@@ -167,7 +150,6 @@ public class MultiGetItemResponse implements Streamable {
 		return this.failure;
 	}
 
-	
 	/**
 	 * Gets the failure.
 	 *
@@ -177,7 +159,6 @@ public class MultiGetItemResponse implements Streamable {
 		return failure();
 	}
 
-	
 	/**
 	 * Read item response.
 	 *
@@ -191,9 +172,8 @@ public class MultiGetItemResponse implements Streamable {
 		return response;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -205,9 +185,8 @@ public class MultiGetItemResponse implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

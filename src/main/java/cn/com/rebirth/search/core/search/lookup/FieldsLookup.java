@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldsLookup.java 2012-3-29 15:01:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldsLookup.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.lookup;
 
@@ -13,14 +12,13 @@ import java.util.Set;
 
 import org.apache.lucene.index.IndexReader;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.search.commons.lucene.document.SingleFieldSelector;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.index.mapper.MapperService;
 
 import com.google.common.collect.Maps;
-
 
 /**
  * The Class FieldsLookup.
@@ -29,27 +27,21 @@ import com.google.common.collect.Maps;
  */
 public class FieldsLookup implements Map {
 
-	
 	/** The mapper service. */
 	private final MapperService mapperService;
 
-	
 	/** The reader. */
 	private IndexReader reader;
 
-	
 	/** The doc id. */
 	private int docId = -1;
 
-	
 	/** The cached field data. */
 	private final Map<String, FieldLookup> cachedFieldData = Maps.newHashMap();
 
-	
 	/** The field selector. */
 	private final SingleFieldSelector fieldSelector = new SingleFieldSelector();
 
-	
 	/**
 	 * Instantiates a new fields lookup.
 	 *
@@ -59,14 +51,13 @@ public class FieldsLookup implements Map {
 		this.mapperService = mapperService;
 	}
 
-	
 	/**
 	 * Sets the next reader.
 	 *
 	 * @param reader the new next reader
 	 */
 	public void setNextReader(IndexReader reader) {
-		if (this.reader == reader) { 
+		if (this.reader == reader) {
 			return;
 		}
 		this.reader = reader;
@@ -74,21 +65,19 @@ public class FieldsLookup implements Map {
 		this.docId = -1;
 	}
 
-	
 	/**
 	 * Sets the next doc id.
 	 *
 	 * @param docId the new next doc id
 	 */
 	public void setNextDocId(int docId) {
-		if (this.docId == docId) { 
+		if (this.docId == docId) {
 			return;
 		}
 		this.docId = docId;
 		clearCache();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
@@ -97,7 +86,6 @@ public class FieldsLookup implements Map {
 		return loadFieldData(key.toString());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#containsKey(java.lang.Object)
 	 */
@@ -111,7 +99,6 @@ public class FieldsLookup implements Map {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#size()
 	 */
@@ -120,7 +107,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#isEmpty()
 	 */
@@ -129,7 +115,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#keySet()
 	 */
@@ -138,7 +123,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#values()
 	 */
@@ -147,7 +131,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#entrySet()
 	 */
@@ -156,7 +139,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
 	 */
@@ -165,7 +147,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#remove(java.lang.Object)
 	 */
@@ -174,7 +155,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#clear()
 	 */
@@ -183,7 +163,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#putAll(java.util.Map)
 	 */
@@ -192,7 +171,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#containsValue(java.lang.Object)
 	 */
@@ -201,7 +179,6 @@ public class FieldsLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/**
 	 * Load field data.
 	 *
@@ -213,7 +190,7 @@ public class FieldsLookup implements Map {
 		if (data == null) {
 			FieldMapper mapper = mapperService.smartNameFieldMapper(name);
 			if (mapper == null) {
-				throw new RestartIllegalArgumentException("No field found for [" + name + "]");
+				throw new RebirthIllegalArgumentException("No field found for [" + name + "]");
 			}
 			data = new FieldLookup(mapper);
 			cachedFieldData.put(name, data);
@@ -223,13 +200,12 @@ public class FieldsLookup implements Map {
 			try {
 				data.doc(reader.document(docId, fieldSelector));
 			} catch (IOException e) {
-				throw new RestartParseException("failed to load field [" + name + "]", e);
+				throw new RebirthParseException("failed to load field [" + name + "]", e);
 			}
 		}
 		return data;
 	}
 
-	
 	/**
 	 * Clear cache.
 	 */

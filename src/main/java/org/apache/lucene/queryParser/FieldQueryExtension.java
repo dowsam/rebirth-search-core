@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldQueryExtension.java 2012-3-29 15:04:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldQueryExtension.java 2012-7-6 14:29:09 l.xue.nong$$
  */
-
 
 package org.apache.lucene.queryParser;
 
 import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
-
 
 /**
  * The Interface FieldQueryExtension.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.index.query.QueryParseContext;
  */
 public interface FieldQueryExtension {
 
-	
 	/**
 	 * Query.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestIndicesExistsAction.java 2012-3-29 15:01:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestIndicesExistsAction.java 2012-7-6 14:29:36 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.exists;
 
@@ -23,7 +22,6 @@ import static cn.com.rebirth.search.core.rest.RestRequest.Method.HEAD;
 import static cn.com.rebirth.search.core.rest.RestStatus.*;
 import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
 
-
 /**
  * The Class RestIndicesExistsAction.
  *
@@ -31,11 +29,9 @@ import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIn
  */
 public class RestIndicesExistsAction extends BaseRestHandler {
 
-	
 	/** The settings filter. */
 	private final SettingsFilter settingsFilter;
 
-	
 	/**
 	 * Instantiates a new rest indices exists action.
 	 *
@@ -53,14 +49,13 @@ public class RestIndicesExistsAction extends BaseRestHandler {
 		this.settingsFilter = settingsFilter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
 		IndicesExistsRequest indicesExistsRequest = new IndicesExistsRequest(splitIndices(request.param("index")));
-		
+
 		indicesExistsRequest.listenerThreaded(false);
 		client.admin().indices().exists(indicesExistsRequest, new ActionListener<IndicesExistsResponse>() {
 			@Override

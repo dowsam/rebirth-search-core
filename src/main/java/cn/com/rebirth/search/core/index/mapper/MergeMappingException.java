@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MergeMappingException.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MergeMappingException.java 2012-7-6 14:29:24 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
 import java.util.Arrays;
-
 
 /**
  * The Class MergeMappingException.
@@ -16,15 +14,12 @@ import java.util.Arrays;
  */
 public class MergeMappingException extends MapperException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4188805280080087948L;
 
-	
 	/** The failures. */
 	private final String[] failures;
 
-	
 	/**
 	 * Instantiates a new merge mapping exception.
 	 *
@@ -35,7 +30,6 @@ public class MergeMappingException extends MapperException {
 		this.failures = failures;
 	}
 
-	
 	/**
 	 * Failures.
 	 *

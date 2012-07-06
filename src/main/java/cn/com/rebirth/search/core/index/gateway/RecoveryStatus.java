@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryStatus.java 2012-3-29 15:01:30 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryStatus.java 2012-7-6 14:29:09 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.gateway;
 
 import java.util.concurrent.atomic.AtomicLong;
-
 
 /**
  * The Class RecoveryStatus.
@@ -16,507 +14,442 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class RecoveryStatus {
 
-    
-    /**
-     * The Enum Stage.
-     *
-     * @author l.xue.nong
-     */
-    public static enum Stage {
-        
-        
-        /** The INIT. */
-        INIT,
-        
-        
-        /** The INDEX. */
-        INDEX,
-        
-        
-        /** The START. */
-        START,
-        
-        
-        /** The TRANSLOG. */
-        TRANSLOG,
-        
-        
-        /** The DONE. */
-        DONE
-    }
+	/**
+	 * The Enum Stage.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static enum Stage {
 
-    
-    /** The stage. */
-    private Stage stage = Stage.INIT;
+		/** The init. */
+		INIT,
 
-    
-    /** The start time. */
-    private long startTime = System.currentTimeMillis();
+		/** The index. */
+		INDEX,
 
-    
-    /** The time. */
-    private long time;
+		/** The start. */
+		START,
 
-    
-    /** The index. */
-    private Index index = new Index();
+		/** The translog. */
+		TRANSLOG,
 
-    
-    /** The translog. */
-    private Translog translog = new Translog();
+		/** The done. */
+		DONE
+	}
 
-    
-    /** The start. */
-    private Start start = new Start();
+	/** The stage. */
+	private Stage stage = Stage.INIT;
 
-    
-    /**
-     * Stage.
-     *
-     * @return the stage
-     */
-    public Stage stage() {
-        return this.stage;
-    }
+	/** The start time. */
+	private long startTime = System.currentTimeMillis();
 
-    
-    /**
-     * Update stage.
-     *
-     * @param stage the stage
-     * @return the recovery status
-     */
-    public RecoveryStatus updateStage(Stage stage) {
-        this.stage = stage;
-        return this;
-    }
+	/** The time. */
+	private long time;
 
-    
-    /**
-     * Start time.
-     *
-     * @return the long
-     */
-    public long startTime() {
-        return this.startTime;
-    }
+	/** The index. */
+	private Index index = new Index();
 
-    
-    /**
-     * Start time.
-     *
-     * @param startTime the start time
-     */
-    public void startTime(long startTime) {
-        this.startTime = startTime;
-    }
+	/** The translog. */
+	private Translog translog = new Translog();
 
-    
-    /**
-     * Time.
-     *
-     * @return the long
-     */
-    public long time() {
-        return this.time;
-    }
+	/** The start. */
+	private Start start = new Start();
 
-    
-    /**
-     * Time.
-     *
-     * @param time the time
-     */
-    public void time(long time) {
-        this.time = time;
-    }
+	/**
+	 * Stage.
+	 *
+	 * @return the stage
+	 */
+	public Stage stage() {
+		return this.stage;
+	}
 
-    
-    /**
-     * Index.
-     *
-     * @return the index
-     */
-    public Index index() {
-        return index;
-    }
+	/**
+	 * Update stage.
+	 *
+	 * @param stage the stage
+	 * @return the recovery status
+	 */
+	public RecoveryStatus updateStage(Stage stage) {
+		this.stage = stage;
+		return this;
+	}
 
-    
-    /**
-     * Start.
-     *
-     * @return the start
-     */
-    public Start start() {
-        return this.start;
-    }
+	/**
+	 * Start time.
+	 *
+	 * @return the long
+	 */
+	public long startTime() {
+		return this.startTime;
+	}
 
-    
-    /**
-     * Translog.
-     *
-     * @return the translog
-     */
-    public Translog translog() {
-        return translog;
-    }
+	/**
+	 * Start time.
+	 *
+	 * @param startTime the start time
+	 */
+	public void startTime(long startTime) {
+		this.startTime = startTime;
+	}
 
-    
-    /**
-     * The Class Start.
-     *
-     * @author l.xue.nong
-     */
-    public static class Start {
-        
-        
-        /** The start time. */
-        private long startTime;
-        
-        
-        /** The time. */
-        private long time;
-        
-        
-        /** The check index time. */
-        private long checkIndexTime;
+	/**
+	 * Time.
+	 *
+	 * @return the long
+	 */
+	public long time() {
+		return this.time;
+	}
 
-        
-        /**
-         * Start time.
-         *
-         * @return the long
-         */
-        public long startTime() {
-            return this.startTime;
-        }
+	/**
+	 * Time.
+	 *
+	 * @param time the time
+	 */
+	public void time(long time) {
+		this.time = time;
+	}
 
-        
-        /**
-         * Start time.
-         *
-         * @param startTime the start time
-         */
-        public void startTime(long startTime) {
-            this.startTime = startTime;
-        }
+	/**
+	 * Index.
+	 *
+	 * @return the index
+	 */
+	public Index index() {
+		return index;
+	}
 
-        
-        /**
-         * Time.
-         *
-         * @return the long
-         */
-        public long time() {
-            return this.time;
-        }
+	/**
+	 * Start.
+	 *
+	 * @return the start
+	 */
+	public Start start() {
+		return this.start;
+	}
 
-        
-        /**
-         * Time.
-         *
-         * @param time the time
-         */
-        public void time(long time) {
-            this.time = time;
-        }
+	/**
+	 * Translog.
+	 *
+	 * @return the translog
+	 */
+	public Translog translog() {
+		return translog;
+	}
 
-        
-        /**
-         * Check index time.
-         *
-         * @return the long
-         */
-        public long checkIndexTime() {
-            return checkIndexTime;
-        }
+	/**
+	 * The Class Start.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class Start {
 
-        
-        /**
-         * Check index time.
-         *
-         * @param checkIndexTime the check index time
-         */
-        public void checkIndexTime(long checkIndexTime) {
-            this.checkIndexTime = checkIndexTime;
-        }
-    }
+		/** The start time. */
+		private long startTime;
 
-    
-    /**
-     * The Class Translog.
-     *
-     * @author l.xue.nong
-     */
-    public static class Translog {
-        
-        
-        /** The start time. */
-        private long startTime = 0;
-        
-        
-        /** The time. */
-        private long time;
-        
-        
-        /** The current translog operations. */
-        private volatile int currentTranslogOperations = 0;
+		/** The time. */
+		private long time;
 
-        
-        /**
-         * Start time.
-         *
-         * @return the long
-         */
-        public long startTime() {
-            return this.startTime;
-        }
+		/** The check index time. */
+		private long checkIndexTime;
 
-        
-        /**
-         * Start time.
-         *
-         * @param startTime the start time
-         */
-        public void startTime(long startTime) {
-            this.startTime = startTime;
-        }
+		/**
+		 * Start time.
+		 *
+		 * @return the long
+		 */
+		public long startTime() {
+			return this.startTime;
+		}
 
-        
-        /**
-         * Time.
-         *
-         * @return the long
-         */
-        public long time() {
-            return this.time;
-        }
+		/**
+		 * Start time.
+		 *
+		 * @param startTime the start time
+		 */
+		public void startTime(long startTime) {
+			this.startTime = startTime;
+		}
 
-        
-        /**
-         * Time.
-         *
-         * @param time the time
-         */
-        public void time(long time) {
-            this.time = time;
-        }
+		/**
+		 * Time.
+		 *
+		 * @return the long
+		 */
+		public long time() {
+			return this.time;
+		}
 
-        
-        /**
-         * Adds the translog operations.
-         *
-         * @param count the count
-         */
-        public void addTranslogOperations(int count) {
-            this.currentTranslogOperations += count;
-        }
+		/**
+		 * Time.
+		 *
+		 * @param time the time
+		 */
+		public void time(long time) {
+			this.time = time;
+		}
 
-        
-        /**
-         * Current translog operations.
-         *
-         * @return the int
-         */
-        public int currentTranslogOperations() {
-            return this.currentTranslogOperations;
-        }
-    }
+		/**
+		 * Check index time.
+		 *
+		 * @return the long
+		 */
+		public long checkIndexTime() {
+			return checkIndexTime;
+		}
 
-    
-    /**
-     * The Class Index.
-     *
-     * @author l.xue.nong
-     */
-    public static class Index {
-        
-        
-        /** The start time. */
-        private long startTime = 0;
-        
-        
-        /** The time. */
-        private long time = 0;
+		/**
+		 * Check index time.
+		 *
+		 * @param checkIndexTime the check index time
+		 */
+		public void checkIndexTime(long checkIndexTime) {
+			this.checkIndexTime = checkIndexTime;
+		}
+	}
 
-        
-        /** The version. */
-        private long version = -1;
-        
-        
-        /** The number of files. */
-        private int numberOfFiles = 0;
-        
-        
-        /** The total size. */
-        private long totalSize = 0;
-        
-        
-        /** The number of reused files. */
-        private int numberOfReusedFiles = 0;
-        
-        
-        /** The reused total size. */
-        private long reusedTotalSize = 0;
-        
-        
-        /** The current files size. */
-        private AtomicLong currentFilesSize = new AtomicLong();
+	/**
+	 * The Class Translog.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class Translog {
 
-        
-        /**
-         * Start time.
-         *
-         * @return the long
-         */
-        public long startTime() {
-            return this.startTime;
-        }
+		/** The start time. */
+		private long startTime = 0;
 
-        
-        /**
-         * Start time.
-         *
-         * @param startTime the start time
-         */
-        public void startTime(long startTime) {
-            this.startTime = startTime;
-        }
+		/** The time. */
+		private long time;
 
-        
-        /**
-         * Time.
-         *
-         * @return the long
-         */
-        public long time() {
-            return this.time;
-        }
+		/** The current translog operations. */
+		private volatile int currentTranslogOperations = 0;
 
-        
-        /**
-         * Time.
-         *
-         * @param time the time
-         */
-        public void time(long time) {
-            this.time = time;
-        }
+		/**
+		 * Start time.
+		 *
+		 * @return the long
+		 */
+		public long startTime() {
+			return this.startTime;
+		}
 
-        
-        /**
-         * Version.
-         *
-         * @return the long
-         */
-        public long version() {
-            return this.version;
-        }
+		/**
+		 * Start time.
+		 *
+		 * @param startTime the start time
+		 */
+		public void startTime(long startTime) {
+			this.startTime = startTime;
+		}
 
-        
-        /**
-         * Files.
-         *
-         * @param numberOfFiles the number of files
-         * @param totalSize the total size
-         * @param numberOfReusedFiles the number of reused files
-         * @param reusedTotalSize the reused total size
-         */
-        public void files(int numberOfFiles, long totalSize, int numberOfReusedFiles, long reusedTotalSize) {
-            this.numberOfFiles = numberOfFiles;
-            this.totalSize = totalSize;
-            this.numberOfReusedFiles = numberOfReusedFiles;
-            this.reusedTotalSize = reusedTotalSize;
-        }
+		/**
+		 * Time.
+		 *
+		 * @return the long
+		 */
+		public long time() {
+			return this.time;
+		}
 
-        
-        /**
-         * Number of files.
-         *
-         * @return the int
-         */
-        public int numberOfFiles() {
-            return numberOfFiles;
-        }
+		/**
+		 * Time.
+		 *
+		 * @param time the time
+		 */
+		public void time(long time) {
+			this.time = time;
+		}
 
-        
-        /**
-         * Number of recovered files.
-         *
-         * @return the int
-         */
-        public int numberOfRecoveredFiles() {
-            return numberOfFiles - numberOfReusedFiles;
-        }
+		/**
+		 * Adds the translog operations.
+		 *
+		 * @param count the count
+		 */
+		public void addTranslogOperations(int count) {
+			this.currentTranslogOperations += count;
+		}
 
-        
-        /**
-         * Total size.
-         *
-         * @return the long
-         */
-        public long totalSize() {
-            return this.totalSize;
-        }
+		/**
+		 * Current translog operations.
+		 *
+		 * @return the int
+		 */
+		public int currentTranslogOperations() {
+			return this.currentTranslogOperations;
+		}
+	}
 
-        
-        /**
-         * Number of reused files.
-         *
-         * @return the int
-         */
-        public int numberOfReusedFiles() {
-            return numberOfReusedFiles;
-        }
+	/**
+	 * The Class Index.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class Index {
 
-        
-        /**
-         * Reused total size.
-         *
-         * @return the long
-         */
-        public long reusedTotalSize() {
-            return this.reusedTotalSize;
-        }
+		/** The start time. */
+		private long startTime = 0;
 
-        
-        /**
-         * Recovered total size.
-         *
-         * @return the long
-         */
-        public long recoveredTotalSize() {
-            return totalSize - reusedTotalSize;
-        }
+		/** The time. */
+		private long time = 0;
 
-        
-        /**
-         * Update version.
-         *
-         * @param version the version
-         */
-        public void updateVersion(long version) {
-            this.version = version;
-        }
+		/** The version. */
+		private long version = -1;
 
-        
-        /**
-         * Current files size.
-         *
-         * @return the long
-         */
-        public long currentFilesSize() {
-            return this.currentFilesSize.get();
-        }
+		/** The number of files. */
+		private int numberOfFiles = 0;
 
-        
-        /**
-         * Adds the current files size.
-         *
-         * @param updatedSize the updated size
-         */
-        public void addCurrentFilesSize(long updatedSize) {
-            this.currentFilesSize.addAndGet(updatedSize);
-        }
-    }
+		/** The total size. */
+		private long totalSize = 0;
+
+		/** The number of reused files. */
+		private int numberOfReusedFiles = 0;
+
+		/** The reused total size. */
+		private long reusedTotalSize = 0;
+
+		/** The current files size. */
+		private AtomicLong currentFilesSize = new AtomicLong();
+
+		/**
+		 * Start time.
+		 *
+		 * @return the long
+		 */
+		public long startTime() {
+			return this.startTime;
+		}
+
+		/**
+		 * Start time.
+		 *
+		 * @param startTime the start time
+		 */
+		public void startTime(long startTime) {
+			this.startTime = startTime;
+		}
+
+		/**
+		 * Time.
+		 *
+		 * @return the long
+		 */
+		public long time() {
+			return this.time;
+		}
+
+		/**
+		 * Time.
+		 *
+		 * @param time the time
+		 */
+		public void time(long time) {
+			this.time = time;
+		}
+
+		/**
+		 * Version.
+		 *
+		 * @return the long
+		 */
+		public long version() {
+			return this.version;
+		}
+
+		/**
+		 * Files.
+		 *
+		 * @param numberOfFiles the number of files
+		 * @param totalSize the total size
+		 * @param numberOfReusedFiles the number of reused files
+		 * @param reusedTotalSize the reused total size
+		 */
+		public void files(int numberOfFiles, long totalSize, int numberOfReusedFiles, long reusedTotalSize) {
+			this.numberOfFiles = numberOfFiles;
+			this.totalSize = totalSize;
+			this.numberOfReusedFiles = numberOfReusedFiles;
+			this.reusedTotalSize = reusedTotalSize;
+		}
+
+		/**
+		 * Number of files.
+		 *
+		 * @return the int
+		 */
+		public int numberOfFiles() {
+			return numberOfFiles;
+		}
+
+		/**
+		 * Number of recovered files.
+		 *
+		 * @return the int
+		 */
+		public int numberOfRecoveredFiles() {
+			return numberOfFiles - numberOfReusedFiles;
+		}
+
+		/**
+		 * Total size.
+		 *
+		 * @return the long
+		 */
+		public long totalSize() {
+			return this.totalSize;
+		}
+
+		/**
+		 * Number of reused files.
+		 *
+		 * @return the int
+		 */
+		public int numberOfReusedFiles() {
+			return numberOfReusedFiles;
+		}
+
+		/**
+		 * Reused total size.
+		 *
+		 * @return the long
+		 */
+		public long reusedTotalSize() {
+			return this.reusedTotalSize;
+		}
+
+		/**
+		 * Recovered total size.
+		 *
+		 * @return the long
+		 */
+		public long recoveredTotalSize() {
+			return totalSize - reusedTotalSize;
+		}
+
+		/**
+		 * Update version.
+		 *
+		 * @param version the version
+		 */
+		public void updateVersion(long version) {
+			this.version = version;
+		}
+
+		/**
+		 * Current files size.
+		 *
+		 * @return the long
+		 */
+		public long currentFilesSize() {
+			return this.currentFilesSize.get();
+		}
+
+		/**
+		 * Adds the current files size.
+		 *
+		 * @param updatedSize the updated size
+		 */
+		public void addCurrentFilesSize(long updatedSize) {
+			this.currentFilesSize.addAndGet(updatedSize);
+		}
+	}
 }

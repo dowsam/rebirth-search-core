@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SnowballAnalyzerProvider.java 2012-3-29 15:02:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SnowballAnalyzerProvider.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class SnowballAnalyzerProvider.
  *
@@ -33,7 +31,6 @@ import com.google.common.collect.ImmutableSet;
  */
 public class SnowballAnalyzerProvider extends AbstractIndexAnalyzerProvider<SnowballAnalyzer> {
 
-	
 	/** The Constant defaultLanguageStopwords. */
 	private static final ImmutableMap<String, Set<?>> defaultLanguageStopwords = MapBuilder
 			.<String, Set<?>> newMapBuilder().put("English", StopAnalyzer.ENGLISH_STOP_WORDS_SET)
@@ -41,11 +38,9 @@ public class SnowballAnalyzerProvider extends AbstractIndexAnalyzerProvider<Snow
 			.put("German2", GermanAnalyzer.getDefaultStopSet()).put("French", FrenchAnalyzer.getDefaultStopSet())
 			.immutableMap();
 
-	
 	/** The analyzer. */
 	private final SnowballAnalyzer analyzer;
 
-	
 	/**
 	 * Instantiates a new snowball analyzer provider.
 	 *
@@ -68,9 +63,8 @@ public class SnowballAnalyzerProvider extends AbstractIndexAnalyzerProvider<Snow
 		analyzer = new SnowballAnalyzer(version, language, stopWords);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#get()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#get()
 	 */
 	@Override
 	public SnowballAnalyzer get() {

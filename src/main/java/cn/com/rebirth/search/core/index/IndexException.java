@@ -1,30 +1,25 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexException.java 2012-3-29 15:02:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexException.java 2012-7-6 14:29:51 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class IndexException.
  *
  * @author l.xue.nong
  */
-public class IndexException extends RestartException {
+public class IndexException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7995033790903153938L;
-	
-	
+
 	/** The index. */
 	private final Index index;
 
-	
 	/**
 	 * Instantiates a new index exception.
 	 *
@@ -35,7 +30,6 @@ public class IndexException extends RestartException {
 		this(index, msg, null);
 	}
 
-	
 	/**
 	 * Instantiates a new index exception.
 	 *
@@ -47,7 +41,6 @@ public class IndexException extends RestartException {
 		this(index, true, msg, cause);
 	}
 
-	
 	/**
 	 * Instantiates a new index exception.
 	 *
@@ -61,7 +54,6 @@ public class IndexException extends RestartException {
 		this.index = index;
 	}
 
-	
 	/**
 	 * Index.
 	 *

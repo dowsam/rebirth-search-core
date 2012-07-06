@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ValueGeoDistanceFacetCollector.java 2012-3-29 15:02:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ValueGeoDistanceFacetCollector.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.geodistance;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ValueGeoDistanceFacetCollector.
  *
@@ -27,15 +25,12 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 
-	
 	/** The index value field name. */
 	private final String indexValueFieldName;
 
-	
 	/** The value field data type. */
 	private final FieldDataType valueFieldDataType;
 
-	
 	/**
 	 * Instantiates a new value geo distance facet collector.
 	 *
@@ -63,9 +58,8 @@ public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 		this.aggregator = new Aggregator(fixedSourceDistance, entries);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.geodistance.GeoDistanceFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.geodistance.GeoDistanceFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -74,7 +68,6 @@ public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 				reader, indexValueFieldName);
 	}
 
-	
 	/**
 	 * The Class Aggregator.
 	 *
@@ -82,23 +75,18 @@ public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 	 */
 	public static class Aggregator implements GeoPointFieldData.ValueInDocProc {
 
-		
 		/** The fixed source distance. */
 		private final GeoDistance.FixedSourceDistance fixedSourceDistance;
 
-		
 		/** The entries. */
 		private final GeoDistanceFacet.Entry[] entries;
 
-		
 		/** The value field data. */
 		NumericFieldData valueFieldData;
 
-		
 		/** The value aggregator. */
 		final ValueAggregator valueAggregator = new ValueAggregator();
 
-		
 		/**
 		 * Instantiates a new aggregator.
 		 *
@@ -110,9 +98,8 @@ public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 			this.entries = entries;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc#onValue(int, double, double)
+		 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc#onValue(int, double, double)
 		 */
 		@Override
 		public void onValue(int docId, double lat, double lon) {
@@ -131,7 +118,6 @@ public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 		}
 	}
 
-	
 	/**
 	 * The Class ValueAggregator.
 	 *
@@ -139,13 +125,11 @@ public class ValueGeoDistanceFacetCollector extends GeoDistanceFacetCollector {
 	 */
 	public static class ValueAggregator implements NumericFieldData.DoubleValueInDocProc {
 
-		
 		/** The entry. */
 		GeoDistanceFacet.Entry entry;
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {

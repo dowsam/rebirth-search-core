@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JmxModule.java 2012-3-29 15:01:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JmxModule.java 2012-7-6 14:29:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.jmx;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.commons.inject.spi.TypeEncounter;
 import cn.com.rebirth.search.commons.inject.spi.TypeListener;
 import cn.com.rebirth.search.core.jmx.action.GetJmxServiceUrlAction;
 
-
 /**
  * The Class JmxModule.
  *
@@ -23,11 +21,9 @@ import cn.com.rebirth.search.core.jmx.action.GetJmxServiceUrlAction;
  */
 public class JmxModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/**
 	 * Instantiates a new jmx module.
 	 *
@@ -37,9 +33,8 @@ public class JmxModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
@@ -51,7 +46,6 @@ public class JmxModule extends AbstractModule {
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving jmxExporterType events.
 	 * The class that is interested in processing a jmxExporterType
@@ -65,11 +59,9 @@ public class JmxModule extends AbstractModule {
 	 */
 	private static class JmxExporterTypeListener implements TypeListener {
 
-		
 		/** The jmx service. */
 		private final JmxService jmxService;
 
-		
 		/**
 		 * Instantiates a new jmx exporter type listener.
 		 *
@@ -79,9 +71,8 @@ public class JmxModule extends AbstractModule {
 			this.jmxService = jmxService;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.inject.spi.TypeListener#hear(cn.com.summall.search.commons.inject.TypeLiteral, cn.com.summall.search.commons.inject.spi.TypeEncounter)
+		 * @see cn.com.rebirth.search.commons.inject.spi.TypeListener#hear(cn.com.rebirth.search.commons.inject.TypeLiteral, cn.com.rebirth.search.commons.inject.spi.TypeEncounter)
 		 */
 		@Override
 		public <I> void hear(TypeLiteral<I> typeLiteral, TypeEncounter<I> typeEncounter) {
@@ -92,7 +83,6 @@ public class JmxModule extends AbstractModule {
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving jmxExporterInjection events.
 	 * The class that is interested in processing a jmxExporterInjection
@@ -107,11 +97,9 @@ public class JmxModule extends AbstractModule {
 	 */
 	private static class JmxExporterInjectionListener<I> implements InjectionListener<I> {
 
-		
 		/** The jmx service. */
 		private final JmxService jmxService;
 
-		
 		/**
 		 * Instantiates a new jmx exporter injection listener.
 		 *
@@ -121,9 +109,8 @@ public class JmxModule extends AbstractModule {
 			this.jmxService = jmxService;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.inject.spi.InjectionListener#afterInjection(java.lang.Object)
+		 * @see cn.com.rebirth.search.commons.inject.spi.InjectionListener#afterInjection(java.lang.Object)
 		 */
 		@Override
 		public void afterInjection(I instance) {

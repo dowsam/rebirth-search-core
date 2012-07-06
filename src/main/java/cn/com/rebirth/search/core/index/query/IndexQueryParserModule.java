@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexQueryParserModule.java 2012-3-29 15:02:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexQueryParserModule.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class IndexQueryParserModule.
  *
@@ -26,7 +24,6 @@ import com.google.common.collect.Maps;
  */
 public class IndexQueryParserModule extends AbstractModule {
 
-	
 	/**
 	 * The Class QueryParsersProcessor.
 	 *
@@ -34,7 +31,6 @@ public class IndexQueryParserModule extends AbstractModule {
 	 */
 	public static class QueryParsersProcessor {
 
-		
 		/**
 		 * Process x content query parsers.
 		 *
@@ -44,7 +40,6 @@ public class IndexQueryParserModule extends AbstractModule {
 
 		}
 
-		
 		/**
 		 * The Class XContentQueryParsersBindings.
 		 *
@@ -52,15 +47,12 @@ public class IndexQueryParserModule extends AbstractModule {
 		 */
 		public static class XContentQueryParsersBindings {
 
-			
 			/** The binder. */
 			private final MapBinder<String, QueryParserFactory> binder;
 
-			
 			/** The group settings. */
 			private final Map<String, Settings> groupSettings;
 
-			
 			/**
 			 * Instantiates a new x content query parsers bindings.
 			 *
@@ -73,7 +65,6 @@ public class IndexQueryParserModule extends AbstractModule {
 				this.groupSettings = groupSettings;
 			}
 
-			
 			/**
 			 * Binder.
 			 *
@@ -83,7 +74,6 @@ public class IndexQueryParserModule extends AbstractModule {
 				return binder;
 			}
 
-			
 			/**
 			 * Group settings.
 			 *
@@ -93,7 +83,6 @@ public class IndexQueryParserModule extends AbstractModule {
 				return groupSettings;
 			}
 
-			
 			/**
 			 * Process x content query parser.
 			 *
@@ -109,7 +98,6 @@ public class IndexQueryParserModule extends AbstractModule {
 			}
 		}
 
-		
 		/**
 		 * Process x content filter parsers.
 		 *
@@ -119,7 +107,6 @@ public class IndexQueryParserModule extends AbstractModule {
 
 		}
 
-		
 		/**
 		 * The Class XContentFilterParsersBindings.
 		 *
@@ -127,15 +114,12 @@ public class IndexQueryParserModule extends AbstractModule {
 		 */
 		public static class XContentFilterParsersBindings {
 
-			
 			/** The binder. */
 			private final MapBinder<String, FilterParserFactory> binder;
 
-			
 			/** The group settings. */
 			private final Map<String, Settings> groupSettings;
 
-			
 			/**
 			 * Instantiates a new x content filter parsers bindings.
 			 *
@@ -148,7 +132,6 @@ public class IndexQueryParserModule extends AbstractModule {
 				this.groupSettings = groupSettings;
 			}
 
-			
 			/**
 			 * Binder.
 			 *
@@ -158,7 +141,6 @@ public class IndexQueryParserModule extends AbstractModule {
 				return binder;
 			}
 
-			
 			/**
 			 * Group settings.
 			 *
@@ -168,7 +150,6 @@ public class IndexQueryParserModule extends AbstractModule {
 				return groupSettings;
 			}
 
-			
 			/**
 			 * Process x content query filter.
 			 *
@@ -185,23 +166,18 @@ public class IndexQueryParserModule extends AbstractModule {
 		}
 	}
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The processors. */
 	private final LinkedList<QueryParsersProcessor> processors = Lists.newLinkedList();
 
-	
 	/** The queries. */
 	private final Map<String, Class<? extends QueryParser>> queries = Maps.newHashMap();
 
-	
 	/** The filters. */
 	private final Map<String, Class<? extends FilterParser>> filters = Maps.newHashMap();
 
-	
 	/**
 	 * Instantiates a new index query parser module.
 	 *
@@ -211,7 +187,6 @@ public class IndexQueryParserModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/**
 	 * Adds the query parser.
 	 *
@@ -222,7 +197,6 @@ public class IndexQueryParserModule extends AbstractModule {
 		queries.put(name, queryParser);
 	}
 
-	
 	/**
 	 * Adds the filter parser.
 	 *
@@ -233,7 +207,6 @@ public class IndexQueryParserModule extends AbstractModule {
 		filters.put(name, filterParser);
 	}
 
-	
 	/**
 	 * Adds the processor.
 	 *
@@ -245,16 +218,14 @@ public class IndexQueryParserModule extends AbstractModule {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
 
 		bind(IndexQueryParserService.class).asEagerSingleton();
 
-		
 		MapBinder<String, QueryParserFactory> queryBinder = MapBinder.newMapBinder(binder(), String.class,
 				QueryParserFactory.class);
 		Map<String, Settings> xContentQueryParserGroups = settings
@@ -285,7 +256,6 @@ public class IndexQueryParserModule extends AbstractModule {
 					.in(Scopes.SINGLETON);
 		}
 
-		
 		MapBinder<String, FilterParserFactory> filterBinder = MapBinder.newMapBinder(binder(), String.class,
 				FilterParserFactory.class);
 		Map<String, Settings> xContentFilterParserGroups = settings

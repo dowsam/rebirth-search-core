@@ -1,34 +1,28 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchPhaseExecutionException.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchPhaseExecutionException.java 2012-7-6 14:29:16 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class SearchPhaseExecutionException.
  *
  * @author l.xue.nong
  */
-public class SearchPhaseExecutionException extends RestartException {
+public class SearchPhaseExecutionException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5076395213258478118L;
 
-	
 	/** The phase name. */
 	private final String phaseName;
 
-	
 	/** The shard failures. */
 	private ShardSearchFailure[] shardFailures;
 
-	
 	/**
 	 * Instantiates a new search phase execution exception.
 	 *
@@ -42,7 +36,6 @@ public class SearchPhaseExecutionException extends RestartException {
 		this.shardFailures = shardFailures;
 	}
 
-	
 	/**
 	 * Instantiates a new search phase execution exception.
 	 *
@@ -58,7 +51,6 @@ public class SearchPhaseExecutionException extends RestartException {
 		this.shardFailures = shardFailures;
 	}
 
-	
 	/**
 	 * Phase name.
 	 *
@@ -68,7 +60,6 @@ public class SearchPhaseExecutionException extends RestartException {
 		return phaseName;
 	}
 
-	
 	/**
 	 * Shard failures.
 	 *
@@ -78,7 +69,6 @@ public class SearchPhaseExecutionException extends RestartException {
 		return shardFailures;
 	}
 
-	
 	/**
 	 * Builds the message.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FacetParseElement.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FacetParseElement.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class FacetParseElement.
  *
@@ -31,11 +29,9 @@ import com.google.common.collect.Lists;
  */
 public class FacetParseElement implements SearchParseElement {
 
-	
 	/** The facet processors. */
 	private final FacetProcessors facetProcessors;
 
-	
 	/**
 	 * Instantiates a new facet parse element.
 	 *
@@ -46,9 +42,8 @@ public class FacetParseElement implements SearchParseElement {
 		this.facetProcessors = facetProcessors;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchParseElement#parse(cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchParseElement#parse(cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void parse(XContentParser parser, SearchContext context) throws Exception {
@@ -103,7 +98,7 @@ public class FacetParseElement implements SearchParseElement {
 				}
 
 				if (nestedPath != null) {
-					
+
 					MapperService.SmartNameObjectMapper mapper = context.smartNameObjectMapper(nestedPath);
 					if (mapper == null) {
 						throw new SearchParseException(context, "facet nested path [" + nestedPath + "] not found");

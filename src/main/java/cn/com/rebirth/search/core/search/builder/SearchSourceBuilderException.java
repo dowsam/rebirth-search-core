@@ -1,26 +1,22 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchSourceBuilderException.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchSourceBuilderException.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.builder;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class SearchSourceBuilderException.
  *
  * @author l.xue.nong
  */
-public class SearchSourceBuilderException extends RestartException {
+public class SearchSourceBuilderException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7005527804441845801L;
 
-	
 	/**
 	 * Instantiates a new search source builder exception.
 	 *
@@ -30,7 +26,6 @@ public class SearchSourceBuilderException extends RestartException {
 		super(msg);
 	}
 
-	
 	/**
 	 * Instantiates a new search source builder exception.
 	 *

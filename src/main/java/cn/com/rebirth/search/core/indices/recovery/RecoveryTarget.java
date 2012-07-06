@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryTarget.java 2012-3-29 15:02:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryTarget.java 2012-7-6 14:30:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -49,7 +48,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class RecoveryTarget.
  *
@@ -57,7 +55,6 @@ import com.google.common.collect.Sets;
  */
 public class RecoveryTarget extends AbstractComponent {
 
-	
 	/**
 	 * The Class Actions.
 	 *
@@ -65,52 +62,40 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	public static class Actions {
 
-		
 		/** The Constant FILES_INFO. */
 		public static final String FILES_INFO = "index/shard/recovery/filesInfo";
 
-		
 		/** The Constant FILE_CHUNK. */
 		public static final String FILE_CHUNK = "index/shard/recovery/fileChunk";
 
-		
 		/** The Constant CLEAN_FILES. */
 		public static final String CLEAN_FILES = "index/shard/recovery/cleanFiles";
 
-		
 		/** The Constant TRANSLOG_OPS. */
 		public static final String TRANSLOG_OPS = "index/shard/recovery/translogOps";
 
-		
 		/** The Constant PREPARE_TRANSLOG. */
 		public static final String PREPARE_TRANSLOG = "index/shard/recovery/prepareTranslog";
 
-		
 		/** The Constant FINALIZE. */
 		public static final String FINALIZE = "index/shard/recovery/finalize";
 	}
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The recovery settings. */
 	private final RecoverySettings recoverySettings;
 
-	
 	/** The on going recoveries. */
 	private final ConcurrentMap<ShardId, RecoveryStatus> onGoingRecoveries = ConcurrentCollections.newConcurrentMap();
 
-	
 	/**
 	 * Instantiates a new recovery target.
 	 *
@@ -145,7 +130,6 @@ public class RecoveryTarget extends AbstractComponent {
 		});
 	}
 
-	
 	/**
 	 * Peer recovery status.
 	 *
@@ -157,14 +141,13 @@ public class RecoveryTarget extends AbstractComponent {
 		if (peerRecoveryStatus == null) {
 			return null;
 		}
-		
+
 		if (peerRecoveryStatus.startTime > 0 && peerRecoveryStatus.stage != RecoveryStatus.Stage.DONE) {
 			peerRecoveryStatus.time = System.currentTimeMillis() - peerRecoveryStatus.startTime;
 		}
 		return peerRecoveryStatus;
 	}
 
-	
 	/**
 	 * Start recovery.
 	 *
@@ -194,7 +177,7 @@ public class RecoveryTarget extends AbstractComponent {
 			try {
 				shard.recovering("from " + request.sourceNode());
 			} catch (IllegalIndexShardStateException e) {
-				
+
 				listener.onIgnoreRecovery(false, "already in recovering process, " + e.getMessage());
 				return;
 			}
@@ -212,7 +195,6 @@ public class RecoveryTarget extends AbstractComponent {
 		});
 	}
 
-	
 	/**
 	 * Do recovery.
 	 *
@@ -284,7 +266,7 @@ public class RecoveryTarget extends AbstractComponent {
 			removeAndCleanOnGoingRecovery(request.shardId());
 			listener.onRecoveryDone();
 		} catch (Exception e) {
-			
+
 			if (shard.state() == IndexShardState.CLOSED) {
 				removeAndCleanOnGoingRecovery(request.shardId());
 				listener.onIgnoreRecovery(false, "local shard closed, stop recovery");
@@ -292,29 +274,22 @@ public class RecoveryTarget extends AbstractComponent {
 			}
 			Throwable cause = ExceptionsHelper.unwrapCause(e);
 			if (cause instanceof RecoveryEngineException) {
-				
-				cause = cause.getCause();
-			}
-			
-			cause = ExceptionsHelper.unwrapCause(cause);
-			if (cause instanceof RecoveryEngineException) {
-				
+
 				cause = cause.getCause();
 			}
 
-			
+			cause = ExceptionsHelper.unwrapCause(cause);
+			if (cause instanceof RecoveryEngineException) {
+
+				cause = cause.getCause();
+			}
 
 			if (cause instanceof IndexShardNotStartedException || cause instanceof IndexMissingException
 					|| cause instanceof IndexShardMissingException) {
-				
+
 				listener.onRetryRecovery(TimeValue.timeValueMillis(500));
 				return;
 			}
-
-			
-
-			
-			
 
 			removeAndCleanOnGoingRecovery(request.shardId());
 
@@ -339,7 +314,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving recovery events.
 	 * The class that is interested in processing a recovery
@@ -353,13 +327,11 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	public static interface RecoveryListener {
 
-		
 		/**
 		 * On recovery done.
 		 */
 		void onRecoveryDone();
 
-		
 		/**
 		 * On retry recovery.
 		 *
@@ -367,7 +339,6 @@ public class RecoveryTarget extends AbstractComponent {
 		 */
 		void onRetryRecovery(TimeValue retryAfter);
 
-		
 		/**
 		 * On ignore recovery.
 		 *
@@ -376,7 +347,6 @@ public class RecoveryTarget extends AbstractComponent {
 		 */
 		void onIgnoreRecovery(boolean removeShard, String reason);
 
-		
 		/**
 		 * On recovery failure.
 		 *
@@ -386,23 +356,22 @@ public class RecoveryTarget extends AbstractComponent {
 		void onRecoveryFailure(RecoveryFailedException e, boolean sendShardFailure);
 	}
 
-	
 	/**
 	 * Removes the and clean on going recovery.
 	 *
 	 * @param shardId the shard id
 	 */
 	private void removeAndCleanOnGoingRecovery(ShardId shardId) {
-		
+
 		RecoveryStatus peerRecoveryStatus = onGoingRecoveries.remove(shardId);
 		if (peerRecoveryStatus != null) {
-			
+
 			for (Map.Entry<String, IndexOutput> entry : peerRecoveryStatus.openIndexOutputs.entrySet()) {
 				synchronized (entry.getValue()) {
 					try {
 						entry.getValue().close();
 					} catch (IOException e) {
-						
+
 					}
 				}
 			}
@@ -411,7 +380,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PrepareForTranslogOperationsRequestHandler.
 	 *
@@ -420,27 +388,24 @@ public class RecoveryTarget extends AbstractComponent {
 	class PrepareForTranslogOperationsRequestHandler extends
 			BaseTransportRequestHandler<RecoveryPrepareForTranslogOperationsRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public RecoveryPrepareForTranslogOperationsRequest newInstance() {
 			return new RecoveryPrepareForTranslogOperationsRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(RecoveryPrepareForTranslogOperationsRequest request, TransportChannel channel)
@@ -450,7 +415,7 @@ public class RecoveryTarget extends AbstractComponent {
 
 			RecoveryStatus onGoingRecovery = onGoingRecoveries.get(shard.shardId());
 			if (onGoingRecovery == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 			onGoingRecovery.stage = RecoveryStatus.Stage.TRANSLOG;
@@ -460,7 +425,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class FinalizeRecoveryRequestHandler.
 	 *
@@ -468,27 +432,24 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	class FinalizeRecoveryRequestHandler extends BaseTransportRequestHandler<RecoveryFinalizeRecoveryRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public RecoveryFinalizeRecoveryRequest newInstance() {
 			return new RecoveryFinalizeRecoveryRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(RecoveryFinalizeRecoveryRequest request, TransportChannel channel) throws Exception {
@@ -496,7 +457,7 @@ public class RecoveryTarget extends AbstractComponent {
 					request.shardId().index().name()).shardSafe(request.shardId().id());
 			RecoveryStatus peerRecoveryStatus = onGoingRecoveries.get(shard.shardId());
 			if (peerRecoveryStatus == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 			peerRecoveryStatus.stage = RecoveryStatus.Stage.FINALIZE;
@@ -507,7 +468,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class TranslogOperationsRequestHandler.
 	 *
@@ -515,27 +475,24 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	class TranslogOperationsRequestHandler extends BaseTransportRequestHandler<RecoveryTranslogOperationsRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public RecoveryTranslogOperationsRequest newInstance() {
 			return new RecoveryTranslogOperationsRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(RecoveryTranslogOperationsRequest request, TransportChannel channel)
@@ -548,7 +505,7 @@ public class RecoveryTarget extends AbstractComponent {
 
 			RecoveryStatus onGoingRecovery = onGoingRecoveries.get(shard.shardId());
 			if (onGoingRecovery == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 			onGoingRecovery.currentTranslogOperations += request.operations().size();
@@ -557,7 +514,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class FilesInfoRequestHandler.
 	 *
@@ -565,27 +521,24 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	class FilesInfoRequestHandler extends BaseTransportRequestHandler<RecoveryFilesInfoRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public RecoveryFilesInfoRequest newInstance() {
 			return new RecoveryFilesInfoRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(RecoveryFilesInfoRequest request, TransportChannel channel) throws Exception {
@@ -593,7 +546,7 @@ public class RecoveryTarget extends AbstractComponent {
 					request.shardId.index().name()).shardSafe(request.shardId.id());
 			RecoveryStatus onGoingRecovery = onGoingRecoveries.get(shard.shardId());
 			if (onGoingRecovery == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 			onGoingRecovery.phase1FileNames = request.phase1FileNames;
@@ -607,7 +560,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class CleanFilesRequestHandler.
 	 *
@@ -615,27 +567,24 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	class CleanFilesRequestHandler extends BaseTransportRequestHandler<RecoveryCleanFilesRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public RecoveryCleanFilesRequest newInstance() {
 			return new RecoveryCleanFilesRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(RecoveryCleanFilesRequest request, TransportChannel channel) throws Exception {
@@ -643,13 +592,10 @@ public class RecoveryTarget extends AbstractComponent {
 					request.shardId().index().name()).shardSafe(request.shardId().id());
 			RecoveryStatus onGoingRecovery = onGoingRecoveries.get(shard.shardId());
 			if (onGoingRecovery == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 
-			
-			
-			
 			String suffix = "." + onGoingRecovery.startTime;
 			Set<String> filesToRename = Sets.newHashSet();
 			for (String existingFile : shard.store().directory().listAll()) {
@@ -659,12 +605,12 @@ public class RecoveryTarget extends AbstractComponent {
 			}
 			Exception failureToRename = null;
 			if (!filesToRename.isEmpty()) {
-				
+
 				for (String fileToRename : filesToRename) {
 					shard.store().directory().deleteFile(fileToRename);
 				}
 				for (String fileToRename : filesToRename) {
-					
+
 					try {
 						shard.store().renameFile(fileToRename + suffix, fileToRename);
 					} catch (Exception e) {
@@ -676,16 +622,16 @@ public class RecoveryTarget extends AbstractComponent {
 			if (failureToRename != null) {
 				throw failureToRename;
 			}
-			
+
 			shard.store().writeChecksums(onGoingRecovery.checksums);
 
 			for (String existingFile : shard.store().directory().listAll()) {
-				
+
 				if (!request.snapshotFiles().contains(existingFile) && !Store.isChecksum(existingFile)) {
 					try {
 						shard.store().directory().deleteFile(existingFile);
 					} catch (Exception e) {
-						
+
 					}
 				}
 			}
@@ -693,7 +639,6 @@ public class RecoveryTarget extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class FileChunkTransportRequestHandler.
 	 *
@@ -701,27 +646,24 @@ public class RecoveryTarget extends AbstractComponent {
 	 */
 	class FileChunkTransportRequestHandler extends BaseTransportRequestHandler<RecoveryFileChunkRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public RecoveryFileChunkRequest newInstance() {
 			return new RecoveryFileChunkRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final RecoveryFileChunkRequest request, TransportChannel channel) throws Exception {
@@ -729,28 +671,21 @@ public class RecoveryTarget extends AbstractComponent {
 					request.shardId().index().name()).shardSafe(request.shardId().id());
 			RecoveryStatus onGoingRecovery = onGoingRecoveries.get(shard.shardId());
 			if (onGoingRecovery == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 			IndexOutput indexOutput;
 			if (request.position() == 0) {
-				
+
 				onGoingRecovery.checksums.remove(request.name());
 				indexOutput = onGoingRecovery.openIndexOutputs.remove(request.name());
 				if (indexOutput != null) {
 					try {
 						indexOutput.close();
 					} catch (IOException e) {
-						
+
 					}
 				}
-				
-				
-
-				
-				
-				
-				
 
 				String name = request.name();
 				if (shard.store().directory().fileExists(name)) {
@@ -764,7 +699,7 @@ public class RecoveryTarget extends AbstractComponent {
 				indexOutput = onGoingRecovery.openIndexOutputs.get(request.name());
 			}
 			if (indexOutput == null) {
-				
+
 				throw new IndexShardClosedException(shard.shardId());
 			}
 			synchronized (indexOutput) {
@@ -776,9 +711,9 @@ public class RecoveryTarget extends AbstractComponent {
 							.length());
 					onGoingRecovery.currentFilesSize.addAndGet(request.length());
 					if (indexOutput.getFilePointer() == request.length()) {
-						
+
 						indexOutput.close();
-						
+
 						if (request.checksum() != null) {
 							onGoingRecovery.checksums.put(request.name(), request.checksum());
 						}
@@ -790,7 +725,7 @@ public class RecoveryTarget extends AbstractComponent {
 					try {
 						indexOutput.close();
 					} catch (IOException e1) {
-						
+
 					}
 					throw e;
 				}

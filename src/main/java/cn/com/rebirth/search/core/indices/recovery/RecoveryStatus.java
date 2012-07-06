@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryStatus.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryStatus.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -14,7 +13,6 @@ import org.apache.lucene.store.IndexOutput;
 
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
 
-
 /**
  * The Class RecoveryStatus.
  *
@@ -22,7 +20,6 @@ import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
  */
 public class RecoveryStatus {
 
-	
 	/**
 	 * The Enum Stage.
 	 *
@@ -30,80 +27,61 @@ public class RecoveryStatus {
 	 */
 	public static enum Stage {
 
-		
-		/** The INIT. */
+		/** The init. */
 		INIT,
 
-		
-		/** The INDEX. */
+		/** The index. */
 		INDEX,
 
-		
-		/** The TRANSLOG. */
+		/** The translog. */
 		TRANSLOG,
 
-		
-		/** The FINALIZE. */
+		/** The finalize. */
 		FINALIZE,
 
-		
-		/** The DONE. */
+		/** The done. */
 		DONE
 	}
 
-	
 	/** The open index outputs. */
 	ConcurrentMap<String, IndexOutput> openIndexOutputs = ConcurrentCollections.newConcurrentMap();
 
-	
 	/** The checksums. */
 	ConcurrentMap<String, String> checksums = ConcurrentCollections.newConcurrentMap();
 
-	
 	/** The start time. */
 	final long startTime = System.currentTimeMillis();
 
-	
 	/** The time. */
 	long time;
 
-	
 	/** The phase1 file names. */
 	List<String> phase1FileNames;
 
-	
 	/** The phase1 file sizes. */
 	List<Long> phase1FileSizes;
 
-	
 	/** The phase1 existing file names. */
 	List<String> phase1ExistingFileNames;
 
-	
 	/** The phase1 existing file sizes. */
 	List<Long> phase1ExistingFileSizes;
 
-	
 	/** The phase1 total size. */
 	long phase1TotalSize;
 
-	
 	/** The phase1 existing total size. */
 	long phase1ExistingTotalSize;
 
-	
 	/** The stage. */
 	volatile Stage stage = Stage.INIT;
 
-	
 	/** The current translog operations. */
 	volatile long currentTranslogOperations = 0;
 
-	
 	/** The current files size. */
 	AtomicLong currentFilesSize = new AtomicLong();
 
-	
 	/**
 	 * Start time.
 	 *
@@ -113,7 +91,6 @@ public class RecoveryStatus {
 		return startTime;
 	}
 
-	
 	/**
 	 * Time.
 	 *
@@ -123,7 +100,6 @@ public class RecoveryStatus {
 		return this.time;
 	}
 
-	
 	/**
 	 * Phase1 total size.
 	 *
@@ -133,7 +109,6 @@ public class RecoveryStatus {
 		return phase1TotalSize;
 	}
 
-	
 	/**
 	 * Phase1 existing total size.
 	 *
@@ -143,7 +118,6 @@ public class RecoveryStatus {
 		return phase1ExistingTotalSize;
 	}
 
-	
 	/**
 	 * Stage.
 	 *
@@ -153,7 +127,6 @@ public class RecoveryStatus {
 		return stage;
 	}
 
-	
 	/**
 	 * Current translog operations.
 	 *
@@ -163,7 +136,6 @@ public class RecoveryStatus {
 		return currentTranslogOperations;
 	}
 
-	
 	/**
 	 * Current files size.
 	 *

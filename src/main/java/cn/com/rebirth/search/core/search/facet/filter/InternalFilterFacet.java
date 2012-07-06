@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalFilterFacet.java 2012-3-29 15:01:52 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalFilterFacet.java 2012-7-6 14:29:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.filter;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.InternalFacet;
 
-
 /**
  * The Class InternalFilterFacet.
  *
@@ -23,11 +21,9 @@ import cn.com.rebirth.search.core.search.facet.InternalFacet;
  */
 public class InternalFilterFacet implements FilterFacet, InternalFacet {
 
-	
 	/** The Constant STREAM_TYPE. */
 	private static final String STREAM_TYPE = "filter";
 
-	
 	/**
 	 * Register streams.
 	 */
@@ -35,8 +31,7 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 		Streams.registerStream(STREAM, STREAM_TYPE);
 	}
 
-	
-	/** The STREAM. */
+	/** The stream. */
 	static Stream STREAM = new Stream() {
 		@Override
 		public Facet readFacet(String type, StreamInput in) throws IOException {
@@ -44,24 +39,20 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 		}
 	};
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.InternalFacet#streamType()
+	 * @see cn.com.rebirth.search.core.search.facet.InternalFacet#streamType()
 	 */
 	@Override
 	public String streamType() {
 		return STREAM_TYPE;
 	}
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The count. */
 	private long count;
 
-	
 	/**
 	 * Instantiates a new internal filter facet.
 	 */
@@ -69,7 +60,6 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 
 	}
 
-	
 	/**
 	 * Instantiates a new internal filter facet.
 	 *
@@ -81,58 +71,51 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 		this.count = count;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#type()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#type()
 	 */
 	@Override
 	public String type() {
 		return TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getType()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getType()
 	 */
 	@Override
 	public String getType() {
 		return TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#name()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#name()
 	 */
 	public String name() {
 		return name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getName()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getName()
 	 */
 	@Override
 	public String getName() {
 		return name();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.filter.FilterFacet#count()
+	 * @see cn.com.rebirth.search.core.search.facet.filter.FilterFacet#count()
 	 */
 	public long count() {
 		return count;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.filter.FilterFacet#getCount()
+	 * @see cn.com.rebirth.search.core.search.facet.filter.FilterFacet#getCount()
 	 */
 	public long getCount() {
 		return count;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -140,18 +123,15 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant COUNT. */
 		static final XContentBuilderString COUNT = new XContentBuilderString("count");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -162,7 +142,6 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 		return builder;
 	}
 
-	
 	/**
 	 * Read filter facet.
 	 *
@@ -176,9 +155,8 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -186,9 +164,8 @@ public class InternalFilterFacet implements FilterFacet, InternalFacet {
 		count = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

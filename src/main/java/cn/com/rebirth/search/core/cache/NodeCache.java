@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeCache.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeCache.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cache;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.cluster.ClusterChangedEvent;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterStateListener;
 
-
 /**
  * The Class NodeCache.
  *
@@ -22,54 +20,48 @@ import cn.com.rebirth.search.core.cluster.ClusterStateListener;
  */
 public class NodeCache extends AbstractComponent implements ClusterStateListener {
 
-    
-    /** The cluster service. */
-    private final ClusterService clusterService;
+	/** The cluster service. */
+	private final ClusterService clusterService;
 
-    
-    /** The byte buffer cache. */
-    private final ByteBufferCache byteBufferCache;
+	/** The byte buffer cache. */
+	private final ByteBufferCache byteBufferCache;
 
-    
-    /**
-     * Instantiates a new node cache.
-     *
-     * @param settings the settings
-     * @param byteBufferCache the byte buffer cache
-     * @param clusterService the cluster service
-     */
-    @Inject
-    public NodeCache(Settings settings, ByteBufferCache byteBufferCache, ClusterService clusterService) {
-        super(settings);
-        this.clusterService = clusterService;
-        this.byteBufferCache = byteBufferCache;
-        clusterService.add(this);
-    }
+	/**
+	 * Instantiates a new node cache.
+	 *
+	 * @param settings the settings
+	 * @param byteBufferCache the byte buffer cache
+	 * @param clusterService the cluster service
+	 */
+	@Inject
+	public NodeCache(Settings settings, ByteBufferCache byteBufferCache, ClusterService clusterService) {
+		super(settings);
+		this.clusterService = clusterService;
+		this.byteBufferCache = byteBufferCache;
+		clusterService.add(this);
+	}
 
-    
-    /**
-     * Close.
-     */
-    public void close() {
-        clusterService.remove(this);
-        byteBufferCache.close();
-    }
+	/**
+	 * Close.
+	 */
+	public void close() {
+		clusterService.remove(this);
+		byteBufferCache.close();
+	}
 
-    
-    /**
-     * Byte buffer.
-     *
-     * @return the byte buffer cache
-     */
-    public ByteBufferCache byteBuffer() {
-        return byteBufferCache;
-    }
+	/**
+	 * Byte buffer.
+	 *
+	 * @return the byte buffer cache
+	 */
+	public ByteBufferCache byteBuffer() {
+		return byteBufferCache;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
-     */
-    @Override
-    public void clusterChanged(ClusterChangedEvent event) {
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
+	 */
+	@Override
+	public void clusterChanged(ClusterChangedEvent event) {
+	}
 }

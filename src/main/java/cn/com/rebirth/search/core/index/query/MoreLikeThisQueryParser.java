@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MoreLikeThisQueryParser.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MoreLikeThisQueryParser.java 2012-7-6 14:30:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class MoreLikeThisQueryParser.
  *
@@ -28,11 +26,9 @@ import com.google.common.collect.Sets;
  */
 public class MoreLikeThisQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "mlt";
 
-	
 	/**
 	 * Instantiates a new more like this query parser.
 	 */
@@ -40,18 +36,16 @@ public class MoreLikeThisQueryParser implements QueryParser {
 	public MoreLikeThisQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "more_like_this", "moreLikeThis" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {

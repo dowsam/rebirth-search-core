@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OsStats.java 2012-3-29 15:02:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OsStats.java 2012-7-6 14:30:08 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.monitor.os;
@@ -25,6 +25,7 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class OsStats implements Streamable, Serializable, ToXContent {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6653101600073480228L;
 
 	/** The Constant EMPTY_LOAD. */
@@ -234,7 +235,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -303,7 +304,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -325,7 +326,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -362,6 +363,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Swap implements Streamable, Serializable {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -9199325143356617048L;
 
 		/** The free. */
@@ -420,7 +422,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -429,7 +431,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -445,6 +447,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Mem implements Streamable, Serializable {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 6930634619203404191L;
 
 		/** The free. */
@@ -479,7 +482,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -492,7 +495,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -620,6 +623,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Cpu implements Streamable, Serializable {
 
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -4302262661219625799L;
 
 		/** The sys. */
@@ -652,7 +656,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -662,7 +666,7 @@ public class OsStats implements Streamable, Serializable, ToXContent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

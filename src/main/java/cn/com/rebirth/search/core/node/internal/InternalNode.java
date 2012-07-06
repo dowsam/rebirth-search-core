@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalNode.java 2012-3-29 15:02:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalNode.java 2012-7-6 14:29:14 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.node.internal;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import cn.com.rebirth.commons.StopWatch;
 import cn.com.rebirth.commons.collect.Tuple;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.thread.ThreadLocals;
 import cn.com.rebirth.search.commons.CacheRecycler;
@@ -104,9 +104,9 @@ public final class InternalNode implements Node {
 	/**
 	 * Instantiates a new internal node.
 	 *
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public InternalNode() throws RestartException {
+	public InternalNode() throws RebirthException {
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS, true);
 	}
 
@@ -115,9 +115,9 @@ public final class InternalNode implements Node {
 	 *
 	 * @param pSettings the settings
 	 * @param loadConfigSettings the load config settings
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public InternalNode(Settings pSettings, boolean loadConfigSettings) throws RestartException {
+	public InternalNode(Settings pSettings, boolean loadConfigSettings) throws RebirthException {
 		Tuple<Settings, Environment> tuple = InternalSettingsPerparer.prepareSettings(pSettings, loadConfigSettings);
 
 		Logger logger = LoggerFactory.getLogger(Node.class);
@@ -165,7 +165,7 @@ public final class InternalNode implements Node {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.node.Node#settings()
+	 * @see cn.com.rebirth.search.core.node.Node#settings()
 	 */
 	@Override
 	public Settings settings() {
@@ -173,7 +173,7 @@ public final class InternalNode implements Node {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.node.Node#client()
+	 * @see cn.com.rebirth.search.core.node.Node#client()
 	 */
 	@Override
 	public Client client() {
@@ -181,7 +181,7 @@ public final class InternalNode implements Node {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.node.Node#start()
+	 * @see cn.com.rebirth.search.core.node.Node#start()
 	 */
 	public Node start() {
 		if (!lifecycle.moveToStarted()) {
@@ -223,7 +223,7 @@ public final class InternalNode implements Node {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.node.Node#stop()
+	 * @see cn.com.rebirth.search.core.node.Node#stop()
 	 */
 	@Override
 	public Node stop() {
@@ -263,7 +263,7 @@ public final class InternalNode implements Node {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.node.Node#close()
+	 * @see cn.com.rebirth.search.core.node.Node#close()
 	 */
 	public void close() {
 		if (lifecycle.started()) {
@@ -352,7 +352,7 @@ public final class InternalNode implements Node {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.node.Node#isClosed()
+	 * @see cn.com.rebirth.search.core.node.Node#isClosed()
 	 */
 	@Override
 	public boolean isClosed() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TieredMergePolicyProvider.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TieredMergePolicyProvider.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.merge.policy;
 
@@ -17,7 +16,7 @@ import org.apache.lucene.index.SegmentInfo;
 import org.apache.lucene.index.SegmentInfos;
 import org.apache.lucene.index.TieredMergePolicy;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettingsService;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.store.Store;
 
-
 /**
  * The Class TieredMergePolicyProvider.
  *
@@ -36,55 +34,42 @@ import cn.com.rebirth.search.core.index.store.Store;
 public class TieredMergePolicyProvider extends AbstractIndexShardComponent implements
 		MergePolicyProvider<TieredMergePolicy> {
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The policies. */
 	private final Set<CustomTieredMergePolicyProvider> policies = new CopyOnWriteArraySet<CustomTieredMergePolicyProvider>();
 
-	
 	/** The compound format. */
 	private volatile boolean compoundFormat;
 
-	
 	/** The force merge deletes pct allowed. */
 	private volatile double forceMergeDeletesPctAllowed;
 
-	
 	/** The floor segment. */
 	private volatile ByteSizeValue floorSegment;
 
-	
 	/** The max merge at once. */
 	private volatile int maxMergeAtOnce;
 
-	
 	/** The max merge at once explicit. */
 	private volatile int maxMergeAtOnceExplicit;
 
-	
 	/** The max merged segment. */
 	private volatile ByteSizeValue maxMergedSegment;
 
-	
 	/** The segments per tier. */
 	private volatile double segmentsPerTier;
 
-	
 	/** The reclaim deletes weight. */
 	private volatile double reclaimDeletesWeight;
 
-	
 	/** The async merge. */
 	private boolean asyncMerge;
 
-	
 	/** The apply settings. */
 	private final ApplySettings applySettings = new ApplySettings();
 
-	
 	/**
 	 * Instantiates a new tiered merge policy provider.
 	 *
@@ -98,11 +83,11 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 
 		this.compoundFormat = indexSettings.getAsBoolean("index.compound_format", store.suggestUseCompoundFile());
 		this.asyncMerge = indexSettings.getAsBoolean("index.merge.async", true);
-		this.forceMergeDeletesPctAllowed = componentSettings.getAsDouble("expunge_deletes_allowed", 10d); 
+		this.forceMergeDeletesPctAllowed = componentSettings.getAsDouble("expunge_deletes_allowed", 10d);
 		this.floorSegment = componentSettings.getAsBytesSize("floor_segment", new ByteSizeValue(2, ByteSizeUnit.MB));
 		this.maxMergeAtOnce = componentSettings.getAsInt("max_merge_at_once", 10);
 		this.maxMergeAtOnceExplicit = componentSettings.getAsInt("max_merge_at_once_explicit", 30);
-		
+
 		this.maxMergedSegment = componentSettings.getAsBytesSize("max_merged_segment",
 				componentSettings.getAsBytesSize("max_merge_segment", new ByteSizeValue(5, ByteSizeUnit.GB)));
 		this.segmentsPerTier = componentSettings.getAsDouble("segments_per_tier", 10d);
@@ -117,9 +102,8 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 		indexSettingsService.addListener(applySettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.merge.policy.MergePolicyProvider#newMergePolicy()
+	 * @see cn.com.rebirth.search.core.index.merge.policy.MergePolicyProvider#newMergePolicy()
 	 */
 	@Override
 	public TieredMergePolicy newMergePolicy() {
@@ -140,12 +124,11 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 		return mergePolicy;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.CloseableIndexComponent#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.CloseableIndexComponent#close(boolean)
 	 */
 	@Override
-	public void close(boolean delete) throws RestartException {
+	public void close(boolean delete) throws RebirthException {
 		indexSettingsService.removeListener(applySettings);
 	}
 
@@ -157,7 +140,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 				"index.compound_format");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -165,9 +147,8 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -261,7 +242,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 		}
 	}
 
-	
 	/**
 	 * The Class CustomTieredMergePolicyProvider.
 	 *
@@ -269,11 +249,9 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 	 */
 	public static class CustomTieredMergePolicyProvider extends TieredMergePolicy {
 
-		
 		/** The provider. */
 		private final TieredMergePolicyProvider provider;
 
-		
 		/**
 		 * Instantiates a new custom tiered merge policy provider.
 		 *
@@ -284,7 +262,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 			this.provider = provider;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.TieredMergePolicy#close()
 		 */
@@ -295,7 +272,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 		}
 	}
 
-	
 	/**
 	 * The Class EnableMergeTieredMergePolicyProvider.
 	 *
@@ -304,7 +280,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 	public static class EnableMergeTieredMergePolicyProvider extends CustomTieredMergePolicyProvider implements
 			EnableMergePolicy {
 
-		
 		/** The enable merge. */
 		private final ThreadLocal<Boolean> enableMerge = new ThreadLocal<Boolean>() {
 			@Override
@@ -313,7 +288,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 			}
 		};
 
-		
 		/**
 		 * Instantiates a new enable merge tiered merge policy provider.
 		 *
@@ -323,36 +297,32 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 			super(provider);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.EnableMergePolicy#enableMerge()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy#enableMerge()
 		 */
 		@Override
 		public void enableMerge() {
 			enableMerge.set(Boolean.TRUE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.EnableMergePolicy#disableMerge()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy#disableMerge()
 		 */
 		@Override
 		public void disableMerge() {
 			enableMerge.set(Boolean.FALSE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.EnableMergePolicy#isMergeEnabled()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy#isMergeEnabled()
 		 */
 		@Override
 		public boolean isMergeEnabled() {
 			return enableMerge.get() == Boolean.TRUE;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.TieredMergePolicyProvider.CustomTieredMergePolicyProvider#close()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.TieredMergePolicyProvider.CustomTieredMergePolicyProvider#close()
 		 */
 		@Override
 		public void close() {
@@ -360,7 +330,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 			super.close();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.TieredMergePolicy#findMerges(org.apache.lucene.index.SegmentInfos)
 		 */
@@ -372,7 +341,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 			return super.findMerges(infos);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.TieredMergePolicy#findForcedMerges(org.apache.lucene.index.SegmentInfos, int, java.util.Map)
 		 */
@@ -385,7 +353,6 @@ public class TieredMergePolicyProvider extends AbstractIndexShardComponent imple
 			return super.findForcedMerges(infos, maxSegmentCount, segmentsToMerge);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.TieredMergePolicy#findForcedDeletesMerges(org.apache.lucene.index.SegmentInfos)
 		 */

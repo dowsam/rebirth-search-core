@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalGatewayAllocator.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalGatewayAllocator.java 2012-7-6 14:30:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway.local;
 
@@ -41,7 +40,6 @@ import cn.com.rebirth.search.core.transport.ConnectTransportException;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class LocalGatewayAllocator.
  *
@@ -53,33 +51,26 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		IndexMetaData.addDynamicSettings("index.recovery.initial_shards");
 	}
 
-	
 	/** The list gateway started shards. */
 	private final TransportNodesListGatewayStartedShards listGatewayStartedShards;
 
-	
 	/** The list shard store meta data. */
 	private final TransportNodesListShardStoreMetaData listShardStoreMetaData;
 
-	
 	/** The cached stores. */
 	private final ConcurrentMap<ShardId, Map<DiscoveryNode, TransportNodesListShardStoreMetaData.StoreFilesMetaData>> cachedStores = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/** The cached shards state. */
 	private final ConcurrentMap<ShardId, TObjectLongHashMap<DiscoveryNode>> cachedShardsState = ConcurrentCollections
 			.newConcurrentMap();
 
-	
 	/** The list timeout. */
 	private final TimeValue listTimeout;
 
-	
 	/** The initial shards. */
 	private final String initialShards;
 
-	
 	/**
 	 * Instantiates a new local gateway allocator.
 	 *
@@ -100,9 +91,8 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		logger.debug("using initial_shards [{}], list_timeout [{}]", initialShards, listTimeout);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyStartedShards(cn.com.summall.search.core.cluster.routing.allocation.StartedRerouteAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyStartedShards(cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAllocation)
 	 */
 	@Override
 	public void applyStartedShards(StartedRerouteAllocation allocation) {
@@ -112,9 +102,8 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyFailedShards(cn.com.summall.search.core.cluster.routing.allocation.FailedRerouteAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.GatewayAllocator#applyFailedShards(cn.com.rebirth.search.core.cluster.routing.allocation.FailedRerouteAllocation)
 	 */
 	@Override
 	public void applyFailedShards(FailedRerouteAllocation allocation) {
@@ -123,9 +112,8 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		cachedShardsState.remove(failedShard.shardId());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.allocator.GatewayAllocator#allocateUnassigned(cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.allocator.GatewayAllocator#allocateUnassigned(cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean allocateUnassigned(RoutingAllocation allocation) {
@@ -133,7 +121,6 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		DiscoveryNodes nodes = allocation.nodes();
 		RoutingNodes routingNodes = allocation.routingNodes();
 
-		
 		Iterator<MutableShardRouting> unassignedIterator = routingNodes.unassigned().iterator();
 		while (unassignedIterator.hasNext()) {
 			MutableShardRouting shard = unassignedIterator.next();
@@ -142,7 +129,6 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 				continue;
 			}
 
-			
 			if (!routingNodes.routingTable().index(shard.index()).shard(shard.id()).allocatedPostApi()) {
 				continue;
 			}
@@ -156,7 +142,7 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 				it.advance();
 				DiscoveryNode node = it.key();
 				long version = it.value();
-				
+
 				if (allocation.shouldIgnoreShardForNode(shard.shardId(), node.id())) {
 					continue;
 				}
@@ -177,7 +163,6 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 				}
 			}
 
-			
 			int requiredAllocation = 1;
 			try {
 				IndexMetaData indexMetaData = routingNodes.metaData().index(shard.index());
@@ -207,9 +192,8 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 						+ initialShards + ", ignore allocation for " + shard);
 			}
 
-			
 			if (numberOfAllocationsFound < requiredAllocation) {
-				
+
 				unassignedIterator.remove();
 				routingNodes.ignoredUnassigned().add(shard);
 				if (logger.isDebugEnabled()) {
@@ -234,20 +218,19 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 						logger.debug("[" + shard.index() + "][" + shard.id() + "]: allocating [" + shard + "] to ["
 								+ discoNode + "] on primary allocation");
 					}
-					
+
 					changed = true;
-					
+
 					node.add(new MutableShardRouting(shard, highestVersion));
 					unassignedIterator.remove();
 
-					
 					throttledNodes.clear();
 					noNodes.clear();
 					break;
 				}
 			}
 			if (throttledNodes.isEmpty()) {
-				
+
 				if (!noNodes.isEmpty()) {
 					DiscoveryNode discoNode = noNodes.iterator().next();
 					RoutingNode node = routingNodes.node(discoNode.id());
@@ -255,9 +238,9 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 						logger.debug("[" + shard.index() + "][" + shard.id() + "]: forcing allocating [" + shard
 								+ "] to [" + discoNode + "] on primary allocation");
 					}
-					
+
 					changed = true;
-					
+
 					node.add(new MutableShardRouting(shard, highestVersion));
 					unassignedIterator.remove();
 				}
@@ -266,7 +249,7 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 					logger.debug("[" + shard.index() + "][" + shard.id() + "]: throttling allocation [" + shard
 							+ "] to [" + throttledNodes + "] on primary allocation");
 				}
-				
+
 				unassignedIterator.remove();
 				routingNodes.ignoredUnassigned().add(shard);
 			}
@@ -276,20 +259,17 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 			return changed;
 		}
 
-		
 		unassignedIterator = routingNodes.unassigned().iterator();
 		while (unassignedIterator.hasNext()) {
 			MutableShardRouting shard = unassignedIterator.next();
 
-			
 			boolean canBeAllocatedToAtLeastOneNode = false;
 			for (DiscoveryNode discoNode : nodes.dataNodes().values()) {
 				RoutingNode node = routingNodes.node(discoNode.id());
 				if (node == null) {
 					continue;
 				}
-				
-				
+
 				if (allocation.deciders().canAllocate(shard, node, allocation).allocate()) {
 					canBeAllocatedToAtLeastOneNode = true;
 					break;
@@ -314,7 +294,7 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 				logger.trace("{}: checking node [{}]", shard, discoNode);
 
 				if (storeFilesMetaData == null) {
-					
+
 					continue;
 				}
 
@@ -323,14 +303,10 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 					continue;
 				}
 
-				
-				
-				
 				if (allocation.deciders().canAllocate(shard, node, allocation) == AllocationDecider.Decision.NO) {
 					continue;
 				}
 
-				
 				if (storeFilesMetaData.allocated()) {
 					continue;
 				}
@@ -364,13 +340,13 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 			}
 
 			if (lastNodeMatched != null) {
-				
+
 				if (allocation.deciders().canAllocate(shard, lastNodeMatched, allocation) == AllocationDecider.Decision.THROTTLE) {
-					
+
 					unassignedIterator.remove();
 					routingNodes.ignoredUnassigned().add(shard);
 				} else {
-					
+
 					changed = true;
 					lastNodeMatched.add(shard);
 					unassignedIterator.remove();
@@ -381,7 +357,6 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		return changed;
 	}
 
-	
 	/**
 	 * Builds the shard states.
 	 *
@@ -397,7 +372,7 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 			cachedShardsState.put(shard.shardId(), shardStates);
 			nodeIds = nodes.dataNodes().keySet();
 		} else {
-			
+
 			for (TObjectLongIterator<DiscoveryNode> it = shardStates.iterator(); it.hasNext();) {
 				it.advance();
 				if (!nodes.nodeExists(it.key().id())) {
@@ -405,7 +380,7 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 				}
 			}
 			nodeIds = Sets.newHashSet();
-			
+
 			for (DiscoveryNode node : nodes.dataNodes().values()) {
 				if (!shardStates.containsKey(node)) {
 					nodeIds.add(node.id());
@@ -433,13 +408,12 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 		}
 
 		for (TransportNodesListGatewayStartedShards.NodeLocalGatewayStartedShards nodeShardState : response) {
-			
+
 			shardStates.put(nodeShardState.node(), nodeShardState.version());
 		}
 		return shardStates;
 	}
 
-	
 	/**
 	 * Builds the shard stores.
 	 *
@@ -458,7 +432,7 @@ public class LocalGatewayAllocator extends AbstractComponent implements GatewayA
 			nodesIds = nodes.dataNodes().keySet();
 		} else {
 			nodesIds = Sets.newHashSet();
-			
+
 			for (Iterator<DiscoveryNode> it = shardStores.keySet().iterator(); it.hasNext();) {
 				DiscoveryNode node = it.next();
 				if (!nodes.nodeExists(node.id())) {

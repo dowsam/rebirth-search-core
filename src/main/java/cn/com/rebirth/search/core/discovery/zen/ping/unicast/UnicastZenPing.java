@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UnicastZenPing.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UnicastZenPing.java 2012-7-6 14:29:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.ping.unicast;
 
@@ -30,9 +29,9 @@ import jsr166y.LinkedTransferQueue;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -57,7 +56,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class UnicastZenPing.
  *
@@ -65,52 +63,40 @@ import com.google.common.collect.Lists;
  */
 public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implements ZenPing {
 
-	
 	/** The Constant LIMIT_PORTS_COUNT. */
 	public static final int LIMIT_PORTS_COUNT = 1;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster name. */
 	private final ClusterName clusterName;
 
-	
 	/** The concurrent connects. */
 	private final int concurrentConnects;
 
-	
 	/** The nodes. */
 	private final DiscoveryNode[] nodes;
 
-	
 	/** The nodes provider. */
 	private volatile DiscoveryNodesProvider nodesProvider;
 
-	
 	/** The ping id generator. */
 	private final AtomicInteger pingIdGenerator = new AtomicInteger();
 
-	
 	/** The received responses. */
-	private final Map<Integer, ConcurrentMap<DiscoveryNode, PingResponse>> receivedResponses = ConcurrentCollections.newConcurrentMap();
+	private final Map<Integer, ConcurrentMap<DiscoveryNode, PingResponse>> receivedResponses = ConcurrentCollections
+			.newConcurrentMap();
 
-	
-	
 	/** The temporal responses. */
 	private final Queue<PingResponse> temporalResponses = new LinkedTransferQueue<PingResponse>();
 
-	
 	/** The hosts providers. */
 	private final CopyOnWriteArrayList<UnicastHostsProvider> hostsProviders = new CopyOnWriteArrayList<UnicastHostsProvider>();
 
-	
 	/**
 	 * Instantiates a new unicast zen ping.
 	 *
@@ -122,7 +108,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS, threadPool, transportService, clusterName);
 	}
 
-	
 	/**
 	 * Instantiates a new unicast zen ping.
 	 *
@@ -140,7 +125,7 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 
 		this.concurrentConnects = componentSettings.getAsInt("concurrent_connects", 10);
 		String[] hostArr = componentSettings.getAsArray("hosts");
-		
+
 		for (int i = 0; i < hostArr.length; i++) {
 			hostArr[i] = hostArr[i].trim();
 		}
@@ -152,12 +137,12 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		for (String host : hosts) {
 			try {
 				TransportAddress[] addresses = transportService.addressesFromString(host);
-				
+
 				for (int i = 0; (i < addresses.length && i < LIMIT_PORTS_COUNT); i++) {
 					nodes.add(new DiscoveryNode("#zen_unicast_" + (++idCounter) + "#", addresses[i]));
 				}
 			} catch (Exception e) {
-				throw new RestartIllegalArgumentException("Failed to resolve address for [" + host + "]", e);
+				throw new RebirthIllegalArgumentException("Failed to resolve address for [" + host + "]", e);
 			}
 		}
 		this.nodes = nodes.toArray(new DiscoveryNode[nodes.size()]);
@@ -165,32 +150,28 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		transportService.registerHandler(UnicastPingRequestHandler.ACTION, new UnicastPingRequestHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		transportService.removeHandler(UnicastPingRequestHandler.ACTION);
 	}
 
-	
 	/**
 	 * Adds the hosts provider.
 	 *
@@ -200,7 +181,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		hostsProviders.add(provider);
 	}
 
-	
 	/**
 	 * Removes the hosts provider.
 	 *
@@ -210,16 +190,14 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		hostsProviders.remove(provider);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing#setNodesProvider(cn.com.summall.search.core.discovery.zen.DiscoveryNodesProvider)
+	 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing#setNodesProvider(cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider)
 	 */
 	@Override
 	public void setNodesProvider(DiscoveryNodesProvider nodesProvider) {
 		this.nodesProvider = nodesProvider;
 	}
 
-	
 	/**
 	 * Ping and wait.
 	 *
@@ -244,12 +222,11 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing#ping(cn.com.summall.search.core.discovery.zen.ping.ZenPing.PingListener, cn.com.summall.search.commons.unit.TimeValue)
+	 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing#ping(cn.com.rebirth.search.core.discovery.zen.ping.ZenPing.PingListener, cn.com.rebirth.commons.unit.TimeValue)
 	 */
 	@Override
-	public void ping(final PingListener listener, final TimeValue timeout) throws RestartException {
+	public void ping(final PingListener listener, final TimeValue timeout) throws RebirthException {
 		final SendPingsHandler sendPingsHandler = new SendPingsHandler(pingIdGenerator.incrementAndGet());
 		receivedResponses.put(sendPingsHandler.id(), new ConcurrentHashMap<DiscoveryNode, PingResponse>());
 		sendPings(timeout, null, sendPingsHandler);
@@ -275,7 +252,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		});
 	}
 
-	
 	/**
 	 * The Class SendPingsHandler.
 	 *
@@ -283,23 +259,18 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 	 */
 	class SendPingsHandler {
 
-		
 		/** The id. */
 		private final int id;
 
-		
 		/** The executor. */
 		private volatile ExecutorService executor;
 
-		
 		/** The node to disconnect. */
 		private final Set<DiscoveryNode> nodeToDisconnect = ConcurrentCollections.newConcurrentSet();
 
-		
 		/** The closed. */
 		private volatile boolean closed;
 
-		
 		/**
 		 * Instantiates a new send pings handler.
 		 *
@@ -309,7 +280,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			this.id = id;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -319,7 +289,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			return this.id;
 		}
 
-		
 		/**
 		 * Checks if is closed.
 		 *
@@ -329,7 +298,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			return this.closed;
 		}
 
-		
 		/**
 		 * Executor.
 		 *
@@ -344,7 +312,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			return executor;
 		}
 
-		
 		/**
 		 * Close.
 		 */
@@ -358,7 +325,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		}
 	}
 
-	
 	/**
 	 * Send pings.
 	 *
@@ -380,7 +346,7 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 
 		final CountDownLatch latch = new CountDownLatch(nodesToPing.size());
 		for (final DiscoveryNode node : nodesToPing) {
-			
+
 			boolean nodeFoundByAddressX;
 			DiscoveryNode nodeToSendX = discoNodes.findByAddress(node.address());
 			if (nodeToSendX != null) {
@@ -397,21 +363,21 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 					return;
 				}
 				sendPingsHandler.nodeToDisconnect.add(nodeToSend);
-				
+
 				sendPingsHandler.executor().execute(new Runnable() {
 					@Override
 					public void run() {
 						try {
-							
+
 							if (!nodeFoundByAddress) {
 								transportService.connectToNodeLight(nodeToSend);
 							} else {
 								transportService.connectToNode(nodeToSend);
 							}
-							
+
 							sendPingRequestToNode(sendPingsHandler.id(), timeout, pingRequest, latch, node, nodeToSend);
 						} catch (ConnectTransportException e) {
-							
+
 							logger.trace("[" + sendPingsHandler.id() + "] failed to connect to " + nodeToSend, e);
 							latch.countDown();
 						}
@@ -425,12 +391,11 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			try {
 				latch.await(waitTime.millis(), TimeUnit.MILLISECONDS);
 			} catch (InterruptedException e) {
-				
+
 			}
 		}
 	}
 
-	
 	/**
 	 * Send ping request to node.
 	 *
@@ -466,11 +431,11 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 							DiscoveryNodes discoveryNodes = nodesProvider.nodes();
 							for (PingResponse pingResponse : response.pingResponses) {
 								if (pingResponse.target().id().equals(discoveryNodes.localNodeId())) {
-									
+
 									continue;
 								}
 								if (!pingResponse.clusterName().equals(clusterName)) {
-									
+
 									logger.debug("[" + id + "] filtering out response from " + pingResponse.target()
 											+ ", not same cluster_name [{}]", pingResponse.clusterName().value());
 									continue;
@@ -493,7 +458,7 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 					public void handleException(TransportException exp) {
 						latch.countDown();
 						if (exp instanceof ConnectTransportException) {
-							
+
 							logger.trace("failed to connect to {}", exp, nodeToSend);
 						} else {
 							logger.warn("failed to send ping to [{}]", exp, node);
@@ -502,7 +467,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 				});
 	}
 
-	
 	/**
 	 * Handle ping request.
 	 *
@@ -511,7 +475,7 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 	 */
 	private UnicastPingResponse handlePingRequest(final UnicastPingRequest request) {
 		if (lifecycle.stoppedOrClosed()) {
-			throw new RestartIllegalStateException("received ping request while stopped/closed");
+			throw new RebirthIllegalStateException("received ping request while stopped/closed");
 		}
 		temporalResponses.add(request.pingResponse);
 		threadPool.schedule(TimeValue.timeValueMillis(request.timeout.millis() * 2), ThreadPool.Names.SAME,
@@ -533,7 +497,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		return unicastPingResponse;
 	}
 
-	
 	/**
 	 * The Class UnicastPingRequestHandler.
 	 *
@@ -541,31 +504,27 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 	 */
 	class UnicastPingRequestHandler extends BaseTransportRequestHandler<UnicastPingRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "discovery/zen/unicast";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public UnicastPingRequest newInstance() {
 			return new UnicastPingRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(UnicastPingRequest request, TransportChannel channel) throws Exception {
@@ -573,7 +532,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		}
 	}
 
-	
 	/**
 	 * The Class UnicastPingRequest.
 	 *
@@ -581,28 +539,23 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 	 */
 	static class UnicastPingRequest implements Streamable {
 
-		
 		/** The id. */
 		int id;
 
-		
 		/** The timeout. */
 		TimeValue timeout;
 
-		
 		/** The ping response. */
 		PingResponse pingResponse;
 
-		
 		/**
 		 * Instantiates a new unicast ping request.
 		 */
 		UnicastPingRequest() {
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -611,9 +564,8 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			pingResponse = readPingResponse(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -623,7 +575,6 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 		}
 	}
 
-	
 	/**
 	 * The Class UnicastPingResponse.
 	 *
@@ -631,24 +582,20 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 	 */
 	static class UnicastPingResponse implements Streamable {
 
-		
 		/** The id. */
 		int id;
 
-		
 		/** The ping responses. */
 		PingResponse[] pingResponses;
 
-		
 		/**
 		 * Instantiates a new unicast ping response.
 		 */
 		UnicastPingResponse() {
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -659,9 +606,8 @@ public class UnicastZenPing extends AbstractLifecycleComponent<ZenPing> implemen
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

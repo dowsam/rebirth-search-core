@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardFieldDoc.java 2012-3-29 15:01:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardFieldDoc.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.controller;
 
 import org.apache.lucene.search.FieldDoc;
 
 import cn.com.rebirth.search.core.search.SearchShardTarget;
-
 
 /**
  * The Class ShardFieldDoc.
@@ -20,11 +18,10 @@ public class ShardFieldDoc extends FieldDoc implements ShardDoc {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1244670897734214036L;
-	
+
 	/** The shard target. */
 	private final SearchShardTarget shardTarget;
 
-	
 	/**
 	 * Instantiates a new shard field doc.
 	 *
@@ -37,7 +34,6 @@ public class ShardFieldDoc extends FieldDoc implements ShardDoc {
 		this.shardTarget = shardTarget;
 	}
 
-	
 	/**
 	 * Instantiates a new shard field doc.
 	 *
@@ -51,27 +47,24 @@ public class ShardFieldDoc extends FieldDoc implements ShardDoc {
 		this.shardTarget = shardTarget;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.controller.ShardDoc#shardTarget()
+	 * @see cn.com.rebirth.search.core.search.controller.ShardDoc#shardTarget()
 	 */
 	@Override
 	public SearchShardTarget shardTarget() {
 		return this.shardTarget;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.controller.ShardDoc#docId()
+	 * @see cn.com.rebirth.search.core.search.controller.ShardDoc#docId()
 	 */
 	@Override
 	public int docId() {
 		return this.doc;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.controller.ShardDoc#score()
+	 * @see cn.com.rebirth.search.core.search.controller.ShardDoc#score()
 	 */
 	@Override
 	public float score() {

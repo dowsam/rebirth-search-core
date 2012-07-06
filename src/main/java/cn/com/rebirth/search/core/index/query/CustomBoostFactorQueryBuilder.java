@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CustomBoostFactorQueryBuilder.java 2012-3-29 15:02:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CustomBoostFactorQueryBuilder.java 2012-7-6 14:28:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class CustomBoostFactorQueryBuilder.
@@ -18,15 +16,12 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class CustomBoostFactorQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The boost factor. */
 	private float boostFactor = -1;
 
-	
 	/**
 	 * Instantiates a new custom boost factor query builder.
 	 *
@@ -36,7 +31,6 @@ public class CustomBoostFactorQueryBuilder extends BaseQueryBuilder {
 		this.queryBuilder = queryBuilder;
 	}
 
-	
 	/**
 	 * Boost factor.
 	 *
@@ -48,9 +42,8 @@ public class CustomBoostFactorQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

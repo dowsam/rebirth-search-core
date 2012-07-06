@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardModule.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardModule.java 2012-7-6 14:29:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 import cn.com.rebirth.search.core.index.shard.service.InternalIndexShard;
 import cn.com.rebirth.search.core.jmx.JmxService;
 
-
 /**
  * The Class IndexShardModule.
  *
@@ -20,15 +18,12 @@ import cn.com.rebirth.search.core.jmx.JmxService;
  */
 public class IndexShardModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The shard id. */
 	private final ShardId shardId;
 
-	
 	/**
 	 * Instantiates a new index shard module.
 	 *
@@ -40,9 +35,8 @@ public class IndexShardModule extends AbstractModule {
 		this.shardId = shardId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

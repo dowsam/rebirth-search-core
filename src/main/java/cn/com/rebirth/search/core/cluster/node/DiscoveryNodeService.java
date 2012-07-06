@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DiscoveryNodeService.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DiscoveryNodeService.java 2012-7-6 14:30:20 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.node;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 
 import com.google.common.collect.Maps;
-
 
 /**
  * The Class DiscoveryNodeService.
@@ -55,12 +53,12 @@ public class DiscoveryNodeService extends AbstractComponent {
 	 */
 	public Map<String, String> buildAttributes() {
 		Map<String, String> attributes = Maps.newHashMap(settings.getByPrefix("node.").getAsMap());
-		attributes.remove("name"); 
+		attributes.remove("name");
 		if (attributes.containsKey("client")) {
 			if (attributes.get("client").equals("false")) {
-				attributes.remove("client"); 
+				attributes.remove("client");
 			} else {
-				
+
 				attributes.put("data", "false");
 			}
 		}

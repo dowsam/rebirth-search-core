@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportNodesListGatewayMetaState.java 2012-3-29 15:00:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportNodesListGatewayMetaState.java 2012-7-6 14:30:30 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway.local.state.meta;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -34,7 +33,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class TransportNodesListGatewayMetaState.
  *
@@ -43,11 +41,10 @@ import com.google.common.collect.Lists;
 public class TransportNodesListGatewayMetaState
 		extends
 		TransportNodesOperationAction<TransportNodesListGatewayMetaState.Request, TransportNodesListGatewayMetaState.NodesLocalGatewayMetaState, TransportNodesListGatewayMetaState.NodeRequest, TransportNodesListGatewayMetaState.NodeLocalGatewayMetaState> {
-	
+
 	/** The meta state. */
 	private LocalGatewayMetaState metaState;
 
-	
 	/**
 	 * Instantiates a new transport nodes list gateway meta state.
 	 *
@@ -63,7 +60,6 @@ public class TransportNodesListGatewayMetaState
 		super(settings, clusterName, threadPool, clusterService, transportService);
 	}
 
-	
 	/**
 	 * Inits the.
 	 *
@@ -75,7 +71,6 @@ public class TransportNodesListGatewayMetaState
 		return this;
 	}
 
-	
 	/**
 	 * List.
 	 *
@@ -87,72 +82,64 @@ public class TransportNodesListGatewayMetaState
 		return execute(new Request(nodesIds).timeout(timeout));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.GENERIC;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return "/gateway/local/meta-state";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#transportCompress()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#transportCompress()
 	 */
 	@Override
 	protected boolean transportCompress() {
-		return true; 
+		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newRequest()
 	 */
 	@Override
 	protected Request newRequest() {
 		return new Request();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest()
 	 */
 	@Override
 	protected NodeRequest newNodeRequest() {
 		return new NodeRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest(java.lang.String, cn.com.summall.search.core.action.support.nodes.NodesOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest(java.lang.String, cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest)
 	 */
 	@Override
 	protected NodeRequest newNodeRequest(String nodeId, Request request) {
 		return new NodeRequest(nodeId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeResponse()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeResponse()
 	 */
 	@Override
 	protected NodeLocalGatewayMetaState newNodeResponse() {
 		return new NodeLocalGatewayMetaState();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newResponse(cn.com.summall.search.core.action.support.nodes.NodesOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newResponse(cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
 	 */
 	@Override
 	protected NodesLocalGatewayMetaState newResponse(Request request, AtomicReferenceArray responses) {
@@ -160,7 +147,7 @@ public class TransportNodesListGatewayMetaState
 		final List<FailedNodeException> failures = Lists.newArrayList();
 		for (int i = 0; i < responses.length(); i++) {
 			Object resp = responses.get(i);
-			if (resp instanceof NodeLocalGatewayMetaState) { 
+			if (resp instanceof NodeLocalGatewayMetaState) {
 				nodesList.add((NodeLocalGatewayMetaState) resp);
 			} else if (resp instanceof FailedNodeException) {
 				failures.add((FailedNodeException) resp);
@@ -170,25 +157,22 @@ public class TransportNodesListGatewayMetaState
 				.size()]), failures.toArray(new FailedNodeException[failures.size()]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#nodeOperation(cn.com.summall.search.core.action.support.nodes.NodeOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#nodeOperation(cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest)
 	 */
 	@Override
-	protected NodeLocalGatewayMetaState nodeOperation(NodeRequest request) throws RestartException {
+	protected NodeLocalGatewayMetaState nodeOperation(NodeRequest request) throws RebirthException {
 		return new NodeLocalGatewayMetaState(clusterService.localNode(), metaState.currentMetaData());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#accumulateExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#accumulateExceptions()
 	 */
 	@Override
 	protected boolean accumulateExceptions() {
 		return true;
 	}
 
-	
 	/**
 	 * The Class Request.
 	 *
@@ -196,14 +180,12 @@ public class TransportNodesListGatewayMetaState
 	 */
 	static class Request extends NodesOperationRequest {
 
-		
 		/**
 		 * Instantiates a new request.
 		 */
 		public Request() {
 		}
 
-		
 		/**
 		 * Instantiates a new request.
 		 *
@@ -213,9 +195,8 @@ public class TransportNodesListGatewayMetaState
 			super(nodesIds.toArray(new String[nodesIds.size()]));
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationRequest#timeout(cn.com.summall.search.commons.unit.TimeValue)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest#timeout(cn.com.rebirth.commons.unit.TimeValue)
 		 */
 		@Override
 		public Request timeout(TimeValue timeout) {
@@ -223,18 +204,16 @@ public class TransportNodesListGatewayMetaState
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			super.readFrom(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -242,7 +221,6 @@ public class TransportNodesListGatewayMetaState
 		}
 	}
 
-	
 	/**
 	 * The Class NodesLocalGatewayMetaState.
 	 *
@@ -250,18 +228,15 @@ public class TransportNodesListGatewayMetaState
 	 */
 	public static class NodesLocalGatewayMetaState extends NodesOperationResponse<NodeLocalGatewayMetaState> {
 
-		
 		/** The failures. */
 		private FailedNodeException[] failures;
 
-		
 		/**
 		 * Instantiates a new nodes local gateway meta state.
 		 */
 		NodesLocalGatewayMetaState() {
 		}
 
-		
 		/**
 		 * Instantiates a new nodes local gateway meta state.
 		 *
@@ -275,7 +250,6 @@ public class TransportNodesListGatewayMetaState
 			this.failures = failures;
 		}
 
-		
 		/**
 		 * Failures.
 		 *
@@ -285,9 +259,8 @@ public class TransportNodesListGatewayMetaState
 			return failures;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -299,9 +272,8 @@ public class TransportNodesListGatewayMetaState
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -313,7 +285,6 @@ public class TransportNodesListGatewayMetaState
 		}
 	}
 
-	
 	/**
 	 * The Class NodeRequest.
 	 *
@@ -321,14 +292,12 @@ public class TransportNodesListGatewayMetaState
 	 */
 	static class NodeRequest extends NodeOperationRequest {
 
-		
 		/**
 		 * Instantiates a new node request.
 		 */
 		NodeRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new node request.
 		 *
@@ -338,18 +307,16 @@ public class TransportNodesListGatewayMetaState
 			super(nodeId);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			super.readFrom(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -357,7 +324,6 @@ public class TransportNodesListGatewayMetaState
 		}
 	}
 
-	
 	/**
 	 * The Class NodeLocalGatewayMetaState.
 	 *
@@ -365,18 +331,15 @@ public class TransportNodesListGatewayMetaState
 	 */
 	public static class NodeLocalGatewayMetaState extends NodeOperationResponse {
 
-		
 		/** The meta data. */
 		private MetaData metaData;
 
-		
 		/**
 		 * Instantiates a new node local gateway meta state.
 		 */
 		NodeLocalGatewayMetaState() {
 		}
 
-		
 		/**
 		 * Instantiates a new node local gateway meta state.
 		 *
@@ -388,7 +351,6 @@ public class TransportNodesListGatewayMetaState
 			this.metaData = metaData;
 		}
 
-		
 		/**
 		 * Meta data.
 		 *
@@ -398,9 +360,8 @@ public class TransportNodesListGatewayMetaState
 			return metaData;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -410,9 +371,8 @@ public class TransportNodesListGatewayMetaState
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

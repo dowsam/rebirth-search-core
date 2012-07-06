@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportModule.java 2012-3-29 15:01:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportModule.java 2012-7-6 14:30:04 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.transport;
@@ -36,7 +36,7 @@ public class TransportModule extends AbstractModule implements SpawnModules {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.SpawnModules#spawnModules()
+	 * @see cn.com.rebirth.search.commons.inject.SpawnModules#spawnModules()
 	 */
 	@Override
 	public Iterable<? extends Module> spawnModules() {
@@ -47,11 +47,11 @@ public class TransportModule extends AbstractModule implements SpawnModules {
 			defaultTransportModule = NettyTransportModule.class;
 		}
 		return ImmutableList.of(Modules.createModule(settings.getAsClass("transport.type", defaultTransportModule,
-				"cn.com.summall.search.core.transport.", "TransportModule"), settings));
+				"cn.com.rebirth.search.core.transport.", "TransportModule"), settings));
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

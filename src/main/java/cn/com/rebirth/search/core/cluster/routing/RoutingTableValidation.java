@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RoutingTableValidation.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RoutingTableValidation.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing;
 
@@ -23,7 +22,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class RoutingTableValidation.
  *
@@ -31,26 +29,21 @@ import com.google.common.collect.Lists;
  */
 public class RoutingTableValidation implements Serializable, Streamable {
 
-	
 	/** The valid. */
 	private boolean valid = true;
 
-	
 	/** The failures. */
 	private List<String> failures;
 
-	
 	/** The indices failures. */
 	private Map<String, List<String>> indicesFailures;
 
-	
 	/**
 	 * Instantiates a new routing table validation.
 	 */
 	public RoutingTableValidation() {
 	}
 
-	
 	/**
 	 * Valid.
 	 *
@@ -60,7 +53,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		return valid;
 	}
 
-	
 	/**
 	 * All failures.
 	 *
@@ -79,7 +71,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		return allFailures;
 	}
 
-	
 	/**
 	 * Failures.
 	 *
@@ -92,7 +83,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		return failures;
 	}
 
-	
 	/**
 	 * Indices failures.
 	 *
@@ -105,7 +95,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		return indicesFailures;
 	}
 
-	
 	/**
 	 * Index failures.
 	 *
@@ -123,7 +112,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		return indexFailures;
 	}
 
-	
 	/**
 	 * Adds the failure.
 	 *
@@ -137,7 +125,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		failures.add(failure);
 	}
 
-	
 	/**
 	 * Adds the index failure.
 	 *
@@ -157,7 +144,6 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		indexFailures.add(failure);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -166,9 +152,8 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		return allFailures().toString();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -199,9 +184,8 @@ public class RoutingTableValidation implements Serializable, Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

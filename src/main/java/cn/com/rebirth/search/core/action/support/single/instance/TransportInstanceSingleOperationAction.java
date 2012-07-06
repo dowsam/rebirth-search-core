@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportInstanceSingleOperationAction.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportInstanceSingleOperationAction.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.single.instance;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -36,7 +35,6 @@ import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportRequestOptions;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportInstanceSingleOperationAction.
  *
@@ -47,23 +45,18 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public abstract class TransportInstanceSingleOperationAction<Request extends InstanceShardOperationRequest, Response extends ActionResponse>
 		extends TransportAction<Request, Response> {
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The transport service. */
 	protected final TransportService transportService;
 
-	
 	/** The transport action. */
 	final String transportAction;
 
-	
 	/** The executor. */
 	final String executor;
 
-	
 	/**
 	 * Instantiates a new transport instance single operation action.
 	 *
@@ -84,16 +77,14 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 		transportService.registerHandler(transportAction, new TransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(Request request, ActionListener<Response> listener) {
 		new AsyncSingleAction(request, listener).start();
 	}
 
-	
 	/**
 	 * Executor.
 	 *
@@ -101,7 +92,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	protected abstract String executor();
 
-	
 	/**
 	 * Transport action.
 	 *
@@ -109,18 +99,15 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	protected abstract String transportAction();
 
-	
 	/**
 	 * Shard operation.
 	 *
 	 * @param request the request
 	 * @param listener the listener
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract void shardOperation(Request request, ActionListener<Response> listener)
-			throws RestartException;
+	protected abstract void shardOperation(Request request, ActionListener<Response> listener) throws RebirthException;
 
-	
 	/**
 	 * New request.
 	 *
@@ -128,7 +115,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	protected abstract Request newRequest();
 
-	
 	/**
 	 * New response.
 	 *
@@ -136,7 +122,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	protected abstract Response newResponse();
 
-	
 	/**
 	 * Check global block.
 	 *
@@ -146,7 +131,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	protected abstract ClusterBlockException checkGlobalBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Check request block.
 	 *
@@ -156,7 +140,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	protected abstract ClusterBlockException checkRequestBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Retry on failure.
 	 *
@@ -167,7 +150,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 		return false;
 	}
 
-	
 	/**
 	 * Transport options.
 	 *
@@ -177,18 +159,16 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 		return TransportRequestOptions.EMPTY;
 	}
 
-	
 	/**
 	 * Shards.
 	 *
 	 * @param clusterState the cluster state
 	 * @param request the request
 	 * @return the shard iterator
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract ShardIterator shards(ClusterState clusterState, Request request) throws RestartException;
+	protected abstract ShardIterator shards(ClusterState clusterState, Request request) throws RebirthException;
 
-	
 	/**
 	 * The Class AsyncSingleAction.
 	 *
@@ -196,27 +176,21 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	class AsyncSingleAction {
 
-		
 		/** The listener. */
 		private final ActionListener<Response> listener;
 
-		
 		/** The request. */
 		private final Request request;
 
-		
 		/** The shard it. */
 		private ShardIterator shardIt;
 
-		
 		/** The nodes. */
 		private DiscoveryNodes nodes;
 
-		
 		/** The operation started. */
 		private final AtomicBoolean operationStarted = new AtomicBoolean();
 
-		
 		/**
 		 * Instantiates a new async single action.
 		 *
@@ -228,7 +202,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 			this.listener = listener;
 		}
 
-		
 		/**
 		 * Start.
 		 */
@@ -236,15 +209,14 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 			start(false);
 		}
 
-		
 		/**
 		 * Start.
 		 *
 		 * @param fromClusterEvent the from cluster event
 		 * @return true, if successful
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		public boolean start(final boolean fromClusterEvent) throws RestartException {
+		public boolean start(final boolean fromClusterEvent) throws RebirthException {
 			final ClusterState clusterState = clusterService.state();
 			nodes = clusterState.nodes();
 			try {
@@ -273,13 +245,11 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 				return true;
 			}
 
-			
 			if (shardIt.size() == 0) {
 				retry(fromClusterEvent, null);
 				return false;
 			}
 
-			
 			assert shardIt.size() == 1;
 
 			ShardRouting shard = shardIt.nextOrNull();
@@ -333,12 +303,11 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 
 							@Override
 							public void handleException(TransportException exp) {
-								
+
 								if (exp.unwrapCause() instanceof ConnectTransportException
 										|| exp.unwrapCause() instanceof NodeClosedException || retryOnFailure(exp)) {
 									operationStarted.set(false);
-									
-									
+
 									retry(false, null);
 								} else {
 									listener.onFailure(exp);
@@ -349,7 +318,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 			return true;
 		}
 
-		
 		/**
 		 * Retry.
 		 *
@@ -358,13 +326,13 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 		 */
 		void retry(final boolean fromClusterEvent, final @Nullable Throwable failure) {
 			if (!fromClusterEvent) {
-				
+
 				request.beforeLocalFork();
 				clusterService.add(request.timeout(), new TimeoutClusterStateListener() {
 					@Override
 					public void postAdded() {
 						if (start(true)) {
-							
+
 							clusterService.remove(this);
 						}
 					}
@@ -378,14 +346,14 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 					@Override
 					public void clusterChanged(ClusterChangedEvent event) {
 						if (start(true)) {
-							
+
 							clusterService.remove(this);
 						}
 					}
 
 					@Override
 					public void onTimeout(TimeValue timeValue) {
-						
+
 						if (start(true)) {
 							clusterService.remove(this);
 							return;
@@ -409,7 +377,6 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -417,31 +384,28 @@ public abstract class TransportInstanceSingleOperationAction<Request extends Ins
 	 */
 	class TransportHandler extends BaseTransportRequestHandler<Request> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public Request newInstance() {
 			return newRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(Request request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<Response>() {
 				@Override

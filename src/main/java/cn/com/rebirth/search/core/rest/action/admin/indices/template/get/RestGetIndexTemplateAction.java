@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestGetIndexTemplateAction.java 2012-3-29 15:02:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestGetIndexTemplateAction.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.template.get;
 
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.RestRequest.Method;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestGetIndexTemplateAction.
  *
@@ -41,11 +39,9 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestGetIndexTemplateAction extends BaseRestHandler {
 
-	
 	/** The settings filter. */
 	private final SettingsFilter settingsFilter;
 
-	
 	/**
 	 * Instantiates a new rest get index template action.
 	 *
@@ -63,9 +59,8 @@ public class RestGetIndexTemplateAction extends BaseRestHandler {
 		controller.registerHandler(Method.GET, "/_template/{name}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -99,7 +94,7 @@ public class RestGetIndexTemplateAction extends BaseRestHandler {
 							XContentParser parser = XContentFactory.xContent(mappingSource).createParser(mappingSource);
 							Map<String, Object> mapping = parser.map();
 							if (mapping.size() == 1 && mapping.containsKey(entry.getKey())) {
-								
+
 								mapping = (Map<String, Object>) mapping.get(entry.getKey());
 							}
 							builder.field(entry.getKey());

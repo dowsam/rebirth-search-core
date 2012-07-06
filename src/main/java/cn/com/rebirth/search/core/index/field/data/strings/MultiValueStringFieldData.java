@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiValueStringFieldData.java 2012-3-29 15:02:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiValueStringFieldData.java 2012-7-6 14:28:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data.strings;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.thread.ThreadLocals;
 import cn.com.rebirth.search.commons.RamUsage;
-
 
 /**
  * The Class MultiValueStringFieldData.
@@ -18,11 +16,9 @@ import cn.com.rebirth.search.commons.RamUsage;
  */
 public class MultiValueStringFieldData extends StringFieldData {
 
-	
 	/** The Constant VALUE_CACHE_SIZE. */
 	private static final int VALUE_CACHE_SIZE = 100;
 
-	
 	/** The values cache. */
 	private static ThreadLocal<ThreadLocals.CleanableValue<String[][]>> valuesCache = new ThreadLocal<ThreadLocals.CleanableValue<String[][]>>() {
 		@Override
@@ -35,12 +31,9 @@ public class MultiValueStringFieldData extends StringFieldData {
 		}
 	};
 
-	
-	
 	/** The ordinals. */
 	private final int[][] ordinals;
 
-	
 	/**
 	 * Instantiates a new multi value string field data.
 	 *
@@ -53,32 +46,29 @@ public class MultiValueStringFieldData extends StringFieldData {
 		this.ordinals = ordinals;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.strings.StringFieldData#computeSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.field.data.strings.StringFieldData#computeSizeInBytes()
 	 */
 	@Override
 	protected long computeSizeInBytes() {
 		long size = super.computeSizeInBytes();
-		size += RamUsage.NUM_BYTES_ARRAY_HEADER; 
+		size += RamUsage.NUM_BYTES_ARRAY_HEADER;
 		for (int[] ordinal : ordinals) {
 			size += RamUsage.NUM_BYTES_INT * ordinal.length + RamUsage.NUM_BYTES_ARRAY_HEADER;
 		}
 		return size;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#multiValued()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#multiValued()
 	 */
 	@Override
 	public boolean multiValued() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#hasValue(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#hasValue(int)
 	 */
 	@Override
 	public boolean hasValue(int docId) {
@@ -90,9 +80,8 @@ public class MultiValueStringFieldData extends StringFieldData {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.StringValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.StringValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, StringValueInDocProc proc) {
@@ -109,9 +98,8 @@ public class MultiValueStringFieldData extends StringFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.OrdinalInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.OrdinalInDocProc)
 	 */
 	@Override
 	public void forEachOrdinalInDoc(int docId, OrdinalInDocProc proc) {
@@ -128,9 +116,8 @@ public class MultiValueStringFieldData extends StringFieldData {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.strings.StringFieldData#value(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.strings.StringFieldData#value(int)
 	 */
 	@Override
 	public String value(int docId) {
@@ -143,9 +130,8 @@ public class MultiValueStringFieldData extends StringFieldData {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.strings.StringFieldData#values(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.strings.StringFieldData#values(int)
 	 */
 	@Override
 	public String[] values(int docId) {

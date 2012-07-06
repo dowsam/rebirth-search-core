@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardSearchService.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardSearchService.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.stats;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class ShardSearchService.
  *
@@ -31,19 +29,15 @@ import com.google.common.collect.ImmutableMap;
  */
 public class ShardSearchService extends AbstractIndexShardComponent {
 
-	
 	/** The slow log search service. */
 	private final ShardSlowLogSearchService slowLogSearchService;
 
-	
 	/** The total stats. */
 	private final StatsHolder totalStats = new StatsHolder();
 
-	
 	/** The groups stats. */
 	private volatile Map<String, StatsHolder> groupsStats = ImmutableMap.of();
 
-	
 	/**
 	 * Instantiates a new shard search service.
 	 *
@@ -58,7 +52,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		this.slowLogSearchService = slowLogSearchService;
 	}
 
-	
 	/**
 	 * Stats.
 	 *
@@ -87,7 +80,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		return new SearchStats(total, groupsSt);
 	}
 
-	
 	/**
 	 * On pre query phase.
 	 *
@@ -102,7 +94,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * On failed query phase.
 	 *
@@ -117,7 +108,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * On query phase.
 	 *
@@ -137,7 +127,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		slowLogSearchService.onQueryPhase(searchContext, tookInNanos);
 	}
 
-	
 	/**
 	 * On pre fetch phase.
 	 *
@@ -152,7 +141,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * On failed fetch phase.
 	 *
@@ -167,7 +155,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * On fetch phase.
 	 *
@@ -187,7 +174,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		slowLogSearchService.onFetchPhase(searchContext, tookInNanos);
 	}
 
-	
 	/**
 	 * Clear.
 	 */
@@ -207,7 +193,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		}
 	}
 
-	
 	/**
 	 * Group stats.
 	 *
@@ -228,7 +213,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 		return stats;
 	}
 
-	
 	/**
 	 * The Class StatsHolder.
 	 *
@@ -236,23 +220,18 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 	 */
 	static class StatsHolder {
 
-		
 		/** The query metric. */
 		public final MeanMetric queryMetric = new MeanMetric();
 
-		
 		/** The fetch metric. */
 		public final MeanMetric fetchMetric = new MeanMetric();
 
-		
 		/** The query current. */
 		public final CounterMetric queryCurrent = new CounterMetric();
 
-		
 		/** The fetch current. */
 		public final CounterMetric fetchCurrent = new CounterMetric();
 
-		
 		/**
 		 * Stats.
 		 *
@@ -264,7 +243,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 					fetchCurrent.count());
 		}
 
-		
 		/**
 		 * Total current.
 		 *
@@ -274,7 +252,6 @@ public class ShardSearchService extends AbstractIndexShardComponent {
 			return queryCurrent.count() + fetchCurrent.count();
 		}
 
-		
 		/**
 		 * Clear.
 		 */

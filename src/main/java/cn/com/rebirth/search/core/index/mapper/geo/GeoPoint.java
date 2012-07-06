@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoPoint.java 2012-3-29 15:02:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoPoint.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.geo;
 
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
-
 
 /**
  * The Class GeoPoint.
@@ -16,22 +14,18 @@ import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
  */
 public class GeoPoint {
 
-	
 	/** The lat. */
 	private double lat;
 
-	
 	/** The lon. */
 	private double lon;
 
-	
 	/**
 	 * Instantiates a new geo point.
 	 */
 	GeoPoint() {
 	}
 
-	
 	/**
 	 * Instantiates a new geo point.
 	 *
@@ -43,7 +37,6 @@ public class GeoPoint {
 		this.lon = lon;
 	}
 
-	
 	/**
 	 * Latlon.
 	 *
@@ -55,7 +48,6 @@ public class GeoPoint {
 		this.lon = lon;
 	}
 
-	
 	/**
 	 * Lat.
 	 *
@@ -65,7 +57,6 @@ public class GeoPoint {
 		return this.lat;
 	}
 
-	
 	/**
 	 * Gets the lat.
 	 *
@@ -75,7 +66,6 @@ public class GeoPoint {
 		return this.lat;
 	}
 
-	
 	/**
 	 * Lon.
 	 *
@@ -85,7 +75,6 @@ public class GeoPoint {
 		return this.lon;
 	}
 
-	
 	/**
 	 * Gets the lon.
 	 *
@@ -95,7 +84,6 @@ public class GeoPoint {
 		return this.lon;
 	}
 
-	
 	/**
 	 * Geohash.
 	 *
@@ -105,7 +93,6 @@ public class GeoPoint {
 		return GeoHashUtils.encode(lat, lon);
 	}
 
-	
 	/**
 	 * Gets the geohash.
 	 *

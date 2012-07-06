@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TrackingSerialMergeScheduler.java 2012-3-29 15:04:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TrackingSerialMergeScheduler.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package org.apache.lucene.index;
 
@@ -15,8 +14,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.metrics.CounterMetric;
 import cn.com.rebirth.search.commons.metrics.MeanMetric;
 
-
-
 /**
  * The Class TrackingSerialMergeScheduler.
  *
@@ -24,35 +21,27 @@ import cn.com.rebirth.search.commons.metrics.MeanMetric;
  */
 public class TrackingSerialMergeScheduler extends MergeScheduler {
 
-	
 	/** The logger. */
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	
 	/** The total merges. */
 	private final MeanMetric totalMerges = new MeanMetric();
 
-	
 	/** The total merges num docs. */
 	private final CounterMetric totalMergesNumDocs = new CounterMetric();
 
-	
 	/** The total merges size in bytes. */
 	private final CounterMetric totalMergesSizeInBytes = new CounterMetric();
 
-	
 	/** The current merges. */
 	private final CounterMetric currentMerges = new CounterMetric();
 
-	
 	/** The current merges num docs. */
 	private final CounterMetric currentMergesNumDocs = new CounterMetric();
 
-	
 	/** The current merges size in bytes. */
 	private final CounterMetric currentMergesSizeInBytes = new CounterMetric();
 
-	
 	/**
 	 * Instantiates a new tracking serial merge scheduler.
 	 */
@@ -60,7 +49,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		super();
 	}
 
-	
 	/**
 	 * Total merges.
 	 *
@@ -70,7 +58,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return totalMerges.count();
 	}
 
-	
 	/**
 	 * Total merge time.
 	 *
@@ -80,7 +67,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return totalMerges.sum();
 	}
 
-	
 	/**
 	 * Total merge num docs.
 	 *
@@ -90,7 +76,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return totalMergesNumDocs.count();
 	}
 
-	
 	/**
 	 * Total merge size in bytes.
 	 *
@@ -100,7 +85,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return totalMergesSizeInBytes.count();
 	}
 
-	
 	/**
 	 * Current merges.
 	 *
@@ -110,7 +94,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return currentMerges.count();
 	}
 
-	
 	/**
 	 * Current merges num docs.
 	 *
@@ -120,7 +103,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return currentMergesNumDocs.count();
 	}
 
-	
 	/**
 	 * Current merges size in bytes.
 	 *
@@ -130,7 +112,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		return currentMergesSizeInBytes.count();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.MergeScheduler#merge(org.apache.lucene.index.IndexWriter)
 	 */
@@ -165,7 +146,7 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 				totalMergesNumDocs.inc(totalNumDocs);
 				totalMergesSizeInBytes.inc(totalSizeInBytes);
 				totalMerges.inc(took);
-				if (took > 20000) { 
+				if (took > 20000) {
 					logger.debug("merge [{}] done, took [{}]", merge.info.name, TimeValue.timeValueMillis(took));
 				} else if (logger.isTraceEnabled()) {
 					logger.trace("merge [{}] done, took [{}]", merge.info.name, TimeValue.timeValueMillis(took));
@@ -174,7 +155,6 @@ public class TrackingSerialMergeScheduler extends MergeScheduler {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.MergeScheduler#close()
 	 */

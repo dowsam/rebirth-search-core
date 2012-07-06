@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BoolQueryBuilder.java 2012-3-29 15:00:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BoolQueryBuilder.java 2012-7-6 14:28:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -12,7 +11,6 @@ import java.util.List;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class BoolQueryBuilder.
  *
@@ -20,31 +18,24 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class BoolQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The must clauses. */
 	private ArrayList<QueryBuilder> mustClauses = new ArrayList<QueryBuilder>();
 
-	
 	/** The must not clauses. */
 	private ArrayList<QueryBuilder> mustNotClauses = new ArrayList<QueryBuilder>();
 
-	
 	/** The should clauses. */
 	private ArrayList<QueryBuilder> shouldClauses = new ArrayList<QueryBuilder>();
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The disable coord. */
 	private Boolean disableCoord;
 
-	
 	/** The minimum number should match. */
 	private int minimumNumberShouldMatch = -1;
 
-	
 	/**
 	 * Must.
 	 *
@@ -56,7 +47,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Must not.
 	 *
@@ -68,7 +58,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Should.
 	 *
@@ -80,7 +69,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -92,7 +80,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Disable coord.
 	 *
@@ -104,7 +91,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Minimum number should match.
 	 *
@@ -116,7 +102,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Checks for clauses.
 	 *
@@ -126,9 +111,8 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		return !mustClauses.isEmpty() || !mustNotClauses.isEmpty() || !shouldClauses.isEmpty();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {
@@ -148,7 +132,6 @@ public class BoolQueryBuilder extends BaseQueryBuilder {
 		builder.endObject();
 	}
 
-	
 	/**
 	 * Do x array content.
 	 *

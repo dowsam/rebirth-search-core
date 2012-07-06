@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MissingFilterParser.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MissingFilterParser.java 2012-7-6 14:30:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.MapperService;
 import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 
-
 /**
  * The Class MissingFilterParser.
  *
@@ -25,11 +23,9 @@ import cn.com.rebirth.search.core.index.query.support.QueryParsers;
  */
 public class MissingFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "missing";
 
-	
 	/**
 	 * Instantiates a new missing filter parser.
 	 */
@@ -37,18 +33,16 @@ public class MissingFilterParser implements FilterParser {
 	public MissingFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -87,10 +81,9 @@ public class MissingFilterParser implements FilterParser {
 			filter = new TermRangeFilter(fieldName, null, null, true, true);
 		}
 
-		
 		filter = parseContext.cacheFilter(filter, null);
 		filter = new NotFilter(filter);
-		
+
 		filter = parseContext.cacheFilter(filter, null);
 
 		filter = QueryParsers.wrapSmartNameFilter(filter, smartNameFieldMappers, parseContext);

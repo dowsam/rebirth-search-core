@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchLookup.java 2012-3-29 15:01:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchLookup.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.lookup;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.index.mapper.MapperService;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class SearchLookup.
  *
@@ -22,23 +20,18 @@ import com.google.common.collect.ImmutableMap;
  */
 public class SearchLookup {
 
-	
 	/** The doc map. */
 	final DocLookup docMap;
 
-	
 	/** The source lookup. */
 	final SourceLookup sourceLookup;
 
-	
 	/** The fields lookup. */
 	final FieldsLookup fieldsLookup;
 
-	
 	/** The as map. */
 	final ImmutableMap<String, Object> asMap;
 
-	
 	/**
 	 * Instantiates a new search lookup.
 	 *
@@ -53,7 +46,6 @@ public class SearchLookup {
 				fieldsLookup);
 	}
 
-	
 	/**
 	 * As map.
 	 *
@@ -63,7 +55,6 @@ public class SearchLookup {
 		return this.asMap;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -73,7 +64,6 @@ public class SearchLookup {
 		return this.sourceLookup;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -83,7 +73,6 @@ public class SearchLookup {
 		return this.fieldsLookup;
 	}
 
-	
 	/**
 	 * Doc.
 	 *
@@ -93,7 +82,6 @@ public class SearchLookup {
 		return this.docMap;
 	}
 
-	
 	/**
 	 * Sets the scorer.
 	 *
@@ -103,7 +91,6 @@ public class SearchLookup {
 		docMap.setScorer(scorer);
 	}
 
-	
 	/**
 	 * Sets the next reader.
 	 *
@@ -115,7 +102,6 @@ public class SearchLookup {
 		fieldsLookup.setNextReader(reader);
 	}
 
-	
 	/**
 	 * Sets the next doc id.
 	 *

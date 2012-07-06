@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NestedFilterParser.java 2012-3-29 15:02:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NestedFilterParser.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.search.nested.BlockJoinQuery;
 import cn.com.rebirth.search.core.index.search.nested.NonNestedDocsFilter;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class NestedFilterParser.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class NestedFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "nested";
 
-	
 	/**
 	 * Instantiates a new nested filter parser.
 	 */
@@ -44,18 +40,16 @@ public class NestedFilterParser implements FilterParser {
 	public NestedFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -70,7 +64,6 @@ public class NestedFilterParser implements FilterParser {
 		CacheKeyFilter.Key cacheKey = null;
 		String filterName = null;
 
-		
 		NestedQueryParser.LateBindingParentFilter currentParentFilterContext = NestedQueryParser.parentFilterContext
 				.get();
 
@@ -142,17 +135,13 @@ public class NestedFilterParser implements FilterParser {
 
 			Filter childFilter = parseContext.cacheFilter(objectMapper.nestedTypeFilter(), null);
 			usAsParentFilter.filter = childFilter;
-			
+
 			query = new FilteredQuery(query, childFilter);
 
 			Filter parentFilter = currentParentFilterContext;
 			if (parentFilter == null) {
 				parentFilter = NonNestedDocsFilter.INSTANCE;
-				
-				
-				
-				
-				
+
 				parentFilter = parseContext.cacheFilter(parentFilter, null);
 			}
 
@@ -172,7 +161,7 @@ public class NestedFilterParser implements FilterParser {
 			return joinFilter;
 
 		} finally {
-			
+
 			NestedQueryParser.parentFilterContext.set(currentParentFilterContext);
 		}
 	}

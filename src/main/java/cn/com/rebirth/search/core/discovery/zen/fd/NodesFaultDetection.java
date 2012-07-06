@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodesFaultDetection.java 2012-3-29 15:01:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodesFaultDetection.java 2012-7-6 14:29:20 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.fd;
 
@@ -13,7 +12,7 @@ import java.io.IOException;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class NodesFaultDetection.
  *
@@ -41,7 +39,6 @@ import com.google.common.collect.Maps;
  */
 public class NodesFaultDetection extends AbstractComponent {
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -49,7 +46,6 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On node failure.
 		 *
@@ -59,56 +55,42 @@ public class NodesFaultDetection extends AbstractComponent {
 		void onNodeFailure(DiscoveryNode node, String reason);
 	}
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The connect on network disconnect. */
 	private final boolean connectOnNetworkDisconnect;
 
-	
 	/** The ping interval. */
 	private final TimeValue pingInterval;
 
-	
 	/** The ping retry timeout. */
 	private final TimeValue pingRetryTimeout;
 
-	
 	/** The ping retry count. */
 	private final int pingRetryCount;
 
-	
-	
 	/** The register connection listener. */
 	private final boolean registerConnectionListener;
 
-	
 	/** The listeners. */
 	private final CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/** The nodes fd. */
 	private final ConcurrentMap<DiscoveryNode, NodeFD> nodesFD = Maps.newConcurrentMap();
 
-	
 	/** The connection listener. */
 	private final FDConnectionListener connectionListener;
 
-	
 	/** The latest nodes. */
 	private volatile DiscoveryNodes latestNodes = EMPTY_NODES;
 
-	
 	/** The running. */
 	private volatile boolean running = false;
 
-	
 	/**
 	 * Instantiates a new nodes fault detection.
 	 *
@@ -138,7 +120,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Adds the listener.
 	 *
@@ -148,7 +129,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		listeners.add(listener);
 	}
 
-	
 	/**
 	 * Removes the listener.
 	 *
@@ -158,7 +138,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		listeners.remove(listener);
 	}
 
-	
 	/**
 	 * Update nodes.
 	 *
@@ -173,7 +152,7 @@ public class NodesFaultDetection extends AbstractComponent {
 		DiscoveryNodes.Delta delta = nodes.delta(prevNodes);
 		for (DiscoveryNode newNode : delta.addedNodes()) {
 			if (newNode.id().equals(nodes.localNodeId())) {
-				
+
 				continue;
 			}
 			if (!nodesFD.containsKey(newNode)) {
@@ -186,7 +165,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Start.
 	 *
@@ -200,7 +178,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		return this;
 	}
 
-	
 	/**
 	 * Stop.
 	 *
@@ -214,7 +191,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		return this;
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -224,7 +200,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		transportService.removeConnectionListener(connectionListener);
 	}
 
-	
 	/**
 	 * Handle transport disconnect.
 	 *
@@ -257,7 +232,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Notify node failure.
 	 *
@@ -275,7 +249,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		});
 	}
 
-	
 	/**
 	 * The Class SendPingRequest.
 	 *
@@ -283,11 +256,9 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	private class SendPingRequest implements Runnable {
 
-		
 		/** The node. */
 		private final DiscoveryNode node;
 
-		
 		/**
 		 * Instantiates a new send ping request.
 		 *
@@ -297,7 +268,6 @@ public class NodesFaultDetection extends AbstractComponent {
 			this.node = node;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -330,12 +300,12 @@ public class NodesFaultDetection extends AbstractComponent {
 
 				@Override
 				public void handleException(TransportException exp) {
-					
+
 					if (!running) {
 						return;
 					}
 					if (exp instanceof ConnectTransportException) {
-						
+
 						return;
 					}
 					NodeFD nodeFD = nodesFD.get(node);
@@ -349,13 +319,13 @@ public class NodesFaultDetection extends AbstractComponent {
 						if (retryCount >= pingRetryCount) {
 							logger.debug("[node  ] failed to ping [" + node + "], tried [" + pingRetryCount
 									+ "] times, each with  maximum [" + pingRetryTimeout + "] timeout");
-							
+
 							if (nodesFD.remove(node) != null) {
 								notifyNodeFailure(node, "failed to ping, tried [" + pingRetryCount
 										+ "] times, each with maximum [" + pingRetryTimeout + "] timeout");
 							}
 						} else {
-							
+
 							transportService.sendRequest(node, PingRequestHandler.ACTION, new PingRequest(node.id()),
 									options().withHighType().withTimeout(pingRetryTimeout), this);
 						}
@@ -370,7 +340,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class NodeFD.
 	 *
@@ -378,16 +347,13 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	static class NodeFD {
 
-		
 		/** The retry count. */
 		volatile int retryCount;
 
-		
 		/** The running. */
 		volatile boolean running = true;
 	}
 
-	
 	/**
 	 * The listener interface for receiving FDConnection events.
 	 * The class that is interested in processing a FDConnection
@@ -401,17 +367,15 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	private class FDConnectionListener implements TransportConnectionListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportConnectionListener#onNodeConnected(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+		 * @see cn.com.rebirth.search.core.transport.TransportConnectionListener#onNodeConnected(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 		 */
 		@Override
 		public void onNodeConnected(DiscoveryNode node) {
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportConnectionListener#onNodeDisconnected(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+		 * @see cn.com.rebirth.search.core.transport.TransportConnectionListener#onNodeDisconnected(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 		 */
 		@Override
 		public void onNodeDisconnected(DiscoveryNode node) {
@@ -419,7 +383,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PingRequestHandler.
 	 *
@@ -427,37 +390,32 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	class PingRequestHandler extends BaseTransportRequestHandler<PingRequest> {
 
-		
 		/** The Constant ACTION. */
 		public static final String ACTION = "discovery/zen/fd/ping";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public PingRequest newInstance() {
 			return new PingRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(PingRequest request, TransportChannel channel) throws Exception {
-			
-			
+
 			if (!latestNodes.localNodeId().equals(request.nodeId)) {
-				throw new RestartIllegalStateException("Got pinged as node [" + request.nodeId
-						+ "], but I am node [" + latestNodes.localNodeId() + "]");
+				throw new RebirthIllegalStateException("Got pinged as node [" + request.nodeId + "], but I am node ["
+						+ latestNodes.localNodeId() + "]");
 			}
 			channel.sendResponse(new PingResponse());
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -465,7 +423,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PingRequest.
 	 *
@@ -473,19 +430,15 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	static class PingRequest implements Streamable {
 
-		
-		
 		/** The node id. */
 		private String nodeId;
 
-		
 		/**
 		 * Instantiates a new ping request.
 		 */
 		PingRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new ping request.
 		 *
@@ -495,18 +448,16 @@ public class NodesFaultDetection extends AbstractComponent {
 			this.nodeId = nodeId;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			nodeId = in.readUTF();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -514,7 +465,6 @@ public class NodesFaultDetection extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PingResponse.
 	 *
@@ -522,24 +472,21 @@ public class NodesFaultDetection extends AbstractComponent {
 	 */
 	private static class PingResponse implements Streamable {
 
-		
 		/**
 		 * Instantiates a new ping response.
 		 */
 		private PingResponse() {
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

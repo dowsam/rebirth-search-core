@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestClusterHealthAction.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestClusterHealthAction.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.cluster.health;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestActions;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestClusterHealthAction.
  *
@@ -38,7 +36,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestClusterHealthAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest cluster health action.
 	 *
@@ -54,9 +51,8 @@ public class RestClusterHealthAction extends BaseRestHandler {
 		controller.registerHandler(RestRequest.Method.GET, "/_cluster/health/{index}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -102,11 +98,7 @@ public class RestClusterHealthAction extends BaseRestHandler {
 			public void onResponse(ClusterHealthResponse response) {
 				try {
 					RestStatus status = RestStatus.OK;
-					
-					
-					
-					
-					
+
 					XContentBuilder builder = RestXContentBuilder.restContentBuilder(request);
 					builder.startObject();
 
@@ -126,8 +118,7 @@ public class RestClusterHealthAction extends BaseRestHandler {
 						for (String validationFailure : response.validationFailures()) {
 							builder.value(validationFailure);
 						}
-						
-						
+
 						if (fLevel == 0) {
 							for (ClusterIndexHealth indexHealth : response) {
 								builder.startObject(indexHealth.index());
@@ -211,7 +202,6 @@ public class RestClusterHealthAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -219,67 +209,51 @@ public class RestClusterHealthAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant CLUSTER_NAME. */
 		static final XContentBuilderString CLUSTER_NAME = new XContentBuilderString("cluster_name");
 
-		
 		/** The Constant STATUS. */
 		static final XContentBuilderString STATUS = new XContentBuilderString("status");
 
-		
 		/** The Constant TIMED_OUT. */
 		static final XContentBuilderString TIMED_OUT = new XContentBuilderString("timed_out");
 
-		
 		/** The Constant NUMBER_OF_SHARDS. */
 		static final XContentBuilderString NUMBER_OF_SHARDS = new XContentBuilderString("number_of_shards");
 
-		
 		/** The Constant NUMBER_OF_REPLICAS. */
 		static final XContentBuilderString NUMBER_OF_REPLICAS = new XContentBuilderString("number_of_replicas");
 
-		
 		/** The Constant NUMBER_OF_NODES. */
 		static final XContentBuilderString NUMBER_OF_NODES = new XContentBuilderString("number_of_nodes");
 
-		
 		/** The Constant NUMBER_OF_DATA_NODES. */
 		static final XContentBuilderString NUMBER_OF_DATA_NODES = new XContentBuilderString("number_of_data_nodes");
 
-		
 		/** The Constant ACTIVE_PRIMARY_SHARDS. */
 		static final XContentBuilderString ACTIVE_PRIMARY_SHARDS = new XContentBuilderString("active_primary_shards");
 
-		
 		/** The Constant ACTIVE_SHARDS. */
 		static final XContentBuilderString ACTIVE_SHARDS = new XContentBuilderString("active_shards");
 
-		
 		/** The Constant RELOCATING_SHARDS. */
 		static final XContentBuilderString RELOCATING_SHARDS = new XContentBuilderString("relocating_shards");
 
-		
 		/** The Constant INITIALIZING_SHARDS. */
 		static final XContentBuilderString INITIALIZING_SHARDS = new XContentBuilderString("initializing_shards");
 
-		
 		/** The Constant UNASSIGNED_SHARDS. */
 		static final XContentBuilderString UNASSIGNED_SHARDS = new XContentBuilderString("unassigned_shards");
 
-		
 		/** The Constant VALIDATION_FAILURES. */
 		static final XContentBuilderString VALIDATION_FAILURES = new XContentBuilderString("validation_failures");
 
-		
 		/** The Constant INDICES. */
 		static final XContentBuilderString INDICES = new XContentBuilderString("indices");
 
-		
 		/** The Constant SHARDS. */
 		static final XContentBuilderString SHARDS = new XContentBuilderString("shards");
 
-		
 		/** The Constant PRIMARY_ACTIVE. */
 		static final XContentBuilderString PRIMARY_ACTIVE = new XContentBuilderString("primary_active");
 	}

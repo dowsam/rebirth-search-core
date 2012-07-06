@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexSegments.java 2012-3-29 15:01:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexSegments.java 2012-7-6 14:30:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.segments;
 
@@ -13,7 +12,6 @@ import java.util.Map;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class IndexSegments.
  *
@@ -21,15 +19,12 @@ import com.google.common.collect.Maps;
  */
 public class IndexSegments implements Iterable<IndexShardSegments> {
 
-	
 	/** The index. */
 	private final String index;
 
-	
 	/** The index shards. */
 	private final Map<Integer, IndexShardSegments> indexShards;
 
-	
 	/**
 	 * Instantiates a new index segments.
 	 *
@@ -55,7 +50,6 @@ public class IndexSegments implements Iterable<IndexShardSegments> {
 		}
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -65,7 +59,6 @@ public class IndexSegments implements Iterable<IndexShardSegments> {
 		return this.index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -75,7 +68,6 @@ public class IndexSegments implements Iterable<IndexShardSegments> {
 		return index();
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -85,7 +77,6 @@ public class IndexSegments implements Iterable<IndexShardSegments> {
 		return this.indexShards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -95,7 +86,6 @@ public class IndexSegments implements Iterable<IndexShardSegments> {
 		return shards();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */

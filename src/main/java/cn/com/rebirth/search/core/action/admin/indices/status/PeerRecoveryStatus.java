@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PeerRecoveryStatus.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PeerRecoveryStatus.java 2012-7-6 14:29:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
-
 
 /**
  * The Class PeerRecoveryStatus.
@@ -18,7 +16,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
  */
 public class PeerRecoveryStatus {
 
-	
 	/**
 	 * The Enum Stage.
 	 *
@@ -26,31 +23,24 @@ public class PeerRecoveryStatus {
 	 */
 	public enum Stage {
 
-		
-		/** The INIT. */
+		/** The init. */
 		INIT((byte) 0),
 
-		
-		/** The INDEX. */
+		/** The index. */
 		INDEX((byte) 1),
 
-		
-		/** The TRANSLOG. */
+		/** The translog. */
 		TRANSLOG((byte) 2),
 
-		
-		/** The FINALIZE. */
+		/** The finalize. */
 		FINALIZE((byte) 3),
 
-		
-		/** The DONE. */
+		/** The done. */
 		DONE((byte) 4);
 
-		
 		/** The value. */
 		private final byte value;
 
-		
 		/**
 		 * Instantiates a new stage.
 		 *
@@ -60,7 +50,6 @@ public class PeerRecoveryStatus {
 			this.value = value;
 		}
 
-		
 		/**
 		 * Value.
 		 *
@@ -70,7 +59,6 @@ public class PeerRecoveryStatus {
 			return value;
 		}
 
-		
 		/**
 		 * From value.
 		 *
@@ -89,39 +77,31 @@ public class PeerRecoveryStatus {
 			} else if (value == 4) {
 				return DONE;
 			}
-			throw new RestartIllegalArgumentException("No stage found for [" + value + ']');
+			throw new RebirthIllegalArgumentException("No stage found for [" + value + ']');
 		}
 	}
 
-	
 	/** The stage. */
 	final Stage stage;
 
-	
 	/** The start time. */
 	final long startTime;
 
-	
 	/** The time. */
 	final long time;
 
-	
 	/** The index size. */
 	final long indexSize;
 
-	
 	/** The reused index size. */
 	final long reusedIndexSize;
 
-	
 	/** The recovered index size. */
 	final long recoveredIndexSize;
 
-	
 	/** The recovered translog operations. */
 	final long recoveredTranslogOperations;
 
-	
 	/**
 	 * Instantiates a new peer recovery status.
 	 *
@@ -144,7 +124,6 @@ public class PeerRecoveryStatus {
 		this.recoveredTranslogOperations = recoveredTranslogOperations;
 	}
 
-	
 	/**
 	 * Stage.
 	 *
@@ -154,7 +133,6 @@ public class PeerRecoveryStatus {
 		return this.stage;
 	}
 
-	
 	/**
 	 * Start time.
 	 *
@@ -164,7 +142,6 @@ public class PeerRecoveryStatus {
 		return this.startTime;
 	}
 
-	
 	/**
 	 * Gets the start time.
 	 *
@@ -174,7 +151,6 @@ public class PeerRecoveryStatus {
 		return this.startTime;
 	}
 
-	
 	/**
 	 * Time.
 	 *
@@ -184,7 +160,6 @@ public class PeerRecoveryStatus {
 		return TimeValue.timeValueMillis(time);
 	}
 
-	
 	/**
 	 * Gets the time.
 	 *
@@ -194,7 +169,6 @@ public class PeerRecoveryStatus {
 		return time();
 	}
 
-	
 	/**
 	 * Index size.
 	 *
@@ -204,7 +178,6 @@ public class PeerRecoveryStatus {
 		return new ByteSizeValue(indexSize);
 	}
 
-	
 	/**
 	 * Gets the index size.
 	 *
@@ -214,7 +187,6 @@ public class PeerRecoveryStatus {
 		return indexSize();
 	}
 
-	
 	/**
 	 * Reused index size.
 	 *
@@ -224,7 +196,6 @@ public class PeerRecoveryStatus {
 		return new ByteSizeValue(reusedIndexSize);
 	}
 
-	
 	/**
 	 * Gets the reused index size.
 	 *
@@ -234,7 +205,6 @@ public class PeerRecoveryStatus {
 		return reusedIndexSize();
 	}
 
-	
 	/**
 	 * Expected recovered index size.
 	 *
@@ -244,7 +214,6 @@ public class PeerRecoveryStatus {
 		return new ByteSizeValue(indexSize - reusedIndexSize);
 	}
 
-	
 	/**
 	 * Gets the expected recovered index size.
 	 *
@@ -254,7 +223,6 @@ public class PeerRecoveryStatus {
 		return expectedRecoveredIndexSize();
 	}
 
-	
 	/**
 	 * Recovered index size.
 	 *
@@ -264,7 +232,6 @@ public class PeerRecoveryStatus {
 		return new ByteSizeValue(recoveredIndexSize);
 	}
 
-	
 	/**
 	 * Gets the recovered index size.
 	 *
@@ -274,7 +241,6 @@ public class PeerRecoveryStatus {
 		return recoveredIndexSize();
 	}
 
-	
 	/**
 	 * Index recovery progress.
 	 *
@@ -290,7 +256,6 @@ public class PeerRecoveryStatus {
 		return (int) (((double) recoveredIndexSize) / expectedRecoveredIndexSize().bytes() * 100);
 	}
 
-	
 	/**
 	 * Gets the index recovery progress.
 	 *
@@ -300,7 +265,6 @@ public class PeerRecoveryStatus {
 		return indexRecoveryProgress();
 	}
 
-	
 	/**
 	 * Recovered translog operations.
 	 *
@@ -310,7 +274,6 @@ public class PeerRecoveryStatus {
 		return recoveredTranslogOperations;
 	}
 
-	
 	/**
 	 * Gets the recovered translog operations.
 	 *

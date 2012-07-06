@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ProcessedClusterStateUpdateTask.java 2012-3-29 15:00:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ProcessedClusterStateUpdateTask.java 2012-7-6 14:29:55 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.cluster;
-
 
 /**
  * The Interface ProcessedClusterStateUpdateTask.
@@ -14,11 +12,10 @@ package cn.com.rebirth.search.core.cluster;
  */
 public interface ProcessedClusterStateUpdateTask extends ClusterStateUpdateTask {
 
-    
-    /**
-     * Cluster state processed.
-     *
-     * @param clusterState the cluster state
-     */
-    void clusterStateProcessed(ClusterState clusterState);
+	/**
+	 * Cluster state processed.
+	 *
+	 * @param clusterState the cluster state
+	 */
+	void clusterStateProcessed(ClusterState clusterState);
 }

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoPolygonFilterBuilder.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoPolygonFilterBuilder.java 2012-7-6 14:30:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.index.search.geo.Point;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class GeoPolygonFilterBuilder.
  *
@@ -23,27 +21,21 @@ import com.google.common.collect.Lists;
  */
 public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The points. */
 	private final List<Point> points = Lists.newArrayList();
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new geo polygon filter builder.
 	 *
@@ -53,7 +45,6 @@ public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 		this.name = name;
 	}
 
-	
 	/**
 	 * Adds the point.
 	 *
@@ -66,7 +57,6 @@ public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the point.
 	 *
@@ -78,7 +68,6 @@ public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 		return addPoint(values[0], values[1]);
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -90,7 +79,6 @@ public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -102,7 +90,6 @@ public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -114,9 +101,8 @@ public class GeoPolygonFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

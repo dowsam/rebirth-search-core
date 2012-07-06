@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScanContext.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScanContext.java 2012-7-6 14:29:48 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.search.scan;
@@ -24,7 +24,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ScanContext.
  *
@@ -32,11 +31,9 @@ import com.google.common.collect.Maps;
  */
 public class ScanContext {
 
-	
 	/** The reader states. */
 	private final Map<IndexReader, ReaderState> readerStates = Maps.newHashMap();
 
-	
 	/**
 	 * Clear.
 	 */
@@ -44,7 +41,6 @@ public class ScanContext {
 		readerStates.clear();
 	}
 
-	
 	/**
 	 * Execute.
 	 *
@@ -58,12 +54,11 @@ public class ScanContext {
 		try {
 			context.searcher().search(query, collector);
 		} catch (ScanCollector.StopCollectingException e) {
-			
+
 		}
 		return collector.topDocs();
 	}
 
-	
 	/**
 	 * The Class ScanCollector.
 	 *
@@ -71,47 +66,36 @@ public class ScanContext {
 	 */
 	static class ScanCollector extends Collector {
 
-		
 		/** The reader states. */
 		private final Map<IndexReader, ReaderState> readerStates;
 
-		
 		/** The from. */
 		private final int from;
 
-		
 		/** The to. */
 		private final int to;
 
-		
 		/** The docs. */
 		private final ArrayList<ScoreDoc> docs;
 
-		
 		/** The track scores. */
 		private final boolean trackScores;
 
-		
 		/** The scorer. */
 		private Scorer scorer;
 
-		
 		/** The doc base. */
 		private int docBase;
 
-		
 		/** The counter. */
 		private int counter;
 
-		
 		/** The current reader. */
 		private IndexReader currentReader;
 
-		
 		/** The reader state. */
 		private ReaderState readerState;
 
-		
 		/**
 		 * Instantiates a new scan collector.
 		 *
@@ -128,7 +112,6 @@ public class ScanContext {
 			this.docs = new ArrayList<ScoreDoc>(size);
 		}
 
-		
 		/**
 		 * Inc counter.
 		 *
@@ -138,7 +121,6 @@ public class ScanContext {
 			this.counter += count;
 		}
 
-		
 		/**
 		 * Top docs.
 		 *
@@ -148,7 +130,6 @@ public class ScanContext {
 			return new TopDocs(docs.size(), docs.toArray(new ScoreDoc[docs.size()]), 0f);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 		 */
@@ -157,7 +138,6 @@ public class ScanContext {
 			this.scorer = scorer;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#collect(int)
 		 */
@@ -173,15 +153,12 @@ public class ScanContext {
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 		 */
 		@Override
 		public void setNextReader(IndexReader reader, int docBase) throws IOException {
-			
-			
-			
+
 			if (currentReader != null && !readerStates.containsKey(currentReader)) {
 				assert readerState != null;
 				readerState.done = true;
@@ -192,7 +169,6 @@ public class ScanContext {
 			this.readerState = new ReaderState();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 		 */
@@ -201,11 +177,9 @@ public class ScanContext {
 			return true;
 		}
 
-		
 		/** The Constant StopCollectingException. */
 		public static final RuntimeException StopCollectingException = new StopCollectingException();
 
-		
 		/**
 		 * The Class StopCollectingException.
 		 *
@@ -213,7 +187,6 @@ public class ScanContext {
 		 */
 		static class StopCollectingException extends RuntimeException {
 
-			
 			/* (non-Javadoc)
 			 * @see java.lang.Throwable#fillInStackTrace()
 			 */
@@ -224,7 +197,6 @@ public class ScanContext {
 		}
 	}
 
-	
 	/**
 	 * The Class ScanFilter.
 	 *
@@ -232,15 +204,12 @@ public class ScanContext {
 	 */
 	public static class ScanFilter extends Filter {
 
-		
 		/** The reader states. */
 		private final Map<IndexReader, ReaderState> readerStates;
 
-		
 		/** The scan collector. */
 		private final ScanCollector scanCollector;
 
-		
 		/**
 		 * Instantiates a new scan filter.
 		 *
@@ -252,7 +221,6 @@ public class ScanContext {
 			this.scanCollector = scanCollector;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */
@@ -267,7 +235,6 @@ public class ScanContext {
 		}
 	}
 
-	
 	/**
 	 * The Class ReaderState.
 	 *
@@ -275,11 +242,9 @@ public class ScanContext {
 	 */
 	static class ReaderState {
 
-		
 		/** The count. */
 		public int count;
 
-		
 		/** The done. */
 		public boolean done;
 	}

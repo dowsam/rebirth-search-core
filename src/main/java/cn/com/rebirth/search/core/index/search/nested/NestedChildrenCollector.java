@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NestedChildrenCollector.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NestedChildrenCollector.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.nested;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.commons.lucene.docset.FixedBitDocSet;
 import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetCollector;
 
-
 /**
  * The Class NestedChildrenCollector.
  *
@@ -27,31 +25,24 @@ import cn.com.rebirth.search.core.search.facet.FacetCollector;
  */
 public class NestedChildrenCollector extends FacetCollector {
 
-	
 	/** The collector. */
 	private final FacetCollector collector;
 
-	
 	/** The parent filter. */
 	private final Filter parentFilter;
 
-	
 	/** The child filter. */
 	private final Filter childFilter;
 
-	
 	/** The child docs. */
 	private DocSet childDocs;
 
-	
 	/** The parent docs. */
 	private FixedBitSet parentDocs;
 
-	
 	/** The current reader. */
 	private IndexReader currentReader;
 
-	
 	/**
 	 * Instantiates a new nested children collector.
 	 *
@@ -65,26 +56,23 @@ public class NestedChildrenCollector extends FacetCollector {
 		this.childFilter = childFilter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return collector.facet();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#setFilter(org.apache.lucene.search.Filter)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#setFilter(org.apache.lucene.search.Filter)
 	 */
 	@Override
 	public void setFilter(Filter filter) {
-		
+
 		collector.setFilter(filter);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 	 */
@@ -93,7 +81,6 @@ public class NestedChildrenCollector extends FacetCollector {
 		collector.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
@@ -105,7 +92,6 @@ public class NestedChildrenCollector extends FacetCollector {
 		parentDocs = ((FixedBitDocSet) parentFilter.getDocIdSet(reader)).set();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 	 */
@@ -114,7 +100,6 @@ public class NestedChildrenCollector extends FacetCollector {
 		return collector.acceptsDocsOutOfOrder();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#collect(int)
 	 */

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptSortParser.java 2012-3-29 15:01:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptSortParser.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.sort;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.script.SearchScript;
 import cn.com.rebirth.search.core.search.SearchParseException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ScriptSortParser.
  *
@@ -26,18 +24,16 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ScriptSortParser implements SortParser {
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.sort.SortParser#names()
+	 * @see cn.com.rebirth.search.core.search.sort.SortParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { "_script" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.sort.SortParser#parse(cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.sort.SortParser#parse(cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public SortField parse(XContentParser parser, SearchContext context) throws Exception {

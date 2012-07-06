@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalSearchResponse.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalSearchResponse.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.internal;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.search.SearchHits;
 import cn.com.rebirth.search.core.search.facet.Facets;
 import cn.com.rebirth.search.core.search.facet.InternalFacets;
 
-
 /**
  * The Class InternalSearchResponse.
  *
@@ -26,31 +24,25 @@ import cn.com.rebirth.search.core.search.facet.InternalFacets;
  */
 public class InternalSearchResponse implements Streamable, ToXContent {
 
-	
 	/** The hits. */
 	private InternalSearchHits hits;
 
-	
 	/** The facets. */
 	private InternalFacets facets;
 
-	
 	/** The timed out. */
 	private boolean timedOut;
 
-	
 	/** The Constant EMPTY. */
 	public static final InternalSearchResponse EMPTY = new InternalSearchResponse(new InternalSearchHits(
 			new InternalSearchHit[0], 0, 0), null, false);
 
-	
 	/**
 	 * Instantiates a new internal search response.
 	 */
 	private InternalSearchResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new internal search response.
 	 *
@@ -64,7 +56,6 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		this.timedOut = timedOut;
 	}
 
-	
 	/**
 	 * Timed out.
 	 *
@@ -74,7 +65,6 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		return this.timedOut;
 	}
 
-	
 	/**
 	 * Hits.
 	 *
@@ -84,7 +74,6 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		return hits;
 	}
 
-	
 	/**
 	 * Facets.
 	 *
@@ -94,9 +83,8 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		return facets;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -107,7 +95,6 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * Read internal search response.
 	 *
@@ -121,9 +108,8 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		return response;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -134,9 +120,8 @@ public class InternalSearchResponse implements Streamable, ToXContent {
 		timedOut = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

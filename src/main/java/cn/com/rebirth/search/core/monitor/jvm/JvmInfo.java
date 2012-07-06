@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JvmInfo.java 2012-3-29 15:02:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JvmInfo.java 2012-7-6 14:29:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.jvm;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class JvmInfo.
  *
@@ -30,19 +28,16 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class JvmInfo implements Streamable, Serializable, ToXContent {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6414742427948268466L;
 
-	
-	/** The INSTANCE. */
+	/** The instance. */
 	private static JvmInfo INSTANCE;
 
 	static {
 		RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
 		MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 
-		
 		long pid;
 		String xPid = runtimeMXBean.getName();
 		try {
@@ -76,7 +71,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		INSTANCE = info;
 	}
 
-	
 	/**
 	 * Jvm info.
 	 *
@@ -86,58 +80,45 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return INSTANCE;
 	}
 
-	
 	/** The pid. */
 	long pid = -1;
 
-	
 	/** The version. */
 	String version = "";
 
-	
 	/** The vm name. */
 	String vmName = "";
 
-	
 	/** The vm version. */
 	String vmVersion = "";
 
-	
 	/** The vm vendor. */
 	String vmVendor = "";
 
-	
 	/** The start time. */
 	long startTime = -1;
 
-	
 	/** The mem. */
 	Mem mem;
 
-	
 	/** The input arguments. */
 	String[] inputArguments;
 
-	
 	/** The boot class path. */
 	String bootClassPath;
 
-	
 	/** The class path. */
 	String classPath;
 
-	
 	/** The system properties. */
 	Map<String, String> systemProperties;
 
-	
 	/**
 	 * Instantiates a new jvm info.
 	 */
 	private JvmInfo() {
 	}
 
-	
 	/**
 	 * Pid.
 	 *
@@ -147,7 +128,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return this.pid;
 	}
 
-	
 	/**
 	 * Gets the pid.
 	 *
@@ -157,7 +137,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return pid;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -167,7 +146,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return this.version;
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -177,7 +155,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return this.version;
 	}
 
-	
 	/**
 	 * Version as integer.
 	 *
@@ -204,7 +181,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * Version update pack.
 	 *
@@ -228,10 +204,10 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			Integer.parseInt(sVersion);
 			int from;
 			if (version.charAt(i) == '_') {
-				
+
 				from = ++i;
 			} else if (version.charAt(i) == '-' && version.charAt(i + 1) == 'u') {
-				
+
 				i = i + 2;
 				from = i;
 			} else {
@@ -251,7 +227,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * Vm name.
 	 *
@@ -261,7 +236,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return vmName;
 	}
 
-	
 	/**
 	 * Gets the vm name.
 	 *
@@ -271,7 +245,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return vmName;
 	}
 
-	
 	/**
 	 * Vm version.
 	 *
@@ -281,7 +254,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return vmVersion;
 	}
 
-	
 	/**
 	 * Gets the vm version.
 	 *
@@ -291,7 +263,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return vmVersion;
 	}
 
-	
 	/**
 	 * Vm vendor.
 	 *
@@ -301,7 +272,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return vmVendor;
 	}
 
-	
 	/**
 	 * Gets the vm vendor.
 	 *
@@ -311,7 +281,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return vmVendor;
 	}
 
-	
 	/**
 	 * Start time.
 	 *
@@ -321,7 +290,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return startTime;
 	}
 
-	
 	/**
 	 * Gets the start time.
 	 *
@@ -331,7 +299,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return startTime;
 	}
 
-	
 	/**
 	 * Mem.
 	 *
@@ -341,7 +308,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return mem;
 	}
 
-	
 	/**
 	 * Gets the mem.
 	 *
@@ -351,7 +317,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return mem();
 	}
 
-	
 	/**
 	 * Input arguments.
 	 *
@@ -361,7 +326,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return inputArguments;
 	}
 
-	
 	/**
 	 * Gets the input arguments.
 	 *
@@ -371,7 +335,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return inputArguments;
 	}
 
-	
 	/**
 	 * Boot class path.
 	 *
@@ -381,7 +344,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return bootClassPath;
 	}
 
-	
 	/**
 	 * Gets the boot class path.
 	 *
@@ -391,7 +353,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return bootClassPath;
 	}
 
-	
 	/**
 	 * Class path.
 	 *
@@ -401,7 +362,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return classPath;
 	}
 
-	
 	/**
 	 * Gets the class path.
 	 *
@@ -411,7 +371,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return classPath;
 	}
 
-	
 	/**
 	 * System properties.
 	 *
@@ -421,7 +380,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return systemProperties;
 	}
 
-	
 	/**
 	 * Gets the system properties.
 	 *
@@ -431,9 +389,8 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return systemProperties;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -460,7 +417,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -468,72 +424,55 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant JVM. */
 		static final XContentBuilderString JVM = new XContentBuilderString("jvm");
 
-		
 		/** The Constant PID. */
 		static final XContentBuilderString PID = new XContentBuilderString("pid");
 
-		
 		/** The Constant VERSION. */
 		static final XContentBuilderString VERSION = new XContentBuilderString("version");
 
-		
 		/** The Constant VM_NAME. */
 		static final XContentBuilderString VM_NAME = new XContentBuilderString("vm_name");
 
-		
 		/** The Constant VM_VERSION. */
 		static final XContentBuilderString VM_VERSION = new XContentBuilderString("vm_version");
 
-		
 		/** The Constant VM_VENDOR. */
 		static final XContentBuilderString VM_VENDOR = new XContentBuilderString("vm_vendor");
 
-		
 		/** The Constant START_TIME. */
 		static final XContentBuilderString START_TIME = new XContentBuilderString("start_time");
 
-		
 		/** The Constant MEM. */
 		static final XContentBuilderString MEM = new XContentBuilderString("mem");
 
-		
 		/** The Constant HEAP_INIT. */
 		static final XContentBuilderString HEAP_INIT = new XContentBuilderString("heap_init");
 
-		
 		/** The Constant HEAP_INIT_IN_BYTES. */
 		static final XContentBuilderString HEAP_INIT_IN_BYTES = new XContentBuilderString("heap_init_in_bytes");
 
-		
 		/** The Constant HEAP_MAX. */
 		static final XContentBuilderString HEAP_MAX = new XContentBuilderString("heap_max");
 
-		
 		/** The Constant HEAP_MAX_IN_BYTES. */
 		static final XContentBuilderString HEAP_MAX_IN_BYTES = new XContentBuilderString("heap_max_in_bytes");
 
-		
 		/** The Constant NON_HEAP_INIT. */
 		static final XContentBuilderString NON_HEAP_INIT = new XContentBuilderString("non_heap_init");
 
-		
 		/** The Constant NON_HEAP_INIT_IN_BYTES. */
 		static final XContentBuilderString NON_HEAP_INIT_IN_BYTES = new XContentBuilderString("non_heap_init_in_bytes");
 
-		
 		/** The Constant NON_HEAP_MAX. */
 		static final XContentBuilderString NON_HEAP_MAX = new XContentBuilderString("non_heap_max");
 
-		
 		/** The Constant NON_HEAP_MAX_IN_BYTES. */
 		static final XContentBuilderString NON_HEAP_MAX_IN_BYTES = new XContentBuilderString("non_heap_max_in_bytes");
 	}
 
-	
 	/**
 	 * Read jvm info.
 	 *
@@ -547,9 +486,8 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		return jvmInfo;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -574,9 +512,8 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		mem.readFrom(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -600,7 +537,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		mem.writeTo(out);
 	}
 
-	
 	/**
 	 * The Class Mem.
 	 *
@@ -611,30 +547,24 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 214089958902976888L;
 
-		
 		/** The heap init. */
 		long heapInit = 0;
 
-		
 		/** The heap max. */
 		long heapMax = 0;
 
-		
 		/** The non heap init. */
 		long nonHeapInit = 0;
 
-		
 		/** The non heap max. */
 		long nonHeapMax = 0;
 
-		
 		/**
 		 * Instantiates a new mem.
 		 */
 		Mem() {
 		}
 
-		
 		/**
 		 * Heap init.
 		 *
@@ -644,7 +574,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(heapInit);
 		}
 
-		
 		/**
 		 * Gets the heap init.
 		 *
@@ -654,7 +583,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return heapInit();
 		}
 
-		
 		/**
 		 * Heap max.
 		 *
@@ -664,7 +592,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(heapMax);
 		}
 
-		
 		/**
 		 * Gets the heap max.
 		 *
@@ -674,7 +601,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return heapMax();
 		}
 
-		
 		/**
 		 * Non heap init.
 		 *
@@ -684,7 +610,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(nonHeapInit);
 		}
 
-		
 		/**
 		 * Gets the non heap init.
 		 *
@@ -694,7 +619,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return nonHeapInit();
 		}
 
-		
 		/**
 		 * Non heap max.
 		 *
@@ -704,7 +628,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(nonHeapMax);
 		}
 
-		
 		/**
 		 * Gets the non heap max.
 		 *
@@ -714,7 +637,6 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return nonHeapMax();
 		}
 
-		
 		/**
 		 * Read mem.
 		 *
@@ -728,9 +650,8 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			return mem;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -740,9 +661,8 @@ public class JvmInfo implements Streamable, Serializable, ToXContent {
 			nonHeapMax = in.readVLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

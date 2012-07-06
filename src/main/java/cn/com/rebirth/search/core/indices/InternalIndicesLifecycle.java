@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalIndicesLifecycle.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalIndicesLifecycle.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.service.IndexService;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 
-
 /**
  * The Class InternalIndicesLifecycle.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.index.shard.service.IndexShard;
  */
 public class InternalIndicesLifecycle extends AbstractComponent implements IndicesLifecycle {
 
-	
 	/** The listeners. */
 	private final CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/**
 	 * Instantiates a new internal indices lifecycle.
 	 *
@@ -41,23 +37,20 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		super(settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesLifecycle#addListener(cn.com.summall.search.core.indices.IndicesLifecycle.Listener)
+	 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle#addListener(cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener)
 	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesLifecycle#removeListener(cn.com.summall.search.core.indices.IndicesLifecycle.Listener)
+	 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle#removeListener(cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener)
 	 */
 	public void removeListener(Listener listener) {
 		listeners.remove(listener);
 	}
 
-	
 	/**
 	 * Shard routing changed.
 	 *
@@ -71,7 +64,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * Before index created.
 	 *
@@ -83,7 +75,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * After index created.
 	 *
@@ -95,7 +86,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * Before index shard created.
 	 *
@@ -107,7 +97,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * After index shard created.
 	 *
@@ -119,7 +108,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * After index shard started.
 	 *
@@ -131,7 +119,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * Before index closed.
 	 *
@@ -144,7 +131,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * After index closed.
 	 *
@@ -157,7 +143,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * Before index shard closed.
 	 *
@@ -171,7 +156,6 @@ public class InternalIndicesLifecycle extends AbstractComponent implements Indic
 		}
 	}
 
-	
 	/**
 	 * After index shard closed.
 	 *

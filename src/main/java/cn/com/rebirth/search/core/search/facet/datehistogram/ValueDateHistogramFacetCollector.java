@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ValueDateHistogramFacetCollector.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ValueDateHistogramFacetCollector.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.datehistogram;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ValueDateHistogramFacetCollector.
  *
@@ -32,39 +30,30 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The key index field name. */
 	private final String keyIndexFieldName;
 
-	
 	/** The value index field name. */
 	private final String valueIndexFieldName;
 
-	
 	/** The comparator type. */
 	private final DateHistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The key field data type. */
 	private final FieldDataType keyFieldDataType;
 
-	
 	/** The key field data. */
 	private LongFieldData keyFieldData;
 
-	
 	/** The value field data type. */
 	private final FieldDataType valueFieldDataType;
 
-	
 	/** The histo proc. */
 	private final DateHistogramProc histoProc;
 
-	
 	/**
 	 * Instantiates a new value date histogram facet collector.
 	 *
@@ -86,7 +75,6 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + keyFieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -105,18 +93,16 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 		this.histoProc = new DateHistogramProc(tzRounding);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		keyFieldData.forEachValueInDoc(doc, histoProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -125,16 +111,14 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 				valueIndexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalFullDateHistogramFacet(facetName, comparatorType, histoProc.entries, true);
 	}
 
-	
 	/**
 	 * The Class DateHistogramProc.
 	 *
@@ -142,24 +126,19 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class DateHistogramProc implements LongFieldData.LongValueInDocProc {
 
-		
 		/** The entries. */
 		final ExtTLongObjectHashMap<InternalFullDateHistogramFacet.FullEntry> entries = CacheRecycler
 				.popLongObjectMap();
 
-		
 		/** The tz rounding. */
 		private final TimeZoneRounding tzRounding;
 
-		
 		/** The value field data. */
 		NumericFieldData valueFieldData;
 
-		
 		/** The value aggregator. */
 		final ValueAggregator valueAggregator = new ValueAggregator();
 
-		
 		/**
 		 * Instantiates a new date histogram proc.
 		 *
@@ -169,9 +148,8 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 			this.tzRounding = tzRounding;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
 		 */
 		@Override
 		public void onValue(int docId, long value) {
@@ -188,7 +166,6 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 			valueFieldData.forEachValueInDoc(docId, valueAggregator);
 		}
 
-		
 		/**
 		 * The Class ValueAggregator.
 		 *
@@ -196,13 +173,11 @@ public class ValueDateHistogramFacetCollector extends AbstractFacetCollector {
 		 */
 		public static class ValueAggregator implements NumericFieldData.DoubleValueInDocProc {
 
-			
 			/** The entry. */
 			InternalFullDateHistogramFacet.FullEntry entry;
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+			 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 			 */
 			@Override
 			public void onValue(int docId, double value) {

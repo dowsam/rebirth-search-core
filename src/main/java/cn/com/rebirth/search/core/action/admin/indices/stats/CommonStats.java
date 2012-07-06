@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CommonStats.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CommonStats.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.stats;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.search.stats.SearchStats;
 import cn.com.rebirth.search.core.index.shard.DocsStats;
 import cn.com.rebirth.search.core.index.store.StoreStats;
 
-
 /**
  * The Class CommonStats.
  *
@@ -32,47 +30,38 @@ import cn.com.rebirth.search.core.index.store.StoreStats;
  */
 public class CommonStats implements Streamable, ToXContent {
 
-	
 	/** The docs. */
 	@Nullable
 	DocsStats docs;
 
-	
 	/** The store. */
 	@Nullable
 	StoreStats store;
 
-	
 	/** The indexing. */
 	@Nullable
 	IndexingStats indexing;
 
-	
 	/** The get. */
 	@Nullable
 	GetStats get;
 
-	
 	/** The search. */
 	@Nullable
 	SearchStats search;
 
-	
 	/** The merge. */
 	@Nullable
 	MergeStats merge;
 
-	
 	/** The refresh. */
 	@Nullable
 	RefreshStats refresh;
 
-	
 	/** The flush. */
 	@Nullable
 	FlushStats flush;
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -145,7 +134,6 @@ public class CommonStats implements Streamable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * Docs.
 	 *
@@ -156,7 +144,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return this.docs;
 	}
 
-	
 	/**
 	 * Gets the docs.
 	 *
@@ -167,7 +154,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return this.docs;
 	}
 
-	
 	/**
 	 * Store.
 	 *
@@ -178,7 +164,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return store;
 	}
 
-	
 	/**
 	 * Gets the store.
 	 *
@@ -189,7 +174,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return store;
 	}
 
-	
 	/**
 	 * Indexing.
 	 *
@@ -200,7 +184,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return indexing;
 	}
 
-	
 	/**
 	 * Gets the indexing.
 	 *
@@ -211,7 +194,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return indexing;
 	}
 
-	
 	/**
 	 * Gets the.
 	 *
@@ -222,7 +204,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return get;
 	}
 
-	
 	/**
 	 * Gets the gets the.
 	 *
@@ -233,7 +214,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return get;
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -244,7 +224,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return search;
 	}
 
-	
 	/**
 	 * Gets the search.
 	 *
@@ -255,7 +234,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return search;
 	}
 
-	
 	/**
 	 * Merge.
 	 *
@@ -266,7 +244,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return merge;
 	}
 
-	
 	/**
 	 * Gets the merge.
 	 *
@@ -277,7 +254,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return merge;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -288,7 +264,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return refresh;
 	}
 
-	
 	/**
 	 * Gets the refresh.
 	 *
@@ -299,7 +274,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return refresh;
 	}
 
-	
 	/**
 	 * Flush.
 	 *
@@ -310,7 +284,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return flush;
 	}
 
-	
 	/**
 	 * Gets the flush.
 	 *
@@ -321,7 +294,6 @@ public class CommonStats implements Streamable, ToXContent {
 		return flush;
 	}
 
-	
 	/**
 	 * Read common stats.
 	 *
@@ -335,9 +307,8 @@ public class CommonStats implements Streamable, ToXContent {
 		return stats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -367,9 +338,8 @@ public class CommonStats implements Streamable, ToXContent {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -423,10 +393,8 @@ public class CommonStats implements Streamable, ToXContent {
 		}
 	}
 
-	
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

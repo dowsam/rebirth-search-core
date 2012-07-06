@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SpanTermQueryParser.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SpanTermQueryParser.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.MapperService;
 import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 
-
 /**
  * The Class SpanTermQueryParser.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.index.query.support.QueryParsers;
  */
 public class SpanTermQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "span_term";
 
-	
 	/**
 	 * Instantiates a new span term query parser.
 	 */
@@ -38,18 +34,16 @@ public class SpanTermQueryParser implements QueryParser {
 	public SpanTermQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -86,7 +80,7 @@ public class SpanTermQueryParser implements QueryParser {
 			parser.nextToken();
 		} else {
 			value = parser.text();
-			
+
 			parser.nextToken();
 		}
 

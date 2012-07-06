@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BufferingFsTranslogFile.java 2012-3-29 15:02:37 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BufferingFsTranslogFile.java 2012-7-6 14:29:28 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.translog.fs;
@@ -14,7 +14,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.translog.Translog;
 import cn.com.rebirth.search.core.index.translog.TranslogException;
 
-
 /**
  * The Class BufferingFsTranslogFile.
  *
@@ -22,47 +21,36 @@ import cn.com.rebirth.search.core.index.translog.TranslogException;
  */
 public class BufferingFsTranslogFile implements FsTranslogFile {
 
-	
 	/** The id. */
 	private final long id;
 
-	
 	/** The shard id. */
 	private final ShardId shardId;
 
-	
 	/** The raf. */
 	private final RafReference raf;
 
-	
 	/** The rwl. */
 	private final ReadWriteLock rwl = new ReentrantReadWriteLock();
 
-	
 	/** The operation counter. */
 	private volatile int operationCounter;
 
-	
 	/** The last position. */
 	private long lastPosition;
 
-	
 	/** The last written position. */
 	private volatile long lastWrittenPosition;
 
-	
 	/** The last sync position. */
 	private volatile long lastSyncPosition = 0;
 
-	
 	/** The buffer. */
 	private byte[] buffer;
 
-	
 	/** The buffer count. */
 	private int bufferCount;
 
-	
 	/**
 	 * Instantiates a new buffering fs translog file.
 	 *
@@ -80,33 +68,29 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 		raf.raf().setLength(0);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#id()
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#id()
 	 */
 	public long id() {
 		return this.id;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#estimatedNumberOfOperations()
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#estimatedNumberOfOperations()
 	 */
 	public int estimatedNumberOfOperations() {
 		return operationCounter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#translogSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#translogSizeInBytes()
 	 */
 	public long translogSizeInBytes() {
 		return lastWrittenPosition;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#add(byte[], int, int)
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#add(byte[], int, int)
 	 */
 	@Override
 	public Translog.Location add(byte[] data, int from, int size) throws IOException {
@@ -133,7 +117,6 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 		}
 	}
 
-	
 	/**
 	 * Flush buffer.
 	 *
@@ -147,9 +130,8 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#read(cn.com.summall.search.core.index.translog.Translog.Location)
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#read(cn.com.rebirth.search.core.index.translog.Translog.Location)
 	 */
 	@Override
 	public byte[] read(Translog.Location location) throws IOException {
@@ -169,9 +151,8 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 		return buffer.array();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#snapshot()
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#snapshot()
 	 */
 	@Override
 	public FsChannelSnapshot snapshot() throws TranslogException {
@@ -189,23 +170,21 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#syncNeeded()
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#syncNeeded()
 	 */
 	@Override
 	public boolean syncNeeded() {
 		return lastPosition != lastSyncPosition;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#sync()
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#sync()
 	 */
 	@Override
 	public void sync() {
 		try {
-			
+
 			long last = lastPosition;
 			if (last == lastSyncPosition) {
 				return;
@@ -219,13 +198,12 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 			}
 			raf.channel().force(false);
 		} catch (Exception e) {
-			
+
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#close(boolean)
 	 */
 	@Override
 	public void close(boolean delete) {
@@ -243,9 +221,8 @@ public class BufferingFsTranslogFile implements FsTranslogFile {
 		raf.decreaseRefCount(delete);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.fs.FsTranslogFile#reuse(cn.com.summall.search.core.index.translog.fs.FsTranslogFile)
+	 * @see cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile#reuse(cn.com.rebirth.search.core.index.translog.fs.FsTranslogFile)
 	 */
 	@Override
 	public void reuse(FsTranslogFile other) {

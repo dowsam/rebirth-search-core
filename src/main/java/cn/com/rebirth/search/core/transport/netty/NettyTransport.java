@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NettyTransport.java 2012-3-29 16:26:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NettyTransport.java 2012-7-6 14:29:28 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.transport.netty;
@@ -43,8 +43,8 @@ import org.jboss.netty.logging.InternalLoggerFactory;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
@@ -253,7 +253,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#transportServiceAdapter(cn.com.summall.search.core.transport.TransportServiceAdapter)
+	 * @see cn.com.rebirth.search.core.transport.Transport#transportServiceAdapter(cn.com.rebirth.search.core.transport.TransportServiceAdapter)
 	 */
 	@Override
 	public void transportServiceAdapter(TransportServiceAdapter service) {
@@ -279,10 +279,10 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		if (blockingClient) {
 			clientBootstrap = new ClientBootstrap(
 					new OioClientSocketChannelFactory(Executors.newCachedThreadPool(EsExecutors.daemonThreadFactory(
@@ -403,10 +403,10 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		final CountDownLatch latch = new CountDownLatch(1);
 
 		threadPool.generic().execute(new Runnable() {
@@ -461,14 +461,14 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#addressesFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.transport.Transport#addressesFromString(java.lang.String)
 	 */
 	@Override
 	public TransportAddress[] addressesFromString(String address) throws Exception {
@@ -502,7 +502,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#addressSupported(java.lang.Class)
+	 * @see cn.com.rebirth.search.core.transport.Transport#addressSupported(java.lang.Class)
 	 */
 	@Override
 	public boolean addressSupported(Class<? extends TransportAddress> address) {
@@ -510,7 +510,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#boundAddress()
+	 * @see cn.com.rebirth.search.core.transport.Transport#boundAddress()
 	 */
 	@Override
 	public BoundTransportAddress boundAddress() {
@@ -556,7 +556,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#serverOpen()
+	 * @see cn.com.rebirth.search.core.transport.Transport#serverOpen()
 	 */
 	@Override
 	public long serverOpen() {
@@ -565,7 +565,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#sendRequest(cn.com.summall.search.core.cluster.node.DiscoveryNode, long, java.lang.String, cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportRequestOptions)
+	 * @see cn.com.rebirth.search.core.transport.Transport#sendRequest(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, long, java.lang.String, cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportRequestOptions)
 	 */
 	@Override
 	public <T extends Streamable> void sendRequest(final DiscoveryNode node, final long requestId, final String action,
@@ -586,7 +586,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#nodeConnected(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#nodeConnected(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public boolean nodeConnected(DiscoveryNode node) {
@@ -594,7 +594,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#connectToNodeLight(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#connectToNodeLight(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public void connectToNodeLight(DiscoveryNode node) throws ConnectTransportException {
@@ -602,7 +602,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#connectToNode(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#connectToNode(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public void connectToNode(DiscoveryNode node) {
@@ -617,7 +617,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	 */
 	public void connectToNode(DiscoveryNode node, boolean light) {
 		if (!lifecycle.started()) {
-			throw new RestartIllegalStateException("Can't add nodes to a stopped transport");
+			throw new RebirthIllegalStateException("Can't add nodes to a stopped transport");
 		}
 		if (node == null) {
 			throw new ConnectTransportException(null, "Can't connect to a null node");
@@ -769,7 +769,7 @@ public class NettyTransport extends AbstractLifecycleComponent<Transport> implem
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.Transport#disconnectFromNode(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+	 * @see cn.com.rebirth.search.core.transport.Transport#disconnectFromNode(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 	 */
 	@Override
 	public void disconnectFromNode(DiscoveryNode node) {

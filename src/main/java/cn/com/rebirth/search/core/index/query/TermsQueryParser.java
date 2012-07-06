@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsQueryParser.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsQueryParser.java 2012-7-6 14:29:09 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.index.mapper.MapperService;
 
-
 /**
  * The Class TermsQueryParser.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.index.mapper.MapperService;
  */
 public class TermsQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "terms";
 
-	
 	/**
 	 * Instantiates a new terms query parser.
 	 */
@@ -44,18 +40,16 @@ public class TermsQueryParser implements QueryParser {
 	public TermsQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
-		return new String[] { NAME, "in" }; 
+		return new String[] { NAME, "in" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -119,8 +113,8 @@ public class TermsQueryParser implements QueryParser {
 			if (minimumNumberShouldMatch != -1) {
 				query.setMinimumNumberShouldMatch(minimumNumberShouldMatch);
 			}
-			return wrapSmartNameQuery(Queries.optimizeQuery(Queries.fixNegativeQueryIfNeeded(query)), smartNameFieldMappers,
-					parseContext);
+			return wrapSmartNameQuery(Queries.optimizeQuery(Queries.fixNegativeQueryIfNeeded(query)),
+					smartNameFieldMappers, parseContext);
 		} finally {
 			if (smartNameFieldMappers != null && smartNameFieldMappers.explicitTypeInNameWithDocMapper()) {
 				QueryParseContext.setTypes(previousTypes);

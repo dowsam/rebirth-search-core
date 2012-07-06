@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchRequest.java 2012-3-29 15:01:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchRequest.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -16,7 +15,7 @@ import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.Unicode;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.unit.TimeValue;
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.client.Requests;
 import cn.com.rebirth.search.core.search.Scroll;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
 
-
 /**
  * The Class SearchRequest.
  *
@@ -39,89 +37,69 @@ import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
  */
 public class SearchRequest implements ActionRequest {
 
-	
 	/** The Constant contentType. */
 	private static final XContentType contentType = Requests.CONTENT_TYPE;
 
-	
 	/** The search type. */
 	private SearchType searchType = SearchType.DEFAULT;
 
-	
 	/** The indices. */
 	private String[] indices;
 
-	
 	/** The query hint. */
 	@Nullable
 	private String queryHint;
 
-	
 	/** The routing. */
 	@Nullable
 	private String routing;
 
-	
 	/** The preference. */
 	@Nullable
 	private String preference;
 
-	
 	/** The source. */
 	private byte[] source;
 
-	
 	/** The source offset. */
 	private int sourceOffset;
 
-	
 	/** The source length. */
 	private int sourceLength;
 
-	
 	/** The source unsafe. */
 	private boolean sourceUnsafe;
 
-	
 	/** The extra source. */
 	private byte[] extraSource;
 
-	
 	/** The extra source offset. */
 	private int extraSourceOffset;
 
-	
 	/** The extra source length. */
 	private int extraSourceLength;
 
-	
 	/** The extra source unsafe. */
 	private boolean extraSourceUnsafe;
 
-	
 	/** The scroll. */
 	private Scroll scroll;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/** The listener threaded. */
 	private boolean listenerThreaded = false;
 
-	
 	/** The operation threading. */
 	private SearchOperationThreading operationThreading = SearchOperationThreading.THREAD_PER_SHARD;
 
-	
 	/**
 	 * Instantiates a new search request.
 	 */
 	public SearchRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new search request.
 	 *
@@ -131,7 +109,6 @@ public class SearchRequest implements ActionRequest {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * Instantiates a new search request.
 	 *
@@ -143,27 +120,21 @@ public class SearchRequest implements ActionRequest {
 		this.source = source;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
 		ActionRequestValidationException validationException = null;
-		
-		
-		
-		
+
 		return validationException;
 	}
 
-	
 	/**
 	 * Before start.
 	 */
 	public void beforeStart() {
-		
-		
+
 		if (source != null && sourceUnsafe) {
 			source = Arrays.copyOfRange(source, sourceOffset, sourceOffset + sourceLength);
 			sourceOffset = 0;
@@ -176,23 +147,20 @@ public class SearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Before local fork.
 	 */
 	public void beforeLocalFork() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return listenerThreaded;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -204,9 +172,8 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public SearchRequest listenerThreaded(boolean listenerThreaded) {
@@ -214,7 +181,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -224,7 +190,6 @@ public class SearchRequest implements ActionRequest {
 		return this.operationThreading;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -236,7 +201,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -247,7 +211,6 @@ public class SearchRequest implements ActionRequest {
 		return operationThreading(SearchOperationThreading.fromString(operationThreading, this.operationThreading));
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -257,7 +220,6 @@ public class SearchRequest implements ActionRequest {
 		return types;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -269,7 +231,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -279,7 +240,6 @@ public class SearchRequest implements ActionRequest {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -291,7 +251,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -303,7 +262,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -315,7 +273,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -325,7 +282,6 @@ public class SearchRequest implements ActionRequest {
 		return this.preference;
 	}
 
-	
 	/**
 	 * Search type.
 	 *
@@ -337,19 +293,17 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search type.
 	 *
 	 * @param searchType the search type
 	 * @return the search request
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public SearchRequest searchType(String searchType) throws RestartIllegalArgumentException {
+	public SearchRequest searchType(String searchType) throws RebirthIllegalArgumentException {
 		return searchType(SearchType.fromString(searchType));
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -365,7 +319,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -381,7 +334,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -398,7 +350,6 @@ public class SearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -417,7 +368,6 @@ public class SearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -428,7 +378,6 @@ public class SearchRequest implements ActionRequest {
 		return source(source, 0, source.length, false);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -441,7 +390,6 @@ public class SearchRequest implements ActionRequest {
 		return source(source, offset, length, false);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -459,7 +407,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -469,7 +416,6 @@ public class SearchRequest implements ActionRequest {
 		return source;
 	}
 
-	
 	/**
 	 * Source offset.
 	 *
@@ -479,7 +425,6 @@ public class SearchRequest implements ActionRequest {
 		return sourceOffset;
 	}
 
-	
 	/**
 	 * Source length.
 	 *
@@ -489,7 +434,6 @@ public class SearchRequest implements ActionRequest {
 		return sourceLength;
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -509,7 +453,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -526,7 +469,6 @@ public class SearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -545,7 +487,6 @@ public class SearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -561,7 +502,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -572,7 +512,6 @@ public class SearchRequest implements ActionRequest {
 		return extraSource(source, 0, source.length, false);
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -585,7 +524,6 @@ public class SearchRequest implements ActionRequest {
 		return extraSource(source, offset, length, false);
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -603,7 +541,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Extra source.
 	 *
@@ -613,7 +550,6 @@ public class SearchRequest implements ActionRequest {
 		return this.extraSource;
 	}
 
-	
 	/**
 	 * Extra source offset.
 	 *
@@ -623,7 +559,6 @@ public class SearchRequest implements ActionRequest {
 		return extraSourceOffset;
 	}
 
-	
 	/**
 	 * Extra source length.
 	 *
@@ -633,7 +568,6 @@ public class SearchRequest implements ActionRequest {
 		return extraSourceLength;
 	}
 
-	
 	/**
 	 * Search type.
 	 *
@@ -643,7 +577,6 @@ public class SearchRequest implements ActionRequest {
 		return searchType;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -653,7 +586,6 @@ public class SearchRequest implements ActionRequest {
 		return indices;
 	}
 
-	
 	/**
 	 * Query hint.
 	 *
@@ -665,7 +597,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query hint.
 	 *
@@ -675,7 +606,6 @@ public class SearchRequest implements ActionRequest {
 		return queryHint;
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -685,7 +615,6 @@ public class SearchRequest implements ActionRequest {
 		return scroll;
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -697,7 +626,6 @@ public class SearchRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -708,7 +636,6 @@ public class SearchRequest implements ActionRequest {
 		return scroll(new Scroll(keepAlive));
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -719,9 +646,8 @@ public class SearchRequest implements ActionRequest {
 		return scroll(new Scroll(TimeValue.parseTimeValue(keepAlive, null)));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -768,9 +694,8 @@ public class SearchRequest implements ActionRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

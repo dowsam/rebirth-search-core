@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StopTokenFilterFactory.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StopTokenFilterFactory.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -20,25 +19,20 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating StopTokenFilter objects.
  */
 public class StopTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/** The stop words. */
 	private final Set<?> stopWords;
 
-	
 	/** The ignore case. */
 	private final boolean ignoreCase;
 
-	
 	/** The enable position increments. */
 	private final boolean enablePositionIncrements;
 
-	
 	/**
 	 * Instantiates a new stop token filter factory.
 	 *
@@ -58,9 +52,8 @@ public class StopTokenFilterFactory extends AbstractTokenFilterFactory {
 				version.onOrAfter(Version.LUCENE_29));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {
@@ -69,7 +62,6 @@ public class StopTokenFilterFactory extends AbstractTokenFilterFactory {
 		return filter;
 	}
 
-	
 	/**
 	 * Stop words.
 	 *
@@ -79,7 +71,6 @@ public class StopTokenFilterFactory extends AbstractTokenFilterFactory {
 		return stopWords;
 	}
 
-	
 	/**
 	 * Ignore case.
 	 *
@@ -89,7 +80,6 @@ public class StopTokenFilterFactory extends AbstractTokenFilterFactory {
 		return ignoreCase;
 	}
 
-	
 	/**
 	 * Enable position increments.
 	 *

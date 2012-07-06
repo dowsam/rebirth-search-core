@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportNodesShutdownAction.java 2012-3-29 15:00:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportNodesShutdownAction.java 2012-7-6 14:29:09 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.node.shutdown;
 
@@ -10,8 +9,8 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -34,7 +33,6 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class TransportNodesShutdownAction.
  *
@@ -43,23 +41,18 @@ import com.google.common.collect.Sets;
 public class TransportNodesShutdownAction extends
 		TransportMasterNodeOperationAction<NodesShutdownRequest, NodesShutdownResponse> {
 
-	
 	/** The node. */
 	private final Node node;
 
-	
 	/** The cluster name. */
 	private final ClusterName clusterName;
 
-	
 	/** The disabled. */
 	private final boolean disabled;
 
-	
 	/** The delay. */
 	private final TimeValue delay;
 
-	
 	/**
 	 * Instantiates a new transport nodes shutdown action.
 	 *
@@ -83,52 +76,47 @@ public class TransportNodesShutdownAction extends
 		this.transportService.registerHandler(NodeShutdownRequestHandler.ACTION, new NodeShutdownRequestHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.GENERIC;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return NodesShutdownAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected NodesShutdownRequest newRequest() {
 		return new NodesShutdownRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected NodesShutdownResponse newResponse() {
 		return new NodesShutdownResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#processBeforeDelegationToMaster(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#processBeforeDelegationToMaster(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected void processBeforeDelegationToMaster(NodesShutdownRequest request, ClusterState state) {
 		String[] nodesIds = request.nodesIds;
 		if (nodesIds != null) {
 			for (int i = 0; i < nodesIds.length; i++) {
-				
+
 				if ("_local".equals(nodesIds[i])) {
 					nodesIds[i] = state.nodes().localNodeId();
 				}
@@ -136,15 +124,14 @@ public class TransportNodesShutdownAction extends
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected NodesShutdownResponse masterOperation(final NodesShutdownRequest request, final ClusterState state)
-			throws RestartException {
+			throws RebirthException {
 		if (disabled) {
-			throw new RestartIllegalStateException("Shutdown is disabled");
+			throw new RebirthIllegalStateException("Shutdown is disabled");
 		}
 		Set<DiscoveryNode> nodes = Sets.newHashSet();
 		if (state.nodes().isAllNodes(request.nodesIds)) {
@@ -157,16 +144,16 @@ public class TransportNodesShutdownAction extends
 					try {
 						Thread.sleep(request.delay.millis());
 					} catch (InterruptedException e) {
-						
+
 					}
-					
+
 					logger.trace("[cluster_shutdown]: stopping the cluster service so no re-routing will occur");
 					clusterService.stop();
 
 					final CountDownLatch latch = new CountDownLatch(state.nodes().size());
 					for (final DiscoveryNode node : state.nodes()) {
 						if (node.id().equals(state.nodes().masterNodeId())) {
-							
+
 							latch.countDown();
 						} else {
 							logger.trace("[cluster_shutdown]: sending shutdown request to [{}]", node);
@@ -193,11 +180,10 @@ public class TransportNodesShutdownAction extends
 					try {
 						latch.await();
 					} catch (InterruptedException e) {
-						
+
 					}
 					logger.info("[cluster_shutdown]: done shutting down all nodes except master, proceeding to master");
 
-					
 					logger.trace("[cluster_shutdown]: shutting down the master [{}]", state.nodes().masterNode());
 					transportService.sendRequest(state.nodes().masterNode(), NodeShutdownRequestHandler.ACTION,
 							new NodeShutdownRequest(request.exit), new VoidTransportResponseHandler(
@@ -232,7 +218,7 @@ public class TransportNodesShutdownAction extends
 					try {
 						Thread.sleep(request.delay.millis());
 					} catch (InterruptedException e) {
-						
+
 					}
 
 					final CountDownLatch latch = new CountDownLatch(nodesIds.length);
@@ -265,7 +251,7 @@ public class TransportNodesShutdownAction extends
 					try {
 						latch.await();
 					} catch (InterruptedException e) {
-						
+
 					}
 
 					logger.info("[partial_cluster_shutdown]: done shutting down [{}]", ((Object) nodesIds));
@@ -276,7 +262,6 @@ public class TransportNodesShutdownAction extends
 		return new NodesShutdownResponse(clusterName, nodes.toArray(new DiscoveryNode[nodes.size()]));
 	}
 
-	
 	/**
 	 * The Class NodeShutdownRequestHandler.
 	 *
@@ -284,36 +269,32 @@ public class TransportNodesShutdownAction extends
 	 */
 	private class NodeShutdownRequestHandler extends BaseTransportRequestHandler<NodeShutdownRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "/cluster/nodes/shutdown/node";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public NodeShutdownRequest newInstance() {
 			return new NodeShutdownRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final NodeShutdownRequest request, TransportChannel channel) throws Exception {
 			if (disabled) {
-				throw new RestartIllegalStateException("Shutdown is disabled");
+				throw new RebirthIllegalStateException("Shutdown is disabled");
 			}
 			logger.info("shutting down in [{}]", delay);
 			Thread t = new Thread(new Runnable() {
@@ -322,7 +303,7 @@ public class TransportNodesShutdownAction extends
 					try {
 						Thread.sleep(delay.millis());
 					} catch (InterruptedException e) {
-						
+
 					}
 					if (!request.exit) {
 						logger.info("initiating requested shutdown (no exit)...");
@@ -352,7 +333,7 @@ public class TransportNodesShutdownAction extends
 						} catch (Exception e) {
 							logger.warn("Failed to shutdown", e);
 						} finally {
-							
+
 							System.exit(0);
 						}
 					}
@@ -364,7 +345,6 @@ public class TransportNodesShutdownAction extends
 		}
 	}
 
-	
 	/**
 	 * The Class NodeShutdownRequest.
 	 *
@@ -372,18 +352,15 @@ public class TransportNodesShutdownAction extends
 	 */
 	static class NodeShutdownRequest implements Streamable {
 
-		
 		/** The exit. */
 		boolean exit;
 
-		
 		/**
 		 * Instantiates a new node shutdown request.
 		 */
 		NodeShutdownRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new node shutdown request.
 		 *
@@ -393,18 +370,16 @@ public class TransportNodesShutdownAction extends
 			this.exit = exit;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			exit = in.readBoolean();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

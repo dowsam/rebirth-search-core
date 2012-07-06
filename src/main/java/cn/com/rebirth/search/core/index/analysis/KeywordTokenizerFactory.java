@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core KeywordTokenizerFactory.java 2012-3-29 15:01:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core KeywordTokenizerFactory.java 2012-7-6 14:30:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -17,17 +16,14 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating KeywordTokenizer objects.
  */
 public class KeywordTokenizerFactory extends AbstractTokenizerFactory {
 
-	
 	/** The buffer size. */
 	private final int bufferSize;
 
-	
 	/**
 	 * Instantiates a new keyword tokenizer factory.
 	 *
@@ -43,9 +39,8 @@ public class KeywordTokenizerFactory extends AbstractTokenizerFactory {
 		bufferSize = settings.getAsInt("buffer_size", 256);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenizerFactory#create(java.io.Reader)
 	 */
 	@Override
 	public Tokenizer create(Reader reader) {

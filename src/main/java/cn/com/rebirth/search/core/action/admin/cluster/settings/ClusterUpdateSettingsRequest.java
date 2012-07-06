@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterUpdateSettingsRequest.java 2012-3-29 15:02:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterUpdateSettingsRequest.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.settings;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class ClusterUpdateSettingsRequest.
  *
@@ -29,24 +27,20 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 
-	
 	/** The transient settings. */
 	private Settings transientSettings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-	
 	/** The persistent settings. */
 	private Settings persistentSettings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-	
 	/**
 	 * Instantiates a new cluster update settings request.
 	 */
 	public ClusterUpdateSettingsRequest() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -57,7 +51,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Transient settings.
 	 *
@@ -67,7 +60,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return transientSettings;
 	}
 
-	
 	/**
 	 * Persistent settings.
 	 *
@@ -77,7 +69,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return persistentSettings;
 	}
 
-	
 	/**
 	 * Transient settings.
 	 *
@@ -89,7 +80,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Transient settings.
 	 *
@@ -101,7 +91,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Transient settings.
 	 *
@@ -113,7 +102,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Transient settings.
 	 *
@@ -131,7 +119,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Persistent settings.
 	 *
@@ -143,7 +130,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Persistent settings.
 	 *
@@ -155,7 +141,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Persistent settings.
 	 *
@@ -167,7 +152,6 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Persistent settings.
 	 *
@@ -185,9 +169,8 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -196,9 +179,8 @@ public class ClusterUpdateSettingsRequest extends MasterNodeOperationRequest {
 		persistentSettings = ImmutableSettings.readSettingsFromStream(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

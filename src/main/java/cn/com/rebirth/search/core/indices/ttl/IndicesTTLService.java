@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesTTLService.java 2012-3-29 15:02:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesTTLService.java 2012-7-6 14:30:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.ttl;
 
@@ -17,7 +16,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Scorer;
 
 import cn.com.rebirth.commons.concurrent.EsExecutors;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
@@ -45,7 +44,6 @@ import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
-
 /**
  * The Class IndicesTTLService.
  *
@@ -57,31 +55,24 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		MetaData.addDynamicSettings("indices.ttl.interval", "index.ttl.disable_purge");
 	}
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The client. */
 	private final Client client;
 
-	
 	/** The interval. */
 	private volatile TimeValue interval;
 
-	
 	/** The bulk size. */
 	private final int bulkSize;
 
-	
 	/** The purger thread. */
 	private PurgerThread purgerThread;
 
-	
 	/**
 	 * Instantiates a new indices ttl service.
 	 *
@@ -104,35 +95,31 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		this.purgerThread = new PurgerThread(EsExecutors.threadName(settings, "[ttl_expire]"));
 		this.purgerThread.start();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		this.purgerThread.doStop();
 		this.purgerThread.interrupt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/**
 	 * The Class PurgerThread.
 	 *
@@ -140,11 +127,9 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 	 */
 	private class PurgerThread extends Thread {
 
-		
 		/** The running. */
 		volatile boolean running = true;
 
-		
 		/**
 		 * Instantiates a new purger thread.
 		 *
@@ -155,7 +140,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 			setDaemon(true);
 		}
 
-		
 		/**
 		 * Do stop.
 		 */
@@ -163,7 +147,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 			running = false;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Thread#run()
 		 */
@@ -180,13 +163,12 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 				try {
 					Thread.sleep(interval.millis());
 				} catch (InterruptedException e) {
-					
+
 				}
 
 			}
 		}
 
-		
 		/**
 		 * Gets the shards to purge.
 		 *
@@ -196,7 +178,7 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 			List<IndexShard> shardsToPurge = new ArrayList<IndexShard>();
 			MetaData metaData = clusterService.state().metaData();
 			for (IndexService indexService : indicesService) {
-				
+
 				IndexMetaData indexMetaData = metaData.index(indexService.index().name());
 				if (indexMetaData == null) {
 					continue;
@@ -206,12 +188,11 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 					continue;
 				}
 
-				
 				FieldMappers ttlFieldMappers = indexService.mapperService().name(TTLFieldMapper.NAME);
 				if (ttlFieldMappers == null) {
 					continue;
 				}
-				
+
 				boolean hasTTLEnabled = false;
 				for (FieldMapper ttlFieldMapper : ttlFieldMappers) {
 					if (((TTLFieldMapper) ttlFieldMapper).enabled()) {
@@ -232,7 +213,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		}
 	}
 
-	
 	/**
 	 * Purge shards.
 	 *
@@ -265,7 +245,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		}
 	}
 
-	
 	/**
 	 * The Class DocToPurge.
 	 *
@@ -273,23 +252,18 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 	 */
 	private static class DocToPurge {
 
-		
 		/** The type. */
 		public final String type;
 
-		
 		/** The id. */
 		public final String id;
 
-		
 		/** The version. */
 		public final long version;
 
-		
 		/** The routing. */
 		public final String routing;
 
-		
 		/**
 		 * Instantiates a new doc to purge.
 		 *
@@ -306,7 +280,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		}
 	}
 
-	
 	/**
 	 * The Class ExpiredDocsCollector.
 	 *
@@ -314,29 +287,24 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 	 */
 	private class ExpiredDocsCollector extends Collector {
 
-		
 		/** The index reader. */
 		private IndexReader indexReader;
 
-		
 		/** The docs to purge. */
 		private List<DocToPurge> docsToPurge = new ArrayList<DocToPurge>();
 
-		
 		/**
 		 * Instantiates a new expired docs collector.
 		 */
 		public ExpiredDocsCollector() {
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 		 */
 		public void setScorer(Scorer scorer) {
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 		 */
@@ -344,7 +312,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 			return true;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#collect(int)
 		 */
@@ -360,7 +327,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 		 */
@@ -368,7 +334,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 			this.indexReader = reader;
 		}
 
-		
 		/**
 		 * Gets the docs to purge.
 		 *
@@ -379,7 +344,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		}
 	}
 
-	
 	/**
 	 * Process bulk if needed.
 	 *
@@ -409,7 +373,6 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 		return bulkRequest;
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -417,9 +380,8 @@ public class IndicesTTLService extends AbstractLifecycleComponent<IndicesTTLServ
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {

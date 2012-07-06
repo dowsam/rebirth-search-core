@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractFacetBuilder.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractFacetBuilder.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
 import cn.com.rebirth.search.core.index.query.FilterBuilder;
 import cn.com.rebirth.search.core.search.internal.ContextIndexSearcher;
 
-
 /**
  * The Class AbstractFacetBuilder.
  *
@@ -22,23 +20,18 @@ import cn.com.rebirth.search.core.search.internal.ContextIndexSearcher;
  */
 public abstract class AbstractFacetBuilder implements ToXContent {
 
-	
 	/** The name. */
 	protected final String name;
 
-	
 	/** The scope. */
 	protected String scope;
 
-	
 	/** The facet filter. */
 	protected FilterBuilder facetFilter;
 
-	
 	/** The nested. */
 	protected String nested;
 
-	
 	/**
 	 * Instantiates a new abstract facet builder.
 	 *
@@ -48,7 +41,6 @@ public abstract class AbstractFacetBuilder implements ToXContent {
 		this.name = name;
 	}
 
-	
 	/**
 	 * Facet filter.
 	 *
@@ -60,7 +52,6 @@ public abstract class AbstractFacetBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Nested.
 	 *
@@ -72,7 +63,6 @@ public abstract class AbstractFacetBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Global.
 	 *
@@ -84,7 +74,6 @@ public abstract class AbstractFacetBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Scope.
 	 *
@@ -96,7 +85,6 @@ public abstract class AbstractFacetBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the filter facet and global.
 	 *

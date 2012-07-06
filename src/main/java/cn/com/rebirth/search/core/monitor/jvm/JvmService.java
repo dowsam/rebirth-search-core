@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JvmService.java 2012-3-29 15:02:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JvmService.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.jvm;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 
-
 /**
  * The Class JvmService.
  *
@@ -19,19 +17,15 @@ import cn.com.rebirth.search.commons.inject.Inject;
  */
 public class JvmService extends AbstractComponent {
 
-	
 	/** The jvm info. */
 	private final JvmInfo jvmInfo;
 
-	
 	/** The refresh interval. */
 	private final TimeValue refreshInterval;
 
-	
 	/** The jvm stats. */
 	private JvmStats jvmStats;
 
-	
 	/**
 	 * Instantiates a new jvm service.
 	 *
@@ -48,7 +42,6 @@ public class JvmService extends AbstractComponent {
 		logger.debug("Using refresh_interval [{}]", refreshInterval);
 	}
 
-	
 	/**
 	 * Info.
 	 *
@@ -58,7 +51,6 @@ public class JvmService extends AbstractComponent {
 		return this.jvmInfo;
 	}
 
-	
 	/**
 	 * Stats.
 	 *

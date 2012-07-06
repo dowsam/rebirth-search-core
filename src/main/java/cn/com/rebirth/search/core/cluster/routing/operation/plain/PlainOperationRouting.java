@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PlainOperationRouting.java 2012-3-29 15:01:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PlainOperationRouting.java 2012-7-6 14:30:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.operation.plain;
 
@@ -12,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.index.IndexShardMissingException;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.indices.IndexMissingException;
 
-
 /**
  * The Class PlainOperationRouting.
  *
@@ -40,19 +38,15 @@ import cn.com.rebirth.search.core.indices.IndexMissingException;
  */
 public class PlainOperationRouting extends AbstractComponent implements OperationRouting {
 
-	
 	/** The hash function. */
 	private final HashFunction hashFunction;
 
-	
 	/** The use type. */
 	private final boolean useType;
 
-	
 	/** The awareness allocation decider. */
 	private final AwarenessAllocationDecider awarenessAllocationDecider;
 
-	
 	/**
 	 * Instantiates a new plain operation routing.
 	 *
@@ -69,9 +63,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		this.awarenessAllocationDecider = awarenessAllocationDecider;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#indexShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#indexShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public ShardIterator indexShards(ClusterState clusterState, String index, String type, String id,
@@ -79,9 +72,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return shards(clusterState, index, type, id, routing).shardsIt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#deleteShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#deleteShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public ShardIterator deleteShards(ClusterState clusterState, String index, String type, String id,
@@ -89,9 +81,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return shards(clusterState, index, type, id, routing).shardsIt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#getShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#getShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public ShardIterator getShards(ClusterState clusterState, String index, String type, String id,
@@ -101,9 +92,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 				.localNodeId(), clusterState.nodes(), preference);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#getShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String, int, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#getShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String, int, java.lang.String)
 	 */
 	@Override
 	public ShardIterator getShards(ClusterState clusterState, String index, int shardId, @Nullable String preference)
@@ -112,9 +102,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 				clusterState.nodes(), preference);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#broadcastDeleteShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#broadcastDeleteShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String)
 	 */
 	@Override
 	public GroupShardsIterator broadcastDeleteShards(ClusterState clusterState, String index)
@@ -122,9 +111,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return indexRoutingTable(clusterState, index).groupByShardsIt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#deleteByQueryShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String, java.util.Set)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#deleteByQueryShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String, java.util.Set)
 	 */
 	@Override
 	public GroupShardsIterator deleteByQueryShards(ClusterState clusterState, String index,
@@ -133,7 +121,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 			return indexRoutingTable(clusterState, index).groupByShardsIt();
 		}
 
-		
 		HashSet<ShardIterator> set = new HashSet<ShardIterator>();
 		IndexRoutingTable indexRouting = indexRoutingTable(clusterState, index);
 		for (String r : routing) {
@@ -147,9 +134,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return new GroupShardsIterator(set);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#searchShardsCount(cn.com.summall.search.core.cluster.ClusterState, java.lang.String[], java.lang.String[], java.lang.String, java.util.Map, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#searchShardsCount(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String[], java.lang.String[], java.lang.String, java.util.Map, java.lang.String)
 	 */
 	@Override
 	public int searchShardsCount(ClusterState clusterState, String[] indices, String[] concreteIndices,
@@ -170,14 +156,14 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 						if (indexShard == null) {
 							throw new IndexShardMissingException(new ShardId(index, shardId));
 						}
-						
+
 						set.add(indexShard.shardId());
 					}
 				}
 			}
 			return set.size();
 		} else {
-			
+
 			int count = 0;
 			for (String index : concreteIndices) {
 				IndexRoutingTable indexRouting = indexRoutingTable(clusterState, index);
@@ -187,9 +173,8 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.operation.OperationRouting#searchShards(cn.com.summall.search.core.cluster.ClusterState, java.lang.String[], java.lang.String[], java.lang.String, java.util.Map, java.lang.String)
+	 * @see cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting#searchShards(cn.com.rebirth.search.core.cluster.ClusterState, java.lang.String[], java.lang.String[], java.lang.String, java.util.Map, java.lang.String)
 	 */
 	@Override
 	public GroupShardsIterator searchShards(ClusterState clusterState, String[] indices, String[] concreteIndices,
@@ -200,7 +185,7 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		}
 
 		if (routing != null) {
-			
+
 			HashSet<ShardIterator> set = new HashSet<ShardIterator>();
 			for (String index : concreteIndices) {
 				IndexRoutingTable indexRouting = indexRoutingTable(clusterState, index);
@@ -212,7 +197,7 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 						if (indexShard == null) {
 							throw new IndexShardMissingException(new ShardId(index, shardId));
 						}
-						
+
 						set.add(preferenceActiveShardIterator(indexShard, clusterState.nodes().localNodeId(),
 								clusterState.nodes(), preference));
 					}
@@ -220,7 +205,7 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 			}
 			return new GroupShardsIterator(set);
 		} else {
-			
+
 			ArrayList<ShardIterator> set = new ArrayList<ShardIterator>();
 			for (String index : concreteIndices) {
 				IndexRoutingTable indexRouting = indexRoutingTable(clusterState, index);
@@ -233,7 +218,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		}
 	}
 
-	
 	/**
 	 * Preference active shard iterator.
 	 *
@@ -267,7 +251,7 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 				return indexShard.onlyNodeActiveShardsIt(preference.substring("_only_node:".length()));
 			}
 		}
-		
+
 		String[] awarenessAttributes = awarenessAllocationDecider.awarenessAttributes();
 		if (awarenessAttributes.length == 0) {
 			return indexShard.activeShardsIt(DjbHashFunction.DJB_HASH(preference));
@@ -277,7 +261,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		}
 	}
 
-	
 	/**
 	 * Index meta data.
 	 *
@@ -293,7 +276,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return indexMetaData;
 	}
 
-	
 	/**
 	 * Index routing table.
 	 *
@@ -309,9 +291,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return indexRouting;
 	}
 
-	
-
-	
 	/**
 	 * Shards.
 	 *
@@ -328,7 +307,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return shards(clusterState, index, shardId);
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -345,7 +323,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return indexShard;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -368,7 +345,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return Math.abs(hash(routing) % indexMetaData(clusterState, index).numberOfShards());
 	}
 
-	
 	/**
 	 * Hash.
 	 *
@@ -379,7 +355,6 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 		return hashFunction.hash(routing);
 	}
 
-	
 	/**
 	 * Hash.
 	 *
@@ -389,7 +364,7 @@ public class PlainOperationRouting extends AbstractComponent implements Operatio
 	 */
 	protected int hash(String type, String id) {
 		if (type == null || "_all".equals(type)) {
-			throw new RestartIllegalArgumentException(
+			throw new RebirthIllegalArgumentException(
 					"Can't route an operation with no type and having type part of the routing (for backward comp)");
 		}
 		return hashFunction.hash(type, id);

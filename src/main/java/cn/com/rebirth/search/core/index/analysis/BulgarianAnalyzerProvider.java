@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulgarianAnalyzerProvider.java 2012-3-29 15:00:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulgarianAnalyzerProvider.java 2012-7-6 14:30:18 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class BulgarianAnalyzerProvider.
  *
@@ -24,11 +22,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class BulgarianAnalyzerProvider extends AbstractIndexAnalyzerProvider<BulgarianAnalyzer> {
 
-	
 	/** The analyzer. */
 	private final BulgarianAnalyzer analyzer;
 
-	
 	/**
 	 * Instantiates a new bulgarian analyzer provider.
 	 *
@@ -47,9 +43,8 @@ public class BulgarianAnalyzerProvider extends AbstractIndexAnalyzerProvider<Bul
 				CharArraySet.EMPTY_SET));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#get()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#get()
 	 */
 	@Override
 	public BulgarianAnalyzer get() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DumpMonitorService.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DumpMonitorService.java 2012-7-6 14:30:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.monitor.dump.heap.HeapDumpContributor;
 import cn.com.rebirth.search.core.monitor.dump.summary.SummaryDumpContributor;
 import cn.com.rebirth.search.core.monitor.dump.thread.ThreadDumpContributor;
 
-
 /**
  * The Class DumpMonitorService.
  *
@@ -33,31 +31,24 @@ import cn.com.rebirth.search.core.monitor.dump.thread.ThreadDumpContributor;
  */
 public class DumpMonitorService extends AbstractComponent {
 
-	
 	/** The dump location. */
 	private final String dumpLocation;
 
-	
 	/** The generator. */
 	private final DumpGenerator generator;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The cont settings. */
 	private final Map<String, Settings> contSettings;
 
-	
 	/** The contributors. */
 	private final Map<String, DumpContributorFactory> contributors;
 
-	
 	/** The work file. */
 	private final File workFile;
 
-	
 	/**
 	 * Instantiates a new dump monitor service.
 	 */
@@ -66,7 +57,6 @@ public class DumpMonitorService extends AbstractComponent {
 				null);
 	}
 
-	
 	/**
 	 * Instantiates a new dump monitor service.
 	 *
@@ -121,7 +111,6 @@ public class DumpMonitorService extends AbstractComponent {
 		generator = new SimpleDumpGenerator(dumpLocationFile, contributorMap);
 	}
 
-	
 	/**
 	 * Generate dump.
 	 *
@@ -135,7 +124,6 @@ public class DumpMonitorService extends AbstractComponent {
 		return generator.generateDump(cause, fillContextMap(context));
 	}
 
-	
 	/**
 	 * Generate dump.
 	 *
@@ -150,7 +138,6 @@ public class DumpMonitorService extends AbstractComponent {
 		return generator.generateDump(cause, fillContextMap(context), contributors);
 	}
 
-	
 	/**
 	 * Fill context map.
 	 *

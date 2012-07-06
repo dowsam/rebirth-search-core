@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalRangeFacet.java 2012-3-29 15:02:26 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalRangeFacet.java 2012-7-6 14:28:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.search.facet.InternalFacet;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class InternalRangeFacet.
  *
@@ -27,11 +25,9 @@ import com.google.common.collect.ImmutableList;
  */
 public class InternalRangeFacet implements RangeFacet, InternalFacet {
 
-	
 	/** The Constant STREAM_TYPE. */
 	private static final String STREAM_TYPE = "range";
 
-	
 	/**
 	 * Register streams.
 	 */
@@ -39,8 +35,7 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		Streams.registerStream(STREAM, STREAM_TYPE);
 	}
 
-	
-	/** The STREAM. */
+	/** The stream. */
 	static Stream STREAM = new Stream() {
 		@Override
 		public Facet readFacet(String type, StreamInput in) throws IOException {
@@ -48,31 +43,26 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		}
 	};
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.InternalFacet#streamType()
+	 * @see cn.com.rebirth.search.core.search.facet.InternalFacet#streamType()
 	 */
 	@Override
 	public String streamType() {
 		return STREAM_TYPE;
 	}
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The entries. */
 	Entry[] entries;
 
-	
 	/**
 	 * Instantiates a new internal range facet.
 	 */
 	InternalRangeFacet() {
 	}
 
-	
 	/**
 	 * Instantiates a new internal range facet.
 	 *
@@ -84,61 +74,54 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		this.entries = entries;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#name()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getName()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getName()
 	 */
 	@Override
 	public String getName() {
 		return name();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#type()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#type()
 	 */
 	@Override
 	public String type() {
 		return RangeFacet.TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getType()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getType()
 	 */
 	@Override
 	public String getType() {
 		return RangeFacet.TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.range.RangeFacet#entries()
+	 * @see cn.com.rebirth.search.core.search.facet.range.RangeFacet#entries()
 	 */
 	@Override
 	public List<Entry> entries() {
 		return ImmutableList.copyOf(entries);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.range.RangeFacet#getEntries()
+	 * @see cn.com.rebirth.search.core.search.facet.range.RangeFacet#getEntries()
 	 */
 	@Override
 	public List<Entry> getEntries() {
 		return entries();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -147,7 +130,6 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		return entries().iterator();
 	}
 
-	
 	/**
 	 * Read range facet.
 	 *
@@ -161,9 +143,8 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		return facet;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -188,9 +169,8 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -219,7 +199,6 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 		}
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -227,58 +206,45 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant RANGES. */
 		static final XContentBuilderString RANGES = new XContentBuilderString("ranges");
 
-		
 		/** The Constant FROM. */
 		static final XContentBuilderString FROM = new XContentBuilderString("from");
 
-		
 		/** The Constant FROM_STR. */
 		static final XContentBuilderString FROM_STR = new XContentBuilderString("from_str");
 
-		
 		/** The Constant TO. */
 		static final XContentBuilderString TO = new XContentBuilderString("to");
 
-		
 		/** The Constant TO_STR. */
 		static final XContentBuilderString TO_STR = new XContentBuilderString("to_str");
 
-		
 		/** The Constant COUNT. */
 		static final XContentBuilderString COUNT = new XContentBuilderString("count");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant TOTAL_COUNT. */
 		static final XContentBuilderString TOTAL_COUNT = new XContentBuilderString("total_count");
 
-		
 		/** The Constant MEAN. */
 		static final XContentBuilderString MEAN = new XContentBuilderString("mean");
 
-		
 		/** The Constant MIN. */
 		static final XContentBuilderString MIN = new XContentBuilderString("min");
 
-		
 		/** The Constant MAX. */
 		static final XContentBuilderString MAX = new XContentBuilderString("max");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -300,7 +266,7 @@ public class InternalRangeFacet implements RangeFacet, InternalFacet {
 				builder.field(Fields.TO_STR, entry.toAsString);
 			}
 			builder.field(Fields.COUNT, entry.count());
-			
+
 			if (entry.totalCount() > 0) {
 				builder.field(Fields.MIN, entry.min());
 				builder.field(Fields.MAX, entry.max());

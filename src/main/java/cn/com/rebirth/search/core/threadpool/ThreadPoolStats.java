@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ThreadPoolStats.java 2012-3-29 15:00:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ThreadPoolStats.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.threadpool;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class ThreadPoolStats.
  *
@@ -26,7 +24,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadPoolStats.Stats> {
 
-	
 	/**
 	 * The Class Stats.
 	 *
@@ -34,23 +31,18 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 	 */
 	public static class Stats implements Streamable, ToXContent {
 
-		
 		/** The name. */
 		private String name;
 
-		
 		/** The threads. */
 		private int threads;
 
-		
 		/** The queue. */
 		private int queue;
 
-		
 		/** The active. */
 		private int active;
 
-		
 		/**
 		 * Instantiates a new stats.
 		 */
@@ -58,7 +50,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 
 		}
 
-		
 		/**
 		 * Instantiates a new stats.
 		 *
@@ -74,7 +65,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			this.active = active;
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -84,7 +74,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.name;
 		}
 
-		
 		/**
 		 * Gets the name.
 		 *
@@ -94,7 +83,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.name;
 		}
 
-		
 		/**
 		 * Threads.
 		 *
@@ -104,7 +92,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.threads;
 		}
 
-		
 		/**
 		 * Gets the threads.
 		 *
@@ -114,7 +101,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.threads;
 		}
 
-		
 		/**
 		 * Queue.
 		 *
@@ -124,7 +110,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.queue;
 		}
 
-		
 		/**
 		 * Gets the queue.
 		 *
@@ -134,7 +119,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.queue;
 		}
 
-		
 		/**
 		 * Active.
 		 *
@@ -144,7 +128,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.active;
 		}
 
-		
 		/**
 		 * Gets the active.
 		 *
@@ -154,9 +137,8 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			return this.active;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -166,9 +148,8 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			active = in.readInt();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -178,9 +159,8 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 			out.writeInt(active);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+		 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 		 */
 		@Override
 		public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -199,11 +179,9 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 		}
 	}
 
-	
 	/** The stats. */
 	private List<Stats> stats;
 
-	
 	/**
 	 * Instantiates a new thread pool stats.
 	 */
@@ -211,7 +189,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 
 	}
 
-	
 	/**
 	 * Instantiates a new thread pool stats.
 	 *
@@ -221,7 +198,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 		this.stats = stats;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -230,7 +206,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 		return stats.iterator();
 	}
 
-	
 	/**
 	 * Read thread pool stats.
 	 *
@@ -244,9 +219,8 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 		return stats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -259,9 +233,8 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -271,7 +244,6 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 		}
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -279,26 +251,21 @@ public class ThreadPoolStats implements Streamable, ToXContent, Iterable<ThreadP
 	 */
 	static final class Fields {
 
-		
 		/** The Constant THREAD_POOL. */
 		static final XContentBuilderString THREAD_POOL = new XContentBuilderString("thread_pool");
 
-		
 		/** The Constant THREADS. */
 		static final XContentBuilderString THREADS = new XContentBuilderString("threads");
 
-		
 		/** The Constant QUEUE. */
 		static final XContentBuilderString QUEUE = new XContentBuilderString("queue");
 
-		
 		/** The Constant ACTIVE. */
 		static final XContentBuilderString ACTIVE = new XContentBuilderString("active");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {

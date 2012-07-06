@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeAliasesUpdatedAction.java 2012-3-29 15:01:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeAliasesUpdatedAction.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.action.index;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class NodeAliasesUpdatedAction.
  *
@@ -35,23 +33,18 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class NodeAliasesUpdatedAction extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The listeners. */
 	private final List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/**
 	 * Instantiates a new node aliases updated action.
 	 *
@@ -71,7 +64,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 				new NodeAliasesUpdatedTransportHandler());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -91,7 +83,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 		});
 	}
 
-	
 	/**
 	 * Removes the.
 	 *
@@ -101,14 +92,13 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 		listeners.remove(listener);
 	}
 
-	
 	/**
 	 * Node aliases updated.
 	 *
 	 * @param response the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void nodeAliasesUpdated(final NodeAliasesUpdatedResponse response) throws RestartException {
+	public void nodeAliasesUpdated(final NodeAliasesUpdatedResponse response) throws RebirthException {
 		DiscoveryNodes nodes = clusterService.state().nodes();
 		if (nodes.localNodeMaster()) {
 			threadPool.generic().execute(new Runnable() {
@@ -123,7 +113,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Inner node aliases updated.
 	 *
@@ -135,7 +124,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -143,7 +131,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On aliases updated.
 		 *
@@ -151,14 +138,12 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 		 */
 		void onAliasesUpdated(NodeAliasesUpdatedResponse response);
 
-		
 		/**
 		 * On timeout.
 		 */
 		void onTimeout();
 	}
 
-	
 	/**
 	 * The Class NodeAliasesUpdatedTransportHandler.
 	 *
@@ -166,22 +151,19 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 	 */
 	private class NodeAliasesUpdatedTransportHandler extends BaseTransportRequestHandler<NodeAliasesUpdatedResponse> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "cluster/nodeAliasesUpdated";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public NodeAliasesUpdatedResponse newInstance() {
 			return new NodeAliasesUpdatedResponse();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(NodeAliasesUpdatedResponse response, TransportChannel channel) throws Exception {
@@ -189,9 +171,8 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -199,7 +180,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class NodeAliasesUpdatedResponse.
 	 *
@@ -207,22 +187,18 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 	 */
 	public static class NodeAliasesUpdatedResponse implements Streamable {
 
-		
 		/** The node id. */
 		private String nodeId;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/**
 		 * Instantiates a new node aliases updated response.
 		 */
 		private NodeAliasesUpdatedResponse() {
 		}
 
-		
 		/**
 		 * Instantiates a new node aliases updated response.
 		 *
@@ -234,7 +210,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 			this.version = version;
 		}
 
-		
 		/**
 		 * Node id.
 		 *
@@ -244,7 +219,6 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 			return nodeId;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -254,9 +228,8 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 			return version;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -264,9 +237,8 @@ public class NodeAliasesUpdatedAction extends AbstractComponent {
 			out.writeLong(version);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {

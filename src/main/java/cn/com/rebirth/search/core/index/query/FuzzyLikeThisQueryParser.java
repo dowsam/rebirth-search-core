@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FuzzyLikeThisQueryParser.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FuzzyLikeThisQueryParser.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class FuzzyLikeThisQueryParser.
  *
@@ -26,11 +24,9 @@ import com.google.common.collect.Lists;
  */
 public class FuzzyLikeThisQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "flt";
 
-	
 	/**
 	 * Instantiates a new fuzzy like this query parser.
 	 */
@@ -38,18 +34,16 @@ public class FuzzyLikeThisQueryParser implements QueryParser {
 	public FuzzyLikeThisQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "fuzzy_like_this", "fuzzyLikeThis" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -112,7 +106,7 @@ public class FuzzyLikeThisQueryParser implements QueryParser {
 
 		FuzzyLikeThisQuery query = new FuzzyLikeThisQuery(maxNumTerms, analyzer);
 		if (fields == null) {
-			
+
 			query.addTerms(likeText, parseContext.defaultField(), minSimilarity, prefixLength);
 		} else {
 			for (String field : fields) {

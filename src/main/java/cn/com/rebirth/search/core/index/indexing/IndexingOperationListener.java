@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexingOperationListener.java 2012-3-29 15:01:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexingOperationListener.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.indexing;
 
 import cn.com.rebirth.search.core.index.engine.Engine;
-
 
 /**
  * The listener interface for receiving indexingOperation events.
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.index.engine.Engine;
  */
 public abstract class IndexingOperationListener {
 
-	
 	/**
 	 * Pre create.
 	 *
@@ -33,7 +30,6 @@ public abstract class IndexingOperationListener {
 		return create;
 	}
 
-	
 	/**
 	 * Post create.
 	 *
@@ -43,7 +39,6 @@ public abstract class IndexingOperationListener {
 
 	}
 
-	
 	/**
 	 * Pre index.
 	 *
@@ -54,7 +49,6 @@ public abstract class IndexingOperationListener {
 		return index;
 	}
 
-	
 	/**
 	 * Post index.
 	 *
@@ -64,7 +58,6 @@ public abstract class IndexingOperationListener {
 
 	}
 
-	
 	/**
 	 * Pre delete.
 	 *
@@ -75,7 +68,6 @@ public abstract class IndexingOperationListener {
 		return delete;
 	}
 
-	
 	/**
 	 * Post delete.
 	 *
@@ -85,7 +77,6 @@ public abstract class IndexingOperationListener {
 
 	}
 
-	
 	/**
 	 * Pre delete by query.
 	 *
@@ -96,7 +87,6 @@ public abstract class IndexingOperationListener {
 		return deleteByQuery;
 	}
 
-	
 	/**
 	 * Post delete by query.
 	 *

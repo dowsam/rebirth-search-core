@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexReplicationOperationRequest.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexReplicationOperationRequest.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.replication;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
 
-
 /**
  * The Class IndexReplicationOperationRequest.
  *
@@ -24,27 +22,21 @@ import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
  */
 public class IndexReplicationOperationRequest implements ActionRequest {
 
-	
 	/** The timeout. */
 	protected TimeValue timeout = ShardReplicationOperationRequest.DEFAULT_TIMEOUT;
 
-	
 	/** The index. */
 	protected String index;
 
-	
 	/** The threaded listener. */
 	private boolean threadedListener = false;
 
-	
 	/** The replication type. */
 	protected ReplicationType replicationType = ReplicationType.DEFAULT;
 
-	
 	/** The consistency level. */
 	protected WriteConsistencyLevel consistencyLevel = WriteConsistencyLevel.DEFAULT;
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -54,7 +46,6 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -64,7 +55,6 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return this.index;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -76,16 +66,14 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return this.threadedListener;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -95,7 +83,6 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return this.replicationType;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -105,9 +92,8 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return this.consistencyLevel;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public IndexReplicationOperationRequest listenerThreaded(boolean threadedListener) {
@@ -115,9 +101,8 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -128,9 +113,8 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -140,9 +124,8 @@ public class IndexReplicationOperationRequest implements ActionRequest {
 		index = in.readUTF();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

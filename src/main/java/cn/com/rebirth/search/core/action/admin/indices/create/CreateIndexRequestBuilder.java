@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CreateIndexRequestBuilder.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CreateIndexRequestBuilder.java 2012-7-6 14:29:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.create;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 
-
 /**
  * The Class CreateIndexRequestBuilder.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateIndexRequest, CreateIndexResponse> {
 
-	
 	/**
 	 * Instantiates a new creates the index request builder.
 	 *
@@ -33,7 +30,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		super(indicesClient, new CreateIndexRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new creates the index request builder.
 	 *
@@ -44,7 +40,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		super(indicesClient, new CreateIndexRequest(index));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -56,7 +51,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -68,7 +62,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -80,7 +73,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -92,7 +84,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -104,7 +95,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -116,7 +106,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Adds the mapping.
 	 *
@@ -129,7 +118,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Cause.
 	 *
@@ -141,7 +129,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Adds the mapping.
 	 *
@@ -154,7 +141,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Adds the mapping.
 	 *
@@ -167,7 +153,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -179,7 +164,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -191,7 +175,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -203,7 +186,6 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -215,9 +197,8 @@ public class CreateIndexRequestBuilder extends BaseIndicesRequestBuilder<CreateI
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<CreateIndexResponse> listener) {

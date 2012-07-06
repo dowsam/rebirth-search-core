@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core WordDelimiterIterator.java 2012-3-29 15:04:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core WordDelimiterIterator.java 2012-7-6 14:29:42 l.xue.nong$$
  */
-
 
 package org.apache.lucene.analysis.miscellaneous;
 
 import static org.apache.lucene.analysis.miscellaneous.WordDelimiterFilter.*;
-
 
 /**
  * The Class WordDelimiterIterator.
@@ -16,315 +14,270 @@ import static org.apache.lucene.analysis.miscellaneous.WordDelimiterFilter.*;
  */
 public final class WordDelimiterIterator {
 
-    
-    /** The Constant DONE. */
-    public static final int DONE = -1;
+	/** The Constant DONE. */
+	public static final int DONE = -1;
 
-    /** The Constant DEFAULT_WORD_DELIM_TABLE. */
-    public static final byte[] DEFAULT_WORD_DELIM_TABLE;
+	/** The Constant DEFAULT_WORD_DELIM_TABLE. */
+	public static final byte[] DEFAULT_WORD_DELIM_TABLE;
 
-    /** The text. */
-    char text[];
-    
-    /** The length. */
-    int length;
+	/** The text. */
+	char text[];
 
-    
-    /** The start bounds. */
-    int startBounds;
-    
-    /** The end bounds. */
-    int endBounds;
+	/** The length. */
+	int length;
 
-    
-    /** The current. */
-    int current;
-    
-    /** The end. */
-    int end;
+	/** The start bounds. */
+	int startBounds;
 
-    
-    /** The has final possessive. */
-    private boolean hasFinalPossessive = false;
+	/** The end bounds. */
+	int endBounds;
 
-    
-    /** The split on case change. */
-    final boolean splitOnCaseChange;
+	/** The current. */
+	int current;
 
-    
-    /** The split on numerics. */
-    final boolean splitOnNumerics;
+	/** The end. */
+	int end;
 
-    
-    /** The stem english possessive. */
-    final boolean stemEnglishPossessive;
+	/** The has final possessive. */
+	private boolean hasFinalPossessive = false;
 
-    /** The char type table. */
-    private final byte[] charTypeTable;
+	/** The split on case change. */
+	final boolean splitOnCaseChange;
 
-    
-    /** The skip possessive. */
-    private boolean skipPossessive = false;
+	/** The split on numerics. */
+	final boolean splitOnNumerics;
 
-    
-    
-    static {
-        byte[] tab = new byte[256];
-        for (int i = 0; i < 256; i++) {
-            byte code = 0;
-            if (Character.isLowerCase(i)) {
-                code |= LOWER;
-            } else if (Character.isUpperCase(i)) {
-                code |= UPPER;
-            } else if (Character.isDigit(i)) {
-                code |= DIGIT;
-            }
-            if (code == 0) {
-                code = SUBWORD_DELIM;
-            }
-            tab[i] = code;
-        }
-        DEFAULT_WORD_DELIM_TABLE = tab;
-    }
+	/** The stem english possessive. */
+	final boolean stemEnglishPossessive;
 
-    
-    /**
-     * Instantiates a new word delimiter iterator.
-     *
-     * @param charTypeTable the char type table
-     * @param splitOnCaseChange the split on case change
-     * @param splitOnNumerics the split on numerics
-     * @param stemEnglishPossessive the stem english possessive
-     */
-    WordDelimiterIterator(byte[] charTypeTable, boolean splitOnCaseChange, boolean splitOnNumerics, boolean stemEnglishPossessive) {
-        this.charTypeTable = charTypeTable;
-        this.splitOnCaseChange = splitOnCaseChange;
-        this.splitOnNumerics = splitOnNumerics;
-        this.stemEnglishPossessive = stemEnglishPossessive;
-    }
+	/** The char type table. */
+	private final byte[] charTypeTable;
 
-    
-    /**
-     * Next.
-     *
-     * @return the int
-     */
-    int next() {
-        current = end;
-        if (current == DONE) {
-            return DONE;
-        }
+	/** The skip possessive. */
+	private boolean skipPossessive = false;
 
-        if (skipPossessive) {
-            current += 2;
-            skipPossessive = false;
-        }
+	static {
+		byte[] tab = new byte[256];
+		for (int i = 0; i < 256; i++) {
+			byte code = 0;
+			if (Character.isLowerCase(i)) {
+				code |= LOWER;
+			} else if (Character.isUpperCase(i)) {
+				code |= UPPER;
+			} else if (Character.isDigit(i)) {
+				code |= DIGIT;
+			}
+			if (code == 0) {
+				code = SUBWORD_DELIM;
+			}
+			tab[i] = code;
+		}
+		DEFAULT_WORD_DELIM_TABLE = tab;
+	}
 
-        int lastType = 0;
+	/**
+	 * Instantiates a new word delimiter iterator.
+	 *
+	 * @param charTypeTable the char type table
+	 * @param splitOnCaseChange the split on case change
+	 * @param splitOnNumerics the split on numerics
+	 * @param stemEnglishPossessive the stem english possessive
+	 */
+	WordDelimiterIterator(byte[] charTypeTable, boolean splitOnCaseChange, boolean splitOnNumerics,
+			boolean stemEnglishPossessive) {
+		this.charTypeTable = charTypeTable;
+		this.splitOnCaseChange = splitOnCaseChange;
+		this.splitOnNumerics = splitOnNumerics;
+		this.stemEnglishPossessive = stemEnglishPossessive;
+	}
 
-        while (current < endBounds && (isSubwordDelim(lastType = charType(text[current])))) {
-            current++;
-        }
+	/**
+	 * Next.
+	 *
+	 * @return the int
+	 */
+	int next() {
+		current = end;
+		if (current == DONE) {
+			return DONE;
+		}
 
-        if (current >= endBounds) {
-            return end = DONE;
-        }
+		if (skipPossessive) {
+			current += 2;
+			skipPossessive = false;
+		}
 
-        for (end = current + 1; end < endBounds; end++) {
-            int type = charType(text[end]);
-            if (isBreak(lastType, type)) {
-                break;
-            }
-            lastType = type;
-        }
+		int lastType = 0;
 
-        if (end < endBounds - 1 && endsWithPossessive(end + 2)) {
-            skipPossessive = true;
-        }
+		while (current < endBounds && (isSubwordDelim(lastType = charType(text[current])))) {
+			current++;
+		}
 
-        return end;
-    }
+		if (current >= endBounds) {
+			return end = DONE;
+		}
 
+		for (end = current + 1; end < endBounds; end++) {
+			int type = charType(text[end]);
+			if (isBreak(lastType, type)) {
+				break;
+			}
+			lastType = type;
+		}
 
-    
-    /**
-     * Type.
-     *
-     * @return the int
-     */
-    int type() {
-        if (end == DONE) {
-            return 0;
-        }
+		if (end < endBounds - 1 && endsWithPossessive(end + 2)) {
+			skipPossessive = true;
+		}
 
-        int type = charType(text[current]);
-        switch (type) {
-            
-            case LOWER:
-            case UPPER:
-                return ALPHA;
-            default:
-                return type;
-        }
-    }
+		return end;
+	}
 
-    
-    /**
-     * Sets the text.
-     *
-     * @param text the text
-     * @param length the length
-     */
-    void setText(char text[], int length) {
-        this.text = text;
-        this.length = this.endBounds = length;
-        current = startBounds = end = 0;
-        skipPossessive = hasFinalPossessive = false;
-        setBounds();
-    }
+	/**
+	 * Type.
+	 *
+	 * @return the int
+	 */
+	int type() {
+		if (end == DONE) {
+			return 0;
+		}
 
-    
+		int type = charType(text[current]);
+		switch (type) {
 
-    
-    /**
-     * Checks if is break.
-     *
-     * @param lastType the last type
-     * @param type the type
-     * @return true, if is break
-     */
-    private boolean isBreak(int lastType, int type) {
-        if ((type & lastType) != 0) {
-            return false;
-        }
+		case LOWER:
+		case UPPER:
+			return ALPHA;
+		default:
+			return type;
+		}
+	}
 
-        if (!splitOnCaseChange && isAlpha(lastType) && isAlpha(type)) {
-            
-            return false;
-        } else if (isUpper(lastType) && isAlpha(type)) {
-            
-            return false;
-        } else if (!splitOnNumerics && ((isAlpha(lastType) && isDigit(type)) || (isDigit(lastType) && isAlpha(type)))) {
-            
-            return false;
-        }
+	/**
+	 * Sets the text.
+	 *
+	 * @param text the text
+	 * @param length the length
+	 */
+	void setText(char text[], int length) {
+		this.text = text;
+		this.length = this.endBounds = length;
+		current = startBounds = end = 0;
+		skipPossessive = hasFinalPossessive = false;
+		setBounds();
+	}
 
-        return true;
-    }
+	/**
+	 * Checks if is break.
+	 *
+	 * @param lastType the last type
+	 * @param type the type
+	 * @return true, if is break
+	 */
+	private boolean isBreak(int lastType, int type) {
+		if ((type & lastType) != 0) {
+			return false;
+		}
 
-    
-    /**
-     * Checks if is single word.
-     *
-     * @return true, if is single word
-     */
-    boolean isSingleWord() {
-        if (hasFinalPossessive) {
-            return current == startBounds && end == endBounds - 2;
-        } else {
-            return current == startBounds && end == endBounds;
-        }
-    }
+		if (!splitOnCaseChange && isAlpha(lastType) && isAlpha(type)) {
 
-    
-    /**
-     * Sets the bounds.
-     */
-    private void setBounds() {
-        while (startBounds < length && (isSubwordDelim(charType(text[startBounds])))) {
-            startBounds++;
-        }
+			return false;
+		} else if (isUpper(lastType) && isAlpha(type)) {
 
-        while (endBounds > startBounds && (isSubwordDelim(charType(text[endBounds - 1])))) {
-            endBounds--;
-        }
-        if (endsWithPossessive(endBounds)) {
-            hasFinalPossessive = true;
-        }
-        current = startBounds;
-    }
+			return false;
+		} else if (!splitOnNumerics && ((isAlpha(lastType) && isDigit(type)) || (isDigit(lastType) && isAlpha(type)))) {
 
-    
-    /**
-     * Ends with possessive.
-     *
-     * @param pos the pos
-     * @return true, if successful
-     */
-    private boolean endsWithPossessive(int pos) {
-        return (stemEnglishPossessive &&
-                pos > 2 &&
-                text[pos - 2] == '\'' &&
-                (text[pos - 1] == 's' || text[pos - 1] == 'S') &&
-                isAlpha(charType(text[pos - 3])) &&
-                (pos == endBounds || isSubwordDelim(charType(text[pos]))));
-    }
+			return false;
+		}
 
-    
-    /**
-     * Char type.
-     *
-     * @param ch the ch
-     * @return the int
-     */
-    private int charType(int ch) {
-        if (ch < charTypeTable.length) {
-            return charTypeTable[ch];
-        }
-        return getType(ch);
-    }
+		return true;
+	}
 
-    
-    /**
-     * Gets the type.
-     *
-     * @param ch the ch
-     * @return the type
-     */
-    public static byte getType(int ch) {
-        switch (Character.getType(ch)) {
-            case Character.UPPERCASE_LETTER:
-                return UPPER;
-            case Character.LOWERCASE_LETTER:
-                return LOWER;
+	/**
+	 * Checks if is single word.
+	 *
+	 * @return true, if is single word
+	 */
+	boolean isSingleWord() {
+		if (hasFinalPossessive) {
+			return current == startBounds && end == endBounds - 2;
+		} else {
+			return current == startBounds && end == endBounds;
+		}
+	}
 
-            case Character.TITLECASE_LETTER:
-            case Character.MODIFIER_LETTER:
-            case Character.OTHER_LETTER:
-            case Character.NON_SPACING_MARK:
-            case Character.ENCLOSING_MARK:  
-            case Character.COMBINING_SPACING_MARK:
-                return ALPHA;
+	/**
+	 * Sets the bounds.
+	 */
+	private void setBounds() {
+		while (startBounds < length && (isSubwordDelim(charType(text[startBounds])))) {
+			startBounds++;
+		}
 
-            case Character.DECIMAL_DIGIT_NUMBER:
-            case Character.LETTER_NUMBER:
-            case Character.OTHER_NUMBER:
-                return DIGIT;
+		while (endBounds > startBounds && (isSubwordDelim(charType(text[endBounds - 1])))) {
+			endBounds--;
+		}
+		if (endsWithPossessive(endBounds)) {
+			hasFinalPossessive = true;
+		}
+		current = startBounds;
+	}
 
-            
-            
-            
-            
-            
-            
+	/**
+	 * Ends with possessive.
+	 *
+	 * @param pos the pos
+	 * @return true, if successful
+	 */
+	private boolean endsWithPossessive(int pos) {
+		return (stemEnglishPossessive && pos > 2 && text[pos - 2] == '\''
+				&& (text[pos - 1] == 's' || text[pos - 1] == 'S') && isAlpha(charType(text[pos - 3])) && (pos == endBounds || isSubwordDelim(charType(text[pos]))));
+	}
 
-            case Character.SURROGATE:  
-                return ALPHA | DIGIT;
+	/**
+	 * Char type.
+	 *
+	 * @param ch the ch
+	 * @return the int
+	 */
+	private int charType(int ch) {
+		if (ch < charTypeTable.length) {
+			return charTypeTable[ch];
+		}
+		return getType(ch);
+	}
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+	/**
+	 * Gets the type.
+	 *
+	 * @param ch the ch
+	 * @return the type
+	 */
+	public static byte getType(int ch) {
+		switch (Character.getType(ch)) {
+		case Character.UPPERCASE_LETTER:
+			return UPPER;
+		case Character.LOWERCASE_LETTER:
+			return LOWER;
 
-            default:
-                return SUBWORD_DELIM;
-        }
-    }
+		case Character.TITLECASE_LETTER:
+		case Character.MODIFIER_LETTER:
+		case Character.OTHER_LETTER:
+		case Character.NON_SPACING_MARK:
+		case Character.ENCLOSING_MARK:
+		case Character.COMBINING_SPACING_MARK:
+			return ALPHA;
+
+		case Character.DECIMAL_DIGIT_NUMBER:
+		case Character.LETTER_NUMBER:
+		case Character.OTHER_NUMBER:
+			return DIGIT;
+
+		case Character.SURROGATE:
+			return ALPHA | DIGIT;
+
+		default:
+			return SUBWORD_DELIM;
+		}
+	}
 }

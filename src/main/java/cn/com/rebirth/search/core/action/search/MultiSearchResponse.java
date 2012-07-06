@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiSearchResponse.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiSearchResponse.java 2012-7-6 14:29:09 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.action.search;
@@ -20,7 +20,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class MultiSearchResponse.
  *
@@ -28,7 +27,6 @@ import com.google.common.collect.Iterators;
  */
 public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearchResponse.Item>, ToXContent {
 
-	
 	/**
 	 * The Class Item.
 	 *
@@ -36,15 +34,12 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 	 */
 	public static class Item implements Streamable {
 
-		
 		/** The response. */
 		private SearchResponse response;
 
-		
 		/** The failure message. */
 		private String failureMessage;
 
-		
 		/**
 		 * Instantiates a new item.
 		 */
@@ -52,7 +47,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 
 		}
 
-		
 		/**
 		 * Instantiates a new item.
 		 *
@@ -64,7 +58,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			this.failureMessage = failureMessage;
 		}
 
-		
 		/**
 		 * Checks if is failure.
 		 *
@@ -74,7 +67,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			return failureMessage != null;
 		}
 
-		
 		/**
 		 * Failure message.
 		 *
@@ -85,7 +77,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			return failureMessage;
 		}
 
-		
 		/**
 		 * Gets the failure message.
 		 *
@@ -96,7 +87,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			return failureMessage;
 		}
 
-		
 		/**
 		 * Response.
 		 *
@@ -107,7 +97,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			return this.response;
 		}
 
-		
 		/**
 		 * Gets the response.
 		 *
@@ -118,7 +107,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			return this.response;
 		}
 
-		
 		/**
 		 * Read item.
 		 *
@@ -132,9 +120,8 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			return item;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -146,9 +133,8 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -161,18 +147,15 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		}
 	}
 
-	
 	/** The items. */
 	private Item[] items;
 
-	
 	/**
 	 * Instantiates a new multi search response.
 	 */
 	MultiSearchResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new multi search response.
 	 *
@@ -182,7 +165,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		this.items = items;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -191,7 +173,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		return Iterators.forArray(items);
 	}
 
-	
 	/**
 	 * Responses.
 	 *
@@ -201,7 +182,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		return this.items;
 	}
 
-	
 	/**
 	 * Gets the responses.
 	 *
@@ -211,9 +191,8 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		return this.items;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -223,9 +202,8 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -235,9 +213,8 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -257,7 +234,6 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -265,11 +241,9 @@ public class MultiSearchResponse implements ActionResponse, Iterable<MultiSearch
 	 */
 	static final class Fields {
 
-		
 		/** The Constant RESPONSES. */
 		static final XContentBuilderString RESPONSES = new XContentBuilderString("responses");
 
-		
 		/** The Constant ERROR. */
 		static final XContentBuilderString ERROR = new XContentBuilderString("error");
 	}

@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InitialStateDiscoveryListener.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InitialStateDiscoveryListener.java 2012-7-6 14:30:35 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.discovery;
-
 
 /**
  * The listener interface for receiving initialStateDiscovery events.
@@ -20,8 +18,8 @@ package cn.com.rebirth.search.core.discovery;
  */
 public interface InitialStateDiscoveryListener {
 
-    /**
-     * Initial state processed.
-     */
-    void initialStateProcessed();
+	/**
+	 * Initial state processed.
+	 */
+	void initialStateProcessed();
 }

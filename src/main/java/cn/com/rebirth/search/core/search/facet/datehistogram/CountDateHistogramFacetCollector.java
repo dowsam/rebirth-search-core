@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CountDateHistogramFacetCollector.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CountDateHistogramFacetCollector.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.datehistogram;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class CountDateHistogramFacetCollector.
  *
@@ -32,31 +30,24 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class CountDateHistogramFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index field name. */
 	private final String indexFieldName;
 
-	
 	/** The comparator type. */
 	private final DateHistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The field data type. */
 	private final FieldDataType fieldDataType;
 
-	
 	/** The field data. */
 	private LongFieldData fieldData;
 
-	
 	/** The histo proc. */
 	private final DateHistogramProc histoProc;
 
-	
 	/**
 	 * Instantiates a new count date histogram facet collector.
 	 *
@@ -77,7 +68,6 @@ public class CountDateHistogramFacetCollector extends AbstractFacetCollector {
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + fieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -89,34 +79,30 @@ public class CountDateHistogramFacetCollector extends AbstractFacetCollector {
 		histoProc = new DateHistogramProc(tzRounding);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		fieldData.forEachValueInDoc(doc, histoProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		fieldData = (LongFieldData) fieldDataCache.cache(fieldDataType, reader, indexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalCountDateHistogramFacet(facetName, comparatorType, histoProc.counts(), true);
 	}
 
-	
 	/**
 	 * The Class DateHistogramProc.
 	 *
@@ -124,15 +110,12 @@ public class CountDateHistogramFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class DateHistogramProc implements LongFieldData.LongValueInDocProc {
 
-		
 		/** The counts. */
 		private final TLongLongHashMap counts = CacheRecycler.popLongLongMap();
 
-		
 		/** The tz rounding. */
 		private final TimeZoneRounding tzRounding;
 
-		
 		/**
 		 * Instantiates a new date histogram proc.
 		 *
@@ -142,16 +125,14 @@ public class CountDateHistogramFacetCollector extends AbstractFacetCollector {
 			this.tzRounding = tzRounding;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
 		 */
 		@Override
 		public void onValue(int docId, long value) {
 			counts.adjustOrPutValue(tzRounding.calc(value), 1, 1);
 		}
 
-		
 		/**
 		 * Counts.
 		 *

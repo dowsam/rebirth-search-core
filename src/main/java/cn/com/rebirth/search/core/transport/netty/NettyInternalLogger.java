@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NettyInternalLogger.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NettyInternalLogger.java 2012-7-6 14:30:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport.netty;
 
 import org.jboss.netty.logging.AbstractInternalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 /**
  * The Class NettyInternalLogger.
@@ -18,7 +16,6 @@ import org.slf4j.LoggerFactory;
  */
 public class NettyInternalLogger extends AbstractInternalLogger {
 
-	
 	/** The logger. */
 	private final Logger logger;
 
@@ -32,7 +29,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		this.logger = logger;
 	}
 
-	
 	/**
 	 * Instantiates a new netty internal logger.
 	 */
@@ -41,7 +37,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		this.logger = LoggerFactory.getLogger(getClass());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#isDebugEnabled()
 	 */
@@ -50,7 +45,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		return logger.isDebugEnabled();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#isInfoEnabled()
 	 */
@@ -59,7 +53,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		return logger.isInfoEnabled();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#isWarnEnabled()
 	 */
@@ -68,7 +61,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		return logger.isWarnEnabled();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#isErrorEnabled()
 	 */
@@ -77,7 +69,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		return logger.isErrorEnabled();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#debug(java.lang.String)
 	 */
@@ -86,7 +77,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.debug(msg);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#debug(java.lang.String, java.lang.Throwable)
 	 */
@@ -95,7 +85,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.debug(msg, cause);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#info(java.lang.String)
 	 */
@@ -104,7 +93,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.info(msg);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#info(java.lang.String, java.lang.Throwable)
 	 */
@@ -113,7 +101,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.info(msg, cause);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#warn(java.lang.String)
 	 */
@@ -122,7 +109,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.warn(msg);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#warn(java.lang.String, java.lang.Throwable)
 	 */
@@ -131,7 +117,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.warn(msg, cause);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#error(java.lang.String)
 	 */
@@ -140,7 +125,6 @@ public class NettyInternalLogger extends AbstractInternalLogger {
 		logger.error(msg);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.jboss.netty.logging.InternalLogger#error(java.lang.String, java.lang.Throwable)
 	 */

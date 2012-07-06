@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DocumentMapperParser.java 2012-3-29 15:02:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DocumentMapperParser.java 2012-7-6 14:30:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
@@ -55,7 +54,6 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class DocumentMapperParser.
  *
@@ -63,27 +61,21 @@ import com.google.common.collect.Maps;
  */
 public class DocumentMapperParser extends AbstractIndexComponent {
 
-	
 	/** The analysis service. */
 	final AnalysisService analysisService;
 
-	
 	/** The root object type parser. */
 	private final RootObjectMapper.TypeParser rootObjectTypeParser = new RootObjectMapper.TypeParser();
 
-	
 	/** The type parsers mutex. */
 	private final Object typeParsersMutex = new Object();
 
-	
 	/** The type parsers. */
 	private volatile ImmutableMap<String, Mapper.TypeParser> typeParsers;
 
-	
 	/** The root type parsers. */
 	private volatile ImmutableMap<String, Mapper.TypeParser> rootTypeParsers;
 
-	
 	/**
 	 * Instantiates a new document mapper parser.
 	 *
@@ -94,7 +86,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		this(index, ImmutableSettings.Builder.EMPTY_SETTINGS, analysisService);
 	}
 
-	
 	/**
 	 * Instantiates a new document mapper parser.
 	 *
@@ -138,7 +129,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 				.put(IdFieldMapper.NAME, new IdFieldMapper.TypeParser()).immutableMap();
 	}
 
-	
 	/**
 	 * Put type parser.
 	 *
@@ -152,7 +142,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Put root type parser.
 	 *
@@ -166,7 +155,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Parser context.
 	 *
@@ -176,7 +164,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		return new Mapper.TypeParser.ParserContext(analysisService, typeParsers);
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -188,7 +175,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		return parse(null, source);
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -201,7 +187,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		return parse(type, source, null);
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -289,12 +274,11 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 		docBuilder.meta(attributes);
 
 		DocumentMapper documentMapper = docBuilder.build(this);
-		
+
 		documentMapper.refreshSource();
 		return documentMapper;
 	}
 
-	
 	/**
 	 * Extract mapping.
 	 *
@@ -318,7 +302,6 @@ public class DocumentMapperParser extends AbstractIndexComponent {
 			}
 		}
 
-		
 		if (root.keySet().size() != 1) {
 			throw new MapperParsingException("Mapping must have the `type` as the root object");
 		}

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SingleValueGeoPointFieldData.java 2012-3-29 15:01:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SingleValueGeoPointFieldData.java 2012-7-6 14:30:38 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.geo;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.commons.RamUsage;
 import cn.com.rebirth.search.core.index.field.data.doubles.DoubleFieldData;
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
 
-
 /**
  * The Class SingleValueGeoPointFieldData.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
  */
 public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 
-	
 	/** The values array cache. */
 	private static ThreadLocal<ThreadLocals.CleanableValue<GeoPoint[]>> valuesArrayCache = new ThreadLocal<ThreadLocals.CleanableValue<GeoPoint[]>>() {
 		@Override
@@ -30,7 +27,6 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		}
 	};
 
-	
 	/** The values lat cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<double[]>> valuesLatCache = new ThreadLocal<ThreadLocals.CleanableValue<double[]>>() {
 		@Override
@@ -39,7 +35,6 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		}
 	};
 
-	
 	/** The values lon cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<double[]>> valuesLonCache = new ThreadLocal<ThreadLocals.CleanableValue<double[]>>() {
 		@Override
@@ -48,12 +43,9 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		}
 	};
 
-	
-	
 	/** The ordinals. */
 	private final int[] ordinals;
 
-	
 	/**
 	 * Instantiates a new single value geo point field data.
 	 *
@@ -67,36 +59,32 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		this.ordinals = ordinals;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#computeSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#computeSizeInBytes()
 	 */
 	@Override
 	protected long computeSizeInBytes() {
 		return super.computeSizeInBytes() + RamUsage.NUM_BYTES_INT * ordinals.length + RamUsage.NUM_BYTES_ARRAY_HEADER;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#multiValued()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#multiValued()
 	 */
 	@Override
 	public boolean multiValued() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#hasValue(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#hasValue(int)
 	 */
 	@Override
 	public boolean hasValue(int docId) {
 		return ordinals[docId] != 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.StringValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.StringValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, StringValueInDocProc proc) {
@@ -108,18 +96,16 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		proc.onValue(docId, GeoHashUtils.encode(lat[loc], lon[loc]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.OrdinalInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.OrdinalInDocProc)
 	 */
 	@Override
 	public void forEachOrdinalInDoc(int docId, OrdinalInDocProc proc) {
 		proc.onOrdinal(docId, ordinals[docId]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, ValueInDocProc proc) {
@@ -130,9 +116,8 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		proc.onValue(docId, lat[loc], lon[loc]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#value(int)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#value(int)
 	 */
 	@Override
 	public GeoPoint value(int docId) {
@@ -145,9 +130,8 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		return point;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#values(int)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#values(int)
 	 */
 	@Override
 	public GeoPoint[] values(int docId) {
@@ -160,27 +144,24 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		return ret;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#latValue(int)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#latValue(int)
 	 */
 	@Override
 	public double latValue(int docId) {
 		return lat[ordinals[docId]];
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#lonValue(int)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#lonValue(int)
 	 */
 	@Override
 	public double lonValue(int docId) {
 		return lon[ordinals[docId]];
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#latValues(int)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#latValues(int)
 	 */
 	@Override
 	public double[] latValues(int docId) {
@@ -193,9 +174,8 @@ public class SingleValueGeoPointFieldData extends GeoPointFieldData {
 		return ret;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData#lonValues(int)
+	 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData#lonValues(int)
 	 */
 	@Override
 	public double[] lonValues(int docId) {

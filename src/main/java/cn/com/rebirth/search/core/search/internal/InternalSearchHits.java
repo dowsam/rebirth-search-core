@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalSearchHits.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalSearchHits.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.internal;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchHits.StreamConte
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class InternalSearchHits.
  *
@@ -34,7 +32,6 @@ import com.google.common.collect.Iterators;
  */
 public class InternalSearchHits implements SearchHits {
 
-	
 	/**
 	 * The Class StreamContext.
 	 *
@@ -42,7 +39,6 @@ public class InternalSearchHits implements SearchHits {
 	 */
 	public static class StreamContext {
 
-		
 		/**
 		 * The Enum ShardTargetType.
 		 *
@@ -50,32 +46,25 @@ public class InternalSearchHits implements SearchHits {
 		 */
 		public static enum ShardTargetType {
 
-			
-			/** The STREAM. */
+			/** The stream. */
 			STREAM,
 
-			
-			/** The LOOKUP. */
+			/** The lookup. */
 			LOOKUP,
 
-			
-			/** The N o_ stream. */
+			/** The no stream. */
 			NO_STREAM
 		}
 
-		
 		/** The shard handle lookup. */
 		private IdentityHashMap<SearchShardTarget, Integer> shardHandleLookup = new IdentityHashMap<SearchShardTarget, Integer>();
 
-		
 		/** The handle shard lookup. */
 		private TIntObjectHashMap<SearchShardTarget> handleShardLookup = new TIntObjectHashMap<SearchShardTarget>();
 
-		
 		/** The stream shard target. */
 		private ShardTargetType streamShardTarget = ShardTargetType.STREAM;
 
-		
 		/**
 		 * Reset.
 		 *
@@ -88,7 +77,6 @@ public class InternalSearchHits implements SearchHits {
 			return this;
 		}
 
-		
 		/**
 		 * Shard handle lookup.
 		 *
@@ -98,7 +86,6 @@ public class InternalSearchHits implements SearchHits {
 			return shardHandleLookup;
 		}
 
-		
 		/**
 		 * Handle shard lookup.
 		 *
@@ -108,7 +95,6 @@ public class InternalSearchHits implements SearchHits {
 			return handleShardLookup;
 		}
 
-		
 		/**
 		 * Stream shard target.
 		 *
@@ -118,7 +104,6 @@ public class InternalSearchHits implements SearchHits {
 			return streamShardTarget;
 		}
 
-		
 		/**
 		 * Stream shard target.
 		 *
@@ -131,7 +116,6 @@ public class InternalSearchHits implements SearchHits {
 		}
 	}
 
-	
 	/** The Constant cache. */
 	private static final ThreadLocal<ThreadLocals.CleanableValue<StreamContext>> cache = new ThreadLocal<ThreadLocals.CleanableValue<StreamContext>>() {
 		@Override
@@ -140,7 +124,6 @@ public class InternalSearchHits implements SearchHits {
 		}
 	};
 
-	
 	/**
 	 * Stream context.
 	 *
@@ -150,23 +133,18 @@ public class InternalSearchHits implements SearchHits {
 		return cache.get().get().reset();
 	}
 
-	
 	/** The Constant EMPTY. */
 	public static final InternalSearchHit[] EMPTY = new InternalSearchHit[0];
 
-	
 	/** The hits. */
 	private InternalSearchHit[] hits;
 
-	
 	/** The total hits. */
 	public long totalHits;
 
-	
 	/** The max score. */
 	private float maxScore;
 
-	
 	/**
 	 * Instantiates a new internal search hits.
 	 */
@@ -174,7 +152,6 @@ public class InternalSearchHits implements SearchHits {
 
 	}
 
-	
 	/**
 	 * Instantiates a new internal search hits.
 	 *
@@ -188,7 +165,6 @@ public class InternalSearchHits implements SearchHits {
 		this.maxScore = maxScore;
 	}
 
-	
 	/**
 	 * Shard target.
 	 *
@@ -200,68 +176,60 @@ public class InternalSearchHits implements SearchHits {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#totalHits()
+	 * @see cn.com.rebirth.search.core.search.SearchHits#totalHits()
 	 */
 	public long totalHits() {
 		return totalHits;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#getTotalHits()
+	 * @see cn.com.rebirth.search.core.search.SearchHits#getTotalHits()
 	 */
 	@Override
 	public long getTotalHits() {
 		return totalHits();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#maxScore()
+	 * @see cn.com.rebirth.search.core.search.SearchHits#maxScore()
 	 */
 	@Override
 	public float maxScore() {
 		return this.maxScore;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#getMaxScore()
+	 * @see cn.com.rebirth.search.core.search.SearchHits#getMaxScore()
 	 */
 	@Override
 	public float getMaxScore() {
 		return maxScore();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#hits()
+	 * @see cn.com.rebirth.search.core.search.SearchHits#hits()
 	 */
 	public SearchHit[] hits() {
 		return this.hits;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#getAt(int)
+	 * @see cn.com.rebirth.search.core.search.SearchHits#getAt(int)
 	 */
 	@Override
 	public SearchHit getAt(int position) {
 		return hits[position];
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchHits#getHits()
+	 * @see cn.com.rebirth.search.core.search.SearchHits#getHits()
 	 */
 	@Override
 	public SearchHit[] getHits() {
 		return hits();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -270,7 +238,6 @@ public class InternalSearchHits implements SearchHits {
 		return Iterators.forArray(hits());
 	}
 
-	
 	/**
 	 * Internal hits.
 	 *
@@ -280,7 +247,6 @@ public class InternalSearchHits implements SearchHits {
 		return this.hits;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -288,22 +254,18 @@ public class InternalSearchHits implements SearchHits {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant HITS. */
 		static final XContentBuilderString HITS = new XContentBuilderString("hits");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant MAX_SCORE. */
 		static final XContentBuilderString MAX_SCORE = new XContentBuilderString("max_score");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -324,7 +286,6 @@ public class InternalSearchHits implements SearchHits {
 		return builder;
 	}
 
-	
 	/**
 	 * Read search hits.
 	 *
@@ -339,7 +300,6 @@ public class InternalSearchHits implements SearchHits {
 		return hits;
 	}
 
-	
 	/**
 	 * Read search hits.
 	 *
@@ -353,16 +313,14 @@ public class InternalSearchHits implements SearchHits {
 		return hits;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		readFrom(in, streamContext().streamShardTarget(StreamContext.ShardTargetType.LOOKUP));
 	}
 
-	
 	/**
 	 * Read from.
 	 *
@@ -378,7 +336,7 @@ public class InternalSearchHits implements SearchHits {
 			hits = EMPTY;
 		} else {
 			if (context.streamShardTarget() == StreamContext.ShardTargetType.LOOKUP) {
-				
+
 				int lookupSize = in.readVInt();
 				for (int i = 0; i < lookupSize; i++) {
 					context.handleShardLookup().put(in.readVInt(), SearchShardTarget.readSearchShardTarget(in));
@@ -392,16 +350,14 @@ public class InternalSearchHits implements SearchHits {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
 		writeTo(out, streamContext().streamShardTarget(StreamContext.ShardTargetType.LOOKUP));
 	}
 
-	
 	/**
 	 * Write to.
 	 *
@@ -415,7 +371,7 @@ public class InternalSearchHits implements SearchHits {
 		out.writeVInt(hits.length);
 		if (hits.length > 0) {
 			if (context.streamShardTarget() == StreamContext.ShardTargetType.LOOKUP) {
-				
+
 				int counter = 1;
 				for (InternalSearchHit hit : hits) {
 					if (hit.shard() != null) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportValidateQueryAction.java 2012-3-29 15:02:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportValidateQueryAction.java 2012-7-6 14:29:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.validate.query;
 
@@ -14,7 +13,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import jsr166y.ThreadLocalRandom;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportValidateQueryAction.
  *
@@ -43,11 +41,9 @@ public class TransportValidateQueryAction
 		extends
 		TransportBroadcastOperationAction<ValidateQueryRequest, ValidateQueryResponse, ShardValidateQueryRequest, ShardValidateQueryResponse> {
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/**
 	 * Instantiates a new transport validate query action.
 	 *
@@ -64,45 +60,40 @@ public class TransportValidateQueryAction
 		this.indicesService = indicesService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.SEARCH;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return ValidateQueryAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
 	 */
 	@Override
 	protected ValidateQueryRequest newRequest() {
 		return new ValidateQueryRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
 	 */
 	@Override
 	protected ShardValidateQueryRequest newShardRequest() {
 		return new ShardValidateQueryRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ShardValidateQueryRequest newShardRequest(ShardRouting shard, ValidateQueryRequest request) {
@@ -111,41 +102,37 @@ public class TransportValidateQueryAction
 		return new ShardValidateQueryRequest(shard.index(), shard.id(), filteringAliases, request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
 	 */
 	@Override
 	protected ShardValidateQueryResponse newShardResponse() {
 		return new ShardValidateQueryResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected GroupShardsIterator shards(ClusterState clusterState, ValidateQueryRequest request,
 			String[] concreteIndices) {
-		
+
 		Map<String, Set<String>> routingMap = clusterState.metaData().resolveSearchRouting(
 				Integer.toString(ThreadLocalRandom.current().nextInt(1000)), request.indices());
 		return clusterService.operationRouting().searchShards(clusterState, request.indices(), concreteIndices, null,
 				routingMap, "_local");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, ValidateQueryRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.READ);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, ValidateQueryRequest countRequest,
@@ -153,9 +140,8 @@ public class TransportValidateQueryAction
 		return state.blocks().indicesBlockedException(ClusterBlockLevel.READ, concreteIndices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected ValidateQueryResponse newResponse(ValidateQueryRequest request, AtomicReferenceArray shardsResponses,
@@ -183,13 +169,11 @@ public class TransportValidateQueryAction
 		return new ValidateQueryResponse(valid, shardsResponses.length(), successfulShards, failedShards, shardFailures);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest)
 	 */
 	@Override
-	protected ShardValidateQueryResponse shardOperation(ShardValidateQueryRequest request)
-			throws RestartException {
+	protected ShardValidateQueryResponse shardOperation(ShardValidateQueryRequest request) throws RebirthException {
 		IndexQueryParserService queryParserService = indicesService.indexServiceSafe(request.index())
 				.queryParserService();
 		boolean valid;

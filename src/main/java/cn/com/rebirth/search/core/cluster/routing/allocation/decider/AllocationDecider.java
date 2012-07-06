@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AllocationDecider.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AllocationDecider.java 2012-7-6 14:30:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingNode;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 
-
 /**
  * The Class AllocationDecider.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
  */
 public abstract class AllocationDecider extends AbstractComponent {
 
-	
 	/**
 	 * The Enum Decision.
 	 *
@@ -28,8 +25,7 @@ public abstract class AllocationDecider extends AbstractComponent {
 	 */
 	public static enum Decision {
 
-		
-		/** The YES. */
+		/** The yes. */
 		YES {
 			@Override
 			public boolean allocate() {
@@ -37,8 +33,7 @@ public abstract class AllocationDecider extends AbstractComponent {
 			}
 		},
 
-		
-		/** The NO. */
+		/** The no. */
 		NO {
 			@Override
 			public boolean allocate() {
@@ -46,8 +41,7 @@ public abstract class AllocationDecider extends AbstractComponent {
 			}
 		},
 
-		
-		/** The THROTTLE. */
+		/** The throttle. */
 		THROTTLE {
 			@Override
 			public boolean allocate() {
@@ -55,7 +49,6 @@ public abstract class AllocationDecider extends AbstractComponent {
 			}
 		};
 
-		
 		/**
 		 * Allocate.
 		 *
@@ -64,7 +57,6 @@ public abstract class AllocationDecider extends AbstractComponent {
 		public abstract boolean allocate();
 	}
 
-	
 	/**
 	 * Instantiates a new allocation decider.
 	 *
@@ -74,7 +66,6 @@ public abstract class AllocationDecider extends AbstractComponent {
 		super(settings);
 	}
 
-	
 	/**
 	 * Can rebalance.
 	 *
@@ -86,7 +77,6 @@ public abstract class AllocationDecider extends AbstractComponent {
 		return true;
 	}
 
-	
 	/**
 	 * Can allocate.
 	 *
@@ -99,7 +89,6 @@ public abstract class AllocationDecider extends AbstractComponent {
 		return Decision.YES;
 	}
 
-	
 	/**
 	 * Can remain.
 	 *

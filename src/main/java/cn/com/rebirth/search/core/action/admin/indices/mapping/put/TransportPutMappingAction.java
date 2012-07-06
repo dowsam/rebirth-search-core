@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportPutMappingAction.java 2012-3-29 15:01:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportPutMappingAction.java 2012-7-6 14:30:22 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.mapping.put;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.cluster.metadata.MetaDataMappingService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportPutMappingAction.
  *
@@ -31,11 +29,9 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportPutMappingAction extends
 		TransportMasterNodeOperationAction<PutMappingRequest, PutMappingResponse> {
 
-	
 	/** The meta data mapping service. */
 	private final MetaDataMappingService metaDataMappingService;
 
-	
 	/**
 	 * Instantiates a new transport put mapping action.
 	 *
@@ -52,45 +48,40 @@ public class TransportPutMappingAction extends
 		this.metaDataMappingService = metaDataMappingService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.MANAGEMENT;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return PutMappingAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected PutMappingRequest newRequest() {
 		return new PutMappingRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected PutMappingResponse newResponse() {
 		return new PutMappingResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#doExecute(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#doExecute(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(PutMappingRequest request, ActionListener<PutMappingResponse> listener) {
@@ -98,25 +89,21 @@ public class TransportPutMappingAction extends
 		super.doExecute(request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected ClusterBlockException checkBlock(PutMappingRequest request, ClusterState state) {
 		return state.blocks().indicesBlockedException(ClusterBlockLevel.METADATA, request.indices());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
-	protected PutMappingResponse masterOperation(PutMappingRequest request, ClusterState state)
-			throws RestartException {
+	protected PutMappingResponse masterOperation(PutMappingRequest request, ClusterState state) throws RebirthException {
 		ClusterState clusterState = clusterService.state();
 
-		
 		request.indices(clusterState.metaData().concreteIndices(request.indices()));
 
 		final AtomicReference<PutMappingResponse> responseRef = new AtomicReference<PutMappingResponse>();
@@ -145,10 +132,10 @@ public class TransportPutMappingAction extends
 		}
 
 		if (failureRef.get() != null) {
-			if (failureRef.get() instanceof RestartException) {
-				throw (RestartException) failureRef.get();
+			if (failureRef.get() instanceof RebirthException) {
+				throw (RebirthException) failureRef.get();
 			} else {
-				throw new RestartException(failureRef.get().getMessage(), failureRef.get());
+				throw new RebirthException(failureRef.get().getMessage(), failureRef.get());
 			}
 		}
 

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TextQueryParser.java 2012-3-29 15:01:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TextQueryParser.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -15,7 +14,6 @@ import org.apache.lucene.search.Query;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
 
-
 /**
  * The Class TextQueryParser.
  *
@@ -23,11 +21,9 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
  */
 public class TextQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "text";
 
-	
 	/**
 	 * Instantiates a new text query parser.
 	 */
@@ -35,9 +31,8 @@ public class TextQueryParser implements QueryParser {
 	public TextQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
@@ -45,9 +40,8 @@ public class TextQueryParser implements QueryParser {
 				"fuzzy_text" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -129,7 +123,7 @@ public class TextQueryParser implements QueryParser {
 			parser.nextToken();
 		} else {
 			text = parser.text();
-			
+
 			parser.nextToken();
 		}
 

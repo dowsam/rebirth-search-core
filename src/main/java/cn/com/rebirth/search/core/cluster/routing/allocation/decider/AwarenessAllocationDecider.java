@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AwarenessAllocationDecider.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AwarenessAllocationDecider.java 2012-7-6 14:30:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class AwarenessAllocationDecider.
  *
@@ -36,7 +34,6 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 				"cluster.routing.allocation.awareness.force.*");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -44,9 +41,8 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -71,15 +67,12 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 		}
 	}
 
-	
 	/** The awareness attributes. */
 	private String[] awarenessAttributes;
 
-	
 	/** The forced awareness attributes. */
 	private Map<String, String[]> forcedAwarenessAttributes;
 
-	
 	/**
 	 * Instantiates a new awareness allocation decider.
 	 *
@@ -103,7 +96,6 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/**
 	 * Awareness attributes.
 	 *
@@ -113,25 +105,22 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 		return this.awarenessAttributes;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public Decision canAllocate(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
 		return underCapacity(shardRouting, node, allocation, true) ? Decision.YES : Decision.NO;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canRemain(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canRemain(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean canRemain(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
 		return underCapacity(shardRouting, node, allocation, false);
 	}
 
-	
 	/**
 	 * Under capacity.
 	 *
@@ -148,24 +137,22 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 		}
 
 		IndexMetaData indexMetaData = allocation.metaData().index(shardRouting.index());
-		int shardCount = indexMetaData.numberOfReplicas() + 1; 
+		int shardCount = indexMetaData.numberOfReplicas() + 1;
 		for (String awarenessAttribute : awarenessAttributes) {
-			
+
 			if (!node.node().attributes().containsKey(awarenessAttribute)) {
 				return false;
 			}
 
-			
 			TObjectIntHashMap<String> nodesPerAttribute = allocation.routingNodes().nodesPerAttributesCounts(
 					awarenessAttribute);
 
-			
 			TObjectIntHashMap<String> shardPerAttribute = new TObjectIntHashMap<String>();
 			for (RoutingNode routingNode : allocation.routingNodes()) {
 				for (int i = 0; i < routingNode.shards().size(); i++) {
 					MutableShardRouting nodeShardRouting = routingNode.shards().get(i);
 					if (nodeShardRouting.shardId().equals(shardRouting.shardId())) {
-						
+
 						if (nodeShardRouting.relocating()) {
 							RoutingNode relocationNode = allocation.routingNodes().node(
 									nodeShardRouting.relocatingNodeId());
@@ -183,7 +170,7 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 					String nodeId = shardRouting.relocating() ? shardRouting.relocatingNodeId() : shardRouting
 							.currentNodeId();
 					if (!node.nodeId().equals(nodeId)) {
-						
+
 						shardPerAttribute.adjustOrPutValue(allocation.routingNodes().node(nodeId).node().attributes()
 								.get(awarenessAttribute), -1, 0);
 						shardPerAttribute.adjustOrPutValue(node.node().attributes().get(awarenessAttribute), 1, 1);
@@ -202,13 +189,12 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 					}
 				}
 			}
-			
 
 			int averagePerAttribute = shardCount / numberOfAttributes;
 			int totalLeftover = shardCount % numberOfAttributes;
 			int requiredCountPerAttribute;
 			if (averagePerAttribute == 0) {
-				
+
 				totalLeftover = 0;
 				requiredCountPerAttribute = 1;
 			} else {
@@ -217,11 +203,11 @@ public class AwarenessAllocationDecider extends AllocationDecider {
 			int leftoverPerAttribute = totalLeftover == 0 ? 0 : 1;
 
 			int currentNodeCount = shardPerAttribute.get(node.node().attributes().get(awarenessAttribute));
-			
+
 			if (currentNodeCount > (requiredCountPerAttribute + leftoverPerAttribute)) {
 				return false;
 			}
-			
+
 			if (currentNodeCount <= requiredCountPerAttribute) {
 				continue;
 			}

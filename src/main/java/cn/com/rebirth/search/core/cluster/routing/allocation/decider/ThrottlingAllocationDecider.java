@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ThrottlingAllocationDecider.java 2012-3-29 15:02:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ThrottlingAllocationDecider.java 2012-7-6 14:29:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.cluster.routing.ShardRoutingState;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
-
 /**
  * The Class ThrottlingAllocationDecider.
  *
@@ -31,15 +29,12 @@ public class ThrottlingAllocationDecider extends AllocationDecider {
 				"cluster.routing.allocation.node_concurrent_recoveries");
 	}
 
-	
 	/** The primaries initial recoveries. */
 	private volatile int primariesInitialRecoveries;
 
-	
 	/** The concurrent recoveries. */
 	private volatile int concurrentRecoveries;
 
-	
 	/**
 	 * Instantiates a new throttling allocation decider.
 	 *
@@ -61,9 +56,8 @@ public class ThrottlingAllocationDecider extends AllocationDecider {
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public Decision canAllocate(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
@@ -75,8 +69,7 @@ public class ThrottlingAllocationDecider extends AllocationDecider {
 				}
 			}
 			if (primaryUnassigned) {
-				
-				
+
 				int primariesInRecovery = 0;
 				List<MutableShardRouting> shards = node.shards();
 				for (int i = 0; i < shards.size(); i++) {
@@ -93,9 +86,6 @@ public class ThrottlingAllocationDecider extends AllocationDecider {
 			}
 		}
 
-		
-
-		
 		int currentRecoveries = 0;
 		List<MutableShardRouting> shards = node.shards();
 		for (int i = 0; i < shards.size(); i++) {
@@ -112,7 +102,6 @@ public class ThrottlingAllocationDecider extends AllocationDecider {
 		}
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -120,9 +109,8 @@ public class ThrottlingAllocationDecider extends AllocationDecider {
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {

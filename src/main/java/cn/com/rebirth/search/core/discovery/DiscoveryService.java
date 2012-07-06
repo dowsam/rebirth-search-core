@@ -1,22 +1,20 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DiscoveryService.java 2012-3-29 15:00:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DiscoveryService.java 2012-7-6 14:29:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.cluster.ClusterState;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
-
 
 /**
  * The Class DiscoveryService.
@@ -25,19 +23,15 @@ import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
  */
 public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryService> {
 
-	
 	/** The initial state timeout. */
 	private final TimeValue initialStateTimeout;
 
-	
 	/** The discovery. */
 	private final Discovery discovery;
 
-	
 	/** The initial state received. */
 	private volatile boolean initialStateReceived;
 
-	
 	/**
 	 * Instantiates a new discovery service.
 	 *
@@ -51,12 +45,11 @@ public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryServic
 		this.initialStateTimeout = componentSettings.getAsTime("initial_state_timeout", TimeValue.timeValueSeconds(30));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		final CountDownLatch latch = new CountDownLatch(1);
 		InitialStateDiscoveryListener listener = new InitialStateDiscoveryListener() {
 			@Override
@@ -77,7 +70,7 @@ public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryServic
 					logger.warn("waited for {} and no initial state was set by the discovery", initialStateTimeout);
 				}
 			} catch (InterruptedException e) {
-				
+
 			}
 		} finally {
 			discovery.removeListener(listener);
@@ -85,25 +78,22 @@ public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryServic
 		logger.info(discovery.nodeDescription());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		discovery.stop();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		discovery.close();
 	}
 
-	
 	/**
 	 * Local node.
 	 *
@@ -113,7 +103,6 @@ public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryServic
 		return discovery.localNode();
 	}
 
-	
 	/**
 	 * Initial state received.
 	 *
@@ -123,7 +112,6 @@ public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryServic
 		return initialStateReceived;
 	}
 
-	
 	/**
 	 * Node description.
 	 *
@@ -133,7 +121,6 @@ public class DiscoveryService extends AbstractLifecycleComponent<DiscoveryServic
 		return discovery.nodeDescription();
 	}
 
-	
 	/**
 	 * Publish.
 	 *

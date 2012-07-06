@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AliasMetaData.java 2012-3-29 15:02:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AliasMetaData.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentFactory;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.RestartGenerationException;
 
-
 /**
  * The Class AliasMetaData.
  *
@@ -27,23 +25,18 @@ import cn.com.rebirth.search.core.RestartGenerationException;
  */
 public class AliasMetaData {
 
-	
 	/** The alias. */
 	private final String alias;
 
-	
 	/** The filter. */
 	private final CompressedString filter;
 
-	
 	/** The index routing. */
 	private String indexRouting;
 
-	
 	/** The search routing. */
 	private String searchRouting;
 
-	
 	/**
 	 * Instantiates a new alias meta data.
 	 *
@@ -59,7 +52,6 @@ public class AliasMetaData {
 		this.searchRouting = searchRouting;
 	}
 
-	
 	/**
 	 * Alias.
 	 *
@@ -69,7 +61,6 @@ public class AliasMetaData {
 		return alias;
 	}
 
-	
 	/**
 	 * Gets the alias.
 	 *
@@ -79,7 +70,6 @@ public class AliasMetaData {
 		return alias();
 	}
 
-	
 	/**
 	 * Filter.
 	 *
@@ -89,7 +79,6 @@ public class AliasMetaData {
 		return filter;
 	}
 
-	
 	/**
 	 * Gets the filter.
 	 *
@@ -99,7 +88,6 @@ public class AliasMetaData {
 		return filter();
 	}
 
-	
 	/**
 	 * Gets the search routing.
 	 *
@@ -109,7 +97,6 @@ public class AliasMetaData {
 		return searchRouting();
 	}
 
-	
 	/**
 	 * Search routing.
 	 *
@@ -119,7 +106,6 @@ public class AliasMetaData {
 		return searchRouting;
 	}
 
-	
 	/**
 	 * Gets the index routing.
 	 *
@@ -129,7 +115,6 @@ public class AliasMetaData {
 		return indexRouting();
 	}
 
-	
 	/**
 	 * Index routing.
 	 *
@@ -139,7 +124,6 @@ public class AliasMetaData {
 		return indexRouting;
 	}
 
-	
 	/**
 	 * New alias meta data builder.
 	 *
@@ -150,7 +134,6 @@ public class AliasMetaData {
 		return new Builder(alias);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -175,7 +158,6 @@ public class AliasMetaData {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -188,7 +170,6 @@ public class AliasMetaData {
 		return result;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -196,23 +177,18 @@ public class AliasMetaData {
 	 */
 	public static class Builder {
 
-		
 		/** The alias. */
 		private String alias;
 
-		
 		/** The filter. */
 		private CompressedString filter;
 
-		
 		/** The index routing. */
 		private String indexRouting;
 
-		
 		/** The search routing. */
 		private String searchRouting;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -222,7 +198,6 @@ public class AliasMetaData {
 			this.alias = alias;
 		}
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -235,7 +210,6 @@ public class AliasMetaData {
 			searchRouting = aliasMetaData.searchRouting();
 		}
 
-		
 		/**
 		 * Alias.
 		 *
@@ -245,7 +219,6 @@ public class AliasMetaData {
 			return alias;
 		}
 
-		
 		/**
 		 * Filter.
 		 *
@@ -257,7 +230,6 @@ public class AliasMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Filter.
 		 *
@@ -282,7 +254,6 @@ public class AliasMetaData {
 			}
 		}
 
-		
 		/**
 		 * Filter.
 		 *
@@ -303,7 +274,6 @@ public class AliasMetaData {
 			}
 		}
 
-		
 		/**
 		 * Filter.
 		 *
@@ -318,7 +288,6 @@ public class AliasMetaData {
 			}
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -331,7 +300,6 @@ public class AliasMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Index routing.
 		 *
@@ -343,7 +311,6 @@ public class AliasMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Search routing.
 		 *
@@ -355,7 +322,6 @@ public class AliasMetaData {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -365,7 +331,6 @@ public class AliasMetaData {
 			return new AliasMetaData(alias, filter, indexRouting, searchRouting);
 		}
 
-		
 		/**
 		 * To x content.
 		 *
@@ -401,7 +366,6 @@ public class AliasMetaData {
 			builder.endObject();
 		}
 
-		
 		/**
 		 * From x content.
 		 *
@@ -415,7 +379,7 @@ public class AliasMetaData {
 			String currentFieldName = null;
 			XContentParser.Token token = parser.nextToken();
 			if (token == null) {
-				
+
 				return builder.build();
 			}
 			while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
@@ -443,7 +407,6 @@ public class AliasMetaData {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *
@@ -474,7 +437,6 @@ public class AliasMetaData {
 
 		}
 
-		
 		/**
 		 * Read from.
 		 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SortParseElement.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SortParseElement.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.sort;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class SortParseElement.
  *
@@ -29,35 +27,27 @@ import com.google.common.collect.Lists;
  */
 public class SortParseElement implements SearchParseElement {
 
-	
 	/** The Constant SORT_SCORE. */
 	private static final SortField SORT_SCORE = new SortField(null, SortField.SCORE);
 
-	
 	/** The Constant SORT_SCORE_REVERSE. */
 	private static final SortField SORT_SCORE_REVERSE = new SortField(null, SortField.SCORE, true);
 
-	
 	/** The Constant SORT_DOC. */
 	private static final SortField SORT_DOC = new SortField(null, SortField.DOC);
 
-	
 	/** The Constant SORT_DOC_REVERSE. */
 	private static final SortField SORT_DOC_REVERSE = new SortField(null, SortField.DOC, true);
 
-	
 	/** The Constant SCORE_FIELD_NAME. */
 	public static final String SCORE_FIELD_NAME = "_score";
 
-	
 	/** The Constant DOC_FIELD_NAME. */
 	public static final String DOC_FIELD_NAME = "_doc";
 
-	
 	/** The parsers. */
 	private final ImmutableMap<String, SortParser> parsers;
 
-	
 	/**
 	 * Instantiates a new sort parse element.
 	 */
@@ -68,7 +58,6 @@ public class SortParseElement implements SearchParseElement {
 		this.parsers = builder.build();
 	}
 
-	
 	/**
 	 * Adds the parser.
 	 *
@@ -81,9 +70,8 @@ public class SortParseElement implements SearchParseElement {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchParseElement#parse(cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchParseElement#parse(cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void parse(XContentParser parser, SearchContext context) throws Exception {
@@ -101,7 +89,7 @@ public class SortParseElement implements SearchParseElement {
 			addCompoundSortField(parser, context, sortFields);
 		}
 		if (!sortFields.isEmpty()) {
-			
+
 			boolean sort;
 			if (sortFields.size() > 1) {
 				sort = true;
@@ -119,7 +107,6 @@ public class SortParseElement implements SearchParseElement {
 		}
 	}
 
-	
 	/**
 	 * Adds the compound sort field.
 	 *
@@ -178,7 +165,6 @@ public class SortParseElement implements SearchParseElement {
 		}
 	}
 
-	
 	/**
 	 * Adds the sort field.
 	 *

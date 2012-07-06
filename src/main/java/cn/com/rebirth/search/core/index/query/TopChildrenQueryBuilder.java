@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TopChildrenQueryBuilder.java 2012-3-29 15:02:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TopChildrenQueryBuilder.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class TopChildrenQueryBuilder.
@@ -18,35 +16,27 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The child type. */
 	private String childType;
 
-	
 	/** The scope. */
 	private String scope;
 
-	
 	/** The score. */
 	private String score;
 
-	
 	/** The boost. */
 	private float boost = 1.0f;
 
-	
 	/** The factor. */
 	private int factor = -1;
 
-	
 	/** The incremental factor. */
 	private int incrementalFactor = -1;
 
-	
 	/**
 	 * Instantiates a new top children query builder.
 	 *
@@ -58,7 +48,6 @@ public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 		this.queryBuilder = queryBuilder;
 	}
 
-	
 	/**
 	 * Scope.
 	 *
@@ -70,7 +59,6 @@ public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Score.
 	 *
@@ -82,7 +70,6 @@ public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Factor.
 	 *
@@ -94,7 +81,6 @@ public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Incremental factor.
 	 *
@@ -106,7 +92,6 @@ public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -118,9 +103,8 @@ public class TopChildrenQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardStatus.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardStatus.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.index.merge.MergeStats;
 import cn.com.rebirth.search.core.index.refresh.RefreshStats;
 import cn.com.rebirth.search.core.index.shard.IndexShardState;
 
-
 /**
  * The Class ShardStatus.
  *
@@ -28,62 +26,48 @@ import cn.com.rebirth.search.core.index.shard.IndexShardState;
  */
 public class ShardStatus extends BroadcastShardOperationResponse {
 
-	
 	/** The shard routing. */
 	private ShardRouting shardRouting;
 
-	
 	/** The state. */
 	IndexShardState state;
 
-	
 	/** The store size. */
 	ByteSizeValue storeSize;
 
-	
 	/** The translog id. */
 	long translogId = -1;
 
-	
 	/** The translog operations. */
 	long translogOperations = -1;
 
-	
 	/** The docs. */
 	DocsStatus docs;
 
-	
 	/** The merge stats. */
 	MergeStats mergeStats;
 
-	
 	/** The refresh stats. */
 	RefreshStats refreshStats;
 
-	
 	/** The flush stats. */
 	FlushStats flushStats;
 
-	
 	/** The peer recovery status. */
 	PeerRecoveryStatus peerRecoveryStatus;
 
-	
 	/** The gateway recovery status. */
 	GatewayRecoveryStatus gatewayRecoveryStatus;
 
-	
 	/** The gateway snapshot status. */
 	GatewaySnapshotStatus gatewaySnapshotStatus;
 
-	
 	/**
 	 * Instantiates a new shard status.
 	 */
 	ShardStatus() {
 	}
 
-	
 	/**
 	 * Instantiates a new shard status.
 	 *
@@ -94,7 +78,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		this.shardRouting = shardRouting;
 	}
 
-	
 	/**
 	 * Shard routing.
 	 *
@@ -104,7 +87,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return this.shardRouting;
 	}
 
-	
 	/**
 	 * Gets the shard routing.
 	 *
@@ -114,7 +96,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return shardRouting();
 	}
 
-	
 	/**
 	 * State.
 	 *
@@ -124,7 +105,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return state;
 	}
 
-	
 	/**
 	 * Gets the state.
 	 *
@@ -134,7 +114,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return state();
 	}
 
-	
 	/**
 	 * Store size.
 	 *
@@ -144,7 +123,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return storeSize;
 	}
 
-	
 	/**
 	 * Gets the store size.
 	 *
@@ -154,7 +132,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return storeSize();
 	}
 
-	
 	/**
 	 * Translog id.
 	 *
@@ -164,7 +141,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return translogId;
 	}
 
-	
 	/**
 	 * Gets the translog id.
 	 *
@@ -174,7 +150,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return translogId();
 	}
 
-	
 	/**
 	 * Translog operations.
 	 *
@@ -184,7 +159,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return translogOperations;
 	}
 
-	
 	/**
 	 * Gets the translog operations.
 	 *
@@ -194,7 +168,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return translogOperations();
 	}
 
-	
 	/**
 	 * Docs.
 	 *
@@ -204,7 +177,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return docs;
 	}
 
-	
 	/**
 	 * Gets the docs.
 	 *
@@ -214,7 +186,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return docs();
 	}
 
-	
 	/**
 	 * Merge stats.
 	 *
@@ -224,7 +195,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return this.mergeStats;
 	}
 
-	
 	/**
 	 * Gets the merge stats.
 	 *
@@ -234,7 +204,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return this.mergeStats;
 	}
 
-	
 	/**
 	 * Refresh stats.
 	 *
@@ -244,7 +213,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return this.refreshStats;
 	}
 
-	
 	/**
 	 * Gets the refresh stats.
 	 *
@@ -254,7 +222,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return refreshStats();
 	}
 
-	
 	/**
 	 * Flush stats.
 	 *
@@ -264,7 +231,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return this.flushStats;
 	}
 
-	
 	/**
 	 * Gets the flush stats.
 	 *
@@ -274,7 +240,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return this.flushStats;
 	}
 
-	
 	/**
 	 * Peer recovery status.
 	 *
@@ -284,7 +249,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return peerRecoveryStatus;
 	}
 
-	
 	/**
 	 * Gets the peer recovery status.
 	 *
@@ -294,7 +258,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return peerRecoveryStatus();
 	}
 
-	
 	/**
 	 * Gateway recovery status.
 	 *
@@ -304,7 +267,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return gatewayRecoveryStatus;
 	}
 
-	
 	/**
 	 * Gets the gateway recovery status.
 	 *
@@ -314,7 +276,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return gatewayRecoveryStatus();
 	}
 
-	
 	/**
 	 * Gateway snapshot status.
 	 *
@@ -324,7 +285,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return gatewaySnapshotStatus;
 	}
 
-	
 	/**
 	 * Gets the gateway snapshot status.
 	 *
@@ -334,7 +294,6 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return gatewaySnapshotStatus();
 	}
 
-	
 	/**
 	 * Read index shard status.
 	 *
@@ -348,9 +307,8 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		return shardStatus;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -430,9 +388,8 @@ public class ShardStatus extends BroadcastShardOperationResponse {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardCountRequest.java 2012-3-29 15:02:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardCountRequest.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.count;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest;
 
-
 /**
  * The Class ShardCountRequest.
  *
@@ -23,32 +21,25 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperati
  */
 class ShardCountRequest extends BroadcastShardOperationRequest {
 
-	
 	/** The min score. */
 	private float minScore;
 
-	
 	/** The query source. */
 	private byte[] querySource;
 
-	
 	/** The query source offset. */
 	private int querySourceOffset;
 
-	
 	/** The query source length. */
 	private int querySourceLength;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/** The filtering aliases. */
 	@Nullable
 	private String[] filteringAliases;
 
-	
 	/**
 	 * Instantiates a new shard count request.
 	 */
@@ -56,7 +47,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new shard count request.
 	 *
@@ -75,7 +65,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		this.filteringAliases = filteringAliases;
 	}
 
-	
 	/**
 	 * Min score.
 	 *
@@ -85,7 +74,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		return minScore;
 	}
 
-	
 	/**
 	 * Query source.
 	 *
@@ -95,7 +83,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		return querySource;
 	}
 
-	
 	/**
 	 * Query source offset.
 	 *
@@ -105,7 +92,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		return querySourceOffset;
 	}
 
-	
 	/**
 	 * Query source length.
 	 *
@@ -115,7 +101,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		return querySourceLength;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -125,7 +110,6 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		return this.types;
 	}
 
-	
 	/**
 	 * Filtering aliases.
 	 *
@@ -135,9 +119,8 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		return filteringAliases;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -165,9 +148,8 @@ class ShardCountRequest extends BroadcastShardOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

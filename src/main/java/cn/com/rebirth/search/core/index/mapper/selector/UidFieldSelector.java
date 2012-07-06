@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UidFieldSelector.java 2012-3-29 15:01:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UidFieldSelector.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.selector;
 
@@ -11,7 +10,6 @@ import org.apache.lucene.document.FieldSelectorResult;
 import cn.com.rebirth.search.commons.lucene.document.ResetFieldSelector;
 import cn.com.rebirth.search.core.index.mapper.internal.UidFieldMapper;
 
-
 /**
  * The Class UidFieldSelector.
  *
@@ -19,11 +17,9 @@ import cn.com.rebirth.search.core.index.mapper.internal.UidFieldMapper;
  */
 public class UidFieldSelector implements ResetFieldSelector {
 
-	
 	/** The Constant INSTANCE. */
 	public static final UidFieldSelector INSTANCE = new UidFieldSelector();
 
-	
 	/**
 	 * Instantiates a new uid field selector.
 	 */
@@ -31,7 +27,6 @@ public class UidFieldSelector implements ResetFieldSelector {
 
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.document.FieldSelector#accept(java.lang.String)
 	 */
@@ -43,9 +38,8 @@ public class UidFieldSelector implements ResetFieldSelector {
 		return FieldSelectorResult.NO_LOAD;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.lucene.document.ResetFieldSelector#reset()
+	 * @see cn.com.rebirth.search.commons.lucene.document.ResetFieldSelector#reset()
 	 */
 	@Override
 	public void reset() {

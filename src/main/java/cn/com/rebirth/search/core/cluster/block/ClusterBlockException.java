@@ -1,32 +1,27 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterBlockException.java 2012-3-29 15:02:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterBlockException.java 2012-7-6 14:29:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.block;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 
 import com.google.common.collect.ImmutableSet;
-
 
 /**
  * The Class ClusterBlockException.
  *
  * @author l.xue.nong
  */
-public class ClusterBlockException extends RestartException {
+public class ClusterBlockException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8835825495004751219L;
 
-	
 	/** The blocks. */
 	private final ImmutableSet<ClusterBlock> blocks;
 
-	
 	/**
 	 * Instantiates a new cluster block exception.
 	 *
@@ -37,7 +32,6 @@ public class ClusterBlockException extends RestartException {
 		this.blocks = blocks;
 	}
 
-	
 	/**
 	 * Retryable.
 	 *
@@ -52,7 +46,6 @@ public class ClusterBlockException extends RestartException {
 		return true;
 	}
 
-	
 	/**
 	 * Blocks.
 	 *
@@ -62,7 +55,6 @@ public class ClusterBlockException extends RestartException {
 		return blocks;
 	}
 
-	
 	/**
 	 * Builds the message.
 	 *

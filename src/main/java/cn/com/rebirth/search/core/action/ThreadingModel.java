@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ThreadingModel.java 2012-3-29 15:01:14 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ThreadingModel.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum ThreadingModel.
@@ -17,27 +14,21 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum ThreadingModel {
 
-	
-	/** The NONE. */
+	/** The none. */
 	NONE((byte) 0),
 
-	
-	/** The OPERATION. */
+	/** The operation. */
 	OPERATION((byte) 1),
 
-	
-	/** The LISTENER. */
+	/** The listener. */
 	LISTENER((byte) 2),
 
-	
-	/** The OPERATIO n_ listener. */
+	/** The operation listener. */
 	OPERATION_LISTENER((byte) 3);
 
-	
 	/** The id. */
 	private byte id;
 
-	
 	/**
 	 * Instantiates a new threading model.
 	 *
@@ -47,7 +38,6 @@ public enum ThreadingModel {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -57,7 +47,6 @@ public enum ThreadingModel {
 		return this.id;
 	}
 
-	
 	/**
 	 * Threaded operation.
 	 *
@@ -67,7 +56,6 @@ public enum ThreadingModel {
 		return this == OPERATION || this == OPERATION_LISTENER;
 	}
 
-	
 	/**
 	 * Threaded listener.
 	 *
@@ -77,7 +65,6 @@ public enum ThreadingModel {
 		return this == LISTENER || this == OPERATION_LISTENER;
 	}
 
-	
 	/**
 	 * Adds the listener.
 	 *
@@ -93,7 +80,6 @@ public enum ThreadingModel {
 		return this;
 	}
 
-	
 	/**
 	 * Removes the listener.
 	 *
@@ -109,7 +95,6 @@ public enum ThreadingModel {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the operation.
 	 *
@@ -125,7 +110,6 @@ public enum ThreadingModel {
 		return this;
 	}
 
-	
 	/**
 	 * Removes the operation.
 	 *
@@ -141,7 +125,6 @@ public enum ThreadingModel {
 		return this;
 	}
 
-	
 	/**
 	 * From id.
 	 *
@@ -158,7 +141,7 @@ public enum ThreadingModel {
 		} else if (id == 3) {
 			return OPERATION_LISTENER;
 		} else {
-			throw new RestartIllegalArgumentException("No threading model for [" + id + "]");
+			throw new RebirthIllegalArgumentException("No threading model for [" + id + "]");
 		}
 	}
 }

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IdCacheModule.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IdCacheModule.java 2012-7-6 14:30:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.id;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.commons.inject.AbstractModule;
 import cn.com.rebirth.search.commons.inject.Scopes;
 import cn.com.rebirth.search.core.index.cache.id.simple.SimpleIdCache;
 
-
 /**
  * The Class IdCacheModule.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.index.cache.id.simple.SimpleIdCache;
  */
 public class IdCacheModule extends AbstractModule {
 
-	
 	/**
 	 * The Class IdCacheSettings.
 	 *
@@ -27,16 +24,13 @@ public class IdCacheModule extends AbstractModule {
 	 */
 	public static final class IdCacheSettings {
 
-		
 		/** The Constant ID_CACHE_TYPE. */
 		public static final String ID_CACHE_TYPE = "index.cache.id.type";
 	}
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/**
 	 * Instantiates a new id cache module.
 	 *
@@ -46,14 +40,13 @@ public class IdCacheModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
 		bind(IdCache.class).to(
 				settings.getAsClass(IdCacheSettings.ID_CACHE_TYPE, SimpleIdCache.class,
-						"cn.com.summall.search.core.index.cache.id.", "IdCache")).in(Scopes.SINGLETON);
+						"cn.com.rebirth.search.core.index.cache.id.", "IdCache")).in(Scopes.SINGLETON);
 	}
 }

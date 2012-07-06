@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RoutingFieldMapper.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RoutingFieldMapper.java 2012-7-6 14:30:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.core.TypeParsers;
 
-
 /**
  * The Class RoutingFieldMapper.
  *
@@ -37,15 +35,12 @@ import cn.com.rebirth.search.core.index.mapper.core.TypeParsers;
  */
 public class RoutingFieldMapper extends AbstractFieldMapper<String> implements InternalMapper, RootMapper {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_routing";
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_routing";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -53,36 +48,28 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
 
-		
 		/** The Constant NAME. */
 		public static final String NAME = "_routing";
 
-		
 		/** The Constant INDEX. */
 		public static final Field.Index INDEX = Field.Index.NOT_ANALYZED;
 
-		
 		/** The Constant STORE. */
 		public static final Field.Store STORE = Field.Store.YES;
 
-		
 		/** The Constant OMIT_NORMS. */
 		public static final boolean OMIT_NORMS = true;
 
-		
 		/** The Constant OMIT_TERM_FREQ_AND_POSITIONS. */
 		public static final boolean OMIT_TERM_FREQ_AND_POSITIONS = true;
 
-		
 		/** The Constant REQUIRED. */
 		public static final boolean REQUIRED = false;
 
-		
 		/** The Constant PATH. */
 		public static final String PATH = null;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -90,15 +77,12 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 	 */
 	public static class Builder extends AbstractFieldMapper.Builder<Builder, RoutingFieldMapper> {
 
-		
 		/** The required. */
 		private boolean required = Defaults.REQUIRED;
 
-		
 		/** The path. */
 		private String path = Defaults.PATH;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 */
@@ -108,7 +92,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 			index = Defaults.INDEX;
 		}
 
-		
 		/**
 		 * Required.
 		 *
@@ -120,7 +103,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 			return builder;
 		}
 
-		
 		/**
 		 * Path.
 		 *
@@ -132,9 +114,8 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 			return builder;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public RoutingFieldMapper build(BuilderContext context) {
@@ -142,7 +123,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -150,9 +130,8 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -172,15 +151,12 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		}
 	}
 
-	
 	/** The required. */
 	private boolean required;
 
-	
 	/** The path. */
 	private final String path;
 
-	
 	/**
 	 * Instantiates a new routing field mapper.
 	 */
@@ -188,7 +164,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		this(Defaults.STORE, Defaults.INDEX, Defaults.REQUIRED, Defaults.PATH);
 	}
 
-	
 	/**
 	 * Instantiates a new routing field mapper.
 	 *
@@ -205,7 +180,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		this.path = path;
 	}
 
-	
 	/**
 	 * Mark as required.
 	 */
@@ -213,7 +187,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		this.required = true;
 	}
 
-	
 	/**
 	 * Required.
 	 *
@@ -223,7 +196,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		return this.required;
 	}
 
-	
 	/**
 	 * Path.
 	 *
@@ -233,7 +205,6 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		return this.path;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -245,57 +216,52 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		return field == null ? null : value(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String value(Fieldable field) {
 		return field.stringValue();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public String valueFromString(String value) {
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
 		return value(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 		String routing = context.sourceToParse().routing();
 		if (path != null && routing != null) {
-			
+
 			String value = null;
 			Fieldable field = context.doc().getFieldable(path);
 			if (field != null) {
 				value = field.stringValue();
 				if (value == null) {
-					
+
 					if (field instanceof NumberFieldMapper.CustomNumericField) {
 						value = ((NumberFieldMapper.CustomNumericField) field).numericAsString();
 					}
@@ -311,46 +277,39 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
 		super.parse(context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
-		
-		
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Field parseCreateField(ParseContext context) throws IOException {
@@ -368,22 +327,20 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-		
+
 		if (index == Defaults.INDEX && store == Defaults.STORE && required == Defaults.REQUIRED
 				&& path == Defaults.PATH) {
 			return builder;
@@ -405,12 +362,11 @@ public class RoutingFieldMapper extends AbstractFieldMapper<String> implements I
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
-		
+
 	}
 }

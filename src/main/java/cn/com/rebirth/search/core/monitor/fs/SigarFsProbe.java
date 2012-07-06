@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SigarFsProbe.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SigarFsProbe.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.fs;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.monitor.sigar.SigarService;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class SigarFsProbe.
  *
@@ -29,19 +27,15 @@ import com.google.common.collect.Maps;
  */
 public class SigarFsProbe extends AbstractComponent implements FsProbe {
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/** The sigar service. */
 	private final SigarService sigarService;
 
-	
 	/** The file systems. */
 	private Map<File, FileSystem> fileSystems = Maps.newHashMap();
 
-	
 	/**
 	 * Instantiates a new sigar fs probe.
 	 *
@@ -56,9 +50,8 @@ public class SigarFsProbe extends AbstractComponent implements FsProbe {
 		this.sigarService = sigarService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.fs.FsProbe#stats()
+	 * @see cn.com.rebirth.search.core.monitor.fs.FsProbe#stats()
 	 */
 	@Override
 	public synchronized FsStats stats() {
@@ -83,7 +76,7 @@ public class SigarFsProbe extends AbstractComponent implements FsProbe {
 				FileSystemUsage fileSystemUsage = sigarService.sigar().getFileSystemUsage(fileSystem.getDirName());
 				info.mount = fileSystem.getDirName();
 				info.dev = fileSystem.getDevName();
-				
+
 				info.total = fileSystemUsage.getTotal() * 1024;
 				info.free = fileSystemUsage.getFree() * 1024;
 				info.available = fileSystemUsage.getAvail() * 1024;
@@ -94,7 +87,7 @@ public class SigarFsProbe extends AbstractComponent implements FsProbe {
 				info.diskQueue = fileSystemUsage.getDiskQueue();
 				info.diskServiceTime = fileSystemUsage.getDiskServiceTime();
 			} catch (SigarException e) {
-				
+
 			}
 
 			infos[i] = info;

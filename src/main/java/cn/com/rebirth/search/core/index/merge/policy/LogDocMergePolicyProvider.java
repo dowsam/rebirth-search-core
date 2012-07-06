@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LogDocMergePolicyProvider.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LogDocMergePolicyProvider.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.merge.policy;
 
@@ -16,7 +15,7 @@ import org.apache.lucene.index.LogDocMergePolicy;
 import org.apache.lucene.index.SegmentInfo;
 import org.apache.lucene.index.SegmentInfos;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.Preconditions;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.cluster.metadata.IndexMetaData;
 import cn.com.rebirth.search.core.index.settings.IndexSettingsService;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.store.Store;
-
 
 /**
  * The Class LogDocMergePolicyProvider.
@@ -34,43 +32,33 @@ import cn.com.rebirth.search.core.index.store.Store;
 public class LogDocMergePolicyProvider extends AbstractIndexShardComponent implements
 		MergePolicyProvider<LogDocMergePolicy> {
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The compound format. */
 	private volatile boolean compoundFormat;
 
-	
 	/** The min merge docs. */
 	private volatile int minMergeDocs;
 
-	
 	/** The max merge docs. */
 	private volatile int maxMergeDocs;
 
-	
 	/** The merge factor. */
 	private volatile int mergeFactor;
 
-	
 	/** The calibrate size by deletes. */
 	private final boolean calibrateSizeByDeletes;
 
-	
 	/** The async merge. */
 	private boolean asyncMerge;
 
-	
 	/** The policies. */
 	private final Set<CustomLogDocMergePolicy> policies = new CopyOnWriteArraySet<CustomLogDocMergePolicy>();
 
-	
 	/** The apply settings. */
 	private final ApplySettings applySettings = new ApplySettings();
 
-	
 	/**
 	 * Instantiates a new log doc merge policy provider.
 	 *
@@ -96,18 +84,16 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 		indexSettingsService.addListener(applySettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.CloseableIndexComponent#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.CloseableIndexComponent#close(boolean)
 	 */
 	@Override
-	public void close(boolean delete) throws RestartException {
+	public void close(boolean delete) throws RebirthException {
 		indexSettingsService.removeListener(applySettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.merge.policy.MergePolicyProvider#newMergePolicy()
+	 * @see cn.com.rebirth.search.core.index.merge.policy.MergePolicyProvider#newMergePolicy()
 	 */
 	@Override
 	public LogDocMergePolicy newMergePolicy() {
@@ -131,7 +117,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 				"index.merge.policy.merge_factor", "index.compound_format");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -139,9 +124,8 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -191,7 +175,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 		}
 	}
 
-	
 	/**
 	 * The Class CustomLogDocMergePolicy.
 	 *
@@ -199,11 +182,9 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 	 */
 	public static class CustomLogDocMergePolicy extends LogDocMergePolicy {
 
-		
 		/** The provider. */
 		private final LogDocMergePolicyProvider provider;
 
-		
 		/**
 		 * Instantiates a new custom log doc merge policy.
 		 *
@@ -214,7 +195,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 			this.provider = provider;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.LogMergePolicy#close()
 		 */
@@ -225,7 +205,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 		}
 	}
 
-	
 	/**
 	 * The Class EnableMergeLogDocMergePolicy.
 	 *
@@ -233,7 +212,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 	 */
 	public static class EnableMergeLogDocMergePolicy extends CustomLogDocMergePolicy implements EnableMergePolicy {
 
-		
 		/** The enable merge. */
 		private final ThreadLocal<Boolean> enableMerge = new ThreadLocal<Boolean>() {
 			@Override
@@ -242,7 +220,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 			}
 		};
 
-		
 		/**
 		 * Instantiates a new enable merge log doc merge policy.
 		 *
@@ -252,36 +229,32 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 			super(provider);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.EnableMergePolicy#enableMerge()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy#enableMerge()
 		 */
 		@Override
 		public void enableMerge() {
 			enableMerge.set(Boolean.TRUE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.EnableMergePolicy#disableMerge()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy#disableMerge()
 		 */
 		@Override
 		public void disableMerge() {
 			enableMerge.set(Boolean.FALSE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.EnableMergePolicy#isMergeEnabled()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy#isMergeEnabled()
 		 */
 		@Override
 		public boolean isMergeEnabled() {
 			return enableMerge.get() == Boolean.TRUE;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.merge.policy.LogDocMergePolicyProvider.CustomLogDocMergePolicy#close()
+		 * @see cn.com.rebirth.search.core.index.merge.policy.LogDocMergePolicyProvider.CustomLogDocMergePolicy#close()
 		 */
 		@Override
 		public void close() {
@@ -289,7 +262,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 			super.close();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.LogMergePolicy#findMerges(org.apache.lucene.index.SegmentInfos)
 		 */
@@ -301,7 +273,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 			return super.findMerges(infos);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.LogMergePolicy#findForcedMerges(org.apache.lucene.index.SegmentInfos, int, java.util.Map)
 		 */
@@ -314,7 +285,6 @@ public class LogDocMergePolicyProvider extends AbstractIndexShardComponent imple
 			return super.findForcedMerges(infos, maxSegmentCount, segmentsToMerge);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.LogMergePolicy#findForcedDeletesMerges(org.apache.lucene.index.SegmentInfos)
 		 */

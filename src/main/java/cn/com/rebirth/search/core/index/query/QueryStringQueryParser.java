@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryStringQueryParser.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryStringQueryParser.java 2012-7-6 14:30:42 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class QueryStringQueryParser.
  *
@@ -38,19 +36,15 @@ import com.google.common.collect.Lists;
  */
 public class QueryStringQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "query_string";
 
-	
 	/** The default analyze wildcard. */
 	private final boolean defaultAnalyzeWildcard;
 
-	
 	/** The default allow leading wildcard. */
 	private final boolean defaultAllowLeadingWildcard;
 
-	
 	/**
 	 * Instantiates a new query string query parser.
 	 *
@@ -64,18 +58,16 @@ public class QueryStringQueryParser implements QueryParser {
 				QueryParserSettings.DEFAULT_ALLOW_LEADING_WILDCARD);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -222,7 +214,7 @@ public class QueryStringQueryParser implements QueryParser {
 				qpSettings.defaultField(qpSettings.fields().get(0));
 				queryParser = parseContext.singleQueryParser(qpSettings);
 			} else {
-				qpSettings.defaultField(null); 
+				qpSettings.defaultField(null);
 				queryParser = parseContext.multiQueryParser(qpSettings);
 			}
 		} else {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FsService.java 2012-3-29 15:02:52 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FsService.java 2012-7-6 14:29:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.fs;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 
-
 /**
  * The Class FsService.
  *
@@ -19,19 +17,15 @@ import cn.com.rebirth.search.commons.inject.Inject;
  */
 public class FsService extends AbstractComponent {
 
-	
 	/** The probe. */
 	private final FsProbe probe;
 
-	
 	/** The refresh interval. */
 	private final TimeValue refreshInterval;
 
-	
 	/** The cached stats. */
 	private FsStats cachedStats;
 
-	
 	/**
 	 * Instantiates a new fs service.
 	 *
@@ -49,7 +43,6 @@ public class FsService extends AbstractComponent {
 		logger.debug("Using probe [{}] with refresh_interval [{}]", probe, refreshInterval);
 	}
 
-	
 	/**
 	 * Stats.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardReplicationOperationRequest.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardReplicationOperationRequest.java 2012-7-6 14:29:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.replication;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
 
-
 /**
  * The Class ShardReplicationOperationRequest.
  *
@@ -25,35 +23,27 @@ import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
  */
 public abstract class ShardReplicationOperationRequest implements ActionRequest {
 
-	
 	/** The Constant DEFAULT_TIMEOUT. */
 	public static final TimeValue DEFAULT_TIMEOUT = new TimeValue(1, TimeUnit.MINUTES);
 
-	
 	/** The timeout. */
 	protected TimeValue timeout = DEFAULT_TIMEOUT;
 
-	
 	/** The index. */
 	protected String index;
 
-	
 	/** The threaded listener. */
 	private boolean threadedListener = false;
 
-	
 	/** The threaded operation. */
 	private boolean threadedOperation = true;
 
-	
 	/** The replication type. */
 	private ReplicationType replicationType = ReplicationType.DEFAULT;
 
-	
 	/** The consistency level. */
 	private WriteConsistencyLevel consistencyLevel = WriteConsistencyLevel.DEFAULT;
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -63,7 +53,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return timeout;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -73,7 +62,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this.index;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -85,18 +73,16 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return threadedListener;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public ShardReplicationOperationRequest listenerThreaded(boolean threadedListener) {
@@ -104,7 +90,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this;
 	}
 
-	
 	/**
 	 * Operation threaded.
 	 *
@@ -114,7 +99,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return threadedOperation;
 	}
 
-	
 	/**
 	 * Operation threaded.
 	 *
@@ -126,7 +110,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -136,7 +119,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this.replicationType;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -148,7 +130,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -158,7 +139,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this.consistencyLevel;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -170,9 +150,8 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -183,9 +162,8 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -193,12 +171,11 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		consistencyLevel = WriteConsistencyLevel.fromId(in.readByte());
 		timeout = TimeValue.readTimeValue(in);
 		index = in.readUTF();
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -208,7 +185,6 @@ public abstract class ShardReplicationOperationRequest implements ActionRequest 
 		out.writeUTF(index);
 	}
 
-	
 	/**
 	 * Before local fork.
 	 */

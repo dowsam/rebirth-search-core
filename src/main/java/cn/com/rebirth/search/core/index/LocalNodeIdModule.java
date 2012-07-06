@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalNodeIdModule.java 2012-3-29 15:00:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalNodeIdModule.java 2012-7-6 14:29:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
 import cn.com.rebirth.search.commons.inject.AbstractModule;
-
 
 /**
  * The Class LocalNodeIdModule.
@@ -16,11 +14,9 @@ import cn.com.rebirth.search.commons.inject.AbstractModule;
  */
 public class LocalNodeIdModule extends AbstractModule {
 
-	
 	/** The local node id. */
 	private final String localNodeId;
 
-	
 	/**
 	 * Instantiates a new local node id module.
 	 *
@@ -30,9 +26,8 @@ public class LocalNodeIdModule extends AbstractModule {
 		this.localNodeId = localNodeId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

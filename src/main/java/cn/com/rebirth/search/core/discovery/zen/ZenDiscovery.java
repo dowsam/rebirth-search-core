@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ZenDiscovery.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ZenDiscovery.java 2012-7-6 14:30:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen;
 
@@ -17,8 +16,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.UUID;
@@ -54,7 +53,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class ZenDiscovery.
  *
@@ -62,89 +60,67 @@ import com.google.common.collect.Sets;
  */
 public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implements Discovery, DiscoveryNodesProvider {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The cluster name. */
 	private final ClusterName clusterName;
 
-	
 	/** The discovery node service. */
 	private final DiscoveryNodeService discoveryNodeService;
 
-	
 	/** The ping service. */
 	private final ZenPingService pingService;
 
-	
 	/** The master fd. */
 	private final MasterFaultDetection masterFD;
 
-	
 	/** The nodes fd. */
 	private final NodesFaultDetection nodesFD;
 
-	
 	/** The publish cluster state. */
 	private final PublishClusterStateAction publishClusterState;
 
-	
 	/** The membership. */
 	private final MembershipAction membership;
 
-	
 	/** The ping timeout. */
 	private final TimeValue pingTimeout;
 
-	
-	
 	/** The send leave request. */
 	private final boolean sendLeaveRequest;
 
-	
 	/** The elect master. */
 	private final ElectMasterService electMaster;
 
-	
 	/** The local node. */
 	private DiscoveryNode localNode;
 
-	
 	/** The initial state listeners. */
 	private final CopyOnWriteArrayList<InitialStateDiscoveryListener> initialStateListeners = new CopyOnWriteArrayList<InitialStateDiscoveryListener>();
 
-	
 	/** The master. */
 	private volatile boolean master = false;
 
-	
 	/** The latest disco nodes. */
 	private volatile DiscoveryNodes latestDiscoNodes;
 
-	
 	/** The current join thread. */
 	private volatile Thread currentJoinThread;
 
-	
 	/** The initial state sent. */
 	private final AtomicBoolean initialStateSent = new AtomicBoolean();
 
-	
 	/** The node service. */
 	@Nullable
 	private NodeService nodeService;
 
-	
 	/**
 	 * Instantiates a new zen discovery.
 	 *
@@ -169,7 +145,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		this.discoveryNodeService = discoveryNodeService;
 		this.pingService = pingService;
 
-		
 		this.pingTimeout = settings.getAsTime(
 				"discovery.zen.ping.timeout",
 				settings.getAsTime(
@@ -194,23 +169,21 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		this.membership = new MembershipAction(settings, transportService, this, new MembershipListener());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#setNodeService(cn.com.summall.search.core.node.service.NodeService)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#setNodeService(cn.com.rebirth.search.core.node.service.NodeService)
 	 */
 	@Override
 	public void setNodeService(@Nullable NodeService nodeService) {
 		this.nodeService = nodeService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		Map<String, String> nodeAttributes = discoveryNodeService.buildAttributes();
-		
+
 		String nodeId = UUID.randomBase64UUID();
 		localNode = new DiscoveryNode(settings.get("name"), nodeId, transportService.boundAddress().publishAddress(),
 				nodeAttributes);
@@ -218,16 +191,14 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		nodesFD.updateNodes(latestDiscoNodes);
 		pingService.start();
 
-		
 		asyncJoinCluster();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		pingService.stop();
 		masterFD.stop("zen disco stop");
 		nodesFD.stop();
@@ -260,17 +231,16 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 			try {
 				currentJoinThread.interrupt();
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		masterFD.close();
 		nodesFD.close();
 		publishClusterState.close();
@@ -278,45 +248,40 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		pingService.close();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#localNode()
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#localNode()
 	 */
 	@Override
 	public DiscoveryNode localNode() {
 		return localNode;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#addListener(cn.com.summall.search.core.discovery.InitialStateDiscoveryListener)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#addListener(cn.com.rebirth.search.core.discovery.InitialStateDiscoveryListener)
 	 */
 	@Override
 	public void addListener(InitialStateDiscoveryListener listener) {
 		this.initialStateListeners.add(listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#removeListener(cn.com.summall.search.core.discovery.InitialStateDiscoveryListener)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#removeListener(cn.com.rebirth.search.core.discovery.InitialStateDiscoveryListener)
 	 */
 	@Override
 	public void removeListener(InitialStateDiscoveryListener listener) {
 		this.initialStateListeners.remove(listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#nodeDescription()
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#nodeDescription()
 	 */
 	@Override
 	public String nodeDescription() {
 		return clusterName.value() + "/" + localNode.id();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.DiscoveryNodesProvider#nodes()
+	 * @see cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider#nodes()
 	 */
 	@Override
 	public DiscoveryNodes nodes() {
@@ -324,40 +289,37 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		if (latestNodes != null) {
 			return latestNodes;
 		}
-		
+
 		return newNodesBuilder().put(localNode).localNodeId(localNode.id()).build();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.DiscoveryNodesProvider#nodeService()
+	 * @see cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider#nodeService()
 	 */
 	@Override
 	public NodeService nodeService() {
 		return this.nodeService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#publish(cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#publish(cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	public void publish(ClusterState clusterState) {
 		if (!master) {
-			throw new RestartIllegalStateException("Shouldn't publish state when not master");
+			throw new RebirthIllegalStateException("Shouldn't publish state when not master");
 		}
 		latestDiscoNodes = clusterState.nodes();
 		nodesFD.updateNodes(clusterState.nodes());
 		publishClusterState.publish(clusterState);
 	}
 
-	
 	/**
 	 * Async join cluster.
 	 */
 	private void asyncJoinCluster() {
 		if (currentJoinThread != null) {
-			
+
 			return;
 		}
 		threadPool.generic().execute(new Runnable() {
@@ -373,7 +335,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		});
 	}
 
-	
 	/**
 	 * Innter join cluster.
 	 */
@@ -391,16 +352,16 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 			}
 			if (localNode.equals(masterNode)) {
 				this.master = true;
-				nodesFD.start(); 
+				nodesFD.start();
 				clusterService.submitStateUpdateTask("zen-disco-join (elected_as_master)",
 						new ProcessedClusterStateUpdateTask() {
 							@Override
 							public ClusterState execute(ClusterState currentState) {
 								DiscoveryNodes.Builder builder = new DiscoveryNodes.Builder()
 										.localNodeId(localNode.id()).masterNodeId(localNode.id())
-										
+
 										.put(localNode);
-								
+
 								latestDiscoNodes = builder.build();
 								ClusterBlocks clusterBlocks = ClusterBlocks.builder().blocks(currentState.blocks())
 										.removeGlobalBlock(NO_MASTER_BLOCK).build();
@@ -416,21 +377,21 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 			} else {
 				this.master = false;
 				try {
-					
+
 					transportService.connectToNode(masterNode);
 				} catch (Exception e) {
 					logger.warn("failed to connect to master [{}], retrying...", e, masterNode);
 					retry = true;
 					continue;
 				}
-				
+
 				ClusterState joinClusterStateX;
 				try {
 					joinClusterStateX = membership.sendJoinRequestBlocking(masterNode, localNode, pingTimeout);
 				} catch (Exception e) {
-					if (e instanceof RestartException) {
+					if (e instanceof RebirthException) {
 						logger.info("failed to send join request to master [{}], reason [{}]", masterNode,
-								((RestartException) e).getDetailedMessage());
+								((RebirthException) e).getDetailedMessage());
 					} else {
 						logger.info("failed to send join request to master [{}], reason [{}]", masterNode,
 								e.getMessage());
@@ -438,18 +399,16 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 					if (logger.isTraceEnabled()) {
 						logger.trace("detailed failed reason", e);
 					}
-					
+
 					retry = true;
 					continue;
 				}
 				masterFD.start(masterNode, "initial_join");
-				
-				
+
 			}
 		}
 	}
 
-	
 	/**
 	 * Handle leave request.
 	 *
@@ -457,7 +416,7 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private void handleLeaveRequest(final DiscoveryNode node) {
 		if (lifecycleState() != Lifecycle.State.STARTED) {
-			
+
 			return;
 		}
 		if (master) {
@@ -468,7 +427,7 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 							node.id());
 					latestDiscoNodes = builder.build();
 					currentState = newClusterStateBuilder().state(currentState).nodes(latestDiscoNodes).build();
-					
+
 					if (!electMaster.hasEnoughMasterNodes(currentState.nodes())) {
 						return disconnectFromCluster(currentState, "not enough master nodes");
 					}
@@ -480,7 +439,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		}
 	}
 
-	
 	/**
 	 * Handle node failure.
 	 *
@@ -489,11 +447,11 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private void handleNodeFailure(final DiscoveryNode node, String reason) {
 		if (lifecycleState() != Lifecycle.State.STARTED) {
-			
+
 			return;
 		}
 		if (!master) {
-			
+
 			return;
 		}
 		clusterService.submitStateUpdateTask("zen-disco-node_failed(" + node + "), reason " + reason,
@@ -504,7 +462,7 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 								.remove(node.id());
 						latestDiscoNodes = builder.build();
 						currentState = newClusterStateBuilder().state(currentState).nodes(latestDiscoNodes).build();
-						
+
 						if (!electMaster.hasEnoughMasterNodes(currentState.nodes())) {
 							return disconnectFromCluster(currentState, "not enough master nodes");
 						}
@@ -518,7 +476,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 				});
 	}
 
-	
 	/**
 	 * Handle master gone.
 	 *
@@ -527,11 +484,11 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private void handleMasterGone(final DiscoveryNode masterNode, final String reason) {
 		if (lifecycleState() != Lifecycle.State.STARTED) {
-			
+
 			return;
 		}
 		if (master) {
-			
+
 			return;
 		}
 
@@ -542,13 +499,13 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 					@Override
 					public ClusterState execute(ClusterState currentState) {
 						if (!masterNode.id().equals(currentState.nodes().masterNodeId())) {
-							
+
 							return currentState;
 						}
 
 						DiscoveryNodes.Builder nodesBuilder = DiscoveryNodes.newNodesBuilder()
 								.putAll(currentState.nodes())
-								
+
 								.remove(masterNode.id()).masterNodeId(null);
 
 						if (!electMaster.hasEnoughMasterNodes(nodesBuilder.build())) {
@@ -556,7 +513,7 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 									.build(), "not enough master nodes after master left (reason = " + reason + ")");
 						}
 
-						final DiscoveryNode electedMaster = electMaster.electMaster(nodesBuilder.build()); 
+						final DiscoveryNode electedMaster = electMaster.electMaster(nodesBuilder.build());
 						if (localNode.equals(electedMaster)) {
 							master = true;
 							masterFD.stop("got elected as new master since master left (reason = " + reason + ")");
@@ -588,7 +545,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 				});
 	}
 
-	
 	/**
 	 * Handle new cluster state from master.
 	 *
@@ -613,7 +569,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 
 						latestDiscoNodes = newState.nodes();
 
-						
 						if (masterFD.masterNode() == null
 								|| !masterFD.masterNode().equals(latestDiscoNodes.masterNode())) {
 							masterFD.restart(
@@ -623,15 +578,15 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 						}
 
 						ClusterState.Builder builder = ClusterState.builder().state(newState);
-						
+
 						if (newState.routingTable().version() == currentState.routingTable().version()) {
 							builder.routingTable(currentState.routingTable());
 						}
-						
+
 						if (newState.metaData().version() == currentState.metaData().version()) {
 							builder.metaData(currentState.metaData());
 						} else {
-							
+
 							MetaData.Builder metaDataBuilder = MetaData.builder().metaData(newState.metaData())
 									.removeAllIndices();
 							for (IndexMetaData indexMetaData : newState.metaData()) {
@@ -659,7 +614,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		}
 	}
 
-	
 	/**
 	 * Handle join request.
 	 *
@@ -668,13 +622,13 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private ClusterState handleJoinRequest(final DiscoveryNode node) {
 		if (!master) {
-			throw new RestartIllegalStateException("Node [" + localNode + "] not master for join request from ["
-					+ node + "]");
+			throw new RebirthIllegalStateException("Node [" + localNode + "] not master for join request from [" + node
+					+ "]");
 		}
 
 		ClusterState state = clusterService.state();
 		if (!transportService.addressSupported(node.address().getClass())) {
-			
+
 			logger.warn("received a wrong address type from [{}], ignoring...", node);
 		} else {
 			transportService.connectToNode(node);
@@ -685,9 +639,9 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 						@Override
 						public ClusterState execute(ClusterState currentState) {
 							if (currentState.nodes().nodeExists(node.id())) {
-								
+
 								logger.warn("received a join request for an existing node [{}]", node);
-								
+
 								return ClusterState.builder().state(currentState).build();
 							}
 							return newClusterStateBuilder().state(currentState)
@@ -698,7 +652,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		return state;
 	}
 
-	
 	/**
 	 * Find master.
 	 *
@@ -733,14 +686,13 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		for (ZenPing.PingResponse pingResponse : pingResponses) {
 			possibleMasterNodes.add(pingResponse.target());
 		}
-		
-		
+
 		if (!electMaster.hasEnoughMasterNodes(possibleMasterNodes)) {
 			return null;
 		}
 
 		if (pingMasters.isEmpty()) {
-			
+
 			DiscoveryNode electedMaster = electMaster.electMaster(possibleMasterNodes);
 			if (localNode.equals(electedMaster)) {
 				return localNode;
@@ -754,7 +706,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		return null;
 	}
 
-	
 	/**
 	 * Disconnect from cluster.
 	 *
@@ -771,12 +722,10 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		ClusterBlocks clusterBlocks = ClusterBlocks.builder().blocks(clusterState.blocks())
 				.addGlobalBlock(NO_MASTER_BLOCK).addGlobalBlock(GatewayService.STATE_NOT_RECOVERED_BLOCK).build();
 
-		
 		RoutingTable routingTable = RoutingTable.builder().version(clusterState.routingTable().version()).build();
-		
+
 		MetaData metaData = MetaData.builder().build();
 
-		
 		latestDiscoNodes = new DiscoveryNodes.Builder().put(localNode).localNodeId(localNode.id()).build();
 
 		asyncJoinCluster();
@@ -785,7 +734,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 				.routingTable(routingTable).metaData(metaData).build();
 	}
 
-	
 	/**
 	 * Send initial state event if needed.
 	 */
@@ -797,7 +745,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving newClusterState events.
 	 * The class that is interested in processing a newClusterState
@@ -811,9 +758,8 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private class NewClusterStateListener implements PublishClusterStateAction.NewClusterStateListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.publish.PublishClusterStateAction.NewClusterStateListener#onNewClusterState(cn.com.summall.search.core.cluster.ClusterState)
+		 * @see cn.com.rebirth.search.core.discovery.zen.publish.PublishClusterStateAction.NewClusterStateListener#onNewClusterState(cn.com.rebirth.search.core.cluster.ClusterState)
 		 */
 		@Override
 		public void onNewClusterState(ClusterState clusterState) {
@@ -821,7 +767,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving membership events.
 	 * The class that is interested in processing a membership
@@ -835,18 +780,16 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private class MembershipListener implements MembershipAction.MembershipListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.membership.MembershipAction.MembershipListener#onJoin(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+		 * @see cn.com.rebirth.search.core.discovery.zen.membership.MembershipAction.MembershipListener#onJoin(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 		 */
 		@Override
 		public ClusterState onJoin(DiscoveryNode node) {
 			return handleJoinRequest(node);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.membership.MembershipAction.MembershipListener#onLeave(cn.com.summall.search.core.cluster.node.DiscoveryNode)
+		 * @see cn.com.rebirth.search.core.discovery.zen.membership.MembershipAction.MembershipListener#onLeave(cn.com.rebirth.search.core.cluster.node.DiscoveryNode)
 		 */
 		@Override
 		public void onLeave(DiscoveryNode node) {
@@ -854,7 +797,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving nodeFailure events.
 	 * The class that is interested in processing a nodeFailure
@@ -868,9 +810,8 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private class NodeFailureListener implements NodesFaultDetection.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.fd.NodesFaultDetection.Listener#onNodeFailure(cn.com.summall.search.core.cluster.node.DiscoveryNode, java.lang.String)
+		 * @see cn.com.rebirth.search.core.discovery.zen.fd.NodesFaultDetection.Listener#onNodeFailure(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, java.lang.String)
 		 */
 		@Override
 		public void onNodeFailure(DiscoveryNode node, String reason) {
@@ -878,7 +819,6 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving masterNodeFailure events.
 	 * The class that is interested in processing a masterNodeFailure
@@ -892,22 +832,20 @@ public class ZenDiscovery extends AbstractLifecycleComponent<Discovery> implemen
 	 */
 	private class MasterNodeFailureListener implements MasterFaultDetection.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.fd.MasterFaultDetection.Listener#onMasterFailure(cn.com.summall.search.core.cluster.node.DiscoveryNode, java.lang.String)
+		 * @see cn.com.rebirth.search.core.discovery.zen.fd.MasterFaultDetection.Listener#onMasterFailure(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, java.lang.String)
 		 */
 		@Override
 		public void onMasterFailure(DiscoveryNode masterNode, String reason) {
 			handleMasterGone(masterNode, reason);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.discovery.zen.fd.MasterFaultDetection.Listener#onDisconnectedFromMaster()
+		 * @see cn.com.rebirth.search.core.discovery.zen.fd.MasterFaultDetection.Listener#onDisconnectedFromMaster()
 		 */
 		@Override
 		public void onDisconnectedFromMaster() {
-			
+
 			DiscoveryNode masterNode = latestDiscoNodes.masterNode();
 			try {
 				membership.sendJoinRequest(masterNode, localNode);

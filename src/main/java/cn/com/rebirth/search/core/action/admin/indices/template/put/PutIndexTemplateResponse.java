@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PutIndexTemplateResponse.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PutIndexTemplateResponse.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.template.put;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.action.ActionResponse;
 
-
 /**
  * The Class PutIndexTemplateResponse.
  *
@@ -21,18 +19,15 @@ import cn.com.rebirth.search.core.action.ActionResponse;
  */
 public class PutIndexTemplateResponse implements ActionResponse, Streamable {
 
-	
 	/** The acknowledged. */
 	private boolean acknowledged;
 
-	
 	/**
 	 * Instantiates a new put index template response.
 	 */
 	PutIndexTemplateResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new put index template response.
 	 *
@@ -42,7 +37,6 @@ public class PutIndexTemplateResponse implements ActionResponse, Streamable {
 		this.acknowledged = acknowledged;
 	}
 
-	
 	/**
 	 * Acknowledged.
 	 *
@@ -52,7 +46,6 @@ public class PutIndexTemplateResponse implements ActionResponse, Streamable {
 		return acknowledged;
 	}
 
-	
 	/**
 	 * Gets the acknowledged.
 	 *
@@ -62,18 +55,16 @@ public class PutIndexTemplateResponse implements ActionResponse, Streamable {
 		return acknowledged();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		acknowledged = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

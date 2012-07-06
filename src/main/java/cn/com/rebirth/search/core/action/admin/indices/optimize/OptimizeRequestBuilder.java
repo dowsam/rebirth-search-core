@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OptimizeRequestBuilder.java 2012-3-29 15:02:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OptimizeRequestBuilder.java 2012-7-6 14:29:53 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.optimize;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesReques
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 
-
 /**
  * The Class OptimizeRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRequest, OptimizeResponse> {
 
-	
 	/**
 	 * Instantiates a new optimize request builder.
 	 *
@@ -29,7 +26,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		super(indicesClient, new OptimizeRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -41,7 +37,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the wait for merge.
 	 *
@@ -53,7 +48,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the max num segments.
 	 *
@@ -65,7 +59,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the only expunge deletes.
 	 *
@@ -77,7 +70,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the flush.
 	 *
@@ -89,7 +81,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -101,7 +92,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -113,7 +103,6 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -125,9 +114,8 @@ public class OptimizeRequestBuilder extends BaseIndicesRequestBuilder<OptimizeRe
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<OptimizeResponse> listener) {

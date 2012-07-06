@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexedGeoBoundingBoxFilter.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexedGeoBoundingBoxFilter.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.geo;
 
@@ -13,10 +12,9 @@ import org.apache.lucene.search.DocIdSet;
 import org.apache.lucene.search.Filter;
 import org.apache.lucene.util.FixedBitSet;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.lucene.docset.DocSets;
 import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldMapper;
-
 
 /**
  * The Class IndexedGeoBoundingBoxFilter.
@@ -25,7 +23,6 @@ import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldMapper;
  */
 public class IndexedGeoBoundingBoxFilter {
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -36,10 +33,10 @@ public class IndexedGeoBoundingBoxFilter {
 	 */
 	public static Filter create(Point topLeft, Point bottomRight, GeoPointFieldMapper fieldMapper) {
 		if (!fieldMapper.isEnableLatLon()) {
-			throw new RestartIllegalArgumentException("lat/lon is not enabled (indexed) for field ["
+			throw new RebirthIllegalArgumentException("lat/lon is not enabled (indexed) for field ["
 					+ fieldMapper.name() + "], can't use indexed filter on it");
 		}
-		
+
 		if (topLeft.lon > bottomRight.lon) {
 			return new LeftGeoBoundingBoxFilter(topLeft, bottomRight, fieldMapper);
 		} else {
@@ -47,7 +44,6 @@ public class IndexedGeoBoundingBoxFilter {
 		}
 	}
 
-	
 	/**
 	 * The Class LeftGeoBoundingBoxFilter.
 	 *
@@ -55,19 +51,15 @@ public class IndexedGeoBoundingBoxFilter {
 	 */
 	static class LeftGeoBoundingBoxFilter extends Filter {
 
-		
 		/** The lon filter1. */
 		final Filter lonFilter1;
 
-		
 		/** The lon filter2. */
 		final Filter lonFilter2;
 
-		
 		/** The lat filter. */
 		final Filter latFilter;
 
-		
 		/**
 		 * Instantiates a new left geo bounding box filter.
 		 *
@@ -81,7 +73,6 @@ public class IndexedGeoBoundingBoxFilter {
 			latFilter = fieldMapper.latMapper().rangeFilter(bottomRight.lat, topLeft.lat, true, true);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */
@@ -100,7 +91,7 @@ public class IndexedGeoBoundingBoxFilter {
 				if (main == null) {
 					return null;
 				} else {
-					
+
 				}
 			} else {
 				if (main == null) {
@@ -118,7 +109,6 @@ public class IndexedGeoBoundingBoxFilter {
 			return main;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -141,7 +131,6 @@ public class IndexedGeoBoundingBoxFilter {
 			return true;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -154,7 +143,6 @@ public class IndexedGeoBoundingBoxFilter {
 		}
 	}
 
-	
 	/**
 	 * The Class RightGeoBoundingBoxFilter.
 	 *
@@ -162,15 +150,12 @@ public class IndexedGeoBoundingBoxFilter {
 	 */
 	static class RightGeoBoundingBoxFilter extends Filter {
 
-		
 		/** The lon filter. */
 		final Filter lonFilter;
 
-		
 		/** The lat filter. */
 		final Filter latFilter;
 
-		
 		/**
 		 * Instantiates a new right geo bounding box filter.
 		 *
@@ -183,7 +168,6 @@ public class IndexedGeoBoundingBoxFilter {
 			latFilter = fieldMapper.latMapper().rangeFilter(bottomRight.lat, topLeft.lat, true, true);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */
@@ -203,7 +187,6 @@ public class IndexedGeoBoundingBoxFilter {
 			return main;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -224,7 +207,6 @@ public class IndexedGeoBoundingBoxFilter {
 			return true;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */

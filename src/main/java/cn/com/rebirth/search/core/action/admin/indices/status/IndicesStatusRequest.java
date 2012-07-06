@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesStatusRequest.java 2012-3-29 15:01:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesStatusRequest.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading;
 
-
 /**
  * The Class IndicesStatusRequest.
  *
@@ -22,15 +20,12 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThr
  */
 public class IndicesStatusRequest extends BroadcastOperationRequest {
 
-	
 	/** The recovery. */
 	private boolean recovery = false;
 
-	
 	/** The snapshot. */
 	private boolean snapshot = false;
 
-	
 	/**
 	 * Instantiates a new indices status request.
 	 */
@@ -38,7 +33,6 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		this(Strings.EMPTY_ARRAY);
 	}
 
-	
 	/**
 	 * Instantiates a new indices status request.
 	 *
@@ -48,7 +42,6 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		super(indices);
 	}
 
-	
 	/**
 	 * Recovery.
 	 *
@@ -60,7 +53,6 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Recovery.
 	 *
@@ -70,7 +62,6 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		return this.recovery;
 	}
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -82,7 +73,6 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -92,9 +82,8 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		return this.snapshot;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public IndicesStatusRequest listenerThreaded(boolean listenerThreaded) {
@@ -102,18 +91,16 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationThreading)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading)
 	 */
 	@Override
 	public BroadcastOperationRequest operationThreading(BroadcastOperationThreading operationThreading) {
 		return super.operationThreading(operationThreading);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -122,9 +109,8 @@ public class IndicesStatusRequest extends BroadcastOperationRequest {
 		out.writeBoolean(snapshot);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {

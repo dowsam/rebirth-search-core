@@ -1,17 +1,15 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsStatsFacet.java 2012-3-29 15:02:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsStatsFacet.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.termsstats;
 
 import java.util.Comparator;
 import java.util.List;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.core.search.facet.Facet;
-
 
 /**
  * The Interface TermsStatsFacet.
@@ -20,11 +18,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> {
 
-	
 	/** The Constant TYPE. */
 	public static final String TYPE = "terms_stats";
 
-	
 	/**
 	 * Missing count.
 	 *
@@ -32,7 +28,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 	 */
 	long missingCount();
 
-	
 	/**
 	 * Gets the missing count.
 	 *
@@ -40,7 +35,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 	 */
 	long getMissingCount();
 
-	
 	/**
 	 * Entries.
 	 *
@@ -48,7 +42,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 	 */
 	List<? extends TermsStatsFacet.Entry> entries();
 
-	
 	/**
 	 * Gets the entries.
 	 *
@@ -56,7 +49,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 	 */
 	List<? extends TermsStatsFacet.Entry> getEntries();
 
-	
 	/**
 	 * The Enum ComparatorType.
 	 *
@@ -64,13 +56,12 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 	 */
 	public static enum ComparatorType {
 
-		
-		/** The COUNT. */
+		/** The count. */
 		COUNT((byte) 0, new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -88,13 +79,12 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The REVERS e_ count. */
+		/** The reverse count. */
 		REVERSE_COUNT((byte) 1, new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -108,13 +98,12 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The TERM. */
+		/** The term. */
 		TERM((byte) 2, new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -132,13 +121,12 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The REVERS e_ term. */
+		/** The reverse term. */
 		REVERSE_TERM((byte) 3, new Comparator<Entry>() {
 
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -152,12 +140,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The TOTAL. */
+		/** The total. */
 		TOTAL((byte) 4, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -175,12 +162,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The REVERS e_ total. */
+		/** The reverse total. */
 		REVERSE_TOTAL((byte) 5, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -194,12 +180,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The MIN. */
+		/** The min. */
 		MIN((byte) 6, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -217,12 +202,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The REVERS e_ min. */
+		/** The reverse min. */
 		REVERSE_MIN((byte) 7, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -236,12 +220,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The MAX. */
+		/** The max. */
 		MAX((byte) 8, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -259,12 +242,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The REVERS e_ max. */
+		/** The reverse max. */
 		REVERSE_MAX((byte) 9, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -278,12 +260,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The MEAN. */
+		/** The mean. */
 		MEAN((byte) 10, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -301,12 +282,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}),
 
-		
-		/** The REVERS e_ mean. */
+		/** The reverse mean. */
 		REVERSE_MEAN((byte) 11, new Comparator<Entry>() {
 			@Override
 			public int compare(Entry o1, Entry o2) {
-				
+
 				if (o1 == null) {
 					if (o2 == null) {
 						return 0;
@@ -320,15 +300,12 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			}
 		}), ;
 
-		
 		/** The id. */
 		private final byte id;
 
-		
 		/** The comparator. */
 		private final Comparator<Entry> comparator;
 
-		
 		/**
 		 * Instantiates a new comparator type.
 		 *
@@ -340,7 +317,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			this.comparator = comparator;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -350,7 +326,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			return this.id;
 		}
 
-		
 		/**
 		 * Comparator.
 		 *
@@ -360,7 +335,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			return comparator;
 		}
 
-		
 		/**
 		 * From id.
 		 *
@@ -393,11 +367,9 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			} else if (id == REVERSE_MEAN.id()) {
 				return REVERSE_MEAN;
 			}
-			throw new RestartIllegalArgumentException("No type argument match for terms facet comparator [" + id
-					+ "]");
+			throw new RebirthIllegalArgumentException("No type argument match for terms facet comparator [" + id + "]");
 		}
 
-		
 		/**
 		 * From string.
 		 *
@@ -430,12 +402,11 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 			} else if ("reverse_mean".equals(type) || "reverseMean".equals(type)) {
 				return REVERSE_MEAN;
 			}
-			throw new RestartIllegalArgumentException("No type argument match for terms stats facet comparator ["
+			throw new RebirthIllegalArgumentException("No type argument match for terms stats facet comparator ["
 					+ type + "]");
 		}
 	}
 
-	
 	/**
 	 * The Interface Entry.
 	 *
@@ -443,7 +414,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 	 */
 	public interface Entry extends Comparable<Entry> {
 
-		
 		/**
 		 * Term.
 		 *
@@ -451,7 +421,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		String term();
 
-		
 		/**
 		 * Gets the term.
 		 *
@@ -459,7 +428,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		String getTerm();
 
-		
 		/**
 		 * Term as number.
 		 *
@@ -467,7 +435,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		Number termAsNumber();
 
-		
 		/**
 		 * Gets the term as number.
 		 *
@@ -475,7 +442,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		Number getTermAsNumber();
 
-		
 		/**
 		 * Count.
 		 *
@@ -483,7 +449,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		long count();
 
-		
 		/**
 		 * Gets the count.
 		 *
@@ -491,7 +456,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		long getCount();
 
-		
 		/**
 		 * Total count.
 		 *
@@ -499,7 +463,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		long totalCount();
 
-		
 		/**
 		 * Gets the total count.
 		 *
@@ -507,7 +470,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		long getTotalCount();
 
-		
 		/**
 		 * Min.
 		 *
@@ -515,7 +477,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double min();
 
-		
 		/**
 		 * Gets the min.
 		 *
@@ -523,7 +484,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double getMin();
 
-		
 		/**
 		 * Max.
 		 *
@@ -531,7 +491,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double max();
 
-		
 		/**
 		 * Gets the max.
 		 *
@@ -539,7 +498,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double getMax();
 
-		
 		/**
 		 * Total.
 		 *
@@ -547,7 +505,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double total();
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -555,7 +512,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double getTotal();
 
-		
 		/**
 		 * Mean.
 		 *
@@ -563,7 +519,6 @@ public interface TermsStatsFacet extends Facet, Iterable<TermsStatsFacet.Entry> 
 		 */
 		double mean();
 
-		
 		/**
 		 * Gets the mean.
 		 *

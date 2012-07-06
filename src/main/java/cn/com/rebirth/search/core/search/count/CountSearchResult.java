@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CountSearchResult.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CountSearchResult.java 2012-7-6 14:28:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.count;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.search.SearchPhaseResult;
 import cn.com.rebirth.search.core.search.SearchShardTarget;
 
-
 /**
  * The Class CountSearchResult.
  *
@@ -22,26 +20,21 @@ import cn.com.rebirth.search.core.search.SearchShardTarget;
  */
 public class CountSearchResult implements Streamable, SearchPhaseResult {
 
-	
 	/** The id. */
 	private long id;
 
-	
 	/** The total hits. */
 	private long totalHits;
 
-	
 	/** The shard target. */
 	private SearchShardTarget shardTarget;
 
-	
 	/**
 	 * Instantiates a new count search result.
 	 */
 	public CountSearchResult() {
 	}
 
-	
 	/**
 	 * Instantiates a new count search result.
 	 *
@@ -53,15 +46,13 @@ public class CountSearchResult implements Streamable, SearchPhaseResult {
 		this.totalHits = totalHits;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhaseResult#id()
+	 * @see cn.com.rebirth.search.core.search.SearchPhaseResult#id()
 	 */
 	public long id() {
 		return this.id;
 	}
 
-	
 	/**
 	 * Total hits.
 	 *
@@ -71,27 +62,24 @@ public class CountSearchResult implements Streamable, SearchPhaseResult {
 		return this.totalHits;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhaseResult#shardTarget()
+	 * @see cn.com.rebirth.search.core.search.SearchPhaseResult#shardTarget()
 	 */
 	@Override
 	public SearchShardTarget shardTarget() {
 		return shardTarget;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhaseResult#shardTarget(cn.com.summall.search.core.search.SearchShardTarget)
+	 * @see cn.com.rebirth.search.core.search.SearchPhaseResult#shardTarget(cn.com.rebirth.search.core.search.SearchShardTarget)
 	 */
 	@Override
 	public void shardTarget(SearchShardTarget shardTarget) {
 		this.shardTarget = shardTarget;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -99,9 +87,8 @@ public class CountSearchResult implements Streamable, SearchPhaseResult {
 		totalHits = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

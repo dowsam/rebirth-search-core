@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DiscoveryNodeFilters.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DiscoveryNodeFilters.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.node;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.commons.transport.InetSocketTransportAddress;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class DiscoveryNodeFilters.
  *
@@ -24,11 +22,9 @@ import com.google.common.collect.ImmutableMap;
  */
 public class DiscoveryNodeFilters {
 
-	
 	/** The Constant NO_FILTERS. */
 	public static final DiscoveryNodeFilters NO_FILTERS = new DiscoveryNodeFilters(ImmutableMap.<String, String[]> of());
 
-	
 	/**
 	 * Builds the from settings.
 	 *
@@ -40,7 +36,6 @@ public class DiscoveryNodeFilters {
 		return buildFromKeyValue(settings.getByPrefix(prefix).getAsMap());
 	}
 
-	
 	/**
 	 * Builds the from key value.
 	 *
@@ -58,11 +53,9 @@ public class DiscoveryNodeFilters {
 		return new DiscoveryNodeFilters(bFilters);
 	}
 
-	
 	/** The filters. */
 	private final Map<String, String[]> filters;
 
-	
 	/**
 	 * Instantiates a new discovery node filters.
 	 *
@@ -72,7 +65,6 @@ public class DiscoveryNodeFilters {
 		this.filters = filters;
 	}
 
-	
 	/**
 	 * Match.
 	 *

@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SpanFirstQueryBuilder.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SpanFirstQueryBuilder.java 2012-7-6 14:30:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class SpanFirstQueryBuilder.
@@ -18,19 +16,15 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class SpanFirstQueryBuilder extends BaseQueryBuilder implements SpanQueryBuilder {
 
-	
 	/** The match builder. */
 	private final SpanQueryBuilder matchBuilder;
 
-	
 	/** The end. */
 	private final int end;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/**
 	 * Instantiates a new span first query builder.
 	 *
@@ -42,7 +36,6 @@ public class SpanFirstQueryBuilder extends BaseQueryBuilder implements SpanQuery
 		this.end = end;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -54,9 +47,8 @@ public class SpanFirstQueryBuilder extends BaseQueryBuilder implements SpanQuery
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

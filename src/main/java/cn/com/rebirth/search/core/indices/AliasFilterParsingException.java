@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AliasFilterParsingException.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AliasFilterParsingException.java 2012-7-6 14:29:02 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.IndexException;
-
 
 /**
  * The Class AliasFilterParsingException.
@@ -17,11 +15,9 @@ import cn.com.rebirth.search.core.index.IndexException;
  */
 public class AliasFilterParsingException extends IndexException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3184923614780342337L;
 
-	
 	/**
 	 * Instantiates a new alias filter parsing exception.
 	 *
@@ -33,7 +29,6 @@ public class AliasFilterParsingException extends IndexException {
 		super(index, "[" + name + "], " + desc);
 	}
 
-	
 	/**
 	 * Instantiates a new alias filter parsing exception.
 	 *

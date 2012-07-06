@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalTermsStatsDoubleFacet.java 2012-3-29 15:01:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalTermsStatsDoubleFacet.java 2012-7-6 14:29:20 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.termsstats.doubles;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.search.facet.termsstats.InternalTermsStatsFace
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class InternalTermsStatsDoubleFacet.
  *
@@ -34,11 +32,9 @@ import com.google.common.collect.ImmutableList;
  */
 public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 
-	
 	/** The Constant STREAM_TYPE. */
 	private static final String STREAM_TYPE = "dTS";
 
-	
 	/**
 	 * Register stream.
 	 */
@@ -46,8 +42,7 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		Streams.registerStream(STREAM, STREAM_TYPE);
 	}
 
-	
-	/** The STREAM. */
+	/** The stream. */
 	static Stream STREAM = new Stream() {
 		@Override
 		public Facet readFacet(String type, StreamInput in) throws IOException {
@@ -55,23 +50,20 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		}
 	};
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.InternalFacet#streamType()
+	 * @see cn.com.rebirth.search.core.search.facet.InternalFacet#streamType()
 	 */
 	@Override
 	public String streamType() {
 		return STREAM_TYPE;
 	}
 
-	
 	/**
 	 * Instantiates a new internal terms stats double facet.
 	 */
 	public InternalTermsStatsDoubleFacet() {
 	}
 
-	
 	/**
 	 * The Class DoubleEntry.
 	 *
@@ -79,31 +71,24 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 	 */
 	public static class DoubleEntry implements Entry {
 
-		
 		/** The term. */
 		double term;
 
-		
 		/** The count. */
 		long count;
 
-		
 		/** The total count. */
 		long totalCount;
 
-		
 		/** The total. */
 		double total;
 
-		
 		/** The min. */
 		double min;
 
-		
 		/** The max. */
 		double max;
 
-		
 		/**
 		 * Instantiates a new double entry.
 		 *
@@ -123,135 +108,120 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 			this.max = max;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#term()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#term()
 		 */
 		@Override
 		public String term() {
 			return Double.toString(term);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTerm()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTerm()
 		 */
 		@Override
 		public String getTerm() {
 			return term();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#termAsNumber()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#termAsNumber()
 		 */
 		@Override
 		public Number termAsNumber() {
 			return term;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTermAsNumber()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTermAsNumber()
 		 */
 		@Override
 		public Number getTermAsNumber() {
 			return termAsNumber();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#count()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#count()
 		 */
 		@Override
 		public long count() {
 			return count;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getCount()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getCount()
 		 */
 		@Override
 		public long getCount() {
 			return count();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#totalCount()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#totalCount()
 		 */
 		@Override
 		public long totalCount() {
 			return this.totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTotalCount()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTotalCount()
 		 */
 		@Override
 		public long getTotalCount() {
 			return this.totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#min()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#min()
 		 */
 		@Override
 		public double min() {
 			return this.min;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getMin()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getMin()
 		 */
 		@Override
 		public double getMin() {
 			return min();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#max()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#max()
 		 */
 		@Override
 		public double max() {
 			return max;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getMax()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getMax()
 		 */
 		@Override
 		public double getMax() {
 			return max();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#total()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#total()
 		 */
 		@Override
 		public double total() {
 			return total;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTotal()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getTotal()
 		 */
 		@Override
 		public double getTotal() {
 			return total();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#mean()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#mean()
 		 */
 		@Override
 		public double mean() {
@@ -261,16 +231,14 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 			return total / totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getMean()
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet.Entry#getMean()
 		 */
 		@Override
 		public double getMean() {
 			return mean();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 */
@@ -281,27 +249,21 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		}
 	}
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The required size. */
 	int requiredSize;
 
-	
 	/** The missing. */
 	long missing;
 
-	
 	/** The entries. */
 	Collection<DoubleEntry> entries = ImmutableList.of();
 
-	
 	/** The comparator type. */
 	ComparatorType comparatorType;
 
-	
 	/**
 	 * Instantiates a new internal terms stats double facet.
 	 *
@@ -320,45 +282,40 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		this.missing = missing;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#name()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getName()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getName()
 	 */
 	@Override
 	public String getName() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#type()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#type()
 	 */
 	@Override
 	public String type() {
 		return TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getType()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getType()
 	 */
 	@Override
 	public String getType() {
 		return type();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet#entries()
+	 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet#entries()
 	 */
 	@Override
 	public List<DoubleEntry> entries() {
@@ -368,7 +325,6 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		return (List<DoubleEntry>) entries;
 	}
 
-	
 	/**
 	 * Mutable list.
 	 *
@@ -381,16 +337,14 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		return (List<DoubleEntry>) entries;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet#getEntries()
+	 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet#getEntries()
 	 */
 	@Override
 	public List<DoubleEntry> getEntries() {
 		return entries();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -400,33 +354,30 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		return (Iterator) entries.iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet#missingCount()
+	 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet#missingCount()
 	 */
 	@Override
 	public long missingCount() {
 		return this.missing;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.termsstats.TermsStatsFacet#getMissingCount()
+	 * @see cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacet#getMissingCount()
 	 */
 	@Override
 	public long getMissingCount() {
 		return missingCount();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.termsstats.InternalTermsStatsFacet#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.termsstats.InternalTermsStatsFacet#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {
 		if (facets.size() == 1) {
 			if (requiredSize == 0) {
-				
+
 				InternalTermsStatsDoubleFacet tsFacet = (InternalTermsStatsDoubleFacet) facets.get(0);
 				if (!tsFacet.entries.isEmpty()) {
 					List<DoubleEntry> entries = tsFacet.mutableList();
@@ -459,8 +410,7 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 			}
 		}
 
-		
-		if (requiredSize == 0) { 
+		if (requiredSize == 0) {
 			DoubleEntry[] entries1 = map.values(new DoubleEntry[map.size()]);
 			Arrays.sort(entries1, comparatorType.comparator());
 			CacheRecycler.pushDoubleObjectMap(map);
@@ -482,7 +432,6 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		}
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -490,50 +439,39 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant MISSING. */
 		static final XContentBuilderString MISSING = new XContentBuilderString("missing");
 
-		
 		/** The Constant TERMS. */
 		static final XContentBuilderString TERMS = new XContentBuilderString("terms");
 
-		
 		/** The Constant TERM. */
 		static final XContentBuilderString TERM = new XContentBuilderString("term");
 
-		
 		/** The Constant COUNT. */
 		static final XContentBuilderString COUNT = new XContentBuilderString("count");
 
-		
 		/** The Constant TOTAL_COUNT. */
 		static final XContentBuilderString TOTAL_COUNT = new XContentBuilderString("total_count");
 
-		
 		/** The Constant MIN. */
 		static final XContentBuilderString MIN = new XContentBuilderString("min");
 
-		
 		/** The Constant MAX. */
 		static final XContentBuilderString MAX = new XContentBuilderString("max");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant MEAN. */
 		static final XContentBuilderString MEAN = new XContentBuilderString("mean");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -557,7 +495,6 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		return builder;
 	}
 
-	
 	/**
 	 * Read terms stats facet.
 	 *
@@ -571,9 +508,8 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		return facet;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -590,9 +526,8 @@ public class InternalTermsStatsDoubleFacet extends InternalTermsStatsFacet {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

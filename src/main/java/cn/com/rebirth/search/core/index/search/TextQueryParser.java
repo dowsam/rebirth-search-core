@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TextQueryParser.java 2012-3-29 15:01:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TextQueryParser.java 2012-7-6 14:30:47 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.search;
@@ -26,8 +26,8 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.search.commons.io.FastStringReader;
 import cn.com.rebirth.search.commons.lucene.search.MatchNoDocsQuery;
 import cn.com.rebirth.search.commons.lucene.search.MultiPhrasePrefixQuery;
@@ -49,13 +49,13 @@ public class TextQueryParser {
 	 */
 	public static enum Type {
 
-		/** The BOOLEAN. */
+		/** The boolean. */
 		BOOLEAN,
 
-		/** The PHRASE. */
+		/** The phrase. */
 		PHRASE,
 
-		/** The PHRAS e_ prefix. */
+		/** The phrase prefix. */
 		PHRASE_PREFIX
 	}
 
@@ -211,7 +211,7 @@ public class TextQueryParser {
 		} else {
 			analyzer = parseContext.mapperService().analysisService().analyzer(this.analyzer);
 			if (analyzer == null) {
-				throw new RestartIllegalArgumentException("No analyzer found for [" + this.analyzer + "]");
+				throw new RebirthIllegalArgumentException("No analyzer found for [" + this.analyzer + "]");
 			}
 		}
 
@@ -408,7 +408,7 @@ public class TextQueryParser {
 			return wrapSmartNameQuery(mpq, smartNameFieldMappers, parseContext);
 		}
 
-		throw new RestartIllegalStateException("No type found for [" + type + "]");
+		throw new RebirthIllegalStateException("No type found for [" + type + "]");
 	}
 
 	/**

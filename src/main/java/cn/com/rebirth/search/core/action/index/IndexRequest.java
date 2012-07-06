@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexRequest.java 2012-3-29 15:02:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexRequest.java 2012-7-6 14:29:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.index;
 
@@ -15,9 +14,9 @@ import org.apache.lucene.util.UnicodeUtil;
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Unicode;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.unit.TimeValue;
@@ -40,7 +39,6 @@ import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 import cn.com.rebirth.search.core.index.VersionType;
 import cn.com.rebirth.search.core.index.mapper.internal.TimestampFieldMapper;
 
-
 /**
  * The Class IndexRequest.
  *
@@ -48,7 +46,6 @@ import cn.com.rebirth.search.core.index.mapper.internal.TimestampFieldMapper;
  */
 public class IndexRequest extends ShardReplicationOperationRequest {
 
-	
 	/**
 	 * The Enum OpType.
 	 *
@@ -56,19 +53,15 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 	 */
 	public static enum OpType {
 
-		
-		/** The INDEX. */
+		/** The index. */
 		INDEX((byte) 0),
 
-		
-		/** The CREATE. */
+		/** The create. */
 		CREATE((byte) 1);
 
-		
 		/** The id. */
 		private byte id;
 
-		
 		/**
 		 * Instantiates a new op type.
 		 *
@@ -78,7 +71,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 			this.id = id;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -88,7 +80,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 			return id;
 		}
 
-		
 		/**
 		 * From id.
 		 *
@@ -101,86 +92,68 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 			} else if (id == 1) {
 				return CREATE;
 			} else {
-				throw new RestartIllegalArgumentException("No type match for [" + id + "]");
+				throw new RebirthIllegalArgumentException("No type match for [" + id + "]");
 			}
 		}
 	}
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The routing. */
 	@Nullable
 	private String routing;
 
-	
 	/** The parent. */
 	@Nullable
 	private String parent;
 
-	
 	/** The timestamp. */
 	@Nullable
 	private String timestamp;
 
-	
 	/** The ttl. */
 	private long ttl = -1;
 
-	
 	/** The source. */
 	private byte[] source;
 
-	
 	/** The source offset. */
 	private int sourceOffset;
 
-	
 	/** The source length. */
 	private int sourceLength;
 
-	
 	/** The source unsafe. */
 	private boolean sourceUnsafe;
 
-	
 	/** The op type. */
 	private OpType opType = OpType.INDEX;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The version. */
 	private long version = 0;
 
-	
 	/** The version type. */
 	private VersionType versionType = VersionType.INTERNAL;
 
-	
 	/** The percolate. */
 	private String percolate;
 
-	
 	/** The content type. */
 	private XContentType contentType = Requests.INDEX_CONTENT_TYPE;
 
-	
 	/**
 	 * Instantiates a new index request.
 	 */
 	public IndexRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new index request.
 	 *
@@ -190,7 +163,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		this.index = index;
 	}
 
-	
 	/**
 	 * Instantiates a new index request.
 	 *
@@ -204,9 +176,8 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		this.id = id;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -220,21 +191,19 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#beforeLocalFork()
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#beforeLocalFork()
 	 */
 	@Override
 	public void beforeLocalFork() {
-		
+
 		if (sourceUnsafe) {
 			source();
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#index(java.lang.String)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#index(java.lang.String)
 	 */
 	@Override
 	public IndexRequest index(String index) {
@@ -242,7 +211,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Content type.
 	 *
@@ -254,9 +222,8 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public IndexRequest listenerThreaded(boolean threadedListener) {
@@ -264,9 +231,8 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#operationThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#operationThreaded(boolean)
 	 */
 	@Override
 	public IndexRequest operationThreaded(boolean threadedOperation) {
@@ -274,7 +240,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -284,7 +249,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return type;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -297,7 +261,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -307,7 +270,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -319,7 +281,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -335,7 +296,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -345,7 +305,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Parent.
 	 *
@@ -360,7 +319,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Parent.
 	 *
@@ -370,7 +328,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.parent;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -382,7 +339,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -392,13 +348,12 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.timestamp;
 	}
 
-	
 	/**
 	 * Ttl.
 	 *
 	 * @param ttl the ttl
 	 * @return the index request
-	 * @throws RestartGenerationException the sum mall search generation exception
+	 * @throws RestartGenerationException the restart generation exception
 	 */
 	public IndexRequest ttl(Long ttl) throws RestartGenerationException {
 		if (ttl == null) {
@@ -406,14 +361,12 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 			return this;
 		}
 		if (ttl <= 0) {
-			throw new RestartIllegalArgumentException("TTL value must be > 0. Illegal value provided [" + ttl
-					+ "]");
+			throw new RebirthIllegalArgumentException("TTL value must be > 0. Illegal value provided [" + ttl + "]");
 		}
 		this.ttl = ttl;
 		return this;
 	}
 
-	
 	/**
 	 * Ttl.
 	 *
@@ -423,7 +376,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.ttl;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -438,7 +390,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return source;
 	}
 
-	
 	/**
 	 * Underlying source.
 	 *
@@ -451,7 +402,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.source;
 	}
 
-	
 	/**
 	 * Underlying source offset.
 	 *
@@ -464,7 +414,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.sourceOffset;
 	}
 
-	
 	/**
 	 * Underlying source length.
 	 *
@@ -477,27 +426,25 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.sourceLength;
 	}
 
-	
 	/**
 	 * Source.
 	 *
 	 * @param source the source
 	 * @return the index request
-	 * @throws RestartGenerationException the sum mall search generation exception
+	 * @throws RestartGenerationException the restart generation exception
 	 */
 	@Required
 	public IndexRequest source(Map source) throws RestartGenerationException {
 		return source(source, contentType);
 	}
 
-	
 	/**
 	 * Source.
 	 *
 	 * @param source the source
 	 * @param contentType the content type
 	 * @return the index request
-	 * @throws RestartGenerationException the sum mall search generation exception
+	 * @throws RestartGenerationException the restart generation exception
 	 */
 	@Required
 	public IndexRequest source(Map source, XContentType contentType) throws RestartGenerationException {
@@ -510,7 +457,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -527,7 +473,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -547,7 +492,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -566,7 +510,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -587,7 +530,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -610,7 +552,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -637,7 +578,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -648,7 +588,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return source(source, 0, source.length);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -662,7 +601,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return source(source, offset, length, false);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -681,7 +619,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -693,7 +630,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -704,7 +640,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/**
 	 * Op type.
 	 *
@@ -716,27 +651,25 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Op type.
 	 *
 	 * @param opType the op type
 	 * @return the index request
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public IndexRequest opType(String opType) throws RestartIllegalArgumentException {
+	public IndexRequest opType(String opType) throws RebirthIllegalArgumentException {
 		if ("create".equals(opType)) {
 			return opType(OpType.CREATE);
 		} else if ("index".equals(opType)) {
 			return opType(OpType.INDEX);
 		} else {
-			throw new RestartIllegalArgumentException("No index opType matching [" + opType + "]");
+			throw new RebirthIllegalArgumentException("No index opType matching [" + opType + "]");
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#replicationType(cn.com.summall.search.core.action.support.replication.ReplicationType)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#replicationType(cn.com.rebirth.search.core.action.support.replication.ReplicationType)
 	 */
 	@Override
 	public IndexRequest replicationType(ReplicationType replicationType) {
@@ -744,9 +677,8 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#consistencyLevel(cn.com.summall.search.core.action.WriteConsistencyLevel)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#consistencyLevel(cn.com.rebirth.search.core.action.WriteConsistencyLevel)
 	 */
 	@Override
 	public IndexRequest consistencyLevel(WriteConsistencyLevel consistencyLevel) {
@@ -754,7 +686,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -766,7 +697,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -781,7 +711,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Op type.
 	 *
@@ -791,7 +720,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.opType;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -803,7 +731,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -813,7 +740,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -825,7 +751,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -835,7 +760,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.version;
 	}
 
-	
 	/**
 	 * Version type.
 	 *
@@ -847,7 +771,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Version type.
 	 *
@@ -857,7 +780,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.versionType;
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
@@ -869,7 +791,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
@@ -879,7 +800,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		return this.percolate;
 	}
 
-	
 	/**
 	 * Process.
 	 *
@@ -887,18 +807,18 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 	 * @param aliasOrIndex the alias or index
 	 * @param mappingMd the mapping md
 	 * @param allowIdGeneration the allow id generation
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	public void process(MetaData metaData, String aliasOrIndex, @Nullable MappingMetaData mappingMd,
-			boolean allowIdGeneration) throws RestartException {
-		
+			boolean allowIdGeneration) throws RebirthException {
+
 		routing(metaData.resolveIndexRouting(routing, aliasOrIndex));
-		
+
 		if (timestamp != null) {
 			timestamp = MappingMetaData.Timestamp.parseStringTimestamp(timestamp, mappingMd != null ? mappingMd
 					.timestamp().dateTimeFormatter() : TimestampFieldMapper.Defaults.DATE_TIME_FORMATTER);
 		}
-		
+
 		if (mappingMd != null) {
 			MappingMetaData.ParseContext parseContext = mappingMd.createParseContext(id, routing, timestamp);
 
@@ -920,7 +840,7 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 								.dateTimeFormatter());
 					}
 				} catch (Exception e) {
-					throw new RestartParseException("failed to parse doc to extract routing/timestamp", e);
+					throw new RebirthParseException("failed to parse doc to extract routing/timestamp", e);
 				} finally {
 					if (parser != null) {
 						parser.close();
@@ -928,30 +848,26 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 				}
 			}
 
-			
 			if (mappingMd.routing().required() && routing == null) {
 				throw new RoutingMissingException(index, type, id);
 			}
 		}
 
-		
 		if (allowIdGeneration) {
 			if (id == null) {
 				id(UUID.randomBase64UUID());
-				
+
 				opType(IndexRequest.OpType.CREATE);
 			}
 		}
 
-		
 		if (timestamp == null) {
 			timestamp = String.valueOf(System.currentTimeMillis());
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -985,9 +901,8 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		versionType = VersionType.fromValue(in.readByte());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -1031,7 +946,6 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		out.writeByte(versionType.getValue());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -1041,7 +955,7 @@ public class IndexRequest extends ShardReplicationOperationRequest {
 		try {
 			sSource = Unicode.fromBytes(source, sourceOffset, sourceLength);
 		} catch (Exception e) {
-			
+
 		}
 		return "index {[" + index + "][" + type + "][" + id + "], source[" + sSource + "]}";
 	}

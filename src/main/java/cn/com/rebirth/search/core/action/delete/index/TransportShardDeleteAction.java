@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportShardDeleteAction.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportShardDeleteAction.java 2012-7-6 14:29:18 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete.index;
 
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction;
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportShardDeleteAction.
  *
@@ -32,7 +30,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportShardDeleteAction extends
 		TransportShardReplicationOperationAction<ShardDeleteRequest, ShardDeleteRequest, ShardDeleteResponse> {
 
-	
 	/**
 	 * Instantiates a new transport shard delete action.
 	 *
@@ -50,81 +47,72 @@ public class TransportShardDeleteAction extends
 		super(settings, transportService, clusterService, indicesService, threadPool, shardStateAction);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
 	 */
 	@Override
 	protected boolean checkWriteConsistency() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
 	 */
 	@Override
 	protected ShardDeleteRequest newRequestInstance() {
 		return new ShardDeleteRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
 	 */
 	@Override
 	protected ShardDeleteRequest newReplicaRequestInstance() {
 		return new ShardDeleteRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
 	 */
 	@Override
 	protected ShardDeleteResponse newResponseInstance() {
 		return new ShardDeleteResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return "indices/index/b_shard/delete";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.INDEX;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, ShardDeleteRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.WRITE);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, ShardDeleteRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.WRITE, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
 	 */
 	@Override
 	protected PrimaryResponse<ShardDeleteResponse, ShardDeleteRequest> shardOperationOnPrimary(
@@ -135,14 +123,14 @@ public class TransportShardDeleteAction extends
 		Engine.Delete delete = indexShard.prepareDelete(request.type(), request.id(), request.version()).origin(
 				Engine.Operation.Origin.PRIMARY);
 		indexShard.delete(delete);
-		
+
 		request.version(delete.version());
 
 		if (request.refresh()) {
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 
@@ -150,9 +138,8 @@ public class TransportShardDeleteAction extends
 		return new PrimaryResponse<ShardDeleteResponse, ShardDeleteRequest>(shardRequest.request, response, null);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
 	 */
 	@Override
 	protected void shardOperationOnReplica(ReplicaOperationRequest shardRequest) {
@@ -167,15 +154,14 @@ public class TransportShardDeleteAction extends
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ShardIterator shards(ClusterState clusterState, ShardDeleteRequest request) {
@@ -186,6 +172,6 @@ public class TransportShardDeleteAction extends
 				return shardIt;
 			}
 		}
-		throw new RestartIllegalStateException("No shards iterator found for shard [" + request.shardId() + "]");
+		throw new RebirthIllegalStateException("No shards iterator found for shard [" + request.shardId() + "]");
 	}
 }

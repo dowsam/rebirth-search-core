@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterStateListener.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterStateListener.java 2012-7-6 14:30:03 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.cluster;
-
 
 /**
  * The listener interface for receiving clusterState events.
@@ -20,11 +18,10 @@ package cn.com.rebirth.search.core.cluster;
  */
 public interface ClusterStateListener {
 
-    
-    /**
-     * Cluster changed.
-     *
-     * @param event the event
-     */
-    void clusterChanged(ClusterChangedEvent event);
+	/**
+	 * Cluster changed.
+	 *
+	 * @param event the event
+	 */
+	void clusterChanged(ClusterChangedEvent event);
 }

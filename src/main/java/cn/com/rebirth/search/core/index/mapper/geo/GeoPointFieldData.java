@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoPointFieldData.java 2012-3-29 15:02:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoPointFieldData.java 2012-7-6 14:29:16 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.geo;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData.GeoPointHas
 import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
 
-
 /**
  * The Class GeoPointFieldData.
  *
@@ -30,7 +28,6 @@ import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
  */
 public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> {
 
-	
 	/** The values cache. */
 	static ThreadLocal<ThreadLocals.CleanableValue<GeoPoint>> valuesCache = new ThreadLocal<ThreadLocals.CleanableValue<GeoPoint>>() {
 		@Override
@@ -39,7 +36,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		}
 	};
 
-	
 	/**
 	 * The Class GeoPointHash.
 	 *
@@ -47,20 +43,16 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	static class GeoPointHash {
 
-		
 		/** The lat. */
 		public double lat;
 
-		
 		/** The lon. */
 		public double lon;
 
-		
 		/** The geo hash. */
 		public String geoHash = "";
 	}
 
-	
 	/** The geo hash cache. */
 	static ThreadLocal<ThreadLocals.CleanableValue<GeoPointHash>> geoHashCache = new ThreadLocal<ThreadLocals.CleanableValue<GeoPointHash>>() {
 		@Override
@@ -69,19 +61,15 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		}
 	};
 
-	
 	/** The Constant EMPTY_ARRAY. */
 	public static final GeoPoint[] EMPTY_ARRAY = new GeoPoint[0];
 
-	
 	/** The lat. */
 	protected final double[] lat;
 
-	
 	/** The lon. */
 	protected final double[] lon;
 
-	
 	/**
 	 * Instantiates a new geo point field data.
 	 *
@@ -95,7 +83,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		this.lon = lon;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -104,7 +91,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	abstract public GeoPoint value(int docId);
 
-	
 	/**
 	 * Values.
 	 *
@@ -113,7 +99,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	abstract public GeoPoint[] values(int docId);
 
-	
 	/**
 	 * Lat value.
 	 *
@@ -122,7 +107,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	abstract public double latValue(int docId);
 
-	
 	/**
 	 * Lon value.
 	 *
@@ -131,7 +115,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	abstract public double lonValue(int docId);
 
-	
 	/**
 	 * Lat values.
 	 *
@@ -140,7 +123,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	abstract public double[] latValues(int docId);
 
-	
 	/**
 	 * Lon values.
 	 *
@@ -149,7 +131,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	abstract public double[] lonValues(int docId);
 
-	
 	/**
 	 * Distance.
 	 *
@@ -163,7 +144,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		return GeoDistance.PLANE.calculate(latValue(docId), lonValue(docId), lat, lon, unit);
 	}
 
-	
 	/**
 	 * Arc distance.
 	 *
@@ -177,7 +157,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		return GeoDistance.ARC.calculate(latValue(docId), lonValue(docId), lat, lon, unit);
 	}
 
-	
 	/**
 	 * Factor distance.
 	 *
@@ -191,7 +170,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		return GeoDistance.FACTOR.calculate(latValue(docId), lonValue(docId), lat, lon, unit);
 	}
 
-	
 	/**
 	 * Distance geohash.
 	 *
@@ -211,18 +189,16 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		return GeoDistance.PLANE.calculate(latValue(docId), lonValue(docId), geoPointHash.lat, geoPointHash.lon, unit);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#docFieldData(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#docFieldData(int)
 	 */
 	@Override
 	public GeoPointDocFieldData docFieldData(int docId) {
 		return super.docFieldData(docId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#computeSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#computeSizeInBytes()
 	 */
 	@Override
 	protected long computeSizeInBytes() {
@@ -230,36 +206,32 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 				+ (RamUsage.NUM_BYTES_DOUBLE * lon.length + RamUsage.NUM_BYTES_ARRAY_HEADER);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#stringValue(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#stringValue(int)
 	 */
 	@Override
 	public String stringValue(int docId) {
 		return value(docId).geohash();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#createFieldData()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#createFieldData()
 	 */
 	@Override
 	protected GeoPointDocFieldData createFieldData() {
 		return new GeoPointDocFieldData(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#type()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#type()
 	 */
 	@Override
 	public FieldDataType type() {
 		return GeoPointFieldDataType.TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachValue(cn.com.summall.search.core.index.field.data.FieldData.StringValueProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachValue(cn.com.rebirth.search.core.index.field.data.FieldData.StringValueProc)
 	 */
 	@Override
 	public void forEachValue(StringValueProc proc) {
@@ -268,7 +240,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		}
 	}
 
-	
 	/**
 	 * For each value.
 	 *
@@ -282,7 +253,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		}
 	}
 
-	
 	/**
 	 * The Interface PointValueProc.
 	 *
@@ -290,7 +260,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	public static interface PointValueProc {
 
-		
 		/**
 		 * On value.
 		 *
@@ -299,7 +268,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		void onValue(GeoPoint value);
 	}
 
-	
 	/**
 	 * For each value.
 	 *
@@ -311,7 +279,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		}
 	}
 
-	
 	/**
 	 * The Interface ValueProc.
 	 *
@@ -319,7 +286,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	public static interface ValueProc {
 
-		
 		/**
 		 * On value.
 		 *
@@ -329,7 +295,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		void onValue(double lat, double lon);
 	}
 
-	
 	/**
 	 * For each value in doc.
 	 *
@@ -338,7 +303,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	public abstract void forEachValueInDoc(int docId, ValueInDocProc proc);
 
-	
 	/**
 	 * The Interface ValueInDocProc.
 	 *
@@ -346,7 +310,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	public static interface ValueInDocProc {
 
-		
 		/**
 		 * On value.
 		 *
@@ -357,7 +320,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		void onValue(int docId, double lat, double lon);
 	}
 
-	
 	/**
 	 * Load.
 	 *
@@ -370,7 +332,6 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 		return FieldDataLoader.load(reader, field, new StringTypeLoader());
 	}
 
-	
 	/**
 	 * The Class StringTypeLoader.
 	 *
@@ -378,28 +339,24 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 	 */
 	static class StringTypeLoader extends FieldDataLoader.FreqsTypeLoader<GeoPointFieldData> {
 
-		
 		/** The lat. */
 		private final TDoubleArrayList lat = new TDoubleArrayList();
 
-		
 		/** The lon. */
 		private final TDoubleArrayList lon = new TDoubleArrayList();
 
-		
 		/**
 		 * Instantiates a new string type loader.
 		 */
 		StringTypeLoader() {
 			super();
-			
+
 			lat.add(0);
 			lon.add(0);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.support.FieldDataLoader.TypeLoader#collectTerm(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader.TypeLoader#collectTerm(java.lang.String)
 		 */
 		@Override
 		public void collectTerm(String term) {
@@ -409,18 +366,16 @@ public abstract class GeoPointFieldData extends FieldData<GeoPointDocFieldData> 
 
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildSingleValue(java.lang.String, int[])
+		 * @see cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildSingleValue(java.lang.String, int[])
 		 */
 		@Override
 		public GeoPointFieldData buildSingleValue(String field, int[] ordinals) {
 			return new SingleValueGeoPointFieldData(field, ordinals, lat.toArray(), lon.toArray());
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildMultiValue(java.lang.String, int[][])
+		 * @see cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildMultiValue(java.lang.String, int[][])
 		 */
 		@Override
 		public GeoPointFieldData buildMultiValue(String field, int[][] ordinals) {

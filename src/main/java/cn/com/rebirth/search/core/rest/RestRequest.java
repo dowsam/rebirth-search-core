@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestRequest.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestRequest.java 2012-7-6 14:29:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
 
-
 /**
  * The Interface RestRequest.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
  */
 public interface RestRequest extends Params {
 
-	
 	/**
 	 * The Enum Method.
 	 *
@@ -28,32 +25,25 @@ public interface RestRequest extends Params {
 	 */
 	enum Method {
 
-		
-		/** The GET. */
+		/** The get. */
 		GET,
-		
-		
-		/** The POST. */
+
+		/** The post. */
 		POST,
-		
-		
-		/** The PUT. */
+
+		/** The put. */
 		PUT,
-		
-		
-		/** The DELETE. */
+
+		/** The delete. */
 		DELETE,
-		
-		
-		/** The OPTIONS. */
+
+		/** The options. */
 		OPTIONS,
-		
-		
-		/** The HEAD. */
+
+		/** The head. */
 		HEAD
 	}
 
-	
 	/**
 	 * Method.
 	 *
@@ -61,7 +51,6 @@ public interface RestRequest extends Params {
 	 */
 	Method method();
 
-	
 	/**
 	 * Uri.
 	 *
@@ -69,7 +58,6 @@ public interface RestRequest extends Params {
 	 */
 	String uri();
 
-	
 	/**
 	 * Raw path.
 	 *
@@ -77,7 +65,6 @@ public interface RestRequest extends Params {
 	 */
 	String rawPath();
 
-	
 	/**
 	 * Path.
 	 *
@@ -85,7 +72,6 @@ public interface RestRequest extends Params {
 	 */
 	String path();
 
-	
 	/**
 	 * Checks for content.
 	 *
@@ -93,7 +79,6 @@ public interface RestRequest extends Params {
 	 */
 	boolean hasContent();
 
-	
 	/**
 	 * Content unsafe.
 	 *
@@ -101,7 +86,6 @@ public interface RestRequest extends Params {
 	 */
 	boolean contentUnsafe();
 
-	
 	/**
 	 * Content byte array.
 	 *
@@ -109,7 +93,6 @@ public interface RestRequest extends Params {
 	 */
 	byte[] contentByteArray();
 
-	
 	/**
 	 * Content byte array offset.
 	 *
@@ -117,7 +100,6 @@ public interface RestRequest extends Params {
 	 */
 	int contentByteArrayOffset();
 
-	
 	/**
 	 * Content length.
 	 *
@@ -125,7 +107,6 @@ public interface RestRequest extends Params {
 	 */
 	int contentLength();
 
-	
 	/**
 	 * Content as string.
 	 *
@@ -133,7 +114,6 @@ public interface RestRequest extends Params {
 	 */
 	String contentAsString();
 
-	
 	/**
 	 * Header.
 	 *
@@ -142,7 +122,6 @@ public interface RestRequest extends Params {
 	 */
 	String header(String name);
 
-	
 	/**
 	 * Checks for param.
 	 *
@@ -151,13 +130,11 @@ public interface RestRequest extends Params {
 	 */
 	boolean hasParam(String key);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent.Params#param(java.lang.String)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent.Params#param(java.lang.String)
 	 */
 	String param(String key);
 
-	
 	/**
 	 * Param as string array.
 	 *
@@ -167,7 +144,6 @@ public interface RestRequest extends Params {
 	 */
 	String[] paramAsStringArray(String key, String[] defaultValue);
 
-	
 	/**
 	 * Param as float.
 	 *
@@ -177,7 +153,6 @@ public interface RestRequest extends Params {
 	 */
 	float paramAsFloat(String key, float defaultValue);
 
-	
 	/**
 	 * Param as int.
 	 *
@@ -187,7 +162,6 @@ public interface RestRequest extends Params {
 	 */
 	int paramAsInt(String key, int defaultValue);
 
-	
 	/**
 	 * Param as long.
 	 *
@@ -197,19 +171,16 @@ public interface RestRequest extends Params {
 	 */
 	long paramAsLong(String key, long defaultValue);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent.Params#paramAsBoolean(java.lang.String, boolean)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent.Params#paramAsBoolean(java.lang.String, boolean)
 	 */
 	boolean paramAsBoolean(String key, boolean defaultValue);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent.Params#paramAsBooleanOptional(java.lang.String, java.lang.Boolean)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent.Params#paramAsBooleanOptional(java.lang.String, java.lang.Boolean)
 	 */
 	Boolean paramAsBooleanOptional(String key, Boolean defaultValue);
 
-	
 	/**
 	 * Param as time.
 	 *
@@ -219,7 +190,6 @@ public interface RestRequest extends Params {
 	 */
 	TimeValue paramAsTime(String key, TimeValue defaultValue);
 
-	
 	/**
 	 * Param as size.
 	 *
@@ -229,7 +199,6 @@ public interface RestRequest extends Params {
 	 */
 	ByteSizeValue paramAsSize(String key, ByteSizeValue defaultValue);
 
-	
 	/**
 	 * Params.
 	 *

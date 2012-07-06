@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverRouting.java 2012-3-29 15:02:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverRouting.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.routing;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.river.RiverName;
 
-
 /**
  * The Class RiverRouting.
  *
@@ -22,22 +20,18 @@ import cn.com.rebirth.search.core.river.RiverName;
  */
 public class RiverRouting implements Streamable {
 
-	
 	/** The river name. */
 	private RiverName riverName;
 
-	
 	/** The node. */
 	private DiscoveryNode node;
 
-	
 	/**
 	 * Instantiates a new river routing.
 	 */
 	private RiverRouting() {
 	}
 
-	
 	/**
 	 * Instantiates a new river routing.
 	 *
@@ -49,7 +43,6 @@ public class RiverRouting implements Streamable {
 		this.node = node;
 	}
 
-	
 	/**
 	 * River name.
 	 *
@@ -59,7 +52,6 @@ public class RiverRouting implements Streamable {
 		return riverName;
 	}
 
-	
 	/**
 	 * Node.
 	 *
@@ -69,7 +61,6 @@ public class RiverRouting implements Streamable {
 		return node;
 	}
 
-	
 	/**
 	 * Node.
 	 *
@@ -79,7 +70,6 @@ public class RiverRouting implements Streamable {
 		this.node = node;
 	}
 
-	
 	/**
 	 * Read river routing.
 	 *
@@ -93,9 +83,8 @@ public class RiverRouting implements Streamable {
 		return routing;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -105,9 +94,8 @@ public class RiverRouting implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

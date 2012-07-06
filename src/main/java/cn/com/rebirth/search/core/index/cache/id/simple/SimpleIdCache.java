@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SimpleIdCache.java 2012-3-29 15:02:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SimpleIdCache.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.id.simple;
 
@@ -22,7 +21,7 @@ import org.apache.lucene.util.StringHelper;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.trove.ExtTObjectIntHasMap;
 import cn.com.rebirth.search.commons.BytesWrap;
@@ -36,7 +35,6 @@ import cn.com.rebirth.search.core.index.mapper.internal.ParentFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.internal.UidFieldMapper;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class SimpleIdCache.
  *
@@ -44,11 +42,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class SimpleIdCache extends AbstractIndexComponent implements IdCache, IndexReader.ReaderFinishedListener {
 
-	
 	/** The id readers. */
 	private final ConcurrentMap<Object, SimpleIdReaderCache> idReaders;
 
-	
 	/**
 	 * Instantiates a new simple id cache.
 	 *
@@ -61,25 +57,22 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		idReaders = ConcurrentCollections.newConcurrentMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.CloseableComponent#close()
+	 * @see cn.com.rebirth.search.commons.component.CloseableComponent#close()
 	 */
 	@Override
-	public void close() throws RestartException {
+	public void close() throws RebirthException {
 		clear();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.id.IdCache#clear()
+	 * @see cn.com.rebirth.search.core.index.cache.id.IdCache#clear()
 	 */
 	@Override
 	public void clear() {
 		idReaders.clear();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.IndexReader.ReaderFinishedListener#finished(org.apache.lucene.index.IndexReader)
 	 */
@@ -88,25 +81,22 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		clear(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.id.IdCache#clear(org.apache.lucene.index.IndexReader)
+	 * @see cn.com.rebirth.search.core.index.cache.id.IdCache#clear(org.apache.lucene.index.IndexReader)
 	 */
 	@Override
 	public void clear(IndexReader reader) {
 		idReaders.remove(reader.getCoreCacheKey());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.id.IdCache#reader(org.apache.lucene.index.IndexReader)
+	 * @see cn.com.rebirth.search.core.index.cache.id.IdCache#reader(org.apache.lucene.index.IndexReader)
 	 */
 	@Override
 	public IdReaderCache reader(IndexReader reader) {
 		return idReaders.get(reader.getCoreCacheKey());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -116,28 +106,24 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		return (Iterator<IdReaderCache>) idReaders.values();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.id.IdCache#refresh(org.apache.lucene.index.IndexReader[])
+	 * @see cn.com.rebirth.search.core.index.cache.id.IdCache#refresh(org.apache.lucene.index.IndexReader[])
 	 */
 	@SuppressWarnings({ "StringEquality" })
 	@Override
 	public void refresh(IndexReader[] readers) throws Exception {
-		
+
 		if (refreshNeeded(readers)) {
 			synchronized (idReaders) {
 				if (!refreshNeeded(readers)) {
 					return;
 				}
 
-				
-
 				Map<Object, Map<String, TypeBuilder>> builders = new HashMap<Object, Map<String, TypeBuilder>>();
 
-				
 				for (IndexReader reader : readers) {
 					if (idReaders.containsKey(reader.getCoreCacheKey())) {
-						
+
 						continue;
 					}
 
@@ -153,8 +139,7 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 							Term term = termEnum.term();
 							if (term == null || term.field() != field)
 								break;
-							
-							
+
 							Uid uid = Uid.createUid(term.text());
 
 							TypeBuilder typeBuilder = readerBuilder.get(uid.type());
@@ -166,7 +151,7 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 							BytesWrap idAsBytes = checkIfCanReuse(builders, new BytesWrap(uid.id()));
 							termDocs.seek(termEnum);
 							while (termDocs.next()) {
-								
+
 								if (!reader.isDeleted(termDocs.doc())) {
 									typeBuilder.idToDoc.put(idAsBytes, termDocs.doc());
 								}
@@ -178,11 +163,9 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 					}
 				}
 
-				
-
 				for (IndexReader reader : readers) {
 					if (idReaders.containsKey(reader.getCoreCacheKey())) {
-						
+
 						continue;
 					}
 
@@ -196,8 +179,7 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 							Term term = termEnum.term();
 							if (term == null || term.field() != field)
 								break;
-							
-							
+
 							Uid uid = Uid.createUid(term.text());
 
 							TypeBuilder typeBuilder = readerBuilder.get(uid.type());
@@ -207,11 +189,11 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 							}
 
 							BytesWrap idAsBytes = checkIfCanReuse(builders, new BytesWrap(uid.id()));
-							boolean added = false; 
+							boolean added = false;
 
 							termDocs.seek(termEnum);
 							while (termDocs.next()) {
-								
+
 								if (!reader.isDeleted(termDocs.doc())) {
 									if (!added) {
 										typeBuilder.parentIdsValues.add(idAsBytes);
@@ -230,7 +212,6 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 					}
 				}
 
-				
 				for (Map.Entry<Object, Map<String, TypeBuilder>> entry : builders.entrySet()) {
 					MapBuilder<String, SimpleIdReaderTypeCache> types = MapBuilder.newMapBuilder();
 					for (Map.Entry<String, TypeBuilder> typeBuilderEntry : entry.getValue().entrySet()) {
@@ -249,7 +230,6 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		}
 	}
 
-	
 	/**
 	 * Check if can reuse.
 	 *
@@ -259,7 +239,7 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 	 */
 	private BytesWrap checkIfCanReuse(Map<Object, Map<String, TypeBuilder>> builders, BytesWrap idAsBytes) {
 		BytesWrap finalIdAsBytes;
-		
+
 		for (SimpleIdReaderCache idReaderCache : idReaders.values()) {
 			finalIdAsBytes = idReaderCache.canReuse(idAsBytes);
 			if (finalIdAsBytes != null) {
@@ -277,7 +257,6 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		return idAsBytes;
 	}
 
-	
 	/**
 	 * Refresh needed.
 	 *
@@ -293,7 +272,6 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		return false;
 	}
 
-	
 	/**
 	 * The Class TypeBuilder.
 	 *
@@ -301,24 +279,19 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 	 */
 	static class TypeBuilder {
 
-		
 		/** The id to doc. */
 		final ExtTObjectIntHasMap<BytesWrap> idToDoc = new ExtTObjectIntHasMap<BytesWrap>(Constants.DEFAULT_CAPACITY,
 				Constants.DEFAULT_LOAD_FACTOR, -1);
 
-		
 		/** The parent ids values. */
 		final ArrayList<BytesWrap> parentIdsValues = new ArrayList<BytesWrap>();
 
-		
 		/** The parent ids ordinals. */
 		final int[] parentIdsOrdinals;
 
-		
 		/** The t. */
-		int t = 1; 
+		int t = 1;
 
-		
 		/**
 		 * Instantiates a new type builder.
 		 *
@@ -326,11 +299,10 @@ public class SimpleIdCache extends AbstractIndexComponent implements IdCache, In
 		 */
 		TypeBuilder(IndexReader reader) {
 			parentIdsOrdinals = new int[reader.maxDoc()];
-			
+
 			parentIdsValues.add(null);
 		}
 
-		
 		/**
 		 * Can reuse.
 		 *

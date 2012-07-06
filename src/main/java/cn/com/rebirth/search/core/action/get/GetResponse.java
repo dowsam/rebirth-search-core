@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GetResponse.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GetResponse.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -11,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import cn.com.rebirth.commons.BytesHolder;
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
 import cn.com.rebirth.search.core.index.get.GetField;
 import cn.com.rebirth.search.core.index.get.GetResult;
 
-
 /**
  * The Class GetResponse.
  *
@@ -29,18 +27,15 @@ import cn.com.rebirth.search.core.index.get.GetResult;
  */
 public class GetResponse implements ActionResponse, Streamable, Iterable<GetField>, ToXContent {
 
-	
 	/** The get result. */
 	private GetResult getResult;
 
-	
 	/**
 	 * Instantiates a new gets the response.
 	 */
 	GetResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new gets the response.
 	 *
@@ -50,7 +45,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		this.getResult = getResult;
 	}
 
-	
 	/**
 	 * Exists.
 	 *
@@ -60,7 +54,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.exists();
 	}
 
-	
 	/**
 	 * Checks if is exists.
 	 *
@@ -70,7 +63,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return exists();
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -80,7 +72,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.index();
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -90,7 +81,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return index();
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -100,7 +90,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.type();
 	}
 
-	
 	/**
 	 * Gets the type.
 	 *
@@ -110,7 +99,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return type();
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -120,7 +108,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.id();
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -130,7 +117,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return id();
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -140,7 +126,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.version();
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -150,7 +135,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return version();
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -160,7 +144,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.source();
 	}
 
-	
 	/**
 	 * Source ref.
 	 *
@@ -170,7 +153,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.sourceRef();
 	}
 
-	
 	/**
 	 * Checks if is source empty.
 	 *
@@ -180,7 +162,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.isSourceEmpty();
 	}
 
-	
 	/**
 	 * Source as string.
 	 *
@@ -190,18 +171,16 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.sourceAsString();
 	}
 
-	
 	/**
 	 * Source as map.
 	 *
 	 * @return the map
-	 * @throws SumMallSearchParseException the sum mall search parse exception
+	 * @throws RebirthParseException the rebirth parse exception
 	 */
-	public Map<String, Object> sourceAsMap() throws RestartParseException {
+	public Map<String, Object> sourceAsMap() throws RebirthParseException {
 		return getResult.sourceAsMap();
 	}
 
-	
 	/**
 	 * Gets the source.
 	 *
@@ -211,7 +190,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.getSource();
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -221,7 +199,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.fields();
 	}
 
-	
 	/**
 	 * Gets the fields.
 	 *
@@ -231,7 +208,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return fields();
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -242,7 +218,6 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.field(name);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -251,27 +226,24 @@ public class GetResponse implements ActionResponse, Streamable, Iterable<GetFiel
 		return getResult.iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
 		return getResult.toXContent(builder, params);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		getResult = GetResult.readGetResult(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

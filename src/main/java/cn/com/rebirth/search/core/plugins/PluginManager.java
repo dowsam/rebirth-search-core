@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PluginManager.java 2012-3-29 15:02:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PluginManager.java 2012-7-6 14:28:53 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.plugins;
@@ -16,7 +16,6 @@ import javax.net.ssl.X509TrustManager;
 import cn.com.rebirth.search.commons.io.FileSystemUtils;
 import cn.com.rebirth.search.core.env.Environment;
 
-
 /**
  * The Class PluginManager.
  *
@@ -24,15 +23,12 @@ import cn.com.rebirth.search.core.env.Environment;
  */
 public class PluginManager {
 
-	
 	/** The environment. */
 	private final Environment environment;
 
-	
 	/** The url. */
 	private String url;
 
-	
 	/**
 	 * Instantiates a new plugin manager.
 	 *
@@ -55,7 +51,6 @@ public class PluginManager {
 			}
 		} };
 
-		
 		try {
 			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, trustAllCerts, new java.security.SecureRandom());
@@ -65,7 +60,6 @@ public class PluginManager {
 		}
 	}
 
-	
 	/**
 	 * Removes the plugin.
 	 *

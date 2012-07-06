@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ThreadPoolInfo.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ThreadPoolInfo.java 2012-7-6 14:30:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.threadpool;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class ThreadPoolInfo.
  *
@@ -26,18 +24,15 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, ToXContent {
 
-	
 	/** The infos. */
 	private List<ThreadPool.Info> infos;
 
-	
 	/**
 	 * Instantiates a new thread pool info.
 	 */
 	ThreadPoolInfo() {
 	}
 
-	
 	/**
 	 * Instantiates a new thread pool info.
 	 *
@@ -47,7 +42,6 @@ public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, To
 		this.infos = infos;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -56,7 +50,6 @@ public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, To
 		return infos.iterator();
 	}
 
-	
 	/**
 	 * Read thread pool info.
 	 *
@@ -70,9 +63,8 @@ public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, To
 		return info;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -85,9 +77,8 @@ public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, To
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -97,7 +88,6 @@ public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, To
 		}
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -105,14 +95,12 @@ public class ThreadPoolInfo implements Streamable, Iterable<ThreadPool.Info>, To
 	 */
 	static final class Fields {
 
-		
 		/** The Constant THREAD_POOL. */
 		static final XContentBuilderString THREAD_POOL = new XContentBuilderString("thread_pool");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

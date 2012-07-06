@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeBuilder.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeBuilder.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.node;
 
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.node.internal.InternalNode;
-
 
 /**
  * The Class NodeBuilder.
@@ -18,15 +16,12 @@ import cn.com.rebirth.search.core.node.internal.InternalNode;
  */
 public class NodeBuilder {
 
-	
 	/** The settings. */
 	private final ImmutableSettings.Builder settings = ImmutableSettings.settingsBuilder();
 
-	
 	/** The load config settings. */
 	private boolean loadConfigSettings = true;
 
-	
 	/**
 	 * Node builder.
 	 *
@@ -36,7 +31,6 @@ public class NodeBuilder {
 		return new NodeBuilder();
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -46,7 +40,6 @@ public class NodeBuilder {
 		return settings;
 	}
 
-	
 	/**
 	 * Gets the settings.
 	 *
@@ -56,7 +49,6 @@ public class NodeBuilder {
 		return settings;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -67,7 +59,6 @@ public class NodeBuilder {
 		return settings(settings.build());
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -79,7 +70,6 @@ public class NodeBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Load config settings.
 	 *
@@ -91,7 +81,6 @@ public class NodeBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Client.
 	 *
@@ -103,7 +92,6 @@ public class NodeBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Data.
 	 *
@@ -115,7 +103,6 @@ public class NodeBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Local.
 	 *
@@ -127,7 +114,6 @@ public class NodeBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cluster name.
 	 *
@@ -139,7 +125,6 @@ public class NodeBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Builds the.
 	 *
@@ -149,7 +134,6 @@ public class NodeBuilder {
 		return new InternalNode(settings.build(), loadConfigSettings);
 	}
 
-	
 	/**
 	 * Node.
 	 *

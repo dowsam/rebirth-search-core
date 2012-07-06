@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportRequestHandler.java 2012-3-29 15:00:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportRequestHandler.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport;
 
 import cn.com.rebirth.commons.io.stream.Streamable;
-
 
 /**
  * The Interface TransportRequestHandler.
@@ -17,29 +15,26 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public interface TransportRequestHandler<T extends Streamable> {
 
-    
-    /**
-     * New instance.
-     *
-     * @return the t
-     */
-    T newInstance();
+	/**
+	 * New instance.
+	 *
+	 * @return the t
+	 */
+	T newInstance();
 
-    
-    /**
-     * Message received.
-     *
-     * @param request the request
-     * @param channel the channel
-     * @throws Exception the exception
-     */
-    void messageReceived(T request, TransportChannel channel) throws Exception;
+	/**
+	 * Message received.
+	 *
+	 * @param request the request
+	 * @param channel the channel
+	 * @throws Exception the exception
+	 */
+	void messageReceived(T request, TransportChannel channel) throws Exception;
 
-    
-    /**
-     * Executor.
-     *
-     * @return the string
-     */
-    String executor();
+	/**
+	 * Executor.
+	 *
+	 * @return the string
+	 */
+	String executor();
 }

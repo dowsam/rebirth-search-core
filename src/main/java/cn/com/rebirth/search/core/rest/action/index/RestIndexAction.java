@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestIndexAction.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestIndexAction.java 2012-7-6 14:28:52 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.index;
 
@@ -33,7 +32,6 @@ import static cn.com.rebirth.search.core.rest.RestRequest.Method.POST;
 import static cn.com.rebirth.search.core.rest.RestRequest.Method.PUT;
 import static cn.com.rebirth.search.core.rest.RestStatus.*;
 
-
 /**
  * The Class RestIndexAction.
  *
@@ -41,7 +39,6 @@ import static cn.com.rebirth.search.core.rest.RestStatus.*;
  */
 public class RestIndexAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest index action.
 	 *
@@ -52,14 +49,13 @@ public class RestIndexAction extends BaseRestHandler {
 	@Inject
 	public RestIndexAction(Settings settings, Client client, RestController controller) {
 		super(settings, client);
-		controller.registerHandler(POST, "/{index}/{type}", this); 
+		controller.registerHandler(POST, "/{index}/{type}", this);
 		controller.registerHandler(PUT, "/{index}/{type}/{id}", this);
 		controller.registerHandler(POST, "/{index}/{type}/{id}", this);
 		controller.registerHandler(PUT, "/{index}/{type}/{id}/_create", new CreateHandler());
 		controller.registerHandler(POST, "/{index}/{type}/{id}/_create", new CreateHandler());
 	}
 
-	
 	/**
 	 * The Class CreateHandler.
 	 *
@@ -67,9 +63,8 @@ public class RestIndexAction extends BaseRestHandler {
 	 */
 	final class CreateHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(RestRequest request, RestChannel channel) {
@@ -78,15 +73,14 @@ public class RestIndexAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
 		IndexRequest indexRequest = new IndexRequest(request.param("index"), request.param("type"), request.param("id"));
 		indexRequest.routing(request.param("routing"));
-		indexRequest.parent(request.param("parent")); 
+		indexRequest.parent(request.param("parent"));
 		indexRequest.timestamp(request.param("timestamp"));
 		if (request.hasParam("ttl")) {
 			indexRequest.ttl(request.paramAsTime("ttl", null).millis());
@@ -126,9 +120,9 @@ public class RestIndexAction extends BaseRestHandler {
 		if (consistencyLevel != null) {
 			indexRequest.consistencyLevel(WriteConsistencyLevel.fromString(consistencyLevel));
 		}
-		
+
 		indexRequest.listenerThreaded(false);
-		
+
 		indexRequest.operationThreaded(true);
 		client.index(indexRequest, new ActionListener<IndexResponse>() {
 			@Override
@@ -167,7 +161,6 @@ public class RestIndexAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -175,27 +168,21 @@ public class RestIndexAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant OK. */
 		static final XContentBuilderString OK = new XContentBuilderString("ok");
 
-		
 		/** The Constant _INDEX. */
 		static final XContentBuilderString _INDEX = new XContentBuilderString("_index");
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant _ID. */
 		static final XContentBuilderString _ID = new XContentBuilderString("_id");
 
-		
 		/** The Constant _VERSION. */
 		static final XContentBuilderString _VERSION = new XContentBuilderString("_version");
 
-		
 		/** The Constant MATCHES. */
 		static final XContentBuilderString MATCHES = new XContentBuilderString("matches");
 	}

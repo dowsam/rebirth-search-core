@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core WriteConsistencyLevel.java 2012-3-29 15:00:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core WriteConsistencyLevel.java 2012-7-6 14:29:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum WriteConsistencyLevel.
@@ -17,27 +14,21 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum WriteConsistencyLevel {
 
-	
-	/** The DEFAULT. */
+	/** The default. */
 	DEFAULT((byte) 0),
 
-	
-	/** The ONE. */
+	/** The one. */
 	ONE((byte) 1),
 
-	
-	/** The QUORUM. */
+	/** The quorum. */
 	QUORUM((byte) 2),
 
-	
-	/** The ALL. */
+	/** The all. */
 	ALL((byte) 3);
 
-	
 	/** The id. */
 	private final byte id;
 
-	
 	/**
 	 * Instantiates a new write consistency level.
 	 *
@@ -47,7 +38,6 @@ public enum WriteConsistencyLevel {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -57,7 +47,6 @@ public enum WriteConsistencyLevel {
 		return id;
 	}
 
-	
 	/**
 	 * From id.
 	 *
@@ -74,10 +63,9 @@ public enum WriteConsistencyLevel {
 		} else if (value == 3) {
 			return ALL;
 		}
-		throw new RestartIllegalArgumentException("No write consistency match [" + value + "]");
+		throw new RebirthIllegalArgumentException("No write consistency match [" + value + "]");
 	}
 
-	
 	/**
 	 * From string.
 	 *
@@ -94,6 +82,6 @@ public enum WriteConsistencyLevel {
 		} else if (value.equals("all")) {
 			return ALL;
 		}
-		throw new RestartIllegalArgumentException("No write consistency match [" + value + "]");
+		throw new RebirthIllegalArgumentException("No write consistency match [" + value + "]");
 	}
 }

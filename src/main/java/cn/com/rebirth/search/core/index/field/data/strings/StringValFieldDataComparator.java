@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StringValFieldDataComparator.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StringValFieldDataComparator.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data.strings;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.field.data.FieldData;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 
-
 /**
  * The Class StringValFieldDataComparator.
  *
@@ -23,27 +21,21 @@ import cn.com.rebirth.search.core.index.field.data.FieldDataType;
  */
 public class StringValFieldDataComparator extends FieldComparator {
 
-	
 	/** The field name. */
 	private final String fieldName;
 
-	
 	/** The field data cache. */
 	protected final FieldDataCache fieldDataCache;
 
-	
 	/** The current field data. */
 	protected FieldData currentFieldData;
 
-	
 	/** The values. */
 	private String[] values;
 
-	
 	/** The bottom. */
 	private String bottom;
 
-	
 	/**
 	 * Instantiates a new string val field data comparator.
 	 *
@@ -57,7 +49,6 @@ public class StringValFieldDataComparator extends FieldComparator {
 		values = new String[numHits];
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#compare(int, int)
 	 */
@@ -77,7 +68,6 @@ public class StringValFieldDataComparator extends FieldComparator {
 		return val1.compareTo(val2);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#compareBottom(int)
 	 */
@@ -95,7 +85,6 @@ public class StringValFieldDataComparator extends FieldComparator {
 		return bottom.compareTo(val2);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#copy(int, int)
 	 */
@@ -104,7 +93,6 @@ public class StringValFieldDataComparator extends FieldComparator {
 		values[slot] = currentFieldData.stringValue(doc);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#setNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
@@ -113,7 +101,6 @@ public class StringValFieldDataComparator extends FieldComparator {
 		currentFieldData = fieldDataCache.cache(FieldDataType.DefaultTypes.STRING, reader, fieldName);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#setBottom(int)
 	 */
@@ -122,7 +109,6 @@ public class StringValFieldDataComparator extends FieldComparator {
 		this.bottom = values[bottom];
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#value(int)
 	 */

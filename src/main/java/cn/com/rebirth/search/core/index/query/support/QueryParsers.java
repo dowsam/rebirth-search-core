@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryParsers.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryParsers.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query.support;
 
@@ -12,14 +11,13 @@ import org.apache.lucene.search.MultiTermQuery;
 import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.lucene.search.AndFilter;
 import cn.com.rebirth.search.core.index.mapper.DocumentMapper;
 import cn.com.rebirth.search.core.index.mapper.MapperService;
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
 
 import com.google.common.collect.ImmutableList;
-
 
 /**
  * The Class QueryParsers.
@@ -28,7 +26,6 @@ import com.google.common.collect.ImmutableList;
  */
 public final class QueryParsers {
 
-	
 	/**
 	 * Instantiates a new query parsers.
 	 */
@@ -36,7 +33,6 @@ public final class QueryParsers {
 
 	}
 
-	
 	/**
 	 * Parses the rewrite method.
 	 *
@@ -75,10 +71,9 @@ public final class QueryParsers {
 			int size = Integer.parseInt(rewriteMethod.substring("topTerms".length()));
 			return new MultiTermQuery.TopTermsScoringBooleanQueryRewrite(size);
 		}
-		throw new RestartIllegalArgumentException("Failed to parse rewrite_method [" + rewriteMethod + "]");
+		throw new RebirthIllegalArgumentException("Failed to parse rewrite_method [" + rewriteMethod + "]");
 	}
 
-	
 	/**
 	 * Wrap smart name query.
 	 *
@@ -102,7 +97,6 @@ public final class QueryParsers {
 		return new FilteredQuery(query, parseContext.cacheFilter(docMapper.typeFilter(), null));
 	}
 
-	
 	/**
 	 * Wrap smart name filter.
 	 *

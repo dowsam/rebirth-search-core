@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportClearIndicesCacheAction.java 2012-3-29 15:02:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportClearIndicesCacheAction.java 2012-7-6 14:29:57 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.action.admin.indices.cache.clear;
@@ -10,7 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
@@ -57,7 +57,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
@@ -65,7 +65,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
@@ -73,7 +73,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
 	 */
 	@Override
 	protected ClearIndicesCacheRequest newRequest() {
@@ -81,7 +81,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#ignoreNonActiveExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#ignoreNonActiveExceptions()
 	 */
 	@Override
 	protected boolean ignoreNonActiveExceptions() {
@@ -89,7 +89,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected ClearIndicesCacheResponse newResponse(ClearIndicesCacheRequest request,
@@ -116,7 +116,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
 	 */
 	@Override
 	protected ShardClearIndicesCacheRequest newShardRequest() {
@@ -124,7 +124,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ShardClearIndicesCacheRequest newShardRequest(ShardRouting shard, ClearIndicesCacheRequest request) {
@@ -132,7 +132,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
 	 */
 	@Override
 	protected ShardClearIndicesCacheResponse newShardResponse() {
@@ -140,11 +140,11 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest)
 	 */
 	@Override
 	protected ShardClearIndicesCacheResponse shardOperation(ShardClearIndicesCacheRequest request)
-			throws RestartException {
+			throws RebirthException {
 		IndexService service = indicesService.indexService(request.index());
 		if (service != null) {
 
@@ -188,7 +188,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected GroupShardsIterator shards(ClusterState clusterState, ClearIndicesCacheRequest request,
@@ -197,7 +197,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, ClearIndicesCacheRequest request) {
@@ -205,7 +205,7 @@ public class TransportClearIndicesCacheAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, ClearIndicesCacheRequest request,

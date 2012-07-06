@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulkShardRequest.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulkShardRequest.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest;
 
-
 /**
  * The Class BulkShardRequest.
  *
@@ -20,26 +18,21 @@ import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOpe
  */
 public class BulkShardRequest extends ShardReplicationOperationRequest {
 
-	
 	/** The shard id. */
 	private int shardId;
 
-	
 	/** The items. */
 	private BulkItemRequest[] items;
 
-	
 	/** The refresh. */
 	private boolean refresh;
 
-	
 	/**
 	 * Instantiates a new bulk shard request.
 	 */
 	BulkShardRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new bulk shard request.
 	 *
@@ -55,7 +48,6 @@ public class BulkShardRequest extends ShardReplicationOperationRequest {
 		this.refresh = refresh;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -65,7 +57,6 @@ public class BulkShardRequest extends ShardReplicationOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -75,7 +66,6 @@ public class BulkShardRequest extends ShardReplicationOperationRequest {
 		return shardId;
 	}
 
-	
 	/**
 	 * Items.
 	 *
@@ -85,9 +75,8 @@ public class BulkShardRequest extends ShardReplicationOperationRequest {
 		return items;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#beforeLocalFork()
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#beforeLocalFork()
 	 */
 	@Override
 	public void beforeLocalFork() {
@@ -96,9 +85,8 @@ public class BulkShardRequest extends ShardReplicationOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -116,9 +104,8 @@ public class BulkShardRequest extends ShardReplicationOperationRequest {
 		out.writeBoolean(refresh);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {

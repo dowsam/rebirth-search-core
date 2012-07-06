@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesSegmentsAction.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesSegmentsAction.java 2012-7-6 14:29:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.segments;
 
 import cn.com.rebirth.search.core.action.admin.indices.IndicesAction;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
-
 
 /**
  * The Class IndicesSegmentsAction.
@@ -18,15 +16,12 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
 public class IndicesSegmentsAction extends
 		IndicesAction<IndicesSegmentsRequest, IndicesSegmentResponse, IndicesSegmentsRequestBuilder> {
 
-	
 	/** The Constant INSTANCE. */
 	public static final IndicesSegmentsAction INSTANCE = new IndicesSegmentsAction();
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "indices/segments";
 
-	
 	/**
 	 * Instantiates a new indices segments action.
 	 */
@@ -34,18 +29,16 @@ public class IndicesSegmentsAction extends
 		super(NAME);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.GenericAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.GenericAction#newResponse()
 	 */
 	@Override
 	public IndicesSegmentResponse newResponse() {
 		return new IndicesSegmentResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.IndicesAction#newRequestBuilder(cn.com.summall.search.core.client.IndicesAdminClient)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.IndicesAction#newRequestBuilder(cn.com.rebirth.search.core.client.IndicesAdminClient)
 	 */
 	@Override
 	public IndicesSegmentsRequestBuilder newRequestBuilder(IndicesAdminClient client) {

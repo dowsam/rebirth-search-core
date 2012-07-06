@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportShardSingleOperationAction.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportShardSingleOperationAction.java 2012-7-6 14:29:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.single.shard;
 
 import java.io.IOException;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportShardSingleOperationAction.
  *
@@ -43,27 +41,21 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public abstract class TransportShardSingleOperationAction<Request extends SingleShardOperationRequest, Response extends ActionResponse>
 		extends TransportAction<Request, Response> {
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The transport service. */
 	protected final TransportService transportService;
 
-	
 	/** The transport action. */
 	final String transportAction;
 
-	
 	/** The transport shard action. */
 	final String transportShardAction;
 
-	
 	/** The executor. */
 	final String executor;
 
-	
 	/**
 	 * Instantiates a new transport shard single operation action.
 	 *
@@ -86,16 +78,14 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 		transportService.registerHandler(transportShardAction, new ShardTransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(Request request, ActionListener<Response> listener) {
 		new AsyncSingleAction(request, listener).start();
 	}
 
-	
 	/**
 	 * Transport action.
 	 *
@@ -103,7 +93,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected abstract String transportAction();
 
-	
 	/**
 	 * Executor.
 	 *
@@ -111,18 +100,16 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected abstract String executor();
 
-	
 	/**
 	 * Shard operation.
 	 *
 	 * @param request the request
 	 * @param shardId the shard id
 	 * @return the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract Response shardOperation(Request request, int shardId) throws RestartException;
+	protected abstract Response shardOperation(Request request, int shardId) throws RebirthException;
 
-	
 	/**
 	 * New request.
 	 *
@@ -130,7 +117,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected abstract Request newRequest();
 
-	
 	/**
 	 * New response.
 	 *
@@ -138,7 +124,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected abstract Response newResponse();
 
-	
 	/**
 	 * Check global block.
 	 *
@@ -148,7 +133,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected abstract ClusterBlockException checkGlobalBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Check request block.
 	 *
@@ -158,7 +142,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected abstract ClusterBlockException checkRequestBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Resolve request.
 	 *
@@ -169,18 +152,16 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 		request.index(state.metaData().concreteIndex(request.index()));
 	}
 
-	
 	/**
 	 * Shards.
 	 *
 	 * @param state the state
 	 * @param request the request
 	 * @return the shard iterator
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract ShardIterator shards(ClusterState state, Request request) throws RestartException;
+	protected abstract ShardIterator shards(ClusterState state, Request request) throws RebirthException;
 
-	
 	/**
 	 * The Class AsyncSingleAction.
 	 *
@@ -188,23 +169,18 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	class AsyncSingleAction {
 
-		
 		/** The listener. */
 		private final ActionListener<Response> listener;
 
-		
 		/** The shard it. */
 		private final ShardIterator shardIt;
 
-		
 		/** The request. */
 		private final Request request;
 
-		
 		/** The nodes. */
 		private final DiscoveryNodes nodes;
 
-		
 		/**
 		 * Instantiates a new async single action.
 		 *
@@ -230,7 +206,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			this.shardIt = shards(clusterState, request);
 		}
 
-		
 		/**
 		 * Start.
 		 */
@@ -238,7 +213,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			perform(null);
 		}
 
-		
 		/**
 		 * On failure.
 		 *
@@ -252,7 +226,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			perform(e);
 		}
 
-		
 		/**
 		 * Perform.
 		 *
@@ -324,7 +297,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -332,33 +304,30 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	private class TransportHandler extends BaseTransportRequestHandler<Request> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public Request newInstance() {
 			return newRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(Request request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
-			
+
 			request.operationThreaded(true);
 			execute(request, new ActionListener<Response>() {
 				@Override
@@ -382,7 +351,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 		}
 	}
 
-	
 	/**
 	 * The Class ShardTransportHandler.
 	 *
@@ -390,27 +358,24 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	private class ShardTransportHandler extends BaseTransportRequestHandler<ShardSingleOperationRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public ShardSingleOperationRequest newInstance() {
 			return new ShardSingleOperationRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return executor;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final ShardSingleOperationRequest request, final TransportChannel channel)
@@ -420,7 +385,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 		}
 	}
 
-	
 	/**
 	 * The Class ShardSingleOperationRequest.
 	 *
@@ -428,22 +392,18 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 	 */
 	protected class ShardSingleOperationRequest implements Streamable {
 
-		
 		/** The request. */
 		private Request request;
 
-		
 		/** The shard id. */
 		private int shardId;
 
-		
 		/**
 		 * Instantiates a new shard single operation request.
 		 */
 		ShardSingleOperationRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new shard single operation request.
 		 *
@@ -455,7 +415,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			this.shardId = shardId;
 		}
 
-		
 		/**
 		 * Request.
 		 *
@@ -465,7 +424,6 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			return request;
 		}
 
-		
 		/**
 		 * Shard id.
 		 *
@@ -475,9 +433,8 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			return shardId;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -486,9 +443,8 @@ public abstract class TransportShardSingleOperationAction<Request extends Single
 			shardId = in.readVInt();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

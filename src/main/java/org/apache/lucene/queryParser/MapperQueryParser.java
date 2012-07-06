@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MapperQueryParser.java 2012-3-29 15:04:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MapperQueryParser.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package org.apache.lucene.queryParser;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class MapperQueryParser.
  *
@@ -38,7 +36,6 @@ import com.google.common.collect.ImmutableMap;
  */
 public class MapperQueryParser extends QueryParser {
 
-	
 	/** The Constant fieldQueryExtensions. */
 	public static final ImmutableMap<String, FieldQueryExtension> fieldQueryExtensions;
 
@@ -48,23 +45,18 @@ public class MapperQueryParser extends QueryParser {
 				.put(MissingFieldQueryExtension.NAME, new MissingFieldQueryExtension()).build();
 	}
 
-	
 	/** The parse context. */
 	private final QueryParseContext parseContext;
 
-	
 	/** The forced analyzer. */
 	private boolean forcedAnalyzer;
 
-	
 	/** The current mapper. */
 	private FieldMapper<?> currentMapper;
 
-	
 	/** The analyze wildcard. */
 	private boolean analyzeWildcard;
 
-	
 	/**
 	 * Instantiates a new mapper query parser.
 	 *
@@ -75,7 +67,6 @@ public class MapperQueryParser extends QueryParser {
 		this.parseContext = parseContext;
 	}
 
-	
 	/**
 	 * Instantiates a new mapper query parser.
 	 *
@@ -88,7 +79,6 @@ public class MapperQueryParser extends QueryParser {
 		reset(settings);
 	}
 
-	
 	/**
 	 * Reset.
 	 *
@@ -110,7 +100,6 @@ public class MapperQueryParser extends QueryParser {
 		this.analyzeWildcard = settings.analyzeWildcard();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#newTermQuery(org.apache.lucene.index.Term)
 	 */
@@ -125,7 +114,6 @@ public class MapperQueryParser extends QueryParser {
 		return super.newTermQuery(term);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#newMatchAllDocsQuery()
 	 */
@@ -134,7 +122,6 @@ public class MapperQueryParser extends QueryParser {
 		return Queries.MATCH_ALL_QUERY;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#getFieldQuery(java.lang.String, java.lang.String, boolean)
 	 */
@@ -180,7 +167,6 @@ public class MapperQueryParser extends QueryParser {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#getRangeQuery(java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
@@ -204,7 +190,6 @@ public class MapperQueryParser extends QueryParser {
 		return newRangeQuery(field, part1, part2, inclusive);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#getFuzzyQuery(java.lang.String, java.lang.String, float)
 	 */
@@ -223,7 +208,6 @@ public class MapperQueryParser extends QueryParser {
 		return super.getFuzzyQuery(field, termStr, minSimilarity);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#getPrefixQuery(java.lang.String, java.lang.String)
 	 */
@@ -265,7 +249,6 @@ public class MapperQueryParser extends QueryParser {
 		}
 	}
 
-	
 	/**
 	 * Gets the possibly analyzed prefix query.
 	 *
@@ -278,7 +261,7 @@ public class MapperQueryParser extends QueryParser {
 		if (!analyzeWildcard) {
 			return super.getPrefixQuery(field, termStr);
 		}
-		
+
 		TokenStream source;
 		try {
 			source = getAnalyzer().reusableTokenStream(field, new StringReader(termStr));
@@ -301,24 +284,23 @@ public class MapperQueryParser extends QueryParser {
 		try {
 			source.close();
 		} catch (IOException e) {
-			
+
 		}
 
 		if (tlist.size() == 1) {
 			return super.getPrefixQuery(field, tlist.get(0));
 		} else {
-			
+
 			List<BooleanClause> clauses = new ArrayList<BooleanClause>();
 			for (String token : tlist) {
 				clauses.add(new BooleanClause(super.getPrefixQuery(field, token), BooleanClause.Occur.SHOULD));
 			}
 			return getBooleanQuery(clauses, true);
-			
+
 		}
 
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#getWildcardQuery(java.lang.String, java.lang.String)
 	 */
@@ -349,7 +331,6 @@ public class MapperQueryParser extends QueryParser {
 		}
 	}
 
-	
 	/**
 	 * Gets the possibly analyzed wildcard query.
 	 *
@@ -376,13 +357,13 @@ public class MapperQueryParser extends QueryParser {
 						if (source.incrementToken()) {
 							String term = termAtt.toString();
 							if (term.length() == 0) {
-								
+
 								aggStr.append(tmp);
 							} else {
 								aggStr.append(term);
 							}
 						} else {
-							
+
 							aggStr.append(tmp);
 						}
 						source.close();
@@ -405,13 +386,13 @@ public class MapperQueryParser extends QueryParser {
 				if (source.incrementToken()) {
 					String term = termAtt.toString();
 					if (term.length() == 0) {
-						
+
 						aggStr.append(tmp);
 					} else {
 						aggStr.append(term);
 					}
 				} else {
-					
+
 					aggStr.append(tmp);
 				}
 				source.close();
@@ -423,7 +404,6 @@ public class MapperQueryParser extends QueryParser {
 		return super.getWildcardQuery(field, aggStr.toString());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.queryParser.QueryParser#getBooleanQuery(java.util.List, boolean)
 	 */

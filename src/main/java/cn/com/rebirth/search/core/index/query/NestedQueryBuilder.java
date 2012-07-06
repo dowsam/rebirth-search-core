@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NestedQueryBuilder.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NestedQueryBuilder.java 2012-7-6 14:28:52 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class NestedQueryBuilder.
@@ -18,31 +16,24 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class NestedQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The filter builder. */
 	private final FilterBuilder filterBuilder;
 
-	
 	/** The path. */
 	private final String path;
 
-	
 	/** The score mode. */
 	private String scoreMode;
 
-	
 	/** The boost. */
 	private float boost = 1.0f;
 
-	
 	/** The scope. */
 	private String scope;
 
-	
 	/**
 	 * Instantiates a new nested query builder.
 	 *
@@ -55,7 +46,6 @@ public class NestedQueryBuilder extends BaseQueryBuilder {
 		this.filterBuilder = null;
 	}
 
-	
 	/**
 	 * Instantiates a new nested query builder.
 	 *
@@ -68,7 +58,6 @@ public class NestedQueryBuilder extends BaseQueryBuilder {
 		this.filterBuilder = filterBuilder;
 	}
 
-	
 	/**
 	 * Score mode.
 	 *
@@ -80,7 +69,6 @@ public class NestedQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Scope.
 	 *
@@ -92,7 +80,6 @@ public class NestedQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -104,9 +91,8 @@ public class NestedQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

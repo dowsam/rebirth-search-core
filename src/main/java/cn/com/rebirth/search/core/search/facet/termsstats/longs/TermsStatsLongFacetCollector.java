@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsStatsLongFacetCollector.java 2012-3-29 15:02:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsStatsLongFacetCollector.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.termsstats.longs;
 
@@ -15,7 +14,7 @@ import java.util.Map;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.Scorer;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.trove.ExtTLongObjectHashMap;
 import cn.com.rebirth.search.commons.CacheRecycler;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class TermsStatsLongFacetCollector.
  *
@@ -39,51 +37,39 @@ import com.google.common.collect.Lists;
  */
 public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The comparator type. */
 	private final TermsStatsFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The key field name. */
 	private final String keyFieldName;
 
-	
 	/** The value field name. */
 	private final String valueFieldName;
 
-	
 	/** The size. */
 	private final int size;
 
-	
 	/** The number of shards. */
 	private final int numberOfShards;
 
-	
 	/** The key field data type. */
 	private final FieldDataType keyFieldDataType;
 
-	
 	/** The key field data. */
 	private NumericFieldData keyFieldData;
 
-	
 	/** The value field data type. */
 	private final FieldDataType valueFieldDataType;
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/** The aggregator. */
 	private final Aggregator aggregator;
 
-	
 	/**
 	 * Instantiates a new terms stats long facet collector.
 	 *
@@ -111,7 +97,7 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 			this.keyFieldName = keyFieldName;
 			this.keyFieldDataType = FieldDataType.DefaultTypes.STRING;
 		} else {
-			
+
 			if (smartMappers.explicitTypeInNameWithDocMapper()) {
 				setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 			}
@@ -123,7 +109,7 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		if (script == null) {
 			smartMappers = context.smartFieldMappers(valueFieldName);
 			if (smartMappers == null || !smartMappers.hasMapper()) {
-				throw new RestartIllegalArgumentException("failed to find mappings for [" + valueFieldName + "]");
+				throw new RebirthIllegalArgumentException("failed to find mappings for [" + valueFieldName + "]");
 			}
 			this.valueFieldName = smartMappers.mapper().names().indexName();
 			this.valueFieldDataType = smartMappers.mapper().fieldDataType();
@@ -137,9 +123,8 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
@@ -148,9 +133,8 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -163,18 +147,16 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		keyFieldData.forEachValueInDoc(doc, aggregator);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
@@ -182,13 +164,12 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 			return new InternalTermsStatsLongFacet(facetName, comparatorType, size,
 					ImmutableList.<InternalTermsStatsLongFacet.LongEntry> of(), aggregator.missing);
 		}
-		if (size == 0) { 
-			
-			return new InternalTermsStatsLongFacet(facetName, comparatorType, 0 ,
-					aggregator.entries.valueCollection(), aggregator.missing);
+		if (size == 0) {
+
+			return new InternalTermsStatsLongFacet(facetName, comparatorType, 0, aggregator.entries.valueCollection(),
+					aggregator.missing);
 		}
 
-		
 		Object[] values = aggregator.entries.internalValues();
 		Arrays.sort(values, (Comparator) comparatorType.comparator());
 
@@ -205,7 +186,6 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		return new InternalTermsStatsLongFacet(facetName, comparatorType, size, ordered, aggregator.missing);
 	}
 
-	
 	/**
 	 * The Class Aggregator.
 	 *
@@ -213,25 +193,20 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class Aggregator implements NumericFieldData.MissingLongValueInDocProc {
 
-		
 		/** The entries. */
 		final ExtTLongObjectHashMap<InternalTermsStatsLongFacet.LongEntry> entries = CacheRecycler.popLongObjectMap();
 
-		
 		/** The missing. */
 		int missing;
 
-		
 		/** The value field data. */
 		NumericFieldData valueFieldData;
 
-		
 		/** The value aggregator. */
 		final ValueAggregator valueAggregator = new ValueAggregator();
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc#onValue(int, long)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc#onValue(int, long)
 		 */
 		@Override
 		public void onValue(int docId, long value) {
@@ -246,16 +221,14 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 			valueFieldData.forEachValueInDoc(docId, valueAggregator);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc#onMissing(int)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc#onMissing(int)
 		 */
 		@Override
 		public void onMissing(int docId) {
 			missing++;
 		}
 
-		
 		/**
 		 * The Class ValueAggregator.
 		 *
@@ -263,13 +236,11 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		 */
 		public static class ValueAggregator implements NumericFieldData.DoubleValueInDocProc {
 
-			
 			/** The long entry. */
 			InternalTermsStatsLongFacet.LongEntry longEntry;
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+			 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 			 */
 			@Override
 			public void onValue(int docId, double value) {
@@ -285,7 +256,6 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/**
 	 * The Class ScriptAggregator.
 	 *
@@ -293,11 +263,9 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class ScriptAggregator extends Aggregator {
 
-		
 		/** The script. */
 		private final SearchScript script;
 
-		
 		/**
 		 * Instantiates a new script aggregator.
 		 *
@@ -307,9 +275,8 @@ public class TermsStatsLongFacetCollector extends AbstractFacetCollector {
 			this.script = script;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.longs.TermsStatsLongFacetCollector.Aggregator#onValue(int, long)
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.longs.TermsStatsLongFacetCollector.Aggregator#onValue(int, long)
 		 */
 		@Override
 		public void onValue(int docId, long value) {

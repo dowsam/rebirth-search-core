@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OrFilterParser.java 2012-3-29 15:01:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OrFilterParser.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.lucene.search.OrFilter;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter;
 
-
 /**
  * The Class OrFilterParser.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter;
  */
 public class OrFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "or";
 
-	
 	/**
 	 * Instantiates a new or filter parser.
 	 */
@@ -38,18 +34,16 @@ public class OrFilterParser implements FilterParser {
 	public OrFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -100,7 +94,6 @@ public class OrFilterParser implements FilterParser {
 			throw new QueryParsingException(parseContext.index(), "[or] filter requires 'filters' to be set on it'");
 		}
 
-		
 		Filter filter = new OrFilter(filters);
 		if (cache) {
 			filter = parseContext.cacheFilter(filter, cacheKey);

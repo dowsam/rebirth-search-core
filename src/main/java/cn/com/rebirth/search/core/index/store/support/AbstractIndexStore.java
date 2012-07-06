@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractIndexStore.java 2012-3-29 15:01:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractIndexStore.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.support;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.store.IndexStore;
 
-
 /**
  * The Class AbstractIndexStore.
  *
@@ -24,11 +22,9 @@ import cn.com.rebirth.search.core.index.store.IndexStore;
  */
 public abstract class AbstractIndexStore extends AbstractIndexComponent implements IndexStore {
 
-	
 	/** The index service. */
 	protected final IndexService indexService;
 
-	
 	/**
 	 * Instantiates a new abstract index store.
 	 *
@@ -41,21 +37,19 @@ public abstract class AbstractIndexStore extends AbstractIndexComponent implemen
 		this.indexService = indexService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#canDeleteUnallocated(cn.com.summall.search.core.index.shard.ShardId)
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#canDeleteUnallocated(cn.com.rebirth.search.core.index.shard.ShardId)
 	 */
 	@Override
 	public boolean canDeleteUnallocated(ShardId shardId) {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#deleteUnallocated(cn.com.summall.search.core.index.shard.ShardId)
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#deleteUnallocated(cn.com.rebirth.search.core.index.shard.ShardId)
 	 */
 	@Override
 	public void deleteUnallocated(ShardId shardId) throws IOException {
-		
+
 	}
 }

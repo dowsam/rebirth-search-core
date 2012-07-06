@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NumericRangeFilterParser.java 2012-3-29 15:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NumericRangeFilterParser.java 2012-7-6 14:30:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.mapper.MapperService;
 import cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper;
 import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 
-
 /**
  * The Class NumericRangeFilterParser.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.index.query.support.QueryParsers;
  */
 public class NumericRangeFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "numeric_range";
 
-	
 	/**
 	 * Instantiates a new numeric range filter parser.
 	 */
@@ -38,24 +34,22 @@ public class NumericRangeFilterParser implements FilterParser {
 	public NumericRangeFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "numericRange" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
 		XContentParser parser = parseContext.parser();
 
-		boolean cache = false; 
+		boolean cache = false;
 		CacheKeyFilter.Key cacheKey = null;
 		String fieldName = null;
 		String from = null;

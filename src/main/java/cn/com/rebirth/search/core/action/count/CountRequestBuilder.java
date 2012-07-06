@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CountRequestBuilder.java 2012-3-29 15:02:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CountRequestBuilder.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.count;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThr
 import cn.com.rebirth.search.core.client.Client;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 
-
 /**
  * The Class CountRequestBuilder.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.index.query.QueryBuilder;
  */
 public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountResponse> {
 
-	
 	/**
 	 * Instantiates a new count request builder.
 	 *
@@ -30,7 +27,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		super(client, new CountRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -42,7 +38,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the types.
 	 *
@@ -54,7 +49,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the min score.
 	 *
@@ -66,7 +60,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query hint.
 	 *
@@ -78,7 +71,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -90,7 +82,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -102,7 +93,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -114,7 +104,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the query.
 	 *
@@ -126,7 +115,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threading.
 	 *
@@ -138,7 +126,6 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -150,9 +137,8 @@ public class CountRequestBuilder extends BaseRequestBuilder<CountRequest, CountR
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<CountResponse> listener) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FetchSubPhase.java 2012-3-29 15:01:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FetchSubPhase.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch;
 
@@ -11,13 +10,12 @@ import java.util.Map;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.core.search.SearchParseElement;
 import cn.com.rebirth.search.core.search.internal.InternalSearchHit;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.Maps;
-
 
 /**
  * The Interface FetchSubPhase.
@@ -26,7 +24,6 @@ import com.google.common.collect.Maps;
  */
 public interface FetchSubPhase {
 
-	
 	/**
 	 * The Class HitContext.
 	 *
@@ -34,35 +31,27 @@ public interface FetchSubPhase {
 	 */
 	public static class HitContext {
 
-		
 		/** The hit. */
 		private InternalSearchHit hit;
 
-		
 		/** The top level reader. */
 		private IndexReader topLevelReader;
 
-		
 		/** The top level doc id. */
 		private int topLevelDocId;
 
-		
 		/** The reader. */
 		private IndexReader reader;
 
-		
 		/** The doc id. */
 		private int docId;
 
-		
 		/** The doc. */
 		private Document doc;
 
-		
 		/** The cache. */
 		private Map<String, Object> cache;
 
-		
 		/**
 		 * Reset.
 		 *
@@ -83,7 +72,6 @@ public interface FetchSubPhase {
 			this.doc = doc;
 		}
 
-		
 		/**
 		 * Hit.
 		 *
@@ -93,7 +81,6 @@ public interface FetchSubPhase {
 			return hit;
 		}
 
-		
 		/**
 		 * Reader.
 		 *
@@ -103,7 +90,6 @@ public interface FetchSubPhase {
 			return reader;
 		}
 
-		
 		/**
 		 * Doc id.
 		 *
@@ -113,7 +99,6 @@ public interface FetchSubPhase {
 			return docId;
 		}
 
-		
 		/**
 		 * Top level reader.
 		 *
@@ -123,7 +108,6 @@ public interface FetchSubPhase {
 			return topLevelReader;
 		}
 
-		
 		/**
 		 * Top level doc id.
 		 *
@@ -133,7 +117,6 @@ public interface FetchSubPhase {
 			return topLevelDocId;
 		}
 
-		
 		/**
 		 * Doc.
 		 *
@@ -143,7 +126,6 @@ public interface FetchSubPhase {
 			return doc;
 		}
 
-		
 		/**
 		 * Cache.
 		 *
@@ -157,7 +139,6 @@ public interface FetchSubPhase {
 		}
 	}
 
-	
 	/**
 	 * Parses the elements.
 	 *
@@ -165,7 +146,6 @@ public interface FetchSubPhase {
 	 */
 	Map<String, ? extends SearchParseElement> parseElements();
 
-	
 	/**
 	 * Hit execution needed.
 	 *
@@ -174,17 +154,15 @@ public interface FetchSubPhase {
 	 */
 	boolean hitExecutionNeeded(SearchContext context);
 
-	
 	/**
 	 * Hit execute.
 	 *
 	 * @param context the context
 	 * @param hitContext the hit context
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void hitExecute(SearchContext context, HitContext hitContext) throws RestartException;
+	void hitExecute(SearchContext context, HitContext hitContext) throws RebirthException;
 
-	
 	/**
 	 * Hits execution needed.
 	 *
@@ -193,13 +171,12 @@ public interface FetchSubPhase {
 	 */
 	boolean hitsExecutionNeeded(SearchContext context);
 
-	
 	/**
 	 * Hits execute.
 	 *
 	 * @param context the context
 	 * @param hits the hits
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void hitsExecute(SearchContext context, InternalSearchHit[] hits) throws RestartException;
+	void hitsExecute(SearchContext context, InternalSearchHit[] hits) throws RebirthException;
 }

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterHealthResponse.java 2012-3-29 15:02:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterHealthResponse.java 2012-7-6 14:29:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.health;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ClusterHealthResponse.
  *
@@ -28,62 +26,48 @@ import com.google.common.collect.Maps;
  */
 public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIndexHealth> {
 
-	
 	/** The cluster name. */
 	private String clusterName;
 
-	
 	/** The number of nodes. */
 	int numberOfNodes = 0;
 
-	
 	/** The number of data nodes. */
 	int numberOfDataNodes = 0;
 
-	
 	/** The active shards. */
 	int activeShards = 0;
 
-	
 	/** The relocating shards. */
 	int relocatingShards = 0;
 
-	
 	/** The active primary shards. */
 	int activePrimaryShards = 0;
 
-	
 	/** The initializing shards. */
 	int initializingShards = 0;
 
-	
 	/** The unassigned shards. */
 	int unassignedShards = 0;
 
-	
 	/** The timed out. */
 	boolean timedOut = false;
 
-	
 	/** The status. */
 	ClusterHealthStatus status = ClusterHealthStatus.RED;
 
-	
 	/** The validation failures. */
 	private List<String> validationFailures;
 
-	
 	/** The indices. */
 	Map<String, ClusterIndexHealth> indices = Maps.newHashMap();
 
-	
 	/**
 	 * Instantiates a new cluster health response.
 	 */
 	ClusterHealthResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new cluster health response.
 	 *
@@ -95,7 +79,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		this.validationFailures = validationFailures;
 	}
 
-	
 	/**
 	 * Cluster name.
 	 *
@@ -105,7 +88,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return clusterName;
 	}
 
-	
 	/**
 	 * Gets the cluster name.
 	 *
@@ -115,7 +97,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return clusterName();
 	}
 
-	
 	/**
 	 * Validation failures.
 	 *
@@ -125,7 +106,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return this.validationFailures;
 	}
 
-	
 	/**
 	 * Gets the validation failures.
 	 *
@@ -135,7 +115,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return validationFailures();
 	}
 
-	
 	/**
 	 * All validation failures.
 	 *
@@ -149,7 +128,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return allFailures;
 	}
 
-	
 	/**
 	 * Gets the all validation failures.
 	 *
@@ -159,7 +137,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return allValidationFailures();
 	}
 
-	
 	/**
 	 * Active shards.
 	 *
@@ -169,7 +146,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return activeShards;
 	}
 
-	
 	/**
 	 * Gets the active shards.
 	 *
@@ -179,7 +155,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return activeShards();
 	}
 
-	
 	/**
 	 * Relocating shards.
 	 *
@@ -189,7 +164,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return relocatingShards;
 	}
 
-	
 	/**
 	 * Gets the relocating shards.
 	 *
@@ -199,7 +173,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return relocatingShards();
 	}
 
-	
 	/**
 	 * Active primary shards.
 	 *
@@ -209,7 +182,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return activePrimaryShards;
 	}
 
-	
 	/**
 	 * Gets the active primary shards.
 	 *
@@ -219,7 +191,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return activePrimaryShards();
 	}
 
-	
 	/**
 	 * Initializing shards.
 	 *
@@ -229,7 +200,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return initializingShards;
 	}
 
-	
 	/**
 	 * Gets the initializing shards.
 	 *
@@ -239,7 +209,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return initializingShards();
 	}
 
-	
 	/**
 	 * Unassigned shards.
 	 *
@@ -249,7 +218,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return unassignedShards;
 	}
 
-	
 	/**
 	 * Gets the unassigned shards.
 	 *
@@ -259,7 +227,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return unassignedShards();
 	}
 
-	
 	/**
 	 * Number of nodes.
 	 *
@@ -269,7 +236,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return this.numberOfNodes;
 	}
 
-	
 	/**
 	 * Gets the number of nodes.
 	 *
@@ -279,7 +245,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return numberOfNodes();
 	}
 
-	
 	/**
 	 * Number of data nodes.
 	 *
@@ -289,7 +254,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return this.numberOfDataNodes;
 	}
 
-	
 	/**
 	 * Gets the number of data nodes.
 	 *
@@ -299,7 +263,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return numberOfDataNodes();
 	}
 
-	
 	/**
 	 * Timed out.
 	 *
@@ -309,7 +272,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return this.timedOut;
 	}
 
-	
 	/**
 	 * Checks if is timed out.
 	 *
@@ -319,7 +281,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return this.timedOut();
 	}
 
-	
 	/**
 	 * Status.
 	 *
@@ -329,7 +290,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return status;
 	}
 
-	
 	/**
 	 * Gets the status.
 	 *
@@ -339,7 +299,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return status();
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -349,7 +308,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return indices;
 	}
 
-	
 	/**
 	 * Gets the indices.
 	 *
@@ -359,7 +317,6 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return indices();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -368,9 +325,8 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		return indices.values().iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -399,9 +355,8 @@ public class ClusterHealthResponse implements ActionResponse, Iterable<ClusterIn
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterHealthRequest.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterHealthRequest.java 2012-7-6 14:28:51 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.health;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class ClusterHealthRequest.
  *
@@ -24,38 +22,30 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class ClusterHealthRequest extends MasterNodeOperationRequest {
 
-	
 	/** The indices. */
 	private String[] indices;
 
-	
 	/** The timeout. */
 	private TimeValue timeout = new TimeValue(30, TimeUnit.SECONDS);
 
-	
 	/** The wait for status. */
 	private ClusterHealthStatus waitForStatus;
 
-	
 	/** The wait for relocating shards. */
 	private int waitForRelocatingShards = -1;
 
-	
 	/** The wait for active shards. */
 	private int waitForActiveShards = -1;
 
-	
 	/** The wait for nodes. */
 	private String waitForNodes = "";
 
-	
 	/**
 	 * Instantiates a new cluster health request.
 	 */
 	ClusterHealthRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new cluster health request.
 	 *
@@ -65,7 +55,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -75,7 +64,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return indices;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -87,7 +75,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -97,7 +84,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -112,7 +98,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -123,7 +108,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/**
 	 * Wait for status.
 	 *
@@ -133,7 +117,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return waitForStatus;
 	}
 
-	
 	/**
 	 * Wait for status.
 	 *
@@ -145,7 +128,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Wait for green status.
 	 *
@@ -155,7 +137,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return waitForStatus(ClusterHealthStatus.GREEN);
 	}
 
-	
 	/**
 	 * Wait for yellow status.
 	 *
@@ -165,7 +146,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return waitForStatus(ClusterHealthStatus.YELLOW);
 	}
 
-	
 	/**
 	 * Wait for relocating shards.
 	 *
@@ -175,7 +155,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return waitForRelocatingShards;
 	}
 
-	
 	/**
 	 * Wait for relocating shards.
 	 *
@@ -187,7 +166,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Wait for active shards.
 	 *
@@ -197,7 +175,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return waitForActiveShards;
 	}
 
-	
 	/**
 	 * Wait for active shards.
 	 *
@@ -209,7 +186,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Wait for nodes.
 	 *
@@ -219,7 +195,6 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return waitForNodes;
 	}
 
-	
 	/**
 	 * Wait for nodes.
 	 *
@@ -231,18 +206,16 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -265,9 +238,8 @@ public class ClusterHealthRequest extends MasterNodeOperationRequest {
 		waitForNodes = in.readUTF();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

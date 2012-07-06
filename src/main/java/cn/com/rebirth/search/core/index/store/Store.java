@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Store.java 2012-3-29 15:02:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Store.java 2012-7-6 14:30:25 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.store;
@@ -721,7 +721,7 @@ public class Store extends AbstractIndexShardComponent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.store.support.ForceSyncDirectory#forceSync(java.lang.String)
+		 * @see cn.com.rebirth.search.index.store.support.ForceSyncDirectory#forceSync(java.lang.String)
 		 */
 		@Override
 		public void forceSync(String name) throws IOException {

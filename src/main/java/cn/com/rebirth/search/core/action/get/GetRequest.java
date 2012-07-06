@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GetRequest.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GetRequest.java 2012-7-6 14:30:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest;
 
-
 /**
  * The Class GetRequest.
  *
@@ -24,35 +22,27 @@ import cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperati
  */
 public class GetRequest extends SingleShardOperationRequest {
 
-	
 	/** The type. */
 	protected String type;
 
-	
 	/** The id. */
 	protected String id;
 
-	
 	/** The routing. */
 	protected String routing;
 
-	
 	/** The preference. */
 	protected String preference;
 
-	
 	/** The fields. */
 	private String[] fields;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The realtime. */
 	Boolean realtime;
 
-	
 	/**
 	 * Instantiates a new gets the request.
 	 */
@@ -60,7 +50,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		type = "_all";
 	}
 
-	
 	/**
 	 * Instantiates a new gets the request.
 	 *
@@ -71,7 +60,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		this.type = "_all";
 	}
 
-	
 	/**
 	 * Instantiates a new gets the request.
 	 *
@@ -85,9 +73,8 @@ public class GetRequest extends SingleShardOperationRequest {
 		this.id = id;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -101,7 +88,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -114,7 +100,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -129,7 +114,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -142,7 +126,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -154,7 +137,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -166,7 +148,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -176,7 +157,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return type;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -186,7 +166,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return id;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -196,7 +175,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -206,7 +184,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this.preference;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -218,7 +195,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -228,7 +204,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this.fields;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -240,7 +215,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -250,7 +224,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Realtime.
 	 *
@@ -260,7 +233,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this.realtime == null ? true : this.realtime;
 	}
 
-	
 	/**
 	 * Realtime.
 	 *
@@ -272,9 +244,8 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public GetRequest listenerThreaded(boolean threadedListener) {
@@ -282,9 +253,8 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#operationThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#operationThreaded(boolean)
 	 */
 	@Override
 	public GetRequest operationThreaded(boolean threadedOperation) {
@@ -292,9 +262,8 @@ public class GetRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -325,9 +294,8 @@ public class GetRequest extends SingleShardOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -366,7 +334,6 @@ public class GetRequest extends SingleShardOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RangeQueryBuilder.java 2012-3-29 15:01:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RangeQueryBuilder.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class RangeQueryBuilder.
@@ -18,31 +16,24 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class RangeQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The from. */
 	private Object from;
 
-	
 	/** The to. */
 	private Object to;
 
-	
 	/** The include lower. */
 	private boolean includeLower = true;
 
-	
 	/** The include upper. */
 	private boolean includeUpper = true;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/**
 	 * Instantiates a new range query builder.
 	 *
@@ -52,7 +43,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		this.name = name;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -64,7 +54,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -76,7 +65,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -88,7 +76,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -100,7 +87,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -112,7 +98,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -124,7 +109,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -137,7 +121,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -150,7 +133,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -163,7 +145,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -176,7 +157,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -189,7 +169,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -202,7 +181,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -215,7 +193,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -228,7 +205,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -241,7 +217,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -254,7 +229,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -267,7 +241,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -280,7 +253,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -292,7 +264,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -304,7 +275,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -316,7 +286,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -328,7 +297,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -340,7 +308,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -352,7 +319,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -365,7 +331,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -378,7 +343,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -391,7 +355,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -404,7 +367,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -417,7 +379,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -430,7 +391,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -443,7 +403,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -456,7 +415,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -469,7 +427,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -482,7 +439,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -495,7 +451,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -508,7 +463,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Include lower.
 	 *
@@ -520,7 +474,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Include upper.
 	 *
@@ -532,7 +485,6 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -544,9 +496,8 @@ public class RangeQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

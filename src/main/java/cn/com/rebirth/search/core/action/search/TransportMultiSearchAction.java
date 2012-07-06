@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportMultiSearchAction.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportMultiSearchAction.java 2012-7-6 14:28:53 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.transport.BaseTransportRequestHandler;
 import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportMultiSearchAction.
  *
@@ -29,15 +27,12 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class TransportMultiSearchAction extends TransportAction<MultiSearchRequest, MultiSearchResponse> {
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The search action. */
 	private final TransportSearchAction searchAction;
 
-	
 	/**
 	 * Instantiates a new transport multi search action.
 	 *
@@ -57,9 +52,8 @@ public class TransportMultiSearchAction extends TransportAction<MultiSearchReque
 		transportService.registerHandler(MultiSearchAction.NAME, new TransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final MultiSearchRequest request, final ActionListener<MultiSearchResponse> listener) {
@@ -98,7 +92,6 @@ public class TransportMultiSearchAction extends TransportAction<MultiSearchReque
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -106,22 +99,20 @@ public class TransportMultiSearchAction extends TransportAction<MultiSearchReque
 	 */
 	class TransportHandler extends BaseTransportRequestHandler<MultiSearchRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public MultiSearchRequest newInstance() {
 			return new MultiSearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final MultiSearchRequest request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<MultiSearchResponse>() {
 				@Override
@@ -145,9 +136,8 @@ public class TransportMultiSearchAction extends TransportAction<MultiSearchReque
 			});
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

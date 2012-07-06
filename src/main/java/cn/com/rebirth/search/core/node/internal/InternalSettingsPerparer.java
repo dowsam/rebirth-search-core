@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalSettingsPerparer.java 2012-3-29 15:21:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalSettingsPerparer.java 2012-7-6 14:30:17 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.node.internal;
@@ -29,9 +29,8 @@ public class InternalSettingsPerparer {
 	 * @return the tuple
 	 */
 	public static Tuple<Settings, Environment> prepareSettings(Settings pSettings, boolean loadConfigSettings) {
-
 		ImmutableSettings.Builder settingsBuilder = ImmutableSettings.settingsBuilder().put(pSettings)
-				.putProperties("summallsearch.", System.getProperties()).putProperties("es.", System.getProperties())
+				.putProperties("rebirthsearch.", System.getProperties()).putProperties("es.", System.getProperties())
 				.replacePropertyPlaceholders();
 
 		Environment environment = new Environment(settingsBuilder.build());
@@ -42,32 +41,32 @@ public class InternalSettingsPerparer {
 				explicitSettingsProvided = true;
 				settingsBuilder.loadFromUrl(environment.resolveConfig(System.getProperty("es.config")));
 			}
-			if (System.getProperty("summallsearch.config") != null) {
+			if (System.getProperty("rebirthsearch.config") != null) {
 				explicitSettingsProvided = true;
-				settingsBuilder.loadFromUrl(environment.resolveConfig(System.getProperty("summallsearch.config")));
+				settingsBuilder.loadFromUrl(environment.resolveConfig(System.getProperty("rebirthsearch.config")));
 			}
 			if (!explicitSettingsProvided) {
 				try {
-					settingsBuilder.loadFromUrl(environment.resolveConfig("summallsearch.yml"));
+					settingsBuilder.loadFromUrl(environment.resolveConfig("rebirthsearch.yml"));
 				} catch (FailedToResolveConfigException e) {
 
 				} catch (NoClassDefFoundError e) {
 
 				}
 				try {
-					settingsBuilder.loadFromUrl(environment.resolveConfig("summallsearch.json"));
+					settingsBuilder.loadFromUrl(environment.resolveConfig("rebirthsearch.json"));
 				} catch (FailedToResolveConfigException e) {
 
 				}
 				try {
-					settingsBuilder.loadFromUrl(environment.resolveConfig("summallsearch.properties"));
+					settingsBuilder.loadFromUrl(environment.resolveConfig("rebirthsearch.properties"));
 				} catch (FailedToResolveConfigException e) {
 
 				}
 			}
 		}
 
-		settingsBuilder.put(pSettings).putProperties("summallsearch.", System.getProperties())
+		settingsBuilder.put(pSettings).putProperties("rebirthsearch.", System.getProperties())
 				.putProperties("es.", System.getProperties()).replacePropertyPlaceholders();
 
 		if (settingsBuilder.get("name") == null) {

@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NestedFilterBuilder.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NestedFilterBuilder.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class NestedFilterBuilder.
@@ -18,35 +16,27 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class NestedFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The filter builder. */
 	private final FilterBuilder filterBuilder;
 
-	
 	/** The path. */
 	private final String path;
 
-	
 	/** The scope. */
 	private String scope;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new nested filter builder.
 	 *
@@ -59,7 +49,6 @@ public class NestedFilterBuilder extends BaseFilterBuilder {
 		this.filterBuilder = null;
 	}
 
-	
 	/**
 	 * Instantiates a new nested filter builder.
 	 *
@@ -72,7 +61,6 @@ public class NestedFilterBuilder extends BaseFilterBuilder {
 		this.filterBuilder = filterBuilder;
 	}
 
-	
 	/**
 	 * Scope.
 	 *
@@ -84,7 +72,6 @@ public class NestedFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -96,7 +83,6 @@ public class NestedFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -108,7 +94,6 @@ public class NestedFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -120,9 +105,8 @@ public class NestedFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

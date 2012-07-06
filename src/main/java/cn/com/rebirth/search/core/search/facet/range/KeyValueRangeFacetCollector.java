@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core KeyValueRangeFacetCollector.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core KeyValueRangeFacetCollector.java 2012-7-6 14:30:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class KeyValueRangeFacetCollector.
  *
@@ -27,39 +25,30 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The key index field name. */
 	private final String keyIndexFieldName;
 
-	
 	/** The value index field name. */
 	private final String valueIndexFieldName;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The key field data type. */
 	private final FieldDataType keyFieldDataType;
 
-	
 	/** The key field data. */
 	private NumericFieldData keyFieldData;
 
-	
 	/** The value field data type. */
 	private final FieldDataType valueFieldDataType;
 
-	
 	/** The entries. */
 	private final RangeFacet.Entry[] entries;
 
-	
 	/** The range proc. */
 	private final RangeProc rangeProc;
 
-	
 	/**
 	 * Instantiates a new key value range facet collector.
 	 *
@@ -80,7 +69,6 @@ public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + keyFieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -99,9 +87,8 @@ public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 		this.rangeProc = new RangeProc(entries);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -110,9 +97,8 @@ public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 				valueIndexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -122,16 +108,14 @@ public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 		keyFieldData.forEachValueInDoc(doc, rangeProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalRangeFacet(facetName, entries);
 	}
 
-	
 	/**
 	 * The Class RangeProc.
 	 *
@@ -139,15 +123,12 @@ public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class RangeProc implements NumericFieldData.DoubleValueInDocProc {
 
-		
 		/** The entries. */
 		private final RangeFacet.Entry[] entries;
 
-		
 		/** The value field data. */
 		NumericFieldData valueFieldData;
 
-		
 		/**
 		 * Instantiates a new range proc.
 		 *
@@ -157,9 +138,8 @@ public class KeyValueRangeFacetCollector extends AbstractFacetCollector {
 			this.entries = entries;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {

@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FuzzyQueryBuilder.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FuzzyQueryBuilder.java 2012-7-6 14:29:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class FuzzyQueryBuilder.
@@ -18,27 +16,21 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class FuzzyQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The value. */
 	private final Object value;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The min similarity. */
 	private String minSimilarity;
 
-	
 	/** The prefix length. */
 	private Integer prefixLength;
 
-	
 	/**
 	 * Instantiates a new fuzzy query builder.
 	 *
@@ -50,7 +42,6 @@ public class FuzzyQueryBuilder extends BaseQueryBuilder {
 		this.value = value;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -62,7 +53,6 @@ public class FuzzyQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Min similarity.
 	 *
@@ -74,7 +64,6 @@ public class FuzzyQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Min similarity.
 	 *
@@ -86,7 +75,6 @@ public class FuzzyQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Prefix length.
 	 *
@@ -98,9 +86,8 @@ public class FuzzyQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

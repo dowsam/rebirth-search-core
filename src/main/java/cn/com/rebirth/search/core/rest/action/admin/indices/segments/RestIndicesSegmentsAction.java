@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestIndicesSegmentsAction.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestIndicesSegmentsAction.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.segments;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestIndicesSegmentsAction.
  *
@@ -37,7 +35,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestIndicesSegmentsAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest indices segments action.
 	 *
@@ -52,19 +49,18 @@ public class RestIndicesSegmentsAction extends BaseRestHandler {
 		controller.registerHandler(GET, "/{index}/_segments", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
 		IndicesSegmentsRequest indicesSegmentsRequest = new IndicesSegmentsRequest(splitIndices(request.param("index")));
-		
+
 		indicesSegmentsRequest.listenerThreaded(false);
 		BroadcastOperationThreading operationThreading = BroadcastOperationThreading.fromString(
 				request.param("operation_threading"), BroadcastOperationThreading.SINGLE_THREAD);
 		if (operationThreading == BroadcastOperationThreading.NO_THREADS) {
-			
+
 			operationThreading = BroadcastOperationThreading.SINGLE_THREAD;
 		}
 		indicesSegmentsRequest.operationThreading(operationThreading);

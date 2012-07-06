@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexDeleteByQueryRequest.java 2012-3-29 15:01:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexDeleteByQueryRequest.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.deletebyquery;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest;
 
-
 /**
  * The Class IndexDeleteByQueryRequest.
  *
@@ -29,25 +27,20 @@ import cn.com.rebirth.search.core.action.support.replication.IndexReplicationOpe
  */
 public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest {
 
-	
 	/** The query source. */
 	private BytesHolder querySource;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/** The routing. */
 	@Nullable
 	private Set<String> routing;
 
-	
 	/** The filtering aliases. */
 	@Nullable
 	private String[] filteringAliases;
 
-	
 	/**
 	 * Instantiates a new index delete by query request.
 	 *
@@ -68,14 +61,12 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		this.filteringAliases = filteringAliases;
 	}
 
-	
 	/**
 	 * Instantiates a new index delete by query request.
 	 */
 	IndexDeleteByQueryRequest() {
 	}
 
-	
 	/**
 	 * Query source.
 	 *
@@ -85,9 +76,8 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		return querySource;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -98,7 +88,6 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		return validationException;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -108,7 +97,6 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		return this.routing;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -118,7 +106,6 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		return this.types;
 	}
 
-	
 	/**
 	 * Filtering aliases.
 	 *
@@ -128,7 +115,6 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		return filteringAliases;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -140,9 +126,8 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	public void readFrom(StreamInput in) throws IOException {
 		super.readFrom(in);
@@ -170,9 +155,8 @@ public class IndexDeleteByQueryRequest extends IndexReplicationOperationRequest 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.IndexReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.IndexReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	public void writeTo(StreamOutput out) throws IOException {
 		super.writeTo(out);

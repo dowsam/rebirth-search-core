@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardIterator.java 2012-3-29 15:01:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardIterator.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing;
 
 import cn.com.rebirth.search.core.index.shard.ShardId;
-
 
 /**
  * The Interface ShardIterator.
@@ -16,7 +14,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 public interface ShardIterator extends ShardsIterator {
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -24,9 +21,8 @@ public interface ShardIterator extends ShardsIterator {
 	 */
 	ShardId shardId();
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.ShardsIterator#reset()
+	 * @see cn.com.rebirth.search.core.cluster.routing.ShardsIterator#reset()
 	 */
 	ShardIterator reset();
 }

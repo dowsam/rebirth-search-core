@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiversRouter.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiversRouter.java 2012-7-6 14:30:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.routing;
 
@@ -10,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -36,7 +35,6 @@ import cn.com.rebirth.search.core.river.cluster.RiverNodeHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class RiversRouter.
  *
@@ -44,19 +42,15 @@ import com.google.common.collect.Maps;
  */
 public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> implements ClusterStateListener {
 
-	
 	/** The river index name. */
 	private final String riverIndexName;
 
-	
 	/** The client. */
 	private final Client client;
 
-	
 	/** The river cluster service. */
 	private final RiverClusterService riverClusterService;
 
-	
 	/**
 	 * Instantiates a new rivers router.
 	 *
@@ -75,33 +69,29 @@ public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> imple
 		clusterService.add(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(final ClusterChangedEvent event) {
@@ -112,7 +102,7 @@ public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> imple
 			@Override
 			public RiverClusterState execute(RiverClusterState currentState) {
 				if (!event.state().metaData().hasIndex(riverIndexName)) {
-					
+
 					if (!currentState.routing().isEmpty()) {
 						return RiverClusterState.builder().state(currentState).routing(RiversRouting.builder()).build();
 					}
@@ -123,11 +113,11 @@ public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> imple
 				boolean dirty = false;
 
 				IndexMetaData indexMetaData = event.state().metaData().index(riverIndexName);
-				
+
 				for (MappingMetaData mappingMd : indexMetaData.mappings().values()) {
-					String mappingType = mappingMd.type(); 
+					String mappingType = mappingMd.type();
 					if (!currentState.routing().hasRiverByName(mappingType)) {
-						
+
 						try {
 							GetResponse getResponse = client.prepareGet(riverIndexName, mappingType, "_meta").execute()
 									.actionGet();
@@ -142,18 +132,17 @@ public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> imple
 								}
 							}
 						} catch (NoShardAvailableActionException e) {
-							
+
 						} catch (ClusterBlockException e) {
-							
+
 						} catch (IndexMissingException e) {
-							
+
 						} catch (Exception e) {
 							logger.warn("failed to get/parse _meta for [{}]", e, mappingType);
 						}
 					}
 				}
-				
-				
+
 				for (RiverRouting routing : currentState.routing()) {
 					if (!indexMetaData.mappings().containsKey(routing.riverName().name())) {
 						routingBuilder.remove(routing);
@@ -165,7 +154,6 @@ public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> imple
 					}
 				}
 
-				
 				Map<DiscoveryNode, List<RiverRouting>> nodesToRivers = Maps.newHashMap();
 
 				for (DiscoveryNode node : event.state().nodes()) {
@@ -206,8 +194,6 @@ public class RiversRouter extends AbstractLifecycleComponent<RiversRouter> imple
 						nodesToRivers.get(smallest).add(routing);
 					}
 				}
-
-				
 
 				if (dirty) {
 					return RiverClusterState.builder().state(currentState).routing(routingBuilder).build();

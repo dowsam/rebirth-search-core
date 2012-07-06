@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UpdateRequest.java 2012-3-29 15:00:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UpdateRequest.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.update;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOp
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class UpdateRequest.
  *
@@ -29,54 +27,42 @@ import com.google.common.collect.Maps;
  */
 public class UpdateRequest extends InstanceShardOperationRequest {
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The routing. */
 	@Nullable
 	private String routing;
 
-	
 	/** The script. */
 	String script;
 
-	
 	/** The script lang. */
 	@Nullable
 	String scriptLang;
 
-	
 	/** The script params. */
 	@Nullable
 	Map<String, Object> scriptParams;
 
-	
 	/** The retry on conflict. */
 	int retryOnConflict = 0;
 
-	
 	/** The percolate. */
 	private String percolate;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The replication type. */
 	private ReplicationType replicationType = ReplicationType.DEFAULT;
 
-	
 	/** The consistency level. */
 	private WriteConsistencyLevel consistencyLevel = WriteConsistencyLevel.DEFAULT;
 
-	
 	/**
 	 * Instantiates a new update request.
 	 */
@@ -84,7 +70,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new update request.
 	 *
@@ -98,9 +83,8 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		this.id = id;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -117,7 +101,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -129,7 +112,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -139,7 +121,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return type;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -151,7 +132,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -161,7 +141,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -173,7 +152,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -189,7 +167,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Parent.
 	 *
@@ -203,7 +180,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -213,7 +189,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -223,7 +198,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Script.
 	 *
@@ -235,7 +209,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Script lang.
 	 *
@@ -247,7 +220,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the script param.
 	 *
@@ -263,7 +235,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Script params.
 	 *
@@ -279,7 +250,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Script.
 	 *
@@ -297,7 +267,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Script.
 	 *
@@ -317,7 +286,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Retry on conflict.
 	 *
@@ -329,7 +297,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Retry on conflict.
 	 *
@@ -339,7 +306,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.retryOnConflict;
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
@@ -351,7 +317,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
@@ -361,7 +326,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.percolate;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -373,7 +337,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -384,7 +347,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -396,7 +358,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -406,7 +367,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -416,7 +376,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.replicationType;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -428,7 +387,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -438,7 +396,6 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this.consistencyLevel;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -450,9 +407,8 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -476,9 +432,8 @@ public class UpdateRequest extends InstanceShardOperationRequest {
 		refresh = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

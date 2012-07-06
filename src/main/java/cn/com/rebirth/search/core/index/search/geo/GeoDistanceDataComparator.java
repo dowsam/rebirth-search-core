@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceDataComparator.java 2012-3-29 15:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceDataComparator.java 2012-7-6 14:29:33 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.search.geo;
@@ -11,7 +11,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.FieldComparator;
 import org.apache.lucene.search.SortField;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.DistanceUnit;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
@@ -105,7 +105,7 @@ public class GeoDistanceDataComparator extends FieldComparator {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.index.field.data.ExtendedFieldComparatorSource#reducedType()
+		 * @see cn.com.rebirth.search.index.field.data.ExtendedFieldComparatorSource#reducedType()
 		 */
 		@Override
 		public int reducedType() {
@@ -173,11 +173,11 @@ public class GeoDistanceDataComparator extends FieldComparator {
 
 		FieldMapper mapper = mapperService.smartNameFieldMapper(fieldName);
 		if (mapper == null) {
-			throw new RestartIllegalArgumentException("No mapping found for field [" + fieldName
+			throw new RebirthIllegalArgumentException("No mapping found for field [" + fieldName
 					+ "] for geo distance sort");
 		}
 		if (mapper.fieldDataType() != GeoPointFieldDataType.TYPE) {
-			throw new RestartIllegalArgumentException("field [" + fieldName + "] is not a geo_point field");
+			throw new RebirthIllegalArgumentException("field [" + fieldName + "] is not a geo_point field");
 		}
 		this.indexFieldName = mapper.names().indexName();
 	}

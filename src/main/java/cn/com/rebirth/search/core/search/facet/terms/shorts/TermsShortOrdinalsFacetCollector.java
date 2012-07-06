@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsShortOrdinalsFacetCollector.java 2012-3-29 15:01:20 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsShortOrdinalsFacetCollector.java 2012-7-6 14:29:31 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.shorts;
 
@@ -17,7 +16,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.util.PriorityQueue;
 
 import cn.com.rebirth.commons.collect.BoundedTreeSet;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.CacheRecycler;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.field.data.FieldData;
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class TermsShortOrdinalsFacetCollector.
  *
@@ -40,59 +38,45 @@ import com.google.common.collect.ImmutableSet;
  */
 public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The index field name. */
 	private final String indexFieldName;
 
-	
 	/** The comparator type. */
 	private final TermsFacet.ComparatorType comparatorType;
 
-	
 	/** The size. */
 	private final int size;
 
-	
 	/** The number of shards. */
 	private final int numberOfShards;
 
-	
 	/** The min count. */
 	private final int minCount;
 
-	
 	/** The field data type. */
 	private final FieldDataType fieldDataType;
 
-	
 	/** The field data. */
 	private ShortFieldData fieldData;
 
-	
 	/** The aggregators. */
 	private final List<ReaderAggregator> aggregators;
 
-	
 	/** The current. */
 	private ReaderAggregator current;
 
-	
 	/** The missing. */
 	long missing;
 
-	
 	/** The total. */
 	long total;
 
-	
 	/** The excluded. */
 	private final TShortHashSet excluded;
 
-	
 	/**
 	 * Instantiates a new terms short ordinals facet collector.
 	 *
@@ -115,16 +99,16 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 
 		MapperService.SmartNameFieldMappers smartMappers = context.smartFieldMappers(fieldName);
 		if (smartMappers == null || !smartMappers.hasMapper()) {
-			throw new RestartIllegalArgumentException("Field [" + fieldName
+			throw new RebirthIllegalArgumentException("Field [" + fieldName
 					+ "] doesn't have a type, can't run terms short facet collector on it");
 		}
-		
+
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
 
 		if (smartMappers.mapper().fieldDataType() != FieldDataType.DefaultTypes.SHORT) {
-			throw new RestartIllegalArgumentException("Field [" + fieldName
+			throw new RebirthIllegalArgumentException("Field [" + fieldName
 					+ "] is not of short type, can't run terms short facet collector on it");
 		}
 
@@ -140,7 +124,6 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 			}
 		}
 
-		
 		if (allTerms) {
 			minCount = -1;
 		} else {
@@ -150,9 +133,8 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 		this.aggregators = new ArrayList<ReaderAggregator>(context.searcher().subReaders().length);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -167,25 +149,23 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 		current = new ReaderAggregator(fieldData);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		fieldData.forEachOrdinalInDoc(doc, current);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		if (current != null) {
 			missing += current.counts[0];
 			total += current.total - current.counts[0];
-			
+
 			if (current.values.length > 1) {
 				aggregators.add(current);
 			}
@@ -199,9 +179,8 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 			}
 		}
 
-		
 		if (size < EntryPriorityQueue.LIMIT) {
-			
+
 			EntryPriorityQueue ordered = new EntryPriorityQueue(size, comparatorType.comparator());
 
 			while (queue.size() > 0) {
@@ -213,7 +192,7 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 					if (agg.nextPosition()) {
 						agg = queue.updateTop();
 					} else {
-						
+
 						queue.pop();
 						agg = queue.top();
 					}
@@ -250,7 +229,7 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 				if (agg.nextPosition()) {
 					agg = queue.updateTop();
 				} else {
-					
+
 					queue.pop();
 					agg = queue.top();
 				}
@@ -271,34 +250,28 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 		return new InternalShortTermsFacet(facetName, comparatorType, size, ordered, missing, total);
 	}
 
-	
 	/**
 	 * The Class ReaderAggregator.
 	 *
 	 * @author l.xue.nong
 	 */
 	public static class ReaderAggregator implements FieldData.OrdinalInDocProc {
-		
+
 		/** The values. */
 		final short[] values;
 
-		
 		/** The counts. */
 		final int[] counts;
 
-		
 		/** The position. */
 		int position = 0;
 
-		
 		/** The current. */
 		short current;
 
-		
 		/** The total. */
 		int total;
 
-		
 		/**
 		 * Instantiates a new reader aggregator.
 		 *
@@ -309,9 +282,8 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 			this.counts = CacheRecycler.popIntArray(fieldData.values().length);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.FieldData.OrdinalInDocProc#onOrdinal(int, int)
+		 * @see cn.com.rebirth.search.core.index.field.data.FieldData.OrdinalInDocProc#onOrdinal(int, int)
 		 */
 		@Override
 		public void onOrdinal(int docId, int ordinal) {
@@ -319,7 +291,6 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 			total++;
 		}
 
-		
 		/**
 		 * Next position.
 		 *
@@ -334,7 +305,6 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/**
 	 * The Class AggregatorPriorityQueue.
 	 *
@@ -342,7 +312,6 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class AggregatorPriorityQueue extends PriorityQueue<ReaderAggregator> {
 
-		
 		/**
 		 * Instantiates a new aggregator priority queue.
 		 *
@@ -352,7 +321,6 @@ public class TermsShortOrdinalsFacetCollector extends AbstractFacetCollector {
 			initialize(size);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.util.PriorityQueue#lessThan(java.lang.Object, java.lang.Object)
 		 */

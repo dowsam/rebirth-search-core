@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DocsStatus.java 2012-3-29 15:00:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DocsStatus.java 2012-7-6 14:30:22 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.action.admin.indices.status;
-
 
 /**
  * The Class DocsStatus.
@@ -14,72 +12,66 @@ package cn.com.rebirth.search.core.action.admin.indices.status;
  */
 public class DocsStatus {
 
-    /** The num docs. */
-    long numDocs = 0;
-    
-    /** The max doc. */
-    long maxDoc = 0;
-    
-    /** The deleted docs. */
-    long deletedDocs = 0;
+	/** The num docs. */
+	long numDocs = 0;
 
-    
-    /**
-     * Num docs.
-     *
-     * @return the long
-     */
-    public long numDocs() {
-        return numDocs;
-    }
+	/** The max doc. */
+	long maxDoc = 0;
 
-    
-    /**
-     * Gets the num docs.
-     *
-     * @return the num docs
-     */
-    public long getNumDocs() {
-        return numDocs();
-    }
+	/** The deleted docs. */
+	long deletedDocs = 0;
 
-    
-    /**
-     * Max doc.
-     *
-     * @return the long
-     */
-    public long maxDoc() {
-        return maxDoc;
-    }
+	/**
+	 * Num docs.
+	 *
+	 * @return the long
+	 */
+	public long numDocs() {
+		return numDocs;
+	}
 
-    
-    /**
-     * Gets the max doc.
-     *
-     * @return the max doc
-     */
-    public long getMaxDoc() {
-        return maxDoc();
-    }
+	/**
+	 * Gets the num docs.
+	 *
+	 * @return the num docs
+	 */
+	public long getNumDocs() {
+		return numDocs();
+	}
 
-    
-    /**
-     * Deleted docs.
-     *
-     * @return the long
-     */
-    public long deletedDocs() {
-        return deletedDocs;
-    }
+	/**
+	 * Max doc.
+	 *
+	 * @return the long
+	 */
+	public long maxDoc() {
+		return maxDoc;
+	}
 
-    
-    /**
-     * Gets the deleted docs.
-     *
-     * @return the deleted docs
-     */
-    public long getDeletedDocs() {
-        return deletedDocs();
-    }
+	/**
+	 * Gets the max doc.
+	 *
+	 * @return the max doc
+	 */
+	public long getMaxDoc() {
+		return maxDoc();
+	}
+
+	/**
+	 * Deleted docs.
+	 *
+	 * @return the long
+	 */
+	public long deletedDocs() {
+		return deletedDocs;
+	}
+
+	/**
+	 * Gets the deleted docs.
+	 *
+	 * @return the deleted docs
+	 */
+	public long getDeletedDocs() {
+		return deletedDocs();
+	}
 }

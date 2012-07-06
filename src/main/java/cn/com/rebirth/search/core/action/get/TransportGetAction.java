@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportGetAction.java 2012-3-29 15:00:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportGetAction.java 2012-7-6 14:29:38 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction;
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportGetAction.
  *
@@ -31,15 +29,12 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class TransportGetAction extends TransportShardSingleOperationAction<GetRequest, GetResponse> {
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The realtime. */
 	private final boolean realtime;
 
-	
 	/**
 	 * Instantiates a new transport get action.
 	 *
@@ -58,45 +53,40 @@ public class TransportGetAction extends TransportShardSingleOperationAction<GetR
 		this.realtime = settings.getAsBoolean("action.get.realtime", true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.GET;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return GetAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, GetRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.READ);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, GetRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.READ, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected ShardIterator shards(ClusterState state, GetRequest request) {
@@ -104,26 +94,24 @@ public class TransportGetAction extends TransportShardSingleOperationAction<GetR
 				request.id(), request.routing(), request.preference());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#resolveRequest(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#resolveRequest(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest)
 	 */
 	@Override
 	protected void resolveRequest(ClusterState state, GetRequest request) {
 		if (request.realtime == null) {
 			request.realtime = this.realtime;
 		}
-		
+
 		request.routing(state.metaData().resolveIndexRouting(request.routing(), request.index()));
 		request.index(state.metaData().concreteIndex(request.index()));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#shardOperation(cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest, int)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest, int)
 	 */
 	@Override
-	protected GetResponse shardOperation(GetRequest request, int shardId) throws RestartException {
+	protected GetResponse shardOperation(GetRequest request, int shardId) throws RebirthException {
 		IndexService indexService = indicesService.indexServiceSafe(request.index());
 		IndexShard indexShard = indexService.shardSafe(shardId);
 
@@ -136,18 +124,16 @@ public class TransportGetAction extends TransportShardSingleOperationAction<GetR
 		return new GetResponse(result);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#newRequest()
 	 */
 	@Override
 	protected GetRequest newRequest() {
 		return new GetRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.TransportShardSingleOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.TransportShardSingleOperationAction#newResponse()
 	 */
 	@Override
 	protected GetResponse newResponse() {

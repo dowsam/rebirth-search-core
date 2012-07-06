@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BroadcastOperationRequest.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BroadcastOperationRequest.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.broadcast;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.ActionRequest;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 
-
 /**
  * The Class BroadcastOperationRequest.
  *
@@ -22,19 +20,15 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
  */
 public abstract class BroadcastOperationRequest implements ActionRequest {
 
-	
 	/** The indices. */
 	protected String[] indices;
 
-	
 	/** The listener threaded. */
 	private boolean listenerThreaded = false;
 
-	
 	/** The operation threading. */
 	private BroadcastOperationThreading operationThreading = BroadcastOperationThreading.SINGLE_THREAD;
 
-	
 	/**
 	 * Instantiates a new broadcast operation request.
 	 */
@@ -42,7 +36,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new broadcast operation request.
 	 *
@@ -52,7 +45,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -62,7 +54,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		return indices;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -74,27 +65,24 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return this.listenerThreaded;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public BroadcastOperationRequest listenerThreaded(boolean listenerThreaded) {
@@ -102,7 +90,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -112,7 +99,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		return operationThreading;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -124,7 +110,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -135,7 +120,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		return operationThreading(BroadcastOperationThreading.fromString(operationThreading, this.operationThreading));
 	}
 
-	
 	/**
 	 * Before start.
 	 */
@@ -143,7 +127,6 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 
 	}
 
-	
 	/**
 	 * Before local fork.
 	 */
@@ -151,9 +134,8 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -168,9 +150,8 @@ public abstract class BroadcastOperationRequest implements ActionRequest {
 		out.writeByte(operationThreading.id());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportAnalyzeAction.java 2012-3-29 15:02:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportAnalyzeAction.java 2012-7-6 14:30:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.analyze;
 
@@ -16,8 +15,8 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.io.FastStringReader;
@@ -45,7 +44,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class TransportAnalyzeAction.
  *
@@ -53,15 +51,12 @@ import com.google.common.collect.Lists;
  */
 public class TransportAnalyzeAction extends TransportSingleCustomOperationAction<AnalyzeRequest, AnalyzeResponse> {
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The indices analysis service. */
 	private final IndicesAnalysisService indicesAnalysisService;
 
-	
 	/**
 	 * Instantiates a new transport analyze action.
 	 *
@@ -81,54 +76,48 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 		this.indicesAnalysisService = indicesAnalysisService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.INDEX;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#newRequest()
 	 */
 	@Override
 	protected AnalyzeRequest newRequest() {
 		return new AnalyzeRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#newResponse()
 	 */
 	@Override
 	protected AnalyzeResponse newResponse() {
 		return new AnalyzeResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return AnalyzeAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, AnalyzeRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.READ);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, AnalyzeRequest request) {
@@ -139,25 +128,23 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest)
 	 */
 	@Override
 	protected ShardsIterator shards(ClusterState state, AnalyzeRequest request) {
 		if (request.index() == null) {
-			
+
 			return null;
 		}
 		return state.routingTable().index(request.index()).randomAllActiveShardsIt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.TransportSingleCustomOperationAction#shardOperation(cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest, int)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.TransportSingleCustomOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest, int)
 	 */
 	@Override
-	protected AnalyzeResponse shardOperation(AnalyzeRequest request, int shardId) throws RestartException {
+	protected AnalyzeResponse shardOperation(AnalyzeRequest request, int shardId) throws RebirthException {
 		IndexService indexService = null;
 		if (request.index() != null) {
 			indexService = indicesService.indexServiceSafe(request.index());
@@ -167,7 +154,7 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 		String field = null;
 		if (request.field() != null) {
 			if (indexService == null) {
-				throw new RestartIllegalArgumentException(
+				throw new RebirthIllegalArgumentException(
 						"No index provided, and trying to analyzer based on a specific field which requires the index parameter");
 			}
 			FieldMapper fieldMapper = indexService.mapperService().smartNameFieldMapper(request.field());
@@ -190,7 +177,7 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 				analyzer = indexService.analysisService().analyzer(request.analyzer());
 			}
 			if (analyzer == null) {
-				throw new RestartIllegalArgumentException("failed to find analyzer [" + request.analyzer() + "]");
+				throw new RebirthIllegalArgumentException("failed to find analyzer [" + request.analyzer() + "]");
 			}
 		} else if (request.tokenizer() != null) {
 			TokenizerFactory tokenizerFactory;
@@ -198,7 +185,7 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 				TokenizerFactoryFactory tokenizerFactoryFactory = indicesAnalysisService
 						.tokenizerFactoryFactory(request.tokenizer());
 				if (tokenizerFactoryFactory == null) {
-					throw new RestartIllegalArgumentException("failed to find global tokenizer under ["
+					throw new RebirthIllegalArgumentException("failed to find global tokenizer under ["
 							+ request.tokenizer() + "]");
 				}
 				tokenizerFactory = tokenizerFactoryFactory.create(request.tokenizer(),
@@ -206,8 +193,8 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 			} else {
 				tokenizerFactory = indexService.analysisService().tokenizer(request.tokenizer());
 				if (tokenizerFactory == null) {
-					throw new RestartIllegalArgumentException("failed to find tokenizer under ["
-							+ request.tokenizer() + "]");
+					throw new RebirthIllegalArgumentException("failed to find tokenizer under [" + request.tokenizer()
+							+ "]");
 				}
 			}
 			TokenFilterFactory[] tokenFilterFactories = new TokenFilterFactory[0];
@@ -219,20 +206,20 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 						TokenFilterFactoryFactory tokenFilterFactoryFactory = indicesAnalysisService
 								.tokenFilterFactoryFactory(tokenFilterName);
 						if (tokenFilterFactoryFactory == null) {
-							throw new RestartIllegalArgumentException(
-									"failed to find global token filter under [" + request.tokenizer() + "]");
+							throw new RebirthIllegalArgumentException("failed to find global token filter under ["
+									+ request.tokenizer() + "]");
 						}
 						tokenFilterFactories[i] = tokenFilterFactoryFactory.create(tokenFilterName,
 								ImmutableSettings.Builder.EMPTY_SETTINGS);
 					} else {
 						tokenFilterFactories[i] = indexService.analysisService().tokenFilter(tokenFilterName);
 						if (tokenFilterFactories[i] == null) {
-							throw new RestartIllegalArgumentException("failed to find token filter under ["
+							throw new RebirthIllegalArgumentException("failed to find token filter under ["
 									+ request.tokenizer() + "]");
 						}
 					}
 					if (tokenFilterFactories[i] == null) {
-						throw new RestartIllegalArgumentException("failed to find token filter under ["
+						throw new RebirthIllegalArgumentException("failed to find token filter under ["
 								+ request.tokenizer() + "]");
 					}
 				}
@@ -247,7 +234,7 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 			}
 		}
 		if (analyzer == null) {
-			throw new RestartIllegalArgumentException("failed to find analyzer");
+			throw new RebirthIllegalArgumentException("failed to find analyzer");
 		}
 
 		List<AnalyzeResponse.AnalyzeToken> tokens = Lists.newArrayList();
@@ -271,13 +258,13 @@ public class TransportAnalyzeAction extends TransportSingleCustomOperationAction
 			}
 			stream.end();
 		} catch (IOException e) {
-			throw new RestartException("failed to analyze", e);
+			throw new RebirthException("failed to analyze", e);
 		} finally {
 			if (stream != null) {
 				try {
 					stream.close();
 				} catch (IOException e) {
-					
+
 				}
 			}
 			if (closeAnalyzer) {

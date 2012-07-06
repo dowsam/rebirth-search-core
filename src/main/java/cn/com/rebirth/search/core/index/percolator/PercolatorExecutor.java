@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PercolatorExecutor.java 2012-3-29 15:01:39 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PercolatorExecutor.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.percolator;
 
@@ -28,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.Preconditions;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -61,7 +60,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class PercolatorExecutor.
  *
@@ -69,7 +67,6 @@ import com.google.common.collect.ImmutableMap;
  */
 public class PercolatorExecutor extends AbstractIndexComponent {
 
-	
 	/**
 	 * The Class SourceRequest.
 	 *
@@ -77,23 +74,18 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 */
 	public static class SourceRequest {
 
-		
 		/** The type. */
 		private final String type;
 
-		
 		/** The source. */
 		private final byte[] source;
 
-		
 		/** The offset. */
 		private final int offset;
 
-		
 		/** The length. */
 		private final int length;
 
-		
 		/**
 		 * Instantiates a new source request.
 		 *
@@ -104,7 +96,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			this(type, source, 0, source.length);
 		}
 
-		
 		/**
 		 * Instantiates a new source request.
 		 *
@@ -120,7 +111,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			this.length = length;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -130,7 +120,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			return this.type;
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -140,7 +129,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			return source;
 		}
 
-		
 		/**
 		 * Offset.
 		 *
@@ -150,7 +138,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			return this.offset;
 		}
 
-		
 		/**
 		 * Length.
 		 *
@@ -161,7 +148,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class DocAndSourceQueryRequest.
 	 *
@@ -169,16 +155,13 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 */
 	public static class DocAndSourceQueryRequest {
 
-		
 		/** The doc. */
 		private final ParsedDocument doc;
 
-		
 		/** The query. */
 		@Nullable
 		private final String query;
 
-		
 		/**
 		 * Instantiates a new doc and source query request.
 		 *
@@ -190,7 +173,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			this.query = query;
 		}
 
-		
 		/**
 		 * Doc.
 		 *
@@ -200,7 +182,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			return this.doc;
 		}
 
-		
 		/**
 		 * Query.
 		 *
@@ -212,7 +193,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class DocAndQueryRequest.
 	 *
@@ -220,16 +200,13 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 */
 	public static class DocAndQueryRequest {
 
-		
 		/** The doc. */
 		private final ParsedDocument doc;
 
-		
 		/** The query. */
 		@Nullable
 		private final Query query;
 
-		
 		/**
 		 * Instantiates a new doc and query request.
 		 *
@@ -241,7 +218,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			this.query = query;
 		}
 
-		
 		/**
 		 * Doc.
 		 *
@@ -251,7 +227,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			return this.doc;
 		}
 
-		
 		/**
 		 * Query.
 		 *
@@ -263,7 +238,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Response.
 	 *
@@ -271,15 +245,12 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 */
 	public static final class Response {
 
-		
 		/** The matches. */
 		private final List<String> matches;
 
-		
 		/** The mappers added. */
 		private final boolean mappersAdded;
 
-		
 		/**
 		 * Instantiates a new response.
 		 *
@@ -291,7 +262,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			this.mappersAdded = mappersAdded;
 		}
 
-		
 		/**
 		 * Mappers added.
 		 *
@@ -301,7 +271,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			return this.mappersAdded;
 		}
 
-		
 		/**
 		 * Matches.
 		 *
@@ -312,27 +281,21 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/** The mapper service. */
 	private final MapperService mapperService;
 
-	
 	/** The query parser service. */
 	private final IndexQueryParserService queryParserService;
 
-	
 	/** The index cache. */
 	private final IndexCache indexCache;
 
-	
 	/** The queries. */
 	private volatile ImmutableMap<String, Query> queries = ImmutableMap.of();
 
-	
 	/** The indices service. */
 	private IndicesService indicesService;
 
-	
 	/**
 	 * Instantiates a new percolator executor.
 	 *
@@ -351,7 +314,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		this.indexCache = indexCache;
 	}
 
-	
 	/**
 	 * Sets the indices service.
 	 *
@@ -361,7 +323,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		this.indicesService = indicesService;
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -371,38 +332,35 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		old.clear();
 	}
 
-	
 	/**
 	 * Adds the query.
 	 *
 	 * @param name the name
 	 * @param queryBuilder the query builder
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void addQuery(String name, QueryBuilder queryBuilder) throws RestartException {
+	public void addQuery(String name, QueryBuilder queryBuilder) throws RebirthException {
 		try {
 			XContentBuilder builder = XContentFactory.smileBuilder().startObject().field("query", queryBuilder)
 					.endObject();
 			BytesStream unsafeBytes = builder.underlyingStream();
 			addQuery(name, unsafeBytes.underlyingBytes(), 0, unsafeBytes.size());
 		} catch (IOException e) {
-			throw new RestartException("Failed to add query [" + name + "]", e);
+			throw new RebirthException("Failed to add query [" + name + "]", e);
 		}
 	}
 
-	
 	/**
 	 * Adds the query.
 	 *
 	 * @param name the name
 	 * @param source the source
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void addQuery(String name, byte[] source) throws RestartException {
+	public void addQuery(String name, byte[] source) throws RebirthException {
 		addQuery(name, source, 0, source.length);
 	}
 
-	
 	/**
 	 * Adds the query.
 	 *
@@ -410,13 +368,12 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 * @param source the source
 	 * @param sourceOffset the source offset
 	 * @param sourceLength the source length
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void addQuery(String name, byte[] source, int sourceOffset, int sourceLength) throws RestartException {
+	public void addQuery(String name, byte[] source, int sourceOffset, int sourceLength) throws RebirthException {
 		addQuery(name, parseQuery(name, source, sourceOffset, sourceLength));
 	}
 
-	
 	/**
 	 * Parses the query.
 	 *
@@ -425,18 +382,17 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 * @param sourceOffset the source offset
 	 * @param sourceLength the source length
 	 * @return the query
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public Query parseQuery(String name, byte[] source, int sourceOffset, int sourceLength)
-			throws RestartException {
+	public Query parseQuery(String name, byte[] source, int sourceOffset, int sourceLength) throws RebirthException {
 		XContentParser parser = null;
 		try {
 			parser = XContentHelper.createParser(source, sourceOffset, sourceLength);
 			Query query = null;
 			String currentFieldName = null;
-			XContentParser.Token token = parser.nextToken(); 
+			XContentParser.Token token = parser.nextToken();
 			if (token != XContentParser.Token.START_OBJECT) {
-				throw new RestartException("Failed to add query [" + name + "], not starting with OBJECT");
+				throw new RebirthException("Failed to add query [" + name + "], not starting with OBJECT");
 			}
 			while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
 				if (token == XContentParser.Token.FIELD_NAME) {
@@ -454,7 +410,7 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			}
 			return query;
 		} catch (IOException e) {
-			throw new RestartException("Failed to add query [" + name + "]", e);
+			throw new RebirthException("Failed to add query [" + name + "]", e);
 		} finally {
 			if (parser != null) {
 				parser.close();
@@ -462,7 +418,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Adds the query.
 	 *
@@ -474,7 +429,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		this.queries = MapBuilder.newMapBuilder(queries).put(name, query).immutableMap();
 	}
 
-	
 	/**
 	 * Removes the query.
 	 *
@@ -484,7 +438,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		this.queries = MapBuilder.newMapBuilder(queries).remove(name).immutableMap();
 	}
 
-	
 	/**
 	 * Adds the queries.
 	 *
@@ -494,15 +447,14 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		this.queries = MapBuilder.newMapBuilder(this.queries).putAll(queries).immutableMap();
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
 	 * @param request the request
 	 * @return the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public Response percolate(final SourceRequest request) throws RestartException {
+	public Response percolate(final SourceRequest request) throws RebirthException {
 		Query query = null;
 		ParsedDocument doc = null;
 		XContentParser parser = null;
@@ -515,8 +467,7 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
 				if (token == XContentParser.Token.FIELD_NAME) {
 					currentFieldName = parser.currentName();
-					
-					
+
 					if ("doc".equals(currentFieldName)) {
 						DocumentMapper docMapper = mapperService.documentMapperWithAutoCreate(request.type());
 						doc = docMapper.parse(source(parser).type(request.type()).flyweight(true));
@@ -544,15 +495,14 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		return percolate(new DocAndQueryRequest(doc, query));
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
 	 * @param request the request
 	 * @return the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public Response percolate(DocAndSourceQueryRequest request) throws RestartException {
+	public Response percolate(DocAndSourceQueryRequest request) throws RebirthException {
 		Query query = null;
 		if (Strings.hasLength(request.query()) && !request.query().equals("*")) {
 			query = queryParserService.parse(QueryBuilders.queryString(request.query())).query();
@@ -560,24 +510,22 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		return percolate(new DocAndQueryRequest(request.doc(), query));
 	}
 
-	
 	/**
 	 * Percolate.
 	 *
 	 * @param request the request
 	 * @return the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public Response percolate(DocAndQueryRequest request) throws RestartException {
-		
+	public Response percolate(DocAndQueryRequest request) throws RebirthException {
+
 		final CustomMemoryIndex memoryIndex = new CustomMemoryIndex();
 
-		
 		for (Fieldable field : request.doc().rootDoc().getFields()) {
 			if (!field.isIndexed()) {
 				continue;
 			}
-			
+
 			if (field.name().equals(UidFieldMapper.NAME)) {
 				continue;
 			}
@@ -653,7 +601,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		return new Response(matches, request.doc().mappersAdded());
 	}
 
-	
 	/**
 	 * The Class QueryCollector.
 	 *
@@ -661,31 +608,24 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 	 */
 	static class QueryCollector extends Collector {
 
-		
 		/** The searcher. */
 		private final IndexSearcher searcher;
 
-		
 		/** The percolator index. */
 		private final IndexService percolatorIndex;
 
-		
 		/** The matches. */
 		private final List<String> matches;
 
-		
 		/** The queries. */
 		private final ImmutableMap<String, Query> queries;
 
-		
 		/** The logger. */
 		private final Logger logger = LoggerFactory.getLogger(getClass());
 
-		
 		/** The collector. */
 		private final Lucene.ExistsCollector collector = new Lucene.ExistsCollector();
 
-		
 		/**
 		 * Instantiates a new query collector.
 		 *
@@ -702,11 +642,9 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			this.matches = matches;
 		}
 
-		
 		/** The field data. */
 		private FieldData fieldData;
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 		 */
@@ -714,7 +652,6 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 		public void setScorer(Scorer scorer) throws IOException {
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#collect(int)
 		 */
@@ -727,10 +664,10 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			String id = Uid.idFromUid(uid);
 			Query query = queries.get(id);
 			if (query == null) {
-				
+
 				return;
 			}
-			
+
 			try {
 				searcher.search(query, collector);
 				if (collector.exists()) {
@@ -741,18 +678,16 @@ public class PercolatorExecutor extends AbstractIndexComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 		 */
 		@Override
 		public void setNextReader(IndexReader reader, int docBase) throws IOException {
-			
+
 			fieldData = percolatorIndex.cache().fieldData()
 					.cache(FieldDataType.DefaultTypes.STRING, reader, UidFieldMapper.NAME);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 		 */

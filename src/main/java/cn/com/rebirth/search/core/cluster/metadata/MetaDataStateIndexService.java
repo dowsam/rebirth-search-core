@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataStateIndexService.java 2012-3-29 15:02:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataStateIndexService.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.indices.IndexMissingException;
 import cn.com.rebirth.search.core.rest.RestStatus;
 
-
 /**
  * The Class MetaDataStateIndexService.
  *
@@ -32,20 +30,16 @@ import cn.com.rebirth.search.core.rest.RestStatus;
  */
 public class MetaDataStateIndexService extends AbstractComponent {
 
-	
 	/** The Constant INDEX_CLOSED_BLOCK. */
 	public static final ClusterBlock INDEX_CLOSED_BLOCK = new ClusterBlock(4, "index closed", false, false,
 			RestStatus.FORBIDDEN, ClusterBlockLevel.READ_WRITE);
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The allocation service. */
 	private final AllocationService allocationService;
 
-	
 	/**
 	 * Instantiates a new meta data state index service.
 	 *
@@ -61,7 +55,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 		this.allocationService = allocationService;
 	}
 
-	
 	/**
 	 * Close index.
 	 *
@@ -103,8 +96,8 @@ public class MetaDataStateIndexService extends AbstractComponent {
 						RoutingTable.Builder rtBuilder = RoutingTable.builder()
 								.routingTable(currentState.routingTable()).remove(request.index);
 
-						RoutingAllocation.Result routingResult = allocationService.reroute(ClusterState.newClusterStateBuilder()
-								.state(updatedState).routingTable(rtBuilder).build());
+						RoutingAllocation.Result routingResult = allocationService.reroute(ClusterState
+								.newClusterStateBuilder().state(updatedState).routingTable(rtBuilder).build());
 
 						return ClusterState.builder().state(updatedState).routingResult(routingResult).build();
 					}
@@ -116,7 +109,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 				});
 	}
 
-	
 	/**
 	 * Open index.
 	 *
@@ -161,8 +153,8 @@ public class MetaDataStateIndexService extends AbstractComponent {
 								.initializeEmpty(updatedState.metaData().index(request.index), false);
 						rtBuilder.add(indexRoutingBuilder);
 
-						RoutingAllocation.Result routingResult = allocationService.reroute(ClusterState.newClusterStateBuilder()
-								.state(updatedState).routingTable(rtBuilder).build());
+						RoutingAllocation.Result routingResult = allocationService.reroute(ClusterState
+								.newClusterStateBuilder().state(updatedState).routingTable(rtBuilder).build());
 
 						return ClusterState.builder().state(updatedState).routingResult(routingResult).build();
 					}
@@ -174,7 +166,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 				});
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -182,7 +173,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On response.
 		 *
@@ -190,7 +180,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 		 */
 		void onResponse(Response response);
 
-		
 		/**
 		 * On failure.
 		 *
@@ -199,7 +188,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 		void onFailure(Throwable t);
 	}
 
-	
 	/**
 	 * The Class Request.
 	 *
@@ -207,15 +195,12 @@ public class MetaDataStateIndexService extends AbstractComponent {
 	 */
 	public static class Request {
 
-		
 		/** The index. */
 		final String index;
 
-		
 		/** The timeout. */
 		TimeValue timeout = TimeValue.timeValueSeconds(10);
 
-		
 		/**
 		 * Instantiates a new request.
 		 *
@@ -225,7 +210,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 			this.index = index;
 		}
 
-		
 		/**
 		 * Timeout.
 		 *
@@ -238,7 +222,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Response.
 	 *
@@ -246,11 +229,9 @@ public class MetaDataStateIndexService extends AbstractComponent {
 	 */
 	public static class Response {
 
-		
 		/** The acknowledged. */
 		private final boolean acknowledged;
 
-		
 		/**
 		 * Instantiates a new response.
 		 *
@@ -260,7 +241,6 @@ public class MetaDataStateIndexService extends AbstractComponent {
 			this.acknowledged = acknowledged;
 		}
 
-		
 		/**
 		 * Acknowledged.
 		 *

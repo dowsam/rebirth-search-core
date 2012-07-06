@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GatewaySnapshotStatus.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GatewaySnapshotStatus.java 2012-7-6 14:29:42 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
-
 
 /**
  * The Class GatewaySnapshotStatus.
@@ -18,7 +16,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
  */
 public class GatewaySnapshotStatus {
 
-	
 	/**
 	 * The Enum Stage.
 	 *
@@ -26,35 +23,27 @@ public class GatewaySnapshotStatus {
 	 */
 	public static enum Stage {
 
-		
-		/** The NONE. */
+		/** The none. */
 		NONE((byte) 0),
 
-		
-		/** The INDEX. */
+		/** The index. */
 		INDEX((byte) 1),
 
-		
-		/** The TRANSLOG. */
+		/** The translog. */
 		TRANSLOG((byte) 2),
 
-		
-		/** The FINALIZE. */
+		/** The finalize. */
 		FINALIZE((byte) 3),
 
-		
-		/** The DONE. */
+		/** The done. */
 		DONE((byte) 4),
 
-		
-		/** The FAILURE. */
+		/** The failure. */
 		FAILURE((byte) 5);
 
-		
 		/** The value. */
 		private final byte value;
 
-		
 		/**
 		 * Instantiates a new stage.
 		 *
@@ -64,7 +53,6 @@ public class GatewaySnapshotStatus {
 			this.value = value;
 		}
 
-		
 		/**
 		 * Value.
 		 *
@@ -74,7 +62,6 @@ public class GatewaySnapshotStatus {
 			return this.value;
 		}
 
-		
 		/**
 		 * From value.
 		 *
@@ -95,31 +82,25 @@ public class GatewaySnapshotStatus {
 			} else if (value == 5) {
 				return Stage.FAILURE;
 			}
-			throw new RestartIllegalArgumentException("No stage found for [" + value + "]");
+			throw new RebirthIllegalArgumentException("No stage found for [" + value + "]");
 		}
 	}
 
-	
 	/** The stage. */
 	final Stage stage;
 
-	
 	/** The start time. */
 	final long startTime;
 
-	
 	/** The time. */
 	final long time;
 
-	
 	/** The index size. */
 	final long indexSize;
 
-	
 	/** The expected number of operations. */
 	final int expectedNumberOfOperations;
 
-	
 	/**
 	 * Instantiates a new gateway snapshot status.
 	 *
@@ -137,7 +118,6 @@ public class GatewaySnapshotStatus {
 		this.expectedNumberOfOperations = expectedNumberOfOperations;
 	}
 
-	
 	/**
 	 * Stage.
 	 *
@@ -147,7 +127,6 @@ public class GatewaySnapshotStatus {
 		return this.stage;
 	}
 
-	
 	/**
 	 * Gets the stage.
 	 *
@@ -157,7 +136,6 @@ public class GatewaySnapshotStatus {
 		return stage();
 	}
 
-	
 	/**
 	 * Start time.
 	 *
@@ -167,7 +145,6 @@ public class GatewaySnapshotStatus {
 		return this.startTime;
 	}
 
-	
 	/**
 	 * Gets the start time.
 	 *
@@ -177,7 +154,6 @@ public class GatewaySnapshotStatus {
 		return startTime();
 	}
 
-	
 	/**
 	 * Time.
 	 *
@@ -187,7 +163,6 @@ public class GatewaySnapshotStatus {
 		return TimeValue.timeValueMillis(time);
 	}
 
-	
 	/**
 	 * Gets the time.
 	 *
@@ -197,7 +172,6 @@ public class GatewaySnapshotStatus {
 		return time();
 	}
 
-	
 	/**
 	 * Index size.
 	 *
@@ -207,7 +181,6 @@ public class GatewaySnapshotStatus {
 		return new ByteSizeValue(indexSize);
 	}
 
-	
 	/**
 	 * Gets the index size.
 	 *
@@ -217,7 +190,6 @@ public class GatewaySnapshotStatus {
 		return indexSize();
 	}
 
-	
 	/**
 	 * Expected number of operations.
 	 *
@@ -227,7 +199,6 @@ public class GatewaySnapshotStatus {
 		return expectedNumberOfOperations;
 	}
 
-	
 	/**
 	 * Gets the expected number of operations.
 	 *

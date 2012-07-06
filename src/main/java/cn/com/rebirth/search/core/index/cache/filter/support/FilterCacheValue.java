@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FilterCacheValue.java 2012-3-29 15:01:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FilterCacheValue.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.filter.support;
 
@@ -15,7 +14,6 @@ import org.apache.lucene.search.DocIdSetIterator;
 import cn.com.rebirth.search.commons.lucene.docset.DocSet;
 import cn.com.rebirth.search.commons.lucene.docset.DocSets;
 
-
 /**
  * The Class FilterCacheValue.
  *
@@ -24,11 +22,9 @@ import cn.com.rebirth.search.commons.lucene.docset.DocSets;
  */
 public class FilterCacheValue<T> {
 
-	
 	/** The value. */
 	private final T value;
 
-	
 	/**
 	 * Instantiates a new filter cache value.
 	 *
@@ -38,7 +34,6 @@ public class FilterCacheValue<T> {
 		this.value = value;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -48,7 +43,6 @@ public class FilterCacheValue<T> {
 		return value;
 	}
 
-	
 	/**
 	 * Cacheable.
 	 *

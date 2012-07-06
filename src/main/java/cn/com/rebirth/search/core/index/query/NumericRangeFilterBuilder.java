@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NumericRangeFilterBuilder.java 2012-3-29 15:02:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NumericRangeFilterBuilder.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class NumericRangeFilterBuilder.
@@ -18,39 +16,30 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The from. */
 	private Object from;
 
-	
 	/** The to. */
 	private Object to;
 
-	
 	/** The include lower. */
 	private boolean includeLower = true;
 
-	
 	/** The include upper. */
 	private boolean includeUpper = true;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new numeric range filter builder.
 	 *
@@ -60,7 +49,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		this.name = name;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -72,7 +60,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -84,7 +71,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -96,7 +82,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -108,7 +93,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -120,7 +104,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -133,7 +116,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -146,7 +128,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -159,7 +140,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -172,7 +152,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -185,7 +164,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -198,7 +176,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -211,7 +188,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -224,7 +200,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -237,7 +212,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -250,7 +224,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -262,7 +235,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -274,7 +246,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -286,7 +257,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -298,7 +268,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -310,7 +279,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -323,7 +291,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -336,7 +303,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -349,7 +315,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -362,7 +327,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -375,7 +339,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -388,7 +351,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -401,7 +363,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -414,7 +375,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -427,7 +387,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -440,7 +399,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Include lower.
 	 *
@@ -452,7 +410,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Include upper.
 	 *
@@ -464,7 +421,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -476,7 +432,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -488,7 +443,6 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -500,9 +454,8 @@ public class NumericRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

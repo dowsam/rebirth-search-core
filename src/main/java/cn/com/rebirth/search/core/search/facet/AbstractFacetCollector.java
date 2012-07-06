@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractFacetCollector.java 2012-3-29 15:02:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractFacetCollector.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.lucene.search.AndFilter;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class AbstractFacetCollector.
  *
@@ -26,19 +24,15 @@ import com.google.common.collect.ImmutableList;
  */
 public abstract class AbstractFacetCollector extends FacetCollector {
 
-	
 	/** The facet name. */
 	protected final String facetName;
 
-	
 	/** The filter. */
 	protected Filter filter;
 
-	
 	/** The doc set. */
 	private DocSet docSet = null;
 
-	
 	/**
 	 * Instantiates a new abstract facet collector.
 	 *
@@ -48,7 +42,6 @@ public abstract class AbstractFacetCollector extends FacetCollector {
 		this.facetName = facetName;
 	}
 
-	
 	/**
 	 * Gets the filter.
 	 *
@@ -58,9 +51,8 @@ public abstract class AbstractFacetCollector extends FacetCollector {
 		return this.filter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#setFilter(org.apache.lucene.search.Filter)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#setFilter(org.apache.lucene.search.Filter)
 	 */
 	@Override
 	public void setFilter(Filter filter) {
@@ -71,25 +63,22 @@ public abstract class AbstractFacetCollector extends FacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#acceptsDocsOutOfOrder()
 	 */
 	@Override
 	public boolean acceptsDocsOutOfOrder() {
-		return true; 
+		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#setNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
@@ -101,7 +90,6 @@ public abstract class AbstractFacetCollector extends FacetCollector {
 		doSetNextReader(reader, docBase);
 	}
 
-	
 	/**
 	 * Do set next reader.
 	 *
@@ -111,7 +99,6 @@ public abstract class AbstractFacetCollector extends FacetCollector {
 	 */
 	protected abstract void doSetNextReader(IndexReader reader, int docBase) throws IOException;
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Collector#collect(int)
 	 */
@@ -124,7 +111,6 @@ public abstract class AbstractFacetCollector extends FacetCollector {
 		}
 	}
 
-	
 	/**
 	 * Do collect.
 	 *

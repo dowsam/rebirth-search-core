@@ -1,18 +1,16 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesService.java 2012-3-29 15:02:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesService.java 2012-7-6 14:30:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
 import java.util.Set;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.core.index.service.IndexService;
-
 
 /**
  * The Interface IndicesService.
@@ -21,7 +19,6 @@ import cn.com.rebirth.search.core.index.service.IndexService;
  */
 public interface IndicesService extends Iterable<IndexService>, LifecycleComponent<IndicesService> {
 
-	
 	/**
 	 * Changes allowed.
 	 *
@@ -29,7 +26,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	public boolean changesAllowed();
 
-	
 	/**
 	 * Stats.
 	 *
@@ -38,7 +34,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	NodeIndicesStats stats(boolean includePrevious);
 
-	
 	/**
 	 * Checks for index.
 	 *
@@ -47,7 +42,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	boolean hasIndex(String index);
 
-	
 	/**
 	 * Indices lifecycle.
 	 *
@@ -55,7 +49,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	IndicesLifecycle indicesLifecycle();
 
-	
 	/**
 	 * Indices.
 	 *
@@ -63,7 +56,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	Set<String> indices();
 
-	
 	/**
 	 * Index service.
 	 *
@@ -72,7 +64,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	IndexService indexService(String index);
 
-	
 	/**
 	 * Index service safe.
 	 *
@@ -82,7 +73,6 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 */
 	IndexService indexServiceSafe(String index) throws IndexMissingException;
 
-	
 	/**
 	 * Creates the index.
 	 *
@@ -90,27 +80,25 @@ public interface IndicesService extends Iterable<IndexService>, LifecycleCompone
 	 * @param settings the settings
 	 * @param localNodeId the local node id
 	 * @return the index service
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	IndexService createIndex(String index, Settings settings, String localNodeId) throws RestartException;
+	IndexService createIndex(String index, Settings settings, String localNodeId) throws RebirthException;
 
-	
 	/**
 	 * Delete index.
 	 *
 	 * @param index the index
 	 * @param reason the reason
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void deleteIndex(String index, String reason) throws RestartException;
+	void deleteIndex(String index, String reason) throws RebirthException;
 
-	
 	/**
 	 * Clean index.
 	 *
 	 * @param index the index
 	 * @param reason the reason
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void cleanIndex(String index, String reason) throws RestartException;
+	void cleanIndex(String index, String reason) throws RebirthException;
 }

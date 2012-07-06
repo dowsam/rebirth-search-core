@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StopAnalyzerProvider.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StopAnalyzerProvider.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class StopAnalyzerProvider.
  *
@@ -25,11 +23,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class StopAnalyzerProvider extends AbstractIndexAnalyzerProvider<StopAnalyzer> {
 
-	
 	/** The stop analyzer. */
 	private final StopAnalyzer stopAnalyzer;
 
-	
 	/**
 	 * Instantiates a new stop analyzer provider.
 	 *
@@ -47,9 +43,8 @@ public class StopAnalyzerProvider extends AbstractIndexAnalyzerProvider<StopAnal
 		this.stopAnalyzer = new StopAnalyzer(version, stopWords);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#get()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#get()
 	 */
 	@Override
 	public StopAnalyzer get() {

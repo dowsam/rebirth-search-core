@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportClusterStateAction.java 2012-3-29 15:02:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportClusterStateAction.java 2012-7-6 14:29:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.state;
 
 import static cn.com.rebirth.search.core.cluster.ClusterState.newClusterStateBuilder;
 import static cn.com.rebirth.search.core.cluster.metadata.MetaData.newMetaDataBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportClusterStateAction.
  *
@@ -30,11 +28,9 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportClusterStateAction extends
 		TransportMasterNodeOperationAction<ClusterStateRequest, ClusterStateResponse> {
 
-	
 	/** The cluster name. */
 	private final ClusterName clusterName;
 
-	
 	/**
 	 * Instantiates a new transport cluster state action.
 	 *
@@ -51,58 +47,52 @@ public class TransportClusterStateAction extends
 		this.clusterName = clusterName;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.GENERIC;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return ClusterStateAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected ClusterStateRequest newRequest() {
 		return new ClusterStateRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected ClusterStateResponse newResponse() {
 		return new ClusterStateResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#localExecute(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#localExecute(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest)
 	 */
 	@Override
 	protected boolean localExecute(ClusterStateRequest request) {
 		return request.local();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected ClusterStateResponse masterOperation(ClusterStateRequest request, ClusterState state)
-			throws RestartException {
+			throws RebirthException {
 		ClusterState currentState = clusterService.state();
 		ClusterState.Builder builder = newClusterStateBuilder();
 		if (!request.filterNodes()) {

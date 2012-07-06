@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodesInfoRequestBuilder.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodesInfoRequestBuilder.java 2012-7-6 14:28:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.node.info;
 
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.cluster.support.BaseClusterRequestBuilder;
 import cn.com.rebirth.search.core.client.ClusterAdminClient;
-
 
 /**
  * The Class NodesInfoRequestBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.client.ClusterAdminClient;
  */
 public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfoRequest, NodesInfoResponse> {
 
-	
 	/**
 	 * Instantiates a new nodes info request builder.
 	 *
@@ -28,7 +25,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		super(clusterClient, new NodesInfoRequest());
 	}
 
-	
 	/**
 	 * Sets the nodes ids.
 	 *
@@ -40,7 +36,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Clear.
 	 *
@@ -51,7 +46,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * All.
 	 *
@@ -62,7 +56,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -74,7 +67,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the os.
 	 *
@@ -86,7 +78,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the process.
 	 *
@@ -98,7 +89,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the jvm.
 	 *
@@ -110,7 +100,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the thread pool.
 	 *
@@ -122,7 +111,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the network.
 	 *
@@ -134,7 +122,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the transport.
 	 *
@@ -146,7 +133,6 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/**
 	 * Sets the http.
 	 *
@@ -158,9 +144,8 @@ public class NodesInfoRequestBuilder extends BaseClusterRequestBuilder<NodesInfo
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.cluster.support.BaseClusterRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.cluster.support.BaseClusterRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<NodesInfoResponse> listener) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Requests.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Requests.java 2012-7-6 14:30:18 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client;
 
@@ -41,7 +40,6 @@ import cn.com.rebirth.search.core.action.mlt.MoreLikeThisRequest;
 import cn.com.rebirth.search.core.action.search.SearchRequest;
 import cn.com.rebirth.search.core.action.search.SearchScrollRequest;
 
-
 /**
  * The Class Requests.
  *
@@ -49,15 +47,12 @@ import cn.com.rebirth.search.core.action.search.SearchScrollRequest;
  */
 public class Requests {
 
-	
-	/** The CONTEN t_ type. */
+	/** The content type. */
 	public static XContentType CONTENT_TYPE = XContentType.SMILE;
 
-	
-	/** The INDE x_ conten t_ type. */
+	/** The index content type. */
 	public static XContentType INDEX_CONTENT_TYPE = XContentType.JSON;
 
-	
 	/**
 	 * Index request.
 	 *
@@ -67,7 +62,6 @@ public class Requests {
 		return new IndexRequest();
 	}
 
-	
 	/**
 	 * Index request.
 	 *
@@ -78,7 +72,6 @@ public class Requests {
 		return new IndexRequest(index);
 	}
 
-	
 	/**
 	 * Delete request.
 	 *
@@ -89,7 +82,6 @@ public class Requests {
 		return new DeleteRequest(index);
 	}
 
-	
 	/**
 	 * Bulk request.
 	 *
@@ -99,7 +91,6 @@ public class Requests {
 		return new BulkRequest();
 	}
 
-	
 	/**
 	 * Delete by query request.
 	 *
@@ -110,7 +101,6 @@ public class Requests {
 		return new DeleteByQueryRequest(indices);
 	}
 
-	
 	/**
 	 * Gets the request.
 	 *
@@ -121,7 +111,6 @@ public class Requests {
 		return new GetRequest(index);
 	}
 
-	
 	/**
 	 * Count request.
 	 *
@@ -132,7 +121,6 @@ public class Requests {
 		return new CountRequest(indices);
 	}
 
-	
 	/**
 	 * More like this request.
 	 *
@@ -143,7 +131,6 @@ public class Requests {
 		return new MoreLikeThisRequest(index);
 	}
 
-	
 	/**
 	 * Search request.
 	 *
@@ -154,7 +141,6 @@ public class Requests {
 		return new SearchRequest(indices);
 	}
 
-	
 	/**
 	 * Search scroll request.
 	 *
@@ -165,7 +151,6 @@ public class Requests {
 		return new SearchScrollRequest(scrollId);
 	}
 
-	
 	/**
 	 * Indices status request.
 	 *
@@ -176,7 +161,6 @@ public class Requests {
 		return new IndicesStatusRequest(indices);
 	}
 
-	
 	/**
 	 * Indices segments request.
 	 *
@@ -187,7 +171,6 @@ public class Requests {
 		return new IndicesSegmentsRequest(indices);
 	}
 
-	
 	/**
 	 * Indices exists request.
 	 *
@@ -198,7 +181,6 @@ public class Requests {
 		return new IndicesExistsRequest(indices);
 	}
 
-	
 	/**
 	 * Creates the index request.
 	 *
@@ -209,7 +191,6 @@ public class Requests {
 		return new CreateIndexRequest(index);
 	}
 
-	
 	/**
 	 * Delete index request.
 	 *
@@ -220,7 +201,6 @@ public class Requests {
 		return new DeleteIndexRequest(index);
 	}
 
-	
 	/**
 	 * Close index request.
 	 *
@@ -231,7 +211,6 @@ public class Requests {
 		return new CloseIndexRequest(index);
 	}
 
-	
 	/**
 	 * Open index request.
 	 *
@@ -242,7 +221,6 @@ public class Requests {
 		return new OpenIndexRequest(index);
 	}
 
-	
 	/**
 	 * Put mapping request.
 	 *
@@ -253,7 +231,6 @@ public class Requests {
 		return new PutMappingRequest(indices);
 	}
 
-	
 	/**
 	 * Delete mapping request.
 	 *
@@ -264,7 +241,6 @@ public class Requests {
 		return new DeleteMappingRequest(indices);
 	}
 
-	
 	/**
 	 * Index aliases request.
 	 *
@@ -274,7 +250,6 @@ public class Requests {
 		return new IndicesAliasesRequest();
 	}
 
-	
 	/**
 	 * Refresh request.
 	 *
@@ -285,7 +260,6 @@ public class Requests {
 		return new RefreshRequest(indices);
 	}
 
-	
 	/**
 	 * Flush request.
 	 *
@@ -296,7 +270,6 @@ public class Requests {
 		return new FlushRequest(indices);
 	}
 
-	
 	/**
 	 * Optimize request.
 	 *
@@ -307,7 +280,6 @@ public class Requests {
 		return new OptimizeRequest(indices);
 	}
 
-	
 	/**
 	 * Gateway snapshot request.
 	 *
@@ -318,7 +290,6 @@ public class Requests {
 		return new GatewaySnapshotRequest(indices);
 	}
 
-	
 	/**
 	 * Clear indices cache request.
 	 *
@@ -329,7 +300,6 @@ public class Requests {
 		return new ClearIndicesCacheRequest(indices);
 	}
 
-	
 	/**
 	 * Update settings request.
 	 *
@@ -340,7 +310,6 @@ public class Requests {
 		return new UpdateSettingsRequest(indices);
 	}
 
-	
 	/**
 	 * Cluster state request.
 	 *
@@ -350,7 +319,6 @@ public class Requests {
 		return new ClusterStateRequest();
 	}
 
-	
 	/**
 	 * Cluster reroute request.
 	 *
@@ -360,7 +328,6 @@ public class Requests {
 		return new ClusterRerouteRequest();
 	}
 
-	
 	/**
 	 * Cluster update settings request.
 	 *
@@ -370,7 +337,6 @@ public class Requests {
 		return new ClusterUpdateSettingsRequest();
 	}
 
-	
 	/**
 	 * Cluster health request.
 	 *
@@ -381,7 +347,6 @@ public class Requests {
 		return new ClusterHealthRequest(indices);
 	}
 
-	
 	/**
 	 * Nodes info request.
 	 *
@@ -391,7 +356,6 @@ public class Requests {
 		return new NodesInfoRequest();
 	}
 
-	
 	/**
 	 * Nodes info request.
 	 *
@@ -402,7 +366,6 @@ public class Requests {
 		return new NodesInfoRequest(nodesIds);
 	}
 
-	
 	/**
 	 * Nodes stats request.
 	 *
@@ -413,7 +376,6 @@ public class Requests {
 		return new NodesStatsRequest(nodesIds);
 	}
 
-	
 	/**
 	 * Nodes shutdown request.
 	 *
@@ -423,7 +385,6 @@ public class Requests {
 		return new NodesShutdownRequest();
 	}
 
-	
 	/**
 	 * Nodes shutdown request.
 	 *
@@ -434,7 +395,6 @@ public class Requests {
 		return new NodesShutdownRequest(nodesIds);
 	}
 
-	
 	/**
 	 * Nodes restart request.
 	 *
@@ -444,7 +404,6 @@ public class Requests {
 		return new NodesRestartRequest();
 	}
 
-	
 	/**
 	 * Nodes restart request.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RamDirectoryService.java 2012-3-29 15:02:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RamDirectoryService.java 2012-7-6 14:30:00 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.ram;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.store.DirectoryService;
 
-
 /**
  * The Class RamDirectoryService.
  *
@@ -28,7 +26,6 @@ import cn.com.rebirth.search.core.index.store.DirectoryService;
  */
 public class RamDirectoryService extends AbstractIndexShardComponent implements DirectoryService {
 
-	
 	/**
 	 * Instantiates a new ram directory service.
 	 *
@@ -40,33 +37,29 @@ public class RamDirectoryService extends AbstractIndexShardComponent implements 
 		super(shardId, indexSettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#build()
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#build()
 	 */
 	@Override
 	public Directory[] build() {
 		return new Directory[] { new CustomRAMDirectory() };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#renameFile(org.apache.lucene.store.Directory, java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#renameFile(org.apache.lucene.store.Directory, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public void renameFile(Directory dir, String from, String to) throws IOException {
 		((CustomRAMDirectory) dir).renameTo(from, to);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#fullDelete(org.apache.lucene.store.Directory)
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#fullDelete(org.apache.lucene.store.Directory)
 	 */
 	@Override
 	public void fullDelete(Directory dir) {
 	}
 
-	
 	/**
 	 * The Class CustomRAMDirectory.
 	 *
@@ -74,7 +67,6 @@ public class RamDirectoryService extends AbstractIndexShardComponent implements 
 	 */
 	static class CustomRAMDirectory extends RAMDirectory {
 
-		
 		/**
 		 * Rename to.
 		 *

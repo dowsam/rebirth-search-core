@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BoostFieldMapper.java 2012-3-29 15:02:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BoostFieldMapper.java 2012-7-6 14:30:30 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -41,7 +40,6 @@ import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.core.index.search.NumericRangeFieldDataFilter;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class BoostFieldMapper.
  *
@@ -49,15 +47,12 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public class BoostFieldMapper extends NumberFieldMapper<Float> implements InternalMapper, RootMapper {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_boost";
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_boost";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -65,24 +60,19 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 	 */
 	public static class Defaults extends NumberFieldMapper.Defaults {
 
-		
 		/** The Constant NAME. */
 		public static final String NAME = "_boost";
 
-		
 		/** The Constant NULL_VALUE. */
 		public static final Float NULL_VALUE = null;
 
-		
 		/** The Constant INDEX. */
 		public static final Field.Index INDEX = Field.Index.NO;
 
-		
 		/** The Constant STORE. */
 		public static final Field.Store STORE = Field.Store.NO;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -90,11 +80,9 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 	 */
 	public static class Builder extends NumberFieldMapper.Builder<Builder, BoostFieldMapper> {
 
-		
 		/** The null value. */
 		protected Float nullValue = Defaults.NULL_VALUE;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -107,7 +95,6 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 			store = Defaults.STORE;
 		}
 
-		
 		/**
 		 * Null value.
 		 *
@@ -119,9 +106,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public BoostFieldMapper build(BuilderContext context) {
@@ -130,7 +116,6 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -138,9 +123,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String fieldName, Map<String, Object> node, ParserContext parserContext)
@@ -159,11 +143,9 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		}
 	}
 
-	
 	/** The null value. */
 	private final Float nullValue;
 
-	
 	/**
 	 * Instantiates a new boost field mapper.
 	 */
@@ -171,7 +153,6 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		this(Defaults.NAME, Defaults.NAME);
 	}
 
-	
 	/**
 	 * Instantiates a new boost field mapper.
 	 *
@@ -183,7 +164,6 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 				Defaults.OMIT_NORMS, Defaults.OMIT_TERM_FREQ_AND_POSITIONS, Defaults.NULL_VALUE);
 	}
 
-	
 	/**
 	 * Instantiates a new boost field mapper.
 	 *
@@ -205,18 +185,16 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		this.nullValue = nullValue;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#maxPrecisionStep()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#maxPrecisionStep()
 	 */
 	@Override
 	protected int maxPrecisionStep() {
 		return 32;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Float value(Fieldable field) {
@@ -227,27 +205,24 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		return Numbers.bytesToFloat(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public Float valueFromString(String value) {
 		return Float.parseFloat(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return NumericUtils.floatToPrefixCoded(Float.parseFloat(value));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, String minSim, int prefixLength, int maxExpansions) {
@@ -257,9 +232,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 				true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, double minSim, int prefixLength, int maxExpansions) {
@@ -269,9 +243,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 				true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query rangeQuery(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -281,9 +254,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 				upperTerm == null ? null : Float.parseFloat(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -293,9 +265,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 				upperTerm == null ? null : Float.parseFloat(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(cn.com.summall.search.core.index.cache.field.data.FieldDataCache, java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache, java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(FieldDataCache fieldDataCache, String lowerTerm, String upperTerm, boolean includeLower,
@@ -305,46 +276,41 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 				includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
-		
+
 		float value = parseFloatValue(context);
 		if (!Float.isNaN(value)) {
 			context.doc().setBoost(value);
@@ -352,9 +318,8 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		super.parse(context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException {
@@ -366,7 +331,6 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		return new FloatFieldMapper.CustomFloatNumericField(this, value);
 	}
 
-	
 	/**
 	 * Parses the float value.
 	 *
@@ -387,31 +351,28 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fieldDataType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fieldDataType()
 	 */
 	@Override
 	public FieldDataType fieldDataType() {
 		return FieldDataType.DefaultTypes.FLOAT;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-		
+
 		if (name().equals(Defaults.NAME) && nullValue == null) {
 			return builder;
 		}
@@ -426,12 +387,11 @@ public class BoostFieldMapper extends NumberFieldMapper<Float> implements Intern
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
-		
+
 	}
 }

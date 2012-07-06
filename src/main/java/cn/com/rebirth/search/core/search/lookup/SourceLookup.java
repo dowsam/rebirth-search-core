@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SourceLookup.java 2012-3-29 15:02:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SourceLookup.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.lookup;
 
@@ -15,14 +14,13 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Fieldable;
 import org.apache.lucene.index.IndexReader;
 
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.search.commons.xcontent.XContentHelper;
 import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.mapper.internal.SourceFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.internal.SourceFieldSelector;
 
 import com.google.common.collect.ImmutableMap;
-
 
 /**
  * The Class SourceLookup.
@@ -31,31 +29,24 @@ import com.google.common.collect.ImmutableMap;
  */
 public class SourceLookup implements Map {
 
-	
 	/** The reader. */
 	private IndexReader reader;
 
-	
 	/** The doc id. */
 	private int docId = -1;
 
-	
 	/** The source as bytes. */
 	private byte[] sourceAsBytes;
 
-	
 	/** The source as bytes offset. */
 	private int sourceAsBytesOffset;
 
-	
 	/** The source as bytes length. */
 	private int sourceAsBytesLength;
 
-	
 	/** The source. */
 	private Map<String, Object> source;
 
-	
 	/**
 	 * Source.
 	 *
@@ -65,7 +56,6 @@ public class SourceLookup implements Map {
 		return source;
 	}
 
-	
 	/**
 	 * Load source if needed.
 	 *
@@ -89,12 +79,11 @@ public class SourceLookup implements Map {
 						sourceField.getBinaryLength());
 			}
 		} catch (Exception e) {
-			throw new RestartParseException("failed to parse / load source", e);
+			throw new RebirthParseException("failed to parse / load source", e);
 		}
 		return this.source;
 	}
 
-	
 	/**
 	 * Source as map.
 	 *
@@ -102,21 +91,19 @@ public class SourceLookup implements Map {
 	 * @param offset the offset
 	 * @param length the length
 	 * @return the map
-	 * @throws SumMallSearchParseException the sum mall search parse exception
+	 * @throws RebirthParseException the rebirth parse exception
 	 */
-	public static Map<String, Object> sourceAsMap(byte[] bytes, int offset, int length)
-			throws RestartParseException {
+	public static Map<String, Object> sourceAsMap(byte[] bytes, int offset, int length) throws RebirthParseException {
 		return XContentHelper.convertToMap(bytes, offset, length, false).v2();
 	}
 
-	
 	/**
 	 * Sets the next reader.
 	 *
 	 * @param reader the new next reader
 	 */
 	public void setNextReader(IndexReader reader) {
-		if (this.reader == reader) { 
+		if (this.reader == reader) {
 			return;
 		}
 		this.reader = reader;
@@ -125,14 +112,13 @@ public class SourceLookup implements Map {
 		this.docId = -1;
 	}
 
-	
 	/**
 	 * Sets the next doc id.
 	 *
 	 * @param docId the new next doc id
 	 */
 	public void setNextDocId(int docId) {
-		if (this.docId == docId) { 
+		if (this.docId == docId) {
 			return;
 		}
 		this.docId = docId;
@@ -140,7 +126,6 @@ public class SourceLookup implements Map {
 		this.source = null;
 	}
 
-	
 	/**
 	 * Sets the next source.
 	 *
@@ -154,7 +139,6 @@ public class SourceLookup implements Map {
 		this.sourceAsBytesLength = length;
 	}
 
-	
 	/**
 	 * Sets the next source.
 	 *
@@ -164,7 +148,6 @@ public class SourceLookup implements Map {
 		this.source = source;
 	}
 
-	
 	/**
 	 * Extract raw values.
 	 *
@@ -175,7 +158,6 @@ public class SourceLookup implements Map {
 		return XContentMapValues.extractRawValues(path, loadSourceIfNeeded());
 	}
 
-	
 	/**
 	 * Filter.
 	 *
@@ -187,7 +169,6 @@ public class SourceLookup implements Map {
 		return XContentMapValues.filter(loadSourceIfNeeded(), includes, excludes);
 	}
 
-	
 	/**
 	 * Extract value.
 	 *
@@ -198,7 +179,6 @@ public class SourceLookup implements Map {
 		return XContentMapValues.extractValue(path, loadSourceIfNeeded());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#get(java.lang.Object)
 	 */
@@ -207,7 +187,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().get(key);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#size()
 	 */
@@ -216,7 +195,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().size();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#isEmpty()
 	 */
@@ -225,7 +203,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().isEmpty();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#containsKey(java.lang.Object)
 	 */
@@ -234,7 +211,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().containsKey(key);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#containsValue(java.lang.Object)
 	 */
@@ -243,7 +219,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().containsValue(value);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#keySet()
 	 */
@@ -252,7 +227,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().keySet();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#values()
 	 */
@@ -261,7 +235,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().values();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#entrySet()
 	 */
@@ -270,7 +243,6 @@ public class SourceLookup implements Map {
 		return loadSourceIfNeeded().entrySet();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
 	 */
@@ -279,7 +251,6 @@ public class SourceLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#remove(java.lang.Object)
 	 */
@@ -288,7 +259,6 @@ public class SourceLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#putAll(java.util.Map)
 	 */
@@ -297,7 +267,6 @@ public class SourceLookup implements Map {
 		throw new UnsupportedOperationException();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.util.Map#clear()
 	 */

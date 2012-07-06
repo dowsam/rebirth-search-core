@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ByteBufferDirectoryService.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ByteBufferDirectoryService.java 2012-7-6 14:28:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.memory;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.store.DirectoryService;
 import cn.com.rebirth.search.core.index.store.IndexStore;
 
-
 /**
  * The Class ByteBufferDirectoryService.
  *
@@ -31,11 +29,9 @@ import cn.com.rebirth.search.core.index.store.IndexStore;
  */
 public class ByteBufferDirectoryService extends AbstractIndexShardComponent implements DirectoryService {
 
-	
 	/** The byte buffer cache. */
 	private final ByteBufferCache byteBufferCache;
 
-	
 	/**
 	 * Instantiates a new byte buffer directory service.
 	 *
@@ -51,33 +47,29 @@ public class ByteBufferDirectoryService extends AbstractIndexShardComponent impl
 		this.byteBufferCache = byteBufferCache;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#build()
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#build()
 	 */
 	@Override
 	public Directory[] build() {
 		return new Directory[] { new CustomByteBufferDirectory(byteBufferCache) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#renameFile(org.apache.lucene.store.Directory, java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#renameFile(org.apache.lucene.store.Directory, java.lang.String, java.lang.String)
 	 */
 	@Override
 	public void renameFile(Directory dir, String from, String to) throws IOException {
 		((CustomByteBufferDirectory) dir).renameTo(from, to);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#fullDelete(org.apache.lucene.store.Directory)
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#fullDelete(org.apache.lucene.store.Directory)
 	 */
 	@Override
 	public void fullDelete(Directory dir) {
 	}
 
-	
 	/**
 	 * The Class CustomByteBufferDirectory.
 	 *
@@ -85,14 +77,12 @@ public class ByteBufferDirectoryService extends AbstractIndexShardComponent impl
 	 */
 	static class CustomByteBufferDirectory extends ByteBufferDirectory {
 
-		
 		/**
 		 * Instantiates a new custom byte buffer directory.
 		 */
 		CustomByteBufferDirectory() {
 		}
 
-		
 		/**
 		 * Instantiates a new custom byte buffer directory.
 		 *
@@ -102,7 +92,6 @@ public class ByteBufferDirectoryService extends AbstractIndexShardComponent impl
 			super(allocator);
 		}
 
-		
 		/**
 		 * Rename to.
 		 *

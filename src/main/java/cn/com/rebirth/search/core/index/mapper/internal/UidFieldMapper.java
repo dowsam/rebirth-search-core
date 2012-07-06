@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UidFieldMapper.java 2012-3-29 15:02:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UidFieldMapper.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.index.mapper.RootMapper;
 import cn.com.rebirth.search.core.index.mapper.Uid;
 import cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper;
 
-
 /**
  * The Class UidFieldMapper.
  *
@@ -35,19 +33,15 @@ import cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper;
  */
 public class UidFieldMapper extends AbstractFieldMapper<Uid> implements InternalMapper, RootMapper {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_uid";
 
-	
 	/** The Constant TERM_FACTORY. */
 	public static final Term TERM_FACTORY = new Term(NAME, "");
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_uid";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -55,24 +49,19 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
 
-		
 		/** The Constant NAME. */
 		public static final String NAME = UidFieldMapper.NAME;
 
-		
 		/** The Constant INDEX. */
 		public static final Field.Index INDEX = Field.Index.NOT_ANALYZED;
 
-		
 		/** The Constant OMIT_NORMS. */
 		public static final boolean OMIT_NORMS = true;
 
-		
 		/** The Constant OMIT_TERM_FREQ_AND_POSITIONS. */
-		public static final boolean OMIT_TERM_FREQ_AND_POSITIONS = false; 
+		public static final boolean OMIT_TERM_FREQ_AND_POSITIONS = false;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -80,11 +69,9 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 	 */
 	public static class Builder extends Mapper.Builder<Builder, UidFieldMapper> {
 
-		
 		/** The index name. */
 		protected String indexName;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 */
@@ -93,9 +80,8 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 			this.indexName = name;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public UidFieldMapper build(BuilderContext context) {
@@ -103,7 +89,6 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -111,9 +96,8 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -122,7 +106,6 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		}
 	}
 
-	
 	/** The field cache. */
 	private ThreadLocal<UidField> fieldCache = new ThreadLocal<UidField>() {
 		@Override
@@ -131,7 +114,6 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		}
 	};
 
-	
 	/**
 	 * Instantiates a new uid field mapper.
 	 */
@@ -139,7 +121,6 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		this(Defaults.NAME);
 	}
 
-	
 	/**
 	 * Instantiates a new uid field mapper.
 	 *
@@ -149,7 +130,6 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		this(name, name);
 	}
 
-	
 	/**
 	 * Instantiates a new uid field mapper.
 	 *
@@ -162,40 +142,36 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 				Lucene.KEYWORD_ANALYZER);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
-		
+
 		if (context.sourceToParse().id() != null) {
 			context.id(context.sourceToParse().id());
 			super.parse(context);
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
 		if (context.id() == null && !context.sourceToParse().flyweight()) {
 			throw new MapperParsingException("No id found while parsing the content source");
 		}
-		
-		
+
 		if (context.sourceToParse().id() == null) {
 			super.parse(context);
-			
-			
+
 			if (context.docs().size() > 1) {
 				UidField uidField = (UidField) context.rootDoc().getFieldable(UidFieldMapper.NAME);
 				assert uidField != null;
-				
+
 				for (int i = 1; i < context.docs().size(); i++) {
-					
+
 					context.docs()
 							.get(i)
 							.add(new Field(UidFieldMapper.NAME, uidField.uid(), Field.Store.NO,
@@ -205,84 +181,73 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException {
 		context.uid(Uid.createUid(context.stringBuilder(), context.type(), context.id()));
-		
-		
-		
+
 		UidField field = fieldCache.get();
 		field.setUid(context.uid());
-		return field; 
+		return field;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Uid value(Fieldable field) {
 		return Uid.createUid(field.stringValue());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public Uid valueFromString(String value) {
 		return Uid.createUid(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
 		return field.stringValue();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return value;
 	}
 
-	
 	/**
 	 * Term.
 	 *
@@ -294,7 +259,6 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		return term(Uid.createUid(type, id));
 	}
 
-	
 	/**
 	 * Term.
 	 *
@@ -305,40 +269,36 @@ public class UidFieldMapper extends AbstractFieldMapper<Uid> implements Internal
 		return names().createIndexNameTerm(uid);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#close()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#close()
 	 */
 	@Override
 	public void close() {
 		fieldCache.remove();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-		
+
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
-		
+
 	}
 }

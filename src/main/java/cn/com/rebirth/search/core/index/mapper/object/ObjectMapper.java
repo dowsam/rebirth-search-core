@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ObjectMapper.java 2012-3-29 15:01:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ObjectMapper.java 2012-7-6 14:30:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.object;
 
@@ -23,7 +22,7 @@ import org.apache.lucene.search.Filter;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.joda.FormatDateTimeFormatter;
 import cn.com.rebirth.search.commons.lucene.search.TermFilter;
 import cn.com.rebirth.search.commons.lucene.uid.UidField;
@@ -51,22 +50,19 @@ import cn.com.rebirth.search.core.index.mapper.multifield.MultiFieldMapper;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class ObjectMapper.
  *
  * @author l.xue.nong
  */
 public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
-	
+
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "object";
 
-	
 	/** The Constant NESTED_CONTENT_TYPE. */
 	public static final String NESTED_CONTENT_TYPE = "nested";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -74,24 +70,19 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class Defaults {
 
-		
 		/** The Constant ENABLED. */
 		public static final boolean ENABLED = true;
 
-		
 		/** The Constant NESTED. */
 		public static final Nested NESTED = Nested.NO;
 
-		
 		/** The Constant DYNAMIC. */
-		public static final Dynamic DYNAMIC = null; 
+		public static final Dynamic DYNAMIC = null;
 
-		
 		/** The Constant PATH_TYPE. */
 		public static final ContentPath.Type PATH_TYPE = ContentPath.Type.FULL;
 	}
 
-	
 	/**
 	 * The Enum Dynamic.
 	 *
@@ -99,20 +90,16 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static enum Dynamic {
 
-		
-		/** The TRUE. */
+		/** The true. */
 		TRUE,
 
-		
-		/** The FALSE. */
+		/** The false. */
 		FALSE,
 
-		
-		/** The STRICT. */
+		/** The strict. */
 		STRICT
 	}
 
-	
 	/**
 	 * The Class Nested.
 	 *
@@ -120,11 +107,9 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class Nested {
 
-		
 		/** The Constant NO. */
 		public static final Nested NO = new Nested(false, false, false);
 
-		
 		/**
 		 * New nested.
 		 *
@@ -136,19 +121,15 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return new Nested(true, includeInParent, includeInRoot);
 		}
 
-		
 		/** The nested. */
 		private final boolean nested;
 
-		
 		/** The include in parent. */
 		private final boolean includeInParent;
 
-		
 		/** The include in root. */
 		private final boolean includeInRoot;
 
-		
 		/**
 		 * Instantiates a new nested.
 		 *
@@ -162,7 +143,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			this.includeInRoot = includeInRoot;
 		}
 
-		
 		/**
 		 * Checks if is nested.
 		 *
@@ -172,7 +152,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return nested;
 		}
 
-		
 		/**
 		 * Checks if is include in parent.
 		 *
@@ -182,7 +161,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return includeInParent;
 		}
 
-		
 		/**
 		 * Checks if is include in root.
 		 *
@@ -193,7 +171,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -203,31 +180,24 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class Builder<T extends Builder, Y extends ObjectMapper> extends Mapper.Builder<T, Y> {
 
-		
 		/** The enabled. */
 		protected boolean enabled = Defaults.ENABLED;
 
-		
 		/** The nested. */
 		protected Nested nested = Defaults.NESTED;
 
-		
 		/** The dynamic. */
 		protected Dynamic dynamic = Defaults.DYNAMIC;
 
-		
 		/** The path type. */
 		protected ContentPath.Type pathType = Defaults.PATH_TYPE;
 
-		
 		/** The include in all. */
 		protected Boolean includeInAll;
 
-		
 		/** The mappers builders. */
 		protected final List<Mapper.Builder> mappersBuilders = newArrayList();
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -238,7 +208,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			this.builder = (T) this;
 		}
 
-		
 		/**
 		 * Enabled.
 		 *
@@ -250,7 +219,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return builder;
 		}
 
-		
 		/**
 		 * Dynamic.
 		 *
@@ -262,7 +230,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return builder;
 		}
 
-		
 		/**
 		 * Nested.
 		 *
@@ -274,7 +241,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return builder;
 		}
 
-		
 		/**
 		 * Path type.
 		 *
@@ -286,7 +252,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return builder;
 		}
 
-		
 		/**
 		 * Include in all.
 		 *
@@ -298,7 +263,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return builder;
 		}
 
-		
 		/**
 		 * Adds the.
 		 *
@@ -310,9 +274,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return this.builder;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public Y build(BuilderContext context) {
@@ -335,7 +298,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return (Y) objectMapper;
 		}
 
-		
 		/**
 		 * Creates the mapper.
 		 *
@@ -354,7 +316,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -362,9 +323,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -420,7 +380,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return builder;
 		}
 
-		
 		/**
 		 * Parses the properties.
 		 *
@@ -439,7 +398,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				if (typeNode != null) {
 					type = typeNode.toString();
 				} else {
-					
+
 					if (propNode.get("properties") != null) {
 						type = ObjectMapper.CONTENT_TYPE;
 					} else if (propNode.get("fields") != null) {
@@ -458,7 +417,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			}
 		}
 
-		
 		/**
 		 * Creates the builder.
 		 *
@@ -469,7 +427,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return MapperBuilders.object(name);
 		}
 
-		
 		/**
 		 * Process field.
 		 *
@@ -482,51 +439,39 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The full path. */
 	private final String fullPath;
 
-	
 	/** The enabled. */
 	private final boolean enabled;
 
-	
 	/** The nested. */
 	private final Nested nested;
 
-	
 	/** The nested type path. */
 	private final String nestedTypePath;
 
-	
 	/** The nested type filter. */
 	private final Filter nestedTypeFilter;
 
-	
 	/** The dynamic. */
 	private final Dynamic dynamic;
 
-	
 	/** The path type. */
 	private final ContentPath.Type pathType;
 
-	
 	/** The include in all. */
 	private Boolean includeInAll;
 
-	
 	/** The mappers. */
 	private volatile ImmutableMap<String, Mapper> mappers = ImmutableMap.of();
 
-	
 	/** The mutex. */
 	private final Object mutex = new Object();
 
-	
 	/**
 	 * Instantiates a new object mapper.
 	 *
@@ -553,18 +498,16 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		this.nestedTypeFilter = new TermFilter(TypeFieldMapper.TERM_FACTORY.createTerm(nestedTypePath));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#name()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAll(Boolean includeInAll) {
@@ -572,7 +515,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return;
 		}
 		this.includeInAll = includeInAll;
-		
+
 		for (Mapper mapper : mappers.values()) {
 			if (mapper instanceof AllFieldMapper.IncludeInAll) {
 				((AllFieldMapper.IncludeInAll) mapper).includeInAll(includeInAll);
@@ -580,16 +523,15 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAllIfNotSet(Boolean includeInAll) {
 		if (this.includeInAll == null) {
 			this.includeInAll = includeInAll;
 		}
-		
+
 		for (Mapper mapper : mappers.values()) {
 			if (mapper instanceof AllFieldMapper.IncludeInAll) {
 				((AllFieldMapper.IncludeInAll) mapper).includeInAllIfNotSet(includeInAll);
@@ -597,7 +539,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * Nested.
 	 *
@@ -607,7 +548,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this.nested;
 	}
 
-	
 	/**
 	 * Nested type filter.
 	 *
@@ -617,7 +557,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this.nestedTypeFilter;
 	}
 
-	
 	/**
 	 * Put mapper.
 	 *
@@ -634,9 +573,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.FieldMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.FieldMapperListener)
 	 */
 	@Override
 	public void traverse(FieldMapperListener fieldMapperListener) {
@@ -645,9 +583,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.ObjectMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.ObjectMapperListener)
 	 */
 	@Override
 	public void traverse(ObjectMapperListener objectMapperListener) {
@@ -657,7 +594,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * Full path.
 	 *
@@ -667,7 +603,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this.fullPath;
 	}
 
-	
 	/**
 	 * Nested type path.
 	 *
@@ -677,7 +612,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return nestedTypePath;
 	}
 
-	
 	/**
 	 * Dynamic.
 	 *
@@ -687,9 +621,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this.dynamic;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	public void parse(ParseContext context) throws IOException {
 		if (!enabled) {
@@ -701,20 +634,17 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		String currentFieldName = parser.currentName();
 		XContentParser.Token token = parser.currentToken();
 		if (token == XContentParser.Token.VALUE_NULL) {
-			
+
 			return;
 		}
 
 		Document restoreDoc = null;
 		if (nested.isNested()) {
 			Document nestedDoc = new Document();
-			
+
 			Fieldable uidField = context.doc().getFieldable(UidFieldMapper.NAME);
 			if (uidField != null) {
-				
-				
 
-				
 				if (uidField.stringValue() != null) {
 					nestedDoc.add(new Field(UidFieldMapper.NAME, uidField.stringValue(), Field.Store.NO,
 							Field.Index.NOT_ANALYZED));
@@ -723,9 +653,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 							Field.Index.NOT_ANALYZED));
 				}
 			}
-			
-			
-			
+
 			nestedDoc.add(new Field(TypeFieldMapper.NAME, nestedTypePath, Field.Store.NO, Field.Index.NOT_ANALYZED));
 			restoreDoc = context.switchDoc(nestedDoc);
 			context.addDoc(nestedDoc);
@@ -734,12 +662,11 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		ContentPath.Type origPathType = context.path().pathType();
 		context.path().pathType(pathType);
 
-		
 		if (token == XContentParser.Token.END_OBJECT) {
 			token = parser.nextToken();
 		}
 		if (token == XContentParser.Token.START_OBJECT) {
-			
+
 			token = parser.nextToken();
 		}
 
@@ -760,7 +687,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			}
 			token = parser.nextToken();
 		}
-		
+
 		context.path().pathType(origPathType);
 		if (nested.isNested()) {
 			Document nestedDoc = context.switchDoc(restoreDoc);
@@ -774,7 +701,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				}
 			}
 			if (nested.isIncludeInRoot()) {
-				
+
 				if (!(nested.isIncludeInParent() && context.doc() == context.rootDoc())) {
 					for (Fieldable field : nestedDoc.getFields()) {
 						if (field.name().equals(UidFieldMapper.NAME) || field.name().equals(TypeFieldMapper.NAME)) {
@@ -788,7 +715,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * Serialize null value.
 	 *
@@ -797,14 +723,13 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	private void serializeNullValue(ParseContext context, String lastFieldName) throws IOException {
-		
+
 		Mapper mapper = mappers.get(lastFieldName);
 		if (mapper != null) {
 			mapper.parse(context);
 		}
 	}
 
-	
 	/**
 	 * Serialize object.
 	 *
@@ -831,8 +756,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			if (dynamic == Dynamic.STRICT) {
 				throw new StrictDynamicMappingException(fullPath, currentFieldName);
 			} else if (dynamic == Dynamic.TRUE) {
-				
-				
+
 				boolean newMapper = false;
 				synchronized (mutex) {
 					objectMapper = mappers.get(currentFieldName);
@@ -844,20 +768,19 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 							builder = MapperBuilders.object(currentFieldName).enabled(true).dynamic(dynamic)
 									.pathType(pathType);
 						}
-						
+
 						context.path().remove();
 						BuilderContext builderContext = new BuilderContext(context.indexSettings(), context.path());
 						objectMapper = builder.build(builderContext);
 						putMapper(objectMapper);
-						
+
 						context.path().add(currentFieldName);
 						context.addedMapper();
 					}
 				}
-				
+
 				if (newMapper) {
-					
-					
+
 					objectMapper.traverse(new FieldMapperListener() {
 						@Override
 						public void fieldMapper(FieldMapper fieldMapper) {
@@ -872,10 +795,10 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 					});
 
 				}
-				
+
 				objectMapper.parse(context);
 			} else {
-				
+
 				context.parser().skipChildren();
 			}
 		}
@@ -883,7 +806,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		context.path().remove();
 	}
 
-	
 	/**
 	 * Serialize array.
 	 *
@@ -914,7 +836,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * Serialize value.
 	 *
@@ -945,9 +866,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		if (dynamic == Dynamic.FALSE) {
 			return;
 		}
-		
-		
-		
+
 		boolean newMapper = false;
 		synchronized (mutex) {
 			mapper = mappers.get(currentFieldName);
@@ -957,9 +876,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				if (token == XContentParser.Token.VALUE_STRING) {
 					boolean resolved = false;
 
-					
-					
-					
 					if (!resolved) {
 						Mapper.Builder builder = context.root().findTemplateBuilder(context, currentFieldName,
 								"string", null);
@@ -970,13 +886,13 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 					}
 
 					if (!resolved && context.parser().textLength() == 0) {
-						
+
 						return;
 					}
 
 					if (!resolved && context.root().dateDetection()) {
 						String text = context.parser().text();
-						
+
 						if (text.contains(":") || text.contains("-") || text.contains("/")) {
 							for (FormatDateTimeFormatter dateTimeFormatter : context.root().dynamicDateTimeFormatters()) {
 								try {
@@ -991,7 +907,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 									resolved = true;
 									break;
 								} catch (Exception e) {
-									
+
 								}
 							}
 						}
@@ -1008,7 +924,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 							mapper = builder.build(builderContext);
 							resolved = true;
 						} catch (Exception e) {
-							
+
 						}
 						if (!resolved) {
 							try {
@@ -1021,25 +937,11 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 								mapper = builder.build(builderContext);
 								resolved = true;
 							} catch (Exception e) {
-								
+
 							}
 						}
 					}
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
 					if (!resolved) {
 						Mapper.Builder builder = context.root()
 								.findTemplateBuilder(context, currentFieldName, "string");
@@ -1113,8 +1015,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 					if (builder != null) {
 						mapper = builder.build(builderContext);
 					} else {
-						
-						throw new RestartIllegalStateException(
+
+						throw new RebirthIllegalStateException(
 								"Can't handle serializing a dynamic type with content token [" + token
 										+ "] and field name [" + currentFieldName + "]");
 					}
@@ -1134,9 +1036,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		mapper.parse(context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(final Mapper mergeWith, final MergeContext mergeContext) throws MergeMappingException {
@@ -1154,7 +1055,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			for (Mapper mergeWithMapper : mergeWithObject.mappers.values()) {
 				Mapper mergeIntoMapper = mappers.get(mergeWithMapper.name());
 				if (mergeIntoMapper == null) {
-					
+
 					if (!mergeContext.mergeFlags().simulate()) {
 						putMapper(mergeWithMapper);
 						mappersToTraverse.add(mergeWithMapper);
@@ -1165,7 +1066,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 						mergeWithMultiField.merge(mergeIntoMapper, mergeContext);
 						if (!mergeContext.mergeFlags().simulate()) {
 							putMapper(mergeWithMultiField);
-							
+
 							for (Mapper mapper : mergeWithMultiField.mappers().values()) {
 								mappersToTraverse.add(mapper);
 							}
@@ -1176,7 +1077,7 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				}
 			}
 		}
-		
+
 		for (Mapper mapper : mappersToTraverse) {
 			mapper.traverse(new FieldMapperListener() {
 				@Override
@@ -1193,7 +1094,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * Do merge.
 	 *
@@ -1204,9 +1104,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#close()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#close()
 	 */
 	@Override
 	public void close() {
@@ -1215,9 +1114,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -1225,7 +1123,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return builder;
 	}
 
-	
 	/**
 	 * To x content.
 	 *
@@ -1246,11 +1143,10 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			if (nested.isIncludeInRoot()) {
 				builder.field("include_in_root", true);
 			}
-		} else if (mappers.isEmpty()) { 
+		} else if (mappers.isEmpty()) {
 			builder.field("type", CONTENT_TYPE);
 		}
-		
-		
+
 		if (this instanceof RootObjectMapper) {
 			if (dynamic != Dynamic.TRUE) {
 				builder.field("dynamic", dynamic.name().toLowerCase());
@@ -1276,10 +1172,8 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 
 		doXContent(builder, params);
 
-		
 		TreeMap<String, Mapper> sortedMappers = new TreeMap<String, Mapper>(mappers);
 
-		
 		for (Mapper mapper : sortedMappers.values()) {
 			if (mapper instanceof InternalMapper) {
 				mapper.toXContent(builder, params);
@@ -1308,7 +1202,6 @@ public class ObjectMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		builder.endObject();
 	}
 
-	
 	/**
 	 * Do x content.
 	 *

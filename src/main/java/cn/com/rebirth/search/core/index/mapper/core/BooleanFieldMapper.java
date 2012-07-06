@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BooleanFieldMapper.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BooleanFieldMapper.java 2012-7-6 14:28:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
@@ -25,8 +24,6 @@ import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;
 import cn.com.rebirth.search.core.index.mapper.ParseContext;
 
-
-
 /**
  * The Class BooleanFieldMapper.
  *
@@ -34,11 +31,9 @@ import cn.com.rebirth.search.core.index.mapper.ParseContext;
  */
 public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "boolean";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -46,16 +41,13 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
 
-		
 		/** The Constant OMIT_NORMS. */
 		public static final boolean OMIT_NORMS = true;
 
-		
 		/** The Constant NULL_VALUE. */
 		public static final Boolean NULL_VALUE = null;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -63,11 +55,9 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 	 */
 	public static class Builder extends AbstractFieldMapper.Builder<Builder, BooleanFieldMapper> {
 
-		
 		/** The null value. */
 		private Boolean nullValue = Defaults.NULL_VALUE;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -79,7 +69,6 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 			this.builder = this;
 		}
 
-		
 		/**
 		 * Null value.
 		 *
@@ -91,63 +80,56 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#index(org.apache.lucene.document.Field.Index)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#index(org.apache.lucene.document.Field.Index)
 		 */
 		@Override
 		public Builder index(Field.Index index) {
 			return super.index(index);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#store(org.apache.lucene.document.Field.Store)
 		 */
 		@Override
 		public Builder store(Field.Store store) {
 			return super.store(store);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#termVector(org.apache.lucene.document.Field.TermVector)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#termVector(org.apache.lucene.document.Field.TermVector)
 		 */
 		@Override
 		public Builder termVector(Field.TermVector termVector) {
 			return super.termVector(termVector);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#boost(float)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#boost(float)
 		 */
 		@Override
 		public Builder boost(float boost) {
 			return super.boost(boost);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
 		 */
 		@Override
 		public Builder indexName(String indexName) {
 			return super.indexName(indexName);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#omitTermFreqAndPositions(boolean)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#omitTermFreqAndPositions(boolean)
 		 */
 		@Override
 		public Builder omitTermFreqAndPositions(boolean omitTermFreqAndPositions) {
 			return super.omitTermFreqAndPositions(omitTermFreqAndPositions);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public BooleanFieldMapper build(BuilderContext context) {
@@ -156,7 +138,6 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -164,9 +145,8 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -184,11 +164,9 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 		}
 	}
 
-	
 	/** The null value. */
 	private Boolean nullValue;
 
-	
 	/**
 	 * Instantiates a new boolean field mapper.
 	 *
@@ -208,45 +186,40 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 		this.nullValue = nullValue;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#useFieldQueryWithQueryString()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#useFieldQueryWithQueryString()
 	 */
 	@Override
 	public boolean useFieldQueryWithQueryString() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Boolean value(Fieldable field) {
 		return field.stringValue().charAt(0) == 'T' ? Boolean.TRUE : Boolean.FALSE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public Boolean valueFromString(String value) {
 		return value.charAt(0) == 'T' ? Boolean.TRUE : Boolean.FALSE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
 		return field.stringValue().charAt(0) == 'T' ? "true" : "false";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
@@ -262,9 +235,8 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 		return "F";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Field parseCreateField(ParseContext context) throws IOException {
@@ -286,18 +258,16 @@ public class BooleanFieldMapper extends AbstractFieldMapper<Boolean> {
 		return new Field(names.indexName(), value, store, index, termVector);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.summall.search.commons.xcontent.XContentBuilder)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.rebirth.search.commons.xcontent.XContentBuilder)
 	 */
 	@Override
 	protected void doXContentBody(XContentBuilder builder) throws IOException {

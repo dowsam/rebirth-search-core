@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PorterStemTokenFilterFactory.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PorterStemTokenFilterFactory.java 2012-7-6 14:30:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -15,13 +14,11 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating PorterStemTokenFilter objects.
  */
 public class PorterStemTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/**
 	 * Instantiates a new porter stem token filter factory.
 	 *
@@ -36,9 +33,8 @@ public class PorterStemTokenFilterFactory extends AbstractTokenFilterFactory {
 		super(index, indexSettings, name, settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalGatewayMetaState.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalGatewayMetaState.java 2012-7-6 14:29:16 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.gateway.local.state.meta;
@@ -105,7 +105,7 @@ public class LocalGatewayMetaState extends AbstractComponent implements ClusterS
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(ClusterChangedEvent event) {

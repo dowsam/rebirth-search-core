@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FsGateway.java 2012-3-29 15:00:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FsGateway.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway.fs;
 
@@ -12,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.concurrent.EsExecutors;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.blobstore.fs.FsBlobStore;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.gateway.blobstore.BlobStoreGateway;
 import cn.com.rebirth.search.core.index.gateway.fs.FsIndexGatewayModule;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class FsGateway.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class FsGateway extends BlobStoreGateway {
 
-	
 	/** The concurrent stream pool. */
 	private final ExecutorService concurrentStreamPool;
 
-	
 	/**
 	 * Instantiates a new fs gateway.
 	 *
@@ -68,30 +64,27 @@ public class FsGateway extends BlobStoreGateway {
 		initialize(new FsBlobStore(componentSettings, concurrentStreamPool, gatewayFile), clusterName, null);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#type()
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#type()
 	 */
 	@Override
 	public String type() {
 		return "fs";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.Gateway#suggestIndexGateway()
+	 * @see cn.com.rebirth.search.core.gateway.Gateway#suggestIndexGateway()
 	 */
 	@Override
 	public Class<? extends Module> suggestIndexGateway() {
 		return FsIndexGatewayModule.class;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.gateway.shared.SharedStorageGateway#doClose()
+	 * @see cn.com.rebirth.search.core.gateway.shared.SharedStorageGateway#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		super.doClose();
 		concurrentStreamPool.shutdown();
 	}

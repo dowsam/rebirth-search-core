@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceRangeFilterBuilder.java 2012-3-29 15:02:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceRangeFilterBuilder.java 2012-7-6 14:29:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -11,7 +10,6 @@ import java.io.IOException;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 
-
 /**
  * The Class GeoDistanceRangeFilterBuilder.
  *
@@ -19,59 +17,45 @@ import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
  */
 public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The from. */
 	private Object from;
 
-	
 	/** The to. */
 	private Object to;
 
-	
 	/** The include lower. */
 	private boolean includeLower = true;
 
-	
 	/** The include upper. */
 	private boolean includeUpper = true;
 
-	
 	/** The lat. */
 	private double lat;
 
-	
 	/** The lon. */
 	private double lon;
 
-	
 	/** The geohash. */
 	private String geohash;
 
-	
 	/** The geo distance. */
 	private GeoDistance geoDistance;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/** The optimize bbox. */
 	private String optimizeBbox;
 
-	
 	/**
 	 * Instantiates a new geo distance range filter builder.
 	 *
@@ -81,7 +65,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		this.name = name;
 	}
 
-	
 	/**
 	 * Point.
 	 *
@@ -95,7 +78,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lat.
 	 *
@@ -107,7 +89,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lon.
 	 *
@@ -119,7 +100,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * From.
 	 *
@@ -131,7 +111,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * To.
 	 *
@@ -143,7 +122,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gt.
 	 *
@@ -156,7 +134,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Gte.
 	 *
@@ -169,7 +146,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lt.
 	 *
@@ -182,7 +158,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lte.
 	 *
@@ -195,7 +170,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Include lower.
 	 *
@@ -207,7 +181,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Include upper.
 	 *
@@ -219,7 +192,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Geohash.
 	 *
@@ -231,7 +203,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Geo distance.
 	 *
@@ -243,7 +214,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Optimize bbox.
 	 *
@@ -255,7 +225,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -267,7 +236,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -279,7 +247,6 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -291,9 +258,8 @@ public class GeoDistanceRangeFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

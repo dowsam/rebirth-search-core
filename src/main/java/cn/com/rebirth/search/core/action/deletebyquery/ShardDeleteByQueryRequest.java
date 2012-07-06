@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardDeleteByQueryRequest.java 2012-3-29 15:02:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardDeleteByQueryRequest.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.deletebyquery;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest;
 
-
 /**
  * The Class ShardDeleteByQueryRequest.
  *
@@ -30,29 +28,23 @@ import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOpe
  */
 public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest {
 
-	
 	/** The shard id. */
 	private int shardId;
 
-	
 	/** The query source. */
 	private BytesHolder querySource;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/** The routing. */
 	@Nullable
 	private Set<String> routing;
 
-	
 	/** The filtering aliases. */
 	@Nullable
 	private String[] filteringAliases;
 
-	
 	/**
 	 * Instantiates a new shard delete by query request.
 	 *
@@ -71,16 +63,14 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		filteringAliases = request.filteringAliases();
 	}
 
-	
 	/**
 	 * Instantiates a new shard delete by query request.
 	 */
 	ShardDeleteByQueryRequest() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -91,7 +81,6 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		return validationException;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -101,7 +90,6 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Query source.
 	 *
@@ -111,7 +99,6 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		return querySource;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -121,7 +108,6 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		return this.types;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -131,7 +117,6 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		return this.routing;
 	}
 
-	
 	/**
 	 * Filtering aliases.
 	 *
@@ -141,9 +126,8 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		return filteringAliases;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -173,9 +157,8 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -204,7 +187,6 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -214,7 +196,7 @@ public class ShardDeleteByQueryRequest extends ShardReplicationOperationRequest 
 		try {
 			sSource = Unicode.fromBytes(querySource.bytes(), querySource.offset(), querySource.length());
 		} catch (Exception e) {
-			
+
 		}
 		return "delete_by_query {[" + index + "]" + Arrays.toString(types) + ", query [" + sSource + "]}";
 	}

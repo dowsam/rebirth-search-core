@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TypeFilterParser.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TypeFilterParser.java 2012-7-6 14:30:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.DocumentMapper;
 import cn.com.rebirth.search.core.index.mapper.internal.TypeFieldMapper;
 
-
 /**
  * The Class TypeFilterParser.
  *
@@ -24,11 +22,9 @@ import cn.com.rebirth.search.core.index.mapper.internal.TypeFieldMapper;
  */
 public class TypeFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "type";
 
-	
 	/**
 	 * Instantiates a new type filter parser.
 	 */
@@ -36,18 +32,16 @@ public class TypeFilterParser implements FilterParser {
 	public TypeFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -69,7 +63,7 @@ public class TypeFilterParser implements FilterParser {
 					"[type] filter should have a value field, and the type name");
 		}
 		String type = parser.text();
-		
+
 		parser.nextToken();
 
 		Filter filter;

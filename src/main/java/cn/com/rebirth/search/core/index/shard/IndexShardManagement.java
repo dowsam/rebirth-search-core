@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardManagement.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardManagement.java 2012-7-6 14:29:09 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.jmx.JmxService;
 import cn.com.rebirth.search.core.jmx.MBean;
 import cn.com.rebirth.search.core.jmx.ManagedAttribute;
 
-
 /**
  * The Class IndexShardManagement.
  *
@@ -31,7 +29,6 @@ import cn.com.rebirth.search.core.jmx.ManagedAttribute;
 @MBean(objectName = "", description = "")
 public class IndexShardManagement extends AbstractIndexShardComponent implements CloseableComponent {
 
-	
 	/**
 	 * Builds the shard group name.
 	 *
@@ -42,23 +39,18 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return IndexServiceManagement.buildIndexGroupName(shardId.index()) + ",subService=shards,shard=" + shardId.id();
 	}
 
-	
 	/** The jmx service. */
 	private final JmxService jmxService;
 
-	
 	/** The index shard. */
 	private final IndexShard indexShard;
 
-	
 	/** The store. */
 	private final Store store;
 
-	
 	/** The translog. */
 	private final Translog translog;
 
-	
 	/**
 	 * Instantiates a new index shard management.
 	 *
@@ -79,15 +71,13 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		this.translog = translog;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.CloseableComponent#close()
+	 * @see cn.com.rebirth.search.commons.component.CloseableComponent#close()
 	 */
 	public void close() {
 		jmxService.unregisterGroup(buildShardGroupName(indexShard.shardId()));
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -98,7 +88,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return indexShard.shardId().index().name();
 	}
 
-	
 	/**
 	 * Gets the shard id.
 	 *
@@ -109,7 +98,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return indexShard.shardId().id();
 	}
 
-	
 	/**
 	 * Gets the store size.
 	 *
@@ -124,7 +112,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		}
 	}
 
-	
 	/**
 	 * Gets the translog id.
 	 *
@@ -135,7 +122,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return translog.currentId();
 	}
 
-	
 	/**
 	 * Gets the translog number of operations.
 	 *
@@ -146,7 +132,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return translog.estimatedNumberOfOperations();
 	}
 
-	
 	/**
 	 * Gets the translog size.
 	 *
@@ -157,7 +142,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return new ByteSizeValue(translog.memorySizeInBytes()).toString();
 	}
 
-	
 	/**
 	 * Gets the state.
 	 *
@@ -168,7 +152,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return indexShard.state().toString();
 	}
 
-	
 	/**
 	 * Checks if is primary.
 	 *
@@ -179,7 +162,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return indexShard.routingEntry().primary();
 	}
 
-	
 	/**
 	 * Gets the routing state.
 	 *
@@ -190,7 +172,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		return indexShard.routingEntry().state().toString();
 	}
 
-	
 	/**
 	 * Gets the num docs.
 	 *
@@ -206,7 +187,6 @@ public class IndexShardManagement extends AbstractIndexShardComponent implements
 		}
 	}
 
-	
 	/**
 	 * Gets the max doc.
 	 *

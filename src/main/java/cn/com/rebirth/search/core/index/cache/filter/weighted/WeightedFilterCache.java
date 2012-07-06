@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core WeightedFilterCache.java 2012-3-29 15:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core WeightedFilterCache.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.filter.weighted;
 
@@ -14,7 +13,7 @@ import org.apache.lucene.search.DocIdSet;
 import org.apache.lucene.search.Filter;
 
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.docset.DocSet;
@@ -34,7 +33,6 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.google.common.cache.Weigher;
 
-
 /**
  * The Class WeightedFilterCache.
  *
@@ -44,27 +42,21 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		IndexReader.ReaderFinishedListener,
 		RemovalListener<WeightedFilterCache.FilterCacheKey, FilterCacheValue<DocSet>> {
 
-	
 	/** The indices filter cache. */
 	final IndicesFilterCache indicesFilterCache;
 
-	
 	/** The seen readers. */
 	final ConcurrentMap<Object, Boolean> seenReaders = ConcurrentCollections.newConcurrentMap();
 
-	
 	/** The seen readers count. */
 	final CounterMetric seenReadersCount = new CounterMetric();
 
-	
 	/** The evictions metric. */
 	final CounterMetric evictionsMetric = new CounterMetric();
 
-	
 	/** The total metric. */
 	final MeanMetric totalMetric = new MeanMetric();
 
-	
 	/**
 	 * Instantiates a new weighted filter cache.
 	 *
@@ -79,28 +71,25 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		indicesFilterCache.addRemovalListener(index.name(), this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#type()
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#type()
 	 */
 	@Override
 	public String type() {
 		return "weighted";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.CloseableComponent#close()
+	 * @see cn.com.rebirth.search.commons.component.CloseableComponent#close()
 	 */
 	@Override
-	public void close() throws RestartException {
+	public void close() throws RebirthException {
 		clear();
 		indicesFilterCache.removeRemovalListener(index.name());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#clear()
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#clear()
 	 */
 	@Override
 	public void clear() {
@@ -112,14 +101,13 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			seenReadersCount.dec();
 			for (FilterCacheKey key : indicesFilterCache.cache().asMap().keySet()) {
 				if (key.readerKey() == readerKey) {
-					
+
 					indicesFilterCache.cache().invalidate(key);
 				}
 			}
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.IndexReader.ReaderFinishedListener#finished(org.apache.lucene.index.IndexReader)
 	 */
@@ -128,14 +116,12 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		clear(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#clear(org.apache.lucene.index.IndexReader)
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#clear(org.apache.lucene.index.IndexReader)
 	 */
 	@Override
 	public void clear(IndexReader reader) {
-		
-		
+
 		Boolean removed = seenReaders.remove(reader.getCoreCacheKey());
 		if (removed == null) {
 			return;
@@ -144,15 +130,14 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		Cache<FilterCacheKey, FilterCacheValue<DocSet>> cache = indicesFilterCache.cache();
 		for (FilterCacheKey key : cache.asMap().keySet()) {
 			if (key.readerKey() == reader.getCoreCacheKey()) {
-				
+
 				cache.invalidate(key);
 			}
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#entriesStats()
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#entriesStats()
 	 */
 	@Override
 	public EntriesStats entriesStats() {
@@ -160,18 +145,16 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		return new EntriesStats(totalMetric.sum(), seenReadersCount == 0 ? 0 : totalMetric.count() / seenReadersCount);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#evictions()
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#evictions()
 	 */
 	@Override
 	public long evictions() {
 		return evictionsMetric.count();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#cache(org.apache.lucene.search.Filter)
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#cache(org.apache.lucene.search.Filter)
 	 */
 	@Override
 	public Filter cache(Filter filterToCache) {
@@ -184,16 +167,14 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		return new FilterCacheFilterWrapper(filterToCache, this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.filter.FilterCache#isCached(org.apache.lucene.search.Filter)
+	 * @see cn.com.rebirth.search.core.index.cache.filter.FilterCache#isCached(org.apache.lucene.search.Filter)
 	 */
 	@Override
 	public boolean isCached(Filter filter) {
 		return filter instanceof FilterCacheFilterWrapper;
 	}
 
-	
 	/**
 	 * The Class FilterCacheFilterWrapper.
 	 *
@@ -201,15 +182,12 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 	 */
 	static class FilterCacheFilterWrapper extends Filter {
 
-		
 		/** The filter. */
 		private final Filter filter;
 
-		
 		/** The cache. */
 		private final WeightedFilterCache cache;
 
-		
 		/**
 		 * Instantiates a new filter cache filter wrapper.
 		 *
@@ -221,7 +199,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			this.cache = cache;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */
@@ -247,8 +224,7 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 				DocIdSet docIdSet = filter.getDocIdSet(reader);
 				DocSet docSet = FilterCacheValue.cacheable(reader, docIdSet);
 				cacheValue = new FilterCacheValue<DocSet>(docSet);
-				
-				
+
 				cache.totalMetric.inc(cacheValue.value().sizeInBytes());
 				innerCache.put(cacheKey, cacheValue);
 			}
@@ -256,7 +232,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			return cacheValue.value() == DocSet.EMPTY_DOC_SET ? null : cacheValue.value();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -264,7 +239,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			return "cache(" + filter + ")";
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -274,7 +248,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			return this.filter.equals(((FilterCacheFilterWrapper) o).filter);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -283,7 +256,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		}
 	}
 
-	
 	/**
 	 * The Class FilterCacheValueWeigher.
 	 *
@@ -292,7 +264,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 	public static class FilterCacheValueWeigher implements
 			Weigher<WeightedFilterCache.FilterCacheKey, FilterCacheValue<DocSet>> {
 
-		
 		/* (non-Javadoc)
 		 * @see com.google.common.cache.Weigher#weigh(java.lang.Object, java.lang.Object)
 		 */
@@ -303,9 +274,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		}
 	}
 
-	
-	
-	
 	/* (non-Javadoc)
 	 * @see com.google.common.cache.RemovalListener#onRemoval(com.google.common.cache.RemovalNotification)
 	 */
@@ -319,7 +287,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		}
 	}
 
-	
 	/**
 	 * The Class FilterCacheKey.
 	 *
@@ -327,19 +294,15 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 	 */
 	public static class FilterCacheKey {
 
-		
 		/** The index. */
 		private final String index;
 
-		
 		/** The reader key. */
 		private final Object readerKey;
 
-		
 		/** The filter key. */
 		private final Object filterKey;
 
-		
 		/**
 		 * Instantiates a new filter cache key.
 		 *
@@ -353,7 +316,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			this.filterKey = filterKey;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -363,7 +325,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			return index;
 		}
 
-		
 		/**
 		 * Reader key.
 		 *
@@ -373,7 +334,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			return readerKey;
 		}
 
-		
 		/**
 		 * Filter key.
 		 *
@@ -383,7 +343,6 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 			return filterKey;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -391,12 +350,11 @@ public class WeightedFilterCache extends AbstractIndexComponent implements Filte
 		public boolean equals(Object o) {
 			if (this == o)
 				return true;
-			
+
 			FilterCacheKey that = (FilterCacheKey) o;
 			return (readerKey == that.readerKey && filterKey.equals(that.filterKey));
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */

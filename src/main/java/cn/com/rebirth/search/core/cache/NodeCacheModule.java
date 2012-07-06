@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeCacheModule.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeCacheModule.java 2012-7-6 14:29:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cache;
 
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.AbstractModule;
 import cn.com.rebirth.search.core.cache.memory.ByteBufferCache;
-
 
 /**
  * The Class NodeCacheModule.
@@ -18,11 +16,9 @@ import cn.com.rebirth.search.core.cache.memory.ByteBufferCache;
  */
 public class NodeCacheModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/**
 	 * Instantiates a new node cache module.
 	 *
@@ -32,9 +28,8 @@ public class NodeCacheModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestBulkAction.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestBulkAction.java 2012-7-6 14:30:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.bulk;
 
@@ -33,7 +32,6 @@ import static cn.com.rebirth.search.core.rest.RestStatus.BAD_REQUEST;
 import static cn.com.rebirth.search.core.rest.RestStatus.OK;
 import static cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder.restContentBuilder;
 
-
 /**
  * The Class RestBulkAction.
  *
@@ -41,7 +39,6 @@ import static cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder
  */
 public class RestBulkAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest bulk action.
 	 *
@@ -61,9 +58,8 @@ public class RestBulkAction extends BaseRestHandler {
 		controller.registerHandler(PUT, "/{index}/{type}/_bulk", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -150,7 +146,6 @@ public class RestBulkAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -158,39 +153,30 @@ public class RestBulkAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant ITEMS. */
 		static final XContentBuilderString ITEMS = new XContentBuilderString("items");
 
-		
 		/** The Constant _INDEX. */
 		static final XContentBuilderString _INDEX = new XContentBuilderString("_index");
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant _ID. */
 		static final XContentBuilderString _ID = new XContentBuilderString("_id");
 
-		
 		/** The Constant ERROR. */
 		static final XContentBuilderString ERROR = new XContentBuilderString("error");
 
-		
 		/** The Constant OK. */
 		static final XContentBuilderString OK = new XContentBuilderString("ok");
 
-		
 		/** The Constant TOOK. */
 		static final XContentBuilderString TOOK = new XContentBuilderString("took");
 
-		
 		/** The Constant _VERSION. */
 		static final XContentBuilderString _VERSION = new XContentBuilderString("_version");
 
-		
 		/** The Constant MATCHES. */
 		static final XContentBuilderString MATCHES = new XContentBuilderString("matches");
 	}

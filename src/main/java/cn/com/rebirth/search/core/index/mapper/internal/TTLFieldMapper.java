@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TTLFieldMapper.java 2012-3-29 15:01:39 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TTLFieldMapper.java 2012-7-6 14:30:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.core.TypeParsers;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class TTLFieldMapper.
  *
@@ -39,15 +37,12 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, RootMapper {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_ttl";
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_ttl";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -55,28 +50,22 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 	 */
 	public static class Defaults extends LongFieldMapper.Defaults {
 
-		
 		/** The Constant NAME. */
 		public static final String NAME = TTLFieldMapper.CONTENT_TYPE;
 
-		
 		/** The Constant STORE. */
 		public static final Field.Store STORE = Field.Store.YES;
 
-		
 		/** The Constant INDEX. */
 		public static final Field.Index INDEX = Field.Index.NOT_ANALYZED;
 
-		
 		/** The Constant ENABLED. */
 		public static final boolean ENABLED = false;
 
-		
 		/** The Constant DEFAULT. */
 		public static final long DEFAULT = -1;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -84,15 +73,12 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 	 */
 	public static class Builder extends NumberFieldMapper.Builder<Builder, TTLFieldMapper> {
 
-		
 		/** The enabled. */
 		private boolean enabled = Defaults.ENABLED;
 
-		
 		/** The default ttl. */
 		private long defaultTTL = Defaults.DEFAULT;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 */
@@ -102,7 +88,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 			index = Defaults.INDEX;
 		}
 
-		
 		/**
 		 * Enabled.
 		 *
@@ -114,7 +99,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 			return builder;
 		}
 
-		
 		/**
 		 * Default ttl.
 		 *
@@ -126,9 +110,8 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 			return builder;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public TTLFieldMapper build(BuilderContext context) {
@@ -136,7 +119,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -144,9 +126,8 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -169,15 +150,12 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		}
 	}
 
-	
 	/** The enabled. */
 	private boolean enabled;
 
-	
 	/** The default ttl. */
 	private long defaultTTL;
 
-	
 	/**
 	 * Instantiates a new tTL field mapper.
 	 */
@@ -185,7 +163,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		this(Defaults.STORE, Defaults.INDEX, Defaults.ENABLED, Defaults.DEFAULT);
 	}
 
-	
 	/**
 	 * Instantiates a new tTL field mapper.
 	 *
@@ -202,7 +179,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		this.defaultTTL = defaultTTL;
 	}
 
-	
 	/**
 	 * Enabled.
 	 *
@@ -212,7 +188,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		return this.enabled;
 	}
 
-	
 	/**
 	 * Default ttl.
 	 *
@@ -222,10 +197,8 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		return this.defaultTTL;
 	}
 
-	
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Object valueForSearch(Fieldable field) {
@@ -240,8 +213,6 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		return value - now;
 	}
 
-	
-	
 	/**
 	 * Value for search.
 	 *
@@ -252,38 +223,34 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		return expirationTime - System.currentTimeMillis();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
 		super.parse(context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException, MapperParsingException {
-		if (context.sourceToParse().ttl() < 0) { 
+		if (context.sourceToParse().ttl() < 0) {
 			long ttl;
 			if (context.parser().currentToken() == XContentParser.Token.VALUE_STRING) {
 				ttl = TimeValue.parseTimeValue(context.parser().text(), null).millis();
@@ -297,50 +264,47 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.LongFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.LongFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException, AlreadyExpiredException {
 		if (enabled) {
 			long ttl = context.sourceToParse().ttl();
-			if (ttl <= 0 && defaultTTL > 0) { 
+			if (ttl <= 0 && defaultTTL > 0) {
 				ttl = defaultTTL;
 				context.sourceToParse().ttl(ttl);
 			}
-			if (ttl > 0) { 
+			if (ttl > 0) {
 				long timestamp = context.sourceToParse().timestamp();
 				long expire = new Date(timestamp + ttl).getTime();
 				long now = System.currentTimeMillis();
-				
+
 				if (now >= expire) {
 					throw new AlreadyExpiredException(context.index(), context.type(), context.id(), timestamp, ttl,
 							now);
 				}
-				
+
 				return new CustomLongNumericField(this, expire);
 			}
 		}
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-		
+
 		if (enabled == Defaults.ENABLED && defaultTTL == Defaults.DEFAULT) {
 			return builder;
 		}
@@ -355,9 +319,8 @@ public class TTLFieldMapper extends LongFieldMapper implements InternalMapper, R
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.LongFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.LongFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {

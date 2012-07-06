@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestIndicesAliasesAction.java 2012-3-29 15:01:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestIndicesAliasesAction.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.alias;
 
 import java.io.IOException;
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestIndicesAliasesAction.
  *
@@ -38,7 +36,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestIndicesAliasesAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest indices aliases action.
 	 *
@@ -52,9 +49,8 @@ public class RestIndicesAliasesAction extends BaseRestHandler {
 		controller.registerHandler(RestRequest.Method.POST, "/_aliases", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -66,7 +62,7 @@ public class RestIndicesAliasesAction extends BaseRestHandler {
 					request.contentByteArrayOffset(), request.contentLength());
 			XContentParser.Token token = parser.nextToken();
 			if (token == null) {
-				throw new RestartIllegalArgumentException("No action is specified");
+				throw new RebirthIllegalArgumentException("No action is specified");
 			}
 			while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
 				if (token == XContentParser.Token.START_ARRAY) {
@@ -79,8 +75,7 @@ public class RestIndicesAliasesAction extends BaseRestHandler {
 							} else if ("remove".equals(action)) {
 								type = AliasAction.Type.REMOVE;
 							} else {
-								throw new RestartIllegalArgumentException("Alias action [" + action
-										+ "] not supported");
+								throw new RebirthIllegalArgumentException("Alias action [" + action + "] not supported");
 							}
 							String index = null;
 							String alias = null;
@@ -121,11 +116,11 @@ public class RestIndicesAliasesAction extends BaseRestHandler {
 								}
 							}
 							if (index == null) {
-								throw new RestartIllegalArgumentException("Alias action [" + action
+								throw new RebirthIllegalArgumentException("Alias action [" + action
 										+ "] requires an [index] to be set");
 							}
 							if (alias == null) {
-								throw new RestartIllegalArgumentException("Alias action [" + action
+								throw new RebirthIllegalArgumentException("Alias action [" + action
 										+ "] requires an [alias] to be set");
 							}
 							if (type == AliasAction.Type.ADD) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GetRequestBuilder.java 2012-3-29 15:01:30 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GetRequestBuilder.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;
 
-
 /**
  * The Class GetRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetResponse> {
 
-	
 	/**
 	 * Instantiates a new gets the request builder.
 	 *
@@ -29,7 +26,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		super(client, new GetRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new gets the request builder.
 	 *
@@ -40,7 +36,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		super(client, new GetRequest(index));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -52,7 +47,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the type.
 	 *
@@ -64,7 +58,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the id.
 	 *
@@ -76,7 +69,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -88,7 +80,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the preference.
 	 *
@@ -100,7 +91,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the fields.
 	 *
@@ -112,7 +102,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -124,7 +113,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the realtime.
 	 *
@@ -136,7 +124,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -148,7 +135,6 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threaded.
 	 *
@@ -160,9 +146,8 @@ public class GetRequestBuilder extends BaseRequestBuilder<GetRequest, GetRespons
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<GetResponse> listener) {

@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ObjectMapperListener.java 2012-3-29 15:02:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ObjectMapperListener.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
 import cn.com.rebirth.search.core.index.mapper.object.ObjectMapper;
-
 
 /**
  * The listener interface for receiving objectMapper events.
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.index.mapper.object.ObjectMapper;
  */
 public interface ObjectMapperListener {
 
-	
 	/**
 	 * Object mapper.
 	 *

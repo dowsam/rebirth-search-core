@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexRequestBuilder.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexRequestBuilder.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.index;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.action.support.replication.ReplicationType;
 import cn.com.rebirth.search.core.client.Client;
 import cn.com.rebirth.search.core.index.VersionType;
 
-
 /**
  * The Class IndexRequestBuilder.
  *
@@ -27,7 +25,6 @@ import cn.com.rebirth.search.core.index.VersionType;
  */
 public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexResponse> {
 
-	
 	/**
 	 * Instantiates a new index request builder.
 	 *
@@ -37,7 +34,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		super(client, new IndexRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new index request builder.
 	 *
@@ -48,7 +44,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		super(client, new IndexRequest(index));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -60,7 +55,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the type.
 	 *
@@ -72,7 +66,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the id.
 	 *
@@ -84,7 +77,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -96,7 +88,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the parent.
 	 *
@@ -108,7 +99,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -120,7 +110,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -133,7 +122,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -145,7 +133,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -157,7 +144,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -169,7 +155,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -183,7 +168,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -198,7 +182,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -211,7 +194,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -226,7 +208,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -244,7 +225,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -264,7 +244,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the content type.
 	 *
@@ -276,7 +255,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -288,7 +266,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -300,7 +277,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the op type.
 	 *
@@ -312,7 +288,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the op type.
 	 *
@@ -324,7 +299,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the create.
 	 *
@@ -336,7 +310,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -348,7 +321,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the replication type.
 	 *
@@ -360,7 +332,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the consistency level.
 	 *
@@ -372,7 +343,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the replication type.
 	 *
@@ -384,7 +354,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the version.
 	 *
@@ -396,7 +365,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the version type.
 	 *
@@ -408,7 +376,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the percolate.
 	 *
@@ -420,7 +387,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timestamp.
 	 *
@@ -432,8 +398,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
-	
 	/**
 	 * Sets the ttl.
 	 *
@@ -445,7 +409,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -457,7 +420,6 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the operation threaded.
 	 *
@@ -469,9 +431,8 @@ public class IndexRequestBuilder extends BaseRequestBuilder<IndexRequest, IndexR
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<IndexResponse> listener) {

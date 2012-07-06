@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchScanAction.java 2012-3-29 15:02:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchScanAction.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class TransportSearchScanAction.
  *
@@ -40,7 +38,6 @@ import com.google.common.collect.ImmutableMap;
  */
 public class TransportSearchScanAction extends TransportSearchTypeAction {
 
-	
 	/**
 	 * Instantiates a new transport search scan action.
 	 *
@@ -58,16 +55,14 @@ public class TransportSearchScanAction extends TransportSearchTypeAction {
 		super(settings, threadPool, clusterService, transportSearchCache, searchService, searchPhaseController);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(SearchRequest searchRequest, ActionListener<SearchResponse> listener) {
 		new AsyncAction(searchRequest, listener).start();
 	}
 
-	
 	/**
 	 * The Class AsyncAction.
 	 *
@@ -75,11 +70,9 @@ public class TransportSearchScanAction extends TransportSearchTypeAction {
 	 */
 	private class AsyncAction extends BaseAsyncAction<QuerySearchResult> {
 
-		
 		/** The query results. */
 		private final Map<SearchShardTarget, QuerySearchResultProvider> queryResults = searchCache.obtainQueryResults();
 
-		
 		/**
 		 * Instantiates a new async action.
 		 *
@@ -90,18 +83,16 @@ public class TransportSearchScanAction extends TransportSearchTypeAction {
 			super(request, listener);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#firstPhaseName()
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#firstPhaseName()
 		 */
 		@Override
 		protected String firstPhaseName() {
 			return "init_scan";
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#sendExecuteFirstPhase(cn.com.summall.search.core.cluster.node.DiscoveryNode, cn.com.summall.search.core.search.internal.InternalSearchRequest, cn.com.summall.search.core.search.action.SearchServiceListener)
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#sendExecuteFirstPhase(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, cn.com.rebirth.search.core.search.internal.InternalSearchRequest, cn.com.rebirth.search.core.search.action.SearchServiceListener)
 		 */
 		@Override
 		protected void sendExecuteFirstPhase(DiscoveryNode node, InternalSearchRequest request,
@@ -109,18 +100,16 @@ public class TransportSearchScanAction extends TransportSearchTypeAction {
 			searchService.sendExecuteScan(node, request, listener);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#processFirstPhaseResult(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.search.SearchPhaseResult)
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#processFirstPhaseResult(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.search.SearchPhaseResult)
 		 */
 		@Override
 		protected void processFirstPhaseResult(ShardRouting shard, QuerySearchResult result) {
 			queryResults.put(result.shardTarget(), result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#moveToSecondPhase()
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#moveToSecondPhase()
 		 */
 		@Override
 		protected void moveToSecondPhase() throws Exception {
@@ -137,7 +126,6 @@ public class TransportSearchScanAction extends TransportSearchTypeAction {
 		}
 	}
 
-	
-	/** The EMPT y_ docs. */
+	/** The empty docs. */
 	private static ShardDoc[] EMPTY_DOCS = new ShardDoc[0];
 }

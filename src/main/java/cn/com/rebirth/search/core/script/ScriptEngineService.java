@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptEngineService.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptEngineService.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.script;
 
@@ -11,7 +10,6 @@ import java.util.Map;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.search.core.search.lookup.SearchLookup;
 
-
 /**
  * The Interface ScriptEngineService.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.search.lookup.SearchLookup;
  */
 public interface ScriptEngineService {
 
-	
 	/**
 	 * Types.
 	 *
@@ -27,7 +24,6 @@ public interface ScriptEngineService {
 	 */
 	String[] types();
 
-	
 	/**
 	 * Extensions.
 	 *
@@ -35,7 +31,6 @@ public interface ScriptEngineService {
 	 */
 	String[] extensions();
 
-	
 	/**
 	 * Compile.
 	 *
@@ -44,7 +39,6 @@ public interface ScriptEngineService {
 	 */
 	Object compile(String script);
 
-	
 	/**
 	 * Executable.
 	 *
@@ -54,7 +48,6 @@ public interface ScriptEngineService {
 	 */
 	ExecutableScript executable(Object compiledScript, @Nullable Map<String, Object> vars);
 
-	
 	/**
 	 * Search.
 	 *
@@ -65,7 +58,6 @@ public interface ScriptEngineService {
 	 */
 	SearchScript search(Object compiledScript, SearchLookup lookup, @Nullable Map<String, Object> vars);
 
-	
 	/**
 	 * Execute.
 	 *
@@ -75,7 +67,6 @@ public interface ScriptEngineService {
 	 */
 	Object execute(Object compiledScript, Map<String, Object> vars);
 
-	
 	/**
 	 * Unwrap.
 	 *
@@ -84,7 +75,6 @@ public interface ScriptEngineService {
 	 */
 	Object unwrap(Object value);
 
-	
 	/**
 	 * Close.
 	 */

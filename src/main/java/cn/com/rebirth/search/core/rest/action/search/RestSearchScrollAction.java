@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestSearchScrollAction.java 2012-3-29 15:02:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestSearchScrollAction.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.search;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.search.Scroll;
 
-
 /**
  * The Class RestSearchScrollAction.
  *
@@ -38,7 +36,6 @@ import cn.com.rebirth.search.core.search.Scroll;
  */
 public class RestSearchScrollAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest search scroll action.
 	 *
@@ -56,9 +53,8 @@ public class RestSearchScrollAction extends BaseRestHandler {
 		controller.registerHandler(POST, "/_search/scroll/{scroll_id}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -77,7 +73,7 @@ public class RestSearchScrollAction extends BaseRestHandler {
 					request.param("operation_threading"), null);
 			if (operationThreading != null) {
 				if (operationThreading == SearchOperationThreading.NO_THREADS) {
-					
+
 					operationThreading = SearchOperationThreading.SINGLE_THREAD;
 				}
 				searchScrollRequest.operationThreading(operationThreading);

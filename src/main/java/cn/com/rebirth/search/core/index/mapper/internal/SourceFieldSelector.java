@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SourceFieldSelector.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SourceFieldSelector.java 2012-7-6 14:30:33 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.mapper.internal;
@@ -16,7 +16,9 @@ import cn.com.rebirth.search.commons.lucene.document.ResetFieldSelector;
  */
 public class SourceFieldSelector implements ResetFieldSelector {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6329639956526526842L;
+
 	/** The Constant INSTANCE. */
 	public static final SourceFieldSelector INSTANCE = new SourceFieldSelector();
 
@@ -39,7 +41,7 @@ public class SourceFieldSelector implements ResetFieldSelector {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.lucene.document.ResetFieldSelector#reset()
+	 * @see cn.com.rebirth.search.commons.lucene.document.ResetFieldSelector#reset()
 	 */
 	@Override
 	public void reset() {

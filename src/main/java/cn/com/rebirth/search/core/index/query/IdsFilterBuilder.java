@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IdsFilterBuilder.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IdsFilterBuilder.java 2012-7-6 14:30:24 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import java.util.List;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class IdsFilterBuilder.
  *
@@ -21,19 +19,15 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class IdsFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The types. */
 	private final List<String> types;
 
-	
 	/** The values. */
 	private List<String> values = new ArrayList<String>();
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new ids filter builder.
 	 *
@@ -43,7 +37,6 @@ public class IdsFilterBuilder extends BaseFilterBuilder {
 		this.types = types == null ? null : Arrays.asList(types);
 	}
 
-	
 	/**
 	 * Adds the ids.
 	 *
@@ -55,7 +48,6 @@ public class IdsFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Ids.
 	 *
@@ -66,7 +58,6 @@ public class IdsFilterBuilder extends BaseFilterBuilder {
 		return addIds(ids);
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -78,9 +69,8 @@ public class IdsFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

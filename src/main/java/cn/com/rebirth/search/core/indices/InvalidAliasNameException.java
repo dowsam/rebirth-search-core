@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InvalidAliasNameException.java 2012-3-29 15:02:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InvalidAliasNameException.java 2012-7-6 14:29:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.IndexException;
-
 
 /**
  * The Class InvalidAliasNameException.
@@ -17,11 +15,9 @@ import cn.com.rebirth.search.core.index.IndexException;
  */
 public class InvalidAliasNameException extends IndexException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8973453270831556236L;
 
-	
 	/**
 	 * Instantiates a new invalid alias name exception.
 	 *

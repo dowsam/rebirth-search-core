@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DirectoryService.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DirectoryService.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store;
 
 import java.io.IOException;
 
 import org.apache.lucene.store.Directory;
-
 
 /**
  * The Interface DirectoryService.
@@ -18,7 +16,6 @@ import org.apache.lucene.store.Directory;
  */
 public interface DirectoryService {
 
-	
 	/**
 	 * Builds the.
 	 *
@@ -27,7 +24,6 @@ public interface DirectoryService {
 	 */
 	Directory[] build() throws IOException;
 
-	
 	/**
 	 * Rename file.
 	 *
@@ -38,7 +34,6 @@ public interface DirectoryService {
 	 */
 	void renameFile(Directory dir, String from, String to) throws IOException;
 
-	
 	/**
 	 * Full delete.
 	 *

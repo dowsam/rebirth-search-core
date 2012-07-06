@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexFailedEngineException.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexFailedEngineException.java 2012-7-6 14:29:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.engine;
 
 import cn.com.rebirth.search.core.index.shard.ShardId;
-
 
 /**
  * The Class IndexFailedEngineException.
@@ -16,19 +14,15 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 public class IndexFailedEngineException extends EngineException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4911711613579284036L;
 
-	
 	/** The type. */
 	private final String type;
 
-	
 	/** The id. */
 	private final String id;
 
-	
 	/**
 	 * Instantiates a new index failed engine exception.
 	 *
@@ -42,7 +36,6 @@ public class IndexFailedEngineException extends EngineException {
 		this.id = index.id();
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -52,7 +45,6 @@ public class IndexFailedEngineException extends EngineException {
 		return this.type;
 	}
 
-	
 	/**
 	 * Id.
 	 *

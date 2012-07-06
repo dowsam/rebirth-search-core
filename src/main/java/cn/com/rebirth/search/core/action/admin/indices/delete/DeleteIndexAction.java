@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteIndexAction.java 2012-3-29 15:02:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteIndexAction.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.delete;
 
 import cn.com.rebirth.search.core.action.admin.indices.IndicesAction;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
-
 
 /**
  * The Class DeleteIndexAction.
@@ -18,15 +16,12 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
 public class DeleteIndexAction extends
 		IndicesAction<DeleteIndexRequest, DeleteIndexResponse, DeleteIndexRequestBuilder> {
 
-	
 	/** The Constant INSTANCE. */
 	public static final DeleteIndexAction INSTANCE = new DeleteIndexAction();
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "indices/delete";
 
-	
 	/**
 	 * Instantiates a new delete index action.
 	 */
@@ -34,18 +29,16 @@ public class DeleteIndexAction extends
 		super(NAME);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.GenericAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.GenericAction#newResponse()
 	 */
 	@Override
 	public DeleteIndexResponse newResponse() {
 		return new DeleteIndexResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.IndicesAction#newRequestBuilder(cn.com.summall.search.core.client.IndicesAdminClient)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.IndicesAction#newRequestBuilder(cn.com.rebirth.search.core.client.IndicesAdminClient)
 	 */
 	@Override
 	public DeleteIndexRequestBuilder newRequestBuilder(IndicesAdminClient client) {

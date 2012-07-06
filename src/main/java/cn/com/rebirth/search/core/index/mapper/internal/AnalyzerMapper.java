@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AnalyzerMapper.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AnalyzerMapper.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.mapper.ObjectMapperListener;
 import cn.com.rebirth.search.core.index.mapper.ParseContext;
 import cn.com.rebirth.search.core.index.mapper.RootMapper;
 
-
 /**
  * The Class AnalyzerMapper.
  *
@@ -32,15 +30,12 @@ import cn.com.rebirth.search.core.index.mapper.RootMapper;
  */
 public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_analyzer";
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_analyzer";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -48,12 +43,10 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 	 */
 	public static class Defaults {
 
-		
 		/** The Constant PATH. */
 		public static final String PATH = "_analyzer";
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -61,11 +54,9 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 	 */
 	public static class Builder extends Mapper.Builder<Builder, AnalyzerMapper> {
 
-		
 		/** The field. */
 		private String field = Defaults.PATH;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 */
@@ -74,7 +65,6 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 			this.builder = this;
 		}
 
-		
 		/**
 		 * Field.
 		 *
@@ -86,9 +76,8 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public AnalyzerMapper build(BuilderContext context) {
@@ -96,7 +85,6 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -104,9 +92,8 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -123,11 +110,9 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 		}
 	}
 
-	
 	/** The path. */
 	private final String path;
 
-	
 	/**
 	 * Instantiates a new analyzer mapper.
 	 */
@@ -135,7 +120,6 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 		this(Defaults.PATH);
 	}
 
-	
 	/**
 	 * Instantiates a new analyzer mapper.
 	 *
@@ -145,26 +129,23 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 		this.path = path;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#name()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#name()
 	 */
 	@Override
 	public String name() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
@@ -185,58 +166,51 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 		context.analyzer(analyzer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.FieldMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.FieldMapperListener)
 	 */
 	@Override
 	public void traverse(FieldMapperListener fieldMapperListener) {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.ObjectMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.ObjectMapperListener)
 	 */
 	@Override
 	public void traverse(ObjectMapperListener objectMapperListener) {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -251,9 +225,8 @@ public class AnalyzerMapper implements Mapper, InternalMapper, RootMapper {
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#close()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#close()
 	 */
 	@Override
 	public void close() {

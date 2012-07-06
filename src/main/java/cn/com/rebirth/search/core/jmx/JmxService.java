@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JmxService.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JmxService.java 2012-7-6 14:30:28 l.xue.nong$$
  */
 package cn.com.rebirth.search.core.jmx;
 
@@ -99,7 +99,7 @@ public class JmxService {
 	 */
 	public JmxService(final Settings settings) {
 		this.settings = settings;
-		this.jmxDomain = settings.get("jmx.domain", "cn.com.summall");
+		this.jmxDomain = settings.get("jmx.domain", "cn.com.rebirth");
 		this.mBeanServer = ManagementFactory.getPlatformMBeanServer();
 	}
 

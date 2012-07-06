@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestClearIndicesCacheAction.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestClearIndicesCacheAction.java 2012-7-6 14:30:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.cache.clear;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestActions;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestClearIndicesCacheAction.
  *
@@ -38,7 +36,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestClearIndicesCacheAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest clear indices cache action.
 	 *
@@ -56,9 +53,8 @@ public class RestClearIndicesCacheAction extends BaseRestHandler {
 		controller.registerHandler(GET, "/{index}/_cache/clear", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -73,12 +69,11 @@ public class RestClearIndicesCacheAction extends BaseRestHandler {
 			clearIndicesCacheRequest.bloomCache(request.paramAsBoolean("bloom", clearIndicesCacheRequest.bloomCache()));
 			clearIndicesCacheRequest.fields(request.paramAsStringArray("fields", clearIndicesCacheRequest.fields()));
 
-			
 			clearIndicesCacheRequest.listenerThreaded(false);
 			BroadcastOperationThreading operationThreading = BroadcastOperationThreading.fromString(
 					request.param("operationThreading"), BroadcastOperationThreading.SINGLE_THREAD);
 			if (operationThreading == BroadcastOperationThreading.NO_THREADS) {
-				
+
 				operationThreading = BroadcastOperationThreading.THREAD_PER_SHARD;
 			}
 			clearIndicesCacheRequest.operationThreading(operationThreading);

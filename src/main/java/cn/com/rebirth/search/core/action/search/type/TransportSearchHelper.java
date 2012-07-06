@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchHelper.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchHelper.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -14,8 +13,8 @@ import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.Unicode;
 import cn.com.rebirth.commons.collect.Tuple;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.search.commons.Base64;
 import cn.com.rebirth.search.core.action.search.SearchRequest;
 import cn.com.rebirth.search.core.action.search.SearchScrollRequest;
@@ -28,7 +27,6 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchRequest;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class TransportSearchHelper.
  *
@@ -36,7 +34,6 @@ import com.google.common.collect.Maps;
  */
 public abstract class TransportSearchHelper {
 
-	
 	/**
 	 * Internal search request.
 	 *
@@ -60,7 +57,6 @@ public abstract class TransportSearchHelper {
 		return internalRequest;
 	}
 
-	
 	/**
 	 * Internal scroll search request.
 	 *
@@ -74,7 +70,6 @@ public abstract class TransportSearchHelper {
 		return internalRequest;
 	}
 
-	
 	/**
 	 * Builds the scroll id.
 	 *
@@ -94,11 +89,10 @@ public abstract class TransportSearchHelper {
 		} else if (searchType == SearchType.SCAN) {
 			return buildScrollId(ParsedScrollId.SCAN, searchPhaseResults, attributes);
 		} else {
-			throw new RestartIllegalStateException();
+			throw new RebirthIllegalStateException();
 		}
 	}
 
-	
 	/**
 	 * Builds the scroll id.
 	 *
@@ -126,7 +120,6 @@ public abstract class TransportSearchHelper {
 		return Base64.encodeBytes(Unicode.fromStringAsBytes(sb.toString()), Base64.URL_SAFE);
 	}
 
-	
 	/**
 	 * Parses the scroll id.
 	 *
@@ -137,7 +130,7 @@ public abstract class TransportSearchHelper {
 		try {
 			scrollId = Unicode.fromBytes(Base64.decode(scrollId, Base64.URL_SAFE));
 		} catch (IOException e) {
-			throw new RestartIllegalArgumentException("Failed to decode scrollId", e);
+			throw new RebirthIllegalArgumentException("Failed to decode scrollId", e);
 		}
 		String[] elements = Strings.splitStringToArray(scrollId, ';');
 		int index = 0;
@@ -149,7 +142,7 @@ public abstract class TransportSearchHelper {
 			String element = elements[index++];
 			int sep = element.indexOf(':');
 			if (sep == -1) {
-				throw new RestartIllegalArgumentException("Malformed scrollId [" + scrollId + "]");
+				throw new RebirthIllegalArgumentException("Malformed scrollId [" + scrollId + "]");
 			}
 			context[i] = new Tuple<String, Long>(element.substring(sep + 1), Long.parseLong(element.substring(0, sep)));
 		}
@@ -168,7 +161,6 @@ public abstract class TransportSearchHelper {
 		return new ParsedScrollId(scrollId, type, context, attributes);
 	}
 
-	
 	/**
 	 * Instantiates a new transport search helper.
 	 */

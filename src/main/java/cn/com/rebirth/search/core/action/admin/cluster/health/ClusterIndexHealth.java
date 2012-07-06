@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterIndexHealth.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterIndexHealth.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.health;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.commons.io.stream.Streamable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ClusterIndexHealth.
  *
@@ -26,58 +24,45 @@ import com.google.common.collect.Maps;
  */
 public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streamable {
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The number of shards. */
 	private int numberOfShards;
 
-	
 	/** The number of replicas. */
 	private int numberOfReplicas;
 
-	
 	/** The active shards. */
 	int activeShards = 0;
 
-	
 	/** The relocating shards. */
 	int relocatingShards = 0;
 
-	
 	/** The initializing shards. */
 	int initializingShards = 0;
 
-	
 	/** The unassigned shards. */
 	int unassignedShards = 0;
 
-	
 	/** The active primary shards. */
 	int activePrimaryShards = 0;
 
-	
 	/** The status. */
 	ClusterHealthStatus status = ClusterHealthStatus.RED;
 
-	
 	/** The shards. */
 	final Map<Integer, ClusterShardHealth> shards = Maps.newHashMap();
 
-	
 	/** The validation failures. */
 	List<String> validationFailures;
 
-	
 	/**
 	 * Instantiates a new cluster index health.
 	 */
 	private ClusterIndexHealth() {
 	}
 
-	
 	/**
 	 * Instantiates a new cluster index health.
 	 *
@@ -93,7 +78,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		this.validationFailures = validationFailures;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -103,7 +87,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -113,7 +96,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return index();
 	}
 
-	
 	/**
 	 * Validation failures.
 	 *
@@ -123,7 +105,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return this.validationFailures;
 	}
 
-	
 	/**
 	 * Gets the validation failures.
 	 *
@@ -133,7 +114,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return validationFailures();
 	}
 
-	
 	/**
 	 * Number of shards.
 	 *
@@ -143,7 +123,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return numberOfShards;
 	}
 
-	
 	/**
 	 * Gets the number of shards.
 	 *
@@ -153,7 +132,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return numberOfShards();
 	}
 
-	
 	/**
 	 * Number of replicas.
 	 *
@@ -163,7 +141,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return numberOfReplicas;
 	}
 
-	
 	/**
 	 * Gets the number of replicas.
 	 *
@@ -173,7 +150,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return numberOfReplicas();
 	}
 
-	
 	/**
 	 * Active shards.
 	 *
@@ -183,7 +159,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return activeShards;
 	}
 
-	
 	/**
 	 * Gets the active shards.
 	 *
@@ -193,7 +168,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return activeShards();
 	}
 
-	
 	/**
 	 * Relocating shards.
 	 *
@@ -203,7 +177,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return relocatingShards;
 	}
 
-	
 	/**
 	 * Gets the relocating shards.
 	 *
@@ -213,7 +186,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return relocatingShards();
 	}
 
-	
 	/**
 	 * Active primary shards.
 	 *
@@ -223,7 +195,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return activePrimaryShards;
 	}
 
-	
 	/**
 	 * Gets the active primary shards.
 	 *
@@ -233,7 +204,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return activePrimaryShards();
 	}
 
-	
 	/**
 	 * Initializing shards.
 	 *
@@ -243,7 +213,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return initializingShards;
 	}
 
-	
 	/**
 	 * Gets the initializing shards.
 	 *
@@ -253,7 +222,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return initializingShards();
 	}
 
-	
 	/**
 	 * Unassigned shards.
 	 *
@@ -263,7 +231,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return unassignedShards;
 	}
 
-	
 	/**
 	 * Gets the unassigned shards.
 	 *
@@ -273,7 +240,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return unassignedShards();
 	}
 
-	
 	/**
 	 * Status.
 	 *
@@ -283,7 +249,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return status;
 	}
 
-	
 	/**
 	 * Gets the status.
 	 *
@@ -293,7 +258,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return status();
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -303,7 +267,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -313,7 +276,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return shards();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -322,7 +284,6 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return shards.values().iterator();
 	}
 
-	
 	/**
 	 * Read cluster index health.
 	 *
@@ -336,9 +297,8 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		return indexHealth;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -367,9 +327,8 @@ public class ClusterIndexHealth implements Iterable<ClusterShardHealth>, Streama
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

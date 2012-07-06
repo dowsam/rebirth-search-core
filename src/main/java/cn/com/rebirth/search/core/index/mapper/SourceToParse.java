@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SourceToParse.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SourceToParse.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
-
 
 /**
  * The Class SourceToParse.
@@ -16,7 +14,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
  */
 public class SourceToParse {
 
-	
 	/**
 	 * Source.
 	 *
@@ -27,7 +24,6 @@ public class SourceToParse {
 		return new SourceToParse(source);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -40,7 +36,6 @@ public class SourceToParse {
 		return new SourceToParse(source, offset, length);
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -51,51 +46,39 @@ public class SourceToParse {
 		return new SourceToParse(parser);
 	}
 
-	
 	/** The source. */
 	private final byte[] source;
 
-	
 	/** The source offset. */
 	private final int sourceOffset;
 
-	
 	/** The source length. */
 	private final int sourceLength;
 
-	
 	/** The parser. */
 	private final XContentParser parser;
 
-	
 	/** The flyweight. */
 	private boolean flyweight = false;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The routing. */
 	private String routing;
 
-	
 	/** The parent id. */
 	private String parentId;
 
-	
 	/** The timestamp. */
 	private long timestamp;
 
-	
 	/** The ttl. */
 	private long ttl;
 
-	
 	/**
 	 * Instantiates a new source to parse.
 	 *
@@ -108,7 +91,6 @@ public class SourceToParse {
 		this.sourceLength = 0;
 	}
 
-	
 	/**
 	 * Instantiates a new source to parse.
 	 *
@@ -121,7 +103,6 @@ public class SourceToParse {
 		this.parser = null;
 	}
 
-	
 	/**
 	 * Instantiates a new source to parse.
 	 *
@@ -136,7 +117,6 @@ public class SourceToParse {
 		this.parser = null;
 	}
 
-	
 	/**
 	 * Parser.
 	 *
@@ -146,7 +126,6 @@ public class SourceToParse {
 		return this.parser;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -156,7 +135,6 @@ public class SourceToParse {
 		return this.source;
 	}
 
-	
 	/**
 	 * Source offset.
 	 *
@@ -166,7 +144,6 @@ public class SourceToParse {
 		return this.sourceOffset;
 	}
 
-	
 	/**
 	 * Source length.
 	 *
@@ -176,7 +153,6 @@ public class SourceToParse {
 		return this.sourceLength;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -186,7 +162,6 @@ public class SourceToParse {
 		return this.type;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -198,7 +173,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Flyweight.
 	 *
@@ -210,7 +184,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Flyweight.
 	 *
@@ -220,7 +193,6 @@ public class SourceToParse {
 		return this.flyweight;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -230,7 +202,6 @@ public class SourceToParse {
 		return this.id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -242,7 +213,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Parent.
 	 *
@@ -252,7 +222,6 @@ public class SourceToParse {
 		return this.parentId;
 	}
 
-	
 	/**
 	 * Parent.
 	 *
@@ -264,7 +233,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -274,7 +242,6 @@ public class SourceToParse {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -286,7 +253,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -296,7 +262,6 @@ public class SourceToParse {
 		return this.timestamp;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -308,7 +273,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -320,7 +284,6 @@ public class SourceToParse {
 		return this;
 	}
 
-	
 	/**
 	 * Ttl.
 	 *
@@ -330,7 +293,6 @@ public class SourceToParse {
 		return this.ttl;
 	}
 
-	
 	/**
 	 * Ttl.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FetchSearchRequest.java 2012-3-29 15:01:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FetchSearchRequest.java 2012-7-6 14:28:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.trove.ExtTIntArrayList;
 
-
 /**
  * The Class FetchSearchRequest.
  *
@@ -21,26 +19,21 @@ import cn.com.rebirth.commons.trove.ExtTIntArrayList;
  */
 public class FetchSearchRequest implements Streamable {
 
-	
 	/** The id. */
 	private long id;
 
-	
 	/** The doc ids. */
 	private int[] docIds;
 
-	
 	/** The size. */
 	private int size;
 
-	
 	/**
 	 * Instantiates a new fetch search request.
 	 */
 	public FetchSearchRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new fetch search request.
 	 *
@@ -53,7 +46,6 @@ public class FetchSearchRequest implements Streamable {
 		this.size = list.size();
 	}
 
-	
 	/**
 	 * Instantiates a new fetch search request.
 	 *
@@ -66,7 +58,6 @@ public class FetchSearchRequest implements Streamable {
 		this.size = docIds.length;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -76,7 +67,6 @@ public class FetchSearchRequest implements Streamable {
 		return id;
 	}
 
-	
 	/**
 	 * Doc ids.
 	 *
@@ -86,7 +76,6 @@ public class FetchSearchRequest implements Streamable {
 		return docIds;
 	}
 
-	
 	/**
 	 * Doc ids size.
 	 *
@@ -96,9 +85,8 @@ public class FetchSearchRequest implements Streamable {
 		return size;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -110,9 +98,8 @@ public class FetchSearchRequest implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

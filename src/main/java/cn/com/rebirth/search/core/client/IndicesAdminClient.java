@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesAdminClient.java 2012-3-29 15:02:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesAdminClient.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client;
 
@@ -77,7 +76,6 @@ import cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQu
 import cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQueryRequestBuilder;
 import cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQueryResponse;
 
-
 /**
  * The Interface IndicesAdminClient.
  *
@@ -85,7 +83,6 @@ import cn.com.rebirth.search.core.action.admin.indices.validate.query.ValidateQu
  */
 public interface IndicesAdminClient {
 
-	
 	/**
 	 * Execute.
 	 *
@@ -99,7 +96,6 @@ public interface IndicesAdminClient {
 	<Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> ActionFuture<Response> execute(
 			final IndicesAction<Request, Response, RequestBuilder> action, final Request request);
 
-	
 	/**
 	 * Execute.
 	 *
@@ -114,7 +110,6 @@ public interface IndicesAdminClient {
 			final IndicesAction<Request, Response, RequestBuilder> action, final Request request,
 			ActionListener<Response> listener);
 
-	
 	/**
 	 * Prepare execute.
 	 *
@@ -127,7 +122,6 @@ public interface IndicesAdminClient {
 	<Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> RequestBuilder prepareExecute(
 			final IndicesAction<Request, Response, RequestBuilder> action);
 
-	
 	/**
 	 * Exists.
 	 *
@@ -136,7 +130,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<IndicesExistsResponse> exists(IndicesExistsRequest request);
 
-	
 	/**
 	 * Exists.
 	 *
@@ -145,7 +138,6 @@ public interface IndicesAdminClient {
 	 */
 	void exists(IndicesExistsRequest request, ActionListener<IndicesExistsResponse> listener);
 
-	
 	/**
 	 * Prepare exists.
 	 *
@@ -154,7 +146,6 @@ public interface IndicesAdminClient {
 	 */
 	IndicesExistsRequestBuilder prepareExists(String... indices);
 
-	
 	/**
 	 * Stats.
 	 *
@@ -163,7 +154,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<IndicesStats> stats(IndicesStatsRequest request);
 
-	
 	/**
 	 * Stats.
 	 *
@@ -172,7 +162,6 @@ public interface IndicesAdminClient {
 	 */
 	void stats(IndicesStatsRequest request, ActionListener<IndicesStats> listener);
 
-	
 	/**
 	 * Prepare stats.
 	 *
@@ -181,7 +170,6 @@ public interface IndicesAdminClient {
 	 */
 	IndicesStatsRequestBuilder prepareStats(String... indices);
 
-	
 	/**
 	 * Status.
 	 *
@@ -190,7 +178,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<IndicesStatusResponse> status(IndicesStatusRequest request);
 
-	
 	/**
 	 * Status.
 	 *
@@ -199,7 +186,6 @@ public interface IndicesAdminClient {
 	 */
 	void status(IndicesStatusRequest request, ActionListener<IndicesStatusResponse> listener);
 
-	
 	/**
 	 * Prepare status.
 	 *
@@ -208,7 +194,6 @@ public interface IndicesAdminClient {
 	 */
 	IndicesStatusRequestBuilder prepareStatus(String... indices);
 
-	
 	/**
 	 * Segments.
 	 *
@@ -217,7 +202,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<IndicesSegmentResponse> segments(IndicesSegmentsRequest request);
 
-	
 	/**
 	 * Segments.
 	 *
@@ -226,7 +210,6 @@ public interface IndicesAdminClient {
 	 */
 	void segments(IndicesSegmentsRequest request, ActionListener<IndicesSegmentResponse> listener);
 
-	
 	/**
 	 * Prepare segments.
 	 *
@@ -235,7 +218,6 @@ public interface IndicesAdminClient {
 	 */
 	IndicesSegmentsRequestBuilder prepareSegments(String... indices);
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -244,7 +226,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<CreateIndexResponse> create(CreateIndexRequest request);
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -253,7 +234,6 @@ public interface IndicesAdminClient {
 	 */
 	void create(CreateIndexRequest request, ActionListener<CreateIndexResponse> listener);
 
-	
 	/**
 	 * Prepare create.
 	 *
@@ -262,7 +242,6 @@ public interface IndicesAdminClient {
 	 */
 	CreateIndexRequestBuilder prepareCreate(String index);
 
-	
 	/**
 	 * Delete.
 	 *
@@ -271,7 +250,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<DeleteIndexResponse> delete(DeleteIndexRequest request);
 
-	
 	/**
 	 * Delete.
 	 *
@@ -280,7 +258,6 @@ public interface IndicesAdminClient {
 	 */
 	void delete(DeleteIndexRequest request, ActionListener<DeleteIndexResponse> listener);
 
-	
 	/**
 	 * Prepare delete.
 	 *
@@ -289,7 +266,6 @@ public interface IndicesAdminClient {
 	 */
 	DeleteIndexRequestBuilder prepareDelete(String... indices);
 
-	
 	/**
 	 * Close.
 	 *
@@ -298,7 +274,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<CloseIndexResponse> close(CloseIndexRequest request);
 
-	
 	/**
 	 * Close.
 	 *
@@ -307,7 +282,6 @@ public interface IndicesAdminClient {
 	 */
 	void close(CloseIndexRequest request, ActionListener<CloseIndexResponse> listener);
 
-	
 	/**
 	 * Prepare close.
 	 *
@@ -316,7 +290,6 @@ public interface IndicesAdminClient {
 	 */
 	CloseIndexRequestBuilder prepareClose(String index);
 
-	
 	/**
 	 * Open.
 	 *
@@ -325,7 +298,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<OpenIndexResponse> open(OpenIndexRequest request);
 
-	
 	/**
 	 * Open.
 	 *
@@ -334,7 +306,6 @@ public interface IndicesAdminClient {
 	 */
 	void open(OpenIndexRequest request, ActionListener<OpenIndexResponse> listener);
 
-	
 	/**
 	 * Prepare open.
 	 *
@@ -343,7 +314,6 @@ public interface IndicesAdminClient {
 	 */
 	OpenIndexRequestBuilder prepareOpen(String index);
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -352,7 +322,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<RefreshResponse> refresh(RefreshRequest request);
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -361,7 +330,6 @@ public interface IndicesAdminClient {
 	 */
 	void refresh(RefreshRequest request, ActionListener<RefreshResponse> listener);
 
-	
 	/**
 	 * Prepare refresh.
 	 *
@@ -370,7 +338,6 @@ public interface IndicesAdminClient {
 	 */
 	RefreshRequestBuilder prepareRefresh(String... indices);
 
-	
 	/**
 	 * Flush.
 	 *
@@ -379,7 +346,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<FlushResponse> flush(FlushRequest request);
 
-	
 	/**
 	 * Flush.
 	 *
@@ -388,7 +354,6 @@ public interface IndicesAdminClient {
 	 */
 	void flush(FlushRequest request, ActionListener<FlushResponse> listener);
 
-	
 	/**
 	 * Prepare flush.
 	 *
@@ -397,7 +362,6 @@ public interface IndicesAdminClient {
 	 */
 	FlushRequestBuilder prepareFlush(String... indices);
 
-	
 	/**
 	 * Optimize.
 	 *
@@ -406,7 +370,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<OptimizeResponse> optimize(OptimizeRequest request);
 
-	
 	/**
 	 * Optimize.
 	 *
@@ -415,7 +378,6 @@ public interface IndicesAdminClient {
 	 */
 	void optimize(OptimizeRequest request, ActionListener<OptimizeResponse> listener);
 
-	
 	/**
 	 * Prepare optimize.
 	 *
@@ -424,7 +386,6 @@ public interface IndicesAdminClient {
 	 */
 	OptimizeRequestBuilder prepareOptimize(String... indices);
 
-	
 	/**
 	 * Put mapping.
 	 *
@@ -433,7 +394,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<PutMappingResponse> putMapping(PutMappingRequest request);
 
-	
 	/**
 	 * Put mapping.
 	 *
@@ -442,7 +402,6 @@ public interface IndicesAdminClient {
 	 */
 	void putMapping(PutMappingRequest request, ActionListener<PutMappingResponse> listener);
 
-	
 	/**
 	 * Prepare put mapping.
 	 *
@@ -451,7 +410,6 @@ public interface IndicesAdminClient {
 	 */
 	PutMappingRequestBuilder preparePutMapping(String... indices);
 
-	
 	/**
 	 * Delete mapping.
 	 *
@@ -460,7 +418,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<DeleteMappingResponse> deleteMapping(DeleteMappingRequest request);
 
-	
 	/**
 	 * Delete mapping.
 	 *
@@ -469,7 +426,6 @@ public interface IndicesAdminClient {
 	 */
 	void deleteMapping(DeleteMappingRequest request, ActionListener<DeleteMappingResponse> listener);
 
-	
 	/**
 	 * Prepare delete mapping.
 	 *
@@ -478,7 +434,6 @@ public interface IndicesAdminClient {
 	 */
 	DeleteMappingRequestBuilder prepareDeleteMapping(String... indices);
 
-	
 	/**
 	 * Gateway snapshot.
 	 *
@@ -487,7 +442,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<GatewaySnapshotResponse> gatewaySnapshot(GatewaySnapshotRequest request);
 
-	
 	/**
 	 * Gateway snapshot.
 	 *
@@ -496,7 +450,6 @@ public interface IndicesAdminClient {
 	 */
 	void gatewaySnapshot(GatewaySnapshotRequest request, ActionListener<GatewaySnapshotResponse> listener);
 
-	
 	/**
 	 * Prepare gateway snapshot.
 	 *
@@ -505,7 +458,6 @@ public interface IndicesAdminClient {
 	 */
 	GatewaySnapshotRequestBuilder prepareGatewaySnapshot(String... indices);
 
-	
 	/**
 	 * Aliases.
 	 *
@@ -514,7 +466,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<IndicesAliasesResponse> aliases(IndicesAliasesRequest request);
 
-	
 	/**
 	 * Aliases.
 	 *
@@ -523,7 +474,6 @@ public interface IndicesAdminClient {
 	 */
 	void aliases(IndicesAliasesRequest request, ActionListener<IndicesAliasesResponse> listener);
 
-	
 	/**
 	 * Prepare aliases.
 	 *
@@ -531,7 +481,6 @@ public interface IndicesAdminClient {
 	 */
 	IndicesAliasesRequestBuilder prepareAliases();
 
-	
 	/**
 	 * Clear cache.
 	 *
@@ -540,7 +489,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<ClearIndicesCacheResponse> clearCache(ClearIndicesCacheRequest request);
 
-	
 	/**
 	 * Clear cache.
 	 *
@@ -549,7 +497,6 @@ public interface IndicesAdminClient {
 	 */
 	void clearCache(ClearIndicesCacheRequest request, ActionListener<ClearIndicesCacheResponse> listener);
 
-	
 	/**
 	 * Prepare clear cache.
 	 *
@@ -558,7 +505,6 @@ public interface IndicesAdminClient {
 	 */
 	ClearIndicesCacheRequestBuilder prepareClearCache(String... indices);
 
-	
 	/**
 	 * Update settings.
 	 *
@@ -567,7 +513,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<UpdateSettingsResponse> updateSettings(UpdateSettingsRequest request);
 
-	
 	/**
 	 * Update settings.
 	 *
@@ -576,7 +521,6 @@ public interface IndicesAdminClient {
 	 */
 	void updateSettings(UpdateSettingsRequest request, ActionListener<UpdateSettingsResponse> listener);
 
-	
 	/**
 	 * Prepare update settings.
 	 *
@@ -585,7 +529,6 @@ public interface IndicesAdminClient {
 	 */
 	UpdateSettingsRequestBuilder prepareUpdateSettings(String... indices);
 
-	
 	/**
 	 * Analyze.
 	 *
@@ -594,7 +537,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<AnalyzeResponse> analyze(AnalyzeRequest request);
 
-	
 	/**
 	 * Analyze.
 	 *
@@ -603,7 +545,6 @@ public interface IndicesAdminClient {
 	 */
 	void analyze(AnalyzeRequest request, ActionListener<AnalyzeResponse> listener);
 
-	
 	/**
 	 * Prepare analyze.
 	 *
@@ -613,7 +554,6 @@ public interface IndicesAdminClient {
 	 */
 	AnalyzeRequestBuilder prepareAnalyze(@Nullable String index, String text);
 
-	
 	/**
 	 * Prepare analyze.
 	 *
@@ -622,7 +562,6 @@ public interface IndicesAdminClient {
 	 */
 	AnalyzeRequestBuilder prepareAnalyze(String text);
 
-	
 	/**
 	 * Put template.
 	 *
@@ -631,7 +570,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<PutIndexTemplateResponse> putTemplate(PutIndexTemplateRequest request);
 
-	
 	/**
 	 * Put template.
 	 *
@@ -640,7 +578,6 @@ public interface IndicesAdminClient {
 	 */
 	void putTemplate(PutIndexTemplateRequest request, ActionListener<PutIndexTemplateResponse> listener);
 
-	
 	/**
 	 * Prepare put template.
 	 *
@@ -649,7 +586,6 @@ public interface IndicesAdminClient {
 	 */
 	PutIndexTemplateRequestBuilder preparePutTemplate(String name);
 
-	
 	/**
 	 * Delete template.
 	 *
@@ -658,7 +594,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<DeleteIndexTemplateResponse> deleteTemplate(DeleteIndexTemplateRequest request);
 
-	
 	/**
 	 * Delete template.
 	 *
@@ -667,7 +602,6 @@ public interface IndicesAdminClient {
 	 */
 	void deleteTemplate(DeleteIndexTemplateRequest request, ActionListener<DeleteIndexTemplateResponse> listener);
 
-	
 	/**
 	 * Prepare delete template.
 	 *
@@ -676,7 +610,6 @@ public interface IndicesAdminClient {
 	 */
 	DeleteIndexTemplateRequestBuilder prepareDeleteTemplate(String name);
 
-	
 	/**
 	 * Validate query.
 	 *
@@ -685,7 +618,6 @@ public interface IndicesAdminClient {
 	 */
 	ActionFuture<ValidateQueryResponse> validateQuery(ValidateQueryRequest request);
 
-	
 	/**
 	 * Validate query.
 	 *
@@ -694,7 +626,6 @@ public interface IndicesAdminClient {
 	 */
 	void validateQuery(ValidateQueryRequest request, ActionListener<ValidateQueryResponse> listener);
 
-	
 	/**
 	 * Prepare validate query.
 	 *

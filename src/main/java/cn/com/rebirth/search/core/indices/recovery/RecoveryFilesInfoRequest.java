@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryFilesInfoRequest.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryFilesInfoRequest.java 2012-7-6 14:29:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 
-
 /**
  * The Class RecoveryFilesInfoRequest.
  *
@@ -23,42 +21,33 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 class RecoveryFilesInfoRequest implements Streamable {
 
-	
 	/** The shard id. */
 	ShardId shardId;
 
-	
 	/** The phase1 file names. */
 	List<String> phase1FileNames;
 
-	
 	/** The phase1 file sizes. */
 	List<Long> phase1FileSizes;
 
-	
 	/** The phase1 existing file names. */
 	List<String> phase1ExistingFileNames;
 
-	
 	/** The phase1 existing file sizes. */
 	List<Long> phase1ExistingFileSizes;
 
-	
 	/** The phase1 total size. */
 	long phase1TotalSize;
 
-	
 	/** The phase1 existing total size. */
 	long phase1ExistingTotalSize;
 
-	
 	/**
 	 * Instantiates a new recovery files info request.
 	 */
 	RecoveryFilesInfoRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new recovery files info request.
 	 *
@@ -82,9 +71,8 @@ class RecoveryFilesInfoRequest implements Streamable {
 		this.phase1ExistingTotalSize = phase1ExistingTotalSize;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -117,9 +105,8 @@ class RecoveryFilesInfoRequest implements Streamable {
 		phase1ExistingTotalSize = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

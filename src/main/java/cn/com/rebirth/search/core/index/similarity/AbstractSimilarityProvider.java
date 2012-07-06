@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractSimilarityProvider.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractSimilarityProvider.java 2012-7-6 14:30:07 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.similarity;
@@ -37,7 +37,7 @@ public abstract class AbstractSimilarityProvider<T extends Similarity> extends A
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.similarity.SimilarityProvider#name()
+	 * @see cn.com.rebirth.search.core.index.similarity.SimilarityProvider#name()
 	 */
 	@Override
 	public String name() {

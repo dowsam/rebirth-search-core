@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core XContentRestResponse.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core XContentRestResponse.java 2012-7-6 14:30:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest;
 
@@ -13,7 +12,6 @@ import org.apache.lucene.util.UnicodeUtil;
 import cn.com.rebirth.commons.thread.ThreadLocals;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class XContentRestResponse.
  *
@@ -21,7 +19,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class XContentRestResponse extends AbstractRestResponse {
 
-	
 	/** The Constant END_JSONP. */
 	private static final byte[] END_JSONP;
 
@@ -32,7 +29,6 @@ public class XContentRestResponse extends AbstractRestResponse {
 		System.arraycopy(U_END_JSONP.result, 0, END_JSONP, 0, U_END_JSONP.length);
 	}
 
-	
 	/** The prefix cache. */
 	private static ThreadLocal<ThreadLocals.CleanableValue<UnicodeUtil.UTF8Result>> prefixCache = new ThreadLocal<ThreadLocals.CleanableValue<UnicodeUtil.UTF8Result>>() {
 		@Override
@@ -41,19 +37,15 @@ public class XContentRestResponse extends AbstractRestResponse {
 		}
 	};
 
-	
 	/** The prefix utf8 result. */
 	private final UnicodeUtil.UTF8Result prefixUtf8Result;
 
-	
 	/** The status. */
 	private final RestStatus status;
 
-	
 	/** The builder. */
 	private final XContentBuilder builder;
 
-	
 	/**
 	 * Instantiates a new x content rest response.
 	 *
@@ -68,7 +60,6 @@ public class XContentRestResponse extends AbstractRestResponse {
 		this.prefixUtf8Result = startJsonp(request);
 	}
 
-	
 	/**
 	 * Builder.
 	 *
@@ -78,54 +69,48 @@ public class XContentRestResponse extends AbstractRestResponse {
 		return this.builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestResponse#contentType()
+	 * @see cn.com.rebirth.search.core.rest.RestResponse#contentType()
 	 */
 	@Override
 	public String contentType() {
 		return builder.contentType().restContentType();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestResponse#contentThreadSafe()
+	 * @see cn.com.rebirth.search.core.rest.RestResponse#contentThreadSafe()
 	 */
 	@Override
 	public boolean contentThreadSafe() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestResponse#content()
+	 * @see cn.com.rebirth.search.core.rest.RestResponse#content()
 	 */
 	@Override
 	public byte[] content() throws IOException {
 		return builder.underlyingBytes();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestResponse#contentLength()
+	 * @see cn.com.rebirth.search.core.rest.RestResponse#contentLength()
 	 */
 	@Override
 	public int contentLength() throws IOException {
 		return builder.underlyingBytesLength();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestResponse#status()
+	 * @see cn.com.rebirth.search.core.rest.RestResponse#status()
 	 */
 	@Override
 	public RestStatus status() {
 		return this.status;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.AbstractRestResponse#prefixContent()
+	 * @see cn.com.rebirth.search.core.rest.AbstractRestResponse#prefixContent()
 	 */
 	@Override
 	public byte[] prefixContent() {
@@ -135,9 +120,8 @@ public class XContentRestResponse extends AbstractRestResponse {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.AbstractRestResponse#prefixContentLength()
+	 * @see cn.com.rebirth.search.core.rest.AbstractRestResponse#prefixContentLength()
 	 */
 	@Override
 	public int prefixContentLength() {
@@ -147,9 +131,8 @@ public class XContentRestResponse extends AbstractRestResponse {
 		return 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.AbstractRestResponse#suffixContent()
+	 * @see cn.com.rebirth.search.core.rest.AbstractRestResponse#suffixContent()
 	 */
 	@Override
 	public byte[] suffixContent() {
@@ -159,9 +142,8 @@ public class XContentRestResponse extends AbstractRestResponse {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.AbstractRestResponse#suffixContentLength()
+	 * @see cn.com.rebirth.search.core.rest.AbstractRestResponse#suffixContentLength()
 	 */
 	@Override
 	public int suffixContentLength() {
@@ -171,7 +153,6 @@ public class XContentRestResponse extends AbstractRestResponse {
 		return 0;
 	}
 
-	
 	/**
 	 * Start jsonp.
 	 *

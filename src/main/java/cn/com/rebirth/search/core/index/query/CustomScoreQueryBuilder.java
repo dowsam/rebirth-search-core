@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CustomScoreQueryBuilder.java 2012-3-29 15:02:11 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CustomScoreQueryBuilder.java 2012-7-6 14:29:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class CustomScoreQueryBuilder.
  *
@@ -21,27 +19,21 @@ import com.google.common.collect.Maps;
  */
 public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The script. */
 	private String script;
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The params. */
 	private Map<String, Object> params = null;
 
-	
 	/**
 	 * Instantiates a new custom score query builder.
 	 *
@@ -51,7 +43,6 @@ public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 		this.queryBuilder = queryBuilder;
 	}
 
-	
 	/**
 	 * Script.
 	 *
@@ -63,7 +54,6 @@ public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -75,7 +65,6 @@ public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Params.
 	 *
@@ -91,7 +80,6 @@ public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -107,7 +95,6 @@ public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -119,9 +106,8 @@ public class CustomScoreQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

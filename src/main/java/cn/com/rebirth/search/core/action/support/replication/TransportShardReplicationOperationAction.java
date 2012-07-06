@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportShardReplicationOperationAction.java 2012-3-29 15:02:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportShardReplicationOperationAction.java 2012-7-6 14:29:22 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.replication;
 
@@ -12,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -52,7 +51,6 @@ import cn.com.rebirth.search.core.transport.TransportRequestOptions;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class TransportShardReplicationOperationAction.
  *
@@ -64,47 +62,36 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 public abstract class TransportShardReplicationOperationAction<Request extends ShardReplicationOperationRequest, ReplicaRequest extends ActionRequest, Response extends ActionResponse>
 		extends TransportAction<Request, Response> {
 
-	
 	/** The transport service. */
 	protected final TransportService transportService;
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The indices service. */
 	protected final IndicesService indicesService;
 
-	
 	/** The shard state action. */
 	protected final ShardStateAction shardStateAction;
 
-	
 	/** The default replication type. */
 	protected final ReplicationType defaultReplicationType;
 
-	
 	/** The default write consistency level. */
 	protected final WriteConsistencyLevel defaultWriteConsistencyLevel;
 
-	
 	/** The transport action. */
 	final String transportAction;
 
-	
 	/** The transport replica action. */
 	final String transportReplicaAction;
 
-	
 	/** The executor. */
 	final String executor;
 
-	
 	/** The check write consistency. */
 	final boolean checkWriteConsistency;
 
-	
 	/**
 	 * Instantiates a new transport shard replication operation action.
 	 *
@@ -137,16 +124,14 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 				"quorum"));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(Request request, ActionListener<Response> listener) {
 		new AsyncShardOperationAction(request, listener).start();
 	}
 
-	
 	/**
 	 * New request instance.
 	 *
@@ -154,7 +139,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract Request newRequestInstance();
 
-	
 	/**
 	 * New replica request instance.
 	 *
@@ -162,7 +146,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract ReplicaRequest newReplicaRequestInstance();
 
-	
 	/**
 	 * New response instance.
 	 *
@@ -170,7 +153,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract Response newResponseInstance();
 
-	
 	/**
 	 * Transport action.
 	 *
@@ -178,7 +160,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract String transportAction();
 
-	
 	/**
 	 * Executor.
 	 *
@@ -186,7 +167,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract String executor();
 
-	
 	/**
 	 * Shard operation on primary.
 	 *
@@ -197,7 +177,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	protected abstract PrimaryResponse<Response, ReplicaRequest> shardOperationOnPrimary(ClusterState clusterState,
 			PrimaryOperationRequest shardRequest);
 
-	
 	/**
 	 * Shard operation on replica.
 	 *
@@ -205,7 +184,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract void shardOperationOnReplica(ReplicaOperationRequest shardRequest);
 
-	
 	/**
 	 * Post primary operation.
 	 *
@@ -216,18 +194,16 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 
 	}
 
-	
 	/**
 	 * Shards.
 	 *
 	 * @param clusterState the cluster state
 	 * @param request the request
 	 * @return the shard iterator
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract ShardIterator shards(ClusterState clusterState, Request request) throws RestartException;
+	protected abstract ShardIterator shards(ClusterState clusterState, Request request) throws RebirthException;
 
-	
 	/**
 	 * Check write consistency.
 	 *
@@ -235,7 +211,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract boolean checkWriteConsistency();
 
-	
 	/**
 	 * Check global block.
 	 *
@@ -245,7 +220,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract ClusterBlockException checkGlobalBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Check request block.
 	 *
@@ -255,7 +229,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected abstract ClusterBlockException checkRequestBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Resolve request.
 	 *
@@ -269,7 +242,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		return true;
 	}
 
-	
 	/**
 	 * Transport options.
 	 *
@@ -279,7 +251,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		return TransportRequestOptions.EMPTY;
 	}
 
-	
 	/**
 	 * Ignore replicas.
 	 *
@@ -289,7 +260,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		return false;
 	}
 
-	
 	/**
 	 * Transport replica action.
 	 *
@@ -299,7 +269,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		return transportAction() + "/replica";
 	}
 
-	
 	/**
 	 * Retry primary exception.
 	 *
@@ -312,7 +281,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 				|| cause instanceof IndexMissingException;
 	}
 
-	
 	/**
 	 * Ignore replica exception.
 	 *
@@ -333,19 +301,17 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		if (cause instanceof ConnectTransportException) {
 			return true;
 		}
-		
-		
+
 		if (cause instanceof VersionConflictEngineException) {
 			return true;
 		}
-		
+
 		if (cause instanceof DocumentAlreadyExistsException) {
 			return true;
 		}
 		return false;
 	}
 
-	
 	/**
 	 * The Class OperationTransportHandler.
 	 *
@@ -353,33 +319,30 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	class OperationTransportHandler extends BaseTransportRequestHandler<Request> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public Request newInstance() {
 			return newRequestInstance();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final Request request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
-			
+
 			request.operationThreaded(true);
 			execute(request, new ActionListener<Response>() {
 				@Override
@@ -403,7 +366,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		}
 	}
 
-	
 	/**
 	 * The Class ReplicaOperationTransportHandler.
 	 *
@@ -411,27 +373,24 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	class ReplicaOperationTransportHandler extends BaseTransportRequestHandler<ReplicaOperationRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public ReplicaOperationRequest newInstance() {
 			return new ReplicaOperationRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return executor;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final ReplicaOperationRequest request, final TransportChannel channel)
@@ -441,7 +400,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		}
 	}
 
-	
 	/**
 	 * The Class PrimaryOperationRequest.
 	 *
@@ -449,22 +407,18 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected class PrimaryOperationRequest implements Streamable {
 
-		
 		/** The shard id. */
 		public int shardId;
 
-		
 		/** The request. */
 		public Request request;
 
-		
 		/**
 		 * Instantiates a new primary operation request.
 		 */
 		public PrimaryOperationRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new primary operation request.
 		 *
@@ -476,9 +430,8 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			this.request = request;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -487,9 +440,8 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			request.readFrom(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -498,7 +450,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		}
 	}
 
-	
 	/**
 	 * The Class ReplicaOperationRequest.
 	 *
@@ -506,22 +457,18 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected class ReplicaOperationRequest implements Streamable {
 
-		
 		/** The shard id. */
 		public int shardId;
 
-		
 		/** The request. */
 		public ReplicaRequest request;
 
-		
 		/**
 		 * Instantiates a new replica operation request.
 		 */
 		public ReplicaOperationRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new replica operation request.
 		 *
@@ -533,9 +480,8 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			this.request = request;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -544,9 +490,8 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			request.readFrom(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -555,7 +500,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		}
 	}
 
-	
 	/**
 	 * The Class AsyncShardOperationAction.
 	 *
@@ -563,31 +507,24 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	protected class AsyncShardOperationAction {
 
-		
 		/** The listener. */
 		private final ActionListener<Response> listener;
 
-		
 		/** The request. */
 		private final Request request;
 
-		
 		/** The nodes. */
 		private DiscoveryNodes nodes;
 
-		
 		/** The shard it. */
 		private ShardIterator shardIt;
 
-		
 		/** The primary operation started. */
 		private final AtomicBoolean primaryOperationStarted = new AtomicBoolean();
 
-		
 		/** The replication type. */
 		private final ReplicationType replicationType;
 
-		
 		/**
 		 * Instantiates a new async shard operation action.
 		 *
@@ -605,7 +542,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			}
 		}
 
-		
 		/**
 		 * Start.
 		 */
@@ -613,15 +549,14 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			start(false);
 		}
 
-		
 		/**
 		 * Start.
 		 *
 		 * @param fromClusterEvent the from cluster event
 		 * @return true, if successful
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		public boolean start(final boolean fromClusterEvent) throws RestartException {
+		public boolean start(final boolean fromClusterEvent) throws RebirthException {
 			final ClusterState clusterState = clusterService.state();
 			nodes = clusterState.nodes();
 			try {
@@ -634,7 +569,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 						throw blockException;
 					}
 				}
-				
+
 				if (!resolveRequest(clusterState, request, listener)) {
 					return true;
 				}
@@ -654,7 +589,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 				return true;
 			}
 
-			
 			if (shardIt.size() == 0) {
 				retry(fromClusterEvent, null);
 				return false;
@@ -664,7 +598,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			ShardRouting shardX;
 			while ((shardX = shardIt.nextOrNull()) != null) {
 				final ShardRouting shard = shardX;
-				
+
 				if (!shard.primary()) {
 					continue;
 				}
@@ -673,7 +607,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 					return false;
 				}
 
-				
 				if (checkWriteConsistency) {
 					WriteConsistencyLevel consistencyLevel = defaultWriteConsistencyLevel;
 					if (request.consistencyLevel() != WriteConsistencyLevel.DEFAULT) {
@@ -681,7 +614,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 					}
 					int requiredNumber = 1;
 					if (consistencyLevel == WriteConsistencyLevel.QUORUM && shardIt.size() > 2) {
-						
+
 						requiredNumber = (shardIt.size() / 2) + 1;
 					} else if (consistencyLevel == WriteConsistencyLevel.ALL) {
 						requiredNumber = shardIt.size();
@@ -732,13 +665,12 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 
 								@Override
 								public void handleException(TransportException exp) {
-									
+
 									if (exp.unwrapCause() instanceof ConnectTransportException
 											|| exp.unwrapCause() instanceof NodeClosedException
 											|| exp.unwrapCause() instanceof IllegalIndexShardStateException) {
 										primaryOperationStarted.set(false);
-										
-										
+
 										retry(false, null);
 									} else {
 										listener.onFailure(exp);
@@ -748,7 +680,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 				}
 				break;
 			}
-			
+
 			if (!foundPrimary) {
 				retry(fromClusterEvent, null);
 				return false;
@@ -756,7 +688,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			return true;
 		}
 
-		
 		/**
 		 * Retry.
 		 *
@@ -765,14 +696,14 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		 */
 		void retry(boolean fromClusterEvent, @Nullable final Throwable failure) {
 			if (!fromClusterEvent) {
-				
+
 				request.beforeLocalFork();
 				request.operationThreaded(true);
 				clusterService.add(request.timeout(), new TimeoutClusterStateListener() {
 					@Override
 					public void postAdded() {
 						if (start(true)) {
-							
+
 							clusterService.remove(this);
 						}
 					}
@@ -786,14 +717,14 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 					@Override
 					public void clusterChanged(ClusterChangedEvent event) {
 						if (start(true)) {
-							
+
 							clusterService.remove(this);
 						}
 					}
 
 					@Override
 					public void onTimeout(TimeValue timeValue) {
-						
+
 						if (start(true)) {
 							clusterService.remove(this);
 							return;
@@ -818,7 +749,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			}
 		}
 
-		
 		/**
 		 * Perform on primary.
 		 *
@@ -834,7 +764,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 						new PrimaryOperationRequest(primaryShardId, request));
 				performReplicas(response);
 			} catch (Exception e) {
-				
+
 				if (retryPrimaryException(e)) {
 					retry(fromDiscoveryListener, null);
 					return;
@@ -843,20 +773,18 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			}
 		}
 
-		
 		/**
 		 * Perform replicas.
 		 *
 		 * @param response the response
 		 */
 		void performReplicas(final PrimaryResponse<Response, ReplicaRequest> response) {
-			if (ignoreReplicas() || shardIt.size() == 1 ) {
+			if (ignoreReplicas() || shardIt.size() == 1) {
 				postPrimaryOperation(request, response);
 				listener.onResponse(response.response());
 				return;
 			}
 
-			
 			int replicaCounter = shardIt.assignedReplicasIncludingRelocating();
 
 			if (replicaCounter == 0) {
@@ -867,26 +795,23 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 
 			if (replicationType == ReplicationType.ASYNC) {
 				postPrimaryOperation(request, response);
-				
+
 				listener.onResponse(response.response());
-				
+
 				replicaCounter = Integer.MIN_VALUE;
 			}
 
-			
 			replicaCounter++;
 
 			AtomicInteger counter = new AtomicInteger(replicaCounter);
-			shardIt.reset(); 
+			shardIt.reset();
 			ShardRouting shard;
 			while ((shard = shardIt.nextOrNull()) != null) {
-				
+
 				if (shard.unassigned()) {
 					continue;
 				}
 
-				
-				
 				boolean doOnlyOnRelocating = false;
 				if (shard.primary()) {
 					if (shard.relocating()) {
@@ -895,9 +820,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 						continue;
 					}
 				}
-				
-				
-				
+
 				if (!doOnlyOnRelocating) {
 					performOnReplica(response, counter, shard, shard.currentNodeId());
 				}
@@ -906,15 +829,13 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 				}
 			}
 
-			
 			postPrimaryOperation(request, response);
-			
+
 			if (counter.decrementAndGet() == 0) {
 				listener.onResponse(response.response());
 			}
 		}
 
-		
 		/**
 		 * Perform on replica.
 		 *
@@ -925,8 +846,7 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		 */
 		void performOnReplica(final PrimaryResponse<Response, ReplicaRequest> response, final AtomicInteger counter,
 				final ShardRouting shard, String nodeId) {
-			
-			
+
 			if (!nodes.nodeExists(nodeId)) {
 				if (counter.decrementAndGet() == 0) {
 					listener.onResponse(response.response());
@@ -1003,7 +923,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 		}
 	}
 
-	
 	/**
 	 * The Class PrimaryResponse.
 	 *
@@ -1013,19 +932,15 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 	 */
 	public static class PrimaryResponse<Response, ReplicaRequest> {
 
-		
 		/** The replica request. */
 		private final ReplicaRequest replicaRequest;
 
-		
 		/** The response. */
 		private final Response response;
 
-		
 		/** The payload. */
 		private final Object payload;
 
-		
 		/**
 		 * Instantiates a new primary response.
 		 *
@@ -1039,7 +954,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			this.payload = payload;
 		}
 
-		
 		/**
 		 * Replica request.
 		 *
@@ -1049,7 +963,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			return this.replicaRequest;
 		}
 
-		
 		/**
 		 * Response.
 		 *
@@ -1059,7 +972,6 @@ public abstract class TransportShardReplicationOperationAction<Request extends S
 			return response;
 		}
 
-		
 		/**
 		 * Payload.
 		 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CacheKeyFilter.java 2012-3-29 15:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CacheKeyFilter.java 2012-7-6 14:28:51 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.filter.support;
 
@@ -15,7 +14,6 @@ import org.apache.lucene.search.Filter;
 
 import cn.com.rebirth.commons.Unicode;
 
-
 /**
  * The Interface CacheKeyFilter.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.commons.Unicode;
  */
 public interface CacheKeyFilter {
 
-	
 	/**
 	 * The Class Key.
 	 *
@@ -31,16 +28,12 @@ public interface CacheKeyFilter {
 	 */
 	public static class Key {
 
-		
 		/** The bytes. */
 		private final byte[] bytes;
 
-		
-		
 		/** The hash code. */
 		private final int hashCode;
 
-		
 		/**
 		 * Instantiates a new key.
 		 *
@@ -51,7 +44,6 @@ public interface CacheKeyFilter {
 			this.hashCode = Arrays.hashCode(bytes);
 		}
 
-		
 		/**
 		 * Instantiates a new key.
 		 *
@@ -61,7 +53,6 @@ public interface CacheKeyFilter {
 			this(Unicode.fromStringAsBytes(str));
 		}
 
-		
 		/**
 		 * Bytes.
 		 *
@@ -71,7 +62,6 @@ public interface CacheKeyFilter {
 			return this.bytes;
 		}
 
-		
 		/**
 		 * Utf8 to string.
 		 *
@@ -81,7 +71,6 @@ public interface CacheKeyFilter {
 			return Unicode.fromBytes(bytes);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -96,7 +85,6 @@ public interface CacheKeyFilter {
 			return Arrays.equals(bytes, bytesWrap.bytes);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -106,7 +94,6 @@ public interface CacheKeyFilter {
 		}
 	}
 
-	
 	/**
 	 * The Class Wrapper.
 	 *
@@ -114,15 +101,12 @@ public interface CacheKeyFilter {
 	 */
 	public static class Wrapper extends Filter implements CacheKeyFilter {
 
-		
 		/** The filter. */
 		private final Filter filter;
 
-		
 		/** The key. */
 		private final Key key;
 
-		
 		/**
 		 * Instantiates a new wrapper.
 		 *
@@ -134,16 +118,14 @@ public interface CacheKeyFilter {
 			this.key = key;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.cache.filter.support.CacheKeyFilter#cacheKey()
+		 * @see cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter#cacheKey()
 		 */
 		@Override
 		public Key cacheKey() {
 			return key;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */
@@ -152,7 +134,6 @@ public interface CacheKeyFilter {
 			return filter.getDocIdSet(reader);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -161,7 +142,6 @@ public interface CacheKeyFilter {
 			return filter.hashCode();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -170,7 +150,6 @@ public interface CacheKeyFilter {
 			return filter.equals(obj);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -180,7 +159,6 @@ public interface CacheKeyFilter {
 		}
 	}
 
-	
 	/**
 	 * Cache key.
 	 *

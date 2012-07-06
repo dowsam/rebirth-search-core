@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DisableAllocationDecider.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DisableAllocationDecider.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingNode;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
-
 
 /**
  * The Class DisableAllocationDecider.
@@ -27,7 +25,6 @@ public class DisableAllocationDecider extends AllocationDecider {
 				"cluster.routing.allocation.disable_replica_allocation");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -35,9 +32,8 @@ public class DisableAllocationDecider extends AllocationDecider {
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -60,15 +56,12 @@ public class DisableAllocationDecider extends AllocationDecider {
 		}
 	}
 
-	
 	/** The disable allocation. */
 	private volatile boolean disableAllocation;
 
-	
 	/** The disable replica allocation. */
 	private volatile boolean disableReplicaAllocation;
 
-	
 	/**
 	 * Instantiates a new disable allocation decider.
 	 *
@@ -85,9 +78,8 @@ public class DisableAllocationDecider extends AllocationDecider {
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public Decision canAllocate(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {

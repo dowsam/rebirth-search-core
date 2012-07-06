@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HighlightPhase.java 2012-3-29 15:02:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HighlightPhase.java 2012-7-6 14:30:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.highlight;
 
@@ -43,7 +42,7 @@ import org.apache.lucene.search.vectorhighlight.SimpleFragListBuilder;
 import org.apache.lucene.search.vectorhighlight.SimpleFragmentsBuilder;
 import org.apache.lucene.search.vectorhighlight.SingleFragListBuilder;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.commons.io.FastStringReader;
 import cn.com.rebirth.search.commons.lucene.document.SingleFieldSelector;
 import cn.com.rebirth.search.commons.lucene.search.function.FiltersFunctionScoreQuery;
@@ -64,7 +63,6 @@ import cn.com.rebirth.search.core.search.lookup.SearchLookup;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class HighlightPhase.
  *
@@ -72,7 +70,6 @@ import com.google.common.collect.Maps;
  */
 public class HighlightPhase implements FetchSubPhase {
 
-	
 	/**
 	 * The Class Encoders.
 	 *
@@ -80,57 +77,50 @@ public class HighlightPhase implements FetchSubPhase {
 	 */
 	public static class Encoders {
 
-		
-		/** The DEFAULT. */
+		/** The default. */
 		public static Encoder DEFAULT = new DefaultEncoder();
 
-		
-		/** The HTML. */
+		/** The html. */
 		public static Encoder HTML = new SimpleHTMLEncoder();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#parseElements()
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#parseElements()
 	 */
 	@Override
 	public Map<String, ? extends SearchParseElement> parseElements() {
 		return ImmutableMap.of("highlight", new HighlighterParseElement());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitsExecutionNeeded(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitsExecutionNeeded(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public boolean hitsExecutionNeeded(SearchContext context) {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitsExecute(cn.com.summall.search.core.search.internal.SearchContext, cn.com.summall.search.core.search.internal.InternalSearchHit[])
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitsExecute(cn.com.rebirth.search.core.search.internal.SearchContext, cn.com.rebirth.search.core.search.internal.InternalSearchHit[])
 	 */
 	@Override
-	public void hitsExecute(SearchContext context, InternalSearchHit[] hits) throws RestartException {
+	public void hitsExecute(SearchContext context, InternalSearchHit[] hits) throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitExecutionNeeded(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitExecutionNeeded(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public boolean hitExecutionNeeded(SearchContext context) {
 		return context.highlight() != null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitExecute(cn.com.summall.search.core.search.internal.SearchContext, cn.com.summall.search.core.search.fetch.FetchSubPhase.HitContext)
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitExecute(cn.com.rebirth.search.core.search.internal.SearchContext, cn.com.rebirth.search.core.search.fetch.FetchSubPhase.HitContext)
 	 */
 	@Override
-	public void hitExecute(SearchContext context, HitContext hitContext) throws RestartException {
-		
+	public void hitExecute(SearchContext context, HitContext hitContext) throws RebirthException {
+
 		HighlighterEntry cache = (HighlighterEntry) hitContext.cache().get("highlight");
 		if (cache == null) {
 			cache = new HighlighterEntry();
@@ -151,7 +141,7 @@ public class HighlightPhase implements FetchSubPhase {
 			if (mapper == null) {
 				MapperService.SmartNameFieldMappers fullMapper = context.mapperService().smartName(field.field());
 				if (fullMapper == null || !fullMapper.hasDocMapper()) {
-					
+
 					continue;
 				}
 				if (!fullMapper.docMapper().type().equals(hitContext.hit().type())) {
@@ -163,16 +153,10 @@ public class HighlightPhase implements FetchSubPhase {
 				}
 			}
 
-			
-			
 			if (mapper.termVector() != Field.TermVector.WITH_POSITIONS_OFFSETS) {
 				MapperHighlightEntry entry = cache.mappers.get(mapper);
 				if (entry == null) {
-					
-					
 
-					
-					
 					Query query = context.parsedQuery().query();
 					while (true) {
 						boolean extracted = false;
@@ -208,7 +192,7 @@ public class HighlightPhase implements FetchSubPhase {
 					entry = new MapperHighlightEntry();
 					entry.highlighter = new Highlighter(formatter, encoder, queryScorer);
 					entry.highlighter.setTextFragmenter(fragmenter);
-					
+
 					entry.highlighter.setMaxDocCharsToAnalyze(Integer.MAX_VALUE);
 
 					cache.mappers.put(mapper, entry);
@@ -236,7 +220,6 @@ public class HighlightPhase implements FetchSubPhase {
 					textsToHighlight = lookup.source().extractRawValues(mapper.names().sourcePath());
 				}
 
-				
 				int numberOfFragments = field.numberOfFragments() == 0 ? 1 : field.numberOfFragments();
 				ArrayList<TextFragment> fragsList = new ArrayList<TextFragment>();
 				try {
@@ -266,14 +249,14 @@ public class HighlightPhase implements FetchSubPhase {
 					});
 				}
 				String[] fragments = null;
-				
+
 				if (field.numberOfFragments() == 0 && textsToHighlight.size() > 1 && fragsList.size() > 0) {
 					fragments = new String[1];
 					for (int i = 0; i < fragsList.size(); i++) {
 						fragments[0] = (fragments[0] != null ? (fragments[0] + " ") : "") + fragsList.get(i).toString();
 					}
 				} else {
-					
+
 					numberOfFragments = fragsList.size() < numberOfFragments ? fragsList.size() : numberOfFragments;
 					fragments = new String[numberOfFragments];
 					for (int i = 0; i < fragments.length; i++) {
@@ -337,22 +320,20 @@ public class HighlightPhase implements FetchSubPhase {
 						entry.fragListBuilder = fragListBuilder;
 						entry.fragmentsBuilder = fragmentsBuilder;
 						if (cache.fvh == null) {
-							
-							
-							
+
 							cache.fvh = new FastVectorHighlighter();
 						}
 						CustomFieldQuery.highlightFilters.set(field.highlightFilter());
 						if (field.requireFieldMatch()) {
 							if (cache.fieldMatchFieldQuery == null) {
-								
+
 								cache.fieldMatchFieldQuery = new CustomFieldQuery(context.parsedQuery().query(),
 										hitContext.topLevelReader(), true, field.requireFieldMatch());
 							}
 							fieldQuery = cache.fieldMatchFieldQuery;
 						} else {
 							if (cache.noFieldMatchFieldQuery == null) {
-								
+
 								cache.noFieldMatchFieldQuery = new CustomFieldQuery(context.parsedQuery().query(),
 										hitContext.topLevelReader(), true, field.requireFieldMatch());
 							}
@@ -363,9 +344,8 @@ public class HighlightPhase implements FetchSubPhase {
 
 					String[] fragments;
 
-					
 					int numberOfFragments = field.numberOfFragments() == 0 ? 1 : field.numberOfFragments();
-					
+
 					fragments = cache.fvh.getBestFragments(fieldQuery, hitContext.reader(), hitContext.docId(), mapper
 							.names().indexName(), field.fragmentCharSize(), numberOfFragments, entry.fragListBuilder,
 							entry.fragmentsBuilder, field.preTags(), field.postTags(), encoder);
@@ -384,7 +364,6 @@ public class HighlightPhase implements FetchSubPhase {
 		hitContext.hit().highlightFields(highlightFields);
 	}
 
-	
 	/**
 	 * The Class MapperHighlightEntry.
 	 *
@@ -392,20 +371,16 @@ public class HighlightPhase implements FetchSubPhase {
 	 */
 	static class MapperHighlightEntry {
 
-		
 		/** The frag list builder. */
 		public FragListBuilder fragListBuilder;
 
-		
 		/** The fragments builder. */
 		public FragmentsBuilder fragmentsBuilder;
 
-		
 		/** The highlighter. */
 		public Highlighter highlighter;
 	}
 
-	
 	/**
 	 * The Class HighlighterEntry.
 	 *
@@ -413,19 +388,15 @@ public class HighlightPhase implements FetchSubPhase {
 	 */
 	static class HighlighterEntry {
 
-		
 		/** The fvh. */
 		public FastVectorHighlighter fvh;
 
-		
 		/** The no field match field query. */
 		public FieldQuery noFieldMatchFieldQuery;
 
-		
 		/** The field match field query. */
 		public FieldQuery fieldMatchFieldQuery;
 
-		
 		/** The mappers. */
 		public Map<FieldMapper, MapperHighlightEntry> mappers = Maps.newHashMap();
 	}

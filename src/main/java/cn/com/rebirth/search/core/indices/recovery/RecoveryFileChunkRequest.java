@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryFileChunkRequest.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryFileChunkRequest.java 2012-7-6 14:29:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 
-
 /**
  * The Class RecoveryFileChunkRequest.
  *
@@ -23,38 +21,30 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 class RecoveryFileChunkRequest implements Streamable {
 
-	
 	/** The shard id. */
 	private ShardId shardId;
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The position. */
 	private long position;
 
-	
 	/** The length. */
 	private long length;
 
-	
 	/** The checksum. */
 	private String checksum;
 
-	
 	/** The content. */
 	private BytesHolder content;
 
-	
 	/**
 	 * Instantiates a new recovery file chunk request.
 	 */
 	RecoveryFileChunkRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new recovery file chunk request.
 	 *
@@ -75,7 +65,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		this.content = content;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -85,7 +74,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		return shardId;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -95,7 +83,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		return name;
 	}
 
-	
 	/**
 	 * Position.
 	 *
@@ -105,7 +92,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		return position;
 	}
 
-	
 	/**
 	 * Checksum.
 	 *
@@ -116,7 +102,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		return this.checksum;
 	}
 
-	
 	/**
 	 * Length.
 	 *
@@ -126,7 +111,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		return length;
 	}
 
-	
 	/**
 	 * Content.
 	 *
@@ -136,7 +120,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		return content;
 	}
 
-	
 	/**
 	 * Read file chunk.
 	 *
@@ -150,9 +133,8 @@ class RecoveryFileChunkRequest implements Streamable {
 		return request;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -166,9 +148,8 @@ class RecoveryFileChunkRequest implements Streamable {
 		content = in.readBytesReference();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -185,7 +166,6 @@ class RecoveryFileChunkRequest implements Streamable {
 		out.writeBytesHolder(content);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

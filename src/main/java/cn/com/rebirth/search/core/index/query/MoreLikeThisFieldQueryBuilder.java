@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MoreLikeThisFieldQueryBuilder.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MoreLikeThisFieldQueryBuilder.java 2012-7-6 14:29:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class MoreLikeThisFieldQueryBuilder.
@@ -18,59 +16,45 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The like text. */
 	private String likeText;
 
-	
 	/** The percent terms to match. */
 	private float percentTermsToMatch = -1;
 
-	
 	/** The min term freq. */
 	private int minTermFreq = -1;
 
-	
 	/** The max query terms. */
 	private int maxQueryTerms = -1;
 
-	
 	/** The stop words. */
 	private String[] stopWords = null;
 
-	
 	/** The min doc freq. */
 	private int minDocFreq = -1;
 
-	
 	/** The max doc freq. */
 	private int maxDocFreq = -1;
 
-	
 	/** The min word len. */
 	private int minWordLen = -1;
 
-	
 	/** The max word len. */
 	private int maxWordLen = -1;
 
-	
 	/** The boost terms. */
 	private float boostTerms = -1;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The analyzer. */
 	private String analyzer;
 
-	
 	/**
 	 * Instantiates a new more like this field query builder.
 	 *
@@ -80,7 +64,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		this.name = name;
 	}
 
-	
 	/**
 	 * Like text.
 	 *
@@ -92,7 +75,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Percent terms to match.
 	 *
@@ -104,7 +86,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Min term freq.
 	 *
@@ -116,7 +97,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Max query terms.
 	 *
@@ -128,7 +108,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Stop words.
 	 *
@@ -140,7 +119,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Min doc freq.
 	 *
@@ -152,7 +130,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Max doc freq.
 	 *
@@ -164,7 +141,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Min word len.
 	 *
@@ -176,7 +152,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Max word len.
 	 *
@@ -188,7 +163,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost terms.
 	 *
@@ -200,7 +174,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -212,7 +185,6 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -224,9 +196,8 @@ public class MoreLikeThisFieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportIndexAction.java 2012-3-29 15:02:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportIndexAction.java 2012-7-6 14:30:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.index;
 
@@ -41,7 +40,6 @@ import cn.com.rebirth.search.core.indices.IndicesService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportIndexAction.
  *
@@ -50,27 +48,21 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public class TransportIndexAction extends
 		TransportShardReplicationOperationAction<IndexRequest, IndexRequest, IndexResponse> {
 
-	
 	/** The auto create index. */
 	private final boolean autoCreateIndex;
 
-	
 	/** The allow id generation. */
 	private final boolean allowIdGeneration;
 
-	
 	/** The create index action. */
 	private final TransportCreateIndexAction createIndexAction;
 
-	
 	/** The mapping updated action. */
 	private final MappingUpdatedAction mappingUpdatedAction;
 
-	
 	/** The wait for mapping change. */
 	private final boolean waitForMappingChange;
 
-	
 	/**
 	 * Instantiates a new transport index action.
 	 *
@@ -95,15 +87,14 @@ public class TransportIndexAction extends
 		this.waitForMappingChange = settings.getAsBoolean("action.wait_on_mapping_change", false);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#doExecute(cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#doExecute(cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final IndexRequest request, final ActionListener<IndexResponse> listener) {
-		
+
 		if (autoCreateIndex && !clusterService.state().metaData().hasConcreteIndex(request.index())) {
-			request.beforeLocalFork(); 
+			request.beforeLocalFork();
 			createIndexAction.execute(new CreateIndexRequest(request.index()).cause("auto(index api)")
 					.masterNodeTimeout(request.timeout()), new ActionListener<CreateIndexResponse>() {
 				@Override
@@ -114,7 +105,7 @@ public class TransportIndexAction extends
 				@Override
 				public void onFailure(Throwable e) {
 					if (ExceptionsHelper.unwrapCause(e) instanceof IndexAlreadyExistsException) {
-						
+
 						try {
 							innerExecute(request, listener);
 						} catch (Exception e1) {
@@ -130,9 +121,8 @@ public class TransportIndexAction extends
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#resolveRequest(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#resolveRequest(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected boolean resolveRequest(ClusterState state, IndexRequest request,
@@ -148,7 +138,6 @@ public class TransportIndexAction extends
 		return true;
 	}
 
-	
 	/**
 	 * Inner execute.
 	 *
@@ -159,81 +148,72 @@ public class TransportIndexAction extends
 		super.doExecute(request, listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
 	 */
 	@Override
 	protected boolean checkWriteConsistency() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
 	 */
 	@Override
 	protected IndexRequest newRequestInstance() {
 		return new IndexRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
 	 */
 	@Override
 	protected IndexRequest newReplicaRequestInstance() {
 		return new IndexRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
 	 */
 	@Override
 	protected IndexResponse newResponseInstance() {
 		return new IndexResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return IndexAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.INDEX;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, IndexRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.WRITE);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, IndexRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.WRITE, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ShardIterator shards(ClusterState clusterState, IndexRequest request) {
@@ -241,16 +221,14 @@ public class TransportIndexAction extends
 				request.id(), request.routing());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
 	 */
 	@Override
 	protected PrimaryResponse<IndexResponse, IndexRequest> shardOperationOnPrimary(ClusterState clusterState,
 			PrimaryOperationRequest shardRequest) {
 		final IndexRequest request = shardRequest.request;
 
-		
 		MappingMetaData mappingMd = clusterState.metaData().index(request.index()).mapping(request.type());
 		if (mappingMd != null && mappingMd.routing().required()) {
 			if (request.routing() == null) {
@@ -283,22 +261,21 @@ public class TransportIndexAction extends
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 		if (op.parsedDoc().mappersAdded()) {
 			updateMappingOnMaster(request);
 		}
-		
+
 		request.version(version);
 
 		IndexResponse response = new IndexResponse(request.index(), request.type(), request.id(), version);
 		return new PrimaryResponse<IndexResponse, IndexRequest>(shardRequest.request, response, op);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#postPrimaryOperation(cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryResponse)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#postPrimaryOperation(cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryResponse)
 	 */
 	@Override
 	protected void postPrimaryOperation(IndexRequest request, PrimaryResponse<IndexResponse, IndexRequest> response) {
@@ -316,9 +293,8 @@ public class TransportIndexAction extends
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
 	 */
 	@Override
 	protected void shardOperationOnReplica(ReplicaOperationRequest shardRequest) {
@@ -342,12 +318,11 @@ public class TransportIndexAction extends
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
 
-	
 	/**
 	 * Update mapping on master.
 	 *
@@ -358,7 +333,7 @@ public class TransportIndexAction extends
 		try {
 			MapperService mapperService = indicesService.indexServiceSafe(request.index()).mapperService();
 			final DocumentMapper documentMapper = mapperService.documentMapper(request.type());
-			if (documentMapper == null) { 
+			if (documentMapper == null) {
 				return;
 			}
 			documentMapper.refreshSource();
@@ -368,7 +343,7 @@ public class TransportIndexAction extends
 					new ActionListener<MappingUpdatedAction.MappingUpdatedResponse>() {
 						@Override
 						public void onResponse(MappingUpdatedAction.MappingUpdatedResponse mappingUpdatedResponse) {
-							
+
 							latch.countDown();
 						}
 
@@ -380,7 +355,7 @@ public class TransportIndexAction extends
 										+ "], type [" + request.type() + "] and source ["
 										+ documentMapper.mappingSource().string() + "]", e);
 							} catch (IOException e1) {
-								
+
 							}
 						}
 					});
@@ -394,7 +369,7 @@ public class TransportIndexAction extends
 			try {
 				latch.await(5, TimeUnit.SECONDS);
 			} catch (InterruptedException e) {
-				
+
 			}
 		}
 	}

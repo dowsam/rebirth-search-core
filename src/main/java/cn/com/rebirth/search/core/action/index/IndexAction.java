@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexAction.java 2012-3-29 15:02:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexAction.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.index;
 
 import cn.com.rebirth.search.core.action.Action;
 import cn.com.rebirth.search.core.client.Client;
-
 
 /**
  * The Class IndexAction.
@@ -17,37 +15,32 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class IndexAction extends Action<IndexRequest, IndexResponse, IndexRequestBuilder> {
 
-    
-    /** The Constant INSTANCE. */
-    public static final IndexAction INSTANCE = new IndexAction();
-    
-    
-    /** The Constant NAME. */
-    public static final String NAME = "index";
+	/** The Constant INSTANCE. */
+	public static final IndexAction INSTANCE = new IndexAction();
 
-    
-    /**
-     * Instantiates a new index action.
-     */
-    private IndexAction() {
-        super(NAME);
-    }
+	/** The Constant NAME. */
+	public static final String NAME = "index";
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.GenericAction#newResponse()
-     */
-    @Override
-    public IndexResponse newResponse() {
-        return new IndexResponse();
-    }
+	/**
+	 * Instantiates a new index action.
+	 */
+	private IndexAction() {
+		super(NAME);
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.action.Action#newRequestBuilder(cn.com.summall.search.core.client.Client)
-     */
-    @Override
-    public IndexRequestBuilder newRequestBuilder(Client client) {
-        return new IndexRequestBuilder(client);
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.GenericAction#newResponse()
+	 */
+	@Override
+	public IndexResponse newResponse() {
+		return new IndexResponse();
+	}
+
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.action.Action#newRequestBuilder(cn.com.rebirth.search.core.client.Client)
+	 */
+	@Override
+	public IndexRequestBuilder newRequestBuilder(Client client) {
+		return new IndexRequestBuilder(client);
+	}
 }

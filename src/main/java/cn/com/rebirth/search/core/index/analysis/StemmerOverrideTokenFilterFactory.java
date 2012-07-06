@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StemmerOverrideTokenFilterFactory.java 2012-3-29 15:01:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StemmerOverrideTokenFilterFactory.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -15,7 +14,7 @@ import org.apache.lucene.analysis.miscellaneous.StemmerOverrideFilter;
 import org.apache.lucene.util.Version;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
@@ -23,18 +22,15 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating StemmerOverrideTokenFilter objects.
  */
 @AnalysisSettingsRequired
 public class StemmerOverrideTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/** The dictionary. */
 	private final Map<String, String> dictionary;
 
-	
 	/**
 	 * Instantiates a new stemmer override token filter factory.
 	 *
@@ -51,23 +47,21 @@ public class StemmerOverrideTokenFilterFactory extends AbstractTokenFilterFactor
 
 		List<String> rules = Analysis.getWordList(env, settings, "rules");
 		if (rules == null) {
-			throw new RestartIllegalArgumentException(
+			throw new RebirthIllegalArgumentException(
 					"stemmer override filter requires either `rules` or `rules_path` to be configured");
 		}
 		dictionary = new HashMap<String, String>();
 		parseRules(rules, dictionary, "=>");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {
 		return new StemmerOverrideFilter(Version.LUCENE_32, tokenStream, dictionary);
 	}
 
-	
 	/**
 	 * Parses the rules.
 	 *

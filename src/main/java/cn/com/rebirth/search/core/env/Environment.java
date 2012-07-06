@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Environment.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Environment.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.env;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.io.Streams;
 import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.cluster.ClusterName;
 
-
 /**
  * The Class Environment.
  *
@@ -26,43 +24,33 @@ import cn.com.rebirth.search.core.cluster.ClusterName;
  */
 public class Environment {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The home file. */
 	private final File homeFile;
 
-	
 	/** The work file. */
 	private final File workFile;
 
-	
 	/** The work with cluster file. */
 	private final File workWithClusterFile;
 
-	
 	/** The data files. */
 	private final File[] dataFiles;
 
-	
 	/** The data with cluster files. */
 	private final File[] dataWithClusterFiles;
 
-	
 	/** The config file. */
 	private final File configFile;
 
-	
 	/** The plugins file. */
 	private final File pluginsFile;
 
-	
 	/** The logs file. */
 	private final File logsFile;
 
-	
 	/**
 	 * Instantiates a new environment.
 	 */
@@ -70,7 +58,6 @@ public class Environment {
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS);
 	}
 
-	
 	/**
 	 * Instantiates a new environment.
 	 *
@@ -124,7 +111,6 @@ public class Environment {
 		}
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -134,7 +120,6 @@ public class Environment {
 		return this.settings;
 	}
 
-	
 	/**
 	 * Home file.
 	 *
@@ -144,7 +129,6 @@ public class Environment {
 		return homeFile;
 	}
 
-	
 	/**
 	 * Work file.
 	 *
@@ -154,7 +138,6 @@ public class Environment {
 		return workFile;
 	}
 
-	
 	/**
 	 * Work with cluster file.
 	 *
@@ -164,7 +147,6 @@ public class Environment {
 		return workWithClusterFile;
 	}
 
-	
 	/**
 	 * Data files.
 	 *
@@ -174,7 +156,6 @@ public class Environment {
 		return dataFiles;
 	}
 
-	
 	/**
 	 * Data with cluster files.
 	 *
@@ -184,7 +165,6 @@ public class Environment {
 		return dataWithClusterFiles;
 	}
 
-	
 	/**
 	 * Config file.
 	 *
@@ -194,7 +174,6 @@ public class Environment {
 		return configFile;
 	}
 
-	
 	/**
 	 * Plugins file.
 	 *
@@ -204,7 +183,6 @@ public class Environment {
 		return pluginsFile;
 	}
 
-	
 	/**
 	 * Logs file.
 	 *
@@ -214,7 +192,6 @@ public class Environment {
 		return logsFile;
 	}
 
-	
 	/**
 	 * Resolve config and load to string.
 	 *
@@ -227,17 +204,16 @@ public class Environment {
 		return Streams.copyToString(new InputStreamReader(resolveConfig(path).openStream(), "UTF-8"));
 	}
 
-	
 	/**
 	 * Resolve config.
 	 *
 	 * @param path the path
-	 * @return the uRL
+	 * @return the url
 	 * @throws FailedToResolveConfigException the failed to resolve config exception
 	 */
 	public URL resolveConfig(String path) throws FailedToResolveConfigException {
 		String origPath = path;
-		
+
 		File f1 = new File(path);
 		if (f1.exists()) {
 			try {
@@ -249,7 +225,7 @@ public class Environment {
 		if (path.startsWith("/")) {
 			path = path.substring(1);
 		}
-		
+
 		File f2 = new File(configFile, path);
 		if (f2.exists()) {
 			try {
@@ -258,12 +234,12 @@ public class Environment {
 				throw new FailedToResolveConfigException("Failed to resolve path [" + f2 + "]", e);
 			}
 		}
-		
+
 		URL resource = settings.getClassLoader().getResource(path);
 		if (resource != null) {
 			return resource;
 		}
-		
+
 		if (!path.startsWith("config/")) {
 			resource = settings.getClassLoader().getResource("config/" + path);
 			if (resource != null) {

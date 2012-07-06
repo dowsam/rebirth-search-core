@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OperationRouting.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OperationRouting.java 2012-7-6 14:29:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.operation;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.cluster.routing.ShardIterator;
 import cn.com.rebirth.search.core.index.IndexShardMissingException;
 import cn.com.rebirth.search.core.indices.IndexMissingException;
 
-
 /**
  * The Interface OperationRouting.
  *
@@ -24,7 +22,6 @@ import cn.com.rebirth.search.core.indices.IndexMissingException;
  */
 public interface OperationRouting {
 
-	
 	/**
 	 * Index shards.
 	 *
@@ -40,7 +37,6 @@ public interface OperationRouting {
 	ShardIterator indexShards(ClusterState clusterState, String index, String type, String id, @Nullable String routing)
 			throws IndexMissingException, IndexShardMissingException;
 
-	
 	/**
 	 * Delete shards.
 	 *
@@ -56,7 +52,6 @@ public interface OperationRouting {
 	ShardIterator deleteShards(ClusterState clusterState, String index, String type, String id, @Nullable String routing)
 			throws IndexMissingException, IndexShardMissingException;
 
-	
 	/**
 	 * Broadcast delete shards.
 	 *
@@ -69,7 +64,6 @@ public interface OperationRouting {
 	GroupShardsIterator broadcastDeleteShards(ClusterState clusterState, String index) throws IndexMissingException,
 			IndexShardMissingException;
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -86,7 +80,6 @@ public interface OperationRouting {
 	ShardIterator getShards(ClusterState clusterState, String index, String type, String id, @Nullable String routing,
 			@Nullable String preference) throws IndexMissingException, IndexShardMissingException;
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -101,7 +94,6 @@ public interface OperationRouting {
 	ShardIterator getShards(ClusterState clusterState, String index, int shardId, @Nullable String preference)
 			throws IndexMissingException, IndexShardMissingException;
 
-	
 	/**
 	 * Delete by query shards.
 	 *
@@ -114,7 +106,6 @@ public interface OperationRouting {
 	GroupShardsIterator deleteByQueryShards(ClusterState clusterState, String index, @Nullable Set<String> routing)
 			throws IndexMissingException;
 
-	
 	/**
 	 * Search shards count.
 	 *
@@ -131,7 +122,6 @@ public interface OperationRouting {
 			@Nullable String queryHint, @Nullable Map<String, Set<String>> routing, @Nullable String preference)
 			throws IndexMissingException;
 
-	
 	/**
 	 * Search shards.
 	 *

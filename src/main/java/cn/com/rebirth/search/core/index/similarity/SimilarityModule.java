@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SimilarityModule.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SimilarityModule.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.similarity;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.inject.Scopes;
 import cn.com.rebirth.search.commons.inject.assistedinject.FactoryProvider;
 import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
 
-
 /**
  * The Class SimilarityModule.
  *
@@ -22,11 +20,9 @@ import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
  */
 public class SimilarityModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/**
 	 * Instantiates a new similarity module.
 	 *
@@ -36,9 +32,8 @@ public class SimilarityModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
@@ -51,7 +46,7 @@ public class SimilarityModule extends AbstractModule {
 			Settings settings = entry.getValue();
 
 			Class<? extends SimilarityProvider> type = settings.getAsClass("type", null,
-					"cn.com.summall.search.core.index.similarity.", "SimilarityProvider");
+					"cn.com.rebirth.search.core.index.similarity.", "SimilarityProvider");
 			if (type == null) {
 				throw new IllegalArgumentException("Similarity [" + name + "] must have a type associated with it");
 			}

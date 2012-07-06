@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractTokenFilterFactory.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractTokenFilterFactory.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -14,21 +13,17 @@ import cn.com.rebirth.search.core.index.AbstractIndexComponent;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating AbstractTokenFilter objects.
  */
 public abstract class AbstractTokenFilterFactory extends AbstractIndexComponent implements TokenFilterFactory {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The version. */
 	protected final Version version;
 
-	
 	/**
 	 * Instantiates a new abstract token filter factory.
 	 *
@@ -43,9 +38,8 @@ public abstract class AbstractTokenFilterFactory extends AbstractIndexComponent 
 		this.version = Lucene.parseVersion(settings.get("version"), Lucene.ANALYZER_VERSION);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#name()
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#name()
 	 */
 	@Override
 	public String name() {

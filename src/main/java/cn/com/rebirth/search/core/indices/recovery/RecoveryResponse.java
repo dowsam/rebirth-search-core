@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryResponse.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryResponse.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.commons.io.stream.Streamable;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class RecoveryResponse.
  *
@@ -23,68 +21,53 @@ import com.google.common.collect.Lists;
  */
 class RecoveryResponse implements Streamable {
 
-	
 	/** The phase1 file names. */
 	List<String> phase1FileNames = Lists.newArrayList();
 
-	
 	/** The phase1 file sizes. */
 	List<Long> phase1FileSizes = Lists.newArrayList();
 
-	
 	/** The phase1 existing file names. */
 	List<String> phase1ExistingFileNames = Lists.newArrayList();
 
-	
 	/** The phase1 existing file sizes. */
 	List<Long> phase1ExistingFileSizes = Lists.newArrayList();
 
-	
 	/** The phase1 total size. */
 	long phase1TotalSize;
 
-	
 	/** The phase1 existing total size. */
 	long phase1ExistingTotalSize;
 
-	
 	/** The phase1 time. */
 	long phase1Time;
 
-	
 	/** The phase1 throttling wait time. */
 	long phase1ThrottlingWaitTime;
 
-	
 	/** The start time. */
 	long startTime;
 
-	
 	/** The phase2 operations. */
 	int phase2Operations;
 
-	
 	/** The phase2 time. */
 	long phase2Time;
 
-	
 	/** The phase3 operations. */
 	int phase3Operations;
 
-	
 	/** The phase3 time. */
 	long phase3Time;
 
-	
 	/**
 	 * Instantiates a new recovery response.
 	 */
 	RecoveryResponse() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -121,9 +104,8 @@ class RecoveryResponse implements Streamable {
 		phase3Time = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

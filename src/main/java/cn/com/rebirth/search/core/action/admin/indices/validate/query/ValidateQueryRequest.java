@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ValidateQueryRequest.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ValidateQueryRequest.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.validate.query;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThr
 import cn.com.rebirth.search.core.client.Requests;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 
-
 /**
  * The Class ValidateQueryRequest.
  *
@@ -37,38 +35,30 @@ import cn.com.rebirth.search.core.index.query.QueryBuilder;
  */
 public class ValidateQueryRequest extends BroadcastOperationRequest {
 
-	
 	/** The Constant contentType. */
 	private static final XContentType contentType = Requests.CONTENT_TYPE;
 
-	
 	/** The query source. */
 	private byte[] querySource;
 
-	
 	/** The query source offset. */
 	private int querySourceOffset;
 
-	
 	/** The query source length. */
 	private int querySourceLength;
 
-	
 	/** The query source unsafe. */
 	private boolean querySourceUnsafe;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/**
 	 * Instantiates a new validate query request.
 	 */
 	ValidateQueryRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new validate query request.
 	 *
@@ -78,9 +68,8 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		super(indices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -88,9 +77,8 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationThreading)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading)
 	 */
 	@Override
 	public ValidateQueryRequest operationThreading(BroadcastOperationThreading operationThreading) {
@@ -98,9 +86,8 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#beforeStart()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#beforeStart()
 	 */
 	@Override
 	protected void beforeStart() {
@@ -111,9 +98,8 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public ValidateQueryRequest listenerThreaded(boolean threadedListener) {
@@ -121,16 +107,14 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#indices(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#indices(java.lang.String[])
 	 */
 	public ValidateQueryRequest indices(String... indices) {
 		this.indices = indices;
 		return this;
 	}
 
-	
 	/**
 	 * Query source.
 	 *
@@ -140,7 +124,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return new BytesHolder(querySource, querySourceOffset, querySourceLength);
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -157,7 +140,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -175,7 +157,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -195,7 +176,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -212,7 +192,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -224,7 +203,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return query(querySource, 0, querySource.length, false);
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -243,7 +221,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -253,7 +230,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this.types;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -265,9 +241,8 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -288,9 +263,8 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -304,7 +278,6 @@ public class ValidateQueryRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

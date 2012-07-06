@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CustomScoreQueryParser.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CustomScoreQueryParser.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.script.SearchScript;
 
-
 /**
  * The Class CustomScoreQueryParser.
  *
@@ -28,11 +26,9 @@ import cn.com.rebirth.search.core.script.SearchScript;
  */
 public class CustomScoreQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "custom_score";
 
-	
 	/**
 	 * Instantiates a new custom score query parser.
 	 */
@@ -40,18 +36,16 @@ public class CustomScoreQueryParser implements QueryParser {
 	public CustomScoreQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -105,7 +99,6 @@ public class CustomScoreQueryParser implements QueryParser {
 		return functionScoreQuery;
 	}
 
-	
 	/**
 	 * The Class ScriptScoreFunction.
 	 *
@@ -113,19 +106,15 @@ public class CustomScoreQueryParser implements QueryParser {
 	 */
 	public static class ScriptScoreFunction implements ScoreFunction {
 
-		
 		/** The s script. */
 		private final String sScript;
 
-		
 		/** The params. */
 		private final Map<String, Object> params;
 
-		
 		/** The script. */
 		private final SearchScript script;
 
-		
 		/**
 		 * Instantiates a new script score function.
 		 *
@@ -139,18 +128,16 @@ public class CustomScoreQueryParser implements QueryParser {
 			this.script = script;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.search.function.ScoreFunction#setNextReader(org.apache.lucene.index.IndexReader)
+		 * @see cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction#setNextReader(org.apache.lucene.index.IndexReader)
 		 */
 		@Override
 		public void setNextReader(IndexReader reader) {
 			script.setNextReader(reader);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.search.function.ScoreFunction#score(int, float)
+		 * @see cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction#score(int, float)
 		 */
 		@Override
 		public float score(int docId, float subQueryScore) {
@@ -159,20 +146,18 @@ public class CustomScoreQueryParser implements QueryParser {
 			return script.runAsFloat();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.search.function.ScoreFunction#factor(int)
+		 * @see cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction#factor(int)
 		 */
 		@Override
 		public float factor(int docId) {
-			
+
 			script.setNextDocId(docId);
 			return script.runAsFloat();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.search.function.ScoreFunction#explainScore(int, org.apache.lucene.search.Explanation)
+		 * @see cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction#explainScore(int, org.apache.lucene.search.Explanation)
 		 */
 		@Override
 		public Explanation explainScore(int docId, Explanation subQueryExpl) {
@@ -182,16 +167,14 @@ public class CustomScoreQueryParser implements QueryParser {
 			return exp;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.search.function.ScoreFunction#explainFactor(int)
+		 * @see cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction#explainFactor(int)
 		 */
 		@Override
 		public Explanation explainFactor(int docId) {
 			return new Explanation(factor(docId), "scriptFactor");
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */

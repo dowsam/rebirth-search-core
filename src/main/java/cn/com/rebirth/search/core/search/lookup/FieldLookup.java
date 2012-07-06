@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldLookup.java 2012-3-29 15:01:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldLookup.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.lookup;
 
@@ -14,7 +13,6 @@ import org.apache.lucene.document.Fieldable;
 
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 
-
 /**
  * The Class FieldLookup.
  *
@@ -22,31 +20,24 @@ import cn.com.rebirth.search.core.index.mapper.FieldMapper;
  */
 public class FieldLookup {
 
-	
 	/** The mapper. */
 	private final FieldMapper mapper;
 
-	
 	/** The doc. */
 	private Document doc;
 
-	
 	/** The value. */
 	private Object value;
 
-	
 	/** The value loaded. */
 	private boolean valueLoaded = false;
 
-	
 	/** The values. */
 	private List<Object> values = new ArrayList<Object>();
 
-	
 	/** The values loaded. */
 	private boolean valuesLoaded = false;
 
-	
 	/**
 	 * Instantiates a new field lookup.
 	 *
@@ -56,7 +47,6 @@ public class FieldLookup {
 		this.mapper = mapper;
 	}
 
-	
 	/**
 	 * Mapper.
 	 *
@@ -66,7 +56,6 @@ public class FieldLookup {
 		return mapper;
 	}
 
-	
 	/**
 	 * Doc.
 	 *
@@ -76,7 +65,6 @@ public class FieldLookup {
 		return doc;
 	}
 
-	
 	/**
 	 * Doc.
 	 *
@@ -86,7 +74,6 @@ public class FieldLookup {
 		this.doc = doc;
 	}
 
-	
 	/**
 	 * Clear.
 	 */
@@ -98,7 +85,6 @@ public class FieldLookup {
 		doc = null;
 	}
 
-	
 	/**
 	 * Checks if is empty.
 	 *
@@ -114,7 +100,6 @@ public class FieldLookup {
 		return getValue() == null;
 	}
 
-	
 	/**
 	 * Gets the value.
 	 *
@@ -134,7 +119,6 @@ public class FieldLookup {
 		return value;
 	}
 
-	
 	/**
 	 * Gets the values.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalDiscovery.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalDiscovery.java 2012-7-6 14:29:00 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.local;
 
@@ -19,8 +18,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import jsr166y.LinkedTransferQueue;
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -39,7 +38,6 @@ import cn.com.rebirth.search.core.discovery.InitialStateDiscoveryListener;
 import cn.com.rebirth.search.core.node.service.NodeService;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class LocalDiscovery.
  *
@@ -47,48 +45,36 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implements Discovery {
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The discovery node service. */
 	private final DiscoveryNodeService discoveryNodeService;
 
-	
 	/** The cluster name. */
 	private final ClusterName clusterName;
 
-	
 	/** The local node. */
 	private DiscoveryNode localNode;
 
-	
 	/** The master. */
 	private volatile boolean master = false;
 
-	
 	/** The initial state sent. */
 	private final AtomicBoolean initialStateSent = new AtomicBoolean();
 
-	
 	/** The initial state listeners. */
 	private final CopyOnWriteArrayList<InitialStateDiscoveryListener> initialStateListeners = new CopyOnWriteArrayList<InitialStateDiscoveryListener>();
 
-	
-	
 	/** The Constant clusterGroups. */
 	private static final ConcurrentMap<ClusterName, ClusterGroup> clusterGroups = new ConcurrentHashMap<ClusterName, ClusterGroup>();
 
-	
 	/** The Constant nodeIdGenerator. */
 	private static final AtomicLong nodeIdGenerator = new AtomicLong();
 
-	
 	/**
 	 * Instantiates a new local discovery.
 	 *
@@ -108,21 +94,19 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 		this.discoveryNodeService = discoveryNodeService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#setNodeService(cn.com.summall.search.core.node.service.NodeService)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#setNodeService(cn.com.rebirth.search.core.node.service.NodeService)
 	 */
 	@Override
 	public void setNodeService(@Nullable NodeService nodeService) {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		synchronized (clusterGroups) {
 			ClusterGroup clusterGroup = clusterGroups.get(clusterName);
 			if (clusterGroup == null) {
@@ -144,7 +128,7 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 			}
 
 			if (firstMaster != null && firstMaster.equals(this)) {
-				
+
 				master = true;
 				final LocalDiscovery master = firstMaster;
 				clusterService.submitStateUpdateTask("local-disco-initial_connect(master)",
@@ -156,7 +140,7 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 									nodesBuilder.put(discovery.localNode);
 								}
 								nodesBuilder.localNodeId(master.localNode().id()).masterNodeId(master.localNode().id());
-								
+
 								ClusterBlocks.Builder blocks = ClusterBlocks.builder().blocks(currentState.blocks())
 										.removeGlobalBlock(Discovery.NO_MASTER_BLOCK);
 								return newClusterStateBuilder().state(currentState).nodes(nodesBuilder).blocks(blocks)
@@ -169,12 +153,12 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 							}
 						});
 			} else if (firstMaster != null) {
-				
+
 				final ClusterState masterState = firstMaster.clusterService.state();
 				clusterService.submitStateUpdateTask("local-disco(detected_master)", new ClusterStateUpdateTask() {
 					@Override
 					public ClusterState execute(ClusterState currentState) {
-						
+
 						DiscoveryNodes.Builder nodesBuilder = DiscoveryNodes.newNodesBuilder()
 								.putAll(currentState.nodes()).put(localNode).localNodeId(localNode.id());
 						return ClusterState.builder().state(currentState).metaData(masterState.metaData())
@@ -182,7 +166,6 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 					}
 				});
 
-				
 				final LocalDiscovery master = firstMaster;
 				firstMaster.clusterService.submitStateUpdateTask("local-disco-receive(from node[" + localNode + "])",
 						new ProcessedClusterStateUpdateTask() {
@@ -202,15 +185,14 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 							}
 						});
 			}
-		} 
+		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		synchronized (clusterGroups) {
 			ClusterGroup clusterGroup = clusterGroups.get(clusterName);
 			if (clusterGroup == null) {
@@ -219,7 +201,7 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 			}
 			clusterGroup.members().remove(this);
 			if (clusterGroup.members().isEmpty()) {
-				
+
 				clusterGroups.remove(clusterName);
 				return;
 			}
@@ -233,7 +215,7 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 			}
 
 			if (firstMaster != null) {
-				
+
 				if (master) {
 					firstMaster.master = true;
 				}
@@ -260,66 +242,60 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#localNode()
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#localNode()
 	 */
 	@Override
 	public DiscoveryNode localNode() {
 		return localNode;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#addListener(cn.com.summall.search.core.discovery.InitialStateDiscoveryListener)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#addListener(cn.com.rebirth.search.core.discovery.InitialStateDiscoveryListener)
 	 */
 	@Override
 	public void addListener(InitialStateDiscoveryListener listener) {
 		this.initialStateListeners.add(listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#removeListener(cn.com.summall.search.core.discovery.InitialStateDiscoveryListener)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#removeListener(cn.com.rebirth.search.core.discovery.InitialStateDiscoveryListener)
 	 */
 	@Override
 	public void removeListener(InitialStateDiscoveryListener listener) {
 		this.initialStateListeners.remove(listener);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#nodeDescription()
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#nodeDescription()
 	 */
 	@Override
 	public String nodeDescription() {
 		return clusterName.value() + "/" + localNode.id();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.Discovery#publish(cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.discovery.Discovery#publish(cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	public void publish(ClusterState clusterState) {
 		if (!master) {
-			throw new RestartIllegalStateException("Shouldn't publish state when not master");
+			throw new RebirthIllegalStateException("Shouldn't publish state when not master");
 		}
 		ClusterGroup clusterGroup = clusterGroups.get(clusterName);
 		if (clusterGroup == null) {
-			
+
 			return;
 		}
 		try {
-			
+
 			final byte[] clusterStateBytes = Builder.toBytes(clusterState);
 			for (LocalDiscovery discovery : clusterGroup.members()) {
 				if (discovery.master) {
@@ -327,7 +303,7 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 				}
 				final ClusterState nodeSpecificClusterState = ClusterState.Builder.fromBytes(clusterStateBytes,
 						discovery.localNode);
-				
+
 				if (nodeSpecificClusterState.nodes().localNode() != null) {
 					discovery.clusterService.submitStateUpdateTask("local-disco-receive(from master)",
 							new ProcessedClusterStateUpdateTask() {
@@ -335,7 +311,7 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 								public ClusterState execute(ClusterState currentState) {
 									ClusterState.Builder builder = ClusterState.builder().state(
 											nodeSpecificClusterState);
-									
+
 									if (nodeSpecificClusterState.routingTable().version() == currentState
 											.routingTable().version()) {
 										builder.routingTable(currentState.routingTable());
@@ -356,12 +332,11 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 				}
 			}
 		} catch (Exception e) {
-			
-			throw new RestartIllegalStateException("Cluster state failed to serialize", e);
+
+			throw new RebirthIllegalStateException("Cluster state failed to serialize", e);
 		}
 	}
 
-	
 	/**
 	 * Send initial state event if needed.
 	 */
@@ -373,7 +348,6 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 		}
 	}
 
-	
 	/**
 	 * The Class ClusterGroup.
 	 *
@@ -381,11 +355,9 @@ public class LocalDiscovery extends AbstractLifecycleComponent<Discovery> implem
 	 */
 	private class ClusterGroup {
 
-		
 		/** The members. */
 		private Queue<LocalDiscovery> members = new LinkedTransferQueue<LocalDiscovery>();
 
-		
 		/**
 		 * Members.
 		 *

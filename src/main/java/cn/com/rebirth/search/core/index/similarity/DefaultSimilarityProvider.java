@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DefaultSimilarityProvider.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DefaultSimilarityProvider.java 2012-7-6 14:29:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.similarity;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class DefaultSimilarityProvider.
  *
@@ -22,11 +20,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class DefaultSimilarityProvider extends AbstractSimilarityProvider<DefaultSimilarity> {
 
-	
 	/** The similarity. */
 	private DefaultSimilarity similarity;
 
-	
 	/**
 	 * Instantiates a new default similarity provider.
 	 *
@@ -42,9 +38,8 @@ public class DefaultSimilarityProvider extends AbstractSimilarityProvider<Defaul
 		this.similarity = new DefaultSimilarity();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.similarity.SimilarityProvider#get()
+	 * @see cn.com.rebirth.search.core.index.similarity.SimilarityProvider#get()
 	 */
 	@Override
 	public DefaultSimilarity get() {

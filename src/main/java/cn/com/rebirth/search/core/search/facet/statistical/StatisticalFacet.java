@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StatisticalFacet.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StatisticalFacet.java 2012-7-6 14:30:24 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.statistical;
 
 import cn.com.rebirth.search.core.search.facet.Facet;
-
 
 /**
  * The Interface StatisticalFacet.
@@ -16,11 +14,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public interface StatisticalFacet extends Facet {
 
-	
 	/** The Constant TYPE. */
 	public static final String TYPE = "statistical";
 
-	
 	/**
 	 * Count.
 	 *
@@ -28,7 +24,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	long count();
 
-	
 	/**
 	 * Gets the count.
 	 *
@@ -36,7 +31,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	long getCount();
 
-	
 	/**
 	 * Total.
 	 *
@@ -44,7 +38,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double total();
 
-	
 	/**
 	 * Gets the total.
 	 *
@@ -52,7 +45,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double getTotal();
 
-	
 	/**
 	 * Sum of squares.
 	 *
@@ -60,7 +52,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double sumOfSquares();
 
-	
 	/**
 	 * Gets the sum of squares.
 	 *
@@ -68,7 +59,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double getSumOfSquares();
 
-	
 	/**
 	 * Mean.
 	 *
@@ -76,7 +66,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double mean();
 
-	
 	/**
 	 * Gets the mean.
 	 *
@@ -84,7 +73,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double getMean();
 
-	
 	/**
 	 * Min.
 	 *
@@ -92,7 +80,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double min();
 
-	
 	/**
 	 * Gets the min.
 	 *
@@ -100,7 +87,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double getMin();
 
-	
 	/**
 	 * Max.
 	 *
@@ -108,7 +94,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double max();
 
-	
 	/**
 	 * Gets the max.
 	 *
@@ -116,7 +101,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double getMax();
 
-	
 	/**
 	 * Variance.
 	 *
@@ -124,7 +108,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double variance();
 
-	
 	/**
 	 * Gets the variance.
 	 *
@@ -132,7 +115,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double getVariance();
 
-	
 	/**
 	 * Std deviation.
 	 *
@@ -140,7 +122,6 @@ public interface StatisticalFacet extends Facet {
 	 */
 	double stdDeviation();
 
-	
 	/**
 	 * Gets the std deviation.
 	 *

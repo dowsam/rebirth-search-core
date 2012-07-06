@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportActionNodeProxy.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportActionNodeProxy.java 2012-7-6 14:29:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.PlainActionFuture;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.BaseTransportResponseHandler;
 import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
-
 
 /**
  * The Class TransportActionNodeProxy.
@@ -25,15 +23,12 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class TransportActionNodeProxy<Request extends ActionRequest, Response extends ActionResponse> {
 
-	
 	/** The transport service. */
 	protected final TransportService transportService;
 
-	
 	/** The action. */
 	private final GenericAction<Request, Response> action;
 
-	
 	/**
 	 * Instantiates a new transport action node proxy.
 	 *
@@ -46,23 +41,21 @@ public class TransportActionNodeProxy<Request extends ActionRequest, Response ex
 		this.transportService = transportService;
 	}
 
-	
 	/**
 	 * Execute.
 	 *
 	 * @param node the node
 	 * @param request the request
 	 * @return the action future
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public ActionFuture<Response> execute(DiscoveryNode node, Request request) throws RestartException {
+	public ActionFuture<Response> execute(DiscoveryNode node, Request request) throws RebirthException {
 		PlainActionFuture<Response> future = PlainActionFuture.newFuture();
 		request.listenerThreaded(false);
 		execute(node, request, future);
 		return future;
 	}
 
-	
 	/**
 	 * Execute.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MulticastZenPing.java 2012-3-29 15:02:14 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MulticastZenPing.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.ping.multicast;
 
@@ -25,8 +24,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.CachedStreamInput;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
@@ -55,7 +54,6 @@ import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class MulticastZenPing.
  *
@@ -63,91 +61,69 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implements ZenPing {
 
-	
 	/** The Constant INTERNAL_HEADER. */
 	private static final byte[] INTERNAL_HEADER = new byte[] { 1, 9, 8, 4 };
 
-	
 	/** The address. */
 	private final String address;
 
-	
 	/** The port. */
 	private final int port;
 
-	
 	/** The group. */
 	private final String group;
 
-	
 	/** The buffer size. */
 	private final int bufferSize;
 
-	
 	/** The ttl. */
 	private final int ttl;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster name. */
 	private final ClusterName clusterName;
 
-	
 	/** The network service. */
 	private final NetworkService networkService;
 
-	
 	/** The ping enabled. */
 	private final boolean pingEnabled;
 
-	
 	/** The nodes provider. */
 	private volatile DiscoveryNodesProvider nodesProvider;
 
-	
 	/** The receiver. */
 	private volatile Receiver receiver;
 
-	
 	/** The receiver thread. */
 	private volatile Thread receiverThread;
 
-	
 	/** The multicast socket. */
 	private MulticastSocket multicastSocket;
 
-	
 	/** The datagram packet send. */
 	private DatagramPacket datagramPacketSend;
 
-	
 	/** The datagram packet receive. */
 	private DatagramPacket datagramPacketReceive;
 
-	
 	/** The ping id generator. */
 	private final AtomicInteger pingIdGenerator = new AtomicInteger();
 
-	
 	/** The received responses. */
 	private final Map<Integer, ConcurrentMap<DiscoveryNode, PingResponse>> receivedResponses = newConcurrentMap();
 
-	
 	/** The send mutex. */
 	private final Object sendMutex = new Object();
 
-	
 	/** The receive mutex. */
 	private final Object receiveMutex = new Object();
 
-	
 	/**
 	 * Instantiates a new multicast zen ping.
 	 *
@@ -159,7 +135,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		this(EMPTY_SETTINGS, threadPool, transportService, clusterName, new NetworkService(EMPTY_SETTINGS));
 	}
 
-	
 	/**
 	 * Instantiates a new multicast zen ping.
 	 *
@@ -192,24 +167,22 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 				new MulticastPingResponseRequestHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing#setNodesProvider(cn.com.summall.search.core.discovery.zen.DiscoveryNodesProvider)
+	 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing#setNodesProvider(cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider)
 	 */
 	@Override
 	public void setNodesProvider(DiscoveryNodesProvider nodesProvider) {
 		if (lifecycle.started()) {
-			throw new RestartIllegalStateException("Can't set nodes provider when started");
+			throw new RebirthIllegalStateException("Can't set nodes provider when started");
 		}
 		this.nodesProvider = nodesProvider;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		try {
 			this.datagramPacketReceive = new DatagramPacket(new byte[bufferSize], bufferSize);
 			this.datagramPacketSend = new DatagramPacket(new byte[bufferSize], bufferSize,
@@ -257,12 +230,11 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		if (receiver != null) {
 			receiver.stop();
 		}
@@ -275,15 +247,13 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/**
 	 * Ping and wait.
 	 *
@@ -308,9 +278,8 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.discovery.zen.ping.ZenPing#ping(cn.com.summall.search.core.discovery.zen.ping.ZenPing.PingListener, cn.com.summall.search.commons.unit.TimeValue)
+	 * @see cn.com.rebirth.search.core.discovery.zen.ping.ZenPing#ping(cn.com.rebirth.search.core.discovery.zen.ping.ZenPing.PingListener, cn.com.rebirth.commons.unit.TimeValue)
 	 */
 	@Override
 	public void ping(final PingListener listener, final TimeValue timeout) {
@@ -326,8 +295,7 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		final int id = pingIdGenerator.incrementAndGet();
 		receivedResponses.put(id, new ConcurrentHashMap<DiscoveryNode, PingResponse>());
 		sendPingRequest(id);
-		
-		
+
 		threadPool.schedule(TimeValue.timeValueMillis(timeout.millis() / 2), ThreadPool.Names.GENERIC, new Runnable() {
 			@Override
 			public void run() {
@@ -347,7 +315,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		});
 	}
 
-	
 	/**
 	 * Send ping request.
 	 *
@@ -385,7 +352,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		}
 	}
 
-	
 	/**
 	 * The Class MulticastPingResponseRequestHandler.
 	 *
@@ -393,22 +359,19 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 	 */
 	class MulticastPingResponseRequestHandler extends BaseTransportRequestHandler<MulticastPingResponse> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "discovery/zen/multicast";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public MulticastPingResponse newInstance() {
 			return new MulticastPingResponse();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(MulticastPingResponse request, TransportChannel channel) throws Exception {
@@ -424,9 +387,8 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -434,7 +396,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		}
 	}
 
-	
 	/**
 	 * The Class MulticastPingResponse.
 	 *
@@ -442,24 +403,20 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 	 */
 	static class MulticastPingResponse implements Streamable {
 
-		
 		/** The id. */
 		int id;
 
-		
 		/** The ping response. */
 		PingResponse pingResponse;
 
-		
 		/**
 		 * Instantiates a new multicast ping response.
 		 */
 		MulticastPingResponse() {
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -467,9 +424,8 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			pingResponse = PingResponse.readPingResponse(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -478,7 +434,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		}
 	}
 
-	
 	/**
 	 * The Class Receiver.
 	 *
@@ -486,11 +441,9 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 	 */
 	private class Receiver implements Runnable {
 
-		
 		/** The running. */
 		private volatile boolean running = true;
 
-		
 		/**
 		 * Stop.
 		 */
@@ -498,7 +451,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			running = false;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -548,14 +500,14 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 								xContentType = XContentFactory.xContentType(datagramPacketReceive.getData(),
 										datagramPacketReceive.getOffset(), datagramPacketReceive.getLength());
 								if (xContentType != null) {
-									
+
 									externalPingData = XContentFactory
 											.xContent(xContentType)
 											.createParser(datagramPacketReceive.getData(),
 													datagramPacketReceive.getOffset(),
 													datagramPacketReceive.getLength()).mapAndClose();
 								} else {
-									throw new RestartIllegalStateException(
+									throw new RebirthIllegalStateException(
 											"failed multicast message, probably message from previous version");
 								}
 							}
@@ -577,7 +529,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			}
 		}
 
-		
 		/**
 		 * Handle external ping request.
 		 *
@@ -589,7 +540,7 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 		private void handleExternalPingRequest(Map<String, Object> externalPingData, XContentType contentType,
 				SocketAddress remoteAddress) {
 			if (externalPingData.containsKey("response")) {
-				
+
 				logger.trace("got an external ping response (ignoring) from {}, content {}", remoteAddress,
 						externalPingData);
 				return;
@@ -662,7 +613,6 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			}
 		}
 
-		
 		/**
 		 * Handle node ping request.
 		 *
@@ -677,7 +627,7 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			DiscoveryNodes discoveryNodes = nodesProvider.nodes();
 			final DiscoveryNode requestingNode = requestingNodeX;
 			if (requestingNode.id().equals(discoveryNodes.localNodeId())) {
-				
+
 				return;
 			}
 			if (!clusterName.equals(MulticastZenPing.this.clusterName)) {
@@ -688,7 +638,7 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 				}
 				return;
 			}
-			
+
 			if (!discoveryNodes.localNode().shouldConnectTo(requestingNode)) {
 				if (logger.isTraceEnabled()) {
 					logger.trace("[" + id
@@ -707,11 +657,11 @@ public class MulticastZenPing extends AbstractLifecycleComponent<ZenPing> implem
 			}
 
 			if (!transportService.nodeConnected(requestingNode)) {
-				
+
 				threadPool.generic().execute(new Runnable() {
 					@Override
 					public void run() {
-						
+
 						try {
 							transportService.connectToNode(requestingNode);
 							transportService.sendRequest(requestingNode, MulticastPingResponseRequestHandler.ACTION,

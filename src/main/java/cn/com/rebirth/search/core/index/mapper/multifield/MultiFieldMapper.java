@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiFieldMapper.java 2012-3-29 15:02:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiFieldMapper.java 2012-7-6 14:30:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.multifield;
 
@@ -34,7 +33,6 @@ import cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class MultiFieldMapper.
  *
@@ -42,11 +40,9 @@ import com.google.common.collect.ImmutableMap;
  */
 public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "multi_field";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -54,12 +50,10 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class Defaults {
 
-		
 		/** The Constant PATH_TYPE. */
 		public static final ContentPath.Type PATH_TYPE = ContentPath.Type.FULL;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -67,19 +61,15 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class Builder extends Mapper.Builder<Builder, MultiFieldMapper> {
 
-		
 		/** The path type. */
 		private ContentPath.Type pathType = Defaults.PATH_TYPE;
 
-		
 		/** The mappers builders. */
 		private final List<Mapper.Builder> mappersBuilders = newArrayList();
 
-		
 		/** The default mapper builder. */
 		private Mapper.Builder defaultMapperBuilder;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -90,7 +80,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			this.builder = this;
 		}
 
-		
 		/**
 		 * Path type.
 		 *
@@ -102,7 +91,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return this;
 		}
 
-		
 		/**
 		 * Adds the.
 		 *
@@ -118,9 +106,8 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public MultiFieldMapper build(BuilderContext context) {
@@ -148,7 +135,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -156,9 +142,8 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -197,27 +182,21 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The path type. */
 	private final ContentPath.Type pathType;
 
-	
 	/** The mutex. */
 	private final Object mutex = new Object();
 
-	
 	/** The mappers. */
 	private volatile ImmutableMap<String, Mapper> mappers = ImmutableMap.of();
 
-	
 	/** The default mapper. */
 	private volatile Mapper defaultMapper;
 
-	
 	/**
 	 * Instantiates a new multi field mapper.
 	 *
@@ -229,7 +208,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		this(name, pathType, new HashMap<String, Mapper>(), defaultMapper);
 	}
 
-	
 	/**
 	 * Instantiates a new multi field mapper.
 	 *
@@ -244,7 +222,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		this.mappers = ImmutableMap.copyOf(mappers);
 		this.defaultMapper = defaultMapper;
 
-		
 		for (Mapper mapper : mappers.values()) {
 			if (mapper instanceof AllFieldMapper.IncludeInAll) {
 				((AllFieldMapper.IncludeInAll) mapper).includeInAll(false);
@@ -252,18 +229,16 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#name()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAll(Boolean includeInAll) {
@@ -272,9 +247,8 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAllIfNotSet(Boolean includeInAll) {
@@ -283,7 +257,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/**
 	 * Path type.
 	 *
@@ -293,7 +266,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return pathType;
 	}
 
-	
 	/**
 	 * Default mapper.
 	 *
@@ -303,7 +275,6 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this.defaultMapper;
 	}
 
-	
 	/**
 	 * Mappers.
 	 *
@@ -313,16 +284,14 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		return this.mappers;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
 		ContentPath.Type origPathType = context.path().pathType();
 		context.path().pathType(pathType);
 
-		
 		if (defaultMapper != null) {
 			defaultMapper.parse(context);
 		}
@@ -336,9 +305,8 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		context.path().pathType(origPathType);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
@@ -350,7 +318,7 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		List<FieldMapper> mappersToAddToDocMapper = new ArrayList<FieldMapper>();
 		synchronized (mutex) {
 			if (mergeWith instanceof AbstractFieldMapper) {
-				
+
 				if (defaultMapper == null) {
 					if (!mergeContext.mergeFlags().simulate()) {
 						defaultMapper = mergeWith;
@@ -359,7 +327,7 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				}
 			} else {
 				MultiFieldMapper mergeWithMultiField = (MultiFieldMapper) mergeWith;
-				
+
 				if (defaultMapper == null) {
 					if (mergeWithMultiField.defaultMapper != null) {
 						if (!mergeContext.mergeFlags().simulate()) {
@@ -373,13 +341,12 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 					}
 				}
 
-				
 				for (Mapper mergeWithMapper : mergeWithMultiField.mappers.values()) {
 					Mapper mergeIntoMapper = mappers.get(mergeWithMapper.name());
 					if (mergeIntoMapper == null) {
-						
+
 						if (!mergeContext.mergeFlags().simulate()) {
-							
+
 							if (mergeWithMapper instanceof AllFieldMapper.IncludeInAll) {
 								((AllFieldMapper.IncludeInAll) mergeWithMapper).includeInAll(false);
 							}
@@ -395,15 +362,14 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				}
 			}
 		}
-		
+
 		for (FieldMapper fieldMapper : mappersToAddToDocMapper) {
 			mergeContext.docMapper().addFieldMapper(fieldMapper);
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#close()
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#close()
 	 */
 	@Override
 	public void close() {
@@ -415,9 +381,8 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.FieldMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.FieldMapperListener)
 	 */
 	@Override
 	public void traverse(FieldMapperListener fieldMapperListener) {
@@ -429,17 +394,15 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.Mapper#traverse(cn.com.summall.search.core.index.mapper.ObjectMapperListener)
+	 * @see cn.com.rebirth.search.core.index.mapper.Mapper#traverse(cn.com.rebirth.search.core.index.mapper.ObjectMapperListener)
 	 */
 	@Override
 	public void traverse(ObjectMapperListener objectMapperListener) {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -458,7 +421,7 @@ public class MultiFieldMapper implements Mapper, AllFieldMapper.IncludeInAll {
 				mapper.toXContent(builder, params);
 			}
 		} else {
-			
+
 			TreeMap<String, Mapper> sortedMappers = new TreeMap<String, Mapper>(mappers);
 			for (Mapper mapper : sortedMappers.values()) {
 				mapper.toXContent(builder, params);

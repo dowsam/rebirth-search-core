@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AnalyzeRequest.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AnalyzeRequest.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.analyze;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest;
 
-
 /**
  * The Class AnalyzeRequest.
  *
@@ -23,31 +21,24 @@ import cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOpera
  */
 public class AnalyzeRequest extends SingleCustomOperationRequest {
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The text. */
 	private String text;
 
-	
 	/** The analyzer. */
 	private String analyzer;
 
-	
 	/** The tokenizer. */
 	private String tokenizer;
 
-	
 	/** The token filters. */
 	private String[] tokenFilters;
 
-	
 	/** The field. */
 	private String field;
 
-	
 	/**
 	 * Instantiates a new analyze request.
 	 */
@@ -55,7 +46,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new analyze request.
 	 *
@@ -65,7 +55,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		this.text = text;
 	}
 
-	
 	/**
 	 * Instantiates a new analyze request.
 	 *
@@ -77,7 +66,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		this.text = text;
 	}
 
-	
 	/**
 	 * Text.
 	 *
@@ -87,7 +75,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this.text;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -99,7 +86,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -109,7 +95,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this.index;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -121,7 +106,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -131,7 +115,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this.analyzer;
 	}
 
-	
 	/**
 	 * Tokenizer.
 	 *
@@ -143,7 +126,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Tokenizer.
 	 *
@@ -153,7 +135,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this.tokenizer;
 	}
 
-	
 	/**
 	 * Token filters.
 	 *
@@ -165,7 +146,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Token filters.
 	 *
@@ -175,7 +155,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this.tokenFilters;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -187,7 +166,6 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -197,9 +175,8 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this.field;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#preferLocal(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#preferLocal(boolean)
 	 */
 	@Override
 	public AnalyzeRequest preferLocal(boolean preferLocal) {
@@ -207,9 +184,8 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -220,9 +196,8 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -241,9 +216,8 @@ public class AnalyzeRequest extends SingleCustomOperationRequest {
 		field = in.readOptionalUTF();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.custom.SingleCustomOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.single.custom.SingleCustomOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

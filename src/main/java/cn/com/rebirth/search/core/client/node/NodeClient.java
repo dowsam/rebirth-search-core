@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeClient.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeClient.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.node;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class NodeClient.
  *
@@ -34,19 +32,15 @@ import com.google.common.collect.ImmutableMap;
  */
 public class NodeClient extends AbstractClient implements InternalClient {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The admin. */
 	private final NodeAdminClient admin;
 
-	
 	/** The actions. */
 	private final ImmutableMap<Action, TransportAction> actions;
 
-	
 	/**
 	 * Instantiates a new node client.
 	 *
@@ -69,36 +63,32 @@ public class NodeClient extends AbstractClient implements InternalClient {
 		this.actions = actionsBuilder.immutableMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.internal.InternalClient#threadPool()
+	 * @see cn.com.rebirth.search.core.client.internal.InternalClient#threadPool()
 	 */
 	@Override
 	public ThreadPool threadPool() {
 		return this.threadPool;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#close()
+	 * @see cn.com.rebirth.search.core.client.Client#close()
 	 */
 	@Override
 	public void close() {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#admin()
+	 * @see cn.com.rebirth.search.core.client.Client#admin()
 	 */
 	@Override
 	public AdminClient admin() {
 		return this.admin;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#execute(cn.com.summall.search.core.action.Action, cn.com.summall.search.core.action.ActionRequest)
+	 * @see cn.com.rebirth.search.core.client.Client#execute(cn.com.rebirth.search.core.action.Action, cn.com.rebirth.search.core.action.ActionRequest)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> ActionFuture<Response> execute(
@@ -107,9 +97,8 @@ public class NodeClient extends AbstractClient implements InternalClient {
 		return transportAction.execute(request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.client.Client#execute(cn.com.summall.search.core.action.Action, cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.client.Client#execute(cn.com.rebirth.search.core.action.Action, cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	public <Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> void execute(

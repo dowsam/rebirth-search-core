@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SoftFieldDataCache.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SoftFieldDataCache.java 2012-7-6 14:29:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.field.data.soft;
 
@@ -20,7 +19,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 
-
 /**
  * The Class SoftFieldDataCache.
  *
@@ -29,11 +27,9 @@ import com.google.common.cache.RemovalNotification;
 public class SoftFieldDataCache extends AbstractConcurrentMapFieldDataCache implements
 		RemovalListener<String, FieldData> {
 
-	
 	/** The evictions. */
 	private final CounterMetric evictions = new CounterMetric();
 
-	
 	/**
 	 * Instantiates a new soft field data cache.
 	 *
@@ -45,9 +41,8 @@ public class SoftFieldDataCache extends AbstractConcurrentMapFieldDataCache impl
 		super(index, indexSettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache#buildFieldDataMap()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache#buildFieldDataMap()
 	 */
 	@Override
 	protected Cache<String, FieldData> buildFieldDataMap() {
@@ -56,25 +51,22 @@ public class SoftFieldDataCache extends AbstractConcurrentMapFieldDataCache impl
 		return cacheBuilder.build();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.FieldDataCache#evictions()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache#evictions()
 	 */
 	@Override
 	public long evictions() {
 		return evictions.count();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.FieldDataCache#type()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache#type()
 	 */
 	@Override
 	public String type() {
 		return "soft";
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see com.google.common.cache.RemovalListener#onRemoval(com.google.common.cache.RemovalNotification)
 	 */

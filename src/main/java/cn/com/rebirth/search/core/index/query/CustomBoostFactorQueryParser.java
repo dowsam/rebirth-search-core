@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CustomBoostFactorQueryParser.java 2012-3-29 15:02:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CustomBoostFactorQueryParser.java 2012-7-6 14:29:22 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.commons.lucene.search.function.BoostScoreFunction;
 import cn.com.rebirth.search.commons.lucene.search.function.FunctionScoreQuery;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
 
-
 /**
  * The Class CustomBoostFactorQueryParser.
  *
@@ -24,11 +22,9 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
  */
 public class CustomBoostFactorQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "custom_boost_factor";
 
-	
 	/**
 	 * Instantiates a new custom boost factor query parser.
 	 */
@@ -36,18 +32,16 @@ public class CustomBoostFactorQueryParser implements QueryParser {
 	public CustomBoostFactorQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {

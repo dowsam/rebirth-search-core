@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchDfsQueryAndFetchAction.java 2012-3-29 15:01:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchDfsQueryAndFetchAction.java 2012-7-6 14:30:05 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -35,7 +34,6 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
 import cn.com.rebirth.search.core.search.query.QuerySearchRequest;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class TransportSearchDfsQueryAndFetchAction.
  *
@@ -43,7 +41,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAction {
 
-	
 	/**
 	 * Instantiates a new transport search dfs query and fetch action.
 	 *
@@ -61,16 +58,14 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 		super(settings, threadPool, clusterService, transportSearchCache, searchService, searchPhaseController);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(SearchRequest searchRequest, ActionListener<SearchResponse> listener) {
 		new AsyncAction(searchRequest, listener).start();
 	}
 
-	
 	/**
 	 * The Class AsyncAction.
 	 *
@@ -78,16 +73,13 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 	 */
 	private class AsyncAction extends BaseAsyncAction<DfsSearchResult> {
 
-		
 		/** The dfs results. */
 		private final Collection<DfsSearchResult> dfsResults = searchCache.obtainDfsResults();
 
-		
 		/** The query fetch results. */
 		private final Map<SearchShardTarget, QueryFetchSearchResult> queryFetchResults = searchCache
 				.obtainQueryFetchResults();
 
-		
 		/**
 		 * Instantiates a new async action.
 		 *
@@ -98,18 +90,16 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 			super(request, listener);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#firstPhaseName()
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#firstPhaseName()
 		 */
 		@Override
 		protected String firstPhaseName() {
 			return "dfs";
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#sendExecuteFirstPhase(cn.com.summall.search.core.cluster.node.DiscoveryNode, cn.com.summall.search.core.search.internal.InternalSearchRequest, cn.com.summall.search.core.search.action.SearchServiceListener)
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#sendExecuteFirstPhase(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, cn.com.rebirth.search.core.search.internal.InternalSearchRequest, cn.com.rebirth.search.core.search.action.SearchServiceListener)
 		 */
 		@Override
 		protected void sendExecuteFirstPhase(DiscoveryNode node, InternalSearchRequest request,
@@ -117,18 +107,16 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 			searchService.sendExecuteDfs(node, request, listener);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#processFirstPhaseResult(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.search.SearchPhaseResult)
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#processFirstPhaseResult(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.search.SearchPhaseResult)
 		 */
 		@Override
 		protected void processFirstPhaseResult(ShardRouting shard, DfsSearchResult result) {
 			dfsResults.add(result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#moveToSecondPhase()
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#moveToSecondPhase()
 		 */
 		@Override
 		protected void moveToSecondPhase() {
@@ -181,7 +169,6 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 			}
 		}
 
-		
 		/**
 		 * Execute second phase.
 		 *
@@ -217,7 +204,6 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 					});
 		}
 
-		
 		/**
 		 * Finish him.
 		 */
@@ -237,7 +223,6 @@ public class TransportSearchDfsQueryAndFetchAction extends TransportSearchTypeAc
 			}
 		}
 
-		
 		/**
 		 * Inner finish him.
 		 *

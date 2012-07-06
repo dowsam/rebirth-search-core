@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldQueryBuilder.java 2012-3-29 15:02:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldQueryBuilder.java 2012-7-6 14:30:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class FieldQueryBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class FieldQueryBuilder extends BaseQueryBuilder {
 
-	
 	/**
 	 * The Enum Operator.
 	 *
@@ -26,80 +23,61 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 	 */
 	public static enum Operator {
 
-		
-		/** The OR. */
+		/** The or. */
 		OR,
 
-		
-		/** The AND. */
+		/** The and. */
 		AND
 	}
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The query. */
 	private final Object query;
 
-	
 	/** The default operator. */
 	private Operator defaultOperator;
 
-	
 	/** The analyzer. */
 	private String analyzer;
 
-	
 	/** The auto generate phrase queries. */
 	private Boolean autoGeneratePhraseQueries;
 
-	
 	/** The allow leading wildcard. */
 	private Boolean allowLeadingWildcard;
 
-	
 	/** The lowercase expanded terms. */
 	private Boolean lowercaseExpandedTerms;
 
-	
 	/** The enable position increments. */
 	private Boolean enablePositionIncrements;
 
-	
 	/** The analyze wildcard. */
 	private Boolean analyzeWildcard;
 
-	
 	/** The fuzzy min sim. */
 	private float fuzzyMinSim = -1;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The fuzzy prefix length. */
 	private int fuzzyPrefixLength = -1;
 
-	
 	/** The phrase slop. */
 	private int phraseSlop = -1;
 
-	
 	/** The extra set. */
 	private boolean extraSet = false;
 
-	
 	/** The rewrite. */
 	private String rewrite;
 
-	
 	/** The minimum should match. */
 	private String minimumShouldMatch;
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -110,7 +88,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object) query);
 	}
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -121,7 +98,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object) query);
 	}
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -132,7 +108,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object) query);
 	}
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -143,7 +118,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object) query);
 	}
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -154,7 +128,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object) query);
 	}
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -165,7 +138,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object) query);
 	}
 
-	
 	/**
 	 * Instantiates a new field query builder.
 	 *
@@ -177,7 +149,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this.query = query;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -190,7 +161,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Default operator.
 	 *
@@ -203,7 +173,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -216,7 +185,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Auto generate phrase queries.
 	 *
@@ -226,7 +194,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		this.autoGeneratePhraseQueries = autoGeneratePhraseQueries;
 	}
 
-	
 	/**
 	 * Allow leading wildcard.
 	 *
@@ -239,7 +206,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lowercase expanded terms.
 	 *
@@ -252,7 +218,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Enable position increments.
 	 *
@@ -265,7 +230,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fuzzy min sim.
 	 *
@@ -278,7 +242,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fuzzy prefix length.
 	 *
@@ -291,7 +254,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Phrase slop.
 	 *
@@ -304,7 +266,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Analyze wildcard.
 	 *
@@ -317,7 +278,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Rewrite.
 	 *
@@ -330,7 +290,6 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Minimum should match.
 	 *
@@ -342,9 +301,8 @@ public class FieldQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

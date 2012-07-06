@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsStatsDoubleFacetCollector.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsStatsDoubleFacetCollector.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.termsstats.doubles;
 
@@ -15,7 +14,7 @@ import java.util.Map;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.Scorer;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.trove.ExtTDoubleObjectHashMap;
 import cn.com.rebirth.search.commons.CacheRecycler;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
@@ -31,7 +30,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class TermsStatsDoubleFacetCollector.
  *
@@ -39,51 +37,39 @@ import com.google.common.collect.Lists;
  */
 public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The comparator type. */
 	private final TermsStatsFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The key field name. */
 	private final String keyFieldName;
 
-	
 	/** The value field name. */
 	private final String valueFieldName;
 
-	
 	/** The size. */
 	private final int size;
 
-	
 	/** The number of shards. */
 	private final int numberOfShards;
 
-	
 	/** The key field data type. */
 	private final FieldDataType keyFieldDataType;
 
-	
 	/** The key field data. */
 	private NumericFieldData keyFieldData;
 
-	
 	/** The value field data type. */
 	private final FieldDataType valueFieldDataType;
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/** The aggregator. */
 	private final Aggregator aggregator;
 
-	
 	/**
 	 * Instantiates a new terms stats double facet collector.
 	 *
@@ -111,7 +97,7 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 			this.keyFieldName = keyFieldName;
 			this.keyFieldDataType = FieldDataType.DefaultTypes.STRING;
 		} else {
-			
+
 			if (smartMappers.explicitTypeInNameWithDocMapper()) {
 				setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 			}
@@ -123,7 +109,7 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		if (script == null) {
 			smartMappers = context.smartFieldMappers(valueFieldName);
 			if (smartMappers == null || !smartMappers.hasMapper()) {
-				throw new RestartIllegalArgumentException("failed to find mappings for [" + valueFieldName + "]");
+				throw new RebirthIllegalArgumentException("failed to find mappings for [" + valueFieldName + "]");
 			}
 			this.valueFieldName = smartMappers.mapper().names().indexName();
 			this.valueFieldDataType = smartMappers.mapper().fieldDataType();
@@ -137,9 +123,8 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
@@ -148,9 +133,8 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -163,18 +147,16 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		keyFieldData.forEachValueInDoc(doc, aggregator);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
@@ -182,9 +164,9 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 			return new InternalTermsStatsDoubleFacet(facetName, comparatorType, size,
 					ImmutableList.<InternalTermsStatsDoubleFacet.DoubleEntry> of(), aggregator.missing);
 		}
-		if (size == 0) { 
-			
-			return new InternalTermsStatsDoubleFacet(facetName, comparatorType, 0 ,
+		if (size == 0) {
+
+			return new InternalTermsStatsDoubleFacet(facetName, comparatorType, 0,
 					aggregator.entries.valueCollection(), aggregator.missing);
 		}
 		Object[] values = aggregator.entries.internalValues();
@@ -204,7 +186,6 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		return new InternalTermsStatsDoubleFacet(facetName, comparatorType, size, ordered, aggregator.missing);
 	}
 
-	
 	/**
 	 * The Class Aggregator.
 	 *
@@ -212,26 +193,21 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class Aggregator implements NumericFieldData.MissingDoubleValueInDocProc {
 
-		
 		/** The entries. */
 		final ExtTDoubleObjectHashMap<InternalTermsStatsDoubleFacet.DoubleEntry> entries = CacheRecycler
 				.popDoubleObjectMap();
 
-		
 		/** The missing. */
 		int missing;
 
-		
 		/** The value field data. */
 		NumericFieldData valueFieldData;
 
-		
 		/** The value aggregator. */
 		final ValueAggregator valueAggregator = new ValueAggregator();
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {
@@ -246,16 +222,14 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 			valueFieldData.forEachValueInDoc(docId, valueAggregator);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onMissing(int)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc#onMissing(int)
 		 */
 		@Override
 		public void onMissing(int docId) {
 			missing++;
 		}
 
-		
 		/**
 		 * The Class ValueAggregator.
 		 *
@@ -263,13 +237,11 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		 */
 		public static class ValueAggregator implements NumericFieldData.DoubleValueInDocProc {
 
-			
 			/** The double entry. */
 			InternalTermsStatsDoubleFacet.DoubleEntry doubleEntry;
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+			 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 			 */
 			@Override
 			public void onValue(int docId, double value) {
@@ -285,7 +257,6 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 		}
 	}
 
-	
 	/**
 	 * The Class ScriptAggregator.
 	 *
@@ -293,11 +264,9 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class ScriptAggregator extends Aggregator {
 
-		
 		/** The script. */
 		private final SearchScript script;
 
-		
 		/**
 		 * Instantiates a new script aggregator.
 		 *
@@ -307,9 +276,8 @@ public class TermsStatsDoubleFacetCollector extends AbstractFacetCollector {
 			this.script = script;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.termsstats.doubles.TermsStatsDoubleFacetCollector.Aggregator#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.search.facet.termsstats.doubles.TermsStatsDoubleFacetCollector.Aggregator#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {

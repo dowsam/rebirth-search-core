@@ -1,51 +1,41 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AlreadyExpiredException.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AlreadyExpiredException.java 2012-7-6 14:28:53 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.core.index.engine.IgnoreOnRecoveryEngineException;
-
 
 /**
  * The Class AlreadyExpiredException.
  *
  * @author l.xue.nong
  */
-public class AlreadyExpiredException extends RestartException implements IgnoreOnRecoveryEngineException {
+public class AlreadyExpiredException extends RebirthException implements IgnoreOnRecoveryEngineException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8301140662841658275L;
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The timestamp. */
 	private final long timestamp;
 
-	
 	/** The ttl. */
 	private final long ttl;
 
-	
 	/** The now. */
 	private final long now;
 
-	
 	/**
 	 * Instantiates a new already expired exception.
 	 *
@@ -67,7 +57,6 @@ public class AlreadyExpiredException extends RestartException implements IgnoreO
 		this.now = now;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -77,7 +66,6 @@ public class AlreadyExpiredException extends RestartException implements IgnoreO
 		return index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -87,7 +75,6 @@ public class AlreadyExpiredException extends RestartException implements IgnoreO
 		return type;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -97,7 +84,6 @@ public class AlreadyExpiredException extends RestartException implements IgnoreO
 		return id;
 	}
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -107,7 +93,6 @@ public class AlreadyExpiredException extends RestartException implements IgnoreO
 		return timestamp;
 	}
 
-	
 	/**
 	 * Ttl.
 	 *
@@ -117,7 +102,6 @@ public class AlreadyExpiredException extends RestartException implements IgnoreO
 		return ttl;
 	}
 
-	
 	/**
 	 * Now.
 	 *

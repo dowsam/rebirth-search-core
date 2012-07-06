@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FsTranslog.java 2012-3-29 15:01:14 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FsTranslog.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.translog.fs;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.index.translog.Translog;
 import cn.com.rebirth.search.core.index.translog.TranslogException;
 import cn.com.rebirth.search.core.index.translog.TranslogStreams;
 
-
 /**
  * The Class FsTranslog.
  *
@@ -42,7 +40,6 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 				"index.translog.fs.transient_buffer_size");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -50,9 +47,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -81,47 +77,36 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The rwl. */
 	private final ReadWriteLock rwl = new ReentrantReadWriteLock();
 
-	
 	/** The locations. */
 	private final File[] locations;
 
-	
 	/** The current. */
 	private volatile FsTranslogFile current;
 
-	
 	/** The trans. */
 	private volatile FsTranslogFile trans;
 
-	
 	/** The type. */
 	private FsTranslogFile.Type type;
 
-	
 	/** The sync on each operation. */
 	private boolean syncOnEachOperation = false;
 
-	
 	/** The buffer size. */
 	private int bufferSize;
 
-	
 	/** The transient buffer size. */
 	private int transientBufferSize;
 
-	
 	/** The apply settings. */
 	private final ApplySettings applySettings = new ApplySettings();
 
-	
 	/**
 	 * Instantiates a new fs translog.
 	 *
@@ -151,7 +136,6 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		indexSettingsService.addListener(applySettings);
 	}
 
-	
 	/**
 	 * Instantiates a new fs translog.
 	 *
@@ -168,9 +152,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		this.type = FsTranslogFile.Type.fromString(componentSettings.get("type", FsTranslogFile.Type.BUFFERED.name()));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#close(boolean)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#close(boolean)
 	 */
 	@Override
 	public void close(boolean delete) {
@@ -192,7 +175,6 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/**
 	 * Locations.
 	 *
@@ -202,9 +184,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		return locations;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#currentId()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#currentId()
 	 */
 	@Override
 	public long currentId() {
@@ -215,9 +196,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		return current1.id();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#estimatedNumberOfOperations()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#estimatedNumberOfOperations()
 	 */
 	@Override
 	public int estimatedNumberOfOperations() {
@@ -228,18 +208,16 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		return current1.estimatedNumberOfOperations();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#memorySizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#memorySizeInBytes()
 	 */
 	@Override
 	public long memorySizeInBytes() {
 		return 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#translogSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#translogSizeInBytes()
 	 */
 	@Override
 	public long translogSizeInBytes() {
@@ -250,9 +228,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		return current1.translogSizeInBytes();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#clearUnreferenced()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#clearUnreferenced()
 	 */
 	@Override
 	public void clearUnreferenced() {
@@ -271,7 +248,7 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 						try {
 							file.delete();
 						} catch (Exception e) {
-							
+
 						}
 					}
 				}
@@ -281,9 +258,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#newTranslog(long)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#newTranslog(long)
 	 */
 	@Override
 	public void newTranslog(long id) throws TranslogException {
@@ -309,7 +285,7 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 			FsTranslogFile old = current;
 			current = newFile;
 			if (old != null) {
-				
+
 				boolean delete = true;
 				if (old.id() == id) {
 					delete = false;
@@ -321,9 +297,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#newTransientTranslog(long)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#newTransientTranslog(long)
 	 */
 	@Override
 	public void newTransientTranslog(long id) throws TranslogException {
@@ -350,9 +325,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#makeTransientCurrent()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#makeTransientCurrent()
 	 */
 	@Override
 	public void makeTransientCurrent() {
@@ -370,9 +344,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		current.reuse(old);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#revertTransient()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#revertTransient()
 	 */
 	@Override
 	public void revertTransient() {
@@ -387,9 +360,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		old.close(true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#read(cn.com.summall.search.core.index.translog.Translog.Location)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#read(cn.com.rebirth.search.core.index.translog.Translog.Location)
 	 */
 	public byte[] read(Location location) {
 		rwl.readLock().lock();
@@ -399,14 +371,14 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 				try {
 					return trans.read(location);
 				} catch (Exception e) {
-					
+
 				}
 			}
 			if (current.id() == location.translogId) {
 				try {
 					return current.read(location);
 				} catch (Exception e) {
-					
+
 				}
 			}
 			return null;
@@ -415,9 +387,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#add(cn.com.summall.search.core.index.translog.Translog.Operation)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#add(cn.com.rebirth.search.core.index.translog.Translog.Operation)
 	 */
 	@Override
 	public Location add(Operation operation) throws TranslogException {
@@ -425,7 +396,7 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		rwl.readLock().lock();
 		try {
 			BytesStreamOutput out = cachedEntry.cachedBytes();
-			out.writeInt(0); 
+			out.writeInt(0);
 			TranslogStreams.writeTranslogOperation(out, operation);
 			out.flush();
 
@@ -442,7 +413,7 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 				try {
 					location = trans.add(out.underlyingBytes(), 0, size);
 				} catch (ClosedChannelException e) {
-					
+
 				}
 			}
 			return location;
@@ -454,9 +425,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#snapshot()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#snapshot()
 	 */
 	@Override
 	public FsChannelSnapshot snapshot() throws TranslogException {
@@ -469,9 +439,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#snapshot(cn.com.summall.search.core.index.translog.Translog.Snapshot)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#snapshot(cn.com.rebirth.search.core.index.translog.Translog.Snapshot)
 	 */
 	@Override
 	public Snapshot snapshot(Snapshot snapshot) {
@@ -482,9 +451,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		return snap;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#sync()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#sync()
 	 */
 	@Override
 	public void sync() {
@@ -495,9 +463,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		current1.sync();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#syncNeeded()
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#syncNeeded()
 	 */
 	@Override
 	public boolean syncNeeded() {
@@ -505,9 +472,8 @@ public class FsTranslog extends AbstractIndexShardComponent implements Translog 
 		return current1 != null && current1.syncNeeded();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.translog.Translog#syncOnEachOperation(boolean)
+	 * @see cn.com.rebirth.search.core.index.translog.Translog#syncOnEachOperation(boolean)
 	 */
 	@Override
 	public void syncOnEachOperation(boolean syncOnEachOperation) {

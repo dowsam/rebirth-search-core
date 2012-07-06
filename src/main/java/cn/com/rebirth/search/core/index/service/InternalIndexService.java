@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalIndexService.java 2012-3-29 15:02:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalIndexService.java 2012-7-6 14:29:00 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.service;
 
@@ -16,9 +15,9 @@ import java.util.concurrent.Executor;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
-import cn.com.rebirth.commons.exception.RestartInterruptedException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthInterruptedException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.CreationException;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -76,7 +75,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.UnmodifiableIterator;
 
-
 /**
  * The Class InternalIndexService.
  *
@@ -84,83 +82,63 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class InternalIndexService extends AbstractIndexComponent implements IndexService {
 
-	
 	/** The injector. */
 	private final Injector injector;
 
-	
 	/** The index settings. */
 	private final Settings indexSettings;
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The plugins service. */
 	private final PluginsService pluginsService;
 
-	
 	/** The indices lifecycle. */
 	private final InternalIndicesLifecycle indicesLifecycle;
 
-	
 	/** The percolator service. */
 	private final PercolatorService percolatorService;
 
-	
 	/** The analysis service. */
 	private final AnalysisService analysisService;
 
-	
 	/** The mapper service. */
 	private final MapperService mapperService;
 
-	
 	/** The query parser service. */
 	private final IndexQueryParserService queryParserService;
 
-	
 	/** The similarity service. */
 	private final SimilarityService similarityService;
 
-	
 	/** The aliases service. */
 	private final IndexAliasesService aliasesService;
 
-	
 	/** The index cache. */
 	private final IndexCache indexCache;
 
-	
 	/** The index engine. */
 	private final IndexEngine indexEngine;
 
-	
 	/** The index gateway. */
 	private final IndexGateway indexGateway;
 
-	
 	/** The index store. */
 	private final IndexStore indexStore;
 
-	
 	/** The shards injectors. */
 	private volatile ImmutableMap<Integer, Injector> shardsInjectors = ImmutableMap.of();
 
-	
 	/** The shards. */
 	private volatile ImmutableMap<Integer, IndexShard> shards = ImmutableMap.of();
 
-	
 	/** The closed. */
 	private volatile boolean closed = false;
 
-	
 	/**
 	 * Instantiates a new internal index service.
 	 *
@@ -206,16 +184,14 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		this.indicesLifecycle = (InternalIndicesLifecycle) injector.getInstance(IndicesLifecycle.class);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#numberOfShards()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#numberOfShards()
 	 */
 	@Override
 	public int numberOfShards() {
 		return shards.size();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -224,27 +200,24 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		return shards.values().iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#hasShard(int)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#hasShard(int)
 	 */
 	@Override
 	public boolean hasShard(int shardId) {
 		return shards.containsKey(shardId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#shard(int)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#shard(int)
 	 */
 	@Override
 	public IndexShard shard(int shardId) {
 		return shards.get(shardId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#shardSafe(int)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#shardSafe(int)
 	 */
 	@Override
 	public IndexShard shardSafe(int shardId) throws IndexShardMissingException {
@@ -255,115 +228,102 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		return indexShard;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#shardIds()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#shardIds()
 	 */
 	@Override
 	public ImmutableSet<Integer> shardIds() {
 		return ImmutableSet.copyOf(shards.keySet());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#injector()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#injector()
 	 */
 	@Override
 	public Injector injector() {
 		return injector;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#gateway()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#gateway()
 	 */
 	@Override
 	public IndexGateway gateway() {
 		return indexGateway;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#store()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#store()
 	 */
 	@Override
 	public IndexStore store() {
 		return indexStore;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#cache()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#cache()
 	 */
 	@Override
 	public IndexCache cache() {
 		return indexCache;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#percolateService()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#percolateService()
 	 */
 	@Override
 	public PercolatorService percolateService() {
 		return this.percolatorService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#analysisService()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#analysisService()
 	 */
 	@Override
 	public AnalysisService analysisService() {
 		return this.analysisService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#mapperService()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#mapperService()
 	 */
 	@Override
 	public MapperService mapperService() {
 		return mapperService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#queryParserService()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#queryParserService()
 	 */
 	@Override
 	public IndexQueryParserService queryParserService() {
 		return queryParserService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#similarityService()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#similarityService()
 	 */
 	@Override
 	public SimilarityService similarityService() {
 		return similarityService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#aliasesService()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#aliasesService()
 	 */
 	@Override
 	public IndexAliasesService aliasesService() {
 		return aliasesService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#engine()
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#engine()
 	 */
 	@Override
 	public IndexEngine engine() {
 		return indexEngine;
 	}
 
-	
 	/**
 	 * Close.
 	 *
@@ -395,22 +355,20 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			throw new RestartInterruptedException("interrupted closing index [ " + index().name() + "]", e);
+			throw new RebirthInterruptedException("interrupted closing index [ " + index().name() + "]", e);
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#shardInjector(int)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#shardInjector(int)
 	 */
 	@Override
-	public Injector shardInjector(int shardId) throws RestartException {
+	public Injector shardInjector(int shardId) throws RebirthException {
 		return shardsInjectors.get(shardId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#shardInjectorSafe(int)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#shardInjectorSafe(int)
 	 */
 	@Override
 	public Injector shardInjectorSafe(int shardId) throws IndexShardMissingException {
@@ -421,14 +379,13 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		return shardInjector;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#createShard(int)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#createShard(int)
 	 */
 	@Override
-	public synchronized IndexShard createShard(int sShardId) throws RestartException {
+	public synchronized IndexShard createShard(int sShardId) throws RebirthException {
 		if (closed) {
-			throw new RestartIllegalStateException("Can't create shard [" + index.name() + "][" + sShardId
+			throw new RebirthIllegalStateException("Can't create shard [" + index.name() + "][" + sShardId
 					+ "], closed");
 		}
 		ShardId shardId = new ShardId(index, sShardId);
@@ -472,25 +429,22 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		return indexShard;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#cleanShard(int, java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#cleanShard(int, java.lang.String)
 	 */
 	@Override
-	public synchronized void cleanShard(int shardId, String reason) throws RestartException {
+	public synchronized void cleanShard(int shardId, String reason) throws RebirthException {
 		deleteShard(shardId, true, false, false, reason);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.service.IndexService#removeShard(int, java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.service.IndexService#removeShard(int, java.lang.String)
 	 */
 	@Override
-	public synchronized void removeShard(int shardId, String reason) throws RestartException {
+	public synchronized void removeShard(int shardId, String reason) throws RebirthException {
 		deleteShard(shardId, false, false, false, reason);
 	}
 
-	
 	/**
 	 * Delete shard.
 	 *
@@ -499,10 +453,10 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 	 * @param snapshotGateway the snapshot gateway
 	 * @param deleteGateway the delete gateway
 	 * @param reason the reason
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	private void deleteShard(int shardId, boolean delete, boolean snapshotGateway, boolean deleteGateway, String reason)
-			throws RestartException {
+			throws RebirthException {
 		Injector shardInjector;
 		IndexShard indexShard;
 		synchronized (this) {
@@ -537,69 +491,64 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 		}
 
 		try {
-			
+
 			shardInjector.getInstance(TranslogService.class).close();
 		} catch (Exception e) {
 			logger.debug("failed to close translog service", e);
-			
+
 		}
 
-		
 		if (indexShard != null) {
 			shardInjector.getInstance(IndexShardManagement.class).close();
 		}
 
-		
-		
 		if (indexShard != null) {
 			try {
 				((InternalIndexShard) indexShard).close(reason);
 			} catch (Exception e) {
 				logger.debug("failed to close index shard", e);
-				
+
 			}
 		}
 		try {
 			shardInjector.getInstance(Engine.class).close();
 		} catch (Exception e) {
 			logger.debug("failed to close engine", e);
-			
+
 		}
 
 		try {
 			shardInjector.getInstance(MergePolicyProvider.class).close(delete);
 		} catch (Exception e) {
 			logger.debug("failed to close merge policy provider", e);
-			
+
 		}
 
 		try {
-			
+
 			if (snapshotGateway) {
 				shardInjector.getInstance(IndexShardGatewayService.class).snapshotOnClose();
 			}
 		} catch (Exception e) {
 			logger.debug("failed to snapshot gateway on close", e);
-			
+
 		}
 		try {
 			shardInjector.getInstance(IndexShardGatewayService.class).close(deleteGateway);
 		} catch (Exception e) {
 			logger.debug("failed to close index shard gateway", e);
-			
+
 		}
 		try {
-			
+
 			shardInjector.getInstance(Translog.class).close(delete);
 		} catch (Exception e) {
 			logger.debug("failed to close translog", e);
-			
+
 		}
 
-		
 		indicesLifecycle.afterIndexShardClosed(sId, delete);
 
-		
 		Store store = shardInjector.getInstance(Store.class);
 		if (delete || indexGateway.type().equals(NoneGateway.TYPE) || !indexStore.persistent()) {
 			try {
@@ -608,7 +557,7 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 				logger.warn("failed to clean store on shard deletion", e);
 			}
 		}
-		
+
 		try {
 			store.close();
 		} catch (IOException e) {
@@ -617,7 +566,6 @@ public class InternalIndexService extends AbstractIndexComponent implements Inde
 
 		Injectors.close(injector);
 
-		
 		if (delete || indexGateway.type().equals(NoneGateway.TYPE)) {
 			FileSystemUtils.deleteRecursively(nodeEnv.shardLocations(sId));
 		}

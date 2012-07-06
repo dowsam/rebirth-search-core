@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core KeepLastNDeletionPolicy.java 2012-3-29 15:02:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core KeepLastNDeletionPolicy.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.deletionpolicy;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 
-
 /**
  * The Class KeepLastNDeletionPolicy.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 public class KeepLastNDeletionPolicy extends AbstractIndexShardComponent implements IndexDeletionPolicy {
 
-	
 	/** The num to keep. */
 	private final int numToKeep;
 
-	
 	/**
 	 * Instantiates a new keep last n deletion policy.
 	 *
@@ -44,16 +40,14 @@ public class KeepLastNDeletionPolicy extends AbstractIndexShardComponent impleme
 		logger.debug("Using [keep_last_n] deletion policy with num_to_keep[{}]", numToKeep);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.IndexDeletionPolicy#onInit(java.util.List)
 	 */
 	public void onInit(List<? extends IndexCommit> commits) throws IOException {
-		
+
 		doDeletes(commits);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.index.IndexDeletionPolicy#onCommit(java.util.List)
 	 */
@@ -61,7 +55,6 @@ public class KeepLastNDeletionPolicy extends AbstractIndexShardComponent impleme
 		doDeletes(commits);
 	}
 
-	
 	/**
 	 * Do deletes.
 	 *

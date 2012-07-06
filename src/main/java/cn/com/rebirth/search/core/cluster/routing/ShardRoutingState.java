@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardRoutingState.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardRoutingState.java 2012-7-6 14:30:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing;
 
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 
 /**
  * The Enum ShardRoutingState.
@@ -17,27 +14,21 @@ import cn.com.rebirth.commons.exception.RestartIllegalStateException;
  */
 public enum ShardRoutingState {
 
-	
-	/** The UNASSIGNED. */
+	/** The unassigned. */
 	UNASSIGNED((byte) 1),
 
-	
-	/** The INITIALIZING. */
+	/** The initializing. */
 	INITIALIZING((byte) 2),
 
-	
-	/** The STARTED. */
+	/** The started. */
 	STARTED((byte) 3),
 
-	
-	/** The RELOCATING. */
+	/** The relocating. */
 	RELOCATING((byte) 4);
 
-	
 	/** The value. */
 	private byte value;
 
-	
 	/**
 	 * Instantiates a new shard routing state.
 	 *
@@ -47,7 +38,6 @@ public enum ShardRoutingState {
 		this.value = value;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -57,7 +47,6 @@ public enum ShardRoutingState {
 		return this.value;
 	}
 
-	
 	/**
 	 * From value.
 	 *
@@ -75,7 +64,7 @@ public enum ShardRoutingState {
 		case 4:
 			return RELOCATING;
 		default:
-			throw new RestartIllegalStateException("No should routing state mapped for [" + value + "]");
+			throw new RebirthIllegalStateException("No should routing state mapped for [" + value + "]");
 		}
 	}
 }

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StoreStats.java 2012-3-29 15:01:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StoreStats.java 2012-7-6 14:29:37 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.store;
@@ -15,7 +15,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class StoreStats.
  *
@@ -23,11 +22,9 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class StoreStats implements Streamable, ToXContent {
 
-	
 	/** The size in bytes. */
 	private long sizeInBytes;
 
-	
 	/**
 	 * Instantiates a new store stats.
 	 */
@@ -35,7 +32,6 @@ public class StoreStats implements Streamable, ToXContent {
 
 	}
 
-	
 	/**
 	 * Instantiates a new store stats.
 	 *
@@ -45,7 +41,6 @@ public class StoreStats implements Streamable, ToXContent {
 		this.sizeInBytes = sizeInBytes;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -58,7 +53,6 @@ public class StoreStats implements Streamable, ToXContent {
 		sizeInBytes += stats.sizeInBytes;
 	}
 
-	
 	/**
 	 * Size in bytes.
 	 *
@@ -68,7 +62,6 @@ public class StoreStats implements Streamable, ToXContent {
 		return sizeInBytes;
 	}
 
-	
 	/**
 	 * Gets the size in bytes.
 	 *
@@ -78,7 +71,6 @@ public class StoreStats implements Streamable, ToXContent {
 		return sizeInBytes;
 	}
 
-	
 	/**
 	 * Size.
 	 *
@@ -88,7 +80,6 @@ public class StoreStats implements Streamable, ToXContent {
 		return new ByteSizeValue(sizeInBytes);
 	}
 
-	
 	/**
 	 * Gets the size.
 	 *
@@ -98,7 +89,6 @@ public class StoreStats implements Streamable, ToXContent {
 		return size();
 	}
 
-	
 	/**
 	 * Read store stats.
 	 *
@@ -112,27 +102,24 @@ public class StoreStats implements Streamable, ToXContent {
 		return store;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		sizeInBytes = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
 		out.writeVLong(sizeInBytes);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -143,7 +130,6 @@ public class StoreStats implements Streamable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -151,15 +137,12 @@ public class StoreStats implements Streamable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant STORE. */
 		static final XContentBuilderString STORE = new XContentBuilderString("store");
 
-		
 		/** The Constant SIZE. */
 		static final XContentBuilderString SIZE = new XContentBuilderString("size");
 
-		
 		/** The Constant SIZE_IN_BYTES. */
 		static final XContentBuilderString SIZE_IN_BYTES = new XContentBuilderString("size_in_bytes");
 	}

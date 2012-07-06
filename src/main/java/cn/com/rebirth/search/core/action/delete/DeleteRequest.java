@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteRequest.java 2012-3-29 15:01:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteRequest.java 2012-7-6 14:29:27 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.action.support.replication.ReplicationType;
 import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest;
 import cn.com.rebirth.search.core.index.VersionType;
 
-
 /**
  * The Class DeleteRequest.
  *
@@ -28,32 +26,25 @@ import cn.com.rebirth.search.core.index.VersionType;
  */
 public class DeleteRequest extends ShardReplicationOperationRequest {
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The routing. */
 	@Nullable
 	private String routing;
 
-	
 	/** The refresh. */
 	private boolean refresh;
 
-	
 	/** The version. */
 	private long version;
 
-	
 	/** The version type. */
 	private VersionType versionType = VersionType.INTERNAL;
 
-	
 	/**
 	 * Instantiates a new delete request.
 	 *
@@ -63,7 +54,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		this.index = index;
 	}
 
-	
 	/**
 	 * Instantiates a new delete request.
 	 *
@@ -77,16 +67,14 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Instantiates a new delete request.
 	 */
 	public DeleteRequest() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -100,9 +88,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#index(java.lang.String)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#index(java.lang.String)
 	 */
 	@Override
 	public DeleteRequest index(String index) {
@@ -110,9 +97,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public DeleteRequest listenerThreaded(boolean threadedListener) {
@@ -120,9 +106,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#operationThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#operationThreaded(boolean)
 	 */
 	@Override
 	public DeleteRequest operationThreaded(boolean threadedOperation) {
@@ -130,9 +115,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#replicationType(cn.com.summall.search.core.action.support.replication.ReplicationType)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#replicationType(cn.com.rebirth.search.core.action.support.replication.ReplicationType)
 	 */
 	@Override
 	public DeleteRequest replicationType(ReplicationType replicationType) {
@@ -140,9 +124,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#consistencyLevel(cn.com.summall.search.core.action.WriteConsistencyLevel)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#consistencyLevel(cn.com.rebirth.search.core.action.WriteConsistencyLevel)
 	 */
 	@Override
 	public DeleteRequest consistencyLevel(WriteConsistencyLevel consistencyLevel) {
@@ -150,7 +133,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -160,7 +142,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return type;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -173,7 +154,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -183,7 +163,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -196,7 +175,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -208,7 +186,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Parent.
 	 *
@@ -222,7 +199,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -238,7 +214,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -248,7 +223,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -260,7 +234,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -270,7 +243,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -282,7 +254,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -292,7 +263,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this.version;
 	}
 
-	
 	/**
 	 * Version type.
 	 *
@@ -304,7 +274,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Version type.
 	 *
@@ -314,9 +283,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		return this.versionType;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -331,9 +299,8 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		versionType = VersionType.fromValue(in.readByte());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -351,7 +318,6 @@ public class DeleteRequest extends ShardReplicationOperationRequest {
 		out.writeByte(versionType.getValue());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

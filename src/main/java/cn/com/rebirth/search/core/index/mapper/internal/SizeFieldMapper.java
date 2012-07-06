@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SizeFieldMapper.java 2012-3-29 15:02:47 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SizeFieldMapper.java 2012-7-6 14:29:02 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.internal;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.mapper.RootMapper;
 import cn.com.rebirth.search.core.index.mapper.core.IntegerFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.core.TypeParsers;
 
-
 /**
  * The Class SizeFieldMapper.
  *
@@ -32,15 +30,12 @@ import cn.com.rebirth.search.core.index.mapper.core.TypeParsers;
  */
 public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_size";
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "_size";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -48,16 +43,13 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 	 */
 	public static class Defaults extends IntegerFieldMapper.Defaults {
 
-		
 		/** The Constant NAME. */
 		public static final String NAME = CONTENT_TYPE;
 
-		
 		/** The Constant ENABLED. */
 		public static final boolean ENABLED = false;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -65,15 +57,12 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 	 */
 	public static class Builder extends Mapper.Builder<Builder, IntegerFieldMapper> {
 
-		
 		/** The enabled. */
 		protected boolean enabled = Defaults.ENABLED;
 
-		
 		/** The store. */
 		protected Field.Store store = Defaults.STORE;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 */
@@ -82,7 +71,6 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 			builder = this;
 		}
 
-		
 		/**
 		 * Enabled.
 		 *
@@ -94,7 +82,6 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 			return builder;
 		}
 
-		
 		/**
 		 * Store.
 		 *
@@ -106,9 +93,8 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 			return builder;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public SizeFieldMapper build(BuilderContext context) {
@@ -116,7 +102,6 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -124,9 +109,8 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -145,11 +129,9 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		}
 	}
 
-	
 	/** The enabled. */
 	private final boolean enabled;
 
-	
 	/**
 	 * Instantiates a new size field mapper.
 	 */
@@ -157,7 +139,6 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		this(Defaults.ENABLED, Defaults.STORE);
 	}
 
-	
 	/**
 	 * Instantiates a new size field mapper.
 	 *
@@ -170,16 +151,14 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		this.enabled = enabled;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.IntegerFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.IntegerFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return Defaults.NAME;
 	}
 
-	
 	/**
 	 * Enabled.
 	 *
@@ -189,53 +168,47 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		return this.enabled;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#validate(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#validate(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void validate(ParseContext context) throws MapperParsingException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#preParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#preParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void preParse(ParseContext context) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#postParse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#postParse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void postParse(ParseContext context) throws IOException {
-		
+
 		super.parse(context);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parse(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	public void parse(ParseContext context) throws IOException {
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.RootMapper#includeInObject()
+	 * @see cn.com.rebirth.search.core.index.mapper.RootMapper#includeInObject()
 	 */
 	@Override
 	public boolean includeInObject() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.IntegerFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.IntegerFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException {
@@ -245,13 +218,12 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		return new CustomIntegerNumericField(this, context.sourceLength());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
-		
+
 		if (enabled == Defaults.ENABLED && store == Defaults.STORE) {
 			return builder;
 		}
@@ -266,12 +238,11 @@ public class SizeFieldMapper extends IntegerFieldMapper implements RootMapper {
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.IntegerFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.IntegerFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
-		
+
 	}
 }

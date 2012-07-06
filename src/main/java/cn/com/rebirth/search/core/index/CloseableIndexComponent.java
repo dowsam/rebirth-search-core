@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CloseableIndexComponent.java 2012-3-29 15:00:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CloseableIndexComponent.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Interface CloseableIndexComponent.
@@ -17,12 +14,11 @@ import cn.com.rebirth.commons.exception.RestartException;
  */
 public interface CloseableIndexComponent {
 
-	
 	/**
 	 * Close.
 	 *
 	 * @param delete the delete
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void close(boolean delete) throws RestartException;
+	void close(boolean delete) throws RebirthException;
 }

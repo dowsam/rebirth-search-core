@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsQueryBuilder.java 2012-3-29 15:00:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsQueryBuilder.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class TermsQueryBuilder.
@@ -18,27 +16,21 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class TermsQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The values. */
 	private final Object[] values;
 
-	
 	/** The minimum match. */
 	private int minimumMatch = -1;
 
-	
 	/** The disable coord. */
 	private Boolean disableCoord;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/**
 	 * Instantiates a new terms query builder.
 	 *
@@ -49,7 +41,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		this(name, (Object[]) values);
 	}
 
-	
 	/**
 	 * Instantiates a new terms query builder.
 	 *
@@ -64,7 +55,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new terms query builder.
 	 *
@@ -79,7 +69,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new terms query builder.
 	 *
@@ -94,7 +83,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new terms query builder.
 	 *
@@ -109,7 +97,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new terms query builder.
 	 *
@@ -121,7 +108,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		this.values = values;
 	}
 
-	
 	/**
 	 * Minimum match.
 	 *
@@ -133,7 +119,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -145,7 +130,6 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Disable coord.
 	 *
@@ -157,9 +141,8 @@ public class TermsQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

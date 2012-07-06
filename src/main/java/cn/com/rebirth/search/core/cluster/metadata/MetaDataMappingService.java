@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataMappingService.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataMappingService.java 2012-7-6 14:30:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -44,7 +43,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class MetaDataMappingService.
  *
@@ -52,23 +50,18 @@ import com.google.common.collect.Sets;
  */
 public class MetaDataMappingService extends AbstractComponent {
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The mapping created action. */
 	private final NodeMappingCreatedAction mappingCreatedAction;
 
-	
 	/** The indices and types to refresh. */
 	private final Map<String, Set<String>> indicesAndTypesToRefresh = Maps.newHashMap();
 
-	
 	/**
 	 * Instantiates a new meta data mapping service.
 	 *
@@ -86,7 +79,6 @@ public class MetaDataMappingService extends AbstractComponent {
 		this.mappingCreatedAction = mappingCreatedAction;
 	}
 
-	
 	/**
 	 * Refresh mapping.
 	 *
@@ -112,26 +104,25 @@ public class MetaDataMappingService extends AbstractComponent {
 							synchronized (indicesAndTypesToRefresh) {
 								sTypes = indicesAndTypesToRefresh.remove(index);
 							}
-							
+
 							if (sTypes == null || sTypes.isEmpty()) {
 								return currentState;
 							}
 
-							
 							final IndexMetaData indexMetaData = currentState.metaData().index(index);
 							if (indexMetaData == null) {
-								
+
 								return currentState;
 							}
 
 							IndexService indexService = indicesService.indexService(index);
 							if (indexService == null) {
-								
+
 								indexService = indicesService.createIndex(indexMetaData.index(),
 										indexMetaData.settings(), currentState.nodes().localNode().id());
 								createdIndex = true;
 								for (String type : sTypes) {
-									
+
 									if (indexMetaData.mappings().containsKey(type)) {
 										indexService.mapperService().add(type,
 												indexMetaData.mappings().get(type).source().string());
@@ -169,7 +160,6 @@ public class MetaDataMappingService extends AbstractComponent {
 				});
 	}
 
-	
 	/**
 	 * Update mapping.
 	 *
@@ -186,10 +176,10 @@ public class MetaDataMappingService extends AbstractComponent {
 					public ClusterState execute(ClusterState currentState) {
 						boolean createdIndex = false;
 						try {
-							
+
 							final IndexMetaData indexMetaData = currentState.metaData().index(index);
 							if (indexMetaData == null) {
-								
+
 								return currentState;
 							}
 							if (indexMetaData.mappings().containsKey(type)
@@ -199,11 +189,11 @@ public class MetaDataMappingService extends AbstractComponent {
 
 							IndexService indexService = indicesService.indexService(index);
 							if (indexService == null) {
-								
+
 								indexService = indicesService.createIndex(indexMetaData.index(),
 										indexMetaData.settings(), currentState.nodes().localNode().id());
 								createdIndex = true;
-								
+
 								if (indexMetaData.mappings().containsKey(type)) {
 									indexService.mapperService().add(type,
 											indexMetaData.mappings().get(type).source().string());
@@ -212,28 +202,26 @@ public class MetaDataMappingService extends AbstractComponent {
 							MapperService mapperService = indexService.mapperService();
 
 							DocumentMapper existingMapper = mapperService.documentMapper(type);
-							
+
 							DocumentMapper updatedMapper = mapperService.parse(type, mappingSource.string());
 							if (existingMapper == null) {
 								existingMapper = updatedMapper;
 							} else {
-								
+
 								existingMapper.merge(updatedMapper, mergeFlags().simulate(false));
 							}
 
-							
 							if (indexMetaData.mappings().containsKey(type)
 									&& indexMetaData.mapping(type).source().equals(existingMapper.mappingSource())) {
 								return currentState;
 							}
 
-							
 							if (logger.isDebugEnabled()) {
 								try {
 									logger.debug("[" + index + "] update_mapping [{}] (dynamic) with source [{}]",
 											type, existingMapper.mappingSource().string());
 								} catch (IOException e) {
-									
+
 								}
 							} else if (logger.isInfoEnabled()) {
 								logger.info("[{}] update_mapping [{}] (dynamic)", index, type);
@@ -261,7 +249,6 @@ public class MetaDataMappingService extends AbstractComponent {
 				});
 	}
 
-	
 	/**
 	 * Removes the mapping.
 	 *
@@ -300,12 +287,11 @@ public class MetaDataMappingService extends AbstractComponent {
 
 					@Override
 					public void clusterStateProcessed(ClusterState clusterState) {
-						
+
 					}
 				});
 	}
 
-	
 	/**
 	 * Put mapping.
 	 *
@@ -329,7 +315,6 @@ public class MetaDataMappingService extends AbstractComponent {
 								}
 							}
 
-							
 							for (String index : request.indices) {
 								if (indicesService.hasIndex(index)) {
 									continue;
@@ -338,7 +323,7 @@ public class MetaDataMappingService extends AbstractComponent {
 								IndexService indexService = indicesService.createIndex(indexMetaData.index(),
 										indexMetaData.settings(), currentState.nodes().localNode().id());
 								indicesToClose.add(indexMetaData.index());
-								
+
 								if (indexMetaData.mappings().containsKey(request.mappingType)) {
 									indexService.mapperService().add(request.mappingType,
 											indexMetaData.mappings().get(request.mappingType).source().string());
@@ -350,17 +335,17 @@ public class MetaDataMappingService extends AbstractComponent {
 							for (String index : request.indices) {
 								IndexService indexService = indicesService.indexService(index);
 								if (indexService != null) {
-									
+
 									DocumentMapper newMapper = indexService.mapperService().parse(request.mappingType,
 											request.mappingSource);
 									newMappers.put(index, newMapper);
 									DocumentMapper existingMapper = indexService.mapperService().documentMapper(
 											request.mappingType);
 									if (existingMapper != null) {
-										
+
 										DocumentMapper.MergeResult mergeResult = existingMapper.merge(newMapper,
 												mergeFlags().simulate(true));
-										
+
 										if (!request.ignoreConflicts && mergeResult.hasConflicts()) {
 											throw new MergeMappingException(mergeResult.conflicts());
 										}
@@ -385,10 +370,10 @@ public class MetaDataMappingService extends AbstractComponent {
 							final Map<String, MappingMetaData> mappings = newHashMap();
 							for (Map.Entry<String, DocumentMapper> entry : newMappers.entrySet()) {
 								String index = entry.getKey();
-								
+
 								DocumentMapper newMapper = entry.getValue();
 								if (existingMappers.containsKey(entry.getKey())) {
-									
+
 									DocumentMapper existingMapper = existingMappers.get(entry.getKey());
 									CompressedString existingSource = existingMapper.mappingSource();
 
@@ -396,9 +381,9 @@ public class MetaDataMappingService extends AbstractComponent {
 
 									CompressedString updatedSource = existingMapper.mappingSource();
 									if (existingSource.equals(updatedSource)) {
-										
+
 									} else {
-										
+
 										mappings.put(index, new MappingMetaData(existingMapper));
 										if (logger.isDebugEnabled()) {
 											logger.debug("[" + index + "] update_mapping [{}] with source [{}]",
@@ -410,8 +395,7 @@ public class MetaDataMappingService extends AbstractComponent {
 								} else {
 									CompressedString newSource = newMapper.mappingSource();
 									mappings.put(index, new MappingMetaData(newMapper));
-									
-									
+
 									IndexService indexService = indicesService.indexService(index);
 									indexService.mapperService().add(newMapper.type(),
 											newMapper.mappingSource().string());
@@ -425,7 +409,7 @@ public class MetaDataMappingService extends AbstractComponent {
 							}
 
 							if (mappings.isEmpty()) {
-								
+
 								listener.onResponse(new Response(true));
 								return currentState;
 							}
@@ -445,7 +429,6 @@ public class MetaDataMappingService extends AbstractComponent {
 							ClusterState updatedState = newClusterStateBuilder().state(currentState).metaData(builder)
 									.build();
 
-							
 							int counter = 0;
 							for (String index : request.indices) {
 								IndexRoutingTable indexRoutingTable = updatedState.routingTable().index(index);
@@ -480,7 +463,6 @@ public class MetaDataMappingService extends AbstractComponent {
 				});
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -488,7 +470,6 @@ public class MetaDataMappingService extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On response.
 		 *
@@ -496,7 +477,6 @@ public class MetaDataMappingService extends AbstractComponent {
 		 */
 		void onResponse(Response response);
 
-		
 		/**
 		 * On failure.
 		 *
@@ -505,7 +485,6 @@ public class MetaDataMappingService extends AbstractComponent {
 		void onFailure(Throwable t);
 	}
 
-	
 	/**
 	 * The Class RemoveRequest.
 	 *
@@ -513,15 +492,12 @@ public class MetaDataMappingService extends AbstractComponent {
 	 */
 	public static class RemoveRequest {
 
-		
 		/** The indices. */
 		final String[] indices;
 
-		
 		/** The mapping type. */
 		final String mappingType;
 
-		
 		/**
 		 * Instantiates a new removes the request.
 		 *
@@ -534,7 +510,6 @@ public class MetaDataMappingService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PutRequest.
 	 *
@@ -542,27 +517,21 @@ public class MetaDataMappingService extends AbstractComponent {
 	 */
 	public static class PutRequest {
 
-		
 		/** The indices. */
 		final String[] indices;
 
-		
 		/** The mapping type. */
 		final String mappingType;
 
-		
 		/** The mapping source. */
 		final String mappingSource;
 
-		
 		/** The ignore conflicts. */
 		boolean ignoreConflicts = false;
 
-		
 		/** The timeout. */
 		TimeValue timeout = TimeValue.timeValueSeconds(10);
 
-		
 		/**
 		 * Instantiates a new put request.
 		 *
@@ -576,7 +545,6 @@ public class MetaDataMappingService extends AbstractComponent {
 			this.mappingSource = mappingSource;
 		}
 
-		
 		/**
 		 * Ignore conflicts.
 		 *
@@ -588,7 +556,6 @@ public class MetaDataMappingService extends AbstractComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Timeout.
 		 *
@@ -601,7 +568,6 @@ public class MetaDataMappingService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Response.
 	 *
@@ -609,11 +575,9 @@ public class MetaDataMappingService extends AbstractComponent {
 	 */
 	public static class Response {
 
-		
 		/** The acknowledged. */
 		private final boolean acknowledged;
 
-		
 		/**
 		 * Instantiates a new response.
 		 *
@@ -623,7 +587,6 @@ public class MetaDataMappingService extends AbstractComponent {
 			this.acknowledged = acknowledged;
 		}
 
-		
 		/**
 		 * Acknowledged.
 		 *
@@ -634,7 +597,6 @@ public class MetaDataMappingService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The listener interface for receiving countDown events.
 	 * The class that is interested in processing a countDown
@@ -648,19 +610,15 @@ public class MetaDataMappingService extends AbstractComponent {
 	 */
 	private class CountDownListener implements NodeMappingCreatedAction.Listener {
 
-		
 		/** The notified. */
 		private final AtomicBoolean notified = new AtomicBoolean();
 
-		
 		/** The count down. */
 		private final AtomicInteger countDown;
 
-		
 		/** The listener. */
 		private final Listener listener;
 
-		
 		/**
 		 * Instantiates a new count down listener.
 		 *
@@ -672,9 +630,8 @@ public class MetaDataMappingService extends AbstractComponent {
 			this.listener = listener;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.action.index.NodeMappingCreatedAction.Listener#onNodeMappingCreated(cn.com.summall.search.core.cluster.action.index.NodeMappingCreatedAction.NodeMappingCreatedResponse)
+		 * @see cn.com.rebirth.search.core.cluster.action.index.NodeMappingCreatedAction.Listener#onNodeMappingCreated(cn.com.rebirth.search.core.cluster.action.index.NodeMappingCreatedAction.NodeMappingCreatedResponse)
 		 */
 		@Override
 		public void onNodeMappingCreated(NodeMappingCreatedAction.NodeMappingCreatedResponse response) {
@@ -686,9 +643,8 @@ public class MetaDataMappingService extends AbstractComponent {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.cluster.action.index.NodeMappingCreatedAction.Listener#onTimeout()
+		 * @see cn.com.rebirth.search.core.cluster.action.index.NodeMappingCreatedAction.Listener#onTimeout()
 		 */
 		@Override
 		public void onTimeout() {

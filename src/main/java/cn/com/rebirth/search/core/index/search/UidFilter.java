@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UidFilter.java 2012-3-29 15:02:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UidFilter.java 2012-7-6 14:30:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.index.cache.bloom.BloomCache;
 import cn.com.rebirth.search.core.index.mapper.Uid;
 import cn.com.rebirth.search.core.index.mapper.internal.UidFieldMapper;
 
-
 /**
  * The Class UidFilter.
  *
@@ -34,15 +32,12 @@ import cn.com.rebirth.search.core.index.mapper.internal.UidFieldMapper;
  */
 public class UidFilter extends Filter {
 
-	
 	/** The uids. */
 	private final Set<Term> uids;
 
-	
 	/** The bloom cache. */
 	private final BloomCache bloomCache;
 
-	
 	/**
 	 * Instantiates a new uid filter.
 	 *
@@ -60,10 +55,6 @@ public class UidFilter extends Filter {
 		}
 	}
 
-	
-	
-	
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 	 */
@@ -97,7 +88,6 @@ public class UidFilter extends Filter {
 		return set;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -111,7 +101,6 @@ public class UidFilter extends Filter {
 		return !uids.equals(uidFilter.uids);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

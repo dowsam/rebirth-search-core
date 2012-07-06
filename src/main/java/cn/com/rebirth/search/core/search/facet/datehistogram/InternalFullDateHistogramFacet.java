@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalFullDateHistogramFacet.java 2012-3-29 15:02:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalFullDateHistogramFacet.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.datehistogram;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.core.search.facet.Facet;
 
-
 /**
  * The Class InternalFullDateHistogramFacet.
  *
@@ -31,11 +29,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 
-	
 	/** The Constant STREAM_TYPE. */
 	private static final String STREAM_TYPE = "fdHistogram";
 
-	
 	/**
 	 * Register streams.
 	 */
@@ -43,8 +39,7 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		Streams.registerStream(STREAM, STREAM_TYPE);
 	}
 
-	
-	/** The STREAM. */
+	/** The stream. */
 	static Stream STREAM = new Stream() {
 		@Override
 		public Facet readFacet(String type, StreamInput in) throws IOException {
@@ -52,16 +47,14 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		}
 	};
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.InternalFacet#streamType()
+	 * @see cn.com.rebirth.search.core.search.facet.InternalFacet#streamType()
 	 */
 	@Override
 	public String streamType() {
 		return STREAM_TYPE;
 	}
 
-	
 	/**
 	 * The Class FullEntry.
 	 *
@@ -69,31 +62,24 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 	 */
 	public static class FullEntry implements Entry {
 
-		
 		/** The time. */
 		private final long time;
 
-		
 		/** The count. */
 		long count;
 
-		
 		/** The total count. */
 		long totalCount;
 
-		
 		/** The total. */
 		double total;
 
-		
 		/** The min. */
 		double min = Double.POSITIVE_INFINITY;
 
-		
 		/** The max. */
 		double max = Double.NEGATIVE_INFINITY;
 
-		
 		/**
 		 * Instantiates a new full entry.
 		 *
@@ -113,81 +99,72 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 			this.total = total;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#time()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#time()
 		 */
 		@Override
 		public long time() {
 			return time;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getTime()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getTime()
 		 */
 		@Override
 		public long getTime() {
 			return time();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#count()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#count()
 		 */
 		@Override
 		public long count() {
 			return count;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getCount()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getCount()
 		 */
 		@Override
 		public long getCount() {
 			return count();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#total()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#total()
 		 */
 		@Override
 		public double total() {
 			return total;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getTotal()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getTotal()
 		 */
 		@Override
 		public double getTotal() {
 			return total();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#totalCount()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#totalCount()
 		 */
 		@Override
 		public long totalCount() {
 			return totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getTotalCount()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getTotalCount()
 		 */
 		@Override
 		public long getTotalCount() {
 			return this.totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#mean()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#mean()
 		 */
 		@Override
 		public double mean() {
@@ -197,45 +174,40 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 			return total / totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getMean()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getMean()
 		 */
 		@Override
 		public double getMean() {
 			return total / totalCount;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#min()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#min()
 		 */
 		@Override
 		public double min() {
 			return this.min;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getMin()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getMin()
 		 */
 		@Override
 		public double getMin() {
 			return this.min;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#max()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#max()
 		 */
 		@Override
 		public double max() {
 			return this.max;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getMax()
+		 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet.Entry#getMax()
 		 */
 		@Override
 		public double getMax() {
@@ -243,34 +215,27 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		}
 	}
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The comparator type. */
 	private ComparatorType comparatorType;
 
-	
 	/** The t entries. */
 	ExtTLongObjectHashMap<FullEntry> tEntries;
 
-	
 	/** The cached entries. */
 	boolean cachedEntries;
 
-	
 	/** The entries. */
 	Collection<FullEntry> entries;
 
-	
 	/**
 	 * Instantiates a new internal full date histogram facet.
 	 */
 	private InternalFullDateHistogramFacet() {
 	}
 
-	
 	/**
 	 * Instantiates a new internal full date histogram facet.
 	 *
@@ -288,45 +253,40 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		this.entries = entries.valueCollection();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#name()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getName()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getName()
 	 */
 	@Override
 	public String getName() {
 		return name();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#type()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#type()
 	 */
 	@Override
 	public String type() {
 		return TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.Facet#getType()
+	 * @see cn.com.rebirth.search.core.search.facet.Facet#getType()
 	 */
 	@Override
 	public String getType() {
 		return type();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet#entries()
+	 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet#entries()
 	 */
 	@Override
 	public List<FullEntry> entries() {
@@ -336,16 +296,14 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		return (List<FullEntry>) entries;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacet#getEntries()
+	 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacet#getEntries()
 	 */
 	@Override
 	public List<FullEntry> getEntries() {
 		return entries();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -354,7 +312,6 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		return (Iterator) entries().iterator();
 	}
 
-	
 	/**
 	 * Release cache.
 	 */
@@ -366,14 +323,13 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.datehistogram.InternalDateHistogramFacet#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.datehistogram.InternalDateHistogramFacet#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {
 		if (facets.size() == 1) {
-			
+
 			InternalFullDateHistogramFacet internalFacet = (InternalFullDateHistogramFacet) facets.get(0);
 			List<FullEntry> entries = internalFacet.entries();
 			Collections.sort(entries, comparatorType.comparator());
@@ -404,7 +360,6 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 			histoFacet.releaseCache();
 		}
 
-		
 		Object[] values = map.internalValues();
 		Arrays.sort(values, (Comparator) comparatorType.comparator());
 		List<FullEntry> ordered = new ArrayList<FullEntry>(map.size());
@@ -418,7 +373,6 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 
 		CacheRecycler.pushLongObjectMap(map);
 
-		
 		InternalFullDateHistogramFacet ret = new InternalFullDateHistogramFacet();
 		ret.name = name;
 		ret.comparatorType = comparatorType;
@@ -426,7 +380,6 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		return ret;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -434,46 +387,36 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant ENTRIES. */
 		static final XContentBuilderString ENTRIES = new XContentBuilderString("entries");
 
-		
 		/** The Constant TIME. */
 		static final XContentBuilderString TIME = new XContentBuilderString("time");
 
-		
 		/** The Constant COUNT. */
 		static final XContentBuilderString COUNT = new XContentBuilderString("count");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant TOTAL_COUNT. */
 		static final XContentBuilderString TOTAL_COUNT = new XContentBuilderString("total_count");
 
-		
 		/** The Constant MEAN. */
 		static final XContentBuilderString MEAN = new XContentBuilderString("mean");
 
-		
 		/** The Constant MIN. */
 		static final XContentBuilderString MIN = new XContentBuilderString("min");
 
-		
 		/** The Constant MAX. */
 		static final XContentBuilderString MAX = new XContentBuilderString("max");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -496,7 +439,6 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		return builder;
 	}
 
-	
 	/**
 	 * Read histogram facet.
 	 *
@@ -510,9 +452,8 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		return facet;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -528,9 +469,8 @@ public class InternalFullDateHistogramFacet extends InternalDateHistogramFacet {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

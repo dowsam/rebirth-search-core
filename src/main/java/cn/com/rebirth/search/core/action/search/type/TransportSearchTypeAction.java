@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchTypeAction.java 2012-3-29 15:01:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchTypeAction.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -43,7 +42,6 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchRequest;
 import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class TransportSearchTypeAction.
  *
@@ -51,23 +49,18 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public abstract class TransportSearchTypeAction extends TransportAction<SearchRequest, SearchResponse> {
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The search service. */
 	protected final SearchServiceTransportAction searchService;
 
-	
 	/** The search phase controller. */
 	protected final SearchPhaseController searchPhaseController;
 
-	
 	/** The search cache. */
 	protected final TransportSearchCache searchCache;
 
-	
 	/**
 	 * Instantiates a new transport search type action.
 	 *
@@ -88,7 +81,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		this.searchPhaseController = searchPhaseController;
 	}
 
-	
 	/**
 	 * The Class BaseAsyncAction.
 	 *
@@ -97,55 +89,42 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 	 */
 	protected abstract class BaseAsyncAction<FirstResult extends SearchPhaseResult> {
 
-		
 		/** The listener. */
 		protected final ActionListener<SearchResponse> listener;
 
-		
 		/** The shards its. */
 		private final GroupShardsIterator shardsIts;
 
-		
 		/** The request. */
 		protected final SearchRequest request;
 
-		
 		/** The cluster state. */
 		protected final ClusterState clusterState;
 
-		
 		/** The nodes. */
 		protected final DiscoveryNodes nodes;
 
-		
 		/** The expected successful ops. */
 		protected final int expectedSuccessfulOps;
 
-		
 		/** The expected total ops. */
 		private final int expectedTotalOps;
 
-		
 		/** The successul ops. */
 		protected final AtomicInteger successulOps = new AtomicInteger();
 
-		
 		/** The total ops. */
 		private final AtomicInteger totalOps = new AtomicInteger();
 
-		
 		/** The shard failures. */
 		private volatile LinkedTransferQueue<ShardSearchFailure> shardFailures;
 
-		
 		/** The sorted shard list. */
 		protected volatile ShardDoc[] sortedShardList;
 
-		
 		/** The start time. */
 		protected final long startTime = System.currentTimeMillis();
 
-		
 		/**
 		 * Instantiates a new base async action.
 		 *
@@ -173,11 +152,11 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			shardsIts = clusterService.operationRouting().searchShards(clusterState, request.indices(),
 					concreteIndices, request.queryHint(), routingMap, request.preference());
 			expectedSuccessfulOps = shardsIts.size();
-			
+
 			expectedTotalOps = shardsIts.totalSizeWith1ForEmpty();
 
 			if (expectedSuccessfulOps == 0) {
-				
+
 				throw new SearchPhaseExecutionException(
 						"initial",
 						"No indices / shards to search on, requested indices are " + Arrays.toString(request.indices()),
@@ -185,13 +164,12 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			}
 		}
 
-		
 		/**
 		 * Start.
 		 */
 		public void start() {
 			request.beforeStart();
-			
+
 			int localOperations = 0;
 			for (final ShardIterator shardIt : shardsIts) {
 				final ShardRouting shard = shardIt.firstOrNull();
@@ -199,15 +177,15 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 					if (shard.currentNodeId().equals(nodes.localNodeId())) {
 						localOperations++;
 					} else {
-						
+
 						performFirstPhase(shardIt);
 					}
 				} else {
-					
+
 					onFirstPhaseResult(null, shardIt, null);
 				}
 			}
-			
+
 			if (localOperations > 0) {
 				if (request.operationThreading() == SearchOperationThreading.SINGLE_THREAD) {
 					request.beforeLocalFork();
@@ -250,7 +228,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			}
 		}
 
-		
 		/**
 		 * Perform first phase.
 		 *
@@ -260,7 +237,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			performFirstPhase(shardIt, shardIt.nextOrNull());
 		}
 
-		
 		/**
 		 * Perform first phase.
 		 *
@@ -269,7 +245,7 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		 */
 		void performFirstPhase(final ShardIterator shardIt, final ShardRouting shard) {
 			if (shard == null) {
-				
+
 				onFirstPhaseResult(null, shardIt, null);
 			} else {
 				DiscoveryNode node = nodes.get(shard.currentNodeId());
@@ -295,7 +271,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			}
 		}
 
-		
 		/**
 		 * On first phase result.
 		 *
@@ -306,8 +281,7 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		void onFirstPhaseResult(ShardRouting shard, FirstResult result, ShardIterator shardIt) {
 			result.shardTarget(new SearchShardTarget(shard.currentNodeId(), shard.index(), shard.id()));
 			processFirstPhaseResult(shard, result);
-			
-			
+
 			int xTotalOps = totalOps.addAndGet(shardIt.remaining() + 1);
 			successulOps.incrementAndGet();
 			if (xTotalOps == expectedTotalOps) {
@@ -323,7 +297,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			}
 		}
 
-		
 		/**
 		 * On first phase result.
 		 *
@@ -333,7 +306,7 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		 */
 		void onFirstPhaseResult(@Nullable ShardRouting shard, final ShardIterator shardIt, Throwable t) {
 			if (totalOps.incrementAndGet() == expectedTotalOps) {
-				
+
 				if (logger.isDebugEnabled()) {
 					if (t != null) {
 						if (shard != null) {
@@ -343,16 +316,16 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 						}
 					}
 				}
-				
+
 				if (t == null) {
-					
+
 					addShardFailure(new ShardSearchFailure("No active shards", new SearchShardTarget(null, shardIt
 							.shardId().index().name(), shardIt.shardId().id())));
 				} else {
 					addShardFailure(new ShardSearchFailure(t));
 				}
 				if (successulOps.get() == 0) {
-					
+
 					listener.onFailure(new SearchPhaseExecutionException(firstPhaseName(), "total failure",
 							buildShardFailures()));
 				} else {
@@ -365,7 +338,7 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			} else {
 				ShardRouting nextShard = shardIt.nextOrNull();
 				if (nextShard != null) {
-					
+
 					if (logger.isTraceEnabled()) {
 						if (t != null) {
 							if (shard != null) {
@@ -377,8 +350,7 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 					}
 					performFirstPhase(shardIt, nextShard);
 				} else {
-					
-					
+
 					if (logger.isDebugEnabled()) {
 						if (t != null) {
 							if (shard != null) {
@@ -389,7 +361,7 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 						}
 					}
 					if (t == null) {
-						
+
 						addShardFailure(new ShardSearchFailure("No active shards", new SearchShardTarget(null, shardIt
 								.shardId().index().name(), shardIt.shardId().id())));
 					} else {
@@ -399,7 +371,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			}
 		}
 
-		
 		/**
 		 * Builds the took in millis.
 		 *
@@ -409,7 +380,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			return System.currentTimeMillis() - startTime;
 		}
 
-		
 		/**
 		 * Builds the shard failures.
 		 *
@@ -423,9 +393,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			return localFailures.toArray(ShardSearchFailure.EMPTY_ARRAY);
 		}
 
-		
-		
-		
 		/**
 		 * Adds the shard failure.
 		 *
@@ -438,7 +405,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			shardFailures.add(failure);
 		}
 
-		
 		/**
 		 * Release irrelevant search contexts.
 		 *
@@ -450,12 +416,12 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			if (docIdsToLoad == null) {
 				return;
 			}
-			
+
 			if (request.scroll() == null) {
 				for (Map.Entry<SearchShardTarget, QuerySearchResultProvider> entry : queryResults.entrySet()) {
 					if (!docIdsToLoad.containsKey(entry.getKey())) {
 						DiscoveryNode node = nodes.get(entry.getKey().nodeId());
-						if (node != null) { 
+						if (node != null) {
 							searchService.sendFreeContext(node, entry.getValue().id());
 						}
 					}
@@ -463,7 +429,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 			}
 		}
 
-		
 		/**
 		 * Send execute first phase.
 		 *
@@ -474,7 +439,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		protected abstract void sendExecuteFirstPhase(DiscoveryNode node, InternalSearchRequest request,
 				SearchServiceListener<FirstResult> listener);
 
-		
 		/**
 		 * Process first phase result.
 		 *
@@ -483,7 +447,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		 */
 		protected abstract void processFirstPhaseResult(ShardRouting shard, FirstResult result);
 
-		
 		/**
 		 * Move to second phase.
 		 *
@@ -491,7 +454,6 @@ public abstract class TransportSearchTypeAction extends TransportAction<SearchRe
 		 */
 		protected abstract void moveToSecondPhase() throws Exception;
 
-		
 		/**
 		 * First phase name.
 		 *

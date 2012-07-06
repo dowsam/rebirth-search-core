@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalTransportChannel.java 2012-3-29 15:01:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalTransportChannel.java 2012-7-6 14:29:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport.local;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportResponseOptions;
 import cn.com.rebirth.search.core.transport.support.TransportStreams;
 
-
 /**
  * The Class LocalTransportChannel.
  *
@@ -28,24 +26,18 @@ import cn.com.rebirth.search.core.transport.support.TransportStreams;
  */
 public class LocalTransportChannel implements TransportChannel {
 
-	
 	/** The source transport. */
 	private final LocalTransport sourceTransport;
 
-	
-	
 	/** The target transport. */
 	private final LocalTransport targetTransport;
 
-	
 	/** The action. */
 	private final String action;
 
-	
 	/** The request id. */
 	private final long requestId;
 
-	
 	/**
 	 * Instantiates a new local transport channel.
 	 *
@@ -62,27 +54,24 @@ public class LocalTransportChannel implements TransportChannel {
 		this.requestId = requestId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.TransportChannel#action()
+	 * @see cn.com.rebirth.search.core.transport.TransportChannel#action()
 	 */
 	@Override
 	public String action() {
 		return action;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.TransportChannel#sendResponse(cn.com.summall.search.commons.io.stream.Streamable)
+	 * @see cn.com.rebirth.search.core.transport.TransportChannel#sendResponse(cn.com.rebirth.commons.io.stream.Streamable)
 	 */
 	@Override
 	public void sendResponse(Streamable message) throws IOException {
 		sendResponse(message, TransportResponseOptions.EMPTY);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.TransportChannel#sendResponse(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportResponseOptions)
+	 * @see cn.com.rebirth.search.core.transport.TransportChannel#sendResponse(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportResponseOptions)
 	 */
 	@Override
 	public void sendResponse(Streamable message, TransportResponseOptions options) throws IOException {
@@ -92,7 +81,7 @@ public class LocalTransportChannel implements TransportChannel {
 			stream.writeLong(requestId);
 			byte status = 0;
 			status = TransportStreams.statusSetResponse(status);
-			stream.writeByte(status); 
+			stream.writeByte(status);
 			message.writeTo(stream);
 			final byte[] data = cachedEntry.bytes().copiedByteArray();
 			targetTransport.threadPool().generic().execute(new Runnable() {
@@ -106,9 +95,8 @@ public class LocalTransportChannel implements TransportChannel {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.transport.TransportChannel#sendResponse(java.lang.Throwable)
+	 * @see cn.com.rebirth.search.core.transport.TransportChannel#sendResponse(java.lang.Throwable)
 	 */
 	@Override
 	public void sendResponse(Throwable error) throws IOException {
@@ -144,7 +132,6 @@ public class LocalTransportChannel implements TransportChannel {
 		}
 	}
 
-	
 	/**
 	 * Write response exception header.
 	 *

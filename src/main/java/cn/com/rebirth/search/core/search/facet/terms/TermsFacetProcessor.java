@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsFacetProcessor.java 2012-3-29 15:01:30 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsFacetProcessor.java 2012-7-6 14:29:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms;
 
@@ -46,7 +45,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class TermsFacetProcessor.
  *
@@ -54,7 +52,6 @@ import com.google.common.collect.Lists;
  */
 public class TermsFacetProcessor extends AbstractComponent implements FacetProcessor {
 
-	
 	/**
 	 * Instantiates a new terms facet processor.
 	 *
@@ -66,18 +63,16 @@ public class TermsFacetProcessor extends AbstractComponent implements FacetProce
 		InternalTermsFacet.registerStreams();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#types()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#types()
 	 */
 	@Override
 	public String[] types() {
 		return new String[] { TermsFacet.TYPE };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public FacetCollector parse(String facetName, XContentParser parser, SearchContext context) throws IOException {
@@ -229,9 +224,8 @@ public class TermsFacetProcessor extends AbstractComponent implements FacetProce
 				pattern, scriptLang, script, params);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SimpleDump.java 2012-3-29 15:01:20 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SimpleDump.java 2012-7-6 14:29:07 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump;
 
@@ -12,7 +11,6 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
 
-
 /**
  * The Class SimpleDump.
  *
@@ -20,11 +18,9 @@ import cn.com.rebirth.commons.Nullable;
  */
 public class SimpleDump extends AbstractDump {
 
-	
 	/** The location. */
 	private final File location;
 
-	
 	/**
 	 * Instantiates a new simple dump.
 	 *
@@ -40,18 +36,16 @@ public class SimpleDump extends AbstractDump {
 		this.location = location;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.AbstractDump#doCreateFile(java.lang.String)
+	 * @see cn.com.rebirth.search.core.monitor.dump.AbstractDump#doCreateFile(java.lang.String)
 	 */
 	@Override
 	protected File doCreateFile(String name) throws DumpException {
 		return new File(location, name);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.Dump#finish()
+	 * @see cn.com.rebirth.search.core.monitor.dump.Dump#finish()
 	 */
 	@Override
 	public void finish() throws DumpException {

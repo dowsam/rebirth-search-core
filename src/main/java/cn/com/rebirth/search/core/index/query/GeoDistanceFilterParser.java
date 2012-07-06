@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceFilterParser.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceFilterParser.java 2012-7-6 14:28:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.search.geo.GeoDistanceFilter;
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
 import cn.com.rebirth.search.core.index.search.geo.GeoUtils;
 
-
 /**
  * The Class GeoDistanceFilterParser.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.index.search.geo.GeoUtils;
  */
 public class GeoDistanceFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "geo_distance";
 
-	
 	/**
 	 * Instantiates a new geo distance filter parser.
 	 */
@@ -44,18 +40,16 @@ public class GeoDistanceFilterParser implements FilterParser {
 	public GeoDistanceFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "geoDistance" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -72,7 +66,7 @@ public class GeoDistanceFilterParser implements FilterParser {
 		String fieldName = null;
 		double distance = 0;
 		Object vDistance = null;
-		DistanceUnit unit = DistanceUnit.KILOMETERS; 
+		DistanceUnit unit = DistanceUnit.KILOMETERS;
 		GeoDistance geoDistance = GeoDistance.ARC;
 		String optimizeBbox = "memory";
 		boolean normalizeLon = true;
@@ -90,7 +84,7 @@ public class GeoDistanceFilterParser implements FilterParser {
 				}
 				fieldName = currentFieldName;
 			} else if (token == XContentParser.Token.START_OBJECT) {
-				
+
 				String currentName = parser.currentName();
 				fieldName = currentFieldName;
 				while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
@@ -114,9 +108,9 @@ public class GeoDistanceFilterParser implements FilterParser {
 			} else if (token.isValue()) {
 				if (currentFieldName.equals("distance")) {
 					if (token == XContentParser.Token.VALUE_STRING) {
-						vDistance = parser.text(); 
+						vDistance = parser.text();
 					} else {
-						vDistance = parser.numberValue(); 
+						vDistance = parser.numberValue();
 					}
 				} else if (currentFieldName.equals("unit")) {
 					unit = DistanceUnit.fromString(parser.text());
@@ -148,7 +142,7 @@ public class GeoDistanceFilterParser implements FilterParser {
 					normalizeLat = parser.booleanValue();
 					normalizeLon = parser.booleanValue();
 				} else {
-					
+
 					String value = parser.text();
 					int comma = value.indexOf(',');
 					if (comma != -1) {

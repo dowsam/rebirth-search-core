@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SimpleFsDirectoryService.java 2012-3-29 15:02:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SimpleFsDirectoryService.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.fs;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.store.IndexStore;
 
-
 /**
  * The Class SimpleFsDirectoryService.
  *
@@ -27,7 +25,6 @@ import cn.com.rebirth.search.core.index.store.IndexStore;
  */
 public class SimpleFsDirectoryService extends FsDirectoryService {
 
-	
 	/**
 	 * Instantiates a new simple fs directory service.
 	 *
@@ -40,9 +37,8 @@ public class SimpleFsDirectoryService extends FsDirectoryService {
 		super(shardId, indexSettings, indexStore);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.DirectoryService#build()
+	 * @see cn.com.rebirth.search.core.index.store.DirectoryService#build()
 	 */
 	@Override
 	public Directory[] build() throws IOException {

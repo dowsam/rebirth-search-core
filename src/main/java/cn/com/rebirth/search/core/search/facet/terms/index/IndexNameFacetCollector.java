@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexNameFacetCollector.java 2012-3-29 15:01:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexNameFacetCollector.java 2012-7-6 14:30:42 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.index;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.terms.strings.InternalStringTerms
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class IndexNameFacetCollector.
  *
@@ -25,23 +23,18 @@ import com.google.common.collect.Sets;
  */
 public class IndexNameFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index name. */
 	private final String indexName;
 
-	
 	/** The comparator type. */
 	private final InternalStringTermsFacet.ComparatorType comparatorType;
 
-	
 	/** The size. */
 	private final int size;
 
-	
 	/** The count. */
 	private int count = 0;
 
-	
 	/**
 	 * Instantiates a new index name facet collector.
 	 *
@@ -58,26 +51,23 @@ public class IndexNameFacetCollector extends AbstractFacetCollector {
 		this.size = size;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		count++;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {

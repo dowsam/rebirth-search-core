@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ResidentFieldDataCache.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ResidentFieldDataCache.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.field.data.resident;
 
 import java.util.concurrent.TimeUnit;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.cache.CacheBuilderHelper;
@@ -27,7 +26,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 
-
 /**
  * The Class ResidentFieldDataCache.
  *
@@ -36,27 +34,21 @@ import com.google.common.cache.RemovalNotification;
 public class ResidentFieldDataCache extends AbstractConcurrentMapFieldDataCache implements
 		RemovalListener<String, FieldData> {
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The max size. */
 	private volatile int maxSize;
 
-	
 	/** The expire. */
 	private volatile TimeValue expire;
 
-	
 	/** The evictions. */
 	private final CounterMetric evictions = new CounterMetric();
 
-	
 	/** The apply settings. */
 	private final ApplySettings applySettings = new ApplySettings();
 
-	
 	/**
 	 * Instantiates a new resident field data cache.
 	 *
@@ -77,19 +69,17 @@ public class ResidentFieldDataCache extends AbstractConcurrentMapFieldDataCache 
 		indexSettingsService.addListener(applySettings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache#close()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache#close()
 	 */
 	@Override
-	public void close() throws RestartException {
+	public void close() throws RebirthException {
 		indexSettingsService.removeListener(applySettings);
 		super.close();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache#buildFieldDataMap()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache#buildFieldDataMap()
 	 */
 	@Override
 	protected Cache<String, FieldData> buildFieldDataMap() {
@@ -104,25 +94,22 @@ public class ResidentFieldDataCache extends AbstractConcurrentMapFieldDataCache 
 		return cacheBuilder.build();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.FieldDataCache#type()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache#type()
 	 */
 	@Override
 	public String type() {
 		return "resident";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.cache.field.data.FieldDataCache#evictions()
+	 * @see cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache#evictions()
 	 */
 	@Override
 	public long evictions() {
 		return evictions.count();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see com.google.common.cache.RemovalListener#onRemoval(com.google.common.cache.RemovalNotification)
 	 */
@@ -137,7 +124,6 @@ public class ResidentFieldDataCache extends AbstractConcurrentMapFieldDataCache 
 		IndexMetaData.addDynamicSettings("index.cache.field.max_size", "index.cache.field.expire");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -145,9 +131,8 @@ public class ResidentFieldDataCache extends AbstractConcurrentMapFieldDataCache 
 	 */
 	class ApplySettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {

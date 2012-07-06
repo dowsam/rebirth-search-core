@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NettyHttpServerTransport.java 2012-4-25 10:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NettyHttpServerTransport.java 2012-7-6 14:30:17 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.http.netty;
@@ -40,7 +40,7 @@ import org.jboss.netty.handler.timeout.ReadTimeoutException;
 import org.jboss.netty.logging.InternalLogger;
 import org.jboss.netty.logging.InternalLoggerFactory;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
@@ -202,17 +202,17 @@ public class NettyHttpServerTransport extends AbstractLifecycleComponent<HttpSer
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.http.HttpServerTransport#httpServerAdapter(cn.com.summall.search.core.http.HttpServerAdapter)
+	 * @see cn.com.rebirth.search.core.http.HttpServerTransport#httpServerAdapter(cn.com.rebirth.search.core.http.HttpServerAdapter)
 	 */
 	public void httpServerAdapter(HttpServerAdapter httpServerAdapter) {
 		this.httpServerAdapter = httpServerAdapter;
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		this.serverOpenChannels = new OpenChannelsHandler();
 
 		if (blockingServer) {
@@ -283,10 +283,10 @@ public class NettyHttpServerTransport extends AbstractLifecycleComponent<HttpSer
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		if (serverChannel != null) {
 			serverChannel.close().awaitUninterruptibly();
 			serverChannel = null;
@@ -304,21 +304,21 @@ public class NettyHttpServerTransport extends AbstractLifecycleComponent<HttpSer
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.http.HttpServerTransport#boundAddress()
+	 * @see cn.com.rebirth.search.core.http.HttpServerTransport#boundAddress()
 	 */
 	public BoundTransportAddress boundAddress() {
 		return this.boundAddress;
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.http.HttpServerTransport#stats()
+	 * @see cn.com.rebirth.search.core.http.HttpServerTransport#stats()
 	 */
 	@Override
 	public HttpStats stats() {

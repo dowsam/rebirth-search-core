@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptModule.java 2012-3-29 15:01:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptModule.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.script;
 
 import java.util.List;
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.AbstractModule;
 import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.script.mvel.MvelScriptEngineService;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ScriptModule.
  *
@@ -27,19 +25,15 @@ import com.google.common.collect.Maps;
  */
 public class ScriptModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The script engines. */
 	private final List<Class<? extends ScriptEngineService>> scriptEngines = Lists.newArrayList();
 
-	
 	/** The scripts. */
 	private final Map<String, Class<? extends NativeScriptFactory>> scripts = Maps.newHashMap();
 
-	
 	/**
 	 * Instantiates a new script module.
 	 *
@@ -49,7 +43,6 @@ public class ScriptModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/**
 	 * Adds the script engine.
 	 *
@@ -59,7 +52,6 @@ public class ScriptModule extends AbstractModule {
 		scriptEngines.add(scriptEngine);
 	}
 
-	
 	/**
 	 * Register script.
 	 *
@@ -70,9 +62,8 @@ public class ScriptModule extends AbstractModule {
 		scripts.put(name, script);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
@@ -82,13 +73,12 @@ public class ScriptModule extends AbstractModule {
 			scriptsBinder.addBinding(entry.getKey()).to(entry.getValue());
 		}
 
-		
 		Map<String, Settings> nativeSettings = settings.getGroups("script.native");
 		for (Map.Entry<String, Settings> entry : nativeSettings.entrySet()) {
 			String name = entry.getKey();
 			Class<? extends NativeScriptFactory> type = entry.getValue().getAsClass("type", NativeScriptFactory.class);
 			if (type == NativeScriptFactory.class) {
-				throw new RestartIllegalArgumentException("type is missing for native script [" + name + "]");
+				throw new RebirthIllegalArgumentException("type is missing for native script [" + name + "]");
 			}
 			scriptsBinder.addBinding(name).to(type);
 		}
@@ -98,7 +88,7 @@ public class ScriptModule extends AbstractModule {
 		try {
 			multibinder.addBinding().to(MvelScriptEngineService.class);
 		} catch (Throwable t) {
-			
+
 		}
 		for (Class<? extends ScriptEngineService> scriptEngine : scriptEngines) {
 			multibinder.addBinding().to(scriptEngine);

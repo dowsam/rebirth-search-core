@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchCache.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchCache.java 2012-7-6 14:30:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.search.fetch.FetchSearchResult;
 import cn.com.rebirth.search.core.search.fetch.QueryFetchSearchResult;
 import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
 
-
 /**
  * The Class TransportSearchCache.
  *
@@ -26,23 +24,18 @@ import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
  */
 public class TransportSearchCache {
 
-	
 	/** The cache dfs results. */
 	private final Queue<Collection<DfsSearchResult>> cacheDfsResults = new LinkedTransferQueue<Collection<DfsSearchResult>>();
 
-	
 	/** The cache query results. */
 	private final Queue<Map<SearchShardTarget, QuerySearchResultProvider>> cacheQueryResults = new LinkedTransferQueue<Map<SearchShardTarget, QuerySearchResultProvider>>();
 
-	
 	/** The cache fetch results. */
 	private final Queue<Map<SearchShardTarget, FetchSearchResult>> cacheFetchResults = new LinkedTransferQueue<Map<SearchShardTarget, FetchSearchResult>>();
 
-	
 	/** The cache query fetch results. */
 	private final Queue<Map<SearchShardTarget, QueryFetchSearchResult>> cacheQueryFetchResults = new LinkedTransferQueue<Map<SearchShardTarget, QueryFetchSearchResult>>();
 
-	
 	/**
 	 * Obtain dfs results.
 	 *
@@ -56,7 +49,6 @@ public class TransportSearchCache {
 		return dfsSearchResults;
 	}
 
-	
 	/**
 	 * Release dfs results.
 	 *
@@ -67,7 +59,6 @@ public class TransportSearchCache {
 		cacheDfsResults.offer(dfsResults);
 	}
 
-	
 	/**
 	 * Obtain query results.
 	 *
@@ -82,7 +73,6 @@ public class TransportSearchCache {
 		return queryResults;
 	}
 
-	
 	/**
 	 * Release query results.
 	 *
@@ -93,7 +83,6 @@ public class TransportSearchCache {
 		cacheQueryResults.offer(queryResults);
 	}
 
-	
 	/**
 	 * Obtain fetch results.
 	 *
@@ -107,7 +96,6 @@ public class TransportSearchCache {
 		return fetchResults;
 	}
 
-	
 	/**
 	 * Release fetch results.
 	 *
@@ -118,7 +106,6 @@ public class TransportSearchCache {
 		cacheFetchResults.offer(fetchResults);
 	}
 
-	
 	/**
 	 * Obtain query fetch results.
 	 *
@@ -133,7 +120,6 @@ public class TransportSearchCache {
 		return fetchResults;
 	}
 
-	
 	/**
 	 * Release query fetch results.
 	 *

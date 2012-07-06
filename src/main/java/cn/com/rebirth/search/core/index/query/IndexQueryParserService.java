@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexQueryParserService.java 2012-3-29 15:01:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexQueryParserService.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -17,7 +16,7 @@ import org.apache.lucene.search.Filter;
 import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.io.BytesStream;
@@ -38,7 +37,6 @@ import cn.com.rebirth.search.core.script.ScriptService;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class IndexQueryParserService.
  *
@@ -46,7 +44,6 @@ import com.google.common.collect.ImmutableMap;
  */
 public class IndexQueryParserService extends AbstractIndexComponent {
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -54,16 +51,13 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 	 */
 	public static final class Defaults {
 
-		
 		/** The Constant QUERY_PREFIX. */
 		public static final String QUERY_PREFIX = "index.queryparser.query";
 
-		
 		/** The Constant FILTER_PREFIX. */
 		public static final String FILTER_PREFIX = "index.queryparser.filter";
 	}
 
-	
 	/** The cache. */
 	private ThreadLocal<QueryParseContext> cache = new ThreadLocal<QueryParseContext>() {
 		@Override
@@ -72,43 +66,33 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		}
 	};
 
-	
 	/** The analysis service. */
 	final AnalysisService analysisService;
 
-	
 	/** The script service. */
 	final ScriptService scriptService;
 
-	
 	/** The mapper service. */
 	final MapperService mapperService;
 
-	
 	/** The similarity service. */
 	final SimilarityService similarityService;
 
-	
 	/** The index cache. */
 	final IndexCache indexCache;
 
-	
 	/** The index engine. */
 	final IndexEngine indexEngine;
 
-	
 	/** The query parsers. */
 	private final Map<String, QueryParser> queryParsers;
 
-	
 	/** The filter parsers. */
 	private final Map<String, FilterParser> filterParsers;
 
-	
 	/** The default field. */
 	private String defaultField;
 
-	
 	/**
 	 * Instantiates a new index query parser service.
 	 *
@@ -190,7 +174,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		this.filterParsers = ImmutableMap.copyOf(filterParsersMap);
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -198,7 +181,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		cache.remove();
 	}
 
-	
 	/**
 	 * Default field.
 	 *
@@ -208,7 +190,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		return this.defaultField;
 	}
 
-	
 	/**
 	 * Query parser.
 	 *
@@ -219,7 +200,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		return queryParsers.get(name);
 	}
 
-	
 	/**
 	 * Filter parser.
 	 *
@@ -230,15 +210,14 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		return filterParsers.get(name);
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
 	 * @param queryBuilder the query builder
 	 * @return the parsed query
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public ParsedQuery parse(QueryBuilder queryBuilder) throws RestartException {
+	public ParsedQuery parse(QueryBuilder queryBuilder) throws RebirthException {
 		XContentParser parser = null;
 		try {
 			BytesStream bytes = queryBuilder.buildAsBytes();
@@ -256,19 +235,17 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
 	 * @param source the source
 	 * @return the parsed query
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public ParsedQuery parse(byte[] source) throws RestartException {
+	public ParsedQuery parse(byte[] source) throws RebirthException {
 		return parse(source, 0, source.length);
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -276,9 +253,9 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 	 * @param offset the offset
 	 * @param length the length
 	 * @return the parsed query
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public ParsedQuery parse(byte[] source, int offset, int length) throws RestartException {
+	public ParsedQuery parse(byte[] source, int offset, int length) throws RebirthException {
 		XContentParser parser = null;
 		try {
 			parser = XContentFactory.xContent(source, offset, length).createParser(source, offset, length);
@@ -294,7 +271,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -318,7 +294,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -333,7 +308,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Parses the inner filter.
 	 *
@@ -347,7 +321,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		return context.parseInnerFilter();
 	}
 
-	
 	/**
 	 * Parses the inner query.
 	 *
@@ -361,7 +334,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		return context.parseInnerQuery();
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -378,7 +350,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		return new ParsedQuery(query, parseContext.copyNamedFilters());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -391,7 +362,6 @@ public class IndexQueryParserService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Adds the.
 	 *

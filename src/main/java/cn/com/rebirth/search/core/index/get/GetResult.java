@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GetResult.java 2012-3-29 15:02:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GetResult.java 2012-7-6 14:29:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.get;
 
@@ -17,7 +16,7 @@ import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Unicode;
 import cn.com.rebirth.commons.compress.lzf.LZF;
 import cn.com.rebirth.commons.compress.lzf.LZFDecoder;
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.search.lookup.SourceLookup;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class GetResult.
  *
@@ -37,50 +35,39 @@ import com.google.common.collect.ImmutableMap;
  */
 public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The version. */
 	private long version;
 
-	
 	/** The exists. */
 	private boolean exists;
 
-	
 	/** The fields. */
 	private Map<String, GetField> fields;
 
-	
 	/** The source as map. */
 	private Map<String, Object> sourceAsMap;
 
-	
 	/** The source. */
 	private BytesHolder source;
 
-	
 	/** The source as bytes. */
 	private byte[] sourceAsBytes;
 
-	
 	/**
 	 * Instantiates a new gets the result.
 	 */
 	GetResult() {
 	}
 
-	
 	/**
 	 * Instantiates a new gets the result.
 	 *
@@ -106,7 +93,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * Exists.
 	 *
@@ -116,7 +102,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return exists;
 	}
 
-	
 	/**
 	 * Checks if is exists.
 	 *
@@ -126,7 +111,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return exists;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -136,7 +120,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return this.index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -146,7 +129,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -156,7 +138,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return type;
 	}
 
-	
 	/**
 	 * Gets the type.
 	 *
@@ -166,7 +147,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return type;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -176,7 +156,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return id;
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -186,7 +165,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return id;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -196,7 +174,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return this.version;
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -206,7 +183,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return this.version;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -223,7 +199,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return this.sourceAsBytes;
 	}
 
-	
 	/**
 	 * Source ref.
 	 *
@@ -234,13 +209,12 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 			try {
 				this.source = new BytesHolder(LZFDecoder.decode(source.bytes(), source.offset(), source.length()));
 			} catch (IOException e) {
-				throw new RestartParseException("failed to decompress source", e);
+				throw new RebirthParseException("failed to decompress source", e);
 			}
 		}
 		return this.source;
 	}
 
-	
 	/**
 	 * Internal source ref.
 	 *
@@ -250,7 +224,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return source;
 	}
 
-	
 	/**
 	 * Checks if is source empty.
 	 *
@@ -260,7 +233,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return source == null;
 	}
 
-	
 	/**
 	 * Source as string.
 	 *
@@ -274,14 +246,13 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return Unicode.fromBytes(source.bytes(), source.offset(), source.length());
 	}
 
-	
 	/**
 	 * Source as map.
 	 *
 	 * @return the map
-	 * @throws SumMallSearchParseException the sum mall search parse exception
+	 * @throws RebirthParseException the rebirth parse exception
 	 */
-	public Map<String, Object> sourceAsMap() throws RestartParseException {
+	public Map<String, Object> sourceAsMap() throws RebirthParseException {
 		if (source == null) {
 			return null;
 		}
@@ -293,7 +264,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return sourceAsMap;
 	}
 
-	
 	/**
 	 * Gets the source.
 	 *
@@ -303,7 +273,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return sourceAsMap();
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -313,7 +282,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return this.fields;
 	}
 
-	
 	/**
 	 * Gets the fields.
 	 *
@@ -323,7 +291,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return fields;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -334,7 +301,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return fields.get(name);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -346,7 +312,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return fields.values().iterator();
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -354,34 +319,27 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant _INDEX. */
 		static final XContentBuilderString _INDEX = new XContentBuilderString("_index");
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant _ID. */
 		static final XContentBuilderString _ID = new XContentBuilderString("_id");
 
-		
 		/** The Constant _VERSION. */
 		static final XContentBuilderString _VERSION = new XContentBuilderString("_version");
 
-		
 		/** The Constant EXISTS. */
 		static final XContentBuilderString EXISTS = new XContentBuilderString("exists");
 
-		
 		/** The Constant FIELDS. */
 		static final XContentBuilderString FIELDS = new XContentBuilderString("fields");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -431,7 +389,6 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * Read get result.
 	 *
@@ -445,9 +402,8 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -474,9 +430,8 @@ public class GetResult implements Streamable, Iterable<GetField>, ToXContent {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

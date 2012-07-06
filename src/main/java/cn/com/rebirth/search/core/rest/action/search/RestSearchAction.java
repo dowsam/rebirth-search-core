@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestSearchAction.java 2012-3-29 15:01:39 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestSearchAction.java 2012-7-6 14:28:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.search;
 
@@ -14,7 +13,7 @@ import static cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder
 import java.io.IOException;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -37,7 +36,6 @@ import cn.com.rebirth.search.core.search.Scroll;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
 import cn.com.rebirth.search.core.search.sort.SortOrder;
 
-
 /**
  * The Class RestSearchAction.
  *
@@ -45,7 +43,6 @@ import cn.com.rebirth.search.core.search.sort.SortOrder;
  */
 public class RestSearchAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest search action.
 	 *
@@ -64,9 +61,8 @@ public class RestSearchAction extends BaseRestHandler {
 		controller.registerHandler(POST, "/{index}/{type}/_search", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -78,7 +74,7 @@ public class RestSearchAction extends BaseRestHandler {
 					request.param("operation_threading"), null);
 			if (operationThreading != null) {
 				if (operationThreading == SearchOperationThreading.NO_THREADS) {
-					
+
 					operationThreading = SearchOperationThreading.SINGLE_THREAD;
 				}
 				searchRequest.operationThreading(operationThreading);
@@ -124,7 +120,6 @@ public class RestSearchAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * Parses the search request.
 	 *
@@ -134,7 +129,7 @@ public class RestSearchAction extends BaseRestHandler {
 	private SearchRequest parseSearchRequest(RestRequest request) {
 		String[] indices = RestActions.splitIndices(request.param("index"));
 		SearchRequest searchRequest = new SearchRequest(indices);
-		
+
 		if (request.hasContent()) {
 			searchRequest.source(request.contentByteArray(), request.contentByteArrayOffset(), request.contentLength(),
 					request.contentUnsafe());
@@ -144,7 +139,7 @@ public class RestSearchAction extends BaseRestHandler {
 				searchRequest.source(source);
 			}
 		}
-		
+
 		searchRequest.extraSource(parseSearchSource(request));
 
 		searchRequest.searchType(request.param("search_type"));
@@ -162,7 +157,6 @@ public class RestSearchAction extends BaseRestHandler {
 		return searchRequest;
 	}
 
-	
 	/**
 	 * Parses the search source.
 	 *
@@ -185,7 +179,7 @@ public class RestSearchAction extends BaseRestHandler {
 				} else if ("AND".equals(defaultOperator)) {
 					queryBuilder.defaultOperator(QueryStringQueryBuilder.Operator.AND);
 				} else {
-					throw new RestartIllegalArgumentException("Unsupported defaultOperator [" + defaultOperator
+					throw new RebirthIllegalArgumentException("Unsupported defaultOperator [" + defaultOperator
 							+ "], can either be [OR] or [AND]");
 				}
 			}
@@ -277,14 +271,14 @@ public class RestSearchAction extends BaseRestHandler {
 			for (String indexBoost : indicesBoost) {
 				int divisor = indexBoost.indexOf(',');
 				if (divisor == -1) {
-					throw new RestartIllegalArgumentException("Illegal index boost [" + indexBoost + "], no ','");
+					throw new RebirthIllegalArgumentException("Illegal index boost [" + indexBoost + "], no ','");
 				}
 				String indexName = indexBoost.substring(0, divisor);
 				String sBoost = indexBoost.substring(divisor + 1);
 				try {
 					searchSourceBuilder.indexBoost(indexName, Float.parseFloat(sBoost));
 				} catch (NumberFormatException e) {
-					throw new RestartIllegalArgumentException("Illegal index boost [" + indexBoost
+					throw new RebirthIllegalArgumentException("Illegal index boost [" + indexBoost
 							+ "], boost not a float number");
 				}
 			}

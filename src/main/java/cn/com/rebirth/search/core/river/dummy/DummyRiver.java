@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DummyRiver.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DummyRiver.java 2012-7-6 14:28:51 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.dummy;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.river.River;
 import cn.com.rebirth.search.core.river.RiverName;
 import cn.com.rebirth.search.core.river.RiverSettings;
 
-
 /**
  * The Class DummyRiver.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.core.river.RiverSettings;
  */
 public class DummyRiver extends AbstractRiverComponent implements River {
 
-	
 	/**
 	 * Instantiates a new dummy river.
 	 *
@@ -33,18 +30,16 @@ public class DummyRiver extends AbstractRiverComponent implements River {
 		logger.info("create");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.river.River#start()
+	 * @see cn.com.rebirth.search.core.river.River#start()
 	 */
 	@Override
 	public void start() {
 		logger.info("start");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.river.River#close()
+	 * @see cn.com.rebirth.search.core.river.River#close()
 	 */
 	@Override
 	public void close() {

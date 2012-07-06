@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportFacetModule.java 2012-3-29 15:02:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportFacetModule.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.statistical.InternalStatisticalFa
 import cn.com.rebirth.search.core.search.facet.terms.InternalTermsFacet;
 import cn.com.rebirth.search.core.search.facet.termsstats.InternalTermsStatsFacet;
 
-
 /**
  * The Class TransportFacetModule.
  *
@@ -25,20 +23,19 @@ import cn.com.rebirth.search.core.search.facet.termsstats.InternalTermsStatsFace
  */
 public class TransportFacetModule extends AbstractModule {
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
-     */
-    @Override
-    protected void configure() {
-        InternalFilterFacet.registerStreams();
-        InternalQueryFacet.registerStreams();
-        InternalGeoDistanceFacet.registerStreams();
-        InternalHistogramFacet.registerStreams();
-        InternalDateHistogramFacet.registerStreams();
-        InternalRangeFacet.registerStreams();
-        InternalStatisticalFacet.registerStreams();
-        InternalTermsFacet.registerStreams();
-        InternalTermsStatsFacet.registerStreams();
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
+	 */
+	@Override
+	protected void configure() {
+		InternalFilterFacet.registerStreams();
+		InternalQueryFacet.registerStreams();
+		InternalGeoDistanceFacet.registerStreams();
+		InternalHistogramFacet.registerStreams();
+		InternalDateHistogramFacet.registerStreams();
+		InternalRangeFacet.registerStreams();
+		InternalStatisticalFacet.registerStreams();
+		InternalTermsFacet.registerStreams();
+		InternalTermsStatsFacet.registerStreams();
+	}
 }

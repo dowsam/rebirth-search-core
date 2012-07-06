@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterStateRequest.java 2012-3-29 15:02:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterStateRequest.java 2012-7-6 14:29:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.state;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class ClusterStateRequest.
  *
@@ -22,51 +20,41 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class ClusterStateRequest extends MasterNodeOperationRequest {
 
-	
 	/** The filter routing table. */
 	private boolean filterRoutingTable = false;
 
-	
 	/** The filter nodes. */
 	private boolean filterNodes = false;
 
-	
 	/** The filter meta data. */
 	private boolean filterMetaData = false;
 
-	
 	/** The filter blocks. */
 	private boolean filterBlocks = false;
 
-	
 	/** The filtered indices. */
 	private String[] filteredIndices = Strings.EMPTY_ARRAY;
 
-	
 	/** The filtered index templates. */
 	private String[] filteredIndexTemplates = Strings.EMPTY_ARRAY;
 
-	
 	/** The local. */
 	private boolean local = false;
 
-	
 	/**
 	 * Instantiates a new cluster state request.
 	 */
 	public ClusterStateRequest() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
 		return null;
 	}
 
-	
 	/**
 	 * Filter all.
 	 *
@@ -82,7 +70,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Filter routing table.
 	 *
@@ -92,7 +79,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return filterRoutingTable;
 	}
 
-	
 	/**
 	 * Filter routing table.
 	 *
@@ -104,7 +90,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Filter nodes.
 	 *
@@ -114,7 +99,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return filterNodes;
 	}
 
-	
 	/**
 	 * Filter nodes.
 	 *
@@ -126,7 +110,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Filter meta data.
 	 *
@@ -136,7 +119,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return filterMetaData;
 	}
 
-	
 	/**
 	 * Filter meta data.
 	 *
@@ -148,7 +130,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Filter blocks.
 	 *
@@ -158,7 +139,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return filterBlocks;
 	}
 
-	
 	/**
 	 * Filter blocks.
 	 *
@@ -170,7 +150,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Filtered indices.
 	 *
@@ -180,7 +159,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return filteredIndices;
 	}
 
-	
 	/**
 	 * Filtered indices.
 	 *
@@ -192,7 +170,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Filtered index templates.
 	 *
@@ -202,7 +179,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this.filteredIndexTemplates;
 	}
 
-	
 	/**
 	 * Filtered index templates.
 	 *
@@ -214,7 +190,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Local.
 	 *
@@ -226,7 +201,6 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Local.
 	 *
@@ -236,9 +210,8 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		return this.local;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -264,9 +237,8 @@ public class ClusterStateRequest extends MasterNodeOperationRequest {
 		local = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

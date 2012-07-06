@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestAnalyzeAction.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestAnalyzeAction.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.analyze;
 
@@ -13,7 +12,7 @@ import static cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder
 
 import java.io.IOException;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
@@ -28,7 +27,6 @@ import cn.com.rebirth.search.core.rest.RestRequest;
 import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 
-
 /**
  * The Class RestAnalyzeAction.
  *
@@ -36,7 +34,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
  */
 public class RestAnalyzeAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest analyze action.
 	 *
@@ -53,9 +50,8 @@ public class RestAnalyzeAction extends BaseRestHandler {
 		controller.registerHandler(POST, "/{index}/_analyze", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -65,8 +61,8 @@ public class RestAnalyzeAction extends BaseRestHandler {
 		}
 		if (text == null) {
 			try {
-				channel.sendResponse(new XContentThrowableRestResponse(request,
-						new RestartIllegalArgumentException("text is missing")));
+				channel.sendResponse(new XContentThrowableRestResponse(request, new RebirthIllegalArgumentException(
+						"text is missing")));
 			} catch (IOException e1) {
 				logger.warn("Failed to send response", e1);
 			}

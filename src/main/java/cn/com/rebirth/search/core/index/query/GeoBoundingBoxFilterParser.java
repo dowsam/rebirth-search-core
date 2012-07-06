@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoBoundingBoxFilterParser.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoBoundingBoxFilterParser.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.index.search.geo.InMemoryGeoBoundingBoxFilter;
 import cn.com.rebirth.search.core.index.search.geo.IndexedGeoBoundingBoxFilter;
 import cn.com.rebirth.search.core.index.search.geo.Point;
 
-
 /**
  * The Class GeoBoundingBoxFilterParser.
  *
@@ -31,11 +29,9 @@ import cn.com.rebirth.search.core.index.search.geo.Point;
  */
 public class GeoBoundingBoxFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "geo_bbox";
 
-	
 	/**
 	 * Instantiates a new geo bounding box filter parser.
 	 */
@@ -43,18 +39,16 @@ public class GeoBoundingBoxFilterParser implements FilterParser {
 	public GeoBoundingBoxFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "geoBbox", "geo_bounding_box", "geoBoundingBox" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {

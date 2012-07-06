@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoPolygonFilterParser.java 2012-3-29 15:02:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoPolygonFilterParser.java 2012-7-6 14:30:10 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.index.search.geo.Point;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class GeoPolygonFilterParser.
  *
@@ -34,11 +32,9 @@ import com.google.common.collect.Lists;
  */
 public class GeoPolygonFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "geo_polygon";
 
-	
 	/**
 	 * Instantiates a new geo polygon filter parser.
 	 */
@@ -46,18 +42,16 @@ public class GeoPolygonFilterParser implements FilterParser {
 	public GeoPolygonFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "geoPolygon" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {

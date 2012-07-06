@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ZenPing.java 2012-3-29 15:01:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ZenPing.java 2012-7-6 14:29:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.discovery.zen.ping;
 
@@ -11,7 +10,7 @@ import static cn.com.rebirth.search.core.cluster.node.DiscoveryNode.readNode;
 
 import java.io.IOException;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.cluster.ClusterName;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider;
 
-
 /**
  * The Interface ZenPing.
  *
@@ -29,7 +27,6 @@ import cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider;
  */
 public interface ZenPing extends LifecycleComponent<ZenPing> {
 
-	
 	/**
 	 * Sets the nodes provider.
 	 *
@@ -37,17 +34,15 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 	 */
 	void setNodesProvider(DiscoveryNodesProvider nodesProvider);
 
-	
 	/**
 	 * Ping.
 	 *
 	 * @param listener the listener
 	 * @param timeout the timeout
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void ping(PingListener listener, TimeValue timeout) throws RestartException;
+	void ping(PingListener listener, TimeValue timeout) throws RebirthException;
 
-	
 	/**
 	 * The listener interface for receiving ping events.
 	 * The class that is interested in processing a ping
@@ -61,7 +56,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 	 */
 	public interface PingListener {
 
-		
 		/**
 		 * On ping.
 		 *
@@ -70,7 +64,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 		void onPing(PingResponse[] pings);
 	}
 
-	
 	/**
 	 * The Class PingResponse.
 	 *
@@ -78,26 +71,21 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 	 */
 	public class PingResponse implements Streamable {
 
-		
 		/** The cluster name. */
 		private ClusterName clusterName;
 
-		
 		/** The target. */
 		private DiscoveryNode target;
 
-		
 		/** The master. */
 		private DiscoveryNode master;
 
-		
 		/**
 		 * Instantiates a new ping response.
 		 */
 		private PingResponse() {
 		}
 
-		
 		/**
 		 * Instantiates a new ping response.
 		 *
@@ -111,7 +99,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			this.clusterName = clusterName;
 		}
 
-		
 		/**
 		 * Cluster name.
 		 *
@@ -121,7 +108,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			return this.clusterName;
 		}
 
-		
 		/**
 		 * Target.
 		 *
@@ -131,7 +117,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			return target;
 		}
 
-		
 		/**
 		 * Master.
 		 *
@@ -141,7 +126,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			return master;
 		}
 
-		
 		/**
 		 * Read ping response.
 		 *
@@ -155,9 +139,8 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			return response;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -168,9 +151,8 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -184,7 +166,6 @@ public interface ZenPing extends LifecycleComponent<ZenPing> {
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */

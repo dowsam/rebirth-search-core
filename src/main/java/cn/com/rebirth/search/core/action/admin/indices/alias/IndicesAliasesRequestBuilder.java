@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesAliasesRequestBuilder.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesAliasesRequestBuilder.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.alias;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
 import cn.com.rebirth.search.core.cluster.metadata.AliasAction;
 import cn.com.rebirth.search.core.index.query.FilterBuilder;
 
-
 /**
  * The Class IndicesAliasesRequestBuilder.
  *
@@ -24,7 +22,6 @@ import cn.com.rebirth.search.core.index.query.FilterBuilder;
 public class IndicesAliasesRequestBuilder extends
 		BaseIndicesRequestBuilder<IndicesAliasesRequest, IndicesAliasesResponse> {
 
-	
 	/**
 	 * Instantiates a new indices aliases request builder.
 	 *
@@ -34,7 +31,6 @@ public class IndicesAliasesRequestBuilder extends
 		super(indicesClient, new IndicesAliasesRequest());
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -47,7 +43,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -61,7 +56,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -75,7 +69,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias.
 	 *
@@ -89,7 +82,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the alias action.
 	 *
@@ -101,7 +93,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Removes the alias.
 	 *
@@ -114,7 +105,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -126,7 +116,6 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -138,9 +127,8 @@ public class IndicesAliasesRequestBuilder extends
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<IndicesAliasesResponse> listener) {

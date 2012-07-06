@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractIndexAnalyzerProvider.java 2012-3-29 15:02:26 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractIndexAnalyzerProvider.java 2012-7-6 14:29:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.index.analysis.AnalyzerScope;
 
-
 /**
  * The Class AbstractIndexAnalyzerProvider.
  *
@@ -26,15 +24,12 @@ import cn.com.rebirth.search.index.analysis.AnalyzerScope;
 public abstract class AbstractIndexAnalyzerProvider<T extends Analyzer> extends AbstractIndexComponent implements
 		AnalyzerProvider<T> {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The version. */
 	protected final Version version;
 
-	
 	/**
 	 * Instantiates a new abstract index analyzer provider.
 	 *
@@ -50,7 +45,6 @@ public abstract class AbstractIndexAnalyzerProvider<T extends Analyzer> extends 
 		this.version = Lucene.parseVersion(settings.get("version"), Lucene.ANALYZER_VERSION);
 	}
 
-	
 	/**
 	 * Instantiates a new abstract index analyzer provider.
 	 *
@@ -67,18 +61,16 @@ public abstract class AbstractIndexAnalyzerProvider<T extends Analyzer> extends 
 		this.version = Lucene.parseVersion(settings.get("version"), Lucene.ANALYZER_VERSION);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#name()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#name()
 	 */
 	@Override
 	public String name() {
 		return this.name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#scope()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#scope()
 	 */
 	@Override
 	public AnalyzerScope scope() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AdapterActionFuture.java 2012-3-29 15:02:11 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AdapterActionFuture.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support;
 
@@ -12,13 +11,12 @@ import java.util.concurrent.TimeoutException;
 
 import cn.com.rebirth.commons.concurrent.BaseFuture;
 import cn.com.rebirth.commons.concurrent.UncategorizedExecutionException;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartInterruptedException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthInterruptedException;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.RestartTimeoutException;
 import cn.com.rebirth.search.core.action.ActionFuture;
 import cn.com.rebirth.search.core.action.ActionListener;
-
 
 /**
  * The Class AdapterActionFuture.
@@ -29,82 +27,75 @@ import cn.com.rebirth.search.core.action.ActionListener;
  */
 public abstract class AdapterActionFuture<T, L> extends BaseFuture<T> implements ActionFuture<T>, ActionListener<L> {
 
-	
 	/** The root failure. */
 	private Throwable rootFailure;
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionFuture#actionGet()
+	 * @see cn.com.rebirth.search.core.action.ActionFuture#actionGet()
 	 */
 	@Override
-	public T actionGet() throws RestartException {
+	public T actionGet() throws RebirthException {
 		try {
 			return get();
 		} catch (InterruptedException e) {
-			throw new RestartInterruptedException(e.getMessage());
+			throw new RebirthInterruptedException(e.getMessage());
 		} catch (ExecutionException e) {
 			throw rethrowExecutionException(e);
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionFuture#actionGet(java.lang.String)
+	 * @see cn.com.rebirth.search.core.action.ActionFuture#actionGet(java.lang.String)
 	 */
 	@Override
-	public T actionGet(String timeout) throws RestartException {
+	public T actionGet(String timeout) throws RebirthException {
 		return actionGet(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionFuture#actionGet(long)
+	 * @see cn.com.rebirth.search.core.action.ActionFuture#actionGet(long)
 	 */
 	@Override
-	public T actionGet(long timeoutMillis) throws RestartException {
+	public T actionGet(long timeoutMillis) throws RebirthException {
 		return actionGet(timeoutMillis, TimeUnit.MILLISECONDS);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionFuture#actionGet(cn.com.summall.search.commons.unit.TimeValue)
+	 * @see cn.com.rebirth.search.core.action.ActionFuture#actionGet(cn.com.rebirth.commons.unit.TimeValue)
 	 */
 	@Override
-	public T actionGet(TimeValue timeout) throws RestartException {
+	public T actionGet(TimeValue timeout) throws RebirthException {
 		return actionGet(timeout.millis(), TimeUnit.MILLISECONDS);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionFuture#actionGet(long, java.util.concurrent.TimeUnit)
+	 * @see cn.com.rebirth.search.core.action.ActionFuture#actionGet(long, java.util.concurrent.TimeUnit)
 	 */
 	@Override
-	public T actionGet(long timeout, TimeUnit unit) throws RestartException {
+	public T actionGet(long timeout, TimeUnit unit) throws RebirthException {
 		try {
 			return get(timeout, unit);
 		} catch (TimeoutException e) {
 			throw new RestartTimeoutException(e.getMessage());
 		} catch (InterruptedException e) {
-			throw new RestartInterruptedException(e.getMessage());
+			throw new RebirthInterruptedException(e.getMessage());
 		} catch (ExecutionException e) {
 			throw rethrowExecutionException(e);
 		}
 	}
 
-	
 	/**
 	 * Rethrow execution exception.
 	 *
 	 * @param e the e
-	 * @return the sum mall search exception
+	 * @return the rebirth exception
 	 */
-	static RestartException rethrowExecutionException(ExecutionException e) {
-		if (e.getCause() instanceof RestartException) {
-			RestartException esEx = (RestartException) e.getCause();
+	static RebirthException rethrowExecutionException(ExecutionException e) {
+		if (e.getCause() instanceof RebirthException) {
+			RebirthException esEx = (RebirthException) e.getCause();
 			Throwable root = esEx.unwrapCause();
-			if (root instanceof RestartException) {
-				return (RestartException) root;
+			if (root instanceof RebirthException) {
+				return (RebirthException) root;
 			}
 			return new UncategorizedExecutionException("Failed execution", root);
 		} else {
@@ -112,25 +103,22 @@ public abstract class AdapterActionFuture<T, L> extends BaseFuture<T> implements
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionListener#onResponse(java.lang.Object)
+	 * @see cn.com.rebirth.search.core.action.ActionListener#onResponse(java.lang.Object)
 	 */
 	@Override
 	public void onResponse(L result) {
 		set(convert(result));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionListener#onFailure(java.lang.Throwable)
+	 * @see cn.com.rebirth.search.core.action.ActionListener#onFailure(java.lang.Throwable)
 	 */
 	@Override
 	public void onFailure(Throwable e) {
 		setException(e);
 	}
 
-	
 	/**
 	 * Convert.
 	 *
@@ -139,9 +127,8 @@ public abstract class AdapterActionFuture<T, L> extends BaseFuture<T> implements
 	 */
 	protected abstract T convert(L listenerResponse);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionFuture#getRootFailure()
+	 * @see cn.com.rebirth.search.core.action.ActionFuture#getRootFailure()
 	 */
 	@Override
 	public Throwable getRootFailure() {

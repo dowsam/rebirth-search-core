@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DateHistogramFacetProcessor.java 2012-3-29 15:02:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DateHistogramFacetProcessor.java 2012-7-6 14:30:20 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.datehistogram;
 
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class DateHistogramFacetProcessor.
  *
@@ -40,11 +38,9 @@ import com.google.common.collect.ImmutableMap;
  */
 public class DateHistogramFacetProcessor extends AbstractComponent implements FacetProcessor {
 
-	
 	/** The date field parsers. */
 	private final ImmutableMap<String, DateFieldParser> dateFieldParsers;
 
-	
 	/**
 	 * Instantiates a new date histogram facet processor.
 	 *
@@ -66,18 +62,16 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 				.immutableMap();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#types()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#types()
 	 */
 	@Override
 	public String[] types() {
 		return new String[] { DateHistogramFacet.TYPE, "dateHistogram" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public FacetCollector parse(String facetName, XContentParser parser, SearchContext context) throws IOException {
@@ -160,7 +154,7 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		if (fieldParser != null) {
 			tzRoundingBuilder = TimeZoneRounding.builder(fieldParser.parse(chronology));
 		} else {
-			
+
 			tzRoundingBuilder = TimeZoneRounding.builder(TimeValue.parseTimeValue(interval, null));
 		}
 
@@ -179,7 +173,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		}
 	}
 
-	
 	/**
 	 * Parses the offset.
 	 *
@@ -194,7 +187,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		return TimeValue.parseTimeValue(offset, null).millis();
 	}
 
-	
 	/**
 	 * Parses the zone.
 	 *
@@ -210,19 +202,18 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			String text = parser.text();
 			int index = text.indexOf(':');
 			if (index != -1) {
-				
+
 				return DateTimeZone.forOffsetHoursMinutes(Integer.parseInt(text.substring(0, index)),
 						Integer.parseInt(text.substring(index + 1)));
 			} else {
-				
+
 				return DateTimeZone.forID(text);
 			}
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {
@@ -230,7 +221,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		return first.reduce(name, facets);
 	}
 
-	
 	/**
 	 * The Interface DateFieldParser.
 	 *
@@ -238,7 +228,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 	 */
 	static interface DateFieldParser {
 
-		
 		/**
 		 * Parses the.
 		 *
@@ -247,7 +236,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		DateTimeField parse(Chronology chronology);
 
-		
 		/**
 		 * The Class WeekOfWeekyear.
 		 *
@@ -255,9 +243,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class WeekOfWeekyear implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {
@@ -265,7 +252,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			}
 		}
 
-		
 		/**
 		 * The Class YearOfCentury.
 		 *
@@ -273,9 +259,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class YearOfCentury implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {
@@ -283,7 +268,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			}
 		}
 
-		
 		/**
 		 * The Class MonthOfYear.
 		 *
@@ -291,9 +275,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class MonthOfYear implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {
@@ -301,7 +284,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			}
 		}
 
-		
 		/**
 		 * The Class DayOfMonth.
 		 *
@@ -309,9 +291,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class DayOfMonth implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {
@@ -319,7 +300,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			}
 		}
 
-		
 		/**
 		 * The Class HourOfDay.
 		 *
@@ -327,9 +307,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class HourOfDay implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {
@@ -337,7 +316,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			}
 		}
 
-		
 		/**
 		 * The Class MinuteOfHour.
 		 *
@@ -345,9 +323,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class MinuteOfHour implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {
@@ -355,7 +332,6 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 			}
 		}
 
-		
 		/**
 		 * The Class SecondOfMinute.
 		 *
@@ -363,9 +339,8 @@ public class DateHistogramFacetProcessor extends AbstractComponent implements Fa
 		 */
 		static class SecondOfMinute implements DateFieldParser {
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
+			 * @see cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor.DateFieldParser#parse(org.joda.time.Chronology)
 			 */
 			@Override
 			public DateTimeField parse(Chronology chronology) {

@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core VersionType.java 2012-3-29 15:02:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core VersionType.java 2012-7-6 14:29:21 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum VersionType.
@@ -16,19 +14,15 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum VersionType {
 
-	
-	/** The INTERNAL. */
+	/** The internal. */
 	INTERNAL((byte) 0),
 
-	
-	/** The EXTERNAL. */
+	/** The external. */
 	EXTERNAL((byte) 1);
 
-	
 	/** The value. */
 	private final byte value;
 
-	
 	/**
 	 * Instantiates a new version type.
 	 *
@@ -38,7 +32,6 @@ public enum VersionType {
 		this.value = value;
 	}
 
-	
 	/**
 	 * Gets the value.
 	 *
@@ -48,7 +41,6 @@ public enum VersionType {
 		return value;
 	}
 
-	
 	/**
 	 * From string.
 	 *
@@ -61,10 +53,9 @@ public enum VersionType {
 		} else if ("external".equals(versionType)) {
 			return EXTERNAL;
 		}
-		throw new RestartIllegalArgumentException("No version type match [" + versionType + "]");
+		throw new RebirthIllegalArgumentException("No version type match [" + versionType + "]");
 	}
 
-	
 	/**
 	 * From string.
 	 *
@@ -81,10 +72,9 @@ public enum VersionType {
 		} else if ("external".equals(versionType)) {
 			return EXTERNAL;
 		}
-		throw new RestartIllegalArgumentException("No version type match [" + versionType + "]");
+		throw new RebirthIllegalArgumentException("No version type match [" + versionType + "]");
 	}
 
-	
 	/**
 	 * From value.
 	 *
@@ -97,6 +87,6 @@ public enum VersionType {
 		} else if (value == 1) {
 			return EXTERNAL;
 		}
-		throw new RestartIllegalArgumentException("No version type match [" + value + "]");
+		throw new RebirthIllegalArgumentException("No version type match [" + value + "]");
 	}
 }

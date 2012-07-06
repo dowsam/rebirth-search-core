@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ParsedScrollId.java 2012-3-29 15:02:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ParsedScrollId.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
 import java.util.Map;
 
 import cn.com.rebirth.commons.collect.Tuple;
-
 
 /**
  * The Class ParsedScrollId.
@@ -18,35 +16,27 @@ import cn.com.rebirth.commons.collect.Tuple;
  */
 public class ParsedScrollId {
 
-	
 	/** The Constant QUERY_THEN_FETCH_TYPE. */
 	public static final String QUERY_THEN_FETCH_TYPE = "queryThenFetch";
 
-	
 	/** The Constant QUERY_AND_FETCH_TYPE. */
 	public static final String QUERY_AND_FETCH_TYPE = "queryAndFetch";
 
-	
 	/** The Constant SCAN. */
 	public static final String SCAN = "scan";
 
-	
 	/** The source. */
 	private final String source;
 
-	
 	/** The type. */
 	private final String type;
 
-	
 	/** The context. */
 	private final Tuple<String, Long>[] context;
 
-	
 	/** The attributes. */
 	private final Map<String, String> attributes;
 
-	
 	/**
 	 * Instantiates a new parsed scroll id.
 	 *
@@ -62,7 +52,6 @@ public class ParsedScrollId {
 		this.attributes = attributes;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -72,7 +61,6 @@ public class ParsedScrollId {
 		return source;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -82,7 +70,6 @@ public class ParsedScrollId {
 		return type;
 	}
 
-	
 	/**
 	 * Context.
 	 *
@@ -92,7 +79,6 @@ public class ParsedScrollId {
 		return context;
 	}
 
-	
 	/**
 	 * Attributes.
 	 *

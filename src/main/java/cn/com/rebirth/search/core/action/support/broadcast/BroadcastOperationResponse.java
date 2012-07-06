@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BroadcastOperationResponse.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BroadcastOperationResponse.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.broadcast;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.action.support.DefaultShardOperationFailedExce
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class BroadcastOperationResponse.
  *
@@ -26,30 +24,24 @@ import com.google.common.collect.ImmutableList;
  */
 public abstract class BroadcastOperationResponse implements ActionResponse {
 
-	
 	/** The total shards. */
 	private int totalShards;
 
-	
 	/** The successful shards. */
 	private int successfulShards;
 
-	
 	/** The failed shards. */
 	private int failedShards;
 
-	
 	/** The shard failures. */
 	private List<ShardOperationFailedException> shardFailures = ImmutableList.of();
 
-	
 	/**
 	 * Instantiates a new broadcast operation response.
 	 */
 	protected BroadcastOperationResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new broadcast operation response.
 	 *
@@ -69,7 +61,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		}
 	}
 
-	
 	/**
 	 * Total shards.
 	 *
@@ -79,7 +70,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return totalShards;
 	}
 
-	
 	/**
 	 * Gets the total shards.
 	 *
@@ -89,7 +79,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return totalShards;
 	}
 
-	
 	/**
 	 * Successful shards.
 	 *
@@ -99,7 +88,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return successfulShards;
 	}
 
-	
 	/**
 	 * Gets the successful shards.
 	 *
@@ -109,7 +97,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return successfulShards;
 	}
 
-	
 	/**
 	 * Failed shards.
 	 *
@@ -119,7 +106,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return failedShards;
 	}
 
-	
 	/**
 	 * Gets the failed shards.
 	 *
@@ -129,7 +115,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return failedShards;
 	}
 
-	
 	/**
 	 * Shard failures.
 	 *
@@ -142,7 +127,6 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return shardFailures;
 	}
 
-	
 	/**
 	 * Gets the shard failures.
 	 *
@@ -152,9 +136,8 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		return shardFailures;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -170,9 +153,8 @@ public abstract class BroadcastOperationResponse implements ActionResponse {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

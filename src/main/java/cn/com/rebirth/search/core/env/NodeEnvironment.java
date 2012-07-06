@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeEnvironment.java 2012-3-29 15:00:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeEnvironment.java 2012-7-6 14:28:51 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.env;
 
@@ -14,7 +13,7 @@ import java.util.Set;
 import org.apache.lucene.store.Lock;
 import org.apache.lucene.store.NativeFSLockFactory;
 
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 
-
 /**
  * The Class NodeEnvironment.
  *
@@ -35,23 +33,18 @@ import com.google.common.primitives.Ints;
  */
 public class NodeEnvironment extends AbstractComponent {
 
-	
 	/** The node files. */
 	private final File[] nodeFiles;
 
-	
 	/** The node indices locations. */
 	private final File[] nodeIndicesLocations;
 
-	
 	/** The locks. */
 	private final Lock[] locks;
 
-	
 	/** The local node id. */
 	private final int localNodeId;
 
-	
 	/**
 	 * Instantiates a new node environment.
 	 *
@@ -93,13 +86,13 @@ public class NodeEnvironment extends AbstractComponent {
 						localNodeId = possibleLockId;
 					} else {
 						logger.trace("failed to obtain node lock on {}", dir.getAbsolutePath());
-						
+
 						for (int i = 0; i < locks.length; i++) {
 							if (locks[i] != null) {
 								try {
 									locks[i].release();
 								} catch (Exception e1) {
-									
+
 								}
 							}
 							locks[i] = null;
@@ -109,13 +102,13 @@ public class NodeEnvironment extends AbstractComponent {
 				} catch (IOException e) {
 					logger.trace("failed to obtain node lock on {}", e, dir.getAbsolutePath());
 					lastException = new IOException("failed to obtain lock on " + dir.getAbsolutePath(), e);
-					
+
 					for (int i = 0; i < locks.length; i++) {
 						if (locks[i] != null) {
 							try {
 								locks[i].release();
 							} catch (Exception e1) {
-								
+
 							}
 						}
 						locks[i] = null;
@@ -124,14 +117,13 @@ public class NodeEnvironment extends AbstractComponent {
 				}
 			}
 			if (locks[0] != null) {
-				
+
 				break;
 			}
 		}
 		if (locks[0] == null) {
-			throw new RestartIllegalStateException(
-					"Failed to obtain node lock, is the following location writable?: "
-							+ Arrays.toString(environment.dataWithClusterFiles()), lastException);
+			throw new RebirthIllegalStateException("Failed to obtain node lock, is the following location writable?: "
+					+ Arrays.toString(environment.dataWithClusterFiles()), lastException);
 		}
 
 		this.localNodeId = localNodeId;
@@ -156,7 +148,6 @@ public class NodeEnvironment extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Local node id.
 	 *
@@ -166,7 +157,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return this.localNodeId;
 	}
 
-	
 	/**
 	 * Checks for node file.
 	 *
@@ -176,7 +166,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return nodeFiles != null && locks != null;
 	}
 
-	
 	/**
 	 * Node data locations.
 	 *
@@ -184,12 +173,11 @@ public class NodeEnvironment extends AbstractComponent {
 	 */
 	public File[] nodeDataLocations() {
 		if (nodeFiles == null || locks == null) {
-			throw new RestartIllegalStateException("node is not configured to store local location");
+			throw new RebirthIllegalStateException("node is not configured to store local location");
 		}
 		return nodeFiles;
 	}
 
-	
 	/**
 	 * Indices locations.
 	 *
@@ -199,7 +187,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return nodeIndicesLocations;
 	}
 
-	
 	/**
 	 * Index locations.
 	 *
@@ -214,7 +201,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return indexLocations;
 	}
 
-	
 	/**
 	 * Shard locations.
 	 *
@@ -230,7 +216,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return shardLocations;
 	}
 
-	
 	/**
 	 * Find all indices.
 	 *
@@ -239,7 +224,7 @@ public class NodeEnvironment extends AbstractComponent {
 	 */
 	public Set<String> findAllIndices() throws Exception {
 		if (nodeFiles == null || locks == null) {
-			throw new RestartIllegalStateException("node is not configured to store local location");
+			throw new RebirthIllegalStateException("node is not configured to store local location");
 		}
 		Set<String> indices = Sets.newHashSet();
 		for (File indicesLocation : nodeIndicesLocations) {
@@ -256,7 +241,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return indices;
 	}
 
-	
 	/**
 	 * Find all shard ids.
 	 *
@@ -265,7 +249,7 @@ public class NodeEnvironment extends AbstractComponent {
 	 */
 	public Set<ShardId> findAllShardIds() throws Exception {
 		if (nodeFiles == null || locks == null) {
-			throw new RestartIllegalStateException("node is not configured to store local location");
+			throw new RebirthIllegalStateException("node is not configured to store local location");
 		}
 		Set<ShardId> shardIds = Sets.newHashSet();
 		for (File indicesLocation : nodeIndicesLocations) {
@@ -296,7 +280,6 @@ public class NodeEnvironment extends AbstractComponent {
 		return shardIds;
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -306,7 +289,7 @@ public class NodeEnvironment extends AbstractComponent {
 				try {
 					lock.release();
 				} catch (IOException e) {
-					
+
 				}
 			}
 		}

@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportMasterNodeOperationAction.java 2012-3-29 15:01:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportMasterNodeOperationAction.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.master;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -28,7 +27,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportMasterNodeOperationAction.
  *
@@ -39,23 +37,18 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public abstract class TransportMasterNodeOperationAction<Request extends MasterNodeOperationRequest, Response extends ActionResponse>
 		extends TransportAction<Request, Response> {
 
-	
 	/** The transport service. */
 	protected final TransportService transportService;
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The transport action. */
 	final String transportAction;
 
-	
 	/** The executor. */
 	final String executor;
 
-	
 	/**
 	 * Instantiates a new transport master node operation action.
 	 *
@@ -76,7 +69,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 		transportService.registerHandler(transportAction, new TransportHandler());
 	}
 
-	
 	/**
 	 * Transport action.
 	 *
@@ -84,7 +76,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 	 */
 	protected abstract String transportAction();
 
-	
 	/**
 	 * Executor.
 	 *
@@ -92,7 +83,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 	 */
 	protected abstract String executor();
 
-	
 	/**
 	 * New request.
 	 *
@@ -100,7 +90,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 	 */
 	protected abstract Request newRequest();
 
-	
 	/**
 	 * New response.
 	 *
@@ -108,18 +97,16 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 	 */
 	protected abstract Response newResponse();
 
-	
 	/**
 	 * Master operation.
 	 *
 	 * @param request the request
 	 * @param state the state
 	 * @return the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract Response masterOperation(Request request, ClusterState state) throws RestartException;
+	protected abstract Response masterOperation(Request request, ClusterState state) throws RebirthException;
 
-	
 	/**
 	 * Local execute.
 	 *
@@ -130,7 +117,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 		return false;
 	}
 
-	
 	/**
 	 * Check block.
 	 *
@@ -142,7 +128,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 		return null;
 	}
 
-	
 	/**
 	 * Process before delegation to master.
 	 *
@@ -153,16 +138,14 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final Request request, final ActionListener<Response> listener) {
 		innerExecute(request, listener, false);
 	}
 
-	
 	/**
 	 * Inner execute.
 	 *
@@ -174,7 +157,7 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 		final ClusterState clusterState = clusterService.state();
 		final DiscoveryNodes nodes = clusterState.nodes();
 		if (nodes.localNodeMaster() || localExecute(request)) {
-			
+
 			final ClusterBlockException blockException = checkBlock(request, clusterState);
 			if (blockException != null) {
 				if (!blockException.retryable()) {
@@ -235,7 +218,7 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 						public void postAdded() {
 							ClusterState clusterStateV2 = clusterService.state();
 							if (clusterStateV2.nodes().masterNodeId() != null) {
-								
+
 								clusterService.remove(this);
 								innerExecute(request, listener, true);
 							}
@@ -285,14 +268,14 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 						@Override
 						public void handleException(final TransportException exp) {
 							if (exp.unwrapCause() instanceof ConnectTransportException) {
-								
+
 								clusterService.add(request.masterNodeTimeout(), new TimeoutClusterStateListener() {
 									@Override
 									public void postAdded() {
 										ClusterState clusterStateV2 = clusterService.state();
 										if (!clusterState.nodes().masterNodeId()
 												.equals(clusterStateV2.nodes().masterNodeId())) {
-											
+
 											clusterService.remove(this);
 											innerExecute(request, listener, false);
 										}
@@ -326,7 +309,6 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -334,31 +316,28 @@ public abstract class TransportMasterNodeOperationAction<Request extends MasterN
 	 */
 	private class TransportHandler extends BaseTransportRequestHandler<Request> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public Request newInstance() {
 			return newRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final Request request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<Response>() {
 				@Override

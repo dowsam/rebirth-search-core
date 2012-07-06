@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsIpOrdinalsFacetCollector.java 2012-3-29 15:01:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsIpOrdinalsFacetCollector.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms.ip;
 
@@ -17,7 +16,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.util.PriorityQueue;
 
 import cn.com.rebirth.commons.collect.BoundedTreeSet;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.CacheRecycler;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class TermsIpOrdinalsFacetCollector.
  *
@@ -40,322 +38,295 @@ import com.google.common.collect.ImmutableSet;
  */
 public class TermsIpOrdinalsFacetCollector extends AbstractFacetCollector {
 
-    
-    /** The field data cache. */
-    private final FieldDataCache fieldDataCache;
+	/** The field data cache. */
+	private final FieldDataCache fieldDataCache;
 
-    
-    /** The index field name. */
-    private final String indexFieldName;
+	/** The index field name. */
+	private final String indexFieldName;
 
-    
-    /** The comparator type. */
-    private final TermsFacet.ComparatorType comparatorType;
+	/** The comparator type. */
+	private final TermsFacet.ComparatorType comparatorType;
 
-    
-    /** The size. */
-    private final int size;
+	/** The size. */
+	private final int size;
 
-    
-    /** The number of shards. */
-    private final int numberOfShards;
+	/** The number of shards. */
+	private final int numberOfShards;
 
-    
-    /** The min count. */
-    private final int minCount;
+	/** The min count. */
+	private final int minCount;
 
-    
-    /** The field data type. */
-    private final FieldDataType fieldDataType;
+	/** The field data type. */
+	private final FieldDataType fieldDataType;
 
-    
-    /** The field data. */
-    private LongFieldData fieldData;
+	/** The field data. */
+	private LongFieldData fieldData;
 
-    
-    /** The aggregators. */
-    private final List<ReaderAggregator> aggregators;
+	/** The aggregators. */
+	private final List<ReaderAggregator> aggregators;
 
-    
-    /** The current. */
-    private ReaderAggregator current;
+	/** The current. */
+	private ReaderAggregator current;
 
-    
-    /** The missing. */
-    long missing;
-    
-    
-    /** The total. */
-    long total;
+	/** The missing. */
+	long missing;
 
-    
-    /** The excluded. */
-    private final TLongHashSet excluded;
+	/** The total. */
+	long total;
 
-    
-    /**
-     * Instantiates a new terms ip ordinals facet collector.
-     *
-     * @param facetName the facet name
-     * @param fieldName the field name
-     * @param size the size
-     * @param comparatorType the comparator type
-     * @param allTerms the all terms
-     * @param context the context
-     * @param excluded the excluded
-     */
-    public TermsIpOrdinalsFacetCollector(String facetName, String fieldName, int size, TermsFacet.ComparatorType comparatorType, boolean allTerms, SearchContext context,
-                                         ImmutableSet<String> excluded) {
-        super(facetName);
-        this.fieldDataCache = context.fieldDataCache();
-        this.size = size;
-        this.comparatorType = comparatorType;
-        this.numberOfShards = context.numberOfShards();
+	/** The excluded. */
+	private final TLongHashSet excluded;
 
-        MapperService.SmartNameFieldMappers smartMappers = context.smartFieldMappers(fieldName);
-        if (smartMappers == null || !smartMappers.hasMapper()) {
-            throw new RestartIllegalArgumentException("Field [" + fieldName + "] doesn't have a type, can't run terms long facet collector on it");
-        }
-        
-        if (smartMappers.explicitTypeInNameWithDocMapper()) {
-            setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
-        }
+	/**
+	 * Instantiates a new terms ip ordinals facet collector.
+	 *
+	 * @param facetName the facet name
+	 * @param fieldName the field name
+	 * @param size the size
+	 * @param comparatorType the comparator type
+	 * @param allTerms the all terms
+	 * @param context the context
+	 * @param excluded the excluded
+	 */
+	public TermsIpOrdinalsFacetCollector(String facetName, String fieldName, int size,
+			TermsFacet.ComparatorType comparatorType, boolean allTerms, SearchContext context,
+			ImmutableSet<String> excluded) {
+		super(facetName);
+		this.fieldDataCache = context.fieldDataCache();
+		this.size = size;
+		this.comparatorType = comparatorType;
+		this.numberOfShards = context.numberOfShards();
 
-        if (smartMappers.mapper().fieldDataType() != FieldDataType.DefaultTypes.LONG) {
-            throw new RestartIllegalArgumentException("Field [" + fieldName + "] is not of long type, can't run terms long facet collector on it");
-        }
+		MapperService.SmartNameFieldMappers smartMappers = context.smartFieldMappers(fieldName);
+		if (smartMappers == null || !smartMappers.hasMapper()) {
+			throw new RebirthIllegalArgumentException("Field [" + fieldName
+					+ "] doesn't have a type, can't run terms long facet collector on it");
+		}
 
-        this.indexFieldName = smartMappers.mapper().names().indexName();
-        this.fieldDataType = smartMappers.mapper().fieldDataType();
+		if (smartMappers.explicitTypeInNameWithDocMapper()) {
+			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
+		}
 
-        if (excluded == null || excluded.isEmpty()) {
-            this.excluded = null;
-        } else {
-            this.excluded = new TLongHashSet(excluded.size());
-            for (String s : excluded) {
-                this.excluded.add(Long.parseLong(s));
-            }
-        }
+		if (smartMappers.mapper().fieldDataType() != FieldDataType.DefaultTypes.LONG) {
+			throw new RebirthIllegalArgumentException("Field [" + fieldName
+					+ "] is not of long type, can't run terms long facet collector on it");
+		}
 
-        
-        if (allTerms) {
-            minCount = -1;
-        } else {
-            minCount = 0;
-        }
+		this.indexFieldName = smartMappers.mapper().names().indexName();
+		this.fieldDataType = smartMappers.mapper().fieldDataType();
 
-        this.aggregators = new ArrayList<ReaderAggregator>(context.searcher().subReaders().length);
-    }
+		if (excluded == null || excluded.isEmpty()) {
+			this.excluded = null;
+		} else {
+			this.excluded = new TLongHashSet(excluded.size());
+			for (String s : excluded) {
+				this.excluded.add(Long.parseLong(s));
+			}
+		}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
-     */
-    @Override
-    protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
-        if (current != null) {
-            missing += current.counts[0];
-            total += current.total - current.counts[0];
-            if (current.values.length > 1) {
-                aggregators.add(current);
-            }
-        }
-        fieldData = (LongFieldData) fieldDataCache.cache(fieldDataType, reader, indexFieldName);
-        current = new ReaderAggregator(fieldData);
-    }
+		if (allTerms) {
+			minCount = -1;
+		} else {
+			minCount = 0;
+		}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
-     */
-    @Override
-    protected void doCollect(int doc) throws IOException {
-        fieldData.forEachOrdinalInDoc(doc, current);
-    }
+		this.aggregators = new ArrayList<ReaderAggregator>(context.searcher().subReaders().length);
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
-     */
-    @Override
-    public Facet facet() {
-        if (current != null) {
-            missing += current.counts[0];
-            total += current.total - current.counts[0];
-            
-            if (current.values.length > 1) {
-                aggregators.add(current);
-            }
-        }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 */
+	@Override
+	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
+		if (current != null) {
+			missing += current.counts[0];
+			total += current.total - current.counts[0];
+			if (current.values.length > 1) {
+				aggregators.add(current);
+			}
+		}
+		fieldData = (LongFieldData) fieldDataCache.cache(fieldDataType, reader, indexFieldName);
+		current = new ReaderAggregator(fieldData);
+	}
 
-        AggregatorPriorityQueue queue = new AggregatorPriorityQueue(aggregators.size());
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 */
+	@Override
+	protected void doCollect(int doc) throws IOException {
+		fieldData.forEachOrdinalInDoc(doc, current);
+	}
 
-        for (ReaderAggregator aggregator : aggregators) {
-            if (aggregator.nextPosition()) {
-                queue.add(aggregator);
-            }
-        }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
+	 */
+	@Override
+	public Facet facet() {
+		if (current != null) {
+			missing += current.counts[0];
+			total += current.total - current.counts[0];
 
-        
-        if (size < EntryPriorityQueue.LIMIT) {
-            
-            EntryPriorityQueue ordered = new EntryPriorityQueue(size, comparatorType.comparator());
+			if (current.values.length > 1) {
+				aggregators.add(current);
+			}
+		}
 
-            while (queue.size() > 0) {
-                ReaderAggregator agg = queue.top();
-                long value = agg.current;
-                int count = 0;
-                do {
-                    count += agg.counts[agg.position];
-                    if (agg.nextPosition()) {
-                        agg = queue.updateTop();
-                    } else {
-                        
-                        queue.pop();
-                        agg = queue.top();
-                    }
-                } while (agg != null && value == agg.current);
+		AggregatorPriorityQueue queue = new AggregatorPriorityQueue(aggregators.size());
 
-                if (count > minCount) {
-                    if (excluded == null || !excluded.contains(value)) {
-                        InternalIpTermsFacet.LongEntry entry = new InternalIpTermsFacet.LongEntry(value, count);
-                        ordered.insertWithOverflow(entry);
-                    }
-                }
-            }
-            InternalIpTermsFacet.LongEntry[] list = new InternalIpTermsFacet.LongEntry[ordered.size()];
-            for (int i = ordered.size() - 1; i >= 0; i--) {
-                list[i] = (InternalIpTermsFacet.LongEntry) ordered.pop();
-            }
+		for (ReaderAggregator aggregator : aggregators) {
+			if (aggregator.nextPosition()) {
+				queue.add(aggregator);
+			}
+		}
 
-            for (ReaderAggregator aggregator : aggregators) {
-                CacheRecycler.pushIntArray(aggregator.counts);
-            }
+		if (size < EntryPriorityQueue.LIMIT) {
 
-            return new InternalIpTermsFacet(facetName, comparatorType, size, Arrays.asList(list), missing, total);
-        }
+			EntryPriorityQueue ordered = new EntryPriorityQueue(size, comparatorType.comparator());
 
-        BoundedTreeSet<InternalIpTermsFacet.LongEntry> ordered = new BoundedTreeSet<InternalIpTermsFacet.LongEntry>(comparatorType.comparator(), size);
+			while (queue.size() > 0) {
+				ReaderAggregator agg = queue.top();
+				long value = agg.current;
+				int count = 0;
+				do {
+					count += agg.counts[agg.position];
+					if (agg.nextPosition()) {
+						agg = queue.updateTop();
+					} else {
 
-        while (queue.size() > 0) {
-            ReaderAggregator agg = queue.top();
-            long value = agg.current;
-            int count = 0;
-            do {
-                count += agg.counts[agg.position];
-                if (agg.nextPosition()) {
-                    agg = queue.updateTop();
-                } else {
-                    
-                    queue.pop();
-                    agg = queue.top();
-                }
-            } while (agg != null && value == agg.current);
+						queue.pop();
+						agg = queue.top();
+					}
+				} while (agg != null && value == agg.current);
 
-            if (count > minCount) {
-                if (excluded == null || !excluded.contains(value)) {
-                    InternalIpTermsFacet.LongEntry entry = new InternalIpTermsFacet.LongEntry(value, count);
-                    ordered.add(entry);
-                }
-            }
-        }
+				if (count > minCount) {
+					if (excluded == null || !excluded.contains(value)) {
+						InternalIpTermsFacet.LongEntry entry = new InternalIpTermsFacet.LongEntry(value, count);
+						ordered.insertWithOverflow(entry);
+					}
+				}
+			}
+			InternalIpTermsFacet.LongEntry[] list = new InternalIpTermsFacet.LongEntry[ordered.size()];
+			for (int i = ordered.size() - 1; i >= 0; i--) {
+				list[i] = (InternalIpTermsFacet.LongEntry) ordered.pop();
+			}
 
-        for (ReaderAggregator aggregator : aggregators) {
-            CacheRecycler.pushIntArray(aggregator.counts);
-        }
+			for (ReaderAggregator aggregator : aggregators) {
+				CacheRecycler.pushIntArray(aggregator.counts);
+			}
 
-        return new InternalIpTermsFacet(facetName, comparatorType, size, ordered, missing, total);
-    }
+			return new InternalIpTermsFacet(facetName, comparatorType, size, Arrays.asList(list), missing, total);
+		}
 
-    
-    /**
-     * The Class ReaderAggregator.
-     *
-     * @author l.xue.nong
-     */
-    public static class ReaderAggregator implements OrdinalInDocProc {
+		BoundedTreeSet<InternalIpTermsFacet.LongEntry> ordered = new BoundedTreeSet<InternalIpTermsFacet.LongEntry>(
+				comparatorType.comparator(), size);
 
-        
-        /** The values. */
-        final long[] values;
-        
-        
-        /** The counts. */
-        final int[] counts;
+		while (queue.size() > 0) {
+			ReaderAggregator agg = queue.top();
+			long value = agg.current;
+			int count = 0;
+			do {
+				count += agg.counts[agg.position];
+				if (agg.nextPosition()) {
+					agg = queue.updateTop();
+				} else {
 
-        
-        /** The position. */
-        int position = 0;
-        
-        
-        /** The current. */
-        long current = Integer.MIN_VALUE;
-        
-        
-        /** The total. */
-        int total;
+					queue.pop();
+					agg = queue.top();
+				}
+			} while (agg != null && value == agg.current);
 
-        
-        /**
-         * Instantiates a new reader aggregator.
-         *
-         * @param fieldData the field data
-         */
-        public ReaderAggregator(LongFieldData fieldData) {
-            this.values = fieldData.values();
-            this.counts = CacheRecycler.popIntArray(fieldData.values().length);
-        }
+			if (count > minCount) {
+				if (excluded == null || !excluded.contains(value)) {
+					InternalIpTermsFacet.LongEntry entry = new InternalIpTermsFacet.LongEntry(value, count);
+					ordered.add(entry);
+				}
+			}
+		}
 
-        
-        /* (non-Javadoc)
-         * @see cn.com.summall.search.core.index.field.data.FieldData.OrdinalInDocProc#onOrdinal(int, int)
-         */
-        @Override
-        public void onOrdinal(int docId, int ordinal) {
-            counts[ordinal]++;
-            total++;
-        }
+		for (ReaderAggregator aggregator : aggregators) {
+			CacheRecycler.pushIntArray(aggregator.counts);
+		}
 
-        
-        /**
-         * Next position.
-         *
-         * @return true, if successful
-         */
-        public boolean nextPosition() {
-            if (++position >= values.length) {
-                return false;
-            }
-            current = values[position];
-            return true;
-        }
-    }
+		return new InternalIpTermsFacet(facetName, comparatorType, size, ordered, missing, total);
+	}
 
-    
-    /**
-     * The Class AggregatorPriorityQueue.
-     *
-     * @author l.xue.nong
-     */
-    public static class AggregatorPriorityQueue extends PriorityQueue<ReaderAggregator> {
+	/**
+	 * The Class ReaderAggregator.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class ReaderAggregator implements OrdinalInDocProc {
 
-        
-        /**
-         * Instantiates a new aggregator priority queue.
-         *
-         * @param size the size
-         */
-        public AggregatorPriorityQueue(int size) {
-            initialize(size);
-        }
+		/** The values. */
+		final long[] values;
 
-        
-        /* (non-Javadoc)
-         * @see org.apache.lucene.util.PriorityQueue#lessThan(java.lang.Object, java.lang.Object)
-         */
-        @Override
-        protected boolean lessThan(ReaderAggregator a, ReaderAggregator b) {
-            return a.current < b.current;
-        }
-    }
+		/** The counts. */
+		final int[] counts;
+
+		/** The position. */
+		int position = 0;
+
+		/** The current. */
+		long current = Integer.MIN_VALUE;
+
+		/** The total. */
+		int total;
+
+		/**
+		 * Instantiates a new reader aggregator.
+		 *
+		 * @param fieldData the field data
+		 */
+		public ReaderAggregator(LongFieldData fieldData) {
+			this.values = fieldData.values();
+			this.counts = CacheRecycler.popIntArray(fieldData.values().length);
+		}
+
+		/* (non-Javadoc)
+		 * @see cn.com.rebirth.search.core.index.field.data.FieldData.OrdinalInDocProc#onOrdinal(int, int)
+		 */
+		@Override
+		public void onOrdinal(int docId, int ordinal) {
+			counts[ordinal]++;
+			total++;
+		}
+
+		/**
+		 * Next position.
+		 *
+		 * @return true, if successful
+		 */
+		public boolean nextPosition() {
+			if (++position >= values.length) {
+				return false;
+			}
+			current = values[position];
+			return true;
+		}
+	}
+
+	/**
+	 * The Class AggregatorPriorityQueue.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class AggregatorPriorityQueue extends PriorityQueue<ReaderAggregator> {
+
+		/**
+		 * Instantiates a new aggregator priority queue.
+		 *
+		 * @param size the size
+		 */
+		public AggregatorPriorityQueue(int size) {
+			initialize(size);
+		}
+
+		/* (non-Javadoc)
+		 * @see org.apache.lucene.util.PriorityQueue#lessThan(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		protected boolean lessThan(ReaderAggregator a, ReaderAggregator b) {
+			return a.current < b.current;
+		}
+	}
 }

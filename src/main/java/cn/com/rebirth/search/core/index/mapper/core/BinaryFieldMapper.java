@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BinaryFieldMapper.java 2012-3-29 15:02:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BinaryFieldMapper.java 2012-7-6 14:29:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
@@ -19,7 +18,7 @@ import org.apache.lucene.document.Fieldable;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.compress.lzf.LZF;
 import cn.com.rebirth.commons.compress.lzf.LZFDecoder;
-import cn.com.rebirth.commons.exception.RestartParseException;
+import cn.com.rebirth.commons.exception.RebirthParseException;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.search.commons.Base64;
 import cn.com.rebirth.search.commons.io.stream.CachedStreamOutput;
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.index.mapper.MergeContext;
 import cn.com.rebirth.search.core.index.mapper.MergeMappingException;
 import cn.com.rebirth.search.core.index.mapper.ParseContext;
 
-
 /**
  * The Class BinaryFieldMapper.
  *
@@ -40,11 +38,9 @@ import cn.com.rebirth.search.core.index.mapper.ParseContext;
  */
 public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "binary";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -52,12 +48,10 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
 
-		
 		/** The Constant COMPRESS_THRESHOLD. */
 		public static final long COMPRESS_THRESHOLD = -1;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -65,15 +59,12 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 	 */
 	public static class Builder extends AbstractFieldMapper.Builder<Builder, BinaryFieldMapper> {
 
-		
 		/** The compress. */
 		private Boolean compress = null;
 
-		
 		/** The compress threshold. */
 		private long compressThreshold = Defaults.COMPRESS_THRESHOLD;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -84,7 +75,6 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 			builder = this;
 		}
 
-		
 		/**
 		 * Compress.
 		 *
@@ -96,7 +86,6 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 			return this;
 		}
 
-		
 		/**
 		 * Compress threshold.
 		 *
@@ -108,18 +97,16 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#indexName(java.lang.String)
 		 */
 		@Override
 		public Builder indexName(String indexName) {
 			return super.indexName(indexName);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public BinaryFieldMapper build(BuilderContext context) {
@@ -127,7 +114,6 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -135,9 +121,8 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -163,15 +148,12 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 		}
 	}
 
-	
 	/** The compress. */
 	private Boolean compress;
 
-	
 	/** The compress threshold. */
 	private long compressThreshold;
 
-	
 	/**
 	 * Instantiates a new binary field mapper.
 	 *
@@ -185,18 +167,16 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 		this.compressThreshold = compressThreshold;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#valueForSearch(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Object valueForSearch(Fieldable field) {
 		return value(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public byte[] value(Fieldable field) {
@@ -205,19 +185,18 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 			try {
 				return LZFDecoder.decode(value);
 			} catch (IOException e) {
-				throw new RestartParseException("failed to decompress source", e);
+				throw new RebirthParseException("failed to decompress source", e);
 			}
 		}
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public byte[] valueFromString(String value) {
-		
+
 		try {
 			return Base64.decode(value);
 		} catch (Exception e) {
@@ -225,27 +204,24 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
 		return null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Field parseCreateField(ParseContext context) throws IOException {
@@ -260,8 +236,7 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 					LZFStreamOutput streamOutput = cachedEntry.cachedLZFBytes();
 					streamOutput.writeBytes(value, 0, value.length);
 					streamOutput.flush();
-					
-					
+
 					value = cachedEntry.bytes().copiedByteArray();
 					CachedStreamOutput.pushEntry(cachedEntry);
 				}
@@ -273,18 +248,16 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 		return new Field(names.indexName(), value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -303,9 +276,8 @@ public class BinaryFieldMapper extends AbstractFieldMapper<byte[]> {
 		return builder;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {

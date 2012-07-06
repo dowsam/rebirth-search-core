@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PutMappingRequestBuilder.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PutMappingRequestBuilder.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.mapping.put;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 
-
 /**
  * The Class PutMappingRequestBuilder.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappingRequest, PutMappingResponse> {
 
-	
 	/**
 	 * Instantiates a new put mapping request builder.
 	 *
@@ -33,7 +30,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		super(indicesClient, new PutMappingRequest());
 	}
 
-	
 	/**
 	 * Sets the indices.
 	 *
@@ -45,7 +41,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the type.
 	 *
@@ -58,7 +53,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -70,7 +64,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -82,7 +75,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the source.
 	 *
@@ -94,7 +86,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -106,7 +97,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -118,7 +108,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -130,7 +119,6 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/**
 	 * Sets the ignore conflicts.
 	 *
@@ -142,9 +130,8 @@ public class PutMappingRequestBuilder extends BaseIndicesRequestBuilder<PutMappi
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<PutMappingResponse> listener) {

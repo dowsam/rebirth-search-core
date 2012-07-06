@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulkRequest.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulkRequest.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.index.VersionType;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class BulkRequest.
  *
@@ -35,27 +33,21 @@ import com.google.common.collect.Lists;
  */
 public class BulkRequest implements ActionRequest {
 
-	
 	/** The requests. */
 	final List<ActionRequest> requests = Lists.newArrayList();
 
-	
 	/** The listener threaded. */
 	private boolean listenerThreaded = false;
 
-	
 	/** The replication type. */
 	private ReplicationType replicationType = ReplicationType.DEFAULT;
 
-	
 	/** The consistency level. */
 	private WriteConsistencyLevel consistencyLevel = WriteConsistencyLevel.DEFAULT;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -67,7 +59,6 @@ public class BulkRequest implements ActionRequest {
 		return internalAdd(request);
 	}
 
-	
 	/**
 	 * Internal add.
 	 *
@@ -79,7 +70,6 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -91,7 +81,6 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -106,7 +95,6 @@ public class BulkRequest implements ActionRequest {
 		return add(data, from, length, contentUnsafe, null, null);
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -128,20 +116,19 @@ public class BulkRequest implements ActionRequest {
 			if (nextMarker == -1) {
 				break;
 			}
-			
+
 			XContentParser parser = xContent.createParser(data, from, nextMarker - from);
 
 			try {
-				
+
 				from = nextMarker + 1;
 
-				
 				XContentParser.Token token = parser.nextToken();
 				if (token == null) {
 					continue;
 				}
 				assert token == XContentParser.Token.START_OBJECT;
-				
+
 				token = parser.nextToken();
 				assert token == XContentParser.Token.FIELD_NAME;
 				String action = parser.currentName();
@@ -157,9 +144,6 @@ public class BulkRequest implements ActionRequest {
 				long version = 0;
 				VersionType versionType = VersionType.INTERNAL;
 				String percolate = null;
-
-				
-				
 
 				String currentFieldName = null;
 				while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {
@@ -205,9 +189,7 @@ public class BulkRequest implements ActionRequest {
 					if (nextMarker == -1) {
 						break;
 					}
-					
-					
-					
+
 					if ("index".equals(action)) {
 						if (opType == null) {
 							internalAdd(new IndexRequest(index, type, id).routing(routing).parent(parent)
@@ -224,7 +206,7 @@ public class BulkRequest implements ActionRequest {
 								.timestamp(timestamp).ttl(ttl).version(version).versionType(versionType).create(true)
 								.source(data, from, nextMarker - from, contentUnsafe).percolate(percolate));
 					}
-					
+
 					from = nextMarker + 1;
 				}
 			} finally {
@@ -234,7 +216,6 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -246,7 +227,6 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Consistency level.
 	 *
@@ -256,7 +236,6 @@ public class BulkRequest implements ActionRequest {
 		return this.consistencyLevel;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -268,7 +247,6 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -278,7 +256,6 @@ public class BulkRequest implements ActionRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -290,7 +267,6 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Replication type.
 	 *
@@ -300,7 +276,6 @@ public class BulkRequest implements ActionRequest {
 		return this.replicationType;
 	}
 
-	
 	/**
 	 * Find next marker.
 	 *
@@ -319,7 +294,6 @@ public class BulkRequest implements ActionRequest {
 		return -1;
 	}
 
-	
 	/**
 	 * Number of actions.
 	 *
@@ -329,9 +303,8 @@ public class BulkRequest implements ActionRequest {
 		return requests.size();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -352,18 +325,16 @@ public class BulkRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return listenerThreaded;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public BulkRequest listenerThreaded(boolean listenerThreaded) {
@@ -371,9 +342,8 @@ public class BulkRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -395,9 +365,8 @@ public class BulkRequest implements ActionRequest {
 		refresh = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

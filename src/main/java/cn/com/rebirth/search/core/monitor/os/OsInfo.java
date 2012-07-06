@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OsInfo.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OsInfo.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.os;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class OsInfo.
  *
@@ -25,33 +23,27 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class OsInfo implements Streamable, Serializable, ToXContent {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 273016926648489348L;
-	
+
 	/** The refresh interval. */
 	long refreshInterval;
 
-	
 	/** The cpu. */
 	Cpu cpu = null;
 
-	
 	/** The mem. */
 	Mem mem = null;
 
-	
 	/** The swap. */
 	Swap swap = null;
 
-	
 	/**
 	 * Instantiates a new os info.
 	 */
 	OsInfo() {
 	}
 
-	
 	/**
 	 * Refresh interval.
 	 *
@@ -61,7 +53,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return this.refreshInterval;
 	}
 
-	
 	/**
 	 * Gets the refresh interval.
 	 *
@@ -71,7 +62,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return this.refreshInterval;
 	}
 
-	
 	/**
 	 * Cpu.
 	 *
@@ -81,7 +71,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return this.cpu;
 	}
 
-	
 	/**
 	 * Gets the cpu.
 	 *
@@ -91,7 +80,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return cpu();
 	}
 
-	
 	/**
 	 * Mem.
 	 *
@@ -101,7 +89,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return this.mem;
 	}
 
-	
 	/**
 	 * Gets the mem.
 	 *
@@ -111,7 +98,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return mem();
 	}
 
-	
 	/**
 	 * Swap.
 	 *
@@ -121,7 +107,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return this.swap;
 	}
 
-	
 	/**
 	 * Gets the swap.
 	 *
@@ -131,7 +116,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return swap();
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -139,70 +123,54 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant OS. */
 		static final XContentBuilderString OS = new XContentBuilderString("os");
 
-		
 		/** The Constant REFRESH_INTERVAL. */
 		static final XContentBuilderString REFRESH_INTERVAL = new XContentBuilderString("refresh_interval");
 
-		
 		/** The Constant CPU. */
 		static final XContentBuilderString CPU = new XContentBuilderString("cpu");
 
-		
 		/** The Constant VENDOR. */
 		static final XContentBuilderString VENDOR = new XContentBuilderString("vendor");
 
-		
 		/** The Constant MODEL. */
 		static final XContentBuilderString MODEL = new XContentBuilderString("model");
 
-		
 		/** The Constant MHZ. */
 		static final XContentBuilderString MHZ = new XContentBuilderString("mhz");
 
-		
 		/** The Constant TOTAL_CORES. */
 		static final XContentBuilderString TOTAL_CORES = new XContentBuilderString("total_cores");
 
-		
 		/** The Constant TOTAL_SOCKETS. */
 		static final XContentBuilderString TOTAL_SOCKETS = new XContentBuilderString("total_sockets");
 
-		
 		/** The Constant CORES_PER_SOCKET. */
 		static final XContentBuilderString CORES_PER_SOCKET = new XContentBuilderString("cores_per_socket");
 
-		
 		/** The Constant CACHE_SIZE. */
 		static final XContentBuilderString CACHE_SIZE = new XContentBuilderString("cache_size");
 
-		
 		/** The Constant CACHE_SIZE_IN_BYTES. */
 		static final XContentBuilderString CACHE_SIZE_IN_BYTES = new XContentBuilderString("cache_size_in_bytes");
 
-		
 		/** The Constant MEM. */
 		static final XContentBuilderString MEM = new XContentBuilderString("mem");
 
-		
 		/** The Constant SWAP. */
 		static final XContentBuilderString SWAP = new XContentBuilderString("swap");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant TOTAL_IN_BYTES. */
 		static final XContentBuilderString TOTAL_IN_BYTES = new XContentBuilderString("total_in_bytes");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -236,7 +204,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * Read os info.
 	 *
@@ -250,9 +217,8 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		return info;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -268,9 +234,8 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -295,7 +260,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * The Class Swap.
 	 *
@@ -303,15 +267,12 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Swap implements Streamable, Serializable {
 
-		
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 4870147119872185998L;
-		
-		
+
 		/** The total. */
 		long total = -1;
 
-		
 		/**
 		 * Instantiates a new swap.
 		 */
@@ -319,7 +280,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 
 		}
 
-		
 		/**
 		 * Read swap.
 		 *
@@ -333,25 +293,22 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return swap;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			total = in.readLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
 			out.writeLong(total);
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -361,7 +318,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(total);
 		}
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -373,7 +329,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 
 	}
 
-	
 	/**
 	 * The Class Mem.
 	 *
@@ -381,15 +336,12 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Mem implements Streamable, Serializable {
 
-		
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -3874356343722647475L;
-		
-		
+
 		/** The total. */
 		long total = -1;
 
-		
 		/**
 		 * Instantiates a new mem.
 		 */
@@ -397,7 +349,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 
 		}
 
-		
 		/**
 		 * Read mem.
 		 *
@@ -411,25 +362,22 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return mem;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			total = in.readLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
 			out.writeLong(total);
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -439,7 +387,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(total);
 		}
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -451,7 +398,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 
 	}
 
-	
 	/**
 	 * The Class Cpu.
 	 *
@@ -459,39 +405,30 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 	 */
 	public static class Cpu implements Streamable, Serializable {
 
-		
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -5122209251662317660L;
 
-		
 		/** The vendor. */
 		String vendor = "";
 
-		
 		/** The model. */
 		String model = "";
 
-		
 		/** The mhz. */
 		int mhz = -1;
 
-		
 		/** The total cores. */
 		int totalCores = -1;
 
-		
 		/** The total sockets. */
 		int totalSockets = -1;
 
-		
 		/** The cores per socket. */
 		int coresPerSocket = -1;
 
-		
 		/** The cache size. */
 		long cacheSize = -1;
 
-		
 		/**
 		 * Instantiates a new cpu.
 		 */
@@ -499,7 +436,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 
 		}
 
-		
 		/**
 		 * Vendor.
 		 *
@@ -509,7 +445,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return this.vendor;
 		}
 
-		
 		/**
 		 * Gets the vendor.
 		 *
@@ -519,7 +454,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return vendor();
 		}
 
-		
 		/**
 		 * Model.
 		 *
@@ -529,7 +463,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return model;
 		}
 
-		
 		/**
 		 * Gets the model.
 		 *
@@ -539,7 +472,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return model;
 		}
 
-		
 		/**
 		 * Mhz.
 		 *
@@ -549,7 +481,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return mhz;
 		}
 
-		
 		/**
 		 * Gets the mhz.
 		 *
@@ -559,7 +490,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return mhz;
 		}
 
-		
 		/**
 		 * Total cores.
 		 *
@@ -569,7 +499,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return totalCores;
 		}
 
-		
 		/**
 		 * Gets the total cores.
 		 *
@@ -579,7 +508,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return totalCores();
 		}
 
-		
 		/**
 		 * Total sockets.
 		 *
@@ -589,7 +517,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return totalSockets;
 		}
 
-		
 		/**
 		 * Gets the total sockets.
 		 *
@@ -599,7 +526,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return totalSockets();
 		}
 
-		
 		/**
 		 * Cores per socket.
 		 *
@@ -609,7 +535,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return coresPerSocket;
 		}
 
-		
 		/**
 		 * Gets the cores per socket.
 		 *
@@ -619,7 +544,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return coresPerSocket();
 		}
 
-		
 		/**
 		 * Cache size.
 		 *
@@ -629,7 +553,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return new ByteSizeValue(cacheSize);
 		}
 
-		
 		/**
 		 * Gets the cache size.
 		 *
@@ -639,7 +562,6 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return cacheSize();
 		}
 
-		
 		/**
 		 * Read cpu.
 		 *
@@ -653,9 +575,8 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			return cpu;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -668,9 +589,8 @@ public class OsInfo implements Streamable, Serializable, ToXContent {
 			cacheSize = in.readLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

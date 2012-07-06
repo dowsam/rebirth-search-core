@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BoundedValueScriptHistogramFacetCollector.java 2012-3-29 15:01:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BoundedValueScriptHistogramFacetCollector.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram.bounded;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.facet.histogram.HistogramFacet;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class BoundedValueScriptHistogramFacetCollector.
  *
@@ -33,35 +31,27 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index field name. */
 	private final String indexFieldName;
 
-	
 	/** The comparator type. */
 	private final HistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The field data type. */
 	private final FieldDataType fieldDataType;
 
-	
 	/** The field data. */
 	private NumericFieldData fieldData;
 
-	
 	/** The value script. */
 	private final SearchScript valueScript;
 
-	
 	/** The histo proc. */
 	private final HistogramProc histoProc;
 
-	
 	/**
 	 * Instantiates a new bounded value script histogram facet collector.
 	 *
@@ -88,7 +78,6 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + fieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -111,27 +100,24 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 		histoProc = new HistogramProc(from, to, interval, offset, size, this.valueScript);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		fieldData.forEachValueInDoc(doc, histoProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
 		valueScript.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -139,9 +125,8 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 		valueScript.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
@@ -149,7 +134,6 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 				histoProc.size, histoProc.entries, true);
 	}
 
-	
 	/**
 	 * Bucket.
 	 *
@@ -161,7 +145,6 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 		return (((long) (value / interval)) * interval);
 	}
 
-	
 	/**
 	 * The Class HistogramProc.
 	 *
@@ -169,35 +152,27 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 	 */
 	public static class HistogramProc implements NumericFieldData.LongValueInDocProc {
 
-		
 		/** The from. */
 		final long from;
 
-		
 		/** The to. */
 		final long to;
 
-		
 		/** The interval. */
 		final long interval;
 
-		
 		/** The offset. */
 		final long offset;
 
-		
 		/** The size. */
 		final int size;
 
-		
 		/** The entries. */
 		final Object[] entries;
 
-		
 		/** The value script. */
 		private final SearchScript valueScript;
 
-		
 		/**
 		 * Instantiates a new histogram proc.
 		 *
@@ -218,13 +193,12 @@ public class BoundedValueScriptHistogramFacetCollector extends AbstractFacetColl
 			this.valueScript = valueScript;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
 		 */
 		@Override
 		public void onValue(int docId, long value) {
-			if (value <= from || value > to) { 
+			if (value <= from || value > to) {
 				return;
 			}
 			int index = ((int) ((value + offset) / interval));

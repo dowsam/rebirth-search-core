@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestNodesInfoAction.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestNodesInfoAction.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.cluster.node.info;
 
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestActions;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestNodesInfoAction.
  *
@@ -35,11 +33,9 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestNodesInfoAction extends BaseRestHandler {
 
-	
 	/** The settings filter. */
 	private final SettingsFilter settingsFilter;
 
-	
 	/**
 	 * Instantiates a new rest nodes info action.
 	 *
@@ -84,9 +80,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		this.settingsFilter = settingsFilter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -113,7 +108,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		executeNodeRequest(request, channel, nodesInfoRequest);
 	}
 
-	
 	/**
 	 * Execute node request.
 	 *
@@ -150,7 +144,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		});
 	}
 
-	
 	/**
 	 * The Class RestSettingsHandler.
 	 *
@@ -158,9 +151,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestSettingsHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -170,7 +162,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestOsHandler.
 	 *
@@ -178,9 +169,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestOsHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -190,7 +180,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestProcessHandler.
 	 *
@@ -198,9 +187,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestProcessHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -210,7 +198,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestJvmHandler.
 	 *
@@ -218,9 +205,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestJvmHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -230,7 +216,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestThreadPoolHandler.
 	 *
@@ -238,9 +223,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestThreadPoolHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -250,7 +234,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestNetworkHandler.
 	 *
@@ -258,9 +241,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestNetworkHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -270,7 +252,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestTransportHandler.
 	 *
@@ -278,9 +259,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestTransportHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -290,7 +270,6 @@ public class RestNodesInfoAction extends BaseRestHandler {
 		}
 	}
 
-	
 	/**
 	 * The Class RestHttpHandler.
 	 *
@@ -298,9 +277,8 @@ public class RestNodesInfoAction extends BaseRestHandler {
 	 */
 	class RestHttpHandler implements RestHandler {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+		 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 		 */
 		@Override
 		public void handleRequest(final RestRequest request, final RestChannel channel) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchShardTarget.java 2012-3-29 15:02:27 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchShardTarget.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 
-
 /**
  * The Class SearchShardTarget.
  *
@@ -22,23 +20,18 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public class SearchShardTarget implements Streamable, Serializable, Comparable<SearchShardTarget> {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 243063810885861219L;
 
-	
 	/** The node id. */
 	private String nodeId;
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The shard id. */
 	private int shardId;
 
-	
 	/**
 	 * Instantiates a new search shard target.
 	 */
@@ -46,7 +39,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 
 	}
 
-	
 	/**
 	 * Instantiates a new search shard target.
 	 *
@@ -60,7 +52,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		this.shardId = shardId;
 	}
 
-	
 	/**
 	 * Node id.
 	 *
@@ -71,7 +62,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return nodeId;
 	}
 
-	
 	/**
 	 * Gets the node id.
 	 *
@@ -82,7 +72,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return nodeId;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -92,7 +81,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -102,7 +90,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return index;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -112,7 +99,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return shardId;
 	}
 
-	
 	/**
 	 * Gets the shard id.
 	 *
@@ -122,7 +108,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return shardId;
 	}
 
-	
 	/**
 	 * Read search shard target.
 	 *
@@ -136,7 +121,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
@@ -149,9 +133,8 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return i;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -162,9 +145,8 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		shardId = in.readVInt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -178,7 +160,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		out.writeVInt(shardId);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -201,7 +182,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -213,7 +193,6 @@ public class SearchShardTarget implements Streamable, Serializable, Comparable<S
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

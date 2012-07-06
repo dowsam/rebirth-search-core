@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StringFieldData.java 2012-3-29 15:02:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StringFieldData.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data.strings;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 import cn.com.rebirth.search.core.index.field.data.FieldData.StringValueProc;
 import cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader;
 
-
 /**
  * The Class StringFieldData.
  *
@@ -25,11 +23,9 @@ import cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader;
  */
 public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 
-	
 	/** The values. */
 	protected final String[] values;
 
-	
 	/**
 	 * Instantiates a new string field data.
 	 *
@@ -41,9 +37,8 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 		this.values = values;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#computeSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#computeSizeInBytes()
 	 */
 	@Override
 	protected long computeSizeInBytes() {
@@ -57,7 +52,6 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 		return size;
 	}
 
-	
 	/**
 	 * Values.
 	 *
@@ -67,7 +61,6 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 		return this.values;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -76,7 +69,6 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 	 */
 	abstract public String value(int docId);
 
-	
 	/**
 	 * Values.
 	 *
@@ -85,45 +77,40 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 	 */
 	abstract public String[] values(int docId);
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#docFieldData(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#docFieldData(int)
 	 */
 	@Override
 	public StringDocFieldData docFieldData(int docId) {
 		return super.docFieldData(docId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#stringValue(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#stringValue(int)
 	 */
 	@Override
 	public String stringValue(int docId) {
 		return value(docId);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#createFieldData()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#createFieldData()
 	 */
 	@Override
 	protected StringDocFieldData createFieldData() {
 		return new StringDocFieldData(this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#type()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#type()
 	 */
 	@Override
 	public FieldDataType type() {
 		return FieldDataType.DefaultTypes.STRING;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachValue(cn.com.summall.search.core.index.field.data.FieldData.StringValueProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachValue(cn.com.rebirth.search.core.index.field.data.FieldData.StringValueProc)
 	 */
 	@Override
 	public void forEachValue(StringValueProc proc) {
@@ -132,7 +119,6 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 		}
 	}
 
-	
 	/**
 	 * Load.
 	 *
@@ -145,7 +131,6 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 		return FieldDataLoader.load(reader, field, new StringTypeLoader());
 	}
 
-	
 	/**
 	 * The Class StringTypeLoader.
 	 *
@@ -153,41 +138,36 @@ public abstract class StringFieldData extends FieldData<StringDocFieldData> {
 	 */
 	static class StringTypeLoader extends FieldDataLoader.FreqsTypeLoader<StringFieldData> {
 
-		
 		/** The terms. */
 		private final ArrayList<String> terms = new ArrayList<String>();
 
-		
 		/**
 		 * Instantiates a new string type loader.
 		 */
 		StringTypeLoader() {
 			super();
-			
+
 			terms.add(null);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.support.FieldDataLoader.TypeLoader#collectTerm(java.lang.String)
+		 * @see cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader.TypeLoader#collectTerm(java.lang.String)
 		 */
 		@Override
 		public void collectTerm(String term) {
 			terms.add(term);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildSingleValue(java.lang.String, int[])
+		 * @see cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildSingleValue(java.lang.String, int[])
 		 */
 		@Override
 		public StringFieldData buildSingleValue(String field, int[] ordinals) {
 			return new SingleValueStringFieldData(field, ordinals, terms.toArray(new String[terms.size()]));
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildMultiValue(java.lang.String, int[][])
+		 * @see cn.com.rebirth.search.core.index.field.data.support.FieldDataLoader.TypeLoader#buildMultiValue(java.lang.String, int[][])
 		 */
 		@Override
 		public StringFieldData buildMultiValue(String field, int[][] ordinals) {

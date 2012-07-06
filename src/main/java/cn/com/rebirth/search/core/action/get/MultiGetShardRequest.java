@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiGetShardRequest.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiGetShardRequest.java 2012-7-6 14:29:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest;
 
-
 /**
  * The Class MultiGetShardRequest.
  *
@@ -25,39 +23,30 @@ import cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperati
  */
 public class MultiGetShardRequest extends SingleShardOperationRequest {
 
-	
 	/** The shard id. */
 	private int shardId;
-	
-	
+
 	/** The preference. */
 	private String preference;
-	
-	
+
 	/** The realtime. */
 	Boolean realtime;
-	
-	
+
 	/** The refresh. */
 	boolean refresh;
 
-	
 	/** The locations. */
 	TIntArrayList locations;
-	
-	
+
 	/** The types. */
 	List<String> types;
-	
-	
+
 	/** The ids. */
 	List<String> ids;
-	
-	
+
 	/** The fields. */
 	List<String[]> fields;
 
-	
 	/**
 	 * Instantiates a new multi get shard request.
 	 */
@@ -65,7 +54,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 
 	}
 
-	
 	/**
 	 * Instantiates a new multi get shard request.
 	 *
@@ -81,7 +69,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		fields = new ArrayList<String[]>();
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -91,7 +78,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -103,7 +89,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -113,7 +98,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this.preference;
 	}
 
-	
 	/**
 	 * Realtime.
 	 *
@@ -123,7 +107,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this.realtime == null ? true : this.realtime;
 	}
 
-	
 	/**
 	 * Realtime.
 	 *
@@ -135,7 +118,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -145,7 +127,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -157,7 +138,6 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -173,9 +153,8 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		this.fields.add(fields);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -217,9 +196,8 @@ public class MultiGetShardRequest extends SingleShardOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.shard.SingleShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.single.shard.SingleShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

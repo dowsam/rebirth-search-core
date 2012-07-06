@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NestedQueryParser.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NestedQueryParser.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.index.search.nested.BlockJoinQuery;
 import cn.com.rebirth.search.core.index.search.nested.NonNestedDocsFilter;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class NestedQueryParser.
  *
@@ -32,11 +30,9 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class NestedQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "nested";
 
-	
 	/**
 	 * Instantiates a new nested query parser.
 	 */
@@ -44,18 +40,16 @@ public class NestedQueryParser implements QueryParser {
 	public NestedQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -68,7 +62,6 @@ public class NestedQueryParser implements QueryParser {
 		String path = null;
 		BlockJoinQuery.ScoreMode scoreMode = BlockJoinQuery.ScoreMode.Avg;
 
-		
 		LateBindingParentFilter currentParentFilterContext = parentFilterContext.get();
 
 		LateBindingParentFilter usAsParentFilter = new LateBindingParentFilter();
@@ -145,17 +138,13 @@ public class NestedQueryParser implements QueryParser {
 
 			Filter childFilter = parseContext.cacheFilter(objectMapper.nestedTypeFilter(), null);
 			usAsParentFilter.filter = childFilter;
-			
+
 			query = new FilteredQuery(query, childFilter);
 
 			Filter parentFilter = currentParentFilterContext;
 			if (parentFilter == null) {
 				parentFilter = NonNestedDocsFilter.INSTANCE;
-				
-				
-				
-				
-				
+
 				parentFilter = parseContext.cacheFilter(parentFilter, null);
 			}
 
@@ -168,16 +157,14 @@ public class NestedQueryParser implements QueryParser {
 
 			return joinQuery;
 		} finally {
-			
+
 			parentFilterContext.set(currentParentFilterContext);
 		}
 	}
 
-	
 	/** The parent filter context. */
 	static ThreadLocal<LateBindingParentFilter> parentFilterContext = new ThreadLocal<LateBindingParentFilter>();
 
-	
 	/**
 	 * The Class LateBindingParentFilter.
 	 *
@@ -185,11 +172,9 @@ public class NestedQueryParser implements QueryParser {
 	 */
 	static class LateBindingParentFilter extends Filter {
 
-		
 		/** The filter. */
 		Filter filter;
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -198,7 +183,6 @@ public class NestedQueryParser implements QueryParser {
 			return filter.hashCode();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -207,7 +191,6 @@ public class NestedQueryParser implements QueryParser {
 			return filter.equals(obj);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -216,7 +199,6 @@ public class NestedQueryParser implements QueryParser {
 			return filter.toString();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */

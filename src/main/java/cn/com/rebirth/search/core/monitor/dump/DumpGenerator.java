@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DumpGenerator.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DumpGenerator.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump;
 
@@ -11,7 +10,6 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
 
-
 /**
  * The Interface DumpGenerator.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.commons.Nullable;
  */
 public interface DumpGenerator {
 
-	
 	/**
 	 * Generate dump.
 	 *
@@ -30,7 +27,6 @@ public interface DumpGenerator {
 	 */
 	Result generateDump(String cause, @Nullable Map<String, Object> context) throws DumpGenerationFailedException;
 
-	
 	/**
 	 * Generate dump.
 	 *
@@ -43,7 +39,6 @@ public interface DumpGenerator {
 	Result generateDump(String cause, @Nullable Map<String, Object> context, String... contributors)
 			throws DumpGenerationFailedException;
 
-	
 	/**
 	 * The Class Result.
 	 *
@@ -51,15 +46,12 @@ public interface DumpGenerator {
 	 */
 	static class Result {
 
-		
 		/** The location. */
 		private final File location;
 
-		
 		/** The failed contributors. */
 		private Iterable<DumpContributionFailedException> failedContributors;
 
-		
 		/**
 		 * Instantiates a new result.
 		 *
@@ -71,7 +63,6 @@ public interface DumpGenerator {
 			this.failedContributors = failedContributors;
 		}
 
-		
 		/**
 		 * Location.
 		 *
@@ -81,7 +72,6 @@ public interface DumpGenerator {
 			return location.toString();
 		}
 
-		
 		/**
 		 * Failed contributors.
 		 *

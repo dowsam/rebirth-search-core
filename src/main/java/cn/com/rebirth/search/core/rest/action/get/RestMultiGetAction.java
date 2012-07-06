@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestMultiGetAction.java 2012-3-29 15:02:37 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestMultiGetAction.java 2012-7-6 14:30:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.get;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.rest.RestRequest;
 import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 
-
 /**
  * The Class RestMultiGetAction.
  *
@@ -37,7 +35,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
  */
 public class RestMultiGetAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest multi get action.
 	 *
@@ -56,9 +53,8 @@ public class RestMultiGetAction extends BaseRestHandler {
 		controller.registerHandler(POST, "/{index}/{type}/_mget", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {

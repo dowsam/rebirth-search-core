@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FacetBuilders.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FacetBuilders.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.search.facet.statistical.StatisticalScriptFace
 import cn.com.rebirth.search.core.search.facet.terms.TermsFacetBuilder;
 import cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacetBuilder;
 
-
 /**
  * The Class FacetBuilders.
  *
@@ -29,7 +27,6 @@ import cn.com.rebirth.search.core.search.facet.termsstats.TermsStatsFacetBuilder
  */
 public class FacetBuilders {
 
-	
 	/**
 	 * Query facet.
 	 *
@@ -40,7 +37,6 @@ public class FacetBuilders {
 		return new QueryFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Query facet.
 	 *
@@ -52,7 +48,6 @@ public class FacetBuilders {
 		return new QueryFacetBuilder(facetName).query(query);
 	}
 
-	
 	/**
 	 * Filter facet.
 	 *
@@ -63,7 +58,6 @@ public class FacetBuilders {
 		return new FilterFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Filter facet.
 	 *
@@ -75,7 +69,6 @@ public class FacetBuilders {
 		return new FilterFacetBuilder(facetName).filter(filter);
 	}
 
-	
 	/**
 	 * Terms facet.
 	 *
@@ -86,7 +79,6 @@ public class FacetBuilders {
 		return new TermsFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Terms stats facet.
 	 *
@@ -97,7 +89,6 @@ public class FacetBuilders {
 		return new TermsStatsFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Statistical facet.
 	 *
@@ -108,7 +99,6 @@ public class FacetBuilders {
 		return new StatisticalFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Statistical script facet.
 	 *
@@ -119,7 +109,6 @@ public class FacetBuilders {
 		return new StatisticalScriptFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Histogram facet.
 	 *
@@ -130,7 +119,6 @@ public class FacetBuilders {
 		return new HistogramFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Date histogram facet.
 	 *
@@ -141,7 +129,6 @@ public class FacetBuilders {
 		return new DateHistogramFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Histogram script facet.
 	 *
@@ -152,7 +139,6 @@ public class FacetBuilders {
 		return new HistogramScriptFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Range facet.
 	 *
@@ -163,7 +149,6 @@ public class FacetBuilders {
 		return new RangeFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Range script facet.
 	 *
@@ -174,7 +159,6 @@ public class FacetBuilders {
 		return new RangeScriptFacetBuilder(facetName);
 	}
 
-	
 	/**
 	 * Geo distance facet.
 	 *

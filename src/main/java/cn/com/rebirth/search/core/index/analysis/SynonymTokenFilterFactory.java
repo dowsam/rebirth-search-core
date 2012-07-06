@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SynonymTokenFilterFactory.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SynonymTokenFilterFactory.java 2012-7-6 14:29:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -22,7 +21,7 @@ import org.apache.lucene.analysis.synonym.SynonymFilter;
 import org.apache.lucene.analysis.synonym.SynonymMap;
 import org.apache.lucene.analysis.synonym.WordnetSynonymParser;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
@@ -32,22 +31,18 @@ import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.indices.analysis.IndicesAnalysisService;
 
-
 /**
  * A factory for creating SynonymTokenFilter objects.
  */
 @AnalysisSettingsRequired
 public class SynonymTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/** The synonym map. */
 	private final SynonymMap synonymMap;
 
-	
 	/** The ignore case. */
 	private final boolean ignoreCase;
 
-	
 	/**
 	 * Instantiates a new synonym token filter factory.
 	 *
@@ -76,7 +71,7 @@ public class SynonymTokenFilterFactory extends AbstractTokenFilterFactory {
 		} else if (settings.get("synonyms_path") != null) {
 			rulesReader = Analysis.getReaderFromFile(env, settings, "synonyms_path");
 		} else {
-			throw new RestartIllegalArgumentException(
+			throw new RebirthIllegalArgumentException(
 					"synonym requires either `synonyms` or `synonyms_path` to be configured");
 		}
 
@@ -90,7 +85,7 @@ public class SynonymTokenFilterFactory extends AbstractTokenFilterFactory {
 			tokenizerFactoryFactory = indicesAnalysisService.tokenizerFactoryFactory(tokenizerName);
 		}
 		if (tokenizerFactoryFactory == null) {
-			throw new RestartIllegalArgumentException("failed to find tokenizer [" + tokenizerName
+			throw new RebirthIllegalArgumentException("failed to find tokenizer [" + tokenizerName
 					+ "] for synonym token filter");
 		}
 		final TokenizerFactory tokenizerFactory = tokenizerFactoryFactory.create(tokenizerName, settings);
@@ -118,17 +113,16 @@ public class SynonymTokenFilterFactory extends AbstractTokenFilterFactory {
 
 			synonymMap = parser.build();
 		} catch (Exception e) {
-			throw new RestartIllegalArgumentException("failed to build synonyms", e);
+			throw new RebirthIllegalArgumentException("failed to build synonyms", e);
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
+	 * @see cn.com.rebirth.search.core.index.analysis.TokenFilterFactory#create(org.apache.lucene.analysis.TokenStream)
 	 */
 	@Override
 	public TokenStream create(TokenStream tokenStream) {
-		
+
 		return synonymMap.fst == null ? tokenStream : new SynonymFilter(tokenStream, synonymMap, ignoreCase);
 	}
 }

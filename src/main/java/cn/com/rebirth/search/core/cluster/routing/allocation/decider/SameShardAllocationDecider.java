@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SameShardAllocationDecider.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SameShardAllocationDecider.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingNode;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 
-
 /**
  * The Class SameShardAllocationDecider.
  *
@@ -23,15 +21,12 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
  */
 public class SameShardAllocationDecider extends AllocationDecider {
 
-	
 	/** The Constant SAME_HOST_SETTING. */
 	public static final String SAME_HOST_SETTING = "cluster.routing.allocation.same_shard.host";
 
-	
 	/** The same host. */
 	private final boolean sameHost;
 
-	
 	/**
 	 * Instantiates a new same shard allocation decider.
 	 *
@@ -44,15 +39,14 @@ public class SameShardAllocationDecider extends AllocationDecider {
 		this.sameHost = settings.getAsBoolean(SAME_HOST_SETTING, false);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public Decision canAllocate(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
 		List<MutableShardRouting> shards = node.shards();
 		for (int i = 0; i < shards.size(); i++) {
-			
+
 			if (shards.get(i).shardId().equals(shardRouting.shardId())) {
 				return Decision.NO;
 			}
@@ -63,7 +57,7 @@ public class SameShardAllocationDecider extends AllocationDecider {
 					if (checkNode.node() == null) {
 						continue;
 					}
-					
+
 					if (!checkNode.node().address().sameHost(node.node().address())) {
 						continue;
 					}

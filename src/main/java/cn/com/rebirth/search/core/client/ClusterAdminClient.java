@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterAdminClient.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterAdminClient.java 2012-7-6 14:30:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client;
 
@@ -37,7 +36,6 @@ import cn.com.rebirth.search.core.action.admin.cluster.state.ClusterStateRequest
 import cn.com.rebirth.search.core.action.admin.cluster.state.ClusterStateRequestBuilder;
 import cn.com.rebirth.search.core.action.admin.cluster.state.ClusterStateResponse;
 
-
 /**
  * The Interface ClusterAdminClient.
  *
@@ -45,7 +43,6 @@ import cn.com.rebirth.search.core.action.admin.cluster.state.ClusterStateRespons
  */
 public interface ClusterAdminClient {
 
-	
 	/**
 	 * Execute.
 	 *
@@ -59,7 +56,6 @@ public interface ClusterAdminClient {
 	<Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> ActionFuture<Response> execute(
 			final ClusterAction<Request, Response, RequestBuilder> action, final Request request);
 
-	
 	/**
 	 * Execute.
 	 *
@@ -74,7 +70,6 @@ public interface ClusterAdminClient {
 			final ClusterAction<Request, Response, RequestBuilder> action, final Request request,
 			ActionListener<Response> listener);
 
-	
 	/**
 	 * Prepare execute.
 	 *
@@ -87,7 +82,6 @@ public interface ClusterAdminClient {
 	<Request extends ActionRequest, Response extends ActionResponse, RequestBuilder extends ActionRequestBuilder<Request, Response>> RequestBuilder prepareExecute(
 			final ClusterAction<Request, Response, RequestBuilder> action);
 
-	
 	/**
 	 * Health.
 	 *
@@ -96,7 +90,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<ClusterHealthResponse> health(ClusterHealthRequest request);
 
-	
 	/**
 	 * Health.
 	 *
@@ -105,7 +98,6 @@ public interface ClusterAdminClient {
 	 */
 	void health(ClusterHealthRequest request, ActionListener<ClusterHealthResponse> listener);
 
-	
 	/**
 	 * Prepare health.
 	 *
@@ -114,7 +106,6 @@ public interface ClusterAdminClient {
 	 */
 	ClusterHealthRequestBuilder prepareHealth(String... indices);
 
-	
 	/**
 	 * State.
 	 *
@@ -123,7 +114,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<ClusterStateResponse> state(ClusterStateRequest request);
 
-	
 	/**
 	 * State.
 	 *
@@ -132,7 +122,6 @@ public interface ClusterAdminClient {
 	 */
 	void state(ClusterStateRequest request, ActionListener<ClusterStateResponse> listener);
 
-	
 	/**
 	 * Prepare state.
 	 *
@@ -140,7 +129,6 @@ public interface ClusterAdminClient {
 	 */
 	ClusterStateRequestBuilder prepareState();
 
-	
 	/**
 	 * Update settings.
 	 *
@@ -149,7 +137,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<ClusterUpdateSettingsResponse> updateSettings(ClusterUpdateSettingsRequest request);
 
-	
 	/**
 	 * Update settings.
 	 *
@@ -158,7 +145,6 @@ public interface ClusterAdminClient {
 	 */
 	void updateSettings(ClusterUpdateSettingsRequest request, ActionListener<ClusterUpdateSettingsResponse> listener);
 
-	
 	/**
 	 * Prepare update settings.
 	 *
@@ -166,7 +152,6 @@ public interface ClusterAdminClient {
 	 */
 	ClusterUpdateSettingsRequestBuilder prepareUpdateSettings();
 
-	
 	/**
 	 * Reroute.
 	 *
@@ -175,7 +160,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<ClusterRerouteResponse> reroute(ClusterRerouteRequest request);
 
-	
 	/**
 	 * Reroute.
 	 *
@@ -184,7 +168,6 @@ public interface ClusterAdminClient {
 	 */
 	void reroute(ClusterRerouteRequest request, ActionListener<ClusterRerouteResponse> listener);
 
-	
 	/**
 	 * Prepare reroute.
 	 *
@@ -192,7 +175,6 @@ public interface ClusterAdminClient {
 	 */
 	ClusterRerouteRequestBuilder prepareReroute();
 
-	
 	/**
 	 * Nodes info.
 	 *
@@ -201,7 +183,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<NodesInfoResponse> nodesInfo(NodesInfoRequest request);
 
-	
 	/**
 	 * Nodes info.
 	 *
@@ -210,7 +191,6 @@ public interface ClusterAdminClient {
 	 */
 	void nodesInfo(NodesInfoRequest request, ActionListener<NodesInfoResponse> listener);
 
-	
 	/**
 	 * Prepare nodes info.
 	 *
@@ -219,7 +199,6 @@ public interface ClusterAdminClient {
 	 */
 	NodesInfoRequestBuilder prepareNodesInfo(String... nodesIds);
 
-	
 	/**
 	 * Nodes stats.
 	 *
@@ -228,7 +207,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<NodesStatsResponse> nodesStats(NodesStatsRequest request);
 
-	
 	/**
 	 * Nodes stats.
 	 *
@@ -237,7 +215,6 @@ public interface ClusterAdminClient {
 	 */
 	void nodesStats(NodesStatsRequest request, ActionListener<NodesStatsResponse> listener);
 
-	
 	/**
 	 * Prepare nodes stats.
 	 *
@@ -246,7 +223,6 @@ public interface ClusterAdminClient {
 	 */
 	NodesStatsRequestBuilder prepareNodesStats(String... nodesIds);
 
-	
 	/**
 	 * Nodes shutdown.
 	 *
@@ -255,7 +231,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<NodesShutdownResponse> nodesShutdown(NodesShutdownRequest request);
 
-	
 	/**
 	 * Nodes shutdown.
 	 *
@@ -264,7 +239,6 @@ public interface ClusterAdminClient {
 	 */
 	void nodesShutdown(NodesShutdownRequest request, ActionListener<NodesShutdownResponse> listener);
 
-	
 	/**
 	 * Prepare nodes shutdown.
 	 *
@@ -273,7 +247,6 @@ public interface ClusterAdminClient {
 	 */
 	NodesShutdownRequestBuilder prepareNodesShutdown(String... nodesIds);
 
-	
 	/**
 	 * Nodes restart.
 	 *
@@ -282,7 +255,6 @@ public interface ClusterAdminClient {
 	 */
 	ActionFuture<NodesRestartResponse> nodesRestart(NodesRestartRequest request);
 
-	
 	/**
 	 * Nodes restart.
 	 *
@@ -291,7 +263,6 @@ public interface ClusterAdminClient {
 	 */
 	void nodesRestart(NodesRestartRequest request, ActionListener<NodesRestartResponse> listener);
 
-	
 	/**
 	 * Prepare nodes restart.
 	 *

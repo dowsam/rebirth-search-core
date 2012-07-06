@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ThreadDumpContributor.java 2012-3-29 15:01:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ThreadDumpContributor.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump.thread;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.monitor.dump.Dump;
 import cn.com.rebirth.search.core.monitor.dump.DumpContributionFailedException;
 import cn.com.rebirth.search.core.monitor.dump.DumpContributor;
 
-
 /**
  * The Class ThreadDumpContributor.
  *
@@ -27,19 +25,15 @@ import cn.com.rebirth.search.core.monitor.dump.DumpContributor;
  */
 public class ThreadDumpContributor implements DumpContributor {
 
-	
 	/** The Constant threadBean. */
 	private static final ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
 
-	
 	/** The Constant THREAD_DUMP. */
 	public static final String THREAD_DUMP = "thread";
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/**
 	 * Instantiates a new thread dump contributor.
 	 *
@@ -51,18 +45,16 @@ public class ThreadDumpContributor implements DumpContributor {
 		this.name = name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.DumpContributor#getName()
+	 * @see cn.com.rebirth.search.core.monitor.dump.DumpContributor#getName()
 	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.DumpContributor#contribute(cn.com.summall.search.core.monitor.dump.Dump)
+	 * @see cn.com.rebirth.search.core.monitor.dump.DumpContributor#contribute(cn.com.rebirth.search.core.monitor.dump.Dump)
 	 */
 	@Override
 	public void contribute(Dump dump) throws DumpContributionFailedException {
@@ -76,12 +68,11 @@ public class ThreadDumpContributor implements DumpContributor {
 			try {
 				writer.close();
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
 
-	
 	/**
 	 * Process deadlocks.
 	 *
@@ -94,7 +85,6 @@ public class ThreadDumpContributor implements DumpContributor {
 			dumpThreads(dump, getThreadInfo(deadlockedThreadIds));
 	}
 
-	
 	/**
 	 * Process all threads.
 	 *
@@ -106,7 +96,6 @@ public class ThreadDumpContributor implements DumpContributor {
 		dumpThreads(dump, dumpAllThreads());
 	}
 
-	
 	/**
 	 * Dump threads.
 	 *
@@ -120,7 +109,6 @@ public class ThreadDumpContributor implements DumpContributor {
 		}
 	}
 
-	
 	/**
 	 * Dump all threads.
 	 *
@@ -130,7 +118,6 @@ public class ThreadDumpContributor implements DumpContributor {
 		return threadBean.dumpAllThreads(true, true);
 	}
 
-	
 	/**
 	 * Find deadlocked threads.
 	 *
@@ -140,7 +127,6 @@ public class ThreadDumpContributor implements DumpContributor {
 		return threadBean.findDeadlockedThreads();
 	}
 
-	
 	/**
 	 * Gets the thread info.
 	 *
@@ -151,7 +137,6 @@ public class ThreadDumpContributor implements DumpContributor {
 		return threadBean.getThreadInfo(threadIds, true, true);
 	}
 
-	
 	/**
 	 * Write.
 	 *
@@ -183,7 +168,6 @@ public class ThreadDumpContributor implements DumpContributor {
 
 	}
 
-	
 	/**
 	 * Find locked monitor.
 	 *

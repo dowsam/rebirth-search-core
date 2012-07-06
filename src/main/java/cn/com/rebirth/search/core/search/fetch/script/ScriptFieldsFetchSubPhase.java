@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptFieldsFetchSubPhase.java 2012-3-29 15:01:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptFieldsFetchSubPhase.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch.script;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.search.SearchHitField;
 import cn.com.rebirth.search.core.search.SearchParseElement;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class ScriptFieldsFetchSubPhase.
  *
@@ -29,7 +27,6 @@ import com.google.common.collect.ImmutableMap;
  */
 public class ScriptFieldsFetchSubPhase implements FetchSubPhase {
 
-	
 	/**
 	 * Instantiates a new script fields fetch sub phase.
 	 */
@@ -37,9 +34,8 @@ public class ScriptFieldsFetchSubPhase implements FetchSubPhase {
 	public ScriptFieldsFetchSubPhase() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#parseElements()
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#parseElements()
 	 */
 	@Override
 	public Map<String, ? extends SearchParseElement> parseElements() {
@@ -49,38 +45,34 @@ public class ScriptFieldsFetchSubPhase implements FetchSubPhase {
 		return parseElements.build();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitsExecutionNeeded(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitsExecutionNeeded(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public boolean hitsExecutionNeeded(SearchContext context) {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitsExecute(cn.com.summall.search.core.search.internal.SearchContext, cn.com.summall.search.core.search.internal.InternalSearchHit[])
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitsExecute(cn.com.rebirth.search.core.search.internal.SearchContext, cn.com.rebirth.search.core.search.internal.InternalSearchHit[])
 	 */
 	@Override
-	public void hitsExecute(SearchContext context, InternalSearchHit[] hits) throws RestartException {
+	public void hitsExecute(SearchContext context, InternalSearchHit[] hits) throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitExecutionNeeded(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitExecutionNeeded(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public boolean hitExecutionNeeded(SearchContext context) {
 		return context.hasScriptFields();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSubPhase#hitExecute(cn.com.summall.search.core.search.internal.SearchContext, cn.com.summall.search.core.search.fetch.FetchSubPhase.HitContext)
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSubPhase#hitExecute(cn.com.rebirth.search.core.search.internal.SearchContext, cn.com.rebirth.search.core.search.fetch.FetchSubPhase.HitContext)
 	 */
 	@Override
-	public void hitExecute(SearchContext context, HitContext hitContext) throws RestartException {
+	public void hitExecute(SearchContext context, HitContext hitContext) throws RebirthException {
 		for (ScriptFieldsContext.ScriptField scriptField : context.scriptFields().fields()) {
 			scriptField.script().setNextReader(hitContext.reader());
 			scriptField.script().setNextDocId(hitContext.docId());

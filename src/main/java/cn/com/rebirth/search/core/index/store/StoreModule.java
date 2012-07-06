@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StoreModule.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StoreModule.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store;
 
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.AbstractModule;
 import cn.com.rebirth.search.core.jmx.JmxService;
-
 
 /**
  * The Class StoreModule.
@@ -18,15 +16,12 @@ import cn.com.rebirth.search.core.jmx.JmxService;
  */
 public class StoreModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The index store. */
 	private final IndexStore indexStore;
 
-	
 	/**
 	 * Instantiates a new store module.
 	 *
@@ -38,9 +33,8 @@ public class StoreModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

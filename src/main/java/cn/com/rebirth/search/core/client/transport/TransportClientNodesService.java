@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportClientNodesService.java 2012-3-29 15:01:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportClientNodesService.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.client.transport;
 
@@ -15,7 +14,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
@@ -39,7 +38,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class TransportClientNodesService.
  *
@@ -62,7 +60,6 @@ public class TransportClientNodesService extends AbstractComponent {
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The listed nodes. */
 	private volatile ImmutableList<DiscoveryNode> listedNodes = ImmutableList.of();
 
@@ -119,7 +116,6 @@ public class TransportClientNodesService extends AbstractComponent {
 		this.nodesSamplerFuture = threadPool.schedule(nodesSamplerInterval, ThreadPool.Names.GENERIC,
 				new ScheduledNodeSampler());
 
-		
 		transportService.throwConnectException(true);
 	}
 
@@ -188,9 +184,9 @@ public class TransportClientNodesService extends AbstractComponent {
 	 * @param <T> the generic type
 	 * @param callback the callback
 	 * @return the t
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public <T> T execute(NodeCallback<T> callback) throws RestartException {
+	public <T> T execute(NodeCallback<T> callback) throws RebirthException {
 		ImmutableList<DiscoveryNode> nodes = this.nodes;
 		if (nodes.isEmpty()) {
 			throw new NoNodeAvailableException();
@@ -204,7 +200,7 @@ public class TransportClientNodesService extends AbstractComponent {
 			DiscoveryNode node = nodes.get((index + i) % nodes.size());
 			try {
 				return callback.doWithNode(node);
-			} catch (RestartException e) {
+			} catch (RebirthException e) {
 				if (!(e.unwrapCause() instanceof ConnectTransportException)) {
 					throw e;
 				}
@@ -219,10 +215,10 @@ public class TransportClientNodesService extends AbstractComponent {
 	 * @param <Response> the generic type
 	 * @param callback the callback
 	 * @param listener the listener
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	public <Response> void execute(NodeListenerCallback<Response> callback, ActionListener<Response> listener)
-			throws RestartException {
+			throws RebirthException {
 		ImmutableList<DiscoveryNode> nodes = this.nodes;
 		if (nodes.isEmpty()) {
 			throw new NoNodeAvailableException();
@@ -235,7 +231,7 @@ public class TransportClientNodesService extends AbstractComponent {
 		RetryListener<Response> retryListener = new RetryListener<Response>(callback, listener, nodes, index);
 		try {
 			callback.doWithNode(nodes.get((index) % nodes.size()), retryListener);
-		} catch (RestartException e) {
+		} catch (RebirthException e) {
 			if (e.unwrapCause() instanceof ConnectTransportException) {
 				retryListener.onFailure(e);
 			} else {
@@ -257,16 +253,16 @@ public class TransportClientNodesService extends AbstractComponent {
 	 * @see RetryEvent
 	 */
 	public static class RetryListener<Response> implements ActionListener<Response> {
-		
+
 		/** The callback. */
 		private final NodeListenerCallback<Response> callback;
-		
+
 		/** The listener. */
 		private final ActionListener<Response> listener;
-		
+
 		/** The nodes. */
 		private final ImmutableList<DiscoveryNode> nodes;
-		
+
 		/** The index. */
 		private final int index;
 
@@ -290,7 +286,7 @@ public class TransportClientNodesService extends AbstractComponent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.ActionListener#onResponse(java.lang.Object)
+		 * @see cn.com.rebirth.search.core.action.ActionListener#onResponse(java.lang.Object)
 		 */
 		@Override
 		public void onResponse(Response response) {
@@ -298,7 +294,7 @@ public class TransportClientNodesService extends AbstractComponent {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.ActionListener#onFailure(java.lang.Throwable)
+		 * @see cn.com.rebirth.search.core.action.ActionListener#onFailure(java.lang.Throwable)
 		 */
 		@Override
 		public void onFailure(Throwable e) {
@@ -310,7 +306,7 @@ public class TransportClientNodesService extends AbstractComponent {
 					try {
 						callback.doWithNode(nodes.get((index + i) % nodes.size()), this);
 					} catch (Exception e1) {
-						
+
 						onFailure(e);
 					}
 				}
@@ -341,7 +337,7 @@ public class TransportClientNodesService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	interface NodeSampler {
-		
+
 		/**
 		 * Sample.
 		 */
@@ -354,7 +350,7 @@ public class TransportClientNodesService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	class ScheduledNodeSampler implements Runnable {
-		
+
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -379,7 +375,7 @@ public class TransportClientNodesService extends AbstractComponent {
 	class SimpleNodeSampler implements NodeSampler {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.client.transport.TransportClientNodesService.NodeSampler#sample()
+		 * @see cn.com.rebirth.search.core.client.transport.TransportClientNodesService.NodeSampler#sample()
 		 */
 		@Override
 		public synchronized void sample() {
@@ -428,7 +424,7 @@ public class TransportClientNodesService extends AbstractComponent {
 	class SniffNodesSampler implements NodeSampler {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.client.transport.TransportClientNodesService.NodeSampler#sample()
+		 * @see cn.com.rebirth.search.core.client.transport.TransportClientNodesService.NodeSampler#sample()
 		 */
 		@Override
 		public synchronized void sample() {
@@ -436,8 +432,6 @@ public class TransportClientNodesService extends AbstractComponent {
 				return;
 			}
 
-			
-			
 			Map<TransportAddress, DiscoveryNode> nodesToPing = Maps.newHashMap();
 			for (DiscoveryNode node : listedNodes) {
 				nodesToPing.put(node.address(), node);
@@ -512,13 +506,13 @@ public class TransportClientNodesService extends AbstractComponent {
 					if (!clusterName.equals(nodesInfoResponse.clusterName())) {
 						logger.warn("node {} not part of the cluster {}, ignoring...", nodeInfo.node(), clusterName);
 					} else {
-						if (nodeInfo.node().dataNode()) { 
+						if (nodeInfo.node().dataNode()) {
 							newNodes.add(nodeInfo.node());
 						}
 					}
 				}
 			}
-			
+
 			for (Iterator<DiscoveryNode> it = newNodes.iterator(); it.hasNext();) {
 				DiscoveryNode node = it.next();
 				try {
@@ -545,9 +539,9 @@ public class TransportClientNodesService extends AbstractComponent {
 		 *
 		 * @param node the node
 		 * @return the t
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		T doWithNode(DiscoveryNode node) throws RestartException;
+		T doWithNode(DiscoveryNode node) throws RebirthException;
 	}
 
 	/**
@@ -563,8 +557,8 @@ public class TransportClientNodesService extends AbstractComponent {
 		 *
 		 * @param node the node
 		 * @param listener the listener
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		void doWithNode(DiscoveryNode node, ActionListener<Response> listener) throws RestartException;
+		void doWithNode(DiscoveryNode node, ActionListener<Response> listener) throws RebirthException;
 	}
 }

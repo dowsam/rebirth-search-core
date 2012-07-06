@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsStatsFacetBuilder.java 2012-3-29 15:00:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsStatsFacetBuilder.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.termsstats;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class TermsStatsFacetBuilder.
  *
@@ -23,35 +21,27 @@ import com.google.common.collect.Maps;
  */
 public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The key field. */
 	private String keyField;
 
-	
 	/** The value field. */
 	private String valueField;
 
-	
 	/** The size. */
 	private int size = -1;
 
-	
 	/** The comparator type. */
 	private TermsStatsFacet.ComparatorType comparatorType;
 
-	
 	/** The script. */
 	private String script;
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The params. */
 	private Map<String, Object> params;
 
-	
 	/**
 	 * Instantiates a new terms stats facet builder.
 	 *
@@ -61,7 +51,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Key field.
 	 *
@@ -73,7 +62,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value field.
 	 *
@@ -85,7 +73,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Order.
 	 *
@@ -97,7 +84,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Size.
 	 *
@@ -109,7 +95,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * All terms.
 	 *
@@ -120,7 +105,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value script.
 	 *
@@ -132,7 +116,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -144,7 +127,6 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -160,9 +142,8 @@ public class TermsStatsFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

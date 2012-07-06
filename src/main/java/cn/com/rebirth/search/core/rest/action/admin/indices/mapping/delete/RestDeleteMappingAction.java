@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestDeleteMappingAction.java 2012-3-29 15:00:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestDeleteMappingAction.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.mapping.delete;
 
@@ -27,7 +26,6 @@ import static cn.com.rebirth.search.core.rest.RestRequest.Method.DELETE;
 import static cn.com.rebirth.search.core.rest.RestStatus.OK;
 import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
 
-
 /**
  * The Class RestDeleteMappingAction.
  *
@@ -35,7 +33,6 @@ import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIn
  */
 public class RestDeleteMappingAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest delete mapping action.
 	 *
@@ -50,9 +47,8 @@ public class RestDeleteMappingAction extends BaseRestHandler {
 		controller.registerHandler(DELETE, "/{index}/{type}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {

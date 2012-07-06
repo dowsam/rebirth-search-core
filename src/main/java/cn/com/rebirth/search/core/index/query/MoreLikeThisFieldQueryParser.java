@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MoreLikeThisFieldQueryParser.java 2012-3-29 15:01:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MoreLikeThisFieldQueryParser.java 2012-7-6 14:30:10 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class MoreLikeThisFieldQueryParser.
  *
@@ -29,11 +27,9 @@ import com.google.common.collect.Sets;
  */
 public class MoreLikeThisFieldQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "mlt_field";
 
-	
 	/**
 	 * Instantiates a new more like this field query parser.
 	 */
@@ -41,18 +37,16 @@ public class MoreLikeThisFieldQueryParser implements QueryParser {
 	public MoreLikeThisFieldQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, "more_like_this_field", Strings.toCamelCase(NAME), "moreLikeThisField" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -62,7 +56,6 @@ public class MoreLikeThisFieldQueryParser implements QueryParser {
 		assert token == XContentParser.Token.FIELD_NAME;
 		String fieldName = parser.currentName();
 
-		
 		token = parser.nextToken();
 		assert token == XContentParser.Token.START_OBJECT;
 
@@ -122,7 +115,6 @@ public class MoreLikeThisFieldQueryParser implements QueryParser {
 					"more_like_this_field requires 'like_text' to be specified");
 		}
 
-		
 		token = parser.nextToken();
 		assert token == XContentParser.Token.END_OBJECT;
 

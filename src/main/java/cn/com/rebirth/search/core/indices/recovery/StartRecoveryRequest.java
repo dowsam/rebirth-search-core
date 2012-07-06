@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StartRecoveryRequest.java 2012-3-29 15:02:20 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StartRecoveryRequest.java 2012-7-6 14:29:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.store.StoreFileMetaData;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class StartRecoveryRequest.
  *
@@ -26,34 +24,27 @@ import com.google.common.collect.Maps;
  */
 public class StartRecoveryRequest implements Streamable {
 
-	
 	/** The shard id. */
 	private ShardId shardId;
 
-	
 	/** The source node. */
 	private DiscoveryNode sourceNode;
 
-	
 	/** The target node. */
 	private DiscoveryNode targetNode;
 
-	
 	/** The mark as relocated. */
 	private boolean markAsRelocated;
 
-	
 	/** The existing files. */
 	private Map<String, StoreFileMetaData> existingFiles;
 
-	
 	/**
 	 * Instantiates a new start recovery request.
 	 */
 	StartRecoveryRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new start recovery request.
 	 *
@@ -72,7 +63,6 @@ public class StartRecoveryRequest implements Streamable {
 		this.existingFiles = existingFiles;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -82,7 +72,6 @@ public class StartRecoveryRequest implements Streamable {
 		return shardId;
 	}
 
-	
 	/**
 	 * Source node.
 	 *
@@ -92,7 +81,6 @@ public class StartRecoveryRequest implements Streamable {
 		return sourceNode;
 	}
 
-	
 	/**
 	 * Target node.
 	 *
@@ -102,7 +90,6 @@ public class StartRecoveryRequest implements Streamable {
 		return targetNode;
 	}
 
-	
 	/**
 	 * Mark as relocated.
 	 *
@@ -112,7 +99,6 @@ public class StartRecoveryRequest implements Streamable {
 		return markAsRelocated;
 	}
 
-	
 	/**
 	 * Existing files.
 	 *
@@ -122,9 +108,8 @@ public class StartRecoveryRequest implements Streamable {
 		return existingFiles;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -140,9 +125,8 @@ public class StartRecoveryRequest implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesStatsRequest.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesStatsRequest.java 2012-7-6 14:29:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.stats;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest;
 
-
 /**
  * The Class IndicesStatsRequest.
  *
@@ -20,56 +18,44 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationReq
  */
 public class IndicesStatsRequest extends BroadcastOperationRequest {
 
-	
 	/** The docs. */
 	private boolean docs = true;
 
-	
 	/** The store. */
 	private boolean store = true;
 
-	
 	/** The indexing. */
 	private boolean indexing = true;
 
-	
 	/** The get. */
 	private boolean get = true;
 
-	
 	/** The search. */
 	private boolean search = true;
 
-	
 	/** The merge. */
 	private boolean merge = false;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The flush. */
 	private boolean flush = false;
 
-	
 	/** The types. */
 	private String[] types = null;
 
-	
 	/** The groups. */
 	private String[] groups = null;
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#indices(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#indices(java.lang.String[])
 	 */
 	public IndicesStatsRequest indices(String... indices) {
 		this.indices = indices;
 		return this;
 	}
 
-	
 	/**
 	 * All.
 	 *
@@ -89,7 +75,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Clear.
 	 *
@@ -109,7 +94,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -121,7 +105,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -131,7 +114,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.types;
 	}
 
-	
 	/**
 	 * Groups.
 	 *
@@ -143,7 +125,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Groups.
 	 *
@@ -153,7 +134,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.groups;
 	}
 
-	
 	/**
 	 * Docs.
 	 *
@@ -165,7 +145,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Docs.
 	 *
@@ -175,7 +154,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.docs;
 	}
 
-	
 	/**
 	 * Store.
 	 *
@@ -187,7 +165,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Store.
 	 *
@@ -197,7 +174,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.store;
 	}
 
-	
 	/**
 	 * Indexing.
 	 *
@@ -209,7 +185,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Indexing.
 	 *
@@ -219,7 +194,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.indexing;
 	}
 
-	
 	/**
 	 * Gets the.
 	 *
@@ -231,7 +205,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Gets the.
 	 *
@@ -241,7 +214,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.get;
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -253,7 +225,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search.
 	 *
@@ -263,7 +234,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.search;
 	}
 
-	
 	/**
 	 * Merge.
 	 *
@@ -275,7 +245,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Merge.
 	 *
@@ -285,7 +254,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.merge;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -297,7 +265,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -307,7 +274,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Flush.
 	 *
@@ -319,7 +285,6 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Flush.
 	 *
@@ -329,9 +294,8 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		return this.flush;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -362,9 +326,8 @@ public class IndicesStatsRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {

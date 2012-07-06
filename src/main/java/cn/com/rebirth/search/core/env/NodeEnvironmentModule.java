@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeEnvironmentModule.java 2012-3-29 15:01:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeEnvironmentModule.java 2012-7-6 14:30:41 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.env;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.search.commons.inject.AbstractModule;
-
 
 /**
  * The Class NodeEnvironmentModule.
@@ -17,11 +15,9 @@ import cn.com.rebirth.search.commons.inject.AbstractModule;
  */
 public class NodeEnvironmentModule extends AbstractModule {
 
-	
 	/** The node environment. */
 	private final NodeEnvironment nodeEnvironment;
 
-	
 	/**
 	 * Instantiates a new node environment module.
 	 */
@@ -29,7 +25,6 @@ public class NodeEnvironmentModule extends AbstractModule {
 		this(null);
 	}
 
-	
 	/**
 	 * Instantiates a new node environment module.
 	 *
@@ -39,9 +34,8 @@ public class NodeEnvironmentModule extends AbstractModule {
 		this.nodeEnvironment = nodeEnvironment;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

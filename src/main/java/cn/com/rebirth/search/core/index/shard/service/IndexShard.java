@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShard.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShard.java 2012-7-6 14:30:47 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard.service;
 
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.index.engine.Engine;
 import cn.com.rebirth.search.core.index.engine.EngineException;
@@ -28,7 +27,6 @@ import cn.com.rebirth.search.core.index.shard.IndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.IndexShardState;
 import cn.com.rebirth.search.core.index.store.StoreStats;
 
-
 /**
  * The Interface IndexShard.
  *
@@ -36,7 +34,6 @@ import cn.com.rebirth.search.core.index.store.StoreStats;
  */
 public interface IndexShard extends IndexShardComponent {
 
-	
 	/**
 	 * Indexing service.
 	 *
@@ -44,7 +41,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	ShardIndexingService indexingService();
 
-	
 	/**
 	 * Gets the service.
 	 *
@@ -52,7 +48,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	ShardGetService getService();
 
-	
 	/**
 	 * Search service.
 	 *
@@ -60,7 +55,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	ShardSearchService searchService();
 
-	
 	/**
 	 * Routing entry.
 	 *
@@ -68,7 +62,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	ShardRouting routingEntry();
 
-	
 	/**
 	 * Doc stats.
 	 *
@@ -76,7 +69,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	DocsStats docStats();
 
-	
 	/**
 	 * Store stats.
 	 *
@@ -84,7 +76,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	StoreStats storeStats();
 
-	
 	/**
 	 * Indexing stats.
 	 *
@@ -93,7 +84,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	IndexingStats indexingStats(String... types);
 
-	
 	/**
 	 * Search stats.
 	 *
@@ -102,7 +92,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	SearchStats searchStats(String... groups);
 
-	
 	/**
 	 * Gets the stats.
 	 *
@@ -110,7 +99,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	GetStats getStats();
 
-	
 	/**
 	 * Merge stats.
 	 *
@@ -118,7 +106,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	MergeStats mergeStats();
 
-	
 	/**
 	 * Refresh stats.
 	 *
@@ -126,7 +113,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	RefreshStats refreshStats();
 
-	
 	/**
 	 * Flush stats.
 	 *
@@ -134,7 +120,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	FlushStats flushStats();
 
-	
 	/**
 	 * State.
 	 *
@@ -142,47 +127,42 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	IndexShardState state();
 
-	
 	/**
 	 * Prepare create.
 	 *
 	 * @param source the source
 	 * @return the engine. create
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	Engine.Create prepareCreate(SourceToParse source) throws RestartException;
+	Engine.Create prepareCreate(SourceToParse source) throws RebirthException;
 
-	
 	/**
 	 * Creates the.
 	 *
 	 * @param create the create
 	 * @return the parsed document
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	ParsedDocument create(Engine.Create create) throws RestartException;
+	ParsedDocument create(Engine.Create create) throws RebirthException;
 
-	
 	/**
 	 * Prepare index.
 	 *
 	 * @param source the source
 	 * @return the engine. index
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	Engine.Index prepareIndex(SourceToParse source) throws RestartException;
+	Engine.Index prepareIndex(SourceToParse source) throws RebirthException;
 
-	
 	/**
 	 * Index.
 	 *
 	 * @param index the index
 	 * @return the parsed document
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	ParsedDocument index(Engine.Index index) throws RestartException;
+	ParsedDocument index(Engine.Index index) throws RebirthException;
 
-	
 	/**
 	 * Prepare delete.
 	 *
@@ -190,20 +170,18 @@ public interface IndexShard extends IndexShardComponent {
 	 * @param id the id
 	 * @param version the version
 	 * @return the engine. delete
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	Engine.Delete prepareDelete(String type, String id, long version) throws RestartException;
+	Engine.Delete prepareDelete(String type, String id, long version) throws RebirthException;
 
-	
 	/**
 	 * Delete.
 	 *
 	 * @param delete the delete
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void delete(Engine.Delete delete) throws RestartException;
+	void delete(Engine.Delete delete) throws RebirthException;
 
-	
 	/**
 	 * Prepare delete by query.
 	 *
@@ -211,31 +189,28 @@ public interface IndexShard extends IndexShardComponent {
 	 * @param filteringAliases the filtering aliases
 	 * @param types the types
 	 * @return the engine. delete by query
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	Engine.DeleteByQuery prepareDeleteByQuery(BytesHolder querySource, @Nullable String[] filteringAliases,
-			String... types) throws RestartException;
+			String... types) throws RebirthException;
 
-	
 	/**
 	 * Delete by query.
 	 *
 	 * @param deleteByQuery the delete by query
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void deleteByQuery(Engine.DeleteByQuery deleteByQuery) throws RestartException;
+	void deleteByQuery(Engine.DeleteByQuery deleteByQuery) throws RebirthException;
 
-	
 	/**
 	 * Gets the.
 	 *
 	 * @param get the get
 	 * @return the engine. get result
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	Engine.GetResult get(Engine.Get get) throws RestartException;
+	Engine.GetResult get(Engine.Get get) throws RebirthException;
 
-	
 	/**
 	 * Count.
 	 *
@@ -244,12 +219,11 @@ public interface IndexShard extends IndexShardComponent {
 	 * @param filteringAliases the filtering aliases
 	 * @param types the types
 	 * @return the long
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	long count(float minScore, byte[] querySource, @Nullable String[] filteringAliases, String... types)
-			throws RestartException;
+			throws RebirthException;
 
-	
 	/**
 	 * Count.
 	 *
@@ -260,39 +234,35 @@ public interface IndexShard extends IndexShardComponent {
 	 * @param filteringAliases the filtering aliases
 	 * @param types the types
 	 * @return the long
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	long count(float minScore, byte[] querySource, int querySourceOffset, int querySourceLength,
-			@Nullable String[] filteringAliases, String... types) throws RestartException;
+			@Nullable String[] filteringAliases, String... types) throws RebirthException;
 
-	
 	/**
 	 * Refresh.
 	 *
 	 * @param refresh the refresh
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void refresh(Engine.Refresh refresh) throws RestartException;
+	void refresh(Engine.Refresh refresh) throws RebirthException;
 
-	
 	/**
 	 * Flush.
 	 *
 	 * @param flush the flush
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void flush(Engine.Flush flush) throws RestartException;
+	void flush(Engine.Flush flush) throws RebirthException;
 
-	
 	/**
 	 * Optimize.
 	 *
 	 * @param optimize the optimize
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void optimize(Engine.Optimize optimize) throws RestartException;
+	void optimize(Engine.Optimize optimize) throws RebirthException;
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -303,7 +273,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	<T> T snapshot(Engine.SnapshotHandler<T> snapshotHandler) throws EngineException;
 
-	
 	/**
 	 * Recover.
 	 *
@@ -312,7 +281,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	void recover(Engine.RecoveryHandler recoveryHandler) throws EngineException;
 
-	
 	/**
 	 * Searcher.
 	 *
@@ -320,7 +288,6 @@ public interface IndexShard extends IndexShardComponent {
 	 */
 	Engine.Searcher searcher();
 
-	
 	/**
 	 * Ignore recovery attempt.
 	 *

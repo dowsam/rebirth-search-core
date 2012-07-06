@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FlushStats.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FlushStats.java 2012-7-6 14:30:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.flush;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class FlushStats.
  *
@@ -24,15 +22,12 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class FlushStats implements Streamable, ToXContent {
 
-	
 	/** The total. */
 	private long total;
 
-	
 	/** The total time in millis. */
 	private long totalTimeInMillis;
 
-	
 	/**
 	 * Instantiates a new flush stats.
 	 */
@@ -40,7 +35,6 @@ public class FlushStats implements Streamable, ToXContent {
 
 	}
 
-	
 	/**
 	 * Instantiates a new flush stats.
 	 *
@@ -52,7 +46,6 @@ public class FlushStats implements Streamable, ToXContent {
 		this.totalTimeInMillis = totalTimeInMillis;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -64,7 +57,6 @@ public class FlushStats implements Streamable, ToXContent {
 		this.totalTimeInMillis += totalTimeInMillis;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -78,7 +70,6 @@ public class FlushStats implements Streamable, ToXContent {
 		this.totalTimeInMillis += flushStats.totalTimeInMillis;
 	}
 
-	
 	/**
 	 * Total.
 	 *
@@ -88,7 +79,6 @@ public class FlushStats implements Streamable, ToXContent {
 		return this.total;
 	}
 
-	
 	/**
 	 * Total time in millis.
 	 *
@@ -98,7 +88,6 @@ public class FlushStats implements Streamable, ToXContent {
 		return this.totalTimeInMillis;
 	}
 
-	
 	/**
 	 * Total time.
 	 *
@@ -108,7 +97,6 @@ public class FlushStats implements Streamable, ToXContent {
 		return new TimeValue(totalTimeInMillis);
 	}
 
-	
 	/**
 	 * Read flush stats.
 	 *
@@ -122,9 +110,8 @@ public class FlushStats implements Streamable, ToXContent {
 		return flushStats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -136,7 +123,6 @@ public class FlushStats implements Streamable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -144,26 +130,21 @@ public class FlushStats implements Streamable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant FLUSH. */
 		static final XContentBuilderString FLUSH = new XContentBuilderString("flush");
 
-		
 		/** The Constant TOTAL. */
 		static final XContentBuilderString TOTAL = new XContentBuilderString("total");
 
-		
 		/** The Constant TOTAL_TIME. */
 		static final XContentBuilderString TOTAL_TIME = new XContentBuilderString("total_time");
 
-		
 		/** The Constant TOTAL_TIME_IN_MILLIS. */
 		static final XContentBuilderString TOTAL_TIME_IN_MILLIS = new XContentBuilderString("total_time_in_millis");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -171,9 +152,8 @@ public class FlushStats implements Streamable, ToXContent {
 		totalTimeInMillis = in.readVLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

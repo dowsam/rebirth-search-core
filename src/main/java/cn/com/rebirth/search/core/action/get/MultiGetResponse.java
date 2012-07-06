@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiGetResponse.java 2012-3-29 15:01:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiGetResponse.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.action.ActionResponse;
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class MultiGetResponse.
  *
@@ -28,7 +26,6 @@ import com.google.common.collect.Iterators;
  */
 public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemResponse>, ToXContent {
 
-	
 	/**
 	 * The Class Failure.
 	 *
@@ -36,23 +33,18 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 	 */
 	public static class Failure implements Streamable {
 
-		
 		/** The index. */
 		private String index;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/** The id. */
 		private String id;
 
-		
 		/** The message. */
 		private String message;
 
-		
 		/**
 		 * Instantiates a new failure.
 		 */
@@ -60,7 +52,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 
 		}
 
-		
 		/**
 		 * Instantiates a new failure.
 		 *
@@ -76,7 +67,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			this.message = message;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -86,7 +76,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return this.index;
 		}
 
-		
 		/**
 		 * Gets the index.
 		 *
@@ -96,7 +85,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return index();
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -106,7 +94,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return type;
 		}
 
-		
 		/**
 		 * Gets the type.
 		 *
@@ -116,7 +103,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return type();
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -126,7 +112,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return id;
 		}
 
-		
 		/**
 		 * Gets the id.
 		 *
@@ -136,7 +121,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return this.id;
 		}
 
-		
 		/**
 		 * Message.
 		 *
@@ -146,7 +130,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return this.message;
 		}
 
-		
 		/**
 		 * Gets the message.
 		 *
@@ -156,7 +139,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return message();
 		}
 
-		
 		/**
 		 * Read failure.
 		 *
@@ -170,9 +152,8 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			return failure;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -184,9 +165,8 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 			message = in.readUTF();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -202,18 +182,15 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 		}
 	}
 
-	
 	/** The responses. */
 	private MultiGetItemResponse[] responses;
 
-	
 	/**
 	 * Instantiates a new multi get response.
 	 */
 	MultiGetResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new multi get response.
 	 *
@@ -223,7 +200,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 		this.responses = responses;
 	}
 
-	
 	/**
 	 * Responses.
 	 *
@@ -233,7 +209,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 		return this.responses;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -242,9 +217,8 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 		return Iterators.forArray(responses);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -269,7 +243,6 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -277,30 +250,24 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 	 */
 	static final class Fields {
 
-		
 		/** The Constant DOCS. */
 		static final XContentBuilderString DOCS = new XContentBuilderString("docs");
 
-		
 		/** The Constant _INDEX. */
 		static final XContentBuilderString _INDEX = new XContentBuilderString("_index");
 
-		
 		/** The Constant _TYPE. */
 		static final XContentBuilderString _TYPE = new XContentBuilderString("_type");
 
-		
 		/** The Constant _ID. */
 		static final XContentBuilderString _ID = new XContentBuilderString("_id");
 
-		
 		/** The Constant ERROR. */
 		static final XContentBuilderString ERROR = new XContentBuilderString("error");
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -310,9 +277,8 @@ public class MultiGetResponse implements ActionResponse, Iterable<MultiGetItemRe
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

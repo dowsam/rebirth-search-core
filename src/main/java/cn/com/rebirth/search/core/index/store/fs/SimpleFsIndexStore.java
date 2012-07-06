@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SimpleFsIndexStore.java 2012-3-29 15:01:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SimpleFsIndexStore.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.fs;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.index.service.IndexService;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.store.DirectoryService;
 
-
 /**
  * The Class SimpleFsIndexStore.
  *
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.index.store.DirectoryService;
  */
 public class SimpleFsIndexStore extends FsIndexStore {
 
-	
 	/**
 	 * Instantiates a new simple fs index store.
 	 *
@@ -37,9 +34,8 @@ public class SimpleFsIndexStore extends FsIndexStore {
 		super(index, indexSettings, indexService, nodeEnv);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#shardDirectory()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#shardDirectory()
 	 */
 	@Override
 	public Class<? extends DirectoryService> shardDirectory() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeMappingCreatedAction.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeMappingCreatedAction.java 2012-7-6 14:29:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.action.index;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class NodeMappingCreatedAction.
  *
@@ -35,23 +33,18 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class NodeMappingCreatedAction extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The listeners. */
 	private final List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/**
 	 * Instantiates a new node mapping created action.
 	 *
@@ -71,7 +64,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 				new NodeMappingCreatedTransportHandler());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -91,7 +83,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 		});
 	}
 
-	
 	/**
 	 * Removes the.
 	 *
@@ -101,14 +92,13 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 		listeners.remove(listener);
 	}
 
-	
 	/**
 	 * Node mapping created.
 	 *
 	 * @param response the response
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void nodeMappingCreated(final NodeMappingCreatedResponse response) throws RestartException {
+	public void nodeMappingCreated(final NodeMappingCreatedResponse response) throws RebirthException {
 		DiscoveryNodes nodes = clusterService.state().nodes();
 		if (nodes.localNodeMaster()) {
 			threadPool.generic().execute(new Runnable() {
@@ -123,7 +113,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Inner node index created.
 	 *
@@ -135,7 +124,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -143,7 +131,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On node mapping created.
 		 *
@@ -151,14 +138,12 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 		 */
 		void onNodeMappingCreated(NodeMappingCreatedResponse response);
 
-		
 		/**
 		 * On timeout.
 		 */
 		void onTimeout();
 	}
 
-	
 	/**
 	 * The Class NodeMappingCreatedTransportHandler.
 	 *
@@ -166,22 +151,19 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 	 */
 	private class NodeMappingCreatedTransportHandler extends BaseTransportRequestHandler<NodeMappingCreatedResponse> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "cluster/nodeMappingCreated";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public NodeMappingCreatedResponse newInstance() {
 			return new NodeMappingCreatedResponse();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(NodeMappingCreatedResponse response, TransportChannel channel) throws Exception {
@@ -189,9 +171,8 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -199,7 +180,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class NodeMappingCreatedResponse.
 	 *
@@ -207,26 +187,21 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 	 */
 	public static class NodeMappingCreatedResponse implements Streamable {
 
-		
 		/** The index. */
 		private String index;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/** The node id. */
 		private String nodeId;
 
-		
 		/**
 		 * Instantiates a new node mapping created response.
 		 */
 		private NodeMappingCreatedResponse() {
 		}
 
-		
 		/**
 		 * Instantiates a new node mapping created response.
 		 *
@@ -240,7 +215,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 			this.nodeId = nodeId;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -250,7 +224,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 			return index;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -260,7 +233,6 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 			return type;
 		}
 
-		
 		/**
 		 * Node id.
 		 *
@@ -270,9 +242,8 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 			return nodeId;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -281,9 +252,8 @@ public class NodeMappingCreatedAction extends AbstractComponent {
 			out.writeUTF(nodeId);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {

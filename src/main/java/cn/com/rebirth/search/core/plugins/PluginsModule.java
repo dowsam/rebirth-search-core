@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PluginsModule.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PluginsModule.java 2012-7-6 14:30:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.plugins;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.inject.SpawnModules;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class PluginsModule.
  *
@@ -26,15 +24,12 @@ import com.google.common.collect.Lists;
  */
 public class PluginsModule extends AbstractModule implements SpawnModules, PreProcessModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The plugins service. */
 	private final PluginsService pluginsService;
 
-	
 	/**
 	 * Instantiates a new plugins module.
 	 *
@@ -46,9 +41,8 @@ public class PluginsModule extends AbstractModule implements SpawnModules, PrePr
 		this.pluginsService = pluginsService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.SpawnModules#spawnModules()
+	 * @see cn.com.rebirth.search.commons.inject.SpawnModules#spawnModules()
 	 */
 	@Override
 	public Iterable<? extends Module> spawnModules() {
@@ -61,18 +55,16 @@ public class PluginsModule extends AbstractModule implements SpawnModules, PrePr
 		return modules;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.PreProcessModule#processModule(cn.com.summall.search.commons.inject.Module)
+	 * @see cn.com.rebirth.search.commons.inject.PreProcessModule#processModule(cn.com.rebirth.search.commons.inject.Module)
 	 */
 	@Override
 	public void processModule(Module module) {
 		pluginsService.processModule(module);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

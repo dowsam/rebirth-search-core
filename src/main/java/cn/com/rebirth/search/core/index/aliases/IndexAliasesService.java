@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexAliasesService.java 2012-3-29 15:02:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexAliasesService.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.aliases;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.indices.InvalidAliasNameException;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.UnmodifiableIterator;
 
-
 /**
  * The Class IndexAliasesService.
  *
@@ -38,19 +36,15 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class IndexAliasesService extends AbstractIndexComponent implements Iterable<IndexAlias> {
 
-	
 	/** The index query parser. */
 	private final IndexQueryParserService indexQueryParser;
 
-	
 	/** The aliases. */
 	private volatile ImmutableMap<String, IndexAlias> aliases = ImmutableMap.of();
 
-	
 	/** The mutex. */
 	private final Object mutex = new Object();
 
-	
 	/**
 	 * Instantiates a new index aliases service.
 	 *
@@ -65,7 +59,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		this.indexQueryParser = indexQueryParser;
 	}
 
-	
 	/**
 	 * Checks for alias.
 	 *
@@ -76,7 +69,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		return aliases.containsKey(alias);
 	}
 
-	
 	/**
 	 * Alias.
 	 *
@@ -87,7 +79,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		return aliases.get(alias);
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -98,7 +89,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		add(new IndexAlias(alias, filter, parse(alias, filter)));
 	}
 
-	
 	/**
 	 * Alias filter.
 	 *
@@ -112,24 +102,24 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		if (aliases.length == 1) {
 			IndexAlias indexAlias = alias(aliases[0]);
 			if (indexAlias == null) {
-				
+
 				throw new InvalidAliasNameException(index, aliases[0], "Unknown alias name was passed to alias Filter");
 			}
 			return indexAlias.parsedFilter();
 		} else {
-			
+
 			XBooleanFilter combined = new XBooleanFilter();
 			for (String alias : aliases) {
 				IndexAlias indexAlias = alias(alias);
 				if (indexAlias == null) {
-					
+
 					throw new InvalidAliasNameException(index, aliases[0],
 							"Unknown alias name was passed to alias Filter");
 				}
 				if (indexAlias.parsedFilter() != null) {
 					combined.add(new FilterClause(indexAlias.parsedFilter(), BooleanClause.Occur.SHOULD));
 				} else {
-					
+
 					return null;
 				}
 			}
@@ -143,7 +133,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		}
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -155,7 +144,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		}
 	}
 
-	
 	/**
 	 * Removes the.
 	 *
@@ -167,7 +155,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		}
 	}
 
-	
 	/**
 	 * Parses the.
 	 *
@@ -192,7 +179,6 @@ public class IndexAliasesService extends AbstractIndexComponent implements Itera
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StringFieldsFunctionDataComparator.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StringFieldsFunctionDataComparator.java 2012-7-6 14:28:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.function.sort;
 
@@ -16,7 +15,6 @@ import org.apache.lucene.search.SortField;
 import cn.com.rebirth.search.core.script.SearchScript;
 import cn.com.rebirth.search.index.field.data.ExtendedFieldComparatorSource;
 
-
 /**
  * The Class StringFieldsFunctionDataComparator.
  *
@@ -24,7 +22,6 @@ import cn.com.rebirth.search.index.field.data.ExtendedFieldComparatorSource;
  */
 public class StringFieldsFunctionDataComparator extends FieldComparator {
 
-	
 	/**
 	 * Comparator source.
 	 *
@@ -35,7 +32,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		return new InnerSource(script);
 	}
 
-	
 	/**
 	 * The Class InnerSource.
 	 *
@@ -43,11 +39,9 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 	 */
 	private static class InnerSource extends ExtendedFieldComparatorSource {
 
-		
 		/** The script. */
 		private final SearchScript script;
 
-		
 		/**
 		 * Instantiates a new inner source.
 		 *
@@ -57,7 +51,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 			this.script = script;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.FieldComparatorSource#newComparator(java.lang.String, int, int, boolean)
 		 */
@@ -67,9 +60,8 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 			return new StringFieldsFunctionDataComparator(numHits, script);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.index.field.data.ExtendedFieldComparatorSource#reducedType()
+		 * @see cn.com.rebirth.search.index.field.data.ExtendedFieldComparatorSource#reducedType()
 		 */
 		@Override
 		public int reducedType() {
@@ -77,19 +69,15 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		}
 	}
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/** The values. */
 	private String[] values;
 
-	
 	/** The bottom. */
 	private String bottom;
 
-	
 	/**
 	 * Instantiates a new string fields function data comparator.
 	 *
@@ -101,7 +89,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		values = new String[numHits];
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#setNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
@@ -110,7 +97,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		script.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#setScorer(org.apache.lucene.search.Scorer)
 	 */
@@ -119,7 +105,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		script.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#compare(int, int)
 	 */
@@ -139,7 +124,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		return val1.compareTo(val2);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#compareBottom(int)
 	 */
@@ -158,7 +142,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		return bottom.compareTo(val2);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#copy(int, int)
 	 */
@@ -168,7 +151,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		values[slot] = script.run().toString();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#setBottom(int)
 	 */
@@ -177,7 +159,6 @@ public class StringFieldsFunctionDataComparator extends FieldComparator {
 		this.bottom = values[bottom];
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.FieldComparator#value(int)
 	 */

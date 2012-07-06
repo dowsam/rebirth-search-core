@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DiscoveryNode.java 2012-3-29 15:02:11 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DiscoveryNode.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.node;
 
@@ -21,6 +20,7 @@ import cn.com.rebirth.search.core.RestartSearchCoreVersion;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+
 /**
  * The Class DiscoveryNode.
  *
@@ -28,11 +28,9 @@ import com.google.common.collect.ImmutableMap;
  */
 public class DiscoveryNode implements Streamable, Serializable {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6396983001046601389L;
 
-	
 	/**
 	 * Node requires local storage.
 	 *
@@ -44,7 +42,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 				.getAsBoolean("node.master", true)));
 	}
 
-	
 	/**
 	 * Client node.
 	 *
@@ -56,7 +53,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return client != null && client.equals("true");
 	}
 
-	
 	/**
 	 * Master node.
 	 *
@@ -71,7 +67,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return master.equals("true");
 	}
 
-	
 	/**
 	 * Data node.
 	 *
@@ -86,38 +81,30 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return data.equals("true");
 	}
 
-	
 	/** The Constant EMPTY_LIST. */
 	public static final ImmutableList<DiscoveryNode> EMPTY_LIST = ImmutableList.of();
 
-	
 	/** The node name. */
 	private String nodeName = "".intern();
 
-	
 	/** The node id. */
 	private String nodeId;
 
-	
 	/** The address. */
 	private TransportAddress address;
 
-	
 	/** The attributes. */
 	private ImmutableMap<String, String> attributes;
 
-	
 	/** The version. */
 	private Version version = new RestartSearchCoreVersion();
 
-	
 	/**
 	 * Instantiates a new discovery node.
 	 */
 	private DiscoveryNode() {
 	}
 
-	
 	/**
 	 * Instantiates a new discovery node.
 	 *
@@ -128,7 +115,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		this("", nodeId, address, ImmutableMap.<String, String> of());
 	}
 
-	
 	/**
 	 * Instantiates a new discovery node.
 	 *
@@ -152,7 +138,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		this.address = address;
 	}
 
-	
 	/**
 	 * Should connect to.
 	 *
@@ -166,7 +151,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return true;
 	}
 
-	
 	/**
 	 * Address.
 	 *
@@ -176,7 +160,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return address;
 	}
 
-	
 	/**
 	 * Gets the address.
 	 *
@@ -186,7 +169,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return address();
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -196,7 +178,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return nodeId;
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -206,7 +187,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return id();
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -216,7 +196,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return this.nodeName;
 	}
 
-	
 	/**
 	 * Gets the name.
 	 *
@@ -226,7 +205,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return name();
 	}
 
-	
 	/**
 	 * Attributes.
 	 *
@@ -236,7 +214,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return this.attributes;
 	}
 
-	
 	/**
 	 * Gets the attributes.
 	 *
@@ -246,7 +223,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return attributes();
 	}
 
-	
 	/**
 	 * Data node.
 	 *
@@ -260,7 +236,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return data.equals("true");
 	}
 
-	
 	/**
 	 * Checks if is data node.
 	 *
@@ -270,7 +245,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return dataNode();
 	}
 
-	
 	/**
 	 * Client node.
 	 *
@@ -281,7 +255,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return client != null && client.equals("true");
 	}
 
-	
 	/**
 	 * Checks if is client node.
 	 *
@@ -291,7 +264,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return clientNode();
 	}
 
-	
 	/**
 	 * Master node.
 	 *
@@ -305,7 +277,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return master.equals("true");
 	}
 
-	
 	/**
 	 * Checks if is master node.
 	 *
@@ -315,7 +286,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return masterNode();
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -325,7 +295,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return this.version;
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -335,7 +304,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return this.version;
 	}
 
-	
 	/**
 	 * Read node.
 	 *
@@ -349,9 +317,8 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return node;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -366,9 +333,8 @@ public class DiscoveryNode implements Streamable, Serializable {
 		attributes = builder.build();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -382,7 +348,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -395,7 +360,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return this.nodeId.equals(other.nodeId);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -404,7 +368,6 @@ public class DiscoveryNode implements Streamable, Serializable {
 		return nodeId.hashCode();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

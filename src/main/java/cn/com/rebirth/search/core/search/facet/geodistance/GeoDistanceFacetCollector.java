@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceFacetCollector.java 2012-3-29 15:01:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceFacetCollector.java 2012-7-6 14:29:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.geodistance;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class GeoDistanceFacetCollector.
  *
@@ -29,47 +27,36 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class GeoDistanceFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index field name. */
 	protected final String indexFieldName;
 
-	
 	/** The lat. */
 	protected final double lat;
 
-	
 	/** The lon. */
 	protected final double lon;
 
-	
 	/** The unit. */
 	protected final DistanceUnit unit;
 
-	
 	/** The geo distance. */
 	protected final GeoDistance geoDistance;
 
-	
 	/** The fixed source distance. */
 	protected final GeoDistance.FixedSourceDistance fixedSourceDistance;
 
-	
 	/** The field data cache. */
 	protected final FieldDataCache fieldDataCache;
 
-	
 	/** The field data. */
 	protected GeoPointFieldData fieldData;
 
-	
 	/** The entries. */
 	protected final GeoDistanceFacet.Entry[] entries;
 
-	
 	/** The aggregator. */
 	protected GeoPointFieldData.ValueInDocProc aggregator;
 
-	
 	/**
 	 * Instantiates a new geo distance facet collector.
 	 *
@@ -102,7 +89,6 @@ public class GeoDistanceFacetCollector extends AbstractFacetCollector {
 			throw new FacetPhaseExecutionException(facetName, "field [" + fieldName + "] is not a geo_point field");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -111,18 +97,16 @@ public class GeoDistanceFacetCollector extends AbstractFacetCollector {
 		this.aggregator = new Aggregator(fixedSourceDistance, entries);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		fieldData = (GeoPointFieldData) fieldDataCache.cache(GeoPointFieldDataType.TYPE, reader, indexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -132,16 +116,14 @@ public class GeoDistanceFacetCollector extends AbstractFacetCollector {
 		fieldData.forEachValueInDoc(doc, aggregator);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalGeoDistanceFacet(facetName, entries);
 	}
 
-	
 	/**
 	 * The Class Aggregator.
 	 *
@@ -149,15 +131,12 @@ public class GeoDistanceFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class Aggregator implements GeoPointFieldData.ValueInDocProc {
 
-		
 		/** The fixed source distance. */
 		private final GeoDistance.FixedSourceDistance fixedSourceDistance;
 
-		
 		/** The entries. */
 		private final GeoDistanceFacet.Entry[] entries;
 
-		
 		/**
 		 * Instantiates a new aggregator.
 		 *
@@ -169,9 +148,8 @@ public class GeoDistanceFacetCollector extends AbstractFacetCollector {
 			this.entries = entries;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc#onValue(int, double, double)
+		 * @see cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData.ValueInDocProc#onValue(int, double, double)
 		 */
 		@Override
 		public void onValue(int docId, double lat, double lon) {

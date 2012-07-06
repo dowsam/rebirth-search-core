@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UpdateRequestBuilder.java 2012-3-29 15:02:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UpdateRequestBuilder.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.update;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.action.support.replication.ReplicationType;
 import cn.com.rebirth.search.core.client.Client;
 
-
 /**
  * The Class UpdateRequestBuilder.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, UpdateResponse> {
 
-	
 	/**
 	 * Instantiates a new update request builder.
 	 *
@@ -33,7 +30,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		super(client, new UpdateRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new update request builder.
 	 *
@@ -46,7 +42,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		super(client, new UpdateRequest(index, type, id));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -58,7 +53,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the type.
 	 *
@@ -70,7 +64,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the id.
 	 *
@@ -82,7 +75,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the routing.
 	 *
@@ -94,7 +86,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the parent.
 	 *
@@ -106,7 +97,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the script.
 	 *
@@ -118,7 +108,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the script lang.
 	 *
@@ -130,7 +119,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the script params.
 	 *
@@ -142,7 +130,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Adds the script param.
 	 *
@@ -155,7 +142,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the retry on conflict.
 	 *
@@ -167,7 +153,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -179,7 +164,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -191,7 +175,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -203,7 +186,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the replication type.
 	 *
@@ -215,7 +197,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the consistency level.
 	 *
@@ -227,7 +208,6 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/**
 	 * Sets the percolate.
 	 *
@@ -239,9 +219,8 @@ public class UpdateRequestBuilder extends BaseRequestBuilder<UpdateRequest, Upda
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<UpdateResponse> listener) {

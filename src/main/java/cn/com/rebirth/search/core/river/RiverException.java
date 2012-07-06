@@ -1,30 +1,25 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverException.java 2012-3-29 15:01:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverException.java 2012-7-6 14:29:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class RiverException.
  *
  * @author l.xue.nong
  */
-public class RiverException extends RestartException {
+public class RiverException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6020210198377018052L;
-	
-	
+
 	/** The river. */
 	private final RiverName river;
 
-	
 	/**
 	 * Instantiates a new river exception.
 	 *
@@ -35,7 +30,6 @@ public class RiverException extends RestartException {
 		this(river, msg, null);
 	}
 
-	
 	/**
 	 * Instantiates a new river exception.
 	 *
@@ -47,7 +41,6 @@ public class RiverException extends RestartException {
 		this(river, true, msg, cause);
 	}
 
-	
 	/**
 	 * Instantiates a new river exception.
 	 *
@@ -61,7 +54,6 @@ public class RiverException extends RestartException {
 		this.river = river;
 	}
 
-	
 	/**
 	 * River name.
 	 *

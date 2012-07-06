@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Analysis.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Analysis.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -48,7 +47,7 @@ import org.apache.lucene.util.Version;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.core.env.Environment;
 
@@ -57,7 +56,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class Analysis.
  *
@@ -65,7 +63,6 @@ import com.google.common.collect.Iterators;
  */
 public class Analysis {
 
-	
 	/**
 	 * Checks if is no stopwords.
 	 *
@@ -77,7 +74,6 @@ public class Analysis {
 		return value != null && "_none_".equals(value);
 	}
 
-	
 	/**
 	 * Parses the stem exclusion.
 	 *
@@ -102,7 +98,6 @@ public class Analysis {
 		}
 	}
 
-	
 	/** The Constant namedStopWords. */
 	public static final ImmutableMap<String, Set<?>> namedStopWords = MapBuilder.<String, Set<?>> newMapBuilder()
 			.put("_arabic_", ArabicAnalyzer.getDefaultStopSet())
@@ -129,7 +124,6 @@ public class Analysis {
 			.put("_swedish_", SwedishAnalyzer.getDefaultStopSet())
 			.put("_turkish_", TurkishAnalyzer.getDefaultStopSet()).immutableMap();
 
-	
 	/**
 	 * Parses the articles.
 	 *
@@ -160,7 +154,6 @@ public class Analysis {
 		return null;
 	}
 
-	
 	/**
 	 * Parses the stop words.
 	 *
@@ -210,7 +203,6 @@ public class Analysis {
 		return defaultStopWords;
 	}
 
-	
 	/**
 	 * Gets the word set.
 	 *
@@ -228,7 +220,6 @@ public class Analysis {
 		return new CharArraySet(version, wordList, settings.getAsBoolean(settingsPrefix + "_case", false));
 	}
 
-	
 	/**
 	 * Gets the word list.
 	 *
@@ -255,11 +246,10 @@ public class Analysis {
 			return loadWordList(new InputStreamReader(wordListFile.openStream(), Charsets.UTF_8), "#");
 		} catch (IOException ioe) {
 			String message = String.format("IOException while reading %s_path: %s", settingPrefix, ioe.getMessage());
-			throw new RestartIllegalArgumentException(message);
+			throw new RebirthIllegalArgumentException(message);
 		}
 	}
 
-	
 	/**
 	 * Load word list.
 	 *
@@ -293,7 +283,6 @@ public class Analysis {
 		return result;
 	}
 
-	
 	/**
 	 * Gets the reader from file.
 	 *
@@ -316,7 +305,7 @@ public class Analysis {
 			reader = new InputStreamReader(fileUrl.openStream(), Charsets.UTF_8);
 		} catch (IOException ioe) {
 			String message = String.format("IOException while reading %s_path: %s", settingPrefix, ioe.getMessage());
-			throw new RestartIllegalArgumentException(message);
+			throw new RebirthIllegalArgumentException(message);
 		}
 
 		return reader;

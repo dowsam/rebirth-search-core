@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeleteResponse.java 2012-3-29 15:02:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeleteResponse.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.action.ActionResponse;
 
-
 /**
  * The Class DeleteResponse.
  *
@@ -21,27 +19,21 @@ import cn.com.rebirth.search.core.action.ActionResponse;
  */
 public class DeleteResponse implements ActionResponse, Streamable {
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The version. */
 	private long version;
 
-	
 	/** The not found. */
 	private boolean notFound;
 
-	
 	/**
 	 * Instantiates a new delete response.
 	 */
@@ -49,7 +41,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new delete response.
 	 *
@@ -67,7 +58,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		this.notFound = notFound;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -77,7 +67,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return this.index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -87,7 +76,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -97,7 +85,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return this.type;
 	}
 
-	
 	/**
 	 * Gets the type.
 	 *
@@ -107,7 +94,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return type;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -117,7 +103,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return this.id;
 	}
 
-	
 	/**
 	 * Gets the id.
 	 *
@@ -127,7 +112,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return id;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -137,7 +121,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return this.version;
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -147,7 +130,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return this.version;
 	}
 
-	
 	/**
 	 * Not found.
 	 *
@@ -157,7 +139,6 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return notFound;
 	}
 
-	
 	/**
 	 * Checks if is not found.
 	 *
@@ -167,9 +148,8 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		return notFound;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -180,9 +160,8 @@ public class DeleteResponse implements ActionResponse, Streamable {
 		notFound = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

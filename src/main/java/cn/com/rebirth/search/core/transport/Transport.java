@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Transport.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Transport.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.transport;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.transport.BoundTransportAddress;
 import cn.com.rebirth.search.commons.transport.TransportAddress;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 
-
 /**
  * The Interface Transport.
  *
@@ -22,7 +20,6 @@ import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
  */
 public interface Transport extends LifecycleComponent<Transport> {
 
-	
 	/**
 	 * Transport service adapter.
 	 *
@@ -30,7 +27,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	void transportServiceAdapter(TransportServiceAdapter service);
 
-	
 	/**
 	 * Bound address.
 	 *
@@ -38,7 +34,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	BoundTransportAddress boundAddress();
 
-	
 	/**
 	 * Addresses from string.
 	 *
@@ -48,7 +43,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	TransportAddress[] addressesFromString(String address) throws Exception;
 
-	
 	/**
 	 * Address supported.
 	 *
@@ -57,7 +51,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	boolean addressSupported(Class<? extends TransportAddress> address);
 
-	
 	/**
 	 * Node connected.
 	 *
@@ -66,7 +59,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	boolean nodeConnected(DiscoveryNode node);
 
-	
 	/**
 	 * Connect to node.
 	 *
@@ -75,7 +67,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	void connectToNode(DiscoveryNode node) throws ConnectTransportException;
 
-	
 	/**
 	 * Connect to node light.
 	 *
@@ -84,7 +75,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	void connectToNodeLight(DiscoveryNode node) throws ConnectTransportException;
 
-	
 	/**
 	 * Disconnect from node.
 	 *
@@ -92,7 +82,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	 */
 	void disconnectFromNode(DiscoveryNode node);
 
-	
 	/**
 	 * Send request.
 	 *
@@ -108,7 +97,6 @@ public interface Transport extends LifecycleComponent<Transport> {
 	<T extends Streamable> void sendRequest(DiscoveryNode node, long requestId, String action, Streamable message,
 			TransportRequestOptions options) throws IOException, TransportException;
 
-	
 	/**
 	 * Server open.
 	 *

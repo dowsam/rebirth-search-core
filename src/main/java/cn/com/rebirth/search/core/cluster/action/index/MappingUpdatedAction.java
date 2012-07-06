@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MappingUpdatedAction.java 2012-3-29 15:01:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MappingUpdatedAction.java 2012-7-6 14:28:53 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.cluster.action.index;
@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 import cn.com.rebirth.commons.compress.CompressedString;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -54,7 +54,7 @@ public class MappingUpdatedAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
@@ -62,7 +62,7 @@ public class MappingUpdatedAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
@@ -70,7 +70,7 @@ public class MappingUpdatedAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected MappingUpdatedRequest newRequest() {
@@ -78,7 +78,7 @@ public class MappingUpdatedAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected MappingUpdatedResponse newResponse() {
@@ -86,11 +86,11 @@ public class MappingUpdatedAction
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected MappingUpdatedResponse masterOperation(MappingUpdatedRequest request, ClusterState state)
-			throws RestartException {
+			throws RebirthException {
 		final CountDownLatch latch = new CountDownLatch(1);
 		final AtomicReference<Throwable> failure = new AtomicReference<Throwable>();
 		try {
@@ -111,10 +111,10 @@ public class MappingUpdatedAction
 			failure.set(e);
 		}
 		if (failure.get() != null) {
-			if (failure.get() instanceof RestartException) {
-				throw (RestartException) failure.get();
+			if (failure.get() instanceof RebirthException) {
+				throw (RebirthException) failure.get();
 			} else {
-				throw new RestartException("failed to update mapping", failure.get());
+				throw new RebirthException("failed to update mapping", failure.get());
 			}
 		}
 		return new MappingUpdatedResponse();
@@ -128,14 +128,14 @@ public class MappingUpdatedAction
 	public static class MappingUpdatedResponse implements ActionResponse {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -205,7 +205,7 @@ public class MappingUpdatedAction
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+		 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 		 */
 		@Override
 		public ActionRequestValidationException validate() {
@@ -213,7 +213,7 @@ public class MappingUpdatedAction
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -224,7 +224,7 @@ public class MappingUpdatedAction
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

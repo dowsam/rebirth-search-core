@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexSettingsService.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexSettingsService.java 2012-7-6 14:29:26 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.settings;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.index.AbstractIndexComponent;
 import cn.com.rebirth.search.core.index.Index;
 
-
 /**
  * The Class IndexSettingsService.
  *
@@ -22,15 +20,12 @@ import cn.com.rebirth.search.core.index.Index;
  */
 public class IndexSettingsService extends AbstractIndexComponent {
 
-	
 	/** The settings. */
 	private volatile Settings settings;
 
-	
 	/** The listeners. */
 	private final CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/**
 	 * Instantiates a new index settings service.
 	 *
@@ -43,16 +38,15 @@ public class IndexSettingsService extends AbstractIndexComponent {
 		this.settings = settings;
 	}
 
-	
 	/**
 	 * Refresh settings.
 	 *
 	 * @param settings the settings
 	 */
 	public synchronized void refreshSettings(Settings settings) {
-		
+
 		if (this.settings.getByPrefix("index.").getAsMap().equals(settings.getByPrefix("index.").getAsMap())) {
-			
+
 			return;
 		}
 		this.settings = ImmutableSettings.settingsBuilder().put(this.settings).put(settings).build();
@@ -65,7 +59,6 @@ public class IndexSettingsService extends AbstractIndexComponent {
 		}
 	}
 
-	
 	/**
 	 * Gets the settings.
 	 *
@@ -75,7 +68,6 @@ public class IndexSettingsService extends AbstractIndexComponent {
 		return this.settings;
 	}
 
-	
 	/**
 	 * Adds the listener.
 	 *
@@ -85,7 +77,6 @@ public class IndexSettingsService extends AbstractIndexComponent {
 		this.listeners.add(listener);
 	}
 
-	
 	/**
 	 * Removes the listener.
 	 *
@@ -95,7 +86,6 @@ public class IndexSettingsService extends AbstractIndexComponent {
 		this.listeners.remove(listener);
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -103,7 +93,6 @@ public class IndexSettingsService extends AbstractIndexComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On refresh settings.
 		 *

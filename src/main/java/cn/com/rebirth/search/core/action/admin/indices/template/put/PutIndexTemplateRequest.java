@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PutIndexTemplateRequest.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PutIndexTemplateRequest.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.template.put;
 
@@ -13,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class PutIndexTemplateRequest.
  *
@@ -35,46 +33,36 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 
-	
 	/** The name. */
 	private String name;
 
-	
 	/** The cause. */
 	private String cause = "";
 
-	
 	/** The template. */
 	private String template;
 
-	
 	/** The order. */
 	private int order;
 
-	
 	/** The create. */
 	private boolean create;
 
-	
 	/** The settings. */
 	private Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-	
 	/** The mappings. */
 	private Map<String, String> mappings = newHashMap();
 
-	
 	/** The timeout. */
 	private TimeValue timeout = new TimeValue(10, TimeUnit.SECONDS);
 
-	
 	/**
 	 * Instantiates a new put index template request.
 	 */
 	PutIndexTemplateRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new put index template request.
 	 *
@@ -84,9 +72,8 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		this.name = name;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -100,7 +87,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -112,7 +98,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -122,7 +107,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this.name;
 	}
 
-	
 	/**
 	 * Template.
 	 *
@@ -134,7 +118,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Template.
 	 *
@@ -144,7 +127,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this.template;
 	}
 
-	
 	/**
 	 * Order.
 	 *
@@ -156,7 +138,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Order.
 	 *
@@ -166,7 +147,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this.order;
 	}
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -178,7 +158,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -188,7 +167,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return create;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -200,7 +178,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -212,7 +189,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -224,7 +200,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -242,7 +217,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -252,7 +226,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this.settings;
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -265,7 +238,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Cause.
 	 *
@@ -277,7 +249,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Cause.
 	 *
@@ -287,7 +258,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this.cause;
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -299,12 +269,11 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		try {
 			mappings.put(type, source.string());
 		} catch (IOException e) {
-			throw new RestartIllegalArgumentException("Failed to build json for mapping request", e);
+			throw new RebirthIllegalArgumentException("Failed to build json for mapping request", e);
 		}
 		return this;
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -313,7 +282,7 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 	 * @return the put index template request
 	 */
 	public PutIndexTemplateRequest mapping(String type, Map<String, Object> source) {
-		
+
 		if (source.size() != 1 || !source.containsKey(type)) {
 			source = MapBuilder.<String, Object> newMapBuilder().put(type, source).map();
 		}
@@ -326,7 +295,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Mappings.
 	 *
@@ -336,7 +304,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this.mappings;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -346,7 +313,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -358,7 +324,6 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -369,9 +334,8 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -389,9 +353,8 @@ public class PutIndexTemplateRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

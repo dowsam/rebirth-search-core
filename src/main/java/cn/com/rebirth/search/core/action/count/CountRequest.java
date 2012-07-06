@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CountRequest.java 2012-3-29 15:00:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CountRequest.java 2012-7-6 14:28:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.count;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThr
 import cn.com.rebirth.search.core.client.Requests;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 
-
 /**
  * The Class CountRequest.
  *
@@ -38,56 +36,44 @@ import cn.com.rebirth.search.core.index.query.QueryBuilder;
  */
 public class CountRequest extends BroadcastOperationRequest {
 
-	
 	/** The Constant contentType. */
 	private static final XContentType contentType = Requests.CONTENT_TYPE;
 
-	
 	/** The Constant DEFAULT_MIN_SCORE. */
 	public static final float DEFAULT_MIN_SCORE = -1f;
 
-	
 	/** The min score. */
 	private float minScore = DEFAULT_MIN_SCORE;
 
-	
 	/** The query hint. */
 	@Nullable
 	protected String queryHint;
 
-	
 	/** The routing. */
 	@Nullable
 	protected String routing;
 
-	
 	/** The query source. */
 	private byte[] querySource;
 
-	
 	/** The query source offset. */
 	private int querySourceOffset;
 
-	
 	/** The query source length. */
 	private int querySourceLength;
 
-	
 	/** The query source unsafe. */
 	private boolean querySourceUnsafe;
 
-	
 	/** The types. */
 	private String[] types = Strings.EMPTY_ARRAY;
 
-	
 	/**
 	 * Instantiates a new count request.
 	 */
 	CountRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new count request.
 	 *
@@ -98,9 +84,8 @@ public class CountRequest extends BroadcastOperationRequest {
 		this.queryHint = null;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -108,7 +93,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Query hint.
 	 *
@@ -118,9 +102,8 @@ public class CountRequest extends BroadcastOperationRequest {
 		return queryHint;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationThreading)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#operationThreading(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationThreading)
 	 */
 	@Override
 	public CountRequest operationThreading(BroadcastOperationThreading operationThreading) {
@@ -128,9 +111,8 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#beforeStart()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#beforeStart()
 	 */
 	@Override
 	protected void beforeStart() {
@@ -141,9 +123,8 @@ public class CountRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public CountRequest listenerThreaded(boolean threadedListener) {
@@ -151,16 +132,14 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#indices(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#indices(java.lang.String[])
 	 */
 	public CountRequest indices(String... indices) {
 		this.indices = indices;
 		return this;
 	}
 
-	
 	/**
 	 * Query hint.
 	 *
@@ -172,7 +151,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Min score.
 	 *
@@ -182,7 +160,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return minScore;
 	}
 
-	
 	/**
 	 * Min score.
 	 *
@@ -194,7 +171,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query source.
 	 *
@@ -204,7 +180,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return querySource;
 	}
 
-	
 	/**
 	 * Query source offset.
 	 *
@@ -214,7 +189,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return querySourceOffset;
 	}
 
-	
 	/**
 	 * Query source length.
 	 *
@@ -224,7 +198,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return querySourceLength;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -241,7 +214,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -259,7 +231,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -279,7 +250,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -296,7 +266,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -308,7 +277,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return query(querySource, 0, querySource.length, false);
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -327,7 +295,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -337,7 +304,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this.types;
 	}
 
-	
 	/**
 	 * Types.
 	 *
@@ -349,7 +315,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -359,7 +324,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this.routing;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -371,7 +335,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -383,9 +346,8 @@ public class CountRequest extends BroadcastOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -414,9 +376,8 @@ public class CountRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -444,7 +405,6 @@ public class CountRequest extends BroadcastOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

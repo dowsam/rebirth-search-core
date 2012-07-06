@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexService.java 2012-3-29 15:02:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexService.java 2012-7-6 14:30:14 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.service;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.commons.inject.Injector;
 import cn.com.rebirth.search.core.index.IndexComponent;
 import cn.com.rebirth.search.core.index.IndexShardMissingException;
@@ -112,27 +112,27 @@ public interface IndexService extends IndexComponent, Iterable<IndexShard> {
 	 *
 	 * @param sShardId the s shard id
 	 * @return the index shard
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	IndexShard createShard(int sShardId) throws RestartException;
+	IndexShard createShard(int sShardId) throws RebirthException;
 
 	/**
 	 * Clean shard.
 	 *
 	 * @param shardId the shard id
 	 * @param reason the reason
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void cleanShard(int shardId, String reason) throws RestartException;
+	void cleanShard(int shardId, String reason) throws RebirthException;
 
 	/**
 	 * Removes the shard.
 	 *
 	 * @param shardId the shard id
 	 * @param reason the reason
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	void removeShard(int shardId, String reason) throws RestartException;
+	void removeShard(int shardId, String reason) throws RebirthException;
 
 	/**
 	 * Number of shards.

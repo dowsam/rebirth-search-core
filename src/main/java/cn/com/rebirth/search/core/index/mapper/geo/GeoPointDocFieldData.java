@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoPointDocFieldData.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoPointDocFieldData.java 2012-7-6 14:28:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.geo;
 
 import cn.com.rebirth.commons.unit.DistanceUnit;
 import cn.com.rebirth.search.core.index.field.data.DocFieldData;
-
 
 /**
  * The Class GeoPointDocFieldData.
@@ -17,7 +15,6 @@ import cn.com.rebirth.search.core.index.field.data.DocFieldData;
  */
 public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 
-	
 	/**
 	 * Instantiates a new geo point doc field data.
 	 *
@@ -27,7 +24,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		super(fieldData);
 	}
 
-	
 	/**
 	 * Gets the value.
 	 *
@@ -37,7 +33,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.value(docId);
 	}
 
-	
 	/**
 	 * Gets the values.
 	 *
@@ -47,7 +42,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.values(docId);
 	}
 
-	
 	/**
 	 * Factor distance.
 	 *
@@ -59,7 +53,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.factorDistance(docId, DistanceUnit.MILES, lat, lon);
 	}
 
-	
 	/**
 	 * Factor distance02.
 	 *
@@ -71,7 +64,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.factorDistance(docId, DistanceUnit.MILES, lat, lon) + 1;
 	}
 
-	
 	/**
 	 * Factor distance13.
 	 *
@@ -83,7 +75,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.factorDistance(docId, DistanceUnit.MILES, lat, lon) + 2;
 	}
 
-	
 	/**
 	 * Arc distance.
 	 *
@@ -95,7 +86,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.arcDistance(docId, DistanceUnit.MILES, lat, lon);
 	}
 
-	
 	/**
 	 * Arc distance in km.
 	 *
@@ -107,7 +97,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.arcDistance(docId, DistanceUnit.KILOMETERS, lat, lon);
 	}
 
-	
 	/**
 	 * Distance.
 	 *
@@ -119,7 +108,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.distance(docId, DistanceUnit.MILES, lat, lon);
 	}
 
-	
 	/**
 	 * Distance in km.
 	 *
@@ -131,7 +119,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.distance(docId, DistanceUnit.KILOMETERS, lat, lon);
 	}
 
-	
 	/**
 	 * Geohash distance.
 	 *
@@ -142,7 +129,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.distanceGeohash(docId, DistanceUnit.MILES, geohash);
 	}
 
-	
 	/**
 	 * Geohash distance in km.
 	 *
@@ -153,7 +139,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.distanceGeohash(docId, DistanceUnit.KILOMETERS, geohash);
 	}
 
-	
 	/**
 	 * Gets the lat.
 	 *
@@ -163,7 +148,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.latValue(docId);
 	}
 
-	
 	/**
 	 * Gets the lon.
 	 *
@@ -173,7 +157,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.lonValue(docId);
 	}
 
-	
 	/**
 	 * Gets the lats.
 	 *
@@ -183,7 +166,6 @@ public class GeoPointDocFieldData extends DocFieldData<GeoPointFieldData> {
 		return fieldData.latValues(docId);
 	}
 
-	
 	/**
 	 * Gets the lons.
 	 *

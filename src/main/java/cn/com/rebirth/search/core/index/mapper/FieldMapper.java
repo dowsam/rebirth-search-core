@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldMapper.java 2012-3-29 15:02:27 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldMapper.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
 
-
 /**
  * The Interface FieldMapper.
  *
@@ -27,7 +25,6 @@ import cn.com.rebirth.search.core.index.query.QueryParseContext;
  */
 public interface FieldMapper<T> {
 
-	
 	/**
 	 * The Class Names.
 	 *
@@ -35,31 +32,24 @@ public interface FieldMapper<T> {
 	 */
 	public static class Names {
 
-		
 		/** The name. */
 		private final String name;
 
-		
 		/** The index name. */
 		private final String indexName;
 
-		
 		/** The index name clean. */
 		private final String indexNameClean;
 
-		
 		/** The full name. */
 		private final String fullName;
 
-		
 		/** The source path. */
 		private final String sourcePath;
 
-		
 		/** The index name term factory. */
 		private final Term indexNameTermFactory;
 
-		
 		/**
 		 * Instantiates a new names.
 		 *
@@ -69,7 +59,6 @@ public interface FieldMapper<T> {
 			this(name, name, name, name);
 		}
 
-		
 		/**
 		 * Instantiates a new names.
 		 *
@@ -82,7 +71,6 @@ public interface FieldMapper<T> {
 			this(name, indexName, indexNameClean, fullName, fullName);
 		}
 
-		
 		/**
 		 * Instantiates a new names.
 		 *
@@ -101,7 +89,6 @@ public interface FieldMapper<T> {
 			this.indexNameTermFactory = new Term(indexName, "");
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -111,7 +98,6 @@ public interface FieldMapper<T> {
 			return name;
 		}
 
-		
 		/**
 		 * Index name.
 		 *
@@ -121,7 +107,6 @@ public interface FieldMapper<T> {
 			return indexName;
 		}
 
-		
 		/**
 		 * Index name clean.
 		 *
@@ -131,7 +116,6 @@ public interface FieldMapper<T> {
 			return indexNameClean;
 		}
 
-		
 		/**
 		 * Full name.
 		 *
@@ -141,7 +125,6 @@ public interface FieldMapper<T> {
 			return fullName;
 		}
 
-		
 		/**
 		 * Source path.
 		 *
@@ -151,7 +134,6 @@ public interface FieldMapper<T> {
 			return sourcePath;
 		}
 
-		
 		/**
 		 * Index name term.
 		 *
@@ -161,7 +143,6 @@ public interface FieldMapper<T> {
 			return this.indexNameTermFactory;
 		}
 
-		
 		/**
 		 * Creates the index name term.
 		 *
@@ -173,7 +154,6 @@ public interface FieldMapper<T> {
 		}
 	}
 
-	
 	/**
 	 * Names.
 	 *
@@ -181,7 +161,6 @@ public interface FieldMapper<T> {
 	 */
 	Names names();
 
-	
 	/**
 	 * Index.
 	 *
@@ -189,7 +168,6 @@ public interface FieldMapper<T> {
 	 */
 	Field.Index index();
 
-	
 	/**
 	 * Indexed.
 	 *
@@ -197,7 +175,6 @@ public interface FieldMapper<T> {
 	 */
 	boolean indexed();
 
-	
 	/**
 	 * Analyzed.
 	 *
@@ -205,7 +182,6 @@ public interface FieldMapper<T> {
 	 */
 	boolean analyzed();
 
-	
 	/**
 	 * Store.
 	 *
@@ -213,7 +189,6 @@ public interface FieldMapper<T> {
 	 */
 	Field.Store store();
 
-	
 	/**
 	 * Stored.
 	 *
@@ -221,7 +196,6 @@ public interface FieldMapper<T> {
 	 */
 	boolean stored();
 
-	
 	/**
 	 * Term vector.
 	 *
@@ -229,7 +203,6 @@ public interface FieldMapper<T> {
 	 */
 	Field.TermVector termVector();
 
-	
 	/**
 	 * Boost.
 	 *
@@ -237,7 +210,6 @@ public interface FieldMapper<T> {
 	 */
 	float boost();
 
-	
 	/**
 	 * Omit norms.
 	 *
@@ -245,7 +217,6 @@ public interface FieldMapper<T> {
 	 */
 	boolean omitNorms();
 
-	
 	/**
 	 * Omit term freq and positions.
 	 *
@@ -253,7 +224,6 @@ public interface FieldMapper<T> {
 	 */
 	boolean omitTermFreqAndPositions();
 
-	
 	/**
 	 * Index analyzer.
 	 *
@@ -261,7 +231,6 @@ public interface FieldMapper<T> {
 	 */
 	Analyzer indexAnalyzer();
 
-	
 	/**
 	 * Search analyzer.
 	 *
@@ -269,7 +238,6 @@ public interface FieldMapper<T> {
 	 */
 	Analyzer searchAnalyzer();
 
-	
 	/**
 	 * Value for search.
 	 *
@@ -278,7 +246,6 @@ public interface FieldMapper<T> {
 	 */
 	Object valueForSearch(Fieldable field);
 
-	
 	/**
 	 * Value.
 	 *
@@ -287,7 +254,6 @@ public interface FieldMapper<T> {
 	 */
 	T value(Fieldable field);
 
-	
 	/**
 	 * Value from string.
 	 *
@@ -296,7 +262,6 @@ public interface FieldMapper<T> {
 	 */
 	T valueFromString(String value);
 
-	
 	/**
 	 * Value as string.
 	 *
@@ -305,7 +270,6 @@ public interface FieldMapper<T> {
 	 */
 	String valueAsString(Fieldable field);
 
-	
 	/**
 	 * Indexed value.
 	 *
@@ -314,7 +278,6 @@ public interface FieldMapper<T> {
 	 */
 	String indexedValue(String value);
 
-	
 	/**
 	 * Use field query with query string.
 	 *
@@ -322,7 +285,6 @@ public interface FieldMapper<T> {
 	 */
 	boolean useFieldQueryWithQueryString();
 
-	
 	/**
 	 * Field query.
 	 *
@@ -332,7 +294,6 @@ public interface FieldMapper<T> {
 	 */
 	Query fieldQuery(String value, @Nullable QueryParseContext context);
 
-	
 	/**
 	 * Fuzzy query.
 	 *
@@ -344,7 +305,6 @@ public interface FieldMapper<T> {
 	 */
 	Query fuzzyQuery(String value, String minSim, int prefixLength, int maxExpansions);
 
-	
 	/**
 	 * Fuzzy query.
 	 *
@@ -356,7 +316,6 @@ public interface FieldMapper<T> {
 	 */
 	Query fuzzyQuery(String value, double minSim, int prefixLength, int maxExpansions);
 
-	
 	/**
 	 * Prefix query.
 	 *
@@ -367,7 +326,6 @@ public interface FieldMapper<T> {
 	 */
 	Query prefixQuery(String value, @Nullable MultiTermQuery.RewriteMethod method, @Nullable QueryParseContext context);
 
-	
 	/**
 	 * Prefix filter.
 	 *
@@ -377,7 +335,6 @@ public interface FieldMapper<T> {
 	 */
 	Filter prefixFilter(String value, @Nullable QueryParseContext context);
 
-	
 	/**
 	 * Query string term query.
 	 *
@@ -386,7 +343,6 @@ public interface FieldMapper<T> {
 	 */
 	Query queryStringTermQuery(Term term);
 
-	
 	/**
 	 * Field filter.
 	 *
@@ -396,7 +352,6 @@ public interface FieldMapper<T> {
 	 */
 	Filter fieldFilter(String value, @Nullable QueryParseContext context);
 
-	
 	/**
 	 * Range query.
 	 *
@@ -410,7 +365,6 @@ public interface FieldMapper<T> {
 	Query rangeQuery(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
 			@Nullable QueryParseContext context);
 
-	
 	/**
 	 * Range filter.
 	 *
@@ -424,7 +378,6 @@ public interface FieldMapper<T> {
 	Filter rangeFilter(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
 			@Nullable QueryParseContext context);
 
-	
 	/**
 	 * Field data type.
 	 *

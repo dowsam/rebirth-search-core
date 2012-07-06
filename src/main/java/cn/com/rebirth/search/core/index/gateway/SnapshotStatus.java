@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SnapshotStatus.java 2012-3-29 15:00:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SnapshotStatus.java 2012-7-6 14:30:38 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.index.gateway;
-
 
 /**
  * The Class SnapshotStatus.
@@ -14,286 +12,286 @@ package cn.com.rebirth.search.core.index.gateway;
  */
 public class SnapshotStatus {
 
-    /**
-     * The Enum Stage.
-     *
-     * @author l.xue.nong
-     */
-    public static enum Stage {
-        
-        /** The NONE. */
-        NONE,
-        
-        /** The INDEX. */
-        INDEX,
-        
-        /** The TRANSLOG. */
-        TRANSLOG,
-        
-        /** The FINALIZE. */
-        FINALIZE,
-        
-        /** The DONE. */
-        DONE,
-        
-        /** The FAILURE. */
-        FAILURE
-    }
+	/**
+	 * The Enum Stage.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static enum Stage {
 
-    /** The stage. */
-    private Stage stage = Stage.NONE;
+		/** The none. */
+		NONE,
 
-    /** The start time. */
-    private long startTime;
+		/** The index. */
+		INDEX,
 
-    /** The time. */
-    private long time;
+		/** The translog. */
+		TRANSLOG,
 
-    /** The index. */
-    private Index index = new Index();
+		/** The finalize. */
+		FINALIZE,
 
-    /** The translog. */
-    private Translog translog = new Translog();
+		/** The done. */
+		DONE,
 
-    /** The failure. */
-    private Throwable failure;
+		/** The failure. */
+		FAILURE
+	}
 
-    /**
-     * Stage.
-     *
-     * @return the stage
-     */
-    public Stage stage() {
-        return this.stage;
-    }
+	/** The stage. */
+	private Stage stage = Stage.NONE;
 
-    /**
-     * Update stage.
-     *
-     * @param stage the stage
-     * @return the snapshot status
-     */
-    public SnapshotStatus updateStage(Stage stage) {
-        this.stage = stage;
-        return this;
-    }
+	/** The start time. */
+	private long startTime;
 
-    /**
-     * Start time.
-     *
-     * @return the long
-     */
-    public long startTime() {
-        return this.startTime;
-    }
+	/** The time. */
+	private long time;
 
-    /**
-     * Start time.
-     *
-     * @param startTime the start time
-     */
-    public void startTime(long startTime) {
-        this.startTime = startTime;
-    }
+	/** The index. */
+	private Index index = new Index();
 
-    /**
-     * Time.
-     *
-     * @return the long
-     */
-    public long time() {
-        return this.time;
-    }
+	/** The translog. */
+	private Translog translog = new Translog();
 
-    /**
-     * Time.
-     *
-     * @param time the time
-     */
-    public void time(long time) {
-        this.time = time;
-    }
+	/** The failure. */
+	private Throwable failure;
 
-    /**
-     * Failed.
-     *
-     * @param failure the failure
-     */
-    public void failed(Throwable failure) {
-        this.failure = failure;
-    }
+	/**
+	 * Stage.
+	 *
+	 * @return the stage
+	 */
+	public Stage stage() {
+		return this.stage;
+	}
 
-    /**
-     * Index.
-     *
-     * @return the index
-     */
-    public Index index() {
-        return index;
-    }
+	/**
+	 * Update stage.
+	 *
+	 * @param stage the stage
+	 * @return the snapshot status
+	 */
+	public SnapshotStatus updateStage(Stage stage) {
+		this.stage = stage;
+		return this;
+	}
 
-    /**
-     * Translog.
-     *
-     * @return the translog
-     */
-    public Translog translog() {
-        return translog;
-    }
+	/**
+	 * Start time.
+	 *
+	 * @return the long
+	 */
+	public long startTime() {
+		return this.startTime;
+	}
 
-    /**
-     * The Class Index.
-     *
-     * @author l.xue.nong
-     */
-    public static class Index {
-        
-        /** The start time. */
-        private long startTime;
-        
-        /** The time. */
-        private long time;
+	/**
+	 * Start time.
+	 *
+	 * @param startTime the start time
+	 */
+	public void startTime(long startTime) {
+		this.startTime = startTime;
+	}
 
-        /** The number of files. */
-        private int numberOfFiles;
-        
-        /** The total size. */
-        private long totalSize;
+	/**
+	 * Time.
+	 *
+	 * @return the long
+	 */
+	public long time() {
+		return this.time;
+	}
 
-        /**
-         * Start time.
-         *
-         * @return the long
-         */
-        public long startTime() {
-            return this.startTime;
-        }
+	/**
+	 * Time.
+	 *
+	 * @param time the time
+	 */
+	public void time(long time) {
+		this.time = time;
+	}
 
-        /**
-         * Start time.
-         *
-         * @param startTime the start time
-         */
-        public void startTime(long startTime) {
-            this.startTime = startTime;
-        }
+	/**
+	 * Failed.
+	 *
+	 * @param failure the failure
+	 */
+	public void failed(Throwable failure) {
+		this.failure = failure;
+	}
 
-        /**
-         * Time.
-         *
-         * @return the long
-         */
-        public long time() {
-            return this.time;
-        }
+	/**
+	 * Index.
+	 *
+	 * @return the index
+	 */
+	public Index index() {
+		return index;
+	}
 
-        /**
-         * Time.
-         *
-         * @param time the time
-         */
-        public void time(long time) {
-            this.time = time;
-        }
+	/**
+	 * Translog.
+	 *
+	 * @return the translog
+	 */
+	public Translog translog() {
+		return translog;
+	}
 
-        /**
-         * Files.
-         *
-         * @param numberOfFiles the number of files
-         * @param totalSize the total size
-         */
-        public void files(int numberOfFiles, long totalSize) {
-            this.numberOfFiles = numberOfFiles;
-            this.totalSize = totalSize;
-        }
+	/**
+	 * The Class Index.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class Index {
 
-        /**
-         * Number of files.
-         *
-         * @return the int
-         */
-        public int numberOfFiles() {
-            return numberOfFiles;
-        }
+		/** The start time. */
+		private long startTime;
 
-        /**
-         * Total size.
-         *
-         * @return the long
-         */
-        public long totalSize() {
-            return totalSize;
-        }
-    }
+		/** The time. */
+		private long time;
 
-    /**
-     * The Class Translog.
-     *
-     * @author l.xue.nong
-     */
-    public static class Translog {
-        
-        /** The start time. */
-        private long startTime;
-        
-        /** The time. */
-        private long time;
-        
-        /** The expected number of operations. */
-        private int expectedNumberOfOperations;
+		/** The number of files. */
+		private int numberOfFiles;
 
-        /**
-         * Start time.
-         *
-         * @return the long
-         */
-        public long startTime() {
-            return this.startTime;
-        }
+		/** The total size. */
+		private long totalSize;
 
-        /**
-         * Start time.
-         *
-         * @param startTime the start time
-         */
-        public void startTime(long startTime) {
-            this.startTime = startTime;
-        }
+		/**
+		 * Start time.
+		 *
+		 * @return the long
+		 */
+		public long startTime() {
+			return this.startTime;
+		}
 
-        /**
-         * Time.
-         *
-         * @return the long
-         */
-        public long time() {
-            return this.time;
-        }
+		/**
+		 * Start time.
+		 *
+		 * @param startTime the start time
+		 */
+		public void startTime(long startTime) {
+			this.startTime = startTime;
+		}
 
-        /**
-         * Time.
-         *
-         * @param time the time
-         */
-        public void time(long time) {
-            this.time = time;
-        }
+		/**
+		 * Time.
+		 *
+		 * @return the long
+		 */
+		public long time() {
+			return this.time;
+		}
 
-        /**
-         * Expected number of operations.
-         *
-         * @return the int
-         */
-        public int expectedNumberOfOperations() {
-            return expectedNumberOfOperations;
-        }
+		/**
+		 * Time.
+		 *
+		 * @param time the time
+		 */
+		public void time(long time) {
+			this.time = time;
+		}
 
-        /**
-         * Expected number of operations.
-         *
-         * @param expectedNumberOfOperations the expected number of operations
-         */
-        public void expectedNumberOfOperations(int expectedNumberOfOperations) {
-            this.expectedNumberOfOperations = expectedNumberOfOperations;
-        }
-    }
+		/**
+		 * Files.
+		 *
+		 * @param numberOfFiles the number of files
+		 * @param totalSize the total size
+		 */
+		public void files(int numberOfFiles, long totalSize) {
+			this.numberOfFiles = numberOfFiles;
+			this.totalSize = totalSize;
+		}
+
+		/**
+		 * Number of files.
+		 *
+		 * @return the int
+		 */
+		public int numberOfFiles() {
+			return numberOfFiles;
+		}
+
+		/**
+		 * Total size.
+		 *
+		 * @return the long
+		 */
+		public long totalSize() {
+			return totalSize;
+		}
+	}
+
+	/**
+	 * The Class Translog.
+	 *
+	 * @author l.xue.nong
+	 */
+	public static class Translog {
+
+		/** The start time. */
+		private long startTime;
+
+		/** The time. */
+		private long time;
+
+		/** The expected number of operations. */
+		private int expectedNumberOfOperations;
+
+		/**
+		 * Start time.
+		 *
+		 * @return the long
+		 */
+		public long startTime() {
+			return this.startTime;
+		}
+
+		/**
+		 * Start time.
+		 *
+		 * @param startTime the start time
+		 */
+		public void startTime(long startTime) {
+			this.startTime = startTime;
+		}
+
+		/**
+		 * Time.
+		 *
+		 * @return the long
+		 */
+		public long time() {
+			return this.time;
+		}
+
+		/**
+		 * Time.
+		 *
+		 * @param time the time
+		 */
+		public void time(long time) {
+			this.time = time;
+		}
+
+		/**
+		 * Expected number of operations.
+		 *
+		 * @return the int
+		 */
+		public int expectedNumberOfOperations() {
+			return expectedNumberOfOperations;
+		}
+
+		/**
+		 * Expected number of operations.
+		 *
+		 * @param expectedNumberOfOperations the expected number of operations
+		 */
+		public void expectedNumberOfOperations(int expectedNumberOfOperations) {
+			this.expectedNumberOfOperations = expectedNumberOfOperations;
+		}
+	}
 }

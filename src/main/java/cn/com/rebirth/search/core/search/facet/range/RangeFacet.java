@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RangeFacet.java 2012-3-29 15:01:18 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RangeFacet.java 2012-7-6 14:30:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
 import java.util.List;
 
 import cn.com.rebirth.search.core.search.facet.Facet;
-
 
 /**
  * The Interface RangeFacet.
@@ -18,11 +16,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 
-	
 	/** The Constant TYPE. */
 	public static final String TYPE = "range";
 
-	
 	/**
 	 * Entries.
 	 *
@@ -30,7 +26,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 	 */
 	List<Entry> entries();
 
-	
 	/**
 	 * Gets the entries.
 	 *
@@ -38,7 +33,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 	 */
 	List<Entry> getEntries();
 
-	
 	/**
 	 * The Class Entry.
 	 *
@@ -46,54 +40,42 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 	 */
 	public class Entry {
 
-		
 		/** The from. */
 		double from = Double.NEGATIVE_INFINITY;
 
-		
 		/** The to. */
 		double to = Double.POSITIVE_INFINITY;
 
-		
 		/** The from as string. */
 		String fromAsString;
 
-		
 		/** The to as string. */
 		String toAsString;
 
-		
 		/** The count. */
 		long count;
 
-		
 		/** The total count. */
 		long totalCount;
 
-		
 		/** The total. */
 		double total;
 
-		
 		/** The min. */
 		double min = Double.POSITIVE_INFINITY;
 
-		
 		/** The max. */
 		double max = Double.NEGATIVE_INFINITY;
 
-		
 		/** The found in doc. */
 		boolean foundInDoc;
 
-		
 		/**
 		 * Instantiates a new entry.
 		 */
 		Entry() {
 		}
 
-		
 		/**
 		 * From.
 		 *
@@ -103,7 +85,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.from;
 		}
 
-		
 		/**
 		 * Gets the from.
 		 *
@@ -113,7 +94,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return from();
 		}
 
-		
 		/**
 		 * From as string.
 		 *
@@ -126,7 +106,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return Double.toString(from);
 		}
 
-		
 		/**
 		 * Gets the from as string.
 		 *
@@ -136,7 +115,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return fromAsString();
 		}
 
-		
 		/**
 		 * To.
 		 *
@@ -146,7 +124,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.to;
 		}
 
-		
 		/**
 		 * Gets the to.
 		 *
@@ -156,7 +133,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return to();
 		}
 
-		
 		/**
 		 * To as string.
 		 *
@@ -169,7 +145,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return Double.toString(to);
 		}
 
-		
 		/**
 		 * Gets the to as string.
 		 *
@@ -179,7 +154,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return toAsString();
 		}
 
-		
 		/**
 		 * Count.
 		 *
@@ -189,7 +163,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.count;
 		}
 
-		
 		/**
 		 * Gets the count.
 		 *
@@ -199,7 +172,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return count();
 		}
 
-		
 		/**
 		 * Total count.
 		 *
@@ -209,7 +181,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.totalCount;
 		}
 
-		
 		/**
 		 * Gets the total count.
 		 *
@@ -219,7 +190,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.totalCount;
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -229,7 +199,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.total;
 		}
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -239,7 +208,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return total();
 		}
 
-		
 		/**
 		 * Mean.
 		 *
@@ -252,7 +220,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return total / totalCount;
 		}
 
-		
 		/**
 		 * Gets the mean.
 		 *
@@ -262,7 +229,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return mean();
 		}
 
-		
 		/**
 		 * Min.
 		 *
@@ -272,7 +238,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.min;
 		}
 
-		
 		/**
 		 * Gets the min.
 		 *
@@ -282,7 +247,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.min;
 		}
 
-		
 		/**
 		 * Max.
 		 *
@@ -292,7 +256,6 @@ public interface RangeFacet extends Facet, Iterable<RangeFacet.Entry> {
 			return this.max;
 		}
 
-		
 		/**
 		 * Gets the max.
 		 *

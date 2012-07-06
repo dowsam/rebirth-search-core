@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryStringQueryBuilder.java 2012-3-29 15:02:39 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryStringQueryBuilder.java 2012-7-6 14:29:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -15,7 +14,6 @@ import java.util.List;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class QueryStringQueryBuilder.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class QueryStringQueryBuilder extends BaseQueryBuilder {
 
-	
 	/**
 	 * The Enum Operator.
 	 *
@@ -31,92 +28,70 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 	 */
 	public static enum Operator {
 
-		
-		/** The OR. */
+		/** The or. */
 		OR,
 
-		
-		/** The AND. */
+		/** The and. */
 		AND
 	}
 
-	
 	/** The query string. */
 	private final String queryString;
 
-	
 	/** The default field. */
 	private String defaultField;
 
-	
 	/** The default operator. */
 	private Operator defaultOperator;
 
-	
 	/** The analyzer. */
 	private String analyzer;
 
-	
 	/** The auto generate phrase queries. */
 	private Boolean autoGeneratePhraseQueries;
 
-	
 	/** The allow leading wildcard. */
 	private Boolean allowLeadingWildcard;
 
-	
 	/** The lowercase expanded terms. */
 	private Boolean lowercaseExpandedTerms;
 
-	
 	/** The enable position increments. */
 	private Boolean enablePositionIncrements;
 
-	
 	/** The analyze wildcard. */
 	private Boolean analyzeWildcard;
 
-	
 	/** The fuzzy min sim. */
 	private float fuzzyMinSim = -1;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The fuzzy prefix length. */
 	private int fuzzyPrefixLength = -1;
 
-	
 	/** The phrase slop. */
 	private int phraseSlop = -1;
 
-	
 	/** The fields. */
 	private List<String> fields;
 
-	
 	/** The fields boosts. */
 	private TObjectFloatHashMap<String> fieldsBoosts;
 
-	
 	/** The use dis max. */
 	private Boolean useDisMax;
 
-	
 	/** The tie breaker. */
 	private float tieBreaker = -1;
 
-	
 	/** The rewrite. */
 	private String rewrite = null;
 
-	
 	/** The minimum should match. */
 	private String minimumShouldMatch;
 
-	
 	/**
 	 * Instantiates a new query string query builder.
 	 *
@@ -126,7 +101,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		this.queryString = queryString;
 	}
 
-	
 	/**
 	 * Default field.
 	 *
@@ -138,7 +112,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -153,7 +126,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -174,7 +146,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Use dis max.
 	 *
@@ -186,7 +157,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Tie breaker.
 	 *
@@ -198,7 +168,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Default operator.
 	 *
@@ -210,7 +179,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -222,7 +190,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Auto generate phrase queries.
 	 *
@@ -234,7 +201,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Allow leading wildcard.
 	 *
@@ -246,7 +212,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Lowercase expanded terms.
 	 *
@@ -258,7 +223,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Enable position increments.
 	 *
@@ -270,7 +234,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fuzzy min sim.
 	 *
@@ -282,7 +245,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fuzzy prefix length.
 	 *
@@ -294,7 +256,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Phrase slop.
 	 *
@@ -306,7 +267,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Analyze wildcard.
 	 *
@@ -318,7 +278,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Rewrite.
 	 *
@@ -330,7 +289,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Minimum should match.
 	 *
@@ -342,7 +300,6 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -354,9 +311,8 @@ public class QueryStringQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

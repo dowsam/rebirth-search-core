@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HistogramScriptFacetBuilder.java 2012-3-29 15:02:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HistogramScriptFacetBuilder.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class HistogramScriptFacetBuilder.
  *
@@ -25,43 +23,33 @@ import com.google.common.collect.Maps;
  */
 public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The key field name. */
 	private String keyFieldName;
 
-	
 	/** The key script. */
 	private String keyScript;
 
-	
 	/** The value script. */
 	private String valueScript;
 
-	
 	/** The params. */
 	private Map<String, Object> params;
 
-	
 	/** The interval. */
 	private long interval = -1;
 
-	
 	/** The comparator type. */
 	private HistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The from. */
 	private Object from;
 
-	
 	/** The to. */
 	private Object to;
 
-	
 	/**
 	 * Instantiates a new histogram script facet builder.
 	 *
@@ -71,7 +59,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -83,7 +70,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Key field.
 	 *
@@ -95,7 +81,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Key script.
 	 *
@@ -107,7 +92,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value script.
 	 *
@@ -119,7 +103,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Interval.
 	 *
@@ -131,7 +114,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -147,7 +129,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Comparator.
 	 *
@@ -159,9 +140,8 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	@Override
 	public HistogramScriptFacetBuilder global(boolean global) {
@@ -169,9 +149,8 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public HistogramScriptFacetBuilder scope(String scope) {
@@ -179,7 +158,6 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Bounds.
 	 *
@@ -193,27 +171,24 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	public HistogramScriptFacetBuilder facetFilter(FilterBuilder filter) {
 		this.facetFilter = filter;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public HistogramScriptFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -243,7 +218,7 @@ public class HistogramScriptFacetBuilder extends AbstractFacetBuilder {
 		if (lang != null) {
 			builder.field("lang", lang);
 		}
-		if (interval > 0) { 
+		if (interval > 0) {
 			builder.field("interval", interval);
 		}
 		if (this.params != null) {

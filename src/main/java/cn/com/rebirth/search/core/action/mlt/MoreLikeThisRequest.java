@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MoreLikeThisRequest.java 2012-3-29 15:00:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MoreLikeThisRequest.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.mlt;
 
@@ -15,7 +14,7 @@ import org.apache.lucene.util.UnicodeUtil;
 import cn.com.rebirth.commons.Bytes;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.Unicode;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.commons.Required;
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.client.Requests;
 import cn.com.rebirth.search.core.search.Scroll;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
 
-
 /**
  * The Class MoreLikeThisRequest.
  *
@@ -40,118 +38,90 @@ import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
  */
 public class MoreLikeThisRequest implements ActionRequest {
 
-	
 	/** The Constant contentType. */
 	private static final XContentType contentType = Requests.CONTENT_TYPE;
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The fields. */
 	private String[] fields;
 
-	
 	/** The percent terms to match. */
 	private float percentTermsToMatch = -1;
 
-	
 	/** The min term freq. */
 	private int minTermFreq = -1;
 
-	
 	/** The max query terms. */
 	private int maxQueryTerms = -1;
 
-	
 	/** The stop words. */
 	private String[] stopWords = null;
 
-	
 	/** The min doc freq. */
 	private int minDocFreq = -1;
 
-	
 	/** The max doc freq. */
 	private int maxDocFreq = -1;
 
-	
 	/** The min word len. */
 	private int minWordLen = -1;
 
-	
 	/** The max word len. */
 	private int maxWordLen = -1;
 
-	
 	/** The boost terms. */
 	private float boostTerms = -1;
 
-	
 	/** The search type. */
 	private SearchType searchType = SearchType.DEFAULT;
 
-	
 	/** The search size. */
 	private int searchSize = 0;
 
-	
 	/** The search from. */
 	private int searchFrom = 0;
 
-	
 	/** The search query hint. */
 	private String searchQueryHint;
 
-	
 	/** The search indices. */
 	private String[] searchIndices;
 
-	
 	/** The search types. */
 	private String[] searchTypes;
 
-	
 	/** The search scroll. */
 	private Scroll searchScroll;
 
-	
 	/** The search source. */
 	private byte[] searchSource;
 
-	
 	/** The search source offset. */
 	private int searchSourceOffset;
 
-	
 	/** The search source length. */
 	private int searchSourceLength;
 
-	
 	/** The search source unsafe. */
 	private boolean searchSourceUnsafe;
 
-	
 	/** The threaded listener. */
 	private boolean threadedListener = false;
 
-	
 	/**
 	 * Instantiates a new more like this request.
 	 */
 	MoreLikeThisRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new more like this request.
 	 *
@@ -161,7 +131,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		this.index = index;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -171,7 +140,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -181,7 +149,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return type;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -191,7 +158,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		this.index = index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -204,7 +170,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -214,7 +179,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return id;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -227,7 +191,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -237,7 +200,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.fields;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -249,7 +211,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Percent terms to match.
 	 *
@@ -261,7 +222,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Percent terms to match.
 	 *
@@ -271,7 +231,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.percentTermsToMatch;
 	}
 
-	
 	/**
 	 * Min term freq.
 	 *
@@ -283,7 +242,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Min term freq.
 	 *
@@ -293,7 +251,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.minTermFreq;
 	}
 
-	
 	/**
 	 * Max query terms.
 	 *
@@ -305,7 +262,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Max query terms.
 	 *
@@ -315,7 +271,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.maxQueryTerms;
 	}
 
-	
 	/**
 	 * Stop words.
 	 *
@@ -327,7 +282,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Stop words.
 	 *
@@ -337,7 +291,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.stopWords;
 	}
 
-	
 	/**
 	 * Min doc freq.
 	 *
@@ -349,7 +302,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Min doc freq.
 	 *
@@ -359,7 +311,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.minDocFreq;
 	}
 
-	
 	/**
 	 * Max doc freq.
 	 *
@@ -371,7 +322,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Max doc freq.
 	 *
@@ -381,7 +331,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.maxDocFreq;
 	}
 
-	
 	/**
 	 * Min word len.
 	 *
@@ -393,7 +342,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Min word len.
 	 *
@@ -403,7 +351,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.minWordLen;
 	}
 
-	
 	/**
 	 * Max word len.
 	 *
@@ -415,7 +362,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Max word len.
 	 *
@@ -425,7 +371,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.maxWordLen;
 	}
 
-	
 	/**
 	 * Boost terms.
 	 *
@@ -437,7 +382,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Boost terms.
 	 *
@@ -447,7 +391,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.boostTerms;
 	}
 
-	
 	/**
 	 * Before local fork.
 	 */
@@ -460,7 +403,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -476,7 +418,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -492,7 +433,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -509,7 +449,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -528,7 +467,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		}
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -539,7 +477,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return searchSource(searchSource, 0, searchSource.length, false);
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -557,7 +494,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search source.
 	 *
@@ -567,7 +503,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchSource;
 	}
 
-	
 	/**
 	 * Search source offset.
 	 *
@@ -577,7 +512,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return searchSourceOffset;
 	}
 
-	
 	/**
 	 * Search source length.
 	 *
@@ -587,7 +521,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return searchSourceLength;
 	}
 
-	
 	/**
 	 * Search source unsafe.
 	 *
@@ -597,7 +530,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return searchSourceUnsafe;
 	}
 
-	
 	/**
 	 * Search type.
 	 *
@@ -609,19 +541,17 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search type.
 	 *
 	 * @param searchType the search type
 	 * @return the more like this request
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public MoreLikeThisRequest searchType(String searchType) throws RestartIllegalArgumentException {
+	public MoreLikeThisRequest searchType(String searchType) throws RebirthIllegalArgumentException {
 		return searchType(SearchType.fromString(searchType));
 	}
 
-	
 	/**
 	 * Search type.
 	 *
@@ -631,7 +561,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchType;
 	}
 
-	
 	/**
 	 * Search indices.
 	 *
@@ -643,7 +572,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search indices.
 	 *
@@ -653,7 +581,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchIndices;
 	}
 
-	
 	/**
 	 * Search types.
 	 *
@@ -665,7 +592,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search types.
 	 *
@@ -675,7 +601,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchTypes;
 	}
 
-	
 	/**
 	 * Search query hint.
 	 *
@@ -687,7 +612,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search query hint.
 	 *
@@ -697,7 +621,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchQueryHint;
 	}
 
-	
 	/**
 	 * Search scroll.
 	 *
@@ -709,7 +632,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search scroll.
 	 *
@@ -719,7 +641,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchScroll;
 	}
 
-	
 	/**
 	 * Search size.
 	 *
@@ -731,7 +652,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search size.
 	 *
@@ -741,7 +661,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchSize;
 	}
 
-	
 	/**
 	 * Search from.
 	 *
@@ -753,7 +672,6 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Search from.
 	 *
@@ -763,9 +681,8 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this.searchFrom;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -782,18 +699,16 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return threadedListener;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public ActionRequest listenerThreaded(boolean listenerThreaded) {
@@ -801,16 +716,15 @@ public class MoreLikeThisRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		index = in.readUTF();
 		type = in.readUTF();
 		id = in.readUTF();
-		
+
 		int size = in.readVInt();
 		if (size == 0) {
 			fields = Strings.EMPTY_ARRAY;
@@ -880,9 +794,8 @@ public class MoreLikeThisRequest implements ActionRequest {
 		searchFrom = in.readVInt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

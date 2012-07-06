@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FacetPhase.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FacetPhase.java 2012-7-6 14:29:00 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
@@ -17,7 +16,7 @@ import org.apache.lucene.search.FilteredQuery;
 import org.apache.lucene.search.MultiCollector;
 import org.apache.lucene.search.Query;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.DeletionAwareConstantScoreQuery;
 import cn.com.rebirth.search.commons.lucene.search.Queries;
@@ -32,7 +31,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class FacetPhase.
  *
@@ -40,15 +38,12 @@ import com.google.common.collect.Maps;
  */
 public class FacetPhase implements SearchPhase {
 
-	
 	/** The facet parse element. */
 	private final FacetParseElement facetParseElement;
 
-	
 	/** The facet binary parse element. */
 	private final FacetBinaryParseElement facetBinaryParseElement;
 
-	
 	/**
 	 * Instantiates a new facet phase.
 	 *
@@ -61,9 +56,8 @@ public class FacetPhase implements SearchPhase {
 		this.facetBinaryParseElement = facetBinaryParseElement;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhase#parseElements()
+	 * @see cn.com.rebirth.search.core.search.SearchPhase#parseElements()
 	 */
 	@Override
 	public Map<String, ? extends SearchParseElement> parseElements() {
@@ -71,13 +65,12 @@ public class FacetPhase implements SearchPhase {
 				facetBinaryParseElement);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhase#preProcess(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchPhase#preProcess(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void preProcess(SearchContext context) {
-		
+
 		if (context.nestedQueries() != null) {
 			for (Map.Entry<String, BlockJoinQuery> entry : context.nestedQueries().entrySet()) {
 				List<Collector> collectors = context.searcher().removeCollectors(entry.getKey());
@@ -93,22 +86,19 @@ public class FacetPhase implements SearchPhase {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhase#execute(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchPhase#execute(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
-	public void execute(SearchContext context) throws RestartException {
+	public void execute(SearchContext context) throws RebirthException {
 		if (context.facets() == null || context.facets().facetCollectors() == null) {
 			return;
 		}
 		if (context.queryResult().facets() != null) {
-			
+
 			return;
 		}
 
-		
-		
 		List<Collector> collectors = context.searcher().removeCollectors(ContextIndexSearcher.Scopes.GLOBAL);
 
 		if (collectors != null && !collectors.isEmpty()) {
@@ -136,7 +126,7 @@ public class FacetPhase implements SearchPhase {
 					list.add(collector);
 				}
 			}
-			
+
 			for (Map.Entry<Filter, List<Collector>> entry : filtersByCollector.entrySet()) {
 				Filter filter = entry.getKey();
 				Query query = new DeletionAwareConstantScoreQuery(filter);

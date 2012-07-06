@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FloatFieldMapper.java 2012-3-29 15:01:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FloatFieldMapper.java 2012-7-6 14:28:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
@@ -39,7 +38,6 @@ import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.core.index.search.NumericRangeFieldDataFilter;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class FloatFieldMapper.
  *
@@ -47,11 +45,9 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public class FloatFieldMapper extends NumberFieldMapper<Float> {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "float";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
@@ -59,12 +55,10 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 	 */
 	public static class Defaults extends NumberFieldMapper.Defaults {
 
-		
 		/** The Constant NULL_VALUE. */
 		public static final Float NULL_VALUE = null;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -72,11 +66,9 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 	 */
 	public static class Builder extends NumberFieldMapper.Builder<Builder, FloatFieldMapper> {
 
-		
 		/** The null value. */
 		protected Float nullValue = Defaults.NULL_VALUE;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -87,7 +79,6 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 			builder = this;
 		}
 
-		
 		/**
 		 * Null value.
 		 *
@@ -99,9 +90,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public FloatFieldMapper build(BuilderContext context) {
@@ -112,7 +102,6 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -120,9 +109,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -140,15 +128,12 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		}
 	}
 
-	
 	/** The null value. */
 	private Float nullValue;
 
-	
 	/** The null value as string. */
 	private String nullValueAsString;
 
-	
 	/**
 	 * Instantiates a new float field mapper.
 	 *
@@ -171,18 +156,16 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		this.nullValueAsString = nullValue == null ? null : nullValue.toString();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#maxPrecisionStep()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#maxPrecisionStep()
 	 */
 	@Override
 	protected int maxPrecisionStep() {
 		return 32;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public Float value(Fieldable field) {
@@ -193,27 +176,24 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		return Numbers.bytesToFloat(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public Float valueFromString(String value) {
 		return Float.parseFloat(value);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return NumericUtils.floatToPrefixCoded(Float.parseFloat(value));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, java.lang.String, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, String minSim, int prefixLength, int maxExpansions) {
@@ -223,9 +203,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 				true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fuzzyQuery(java.lang.String, double, int, int)
 	 */
 	@Override
 	public Query fuzzyQuery(String value, double minSim, int prefixLength, int maxExpansions) {
@@ -235,9 +214,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 				true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fieldQuery(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fieldQuery(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query fieldQuery(String value, @Nullable QueryParseContext context) {
@@ -245,9 +223,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		return NumericRangeQuery.newFloatRange(names.indexName(), precisionStep, fValue, fValue, true, true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeQuery(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query rangeQuery(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -257,9 +234,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 				upperTerm == null ? null : Float.parseFloat(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fieldFilter(java.lang.String, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fieldFilter(java.lang.String, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter fieldFilter(String value, @Nullable QueryParseContext context) {
@@ -267,9 +243,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		return NumericRangeFilter.newFloatRange(names.indexName(), precisionStep, fValue, fValue, true, true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(String lowerTerm, String upperTerm, boolean includeLower, boolean includeUpper,
@@ -279,9 +254,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 				upperTerm == null ? null : Float.parseFloat(upperTerm), includeLower, includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(cn.com.summall.search.core.index.cache.field.data.FieldDataCache, java.lang.String, java.lang.String, boolean, boolean, cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#rangeFilter(cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache, java.lang.String, java.lang.String, boolean, boolean, cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter rangeFilter(FieldDataCache fieldDataCache, String lowerTerm, String upperTerm, boolean includeLower,
@@ -291,18 +265,16 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 				includeUpper);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#customBoost()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#customBoost()
 	 */
 	@Override
 	protected boolean customBoost() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Fieldable parseCreateField(ParseContext context) throws IOException {
@@ -360,7 +332,7 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 					}
 				}
 				if (objValue == null) {
-					
+
 					return null;
 				}
 				value = objValue;
@@ -377,27 +349,24 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		return field;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#fieldDataType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#fieldDataType()
 	 */
 	@Override
 	public FieldDataType fieldDataType() {
 		return FieldDataType.DefaultTypes.FLOAT;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
@@ -411,9 +380,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.summall.search.commons.xcontent.XContentBuilder)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.rebirth.search.commons.xcontent.XContentBuilder)
 	 */
 	@Override
 	protected void doXContentBody(XContentBuilder builder) throws IOException {
@@ -447,7 +415,6 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 		}
 	}
 
-	
 	/**
 	 * The Class CustomFloatNumericField.
 	 *
@@ -455,15 +422,12 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 	 */
 	public static class CustomFloatNumericField extends CustomNumericField {
 
-		
 		/** The number. */
 		private final float number;
 
-		
 		/** The mapper. */
 		private final NumberFieldMapper mapper;
 
-		
 		/**
 		 * Instantiates a new custom float numeric field.
 		 *
@@ -476,7 +440,6 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 			this.number = number;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.document.Fieldable#tokenStreamValue()
 		 */
@@ -488,9 +451,8 @@ public class FloatFieldMapper extends NumberFieldMapper<Float> {
 			return null;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.NumberFieldMapper.CustomNumericField#numericAsString()
+		 * @see cn.com.rebirth.search.core.index.mapper.core.NumberFieldMapper.CustomNumericField#numericAsString()
 		 */
 		@Override
 		public String numericAsString() {

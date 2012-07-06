@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportNodesListGatewayStartedShards.java 2012-3-29 15:02:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportNodesListGatewayStartedShards.java 2012-7-6 14:29:23 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.gateway.local.state.shards;
@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -86,7 +86,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
@@ -94,7 +94,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
@@ -102,7 +102,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#transportCompress()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#transportCompress()
 	 */
 	@Override
 	protected boolean transportCompress() {
@@ -110,7 +110,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newRequest()
 	 */
 	@Override
 	protected Request newRequest() {
@@ -118,7 +118,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest()
 	 */
 	@Override
 	protected NodeRequest newNodeRequest() {
@@ -126,7 +126,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest(java.lang.String, cn.com.summall.search.core.action.support.nodes.NodesOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest(java.lang.String, cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest)
 	 */
 	@Override
 	protected NodeRequest newNodeRequest(String nodeId, Request request) {
@@ -134,7 +134,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeResponse()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeResponse()
 	 */
 	@Override
 	protected NodeLocalGatewayStartedShards newNodeResponse() {
@@ -142,7 +142,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newResponse(cn.com.summall.search.core.action.support.nodes.NodesOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newResponse(cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
 	 */
 	@Override
 	protected NodesLocalGatewayStartedShards newResponse(Request request, AtomicReferenceArray responses) {
@@ -162,10 +162,10 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#nodeOperation(cn.com.summall.search.core.action.support.nodes.NodeOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#nodeOperation(cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest)
 	 */
 	@Override
-	protected NodeLocalGatewayStartedShards nodeOperation(NodeRequest request) throws RestartException {
+	protected NodeLocalGatewayStartedShards nodeOperation(NodeRequest request) throws RebirthException {
 		Map<ShardId, ShardStateInfo> shardsStateInfo = shardsState.currentStartedShards();
 		if (shardsStateInfo != null) {
 			for (Map.Entry<ShardId, ShardStateInfo> entry : shardsStateInfo.entrySet()) {
@@ -178,7 +178,7 @@ public class TransportNodesListGatewayStartedShards
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#accumulateExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#accumulateExceptions()
 	 */
 	@Override
 	protected boolean accumulateExceptions() {
@@ -222,7 +222,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationRequest#timeout(cn.com.summall.search.commons.unit.TimeValue)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest#timeout(cn.com.rebirth.commons.unit.TimeValue)
 		 */
 		@Override
 		public Request timeout(TimeValue timeout) {
@@ -231,7 +231,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -240,7 +240,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -288,7 +288,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -301,7 +301,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodesOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodesOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -341,7 +341,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -350,7 +350,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -405,7 +405,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -414,7 +414,7 @@ public class TransportNodesListGatewayStartedShards
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

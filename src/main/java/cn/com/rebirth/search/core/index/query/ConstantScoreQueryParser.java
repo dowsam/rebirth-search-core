@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ConstantScoreQueryParser.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ConstantScoreQueryParser.java 2012-7-6 14:30:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.lucene.search.DeletionAwareConstantScoreQue
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter;
 
-
 /**
  * The Class ConstantScoreQueryParser.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter;
  */
 public class ConstantScoreQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "constant_score";
 
-	
 	/**
 	 * Instantiates a new constant score query parser.
 	 */
@@ -38,18 +34,16 @@ public class ConstantScoreQueryParser implements QueryParser {
 	public ConstantScoreQueryParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME, Strings.toCamelCase(NAME) };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -94,7 +88,7 @@ public class ConstantScoreQueryParser implements QueryParser {
 		}
 
 		if (filter != null) {
-			
+
 			if (cache) {
 				filter = parseContext.cacheFilter(filter, cacheKey);
 			}
@@ -103,7 +97,7 @@ public class ConstantScoreQueryParser implements QueryParser {
 			query1.setBoost(boost);
 			return query1;
 		}
-		
+
 		query = new ConstantScoreQuery(query);
 		query.setBoost(boost);
 		return query;

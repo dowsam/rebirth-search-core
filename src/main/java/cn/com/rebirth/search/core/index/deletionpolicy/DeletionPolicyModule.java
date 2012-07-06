@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DeletionPolicyModule.java 2012-3-29 15:01:30 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DeletionPolicyModule.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.deletionpolicy;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.AbstractModule;
 import cn.com.rebirth.search.commons.inject.name.Names;
 
-
 /**
  * The Class DeletionPolicyModule.
  *
@@ -20,7 +18,6 @@ import cn.com.rebirth.search.commons.inject.name.Names;
  */
 public class DeletionPolicyModule extends AbstractModule {
 
-	
 	/**
 	 * The Class DeletionPolicySettings.
 	 *
@@ -28,16 +25,13 @@ public class DeletionPolicyModule extends AbstractModule {
 	 */
 	public static class DeletionPolicySettings {
 
-		
 		/** The Constant TYPE. */
 		public static final String TYPE = "index.deletionpolicy.type";
 	}
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/**
 	 * Instantiates a new deletion policy module.
 	 *
@@ -47,9 +41,8 @@ public class DeletionPolicyModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

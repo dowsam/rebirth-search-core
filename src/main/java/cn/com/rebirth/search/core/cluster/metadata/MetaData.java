@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaData.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaData.java 2012-7-6 14:28:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -25,7 +24,7 @@ import java.util.Set;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.regex.Regex;
@@ -48,7 +47,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.collect.UnmodifiableIterator;
 
-
 /**
  * The Class MetaData.
  *
@@ -56,21 +54,17 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class MetaData implements Iterable<IndexMetaData> {
 
-	
 	/** The Constant SETTING_READ_ONLY. */
 	public static final String SETTING_READ_ONLY = "cluster.blocks.read_only";
 
-	
 	/** The Constant CLUSTER_READ_ONLY_BLOCK. */
 	public static final ClusterBlock CLUSTER_READ_ONLY_BLOCK = new ClusterBlock(6, "cluster read-only (api)", false,
 			false, RestStatus.FORBIDDEN, ClusterBlockLevel.WRITE, ClusterBlockLevel.METADATA);
 
-	
 	/** The dynamic settings. */
 	private static ImmutableSet<String> dynamicSettings = ImmutableSet.<String> builder().add(SETTING_READ_ONLY)
 			.build();
 
-	
 	/**
 	 * Dynamic settings.
 	 *
@@ -80,7 +74,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return dynamicSettings;
 	}
 
-	
 	/**
 	 * Checks for dynamic setting.
 	 *
@@ -96,7 +89,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return false;
 	}
 
-	
 	/**
 	 * Adds the dynamic settings.
 	 *
@@ -108,64 +100,48 @@ public class MetaData implements Iterable<IndexMetaData> {
 		dynamicSettings = ImmutableSet.copyOf(updatedSettings);
 	}
 
-	
 	/** The Constant EMPTY_META_DATA. */
 	public static final MetaData EMPTY_META_DATA = newMetaDataBuilder().build();
 
-	
 	/** The version. */
 	private final long version;
 
-	
 	/** The transient settings. */
 	private final Settings transientSettings;
 
-	
 	/** The persistent settings. */
 	private final Settings persistentSettings;
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/** The indices. */
 	private final ImmutableMap<String, IndexMetaData> indices;
 
-	
 	/** The templates. */
 	private final ImmutableMap<String, IndexTemplateMetaData> templates;
 
-	
 	/** The total number of shards. */
 	private final transient int totalNumberOfShards;
 
-	
 	/** The all indices. */
 	private final String[] allIndices;
 
-	
 	/** The all open indices. */
 	private final String[] allOpenIndices;
 
-	
 	/** The aliases. */
 	private final ImmutableMap<String, ImmutableMap<String, AliasMetaData>> aliases;
 
-	
 	/** The alias to index to search routing map. */
 	private final ImmutableMap<String, ImmutableMap<String, ImmutableSet<String>>> aliasToIndexToSearchRoutingMap;
 
-	
-	
 	/** The index to alias filtering required map. */
 	private final ImmutableMap<String, ImmutableMap<String, Boolean>> indexToAliasFilteringRequiredMap;
 
-	
 	/** The alias and index to index map. */
 	private final ImmutableMap<String, String[]> aliasAndIndexToIndexMap;
 
-	
 	/**
 	 * Instantiates a new meta data.
 	 *
@@ -189,7 +165,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		}
 		this.totalNumberOfShards = totalNumberOfShards;
 
-		
 		List<String> allIndicesLst = Lists.newArrayList();
 		for (IndexMetaData indexMetaData : indices.values()) {
 			allIndicesLst.add(indexMetaData.index());
@@ -204,7 +179,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		}
 		this.allOpenIndices = allOpenIndices.toArray(new String[allOpenIndices.size()]);
 
-		
 		MapBuilder<String, MapBuilder<String, AliasMetaData>> tmpAliasesMap = newMapBuilder();
 		for (IndexMetaData indexMetaData : indices.values()) {
 			String index = indexMetaData.index();
@@ -223,7 +197,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		}
 		this.aliases = aliases.immutableMap();
 
-		
 		MapBuilder<String, MapBuilder<String, ImmutableSet<String>>> tmpAliasToIndexToSearchRoutingMap = newMapBuilder();
 		for (IndexMetaData indexMetaData : indices.values()) {
 			for (AliasMetaData aliasMd : indexMetaData.aliases().values()) {
@@ -248,11 +221,10 @@ public class MetaData implements Iterable<IndexMetaData> {
 		}
 		this.aliasToIndexToSearchRoutingMap = aliasToIndexToSearchRoutingMap.immutableMap();
 
-		
 		MapBuilder<String, ImmutableMap<String, Boolean>> filteringRequiredMap = newMapBuilder();
 		for (IndexMetaData indexMetaData : indices.values()) {
 			MapBuilder<String, Boolean> indexFilteringRequiredMap = newMapBuilder();
-			
+
 			indexFilteringRequiredMap.put(indexMetaData.index(), false);
 			for (AliasMetaData aliasMetaData : indexMetaData.aliases().values()) {
 				if (aliasMetaData.filter() != null) {
@@ -265,7 +237,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		}
 		indexToAliasFilteringRequiredMap = filteringRequiredMap.immutableMap();
 
-		
 		MapBuilder<String, Set<String>> tmpAliasAndIndexToIndexBuilder = newMapBuilder();
 		for (IndexMetaData indexMetaData : indices.values()) {
 			Set<String> lst = tmpAliasAndIndexToIndexBuilder.get(indexMetaData.index());
@@ -293,7 +264,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		this.aliasAndIndexToIndexMap = aliasAndIndexToIndexBuilder.immutableMap();
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -303,7 +273,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.version;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -313,7 +282,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.settings;
 	}
 
-	
 	/**
 	 * Transient settings.
 	 *
@@ -323,7 +291,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.transientSettings;
 	}
 
-	
 	/**
 	 * Persistent settings.
 	 *
@@ -333,7 +300,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.persistentSettings;
 	}
 
-	
 	/**
 	 * Aliases.
 	 *
@@ -343,7 +309,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.aliases;
 	}
 
-	
 	/**
 	 * Gets the aliases.
 	 *
@@ -353,7 +318,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return aliases();
 	}
 
-	
 	/**
 	 * Concrete all indices.
 	 *
@@ -363,7 +327,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return allIndices;
 	}
 
-	
 	/**
 	 * Gets the concrete all indices.
 	 *
@@ -373,7 +336,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return concreteAllIndices();
 	}
 
-	
 	/**
 	 * Concrete all open indices.
 	 *
@@ -383,7 +345,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return allOpenIndices;
 	}
 
-	
 	/**
 	 * Gets the concrete all open indices.
 	 *
@@ -393,7 +354,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return allOpenIndices;
 	}
 
-	
 	/**
 	 * Concrete indices.
 	 *
@@ -405,7 +365,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return concreteIndices(indices, false, false);
 	}
 
-	
 	/**
 	 * Concrete indices ignore missing.
 	 *
@@ -416,7 +375,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return concreteIndices(indices, true, false);
 	}
 
-	
 	/**
 	 * Resolve index routing.
 	 *
@@ -425,13 +383,13 @@ public class MetaData implements Iterable<IndexMetaData> {
 	 * @return the string
 	 */
 	public String resolveIndexRouting(@Nullable String routing, String aliasOrIndex) {
-		
+
 		ImmutableMap<String, AliasMetaData> indexAliases = aliases.get(aliasOrIndex);
 		if (indexAliases == null || indexAliases.isEmpty()) {
 			return routing;
 		}
 		if (indexAliases.size() > 1) {
-			throw new RestartIllegalArgumentException("Alias [" + aliasOrIndex
+			throw new RebirthIllegalArgumentException("Alias [" + aliasOrIndex
 					+ "] has more than one index associated with it [" + indexAliases.keySet()
 					+ "], can't execute a single index op");
 		}
@@ -439,7 +397,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 		if (aliasMd.indexRouting() != null) {
 			if (routing != null) {
 				if (!routing.equals(aliasMd.indexRouting())) {
-					throw new RestartIllegalArgumentException("Alias [" + aliasOrIndex
+					throw new RebirthIllegalArgumentException("Alias [" + aliasOrIndex
 							+ "] has index routing associated with it [" + aliasMd.indexRouting()
 							+ "], and was provided with routing value [" + routing + "], rejecting operation");
 				}
@@ -448,7 +406,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 		}
 		if (routing != null) {
 			if (routing.indexOf(',') != -1) {
-				throw new RestartIllegalArgumentException("index/alias [" + aliasOrIndex
+				throw new RebirthIllegalArgumentException("index/alias [" + aliasOrIndex
 						+ "] provided with routing value [" + routing
 						+ "] that resolved to several routing values, rejecting operation");
 			}
@@ -456,7 +414,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return routing;
 	}
 
-	
 	/**
 	 * Resolve search routing all indices.
 	 *
@@ -476,7 +433,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return null;
 	}
 
-	
 	/**
 	 * Resolve search routing.
 	 *
@@ -493,10 +449,10 @@ public class MetaData implements Iterable<IndexMetaData> {
 
 		ImmutableMap<String, ImmutableSet<String>> indexToRoutingMap = aliasToIndexToSearchRoutingMap.get(aliasOrIndex);
 		if (indexToRoutingMap != null && !indexToRoutingMap.isEmpty()) {
-			
+
 			for (Map.Entry<String, ImmutableSet<String>> indexRouting : indexToRoutingMap.entrySet()) {
 				if (!indexRouting.getValue().isEmpty()) {
-					
+
 					Set<String> r = new THashSet<String>(indexRouting.getValue());
 					if (paramRouting != null) {
 						r.retainAll(paramRouting);
@@ -508,7 +464,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 						routings.put(indexRouting.getKey(), r);
 					}
 				} else {
-					
+
 					if (paramRouting != null) {
 						Set<String> r = new THashSet<String>(paramRouting);
 						if (routings == null) {
@@ -519,7 +475,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 				}
 			}
 		} else {
-			
+
 			if (paramRouting != null) {
 				routings = ImmutableMap.of(aliasOrIndex, paramRouting);
 			}
@@ -527,7 +483,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return routings;
 	}
 
-	
 	/**
 	 * Resolve search routing.
 	 *
@@ -550,7 +505,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 
 		Map<String, Set<String>> routings = null;
 		Set<String> paramRouting = null;
-		
+
 		Set<String> norouting = newHashSet();
 		if (routing != null) {
 			paramRouting = Strings.splitStringByCommaToSet(routing);
@@ -563,7 +518,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 				for (Map.Entry<String, ImmutableSet<String>> indexRouting : indexToRoutingMap.entrySet()) {
 					if (!norouting.contains(indexRouting.getKey())) {
 						if (!indexRouting.getValue().isEmpty()) {
-							
+
 							if (routings == null) {
 								routings = newHashMap();
 							}
@@ -580,7 +535,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 								routings.remove(indexRouting.getKey());
 							}
 						} else {
-							
+
 							if (!norouting.contains(indexRouting.getKey())) {
 								norouting.add(indexRouting.getKey());
 								if (paramRouting != null) {
@@ -599,7 +554,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 					}
 				}
 			} else {
-				
+
 				if (!norouting.contains(aliasOrIndex)) {
 					norouting.add(aliasOrIndex);
 					if (paramRouting != null) {
@@ -623,7 +578,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return routings;
 	}
 
-	
 	/**
 	 * Concrete indices.
 	 *
@@ -638,7 +592,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 		if (indices == null || indices.length == 0) {
 			return allOnlyOpen ? concreteAllOpenIndices() : concreteAllIndices();
 		}
-		
+
 		if (indices.length == 1) {
 			String index = indices[0];
 			if (index.length() == 0) {
@@ -647,7 +601,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 			if (index.equals("_all")) {
 				return allOnlyOpen ? concreteAllOpenIndices() : concreteAllIndices();
 			}
-			
+
 			if (this.indices.containsKey(index)) {
 				return indices;
 			}
@@ -663,8 +617,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			}
 		}
 
-		
-		
 		boolean possiblyAliased = false;
 		for (String index : indices) {
 			if (!this.indices.containsKey(index)) {
@@ -692,34 +644,32 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return actualIndices.toArray(new String[actualIndices.size()]);
 	}
 
-	
 	/**
 	 * Concrete index.
 	 *
 	 * @param index the index
 	 * @return the string
 	 * @throws IndexMissingException the index missing exception
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public String concreteIndex(String index) throws IndexMissingException, RestartIllegalArgumentException {
-		
+	public String concreteIndex(String index) throws IndexMissingException, RebirthIllegalArgumentException {
+
 		if (indices.containsKey(index)) {
 			return index;
 		}
-		
+
 		String[] lst = aliasAndIndexToIndexMap.get(index);
 		if (lst == null) {
 			throw new IndexMissingException(new Index(index));
 		}
 		if (lst.length > 1) {
-			throw new RestartIllegalArgumentException("Alias [" + index
+			throw new RebirthIllegalArgumentException("Alias [" + index
 					+ "] has more than one indices associated with it [" + Arrays.toString(lst)
 					+ "], can't execute a single index op");
 		}
 		return lst[0];
 	}
 
-	
 	/**
 	 * Checks for index.
 	 *
@@ -730,7 +680,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return indices.containsKey(index);
 	}
 
-	
 	/**
 	 * Checks for concrete index.
 	 *
@@ -741,7 +690,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return aliasAndIndexToIndexMap.containsKey(index);
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -752,7 +700,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return indices.get(index);
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -762,7 +709,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.indices;
 	}
 
-	
 	/**
 	 * Gets the indices.
 	 *
@@ -772,7 +718,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return indices();
 	}
 
-	
 	/**
 	 * Templates.
 	 *
@@ -782,7 +727,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.templates;
 	}
 
-	
 	/**
 	 * Gets the templates.
 	 *
@@ -792,7 +736,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.templates;
 	}
 
-	
 	/**
 	 * Total number of shards.
 	 *
@@ -802,7 +745,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return this.totalNumberOfShards;
 	}
 
-	
 	/**
 	 * Gets the total number of shards.
 	 *
@@ -812,7 +754,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return totalNumberOfShards();
 	}
 
-	
 	/**
 	 * Filtering aliases.
 	 *
@@ -824,16 +765,16 @@ public class MetaData implements Iterable<IndexMetaData> {
 		if (indices == null || indices.length == 0) {
 			return null;
 		}
-		
+
 		if (indices.length == 1) {
 			String alias = indices[0];
-			
+
 			if (alias.equals("_all")) {
 				return null;
 			}
 			ImmutableMap<String, Boolean> aliasToFilteringRequiredMap = indexToAliasFilteringRequiredMap.get(index);
 			if (aliasToFilteringRequiredMap == null) {
-				
+
 				throw new IndexMissingException(new Index(index));
 			}
 			Boolean filteringRequired = aliasToFilteringRequiredMap.get(alias);
@@ -846,21 +787,20 @@ public class MetaData implements Iterable<IndexMetaData> {
 		for (String alias : indices) {
 			ImmutableMap<String, Boolean> aliasToFilteringRequiredMap = indexToAliasFilteringRequiredMap.get(index);
 			if (aliasToFilteringRequiredMap == null) {
-				
+
 				throw new IndexMissingException(new Index(index));
 			}
 			Boolean filteringRequired = aliasToFilteringRequiredMap.get(alias);
-			
-			
+
 			if (filteringRequired != null) {
 				if (filteringRequired) {
-					
+
 					if (filteringAliases == null) {
 						filteringAliases = newArrayList();
 					}
 					filteringAliases.add(alias);
 				} else {
-					
+
 					return null;
 				}
 			}
@@ -871,7 +811,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return filteringAliases.toArray(new String[filteringAliases.size()]);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -880,7 +819,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return indices.values().iterator();
 	}
 
-	
 	/**
 	 * Checks if is global state equals.
 	 *
@@ -896,7 +834,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return true;
 	}
 
-	
 	/**
 	 * Builder.
 	 *
@@ -906,7 +843,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return new Builder();
 	}
 
-	
 	/**
 	 * New meta data builder.
 	 *
@@ -916,7 +852,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 		return new Builder();
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -924,27 +859,21 @@ public class MetaData implements Iterable<IndexMetaData> {
 	 */
 	public static class Builder {
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/** The transient settings. */
 		private Settings transientSettings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-		
 		/** The persistent settings. */
 		private Settings persistentSettings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-		
 		/** The indices. */
 		private MapBuilder<String, IndexMetaData> indices = newMapBuilder();
 
-		
 		/** The templates. */
 		private MapBuilder<String, IndexTemplateMetaData> templates = newMapBuilder();
 
-		
 		/**
 		 * Meta data.
 		 *
@@ -960,7 +889,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Put.
 		 *
@@ -968,14 +896,13 @@ public class MetaData implements Iterable<IndexMetaData> {
 		 * @return the builder
 		 */
 		public Builder put(IndexMetaData.Builder indexMetaDataBuilder) {
-			
+
 			indexMetaDataBuilder.version(indexMetaDataBuilder.version() + 1);
 			IndexMetaData indexMetaData = indexMetaDataBuilder.build();
 			indices.put(indexMetaData.index(), indexMetaData);
 			return this;
 		}
 
-		
 		/**
 		 * Put.
 		 *
@@ -987,7 +914,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 			if (indices.get(indexMetaData.index()) == indexMetaData) {
 				return this;
 			}
-			
+
 			if (incrementVersion) {
 				indexMetaData = IndexMetaData.newIndexMetaDataBuilder(indexMetaData)
 						.version(indexMetaData.version() + 1).build();
@@ -996,7 +923,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Gets the.
 		 *
@@ -1007,7 +933,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return indices.get(index);
 		}
 
-		
 		/**
 		 * Removes the.
 		 *
@@ -1019,7 +944,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the all indices.
 		 *
@@ -1030,7 +954,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Put.
 		 *
@@ -1041,7 +964,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return put(template.build());
 		}
 
-		
 		/**
 		 * Put.
 		 *
@@ -1053,7 +975,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the template.
 		 *
@@ -1065,7 +986,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Update settings.
 		 *
@@ -1088,7 +1008,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Update number of replicas.
 		 *
@@ -1110,7 +1029,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Transient settings.
 		 *
@@ -1120,7 +1038,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this.transientSettings;
 		}
 
-		
 		/**
 		 * Transient settings.
 		 *
@@ -1132,7 +1049,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Persistent settings.
 		 *
@@ -1142,7 +1058,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this.persistentSettings;
 		}
 
-		
 		/**
 		 * Persistent settings.
 		 *
@@ -1154,7 +1069,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1166,7 +1080,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -1177,7 +1090,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 					templates.immutableMap());
 		}
 
-		
 		/**
 		 * To x content.
 		 *
@@ -1193,7 +1105,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return builder.string();
 		}
 
-		
 		/**
 		 * To x content.
 		 *
@@ -1233,7 +1144,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			builder.endObject();
 		}
 
-		
 		/**
 		 * From x content.
 		 *
@@ -1250,7 +1160,7 @@ public class MetaData implements Iterable<IndexMetaData> {
 				token = parser.nextToken();
 				currentFieldName = parser.currentName();
 				if (token == null) {
-					
+
 					return builder.build();
 				}
 			}
@@ -1286,7 +1196,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Read from.
 		 *
@@ -1310,7 +1219,6 @@ public class MetaData implements Iterable<IndexMetaData> {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *

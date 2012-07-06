@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FetchPhase.java 2012-3-29 15:01:52 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FetchPhase.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch;
 
@@ -48,7 +47,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class FetchPhase.
  *
@@ -56,11 +54,9 @@ import com.google.common.collect.Lists;
  */
 public class FetchPhase implements SearchPhase {
 
-	
 	/** The fetch sub phases. */
 	private final FetchSubPhase[] fetchSubPhases;
 
-	
 	/**
 	 * Instantiates a new fetch phase.
 	 *
@@ -79,9 +75,8 @@ public class FetchPhase implements SearchPhase {
 				explainPhase, highlightPhase, versionPhase };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhase#parseElements()
+	 * @see cn.com.rebirth.search.core.search.SearchPhase#parseElements()
 	 */
 	@Override
 	public Map<String, ? extends SearchParseElement> parseElements() {
@@ -93,17 +88,15 @@ public class FetchPhase implements SearchPhase {
 		return parseElements.build();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhase#preProcess(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchPhase#preProcess(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void preProcess(SearchContext context) {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhase#execute(cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.SearchPhase#execute(cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	public void execute(SearchContext context) {
 		ResetFieldSelector fieldSelector;
@@ -111,11 +104,11 @@ public class FetchPhase implements SearchPhase {
 		boolean sourceRequested = false;
 		if (!context.hasFieldNames()) {
 			if (context.hasPartialFields()) {
-				
+
 				fieldSelector = new UidAndSourceFieldSelector();
 				sourceRequested = false;
 			} else if (context.hasScriptFields()) {
-				
+
 				fieldSelector = UidFieldSelector.INSTANCE;
 				sourceRequested = false;
 			} else {
@@ -153,12 +146,12 @@ public class FetchPhase implements SearchPhase {
 
 			if (loadAllStored) {
 				if (sourceRequested || extractFieldNames != null) {
-					fieldSelector = null; 
+					fieldSelector = null;
 				} else {
 					fieldSelector = AllButSourceFieldSelector.INSTANCE;
 				}
 			} else if (fieldSelectorMapper != null) {
-				
+
 				fieldSelectorMapper.add(UidFieldMapper.NAME);
 				if (extractFieldNames != null) {
 					fieldSelectorMapper.add(SourceFieldMapper.NAME);
@@ -186,8 +179,6 @@ public class FetchPhase implements SearchPhase {
 
 			byte[] source = extractSource(doc, documentMapper);
 
-			
-
 			InternalSearchHit searchHit = new InternalSearchHit(docId, uid.id(), uid.type(), sourceRequested ? source
 					: null, null);
 			hits[index] = searchHit;
@@ -196,12 +187,10 @@ public class FetchPhase implements SearchPhase {
 				Fieldable field = (Fieldable) oField;
 				String name = field.name();
 
-				
 				if (name.equals(UidFieldMapper.NAME)) {
 					continue;
 				}
 
-				
 				if (name.equals(SourceFieldMapper.NAME)) {
 					continue;
 				}
@@ -239,7 +228,6 @@ public class FetchPhase implements SearchPhase {
 			IndexReader subReader = context.searcher().subReaders()[readerIndex];
 			int subDoc = docId - context.searcher().docStarts()[readerIndex];
 
-			
 			context.lookup().setNextReader(subReader);
 			context.lookup().setNextDocId(subDoc);
 			if (source != null) {
@@ -283,7 +271,6 @@ public class FetchPhase implements SearchPhase {
 						.getMaxScore()));
 	}
 
-	
 	/**
 	 * Extract source.
 	 *
@@ -299,7 +286,6 @@ public class FetchPhase implements SearchPhase {
 		return null;
 	}
 
-	
 	/**
 	 * Extract uid.
 	 *
@@ -308,12 +294,12 @@ public class FetchPhase implements SearchPhase {
 	 * @return the uid
 	 */
 	private Uid extractUid(SearchContext context, Document doc) {
-		
+
 		String sUid = doc.get(UidFieldMapper.NAME);
 		if (sUid != null) {
 			return Uid.createUid(sUid);
 		}
-		
+
 		List<String> fieldNames = new ArrayList<String>();
 		for (Fieldable field : doc.getFields()) {
 			fieldNames.add(field.name());
@@ -323,7 +309,6 @@ public class FetchPhase implements SearchPhase {
 						+ fieldNames + "]");
 	}
 
-	
 	/**
 	 * Load document.
 	 *

@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FilterBuilders.java 2012-3-29 15:02:40 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FilterBuilders.java 2012-7-6 14:30:24 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import cn.com.rebirth.commons.Nullable;
-
 
 /**
  * The Class FilterBuilders.
@@ -16,7 +14,6 @@ import cn.com.rebirth.commons.Nullable;
  */
 public abstract class FilterBuilders {
 
-	
 	/**
 	 * Match all filter.
 	 *
@@ -26,7 +23,6 @@ public abstract class FilterBuilders {
 		return new MatchAllFilterBuilder();
 	}
 
-	
 	/**
 	 * Limit filter.
 	 *
@@ -37,7 +33,6 @@ public abstract class FilterBuilders {
 		return new LimitFilterBuilder(limit);
 	}
 
-	
 	/**
 	 * Nested filter.
 	 *
@@ -49,7 +44,6 @@ public abstract class FilterBuilders {
 		return new NestedFilterBuilder(path, query);
 	}
 
-	
 	/**
 	 * Nested filter.
 	 *
@@ -61,7 +55,6 @@ public abstract class FilterBuilders {
 		return new NestedFilterBuilder(path, filter);
 	}
 
-	
 	/**
 	 * Ids filter.
 	 *
@@ -72,7 +65,6 @@ public abstract class FilterBuilders {
 		return new IdsFilterBuilder(types);
 	}
 
-	
 	/**
 	 * Type filter.
 	 *
@@ -83,7 +75,6 @@ public abstract class FilterBuilders {
 		return new TypeFilterBuilder(type);
 	}
 
-	
 	/**
 	 * Term filter.
 	 *
@@ -95,7 +86,6 @@ public abstract class FilterBuilders {
 		return new TermFilterBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term filter.
 	 *
@@ -107,7 +97,6 @@ public abstract class FilterBuilders {
 		return new TermFilterBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term filter.
 	 *
@@ -119,7 +108,6 @@ public abstract class FilterBuilders {
 		return new TermFilterBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term filter.
 	 *
@@ -131,7 +119,6 @@ public abstract class FilterBuilders {
 		return new TermFilterBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term filter.
 	 *
@@ -143,7 +130,6 @@ public abstract class FilterBuilders {
 		return new TermFilterBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term filter.
 	 *
@@ -155,7 +141,6 @@ public abstract class FilterBuilders {
 		return new TermFilterBuilder(name, value);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -167,7 +152,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -179,7 +163,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -191,7 +174,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -203,7 +185,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -215,7 +196,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -227,7 +207,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms filter.
 	 *
@@ -239,7 +218,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * In filter.
 	 *
@@ -251,7 +229,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * In filter.
 	 *
@@ -263,7 +240,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * In filter.
 	 *
@@ -275,7 +251,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * In filter.
 	 *
@@ -287,7 +262,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * In filter.
 	 *
@@ -299,7 +273,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * In filter.
 	 *
@@ -311,7 +284,6 @@ public abstract class FilterBuilders {
 		return new TermsFilterBuilder(name, values);
 	}
 
-	
 	/**
 	 * Prefix filter.
 	 *
@@ -323,7 +295,6 @@ public abstract class FilterBuilders {
 		return new PrefixFilterBuilder(name, prefix);
 	}
 
-	
 	/**
 	 * Range filter.
 	 *
@@ -334,7 +305,6 @@ public abstract class FilterBuilders {
 		return new RangeFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Numeric range filter.
 	 *
@@ -345,7 +315,6 @@ public abstract class FilterBuilders {
 		return new NumericRangeFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Query filter.
 	 *
@@ -356,7 +325,6 @@ public abstract class FilterBuilders {
 		return new QueryFilterBuilder(queryBuilder);
 	}
 
-	
 	/**
 	 * Script filter.
 	 *
@@ -367,7 +335,6 @@ public abstract class FilterBuilders {
 		return new ScriptFilterBuilder(script);
 	}
 
-	
 	/**
 	 * Geo distance filter.
 	 *
@@ -378,7 +345,6 @@ public abstract class FilterBuilders {
 		return new GeoDistanceFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Geo distance range filter.
 	 *
@@ -389,7 +355,6 @@ public abstract class FilterBuilders {
 		return new GeoDistanceRangeFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Geo bounding box filter.
 	 *
@@ -400,7 +365,6 @@ public abstract class FilterBuilders {
 		return new GeoBoundingBoxFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Geo polygon filter.
 	 *
@@ -411,7 +375,6 @@ public abstract class FilterBuilders {
 		return new GeoPolygonFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Exists filter.
 	 *
@@ -422,7 +385,6 @@ public abstract class FilterBuilders {
 		return new ExistsFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Missing filter.
 	 *
@@ -433,7 +395,6 @@ public abstract class FilterBuilders {
 		return new MissingFilterBuilder(name);
 	}
 
-	
 	/**
 	 * Checks for child filter.
 	 *
@@ -445,7 +406,6 @@ public abstract class FilterBuilders {
 		return new HasChildFilterBuilder(type, query);
 	}
 
-	
 	/**
 	 * Bool filter.
 	 *
@@ -455,7 +415,6 @@ public abstract class FilterBuilders {
 		return new BoolFilterBuilder();
 	}
 
-	
 	/**
 	 * And filter.
 	 *
@@ -466,7 +425,6 @@ public abstract class FilterBuilders {
 		return new AndFilterBuilder(filters);
 	}
 
-	
 	/**
 	 * Or filter.
 	 *
@@ -477,7 +435,6 @@ public abstract class FilterBuilders {
 		return new OrFilterBuilder(filters);
 	}
 
-	
 	/**
 	 * Not filter.
 	 *
@@ -488,7 +445,6 @@ public abstract class FilterBuilders {
 		return new NotFilterBuilder(filter);
 	}
 
-	
 	/**
 	 * Indices filter.
 	 *
@@ -500,7 +456,6 @@ public abstract class FilterBuilders {
 		return new IndicesFilterBuilder(filter, indices);
 	}
 
-	
 	/**
 	 * Instantiates a new filter builders.
 	 */

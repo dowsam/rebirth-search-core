@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JmxFsProbe.java 2012-3-29 15:01:52 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JmxFsProbe.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.fs;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.env.NodeEnvironment;
 
-
 /**
  * The Class JmxFsProbe.
  *
@@ -21,11 +19,9 @@ import cn.com.rebirth.search.core.env.NodeEnvironment;
  */
 public class JmxFsProbe extends AbstractComponent implements FsProbe {
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/**
 	 * Instantiates a new jmx fs probe.
 	 *
@@ -38,9 +34,8 @@ public class JmxFsProbe extends AbstractComponent implements FsProbe {
 		this.nodeEnv = nodeEnv;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.fs.FsProbe#stats()
+	 * @see cn.com.rebirth.search.core.monitor.fs.FsProbe#stats()
 	 */
 	@Override
 	public FsStats stats() {

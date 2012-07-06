@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HttpServer.java 2012-4-25 10:02:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HttpServer.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.http;
 
@@ -16,7 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.rest.StringRestResponse;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class HttpServer.
  *
@@ -41,31 +39,24 @@ import com.google.common.collect.ImmutableMap;
  */
 public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 
-	
 	/** The environment. */
 	private final Environment environment;
 
-	
 	/** The transport. */
 	private final HttpServerTransport transport;
 
-	
 	/** The rest controller. */
 	private final RestController restController;
 
-	
 	/** The node service. */
 	private final NodeService nodeService;
 
-	
 	/** The disable sites. */
 	private final boolean disableSites;
 
-	
 	/** The plugin site filter. */
 	private final PluginSiteFilter pluginSiteFilter = new PluginSiteFilter();
 
-	
 	/**
 	 * Instantiates a new http server.
 	 *
@@ -90,7 +81,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		transport.httpServerAdapter(new Dispatcher(this));
 	}
 
-	
 	/**
 	 * The Class Dispatcher.
 	 *
@@ -98,11 +88,9 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 	 */
 	static class Dispatcher implements HttpServerAdapter {
 
-		
 		/** The server. */
 		private final HttpServer server;
 
-		
 		/**
 		 * Instantiates a new dispatcher.
 		 *
@@ -112,9 +100,8 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 			this.server = server;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.http.HttpServerAdapter#dispatchRequest(cn.com.summall.search.core.http.HttpRequest, cn.com.summall.search.core.http.HttpChannel)
+		 * @see cn.com.rebirth.search.core.http.HttpServerAdapter#dispatchRequest(cn.com.rebirth.search.core.http.HttpRequest, cn.com.rebirth.search.core.http.HttpChannel)
 		 */
 		@Override
 		public void dispatchRequest(HttpRequest request, HttpChannel channel) {
@@ -122,12 +109,11 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		transport.start();
 		if (logger.isInfoEnabled()) {
 			logger.info("{}", transport.boundAddress());
@@ -135,26 +121,23 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		nodeService.putAttribute("http_address", transport.boundAddress().publishAddress().toString());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		nodeService.removeAttribute("http_address");
 		transport.stop();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		transport.close();
 	}
 
-	
 	/**
 	 * Info.
 	 *
@@ -164,7 +147,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		return new HttpInfo(transport.boundAddress());
 	}
 
-	
 	/**
 	 * Stats.
 	 *
@@ -174,7 +156,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		return transport.stats();
 	}
 
-	
 	/**
 	 * Internal dispatch request.
 	 *
@@ -190,7 +171,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		restController.dispatchRequest(request, channel);
 	}
 
-	
 	/**
 	 * The Class PluginSiteFilter.
 	 *
@@ -198,9 +178,8 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 	 */
 	class PluginSiteFilter extends RestFilter {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.rest.RestFilter#process(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel, cn.com.summall.search.core.rest.RestFilterChain)
+		 * @see cn.com.rebirth.search.core.rest.RestFilter#process(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel, cn.com.rebirth.search.core.rest.RestFilterChain)
 		 */
 		@Override
 		public void process(RestRequest request, RestChannel channel, RestFilterChain filterChain) {
@@ -208,7 +187,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		}
 	}
 
-	
 	/**
 	 * Handle plugin site.
 	 *
@@ -221,7 +199,7 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 			return;
 		}
 		if (request.method() == RestRequest.Method.OPTIONS) {
-			
+
 			StringRestResponse response = new StringRestResponse(OK);
 			channel.sendResponse(response);
 			return;
@@ -230,7 +208,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 			channel.sendResponse(new StringRestResponse(FORBIDDEN));
 			return;
 		}
-		
 
 		String path = request.rawPath().substring("/_plugin/".length());
 		int i1 = path.indexOf('/');
@@ -239,8 +216,7 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		if (i1 == -1) {
 			pluginName = path;
 			sitePath = null;
-			
-			
+
 			channel.sendResponse(new StringRestResponse(NOT_FOUND));
 			return;
 		} else {
@@ -252,10 +228,8 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 			sitePath = "/index.html";
 		}
 
-		
 		sitePath = sitePath.replace('/', File.separatorChar);
 
-		
 		File siteFile = new File(new File(environment.pluginsFile(), pluginName), "_site");
 		File file = new File(siteFile, sitePath);
 		if (!file.exists() || file.isHidden()) {
@@ -278,8 +252,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		}
 	}
 
-	
-	
 	/**
 	 * Guess mime type.
 	 *
@@ -300,7 +272,7 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 	}
 
 	static {
-		
+
 		Map<String, String> mimeTypes = new HashMap<String, String>();
 		mimeTypes.put("txt", "text/plain");
 		mimeTypes.put("css", "text/css");
@@ -308,7 +280,7 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		mimeTypes.put("htm", "text/html");
 		mimeTypes.put("html", "text/html");
 		mimeTypes.put("xml", "text/xml");
-		mimeTypes.put("js", "text/javascript"); 
+		mimeTypes.put("js", "text/javascript");
 		mimeTypes.put("xhtml", "application/xhtml+xml");
 		mimeTypes.put("json", "application/json");
 		mimeTypes.put("pdf", "application/pdf");
@@ -325,7 +297,6 @@ public class HttpServer extends AbstractLifecycleComponent<HttpServer> {
 		DEFAULT_MIME_TYPES = ImmutableMap.copyOf(mimeTypes);
 	}
 
-	
 	/** The Constant DEFAULT_MIME_TYPES. */
 	public static final Map<String, String> DEFAULT_MIME_TYPES;
 }

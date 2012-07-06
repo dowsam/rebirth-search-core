@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardSegments.java 2012-3-29 15:02:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardSegments.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.segments;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 
 import com.google.common.collect.Iterators;
 
-
 /**
  * The Class IndexShardSegments.
  *
@@ -20,15 +18,12 @@ import com.google.common.collect.Iterators;
  */
 public class IndexShardSegments implements Iterable<ShardSegments> {
 
-	
 	/** The shard id. */
 	private final ShardId shardId;
 
-	
 	/** The shards. */
 	private final ShardSegments[] shards;
 
-	
 	/**
 	 * Instantiates a new index shard segments.
 	 *
@@ -40,7 +35,6 @@ public class IndexShardSegments implements Iterable<ShardSegments> {
 		this.shards = shards;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -50,7 +44,6 @@ public class IndexShardSegments implements Iterable<ShardSegments> {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Gets the shard id.
 	 *
@@ -60,7 +53,6 @@ public class IndexShardSegments implements Iterable<ShardSegments> {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Gets the at.
 	 *
@@ -71,7 +63,6 @@ public class IndexShardSegments implements Iterable<ShardSegments> {
 		return shards[i];
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -81,7 +72,6 @@ public class IndexShardSegments implements Iterable<ShardSegments> {
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -91,7 +81,6 @@ public class IndexShardSegments implements Iterable<ShardSegments> {
 		return this.shards;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulkRequestBuilder.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulkRequestBuilder.java 2012-7-6 14:28:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.action.support.replication.ReplicationType;
 import cn.com.rebirth.search.core.client.Client;
 
-
 /**
  * The Class BulkRequestBuilder.
  *
@@ -25,7 +23,6 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResponse> {
 
-	
 	/**
 	 * Instantiates a new bulk request builder.
 	 *
@@ -35,7 +32,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		super(client, new BulkRequest());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -47,7 +43,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -59,7 +54,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -71,7 +65,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -83,7 +76,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -99,7 +91,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -118,7 +109,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Sets the replication type.
 	 *
@@ -130,7 +120,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Sets the consistency level.
 	 *
@@ -142,7 +131,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -154,7 +142,6 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return this;
 	}
 
-	
 	/**
 	 * Number of actions.
 	 *
@@ -164,9 +151,8 @@ public class BulkRequestBuilder extends BaseRequestBuilder<BulkRequest, BulkResp
 		return request.numberOfActions();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<BulkResponse> listener) {

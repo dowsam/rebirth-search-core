@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ParsedQuery.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ParsedQuery.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.lucene.search.Queries;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class ParsedQuery.
  *
@@ -21,20 +19,16 @@ import com.google.common.collect.ImmutableMap;
  */
 public class ParsedQuery {
 
-	
-	/** The MATC h_ al l_ parse d_ query. */
+	/** The match all parsed query. */
 	public static ParsedQuery MATCH_ALL_PARSED_QUERY = new ParsedQuery(Queries.MATCH_ALL_QUERY,
 			ImmutableMap.<String, Filter> of());
 
-	
 	/** The query. */
 	private final Query query;
 
-	
 	/** The named filters. */
 	private final ImmutableMap<String, Filter> namedFilters;
 
-	
 	/**
 	 * Instantiates a new parsed query.
 	 *
@@ -46,7 +40,6 @@ public class ParsedQuery {
 		this.namedFilters = namedFilters;
 	}
 
-	
 	/**
 	 * Instantiates a new parsed query.
 	 *
@@ -58,7 +51,6 @@ public class ParsedQuery {
 		this.namedFilters = parsedQuery.namedFilters;
 	}
 
-	
 	/**
 	 * Query.
 	 *
@@ -68,7 +60,6 @@ public class ParsedQuery {
 		return this.query;
 	}
 
-	
 	/**
 	 * Named filters.
 	 *

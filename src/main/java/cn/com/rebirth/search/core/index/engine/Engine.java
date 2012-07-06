@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Engine.java 2012-3-29 15:01:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Engine.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.engine;
 
@@ -18,7 +17,7 @@ import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.CloseableComponent;
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.index.shard.IndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.translog.Translog;
 
-
 /**
  * The Interface Engine.
  *
@@ -41,11 +39,9 @@ import cn.com.rebirth.search.core.index.translog.Translog;
  */
 public interface Engine extends IndexShardComponent, CloseableComponent {
 
-	
-	/** The INACTIV e_ shar d_ indexin g_ buffer. */
+	/** The inactive shard indexing buffer. */
 	static ByteSizeValue INACTIVE_SHARD_INDEXING_BUFFER = ByteSizeValue.parseBytesSizeValue("500kb");
 
-	
 	/**
 	 * Default refresh interval.
 	 *
@@ -53,7 +49,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	TimeValue defaultRefreshInterval();
 
-	
 	/**
 	 * Enable gc deletes.
 	 *
@@ -61,7 +56,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void enableGcDeletes(boolean enableGcDeletes);
 
-	
 	/**
 	 * Update indexing buffer size.
 	 *
@@ -69,7 +63,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void updateIndexingBufferSize(ByteSizeValue indexingBufferSize);
 
-	
 	/**
 	 * Adds the failed engine listener.
 	 *
@@ -77,7 +70,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void addFailedEngineListener(FailedEngineListener listener);
 
-	
 	/**
 	 * Start.
 	 *
@@ -85,7 +77,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void start() throws EngineException;
 
-	
 	/**
 	 * Creates the.
 	 *
@@ -94,7 +85,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void create(Create create) throws EngineException;
 
-	
 	/**
 	 * Index.
 	 *
@@ -103,7 +93,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void index(Index index) throws EngineException;
 
-	
 	/**
 	 * Delete.
 	 *
@@ -112,7 +101,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void delete(Delete delete) throws EngineException;
 
-	
 	/**
 	 * Delete.
 	 *
@@ -121,7 +109,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void delete(DeleteByQuery delete) throws EngineException;
 
-	
 	/**
 	 * Gets the.
 	 *
@@ -131,7 +118,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	GetResult get(Get get) throws EngineException;
 
-	
 	/**
 	 * Searcher.
 	 *
@@ -140,7 +126,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	Searcher searcher() throws EngineException;
 
-	
 	/**
 	 * Segments.
 	 *
@@ -148,7 +133,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	List<Segment> segments();
 
-	
 	/**
 	 * Refresh needed.
 	 *
@@ -156,7 +140,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	boolean refreshNeeded();
 
-	
 	/**
 	 * Possible merge needed.
 	 *
@@ -164,7 +147,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	boolean possibleMergeNeeded();
 
-	
 	/**
 	 * Maybe merge.
 	 *
@@ -172,7 +154,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void maybeMerge() throws EngineException;
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -181,7 +162,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void refresh(Refresh refresh) throws EngineException;
 
-	
 	/**
 	 * Flush.
 	 *
@@ -191,7 +171,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void flush(Flush flush) throws EngineException, FlushNotAllowedEngineException;
 
-	
 	/**
 	 * Optimize.
 	 *
@@ -200,7 +179,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void optimize(Optimize optimize) throws EngineException;
 
-	
 	/**
 	 * Snapshot.
 	 *
@@ -211,7 +189,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	<T> T snapshot(SnapshotHandler<T> snapshotHandler) throws EngineException;
 
-	
 	/**
 	 * Recover.
 	 *
@@ -220,7 +197,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	void recover(RecoveryHandler recoveryHandler) throws EngineException;
 
-	
 	/**
 	 * The listener interface for receiving failedEngine events.
 	 * The class that is interested in processing a failedEngine
@@ -234,7 +210,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static interface FailedEngineListener {
 
-		
 		/**
 		 * On failed engine.
 		 *
@@ -244,7 +219,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		void onFailedEngine(ShardId shardId, Throwable t);
 	}
 
-	
 	/**
 	 * The Interface RecoveryHandler.
 	 *
@@ -252,35 +226,31 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static interface RecoveryHandler {
 
-		
 		/**
 		 * Phase1.
 		 *
 		 * @param snapshot the snapshot
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		void phase1(SnapshotIndexCommit snapshot) throws RestartException;
+		void phase1(SnapshotIndexCommit snapshot) throws RebirthException;
 
-		
 		/**
 		 * Phase2.
 		 *
 		 * @param snapshot the snapshot
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		void phase2(Translog.Snapshot snapshot) throws RestartException;
+		void phase2(Translog.Snapshot snapshot) throws RebirthException;
 
-		
 		/**
 		 * Phase3.
 		 *
 		 * @param snapshot the snapshot
-		 * @throws SumMallSearchException the sum mall search exception
+		 * @throws RebirthException the rebirth exception
 		 */
-		void phase3(Translog.Snapshot snapshot) throws RestartException;
+		void phase3(Translog.Snapshot snapshot) throws RebirthException;
 	}
 
-	
 	/**
 	 * The Interface SnapshotHandler.
 	 *
@@ -289,7 +259,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static interface SnapshotHandler<T> {
 
-		
 		/**
 		 * Snapshot.
 		 *
@@ -301,7 +270,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		T snapshot(SnapshotIndexCommit snapshotIndexCommit, Translog.Snapshot translogSnapshot) throws EngineException;
 	}
 
-	
 	/**
 	 * The Interface Searcher.
 	 *
@@ -309,7 +277,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static interface Searcher extends Releasable {
 
-		
 		/**
 		 * Reader.
 		 *
@@ -317,7 +284,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		 */
 		IndexReader reader();
 
-		
 		/**
 		 * Searcher.
 		 *
@@ -326,7 +292,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		ExtendedIndexSearcher searcher();
 	}
 
-	
 	/**
 	 * The Class Refresh.
 	 *
@@ -334,15 +299,12 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Refresh {
 
-		
 		/** The wait for operations. */
 		private final boolean waitForOperations;
 
-		
 		/** The force. */
 		private boolean force = false;
 
-		
 		/**
 		 * Instantiates a new refresh.
 		 *
@@ -352,7 +314,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.waitForOperations = waitForOperations;
 		}
 
-		
 		/**
 		 * Force.
 		 *
@@ -364,7 +325,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Force.
 		 *
@@ -374,7 +334,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.force;
 		}
 
-		
 		/**
 		 * Wait for operations.
 		 *
@@ -384,7 +343,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return waitForOperations;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -394,7 +352,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Flush.
 	 *
@@ -402,19 +359,15 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Flush {
 
-		
 		/** The full. */
 		private boolean full = false;
 
-		
 		/** The refresh. */
 		private boolean refresh = false;
 
-		
 		/** The force. */
 		private boolean force = false;
 
-		
 		/**
 		 * Refresh.
 		 *
@@ -424,7 +377,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.refresh;
 		}
 
-		
 		/**
 		 * Refresh.
 		 *
@@ -436,7 +388,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Full.
 		 *
@@ -446,7 +397,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.full;
 		}
 
-		
 		/**
 		 * Full.
 		 *
@@ -458,7 +408,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Force.
 		 *
@@ -468,7 +417,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.force;
 		}
 
-		
 		/**
 		 * Force.
 		 *
@@ -480,7 +428,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -490,7 +437,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Optimize.
 	 *
@@ -498,34 +444,27 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Optimize {
 
-		
 		/** The wait for merge. */
 		private boolean waitForMerge = true;
 
-		
 		/** The max num segments. */
 		private int maxNumSegments = -1;
 
-		
 		/** The only expunge deletes. */
 		private boolean onlyExpungeDeletes = false;
 
-		
 		/** The flush. */
 		private boolean flush = false;
 
-		
 		/** The refresh. */
 		private boolean refresh = false;
 
-		
 		/**
 		 * Instantiates a new optimize.
 		 */
 		public Optimize() {
 		}
 
-		
 		/**
 		 * Wait for merge.
 		 *
@@ -535,7 +474,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return waitForMerge;
 		}
 
-		
 		/**
 		 * Wait for merge.
 		 *
@@ -547,7 +485,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Max num segments.
 		 *
@@ -557,7 +494,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return maxNumSegments;
 		}
 
-		
 		/**
 		 * Max num segments.
 		 *
@@ -569,7 +505,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Only expunge deletes.
 		 *
@@ -579,7 +514,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return onlyExpungeDeletes;
 		}
 
-		
 		/**
 		 * Only expunge deletes.
 		 *
@@ -591,7 +525,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Flush.
 		 *
@@ -601,7 +534,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return flush;
 		}
 
-		
 		/**
 		 * Flush.
 		 *
@@ -613,7 +545,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Refresh.
 		 *
@@ -623,7 +554,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return refresh;
 		}
 
-		
 		/**
 		 * Refresh.
 		 *
@@ -635,7 +565,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -646,7 +575,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Operation.
 	 *
@@ -654,7 +582,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static interface Operation {
 
-		
 		/**
 		 * The Enum Type.
 		 *
@@ -662,20 +589,16 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		 */
 		static enum Type {
 
-			
-			/** The CREATE. */
+			/** The create. */
 			CREATE,
 
-			
-			/** The INDEX. */
+			/** The index. */
 			INDEX,
 
-			
-			/** The DELETE. */
+			/** The delete. */
 			DELETE
 		}
 
-		
 		/**
 		 * The Enum Origin.
 		 *
@@ -683,20 +606,16 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		 */
 		static enum Origin {
 
-			
-			/** The PRIMARY. */
+			/** The primary. */
 			PRIMARY,
 
-			
-			/** The REPLICA. */
+			/** The replica. */
 			REPLICA,
 
-			
-			/** The RECOVERY. */
+			/** The recovery. */
 			RECOVERY
 		}
 
-		
 		/**
 		 * Op type.
 		 *
@@ -704,7 +623,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		 */
 		Type opType();
 
-		
 		/**
 		 * Origin.
 		 *
@@ -713,7 +631,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		Origin origin();
 	}
 
-	
 	/**
 	 * The Interface IndexingOperation.
 	 *
@@ -721,7 +638,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static interface IndexingOperation extends Operation {
 
-		
 		/**
 		 * Parsed doc.
 		 *
@@ -729,7 +645,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		 */
 		ParsedDocument parsedDoc();
 
-		
 		/**
 		 * Docs.
 		 *
@@ -737,7 +652,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		 */
 		List<Document> docs();
 
-		
 		/**
 		 * Doc mapper.
 		 *
@@ -746,7 +660,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		DocumentMapper docMapper();
 	}
 
-	
 	/**
 	 * The Class Create.
 	 *
@@ -754,39 +667,30 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Create implements IndexingOperation {
 
-		
 		/** The doc mapper. */
 		private final DocumentMapper docMapper;
 
-		
 		/** The uid. */
 		private final Term uid;
 
-		
 		/** The doc. */
 		private final ParsedDocument doc;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/** The version type. */
 		private VersionType versionType = VersionType.INTERNAL;
 
-		
 		/** The origin. */
 		private Origin origin = Origin.PRIMARY;
 
-		
 		/** The start time. */
 		private long startTime;
 
-		
 		/** The end time. */
 		private long endTime;
 
-		
 		/**
 		 * Instantiates a new creates the.
 		 *
@@ -800,24 +704,21 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.doc = doc;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.IndexingOperation#docMapper()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.IndexingOperation#docMapper()
 		 */
 		public DocumentMapper docMapper() {
 			return this.docMapper;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.CREATE;
 		}
 
-		
 		/**
 		 * Origin.
 		 *
@@ -829,24 +730,21 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Operation#origin()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Operation#origin()
 		 */
 		@Override
 		public Origin origin() {
 			return this.origin;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.IndexingOperation#parsedDoc()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.IndexingOperation#parsedDoc()
 		 */
 		public ParsedDocument parsedDoc() {
 			return this.doc;
 		}
 
-		
 		/**
 		 * Uid.
 		 *
@@ -856,7 +754,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.uid;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -866,7 +763,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.type();
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -876,7 +772,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.id();
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -886,7 +781,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.routing();
 		}
 
-		
 		/**
 		 * Timestamp.
 		 *
@@ -896,7 +790,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.timestamp();
 		}
 
-		
 		/**
 		 * Ttl.
 		 *
@@ -906,7 +799,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.ttl();
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -916,7 +808,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.version;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -928,7 +819,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Version type.
 		 *
@@ -938,7 +828,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.versionType;
 		}
 
-		
 		/**
 		 * Version type.
 		 *
@@ -950,7 +839,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Parent.
 		 *
@@ -960,15 +848,13 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.parent();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.IndexingOperation#docs()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.IndexingOperation#docs()
 		 */
 		public List<Document> docs() {
 			return this.doc.docs();
 		}
 
-		
 		/**
 		 * Analyzer.
 		 *
@@ -978,7 +864,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.analyzer();
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -988,7 +873,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.source();
 		}
 
-		
 		/**
 		 * Source offset.
 		 *
@@ -998,7 +882,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.sourceOffset();
 		}
 
-		
 		/**
 		 * Source length.
 		 *
@@ -1008,7 +891,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.sourceLength();
 		}
 
-		
 		/**
 		 * Uid field.
 		 *
@@ -1018,7 +900,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return (UidField) doc.rootDoc().getFieldable(UidFieldMapper.NAME);
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1030,7 +911,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1040,7 +920,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.startTime;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1052,7 +931,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1063,7 +941,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Index.
 	 *
@@ -1071,39 +948,30 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Index implements IndexingOperation {
 
-		
 		/** The doc mapper. */
 		private final DocumentMapper docMapper;
 
-		
 		/** The uid. */
 		private final Term uid;
 
-		
 		/** The doc. */
 		private final ParsedDocument doc;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/** The version type. */
 		private VersionType versionType = VersionType.INTERNAL;
 
-		
 		/** The origin. */
 		private Origin origin = Origin.PRIMARY;
 
-		
 		/** The start time. */
 		private long startTime;
 
-		
 		/** The end time. */
 		private long endTime;
 
-		
 		/**
 		 * Instantiates a new index.
 		 *
@@ -1117,24 +985,21 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.doc = doc;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.IndexingOperation#docMapper()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.IndexingOperation#docMapper()
 		 */
 		public DocumentMapper docMapper() {
 			return this.docMapper;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.INDEX;
 		}
 
-		
 		/**
 		 * Origin.
 		 *
@@ -1146,16 +1011,14 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Operation#origin()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Operation#origin()
 		 */
 		@Override
 		public Origin origin() {
 			return this.origin;
 		}
 
-		
 		/**
 		 * Uid.
 		 *
@@ -1165,15 +1028,13 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.uid;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.IndexingOperation#parsedDoc()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.IndexingOperation#parsedDoc()
 		 */
 		public ParsedDocument parsedDoc() {
 			return this.doc;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1185,7 +1046,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1195,7 +1055,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.version;
 		}
 
-		
 		/**
 		 * Version type.
 		 *
@@ -1207,7 +1066,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Version type.
 		 *
@@ -1217,15 +1075,13 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.versionType;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.IndexingOperation#docs()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.IndexingOperation#docs()
 		 */
 		public List<Document> docs() {
 			return this.doc.docs();
 		}
 
-		
 		/**
 		 * Analyzer.
 		 *
@@ -1235,7 +1091,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.analyzer();
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -1245,7 +1100,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.id();
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -1255,7 +1109,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.type();
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -1265,7 +1118,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.routing();
 		}
 
-		
 		/**
 		 * Parent.
 		 *
@@ -1275,7 +1127,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.parent();
 		}
 
-		
 		/**
 		 * Timestamp.
 		 *
@@ -1285,7 +1136,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.timestamp();
 		}
 
-		
 		/**
 		 * Ttl.
 		 *
@@ -1295,7 +1145,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.ttl();
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -1305,7 +1154,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.source();
 		}
 
-		
 		/**
 		 * Source offset.
 		 *
@@ -1315,7 +1163,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.sourceOffset();
 		}
 
-		
 		/**
 		 * Source length.
 		 *
@@ -1325,7 +1172,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.doc.sourceLength();
 		}
 
-		
 		/**
 		 * Uid field.
 		 *
@@ -1335,7 +1181,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return (UidField) doc.rootDoc().getFieldable(UidFieldMapper.NAME);
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1347,7 +1192,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1357,7 +1201,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.startTime;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1369,7 +1212,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1380,7 +1222,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Delete.
 	 *
@@ -1388,43 +1229,33 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Delete implements Operation {
 
-		
 		/** The type. */
 		private final String type;
 
-		
 		/** The id. */
 		private final String id;
 
-		
 		/** The uid. */
 		private final Term uid;
 
-		
 		/** The version. */
 		private long version;
 
-		
 		/** The version type. */
 		private VersionType versionType = VersionType.INTERNAL;
 
-		
 		/** The origin. */
 		private Origin origin = Origin.PRIMARY;
 
-		
 		/** The not found. */
 		private boolean notFound;
 
-		
 		/** The start time. */
 		private long startTime;
 
-		
 		/** The end time. */
 		private long endTime;
 
-		
 		/**
 		 * Instantiates a new delete.
 		 *
@@ -1438,16 +1269,14 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.uid = uid;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Operation#opType()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Operation#opType()
 		 */
 		@Override
 		public Type opType() {
 			return Type.DELETE;
 		}
 
-		
 		/**
 		 * Origin.
 		 *
@@ -1459,16 +1288,14 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Operation#origin()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Operation#origin()
 		 */
 		@Override
 		public Origin origin() {
 			return this.origin;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -1478,7 +1305,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.type;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -1488,7 +1314,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.id;
 		}
 
-		
 		/**
 		 * Uid.
 		 *
@@ -1498,7 +1323,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.uid;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1510,7 +1334,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1520,7 +1343,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.version;
 		}
 
-		
 		/**
 		 * Version type.
 		 *
@@ -1532,7 +1354,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Version type.
 		 *
@@ -1542,7 +1363,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.versionType;
 		}
 
-		
 		/**
 		 * Not found.
 		 *
@@ -1552,7 +1372,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.notFound;
 		}
 
-		
 		/**
 		 * Not found.
 		 *
@@ -1564,7 +1383,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1576,7 +1394,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1586,7 +1403,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.startTime;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1598,7 +1414,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1609,7 +1424,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class DeleteByQuery.
 	 *
@@ -1617,35 +1431,27 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class DeleteByQuery {
 
-		
 		/** The query. */
 		private final Query query;
 
-		
 		/** The source. */
 		private final BytesHolder source;
 
-		
 		/** The filtering aliases. */
 		private final String[] filteringAliases;
 
-		
 		/** The alias filter. */
 		private final Filter aliasFilter;
 
-		
 		/** The types. */
 		private final String[] types;
 
-		
 		/** The start time. */
 		private long startTime;
 
-		
 		/** The end time. */
 		private long endTime;
 
-		
 		/**
 		 * Instantiates a new delete by query.
 		 *
@@ -1664,7 +1470,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.aliasFilter = aliasFilter;
 		}
 
-		
 		/**
 		 * Query.
 		 *
@@ -1674,7 +1479,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.query;
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -1684,7 +1488,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.source;
 		}
 
-		
 		/**
 		 * Types.
 		 *
@@ -1694,7 +1497,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.types;
 		}
 
-		
 		/**
 		 * Filtering aliases.
 		 *
@@ -1704,7 +1506,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return filteringAliases;
 		}
 
-		
 		/**
 		 * Alias filter.
 		 *
@@ -1714,7 +1515,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return aliasFilter;
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1726,7 +1526,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * Start time.
 		 *
@@ -1736,7 +1535,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.startTime;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1748,7 +1546,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this;
 		}
 
-		
 		/**
 		 * End time.
 		 *
@@ -1759,7 +1556,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class Get.
 	 *
@@ -1767,19 +1563,15 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class Get {
 
-		
 		/** The realtime. */
 		private final boolean realtime;
 
-		
 		/** The uid. */
 		private final Term uid;
 
-		
 		/** The load source. */
 		private boolean loadSource = true;
 
-		
 		/**
 		 * Instantiates a new gets the.
 		 *
@@ -1791,7 +1583,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.uid = uid;
 		}
 
-		
 		/**
 		 * Realtime.
 		 *
@@ -1801,7 +1592,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.realtime;
 		}
 
-		
 		/**
 		 * Uid.
 		 *
@@ -1811,7 +1601,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return uid;
 		}
 
-		
 		/**
 		 * Load source.
 		 *
@@ -1821,7 +1610,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.loadSource;
 		}
 
-		
 		/**
 		 * Load source.
 		 *
@@ -1834,7 +1622,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class GetResult.
 	 *
@@ -1842,31 +1629,24 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 	 */
 	static class GetResult {
 
-		
 		/** The exists. */
 		private final boolean exists;
 
-		
 		/** The version. */
 		private final long version;
 
-		
 		/** The source. */
 		private final Translog.Source source;
 
-		
 		/** The doc id and version. */
 		private final UidField.DocIdAndVersion docIdAndVersion;
 
-		
 		/** The searcher. */
 		private final Searcher searcher;
 
-		
 		/** The Constant NOT_EXISTS. */
 		public static final GetResult NOT_EXISTS = new GetResult(false, -1, null);
 
-		
 		/**
 		 * Instantiates a new gets the result.
 		 *
@@ -1882,7 +1662,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.searcher = null;
 		}
 
-		
 		/**
 		 * Instantiates a new gets the result.
 		 *
@@ -1897,7 +1676,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			this.searcher = searcher;
 		}
 
-		
 		/**
 		 * Exists.
 		 *
@@ -1907,7 +1685,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return exists;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -1917,7 +1694,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.version;
 		}
 
-		
 		/**
 		 * Source.
 		 *
@@ -1928,7 +1704,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return source;
 		}
 
-		
 		/**
 		 * Searcher.
 		 *
@@ -1938,7 +1713,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return this.searcher;
 		}
 
-		
 		/**
 		 * Doc id and version.
 		 *
@@ -1948,7 +1722,6 @@ public interface Engine extends IndexShardComponent, CloseableComponent {
 			return docIdAndVersion;
 		}
 
-		
 		/**
 		 * Release.
 		 */

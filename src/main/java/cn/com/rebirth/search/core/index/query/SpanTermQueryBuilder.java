@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SpanTermQueryBuilder.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SpanTermQueryBuilder.java 2012-7-6 14:29:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class SpanTermQueryBuilder.
@@ -18,19 +16,15 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The value. */
 	private final Object value;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/**
 	 * Instantiates a new span term query builder.
 	 *
@@ -41,7 +35,6 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new span term query builder.
 	 *
@@ -52,7 +45,6 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new span term query builder.
 	 *
@@ -63,7 +55,6 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new span term query builder.
 	 *
@@ -74,7 +65,6 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new span term query builder.
 	 *
@@ -85,7 +75,6 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new span term query builder.
 	 *
@@ -97,7 +86,6 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		this.value = value;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -109,9 +97,8 @@ public class SpanTermQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

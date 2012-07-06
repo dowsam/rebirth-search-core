@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesQueryBuilder.java 2012-3-29 15:02:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesQueryBuilder.java 2012-7-6 14:30:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class IndicesQueryBuilder.
@@ -18,23 +16,18 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class IndicesQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The indices. */
 	private final String[] indices;
 
-	
 	/** The s no match query. */
 	private String sNoMatchQuery;
 
-	
 	/** The no match query. */
 	private QueryBuilder noMatchQuery;
 
-	
 	/**
 	 * Instantiates a new indices query builder.
 	 *
@@ -46,7 +39,6 @@ public class IndicesQueryBuilder extends BaseQueryBuilder {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * No match query.
 	 *
@@ -58,7 +50,6 @@ public class IndicesQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * No match query.
 	 *
@@ -70,9 +61,8 @@ public class IndicesQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

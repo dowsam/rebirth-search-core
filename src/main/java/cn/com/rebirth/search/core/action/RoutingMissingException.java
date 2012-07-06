@@ -1,38 +1,31 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RoutingMissingException.java 2012-3-29 15:00:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RoutingMissingException.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class RoutingMissingException.
  *
  * @author l.xue.nong
  */
-public class RoutingMissingException extends RestartException {
+public class RoutingMissingException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4299852296910579297L;
 
-	
 	/** The index. */
 	private final String index;
 
-	
 	/** The type. */
 	private final String type;
 
-	
 	/** The id. */
 	private final String id;
 
-	
 	/**
 	 * Instantiates a new routing missing exception.
 	 *
@@ -47,7 +40,6 @@ public class RoutingMissingException extends RestartException {
 		this.id = id;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -57,7 +49,6 @@ public class RoutingMissingException extends RestartException {
 		return index;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -67,7 +58,6 @@ public class RoutingMissingException extends RestartException {
 		return type;
 	}
 
-	
 	/**
 	 * Id.
 	 *

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldQueryParser.java 2012-3-29 15:00:59 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldQueryParser.java 2012-7-6 14:28:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class FieldQueryParser.
  *
@@ -29,19 +27,15 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public class FieldQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "field";
 
-	
 	/** The default analyze wildcard. */
 	private final boolean defaultAnalyzeWildcard;
 
-	
 	/** The default allow leading wildcard. */
 	private final boolean defaultAllowLeadingWildcard;
 
-	
 	/**
 	 * Instantiates a new field query parser.
 	 *
@@ -55,18 +49,16 @@ public class FieldQueryParser implements QueryParser {
 				QueryParserSettings.DEFAULT_ALLOW_LEADING_WILDCARD);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -150,7 +142,7 @@ public class FieldQueryParser implements QueryParser {
 			parser.nextToken();
 		} else {
 			qpSettings.queryString(parser.text());
-			
+
 			parser.nextToken();
 		}
 

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoverySource.java 2012-3-29 15:01:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoverySource.java 2012-7-6 14:29:06 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -16,7 +15,7 @@ import org.apache.lucene.store.IndexInput;
 
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.StopWatch;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
@@ -40,7 +39,6 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class RecoverySource.
  *
@@ -48,7 +46,6 @@ import com.google.common.collect.Sets;
  */
 public class RecoverySource extends AbstractComponent {
 
-	
 	/**
 	 * The Class Actions.
 	 *
@@ -56,24 +53,19 @@ public class RecoverySource extends AbstractComponent {
 	 */
 	public static class Actions {
 
-		
 		/** The Constant START_RECOVERY. */
 		public static final String START_RECOVERY = "index/shard/recovery/startRecovery";
 	}
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The recovery settings. */
 	private final RecoverySettings recoverySettings;
 
-	
 	/**
 	 * Instantiates a new recovery source.
 	 *
@@ -94,7 +86,6 @@ public class RecoverySource extends AbstractComponent {
 		transportService.registerHandler(Actions.START_RECOVERY, new StartRecoveryTransportRequestHandler());
 	}
 
-	
 	/**
 	 * Recover.
 	 *
@@ -109,7 +100,7 @@ public class RecoverySource extends AbstractComponent {
 		final RecoveryResponse response = new RecoveryResponse();
 		shard.recover(new Engine.RecoveryHandler() {
 			@Override
-			public void phase1(final SnapshotIndexCommit snapshot) throws RestartException {
+			public void phase1(final SnapshotIndexCommit snapshot) throws RebirthException {
 				long totalSize = 0;
 				long existingTotalSize = 0;
 				try {
@@ -119,7 +110,7 @@ public class RecoverySource extends AbstractComponent {
 						StoreFileMetaData md = shard.store().metaData(name);
 						boolean useExisting = false;
 						if (request.existingFiles().containsKey(name)) {
-							
+
 							if (!name.startsWith("segments") && md.isSame(request.existingFiles().get(name))) {
 								response.phase1ExistingFileNames.add(name);
 								response.phase1ExistingFileSizes.add(md.length());
@@ -180,7 +171,7 @@ public class RecoverySource extends AbstractComponent {
 									long len = indexInput.length();
 									long readCount = 0;
 									while (readCount < len) {
-										if (shard.state() == IndexShardState.CLOSED) { 
+										if (shard.state() == IndexShardState.CLOSED) {
 											throw new IndexShardClosedException(shard.shardId());
 										}
 										int toRead = readCount + BUFFER_SIZE > len ? (int) (len - readCount)
@@ -211,7 +202,7 @@ public class RecoverySource extends AbstractComponent {
 										try {
 											indexInput.close();
 										} catch (IOException e) {
-											
+
 										}
 									}
 									latch.countDown();
@@ -226,7 +217,6 @@ public class RecoverySource extends AbstractComponent {
 						throw lastException.get();
 					}
 
-					
 					Set<String> snapshotFiles = Sets.newHashSet(snapshot.getFiles());
 					transportService.submitRequest(request.targetNode(), RecoveryTarget.Actions.CLEAN_FILES,
 							new RecoveryCleanFilesRequest(shard.shardId(), snapshotFiles),
@@ -243,7 +233,7 @@ public class RecoverySource extends AbstractComponent {
 			}
 
 			@Override
-			public void phase2(Translog.Snapshot snapshot) throws RestartException {
+			public void phase2(Translog.Snapshot snapshot) throws RebirthException {
 				if (shard.state() == IndexShardState.CLOSED) {
 					throw new IndexShardClosedException(request.shardId());
 				}
@@ -271,7 +261,7 @@ public class RecoverySource extends AbstractComponent {
 			}
 
 			@Override
-			public void phase3(Translog.Snapshot snapshot) throws RestartException {
+			public void phase3(Translog.Snapshot snapshot) throws RebirthException {
 				if (shard.state() == IndexShardState.CLOSED) {
 					throw new IndexShardClosedException(request.shardId());
 				}
@@ -284,13 +274,11 @@ public class RecoverySource extends AbstractComponent {
 						new RecoveryFinalizeRecoveryRequest(request.shardId()),
 						VoidTransportResponseHandler.INSTANCE_SAME).txGet();
 				if (request.markAsRelocated()) {
-					
+
 					try {
 						shard.relocated("to " + request.targetNode());
 					} catch (IllegalIndexShardStateException e) {
-						
-						
-						
+
 					}
 				}
 				stopWatch.stop();
@@ -300,7 +288,7 @@ public class RecoverySource extends AbstractComponent {
 				response.phase3Operations = totalOperations;
 			}
 
-			private int sendSnapshot(Translog.Snapshot snapshot) throws RestartException {
+			private int sendSnapshot(Translog.Snapshot snapshot) throws RebirthException {
 				int ops = 0;
 				long size = 0;
 				int totalOperations = 0;
@@ -333,7 +321,7 @@ public class RecoverySource extends AbstractComponent {
 						operations.clear();
 					}
 				}
-				
+
 				if (!operations.isEmpty()) {
 					RecoveryTranslogOperationsRequest translogOperationsRequest = new RecoveryTranslogOperationsRequest(
 							request.shardId(), operations);
@@ -348,7 +336,6 @@ public class RecoverySource extends AbstractComponent {
 		return response;
 	}
 
-	
 	/**
 	 * The Class StartRecoveryTransportRequestHandler.
 	 *
@@ -356,27 +343,24 @@ public class RecoverySource extends AbstractComponent {
 	 */
 	class StartRecoveryTransportRequestHandler extends BaseTransportRequestHandler<StartRecoveryRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public StartRecoveryRequest newInstance() {
 			return new StartRecoveryRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.GENERIC;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final StartRecoveryRequest request, final TransportChannel channel)

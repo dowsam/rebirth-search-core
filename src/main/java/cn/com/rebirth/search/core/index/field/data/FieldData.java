@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldData.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldData.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data;
 
@@ -14,7 +13,6 @@ import org.apache.lucene.index.IndexReader;
 
 import cn.com.rebirth.commons.thread.ThreadLocals;
 
-
 /**
  * The Class FieldData.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.commons.thread.ThreadLocals;
  */
 public abstract class FieldData<Doc extends DocFieldData> {
 
-	
 	/** The cached doc field data. */
 	private final ThreadLocal<ThreadLocals.CleanableValue<Doc>> cachedDocFieldData = new ThreadLocal<ThreadLocals.CleanableValue<Doc>>() {
 		@Override
@@ -32,15 +29,12 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		}
 	};
 
-	
 	/** The field name. */
 	private final String fieldName;
 
-	
 	/** The size in bytes. */
 	private long sizeInBytes = -1;
 
-	
 	/**
 	 * Instantiates a new field data.
 	 *
@@ -50,7 +44,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		this.fieldName = fieldName;
 	}
 
-	
 	/**
 	 * Field name.
 	 *
@@ -60,7 +53,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		return fieldName;
 	}
 
-	
 	/**
 	 * Doc field data.
 	 *
@@ -73,7 +65,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		return docFieldData;
 	}
 
-	
 	/**
 	 * Size in bytes.
 	 *
@@ -86,7 +77,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		return sizeInBytes;
 	}
 
-	
 	/**
 	 * Compute size in bytes.
 	 *
@@ -94,7 +84,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	protected abstract long computeSizeInBytes();
 
-	
 	/**
 	 * Creates the field data.
 	 *
@@ -102,7 +91,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	protected abstract Doc createFieldData();
 
-	
 	/**
 	 * Multi valued.
 	 *
@@ -110,7 +98,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract boolean multiValued();
 
-	
 	/**
 	 * Checks for value.
 	 *
@@ -119,7 +106,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract boolean hasValue(int docId);
 
-	
 	/**
 	 * String value.
 	 *
@@ -128,7 +114,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract String stringValue(int docId);
 
-	
 	/**
 	 * For each value.
 	 *
@@ -136,7 +121,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract void forEachValue(StringValueProc proc);
 
-	
 	/**
 	 * The Interface StringValueProc.
 	 *
@@ -144,7 +128,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public static interface StringValueProc {
 
-		
 		/**
 		 * On value.
 		 *
@@ -153,7 +136,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		void onValue(String value);
 	}
 
-	
 	/**
 	 * For each value in doc.
 	 *
@@ -162,7 +144,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract void forEachValueInDoc(int docId, StringValueInDocProc proc);
 
-	
 	/**
 	 * The Interface StringValueInDocProc.
 	 *
@@ -170,7 +151,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public static interface StringValueInDocProc {
 
-		
 		/**
 		 * On value.
 		 *
@@ -179,7 +159,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		 */
 		void onValue(int docId, String value);
 
-		
 		/**
 		 * On missing.
 		 *
@@ -188,7 +167,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		void onMissing(int docId);
 	}
 
-	
 	/**
 	 * For each ordinal in doc.
 	 *
@@ -197,7 +175,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract void forEachOrdinalInDoc(int docId, OrdinalInDocProc proc);
 
-	
 	/**
 	 * The Interface OrdinalInDocProc.
 	 *
@@ -205,7 +182,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public static interface OrdinalInDocProc {
 
-		
 		/**
 		 * On ordinal.
 		 *
@@ -215,7 +191,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 		void onOrdinal(int docId, int ordinal);
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -223,7 +198,6 @@ public abstract class FieldData<Doc extends DocFieldData> {
 	 */
 	public abstract FieldDataType type();
 
-	
 	/**
 	 * Load.
 	 *

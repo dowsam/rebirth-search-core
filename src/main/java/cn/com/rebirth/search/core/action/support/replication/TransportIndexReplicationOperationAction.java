@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportIndexReplicationOperationAction.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportIndexReplicationOperationAction.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.replication;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.transport.BaseTransportRequestHandler;
 import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportIndexReplicationOperationAction.
  *
@@ -40,15 +38,12 @@ import cn.com.rebirth.search.core.transport.TransportService;
 public abstract class TransportIndexReplicationOperationAction<Request extends IndexReplicationOperationRequest, Response extends ActionResponse, ShardRequest extends ShardReplicationOperationRequest, ShardReplicaRequest extends ActionRequest, ShardResponse extends ActionResponse>
 		extends TransportAction<Request, Response> {
 
-	
 	/** The cluster service. */
 	protected final ClusterService clusterService;
 
-	
 	/** The shard action. */
 	protected final TransportShardReplicationOperationAction<ShardRequest, ShardReplicaRequest, ShardResponse> shardAction;
 
-	
 	/**
 	 * Instantiates a new transport index replication operation action.
 	 *
@@ -69,9 +64,8 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 		transportService.registerHandler(transportAction(), new TransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(final Request request, final ActionListener<Response> listener) {
@@ -80,7 +74,7 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 		if (blockException != null) {
 			throw blockException;
 		}
-		
+
 		request.index(clusterState.metaData().concreteIndex(request.index()));
 		blockException = checkRequestBlock(clusterState, request);
 		if (blockException != null) {
@@ -101,11 +95,9 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 		for (final ShardIterator shardIt : groups) {
 			ShardRequest shardRequest = newShardRequestInstance(request, shardIt.shardId().id());
 
-			
-			shardRequest.beforeLocalFork(); 
+			shardRequest.beforeLocalFork();
 			shardRequest.operationThreaded(true);
 
-			
 			shardRequest.listenerThreaded(false);
 			shardAction.execute(shardRequest, new ActionListener<ShardResponse>() {
 				@Override
@@ -130,7 +122,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 		}
 	}
 
-	
 	/**
 	 * New request instance.
 	 *
@@ -138,7 +129,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract Request newRequestInstance();
 
-	
 	/**
 	 * New response instance.
 	 *
@@ -148,7 +138,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract Response newResponseInstance(Request request, AtomicReferenceArray shardsResponses);
 
-	
 	/**
 	 * Transport action.
 	 *
@@ -156,17 +145,15 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract String transportAction();
 
-	
 	/**
 	 * Shards.
 	 *
 	 * @param request the request
 	 * @return the group shards iterator
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	protected abstract GroupShardsIterator shards(Request request) throws RestartException;
+	protected abstract GroupShardsIterator shards(Request request) throws RebirthException;
 
-	
 	/**
 	 * New shard request instance.
 	 *
@@ -176,7 +163,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract ShardRequest newShardRequestInstance(Request request, int shardId);
 
-	
 	/**
 	 * Accumulate exceptions.
 	 *
@@ -184,7 +170,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract boolean accumulateExceptions();
 
-	
 	/**
 	 * Check global block.
 	 *
@@ -194,7 +179,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract ClusterBlockException checkGlobalBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * Check request block.
 	 *
@@ -204,7 +188,6 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	protected abstract ClusterBlockException checkRequestBlock(ClusterState state, Request request);
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -212,31 +195,28 @@ public abstract class TransportIndexReplicationOperationAction<Request extends I
 	 */
 	private class TransportHandler extends BaseTransportRequestHandler<Request> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public Request newInstance() {
 			return newRequestInstance();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(final Request request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
 			execute(request, new ActionListener<Response>() {
 				@Override

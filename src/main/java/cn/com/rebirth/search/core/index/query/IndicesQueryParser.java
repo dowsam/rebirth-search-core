@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesQueryParser.java 2012-3-29 15:02:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesQueryParser.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -22,7 +21,6 @@ import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class IndicesQueryParser.
  *
@@ -30,16 +28,13 @@ import com.google.common.collect.Sets;
  */
 public class IndicesQueryParser implements QueryParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "indices";
 
-	
 	/** The cluster service. */
 	@Nullable
 	private final ClusterService clusterService;
 
-	
 	/**
 	 * Instantiates a new indices query parser.
 	 *
@@ -50,18 +45,16 @@ public class IndicesQueryParser implements QueryParser {
 		this.clusterService = clusterService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.QueryParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Query parse(QueryParseContext parseContext) throws IOException, QueryParsingException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AliasAction.java 2012-3-29 15:02:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AliasAction.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentType;
 import cn.com.rebirth.search.core.RestartGenerationException;
 import cn.com.rebirth.search.core.index.query.FilterBuilder;
 
-
 /**
  * The Class AliasAction.
  *
@@ -29,7 +27,6 @@ import cn.com.rebirth.search.core.index.query.FilterBuilder;
  */
 public class AliasAction implements Streamable {
 
-	
 	/**
 	 * The Enum Type.
 	 *
@@ -37,19 +34,15 @@ public class AliasAction implements Streamable {
 	 */
 	public static enum Type {
 
-		
-		/** The ADD. */
+		/** The add. */
 		ADD((byte) 0),
 
-		
-		/** The REMOVE. */
+		/** The remove. */
 		REMOVE((byte) 1);
 
-		
 		/** The value. */
 		private final byte value;
 
-		
 		/**
 		 * Instantiates a new type.
 		 *
@@ -59,7 +52,6 @@ public class AliasAction implements Streamable {
 			this.value = value;
 		}
 
-		
 		/**
 		 * Value.
 		 *
@@ -69,7 +61,6 @@ public class AliasAction implements Streamable {
 			return value;
 		}
 
-		
 		/**
 		 * From value.
 		 *
@@ -82,39 +73,32 @@ public class AliasAction implements Streamable {
 			} else if (value == 1) {
 				return REMOVE;
 			} else {
-				throw new RestartIllegalArgumentException("No type for action [" + value + "]");
+				throw new RebirthIllegalArgumentException("No type for action [" + value + "]");
 			}
 		}
 	}
 
-	
 	/** The action type. */
 	private Type actionType;
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The alias. */
 	private String alias;
 
-	
 	/** The filter. */
 	@Nullable
 	private String filter;
 
-	
 	/** The index routing. */
 	@Nullable
 	private String indexRouting;
 
-	
 	/** The search routing. */
 	@Nullable
 	private String searchRouting;
 
-	
 	/**
 	 * Instantiates a new alias action.
 	 */
@@ -122,7 +106,6 @@ public class AliasAction implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new alias action.
 	 *
@@ -136,7 +119,6 @@ public class AliasAction implements Streamable {
 		this.alias = alias;
 	}
 
-	
 	/**
 	 * Instantiates a new alias action.
 	 *
@@ -152,7 +134,6 @@ public class AliasAction implements Streamable {
 		this.filter = filter;
 	}
 
-	
 	/**
 	 * Action type.
 	 *
@@ -162,7 +143,6 @@ public class AliasAction implements Streamable {
 		return actionType;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -172,7 +152,6 @@ public class AliasAction implements Streamable {
 		return index;
 	}
 
-	
 	/**
 	 * Alias.
 	 *
@@ -182,7 +161,6 @@ public class AliasAction implements Streamable {
 		return alias;
 	}
 
-	
 	/**
 	 * Filter.
 	 *
@@ -192,7 +170,6 @@ public class AliasAction implements Streamable {
 		return filter;
 	}
 
-	
 	/**
 	 * Filter.
 	 *
@@ -204,7 +181,6 @@ public class AliasAction implements Streamable {
 		return this;
 	}
 
-	
 	/**
 	 * Filter.
 	 *
@@ -226,7 +202,6 @@ public class AliasAction implements Streamable {
 		}
 	}
 
-	
 	/**
 	 * Filter.
 	 *
@@ -249,7 +224,6 @@ public class AliasAction implements Streamable {
 		}
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -262,7 +236,6 @@ public class AliasAction implements Streamable {
 		return this;
 	}
 
-	
 	/**
 	 * Index routing.
 	 *
@@ -272,7 +245,6 @@ public class AliasAction implements Streamable {
 		return indexRouting;
 	}
 
-	
 	/**
 	 * Index routing.
 	 *
@@ -284,7 +256,6 @@ public class AliasAction implements Streamable {
 		return this;
 	}
 
-	
 	/**
 	 * Search routing.
 	 *
@@ -294,7 +265,6 @@ public class AliasAction implements Streamable {
 		return searchRouting;
 	}
 
-	
 	/**
 	 * Search routing.
 	 *
@@ -306,7 +276,6 @@ public class AliasAction implements Streamable {
 		return this;
 	}
 
-	
 	/**
 	 * Read alias action.
 	 *
@@ -320,9 +289,8 @@ public class AliasAction implements Streamable {
 		return aliasAction;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -340,9 +308,8 @@ public class AliasAction implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -369,7 +336,6 @@ public class AliasAction implements Streamable {
 		}
 	}
 
-	
 	/**
 	 * New add alias action.
 	 *
@@ -381,7 +347,6 @@ public class AliasAction implements Streamable {
 		return new AliasAction(Type.ADD, index, alias);
 	}
 
-	
 	/**
 	 * New remove alias action.
 	 *

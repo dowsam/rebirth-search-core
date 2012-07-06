@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StartedRerouteAllocation.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StartedRerouteAllocation.java 2012-7-6 14:28:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingNodes;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDeciders;
 
-
 /**
  * The Class StartedRerouteAllocation.
  *
@@ -21,11 +19,9 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationD
  */
 public class StartedRerouteAllocation extends RoutingAllocation {
 
-	
 	/** The started shards. */
 	private final List<? extends ShardRouting> startedShards;
 
-	
 	/**
 	 * Instantiates a new started reroute allocation.
 	 *
@@ -40,7 +36,6 @@ public class StartedRerouteAllocation extends RoutingAllocation {
 		this.startedShards = startedShards;
 	}
 
-	
 	/**
 	 * Started shards.
 	 *

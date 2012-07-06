@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceFilter.java 2012-3-29 15:01:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceFilter.java 2012-7-6 14:30:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.geo;
 
@@ -12,7 +11,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.DocIdSet;
 import org.apache.lucene.search.Filter;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.DistanceUnit;
 import cn.com.rebirth.search.commons.lucene.docset.AndDocSet;
 import cn.com.rebirth.search.commons.lucene.docset.DocSet;
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldMapper;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class GeoDistanceFilter.
  *
@@ -33,43 +31,33 @@ import com.google.common.collect.ImmutableList;
  */
 public class GeoDistanceFilter extends Filter {
 
-	
 	/** The lat. */
 	private final double lat;
 
-	
 	/** The lon. */
 	private final double lon;
 
-	
 	/** The distance. */
-	private final double distance; 
+	private final double distance;
 
-	
 	/** The geo distance. */
 	private final GeoDistance geoDistance;
 
-	
 	/** The field name. */
 	private final String fieldName;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The fixed source distance. */
 	private final GeoDistance.FixedSourceDistance fixedSourceDistance;
 
-	
 	/** The distance bounding check. */
 	private GeoDistance.DistanceBoundingCheck distanceBoundingCheck;
 
-	
 	/** The bounding box filter. */
 	private final Filter boundingBoxFilter;
 
-	
 	/**
 	 * Instantiates a new geo distance filter.
 	 *
@@ -99,9 +87,9 @@ public class GeoDistanceFilter extends Filter {
 			} else if ("indexed".equals(optimizeBbox)) {
 				boundingBoxFilter = IndexedGeoBoundingBoxFilter.create(distanceBoundingCheck.topLeft(),
 						distanceBoundingCheck.bottomRight(), mapper);
-				distanceBoundingCheck = GeoDistance.ALWAYS_INSTANCE; 
+				distanceBoundingCheck = GeoDistance.ALWAYS_INSTANCE;
 			} else {
-				throw new RestartIllegalArgumentException("type [" + optimizeBbox
+				throw new RebirthIllegalArgumentException("type [" + optimizeBbox
 						+ "] for bounding box optimization not supported");
 			}
 		} else {
@@ -110,7 +98,6 @@ public class GeoDistanceFilter extends Filter {
 		}
 	}
 
-	
 	/**
 	 * Lat.
 	 *
@@ -120,7 +107,6 @@ public class GeoDistanceFilter extends Filter {
 		return lat;
 	}
 
-	
 	/**
 	 * Lon.
 	 *
@@ -130,7 +116,6 @@ public class GeoDistanceFilter extends Filter {
 		return lon;
 	}
 
-	
 	/**
 	 * Distance.
 	 *
@@ -140,7 +125,6 @@ public class GeoDistanceFilter extends Filter {
 		return distance;
 	}
 
-	
 	/**
 	 * Geo distance.
 	 *
@@ -150,7 +134,6 @@ public class GeoDistanceFilter extends Filter {
 		return geoDistance;
 	}
 
-	
 	/**
 	 * Field name.
 	 *
@@ -160,7 +143,6 @@ public class GeoDistanceFilter extends Filter {
 		return fieldName;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 	 */
@@ -185,7 +167,6 @@ public class GeoDistanceFilter extends Filter {
 		}
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -212,7 +193,6 @@ public class GeoDistanceFilter extends Filter {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -231,7 +211,6 @@ public class GeoDistanceFilter extends Filter {
 		return result;
 	}
 
-	
 	/**
 	 * The Class GeoDistanceDocSet.
 	 *
@@ -239,23 +218,18 @@ public class GeoDistanceFilter extends Filter {
 	 */
 	public static class GeoDistanceDocSet extends GetDocSet {
 
-		
 		/** The distance. */
-		private final double distance; 
+		private final double distance;
 
-		
 		/** The field data. */
 		private final GeoPointFieldData fieldData;
 
-		
 		/** The fixed source distance. */
 		private final GeoDistance.FixedSourceDistance fixedSourceDistance;
 
-		
 		/** The distance bounding check. */
 		private final GeoDistance.DistanceBoundingCheck distanceBoundingCheck;
 
-		
 		/**
 		 * Instantiates a new geo distance doc set.
 		 *
@@ -275,21 +249,17 @@ public class GeoDistanceFilter extends Filter {
 			this.distance = distance;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.DocIdSet#isCacheable()
 		 */
 		@Override
 		public boolean isCacheable() {
-			
-			
-			
+
 			return false;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.docset.DocSet#get(int)
+		 * @see cn.com.rebirth.search.commons.lucene.docset.DocSet#get(int)
 		 */
 		@Override
 		public boolean get(int doc) {

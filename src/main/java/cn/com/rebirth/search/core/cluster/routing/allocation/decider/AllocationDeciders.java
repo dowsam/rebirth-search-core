@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AllocationDeciders.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AllocationDeciders.java 2012-7-6 14:29:26 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class AllocationDeciders.
  *
@@ -25,11 +23,9 @@ import com.google.common.collect.ImmutableSet;
  */
 public class AllocationDeciders extends AllocationDecider {
 
-	
 	/** The allocations. */
 	private final AllocationDecider[] allocations;
 
-	
 	/**
 	 * Instantiates a new allocation deciders.
 	 *
@@ -49,7 +45,6 @@ public class AllocationDeciders extends AllocationDecider {
 				.add(new ShardsLimitAllocationDecider(settings)).build());
 	}
 
-	
 	/**
 	 * Instantiates a new allocation deciders.
 	 *
@@ -62,9 +57,8 @@ public class AllocationDeciders extends AllocationDecider {
 		this.allocations = allocations.toArray(new AllocationDecider[allocations.size()]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canRebalance(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canRebalance(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean canRebalance(ShardRouting shardRouting, RoutingAllocation allocation) {
@@ -76,18 +70,17 @@ public class AllocationDeciders extends AllocationDecider {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canAllocate(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public Decision canAllocate(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {
 		Decision ret = Decision.YES;
-		
+
 		if (allocation.shouldIgnoreShardForNode(shardRouting.shardId(), node.nodeId())) {
 			return Decision.NO;
 		}
-		
+
 		for (AllocationDecider allocation1 : allocations) {
 			Decision decision = allocation1.canAllocate(shardRouting, node, allocation);
 			if (decision == Decision.NO) {
@@ -99,9 +92,8 @@ public class AllocationDeciders extends AllocationDecider {
 		return ret;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.routing.allocation.decider.AllocationDecider#canRemain(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.cluster.routing.RoutingNode, cn.com.summall.search.core.cluster.routing.allocation.RoutingAllocation)
+	 * @see cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecider#canRemain(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.cluster.routing.RoutingNode, cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation)
 	 */
 	@Override
 	public boolean canRemain(ShardRouting shardRouting, RoutingNode node, RoutingAllocation allocation) {

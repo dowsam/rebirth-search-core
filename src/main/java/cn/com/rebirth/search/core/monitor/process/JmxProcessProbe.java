@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JmxProcessProbe.java 2012-3-29 15:01:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JmxProcessProbe.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.process;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.monitor.jvm.JvmInfo;
 
-
 /**
  * The Class JmxProcessProbe.
  *
@@ -23,15 +21,12 @@ import cn.com.rebirth.search.core.monitor.jvm.JvmInfo;
  */
 public class JmxProcessProbe extends AbstractComponent implements ProcessProbe {
 
-	
 	/** The Constant osMxBean. */
 	private static final OperatingSystemMXBean osMxBean = ManagementFactory.getOperatingSystemMXBean();
 
-	
 	/** The Constant getMaxFileDescriptorCountField. */
 	private static final Method getMaxFileDescriptorCountField;
 
-	
 	/** The Constant getOpenFileDescriptorCountField. */
 	private static final Method getOpenFileDescriptorCountField;
 
@@ -41,7 +36,7 @@ public class JmxProcessProbe extends AbstractComponent implements ProcessProbe {
 			method = osMxBean.getClass().getDeclaredMethod("getMaxFileDescriptorCount");
 			method.setAccessible(true);
 		} catch (Exception e) {
-			
+
 		}
 		getMaxFileDescriptorCountField = method;
 
@@ -50,12 +45,11 @@ public class JmxProcessProbe extends AbstractComponent implements ProcessProbe {
 			method = osMxBean.getClass().getDeclaredMethod("getOpenFileDescriptorCount");
 			method.setAccessible(true);
 		} catch (Exception e) {
-			
+
 		}
 		getOpenFileDescriptorCountField = method;
 	}
 
-	
 	/**
 	 * Gets the max file descriptor count.
 	 *
@@ -72,7 +66,6 @@ public class JmxProcessProbe extends AbstractComponent implements ProcessProbe {
 		}
 	}
 
-	
 	/**
 	 * Gets the open file descriptor count.
 	 *
@@ -89,7 +82,6 @@ public class JmxProcessProbe extends AbstractComponent implements ProcessProbe {
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new jmx process probe.
 	 *
@@ -100,18 +92,16 @@ public class JmxProcessProbe extends AbstractComponent implements ProcessProbe {
 		super(settings);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.process.ProcessProbe#processInfo()
+	 * @see cn.com.rebirth.search.core.monitor.process.ProcessProbe#processInfo()
 	 */
 	@Override
 	public ProcessInfo processInfo() {
 		return new ProcessInfo(JvmInfo.jvmInfo().pid(), getMaxFileDescriptorCount());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.process.ProcessProbe#processStats()
+	 * @see cn.com.rebirth.search.core.monitor.process.ProcessProbe#processStats()
 	 */
 	@Override
 	public ProcessStats processStats() {

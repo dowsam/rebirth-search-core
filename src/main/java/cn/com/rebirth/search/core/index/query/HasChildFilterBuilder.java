@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HasChildFilterBuilder.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HasChildFilterBuilder.java 2012-7-6 14:30:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class HasChildFilterBuilder.
@@ -18,23 +16,18 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class HasChildFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The query builder. */
 	private final QueryBuilder queryBuilder;
 
-	
 	/** The child type. */
 	private String childType;
 
-	
 	/** The scope. */
 	private String scope;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new checks for child filter builder.
 	 *
@@ -46,7 +39,6 @@ public class HasChildFilterBuilder extends BaseFilterBuilder {
 		this.queryBuilder = queryBuilder;
 	}
 
-	
 	/**
 	 * Scope.
 	 *
@@ -58,7 +50,6 @@ public class HasChildFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -70,9 +61,8 @@ public class HasChildFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PutMappingRequest.java 2012-3-29 15:02:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PutMappingRequest.java 2012-7-6 14:29:00 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.mapping.put;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.unit.TimeValue;
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class PutMappingRequest.
  *
@@ -31,34 +29,27 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class PutMappingRequest extends MasterNodeOperationRequest {
 
-	
 	/** The indices. */
 	private String[] indices;
 
-	
 	/** The mapping type. */
 	private String mappingType;
 
-	
 	/** The mapping source. */
 	private String mappingSource;
 
-	
 	/** The timeout. */
 	private TimeValue timeout = new TimeValue(10, TimeUnit.SECONDS);
 
-	
 	/** The ignore conflicts. */
 	private boolean ignoreConflicts = false;
 
-	
 	/**
 	 * Instantiates a new put mapping request.
 	 */
 	PutMappingRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new put mapping request.
 	 *
@@ -68,9 +59,8 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		this.indices = indices;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -84,7 +74,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -96,7 +85,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -106,7 +94,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return indices;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -116,7 +103,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return mappingType;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -129,7 +115,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -139,7 +124,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return mappingSource;
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -151,11 +135,10 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		try {
 			return source(mappingBuilder.string());
 		} catch (IOException e) {
-			throw new RestartIllegalArgumentException("Failed to build json for mapping request", e);
+			throw new RebirthIllegalArgumentException("Failed to build json for mapping request", e);
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -173,7 +156,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Source.
 	 *
@@ -186,7 +168,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -196,7 +177,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -208,7 +188,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -219,7 +198,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/**
 	 * Ignore conflicts.
 	 *
@@ -229,7 +207,6 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return ignoreConflicts;
 	}
 
-	
 	/**
 	 * Ignore conflicts.
 	 *
@@ -241,9 +218,8 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -260,9 +236,8 @@ public class PutMappingRequest extends MasterNodeOperationRequest {
 		ignoreConflicts = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

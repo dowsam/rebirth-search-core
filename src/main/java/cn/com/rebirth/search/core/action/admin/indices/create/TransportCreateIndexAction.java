@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportCreateIndexAction.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportCreateIndexAction.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.create;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction;
@@ -20,7 +19,6 @@ import cn.com.rebirth.search.core.cluster.block.ClusterBlockLevel;
 import cn.com.rebirth.search.core.cluster.metadata.MetaDataCreateIndexService;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
-
 
 /**
  * The Class TransportCreateIndexAction.
@@ -50,7 +48,7 @@ public class TransportCreateIndexAction extends
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
@@ -58,7 +56,7 @@ public class TransportCreateIndexAction extends
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
@@ -66,7 +64,7 @@ public class TransportCreateIndexAction extends
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newRequest()
 	 */
 	@Override
 	protected CreateIndexRequest newRequest() {
@@ -74,7 +72,7 @@ public class TransportCreateIndexAction extends
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#newResponse()
 	 */
 	@Override
 	protected CreateIndexResponse newResponse() {
@@ -82,7 +80,7 @@ public class TransportCreateIndexAction extends
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#checkBlock(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected ClusterBlockException checkBlock(CreateIndexRequest request, ClusterState state) {
@@ -90,11 +88,11 @@ public class TransportCreateIndexAction extends
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction#masterOperation(cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected CreateIndexResponse masterOperation(CreateIndexRequest request, ClusterState state)
-			throws RestartException {
+			throws RebirthException {
 		String cause = request.cause();
 		if (cause.length() == 0) {
 			cause = "api";
@@ -127,10 +125,10 @@ public class TransportCreateIndexAction extends
 		}
 
 		if (failureRef.get() != null) {
-			if (failureRef.get() instanceof RestartException) {
-				throw (RestartException) failureRef.get();
+			if (failureRef.get() instanceof RebirthException) {
+				throw (RebirthException) failureRef.get();
 			} else {
-				throw new RestartException(failureRef.get().getMessage(), failureRef.get());
+				throw new RebirthException(failureRef.get().getMessage(), failureRef.get());
 			}
 		}
 

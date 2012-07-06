@@ -1,30 +1,25 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InvalidIndexTemplateException.java 2012-3-29 15:02:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InvalidIndexTemplateException.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class InvalidIndexTemplateException.
  *
  * @author l.xue.nong
  */
-public class InvalidIndexTemplateException extends RestartException {
+public class InvalidIndexTemplateException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3831258589976066298L;
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/**
 	 * Instantiates a new invalid index template exception.
 	 *
@@ -36,7 +31,6 @@ public class InvalidIndexTemplateException extends RestartException {
 		this.name = name;
 	}
 
-	
 	/**
 	 * Name.
 	 *

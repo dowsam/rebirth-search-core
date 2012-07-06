@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RecoveryCleanFilesRequest.java 2012-3-29 15:01:36 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RecoveryCleanFilesRequest.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.recovery;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class RecoveryCleanFilesRequest.
  *
@@ -24,22 +22,18 @@ import com.google.common.collect.Sets;
  */
 class RecoveryCleanFilesRequest implements Streamable {
 
-	
 	/** The shard id. */
 	private ShardId shardId;
 
-	
 	/** The snapshot files. */
 	private Set<String> snapshotFiles;
 
-	
 	/**
 	 * Instantiates a new recovery clean files request.
 	 */
 	RecoveryCleanFilesRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new recovery clean files request.
 	 *
@@ -51,7 +45,6 @@ class RecoveryCleanFilesRequest implements Streamable {
 		this.snapshotFiles = snapshotFiles;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -61,7 +54,6 @@ class RecoveryCleanFilesRequest implements Streamable {
 		return shardId;
 	}
 
-	
 	/**
 	 * Snapshot files.
 	 *
@@ -71,9 +63,8 @@ class RecoveryCleanFilesRequest implements Streamable {
 		return snapshotFiles;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -85,9 +76,8 @@ class RecoveryCleanFilesRequest implements Streamable {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

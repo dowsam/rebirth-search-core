@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptFilterParser.java 2012-3-29 15:00:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptFilterParser.java 2012-7-6 14:29:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,8 +12,8 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.DocIdSet;
 import org.apache.lucene.search.Filter;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.docset.GetDocSet;
 import cn.com.rebirth.search.commons.xcontent.XContentParser;
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class ScriptFilterParser.
  *
@@ -33,11 +31,9 @@ import com.google.common.collect.Maps;
  */
 public class ScriptFilterParser implements FilterParser {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "script";
 
-	
 	/**
 	 * Instantiates a new script filter parser.
 	 */
@@ -45,18 +41,16 @@ public class ScriptFilterParser implements FilterParser {
 	public ScriptFilterParser() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#names()
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#names()
 	 */
 	@Override
 	public String[] names() {
 		return new String[] { NAME };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.FilterParser#parse(cn.com.summall.search.core.index.query.QueryParseContext)
+	 * @see cn.com.rebirth.search.core.index.query.FilterParser#parse(cn.com.rebirth.search.core.index.query.QueryParseContext)
 	 */
 	@Override
 	public Filter parse(QueryParseContext parseContext) throws IOException, QueryParsingException {
@@ -64,9 +58,9 @@ public class ScriptFilterParser implements FilterParser {
 
 		XContentParser.Token token;
 
-		boolean cache = false; 
+		boolean cache = false;
 		CacheKeyFilter.Key cacheKey = null;
-		
+
 		String script = null;
 		String scriptLang = null;
 		Map<String, Object> params = null;
@@ -118,7 +112,6 @@ public class ScriptFilterParser implements FilterParser {
 		return filter;
 	}
 
-	
 	/**
 	 * The Class ScriptFilter.
 	 *
@@ -126,19 +119,15 @@ public class ScriptFilterParser implements FilterParser {
 	 */
 	public static class ScriptFilter extends Filter {
 
-		
 		/** The script. */
 		private final String script;
 
-		
 		/** The params. */
 		private final Map<String, Object> params;
 
-		
 		/** The search script. */
 		private final SearchScript searchScript;
 
-		
 		/**
 		 * Instantiates a new script filter.
 		 *
@@ -153,13 +142,12 @@ public class ScriptFilterParser implements FilterParser {
 
 			SearchContext context = SearchContext.current();
 			if (context == null) {
-				throw new RestartIllegalStateException("No search context on going...");
+				throw new RebirthIllegalStateException("No search context on going...");
 			}
 
 			this.searchScript = context.scriptService().search(context.lookup(), scriptLang, script, params);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -172,7 +160,6 @@ public class ScriptFilterParser implements FilterParser {
 			return buffer.toString();
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -193,7 +180,6 @@ public class ScriptFilterParser implements FilterParser {
 			return true;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -204,7 +190,6 @@ public class ScriptFilterParser implements FilterParser {
 			return result;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 		 */
@@ -214,7 +199,6 @@ public class ScriptFilterParser implements FilterParser {
 			return new ScriptDocSet(reader, searchScript);
 		}
 
-		
 		/**
 		 * The Class ScriptDocSet.
 		 *
@@ -222,11 +206,9 @@ public class ScriptFilterParser implements FilterParser {
 		 */
 		static class ScriptDocSet extends GetDocSet {
 
-			
 			/** The search script. */
 			private final SearchScript searchScript;
 
-			
 			/**
 			 * Instantiates a new script doc set.
 			 *
@@ -238,31 +220,25 @@ public class ScriptFilterParser implements FilterParser {
 				this.searchScript = searchScript;
 			}
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.commons.lucene.docset.GetDocSet#sizeInBytes()
+			 * @see cn.com.rebirth.search.commons.lucene.docset.GetDocSet#sizeInBytes()
 			 */
 			@Override
 			public long sizeInBytes() {
 				return 0;
 			}
 
-			
 			/* (non-Javadoc)
 			 * @see org.apache.lucene.search.DocIdSet#isCacheable()
 			 */
 			@Override
 			public boolean isCacheable() {
-				
-				
-				
-				
+
 				return false;
 			}
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.commons.lucene.docset.DocSet#get(int)
+			 * @see cn.com.rebirth.search.commons.lucene.docset.DocSet#get(int)
 			 */
 			@Override
 			public boolean get(int doc) {
@@ -277,7 +253,7 @@ public class ScriptFilterParser implements FilterParser {
 				if (val instanceof Number) {
 					return ((Number) val).longValue() != 0;
 				}
-				throw new RestartIllegalArgumentException("Can't handle type [" + val + "] in script filter");
+				throw new RebirthIllegalArgumentException("Can't handle type [" + val + "] in script filter");
 			}
 		}
 	}

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StringFieldMapper.java 2012-3-29 15:02:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StringFieldMapper.java 2012-7-6 14:29:10 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.index.mapper.ParseContext;
 import cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll;
 import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
 
-
 /**
  * The Class StringFieldMapper.
  *
@@ -34,24 +32,20 @@ import cn.com.rebirth.search.index.analysis.NamedAnalyzer;
  */
 public class StringFieldMapper extends AbstractFieldMapper<String> implements IncludeInAll {
 
-	
 	/** The Constant CONTENT_TYPE. */
 	public static final String CONTENT_TYPE = "string";
 
-	
 	/**
 	 * The Class Defaults.
 	 *
 	 * @author l.xue.nong
 	 */
 	public static class Defaults extends AbstractFieldMapper.Defaults {
-		
-		
+
 		/** The Constant NULL_VALUE. */
 		public static final String NULL_VALUE = null;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -59,11 +53,9 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 	 */
 	public static class Builder extends AbstractFieldMapper.OpenBuilder<Builder, StringFieldMapper> {
 
-		
 		/** The null value. */
 		protected String nullValue = Defaults.NULL_VALUE;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -74,7 +66,6 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 			builder = this;
 		}
 
-		
 		/**
 		 * Null value.
 		 *
@@ -86,9 +77,8 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper.Builder#includeInAll(java.lang.Boolean)
+		 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper.Builder#includeInAll(java.lang.Boolean)
 		 */
 		@Override
 		public Builder includeInAll(Boolean includeInAll) {
@@ -96,9 +86,8 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 			return this;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.Builder#build(cn.com.summall.search.core.index.mapper.Mapper.BuilderContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.Builder#build(cn.com.rebirth.search.core.index.mapper.Mapper.BuilderContext)
 		 */
 		@Override
 		public StringFieldMapper build(BuilderContext context) {
@@ -109,7 +98,6 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		}
 	}
 
-	
 	/**
 	 * The Class TypeParser.
 	 *
@@ -117,9 +105,8 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 	 */
 	public static class TypeParser implements Mapper.TypeParser {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.summall.search.core.index.mapper.Mapper.TypeParser.ParserContext)
+		 * @see cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser#parse(java.lang.String, java.util.Map, cn.com.rebirth.search.core.index.mapper.Mapper.TypeParser.ParserContext)
 		 */
 		@Override
 		public Mapper.Builder parse(String name, Map<String, Object> node, ParserContext parserContext)
@@ -137,15 +124,12 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		}
 	}
 
-	
 	/** The null value. */
 	private String nullValue;
 
-	
 	/** The include in all. */
 	private Boolean includeInAll;
 
-	
 	/**
 	 * Instantiates a new string field mapper.
 	 *
@@ -168,9 +152,8 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		this.nullValue = nullValue;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAll(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAll(Boolean includeInAll) {
@@ -179,9 +162,8 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.index.mapper.internal.AllFieldMapper.IncludeInAll#includeInAllIfNotSet(java.lang.Boolean)
 	 */
 	@Override
 	public void includeInAllIfNotSet(Boolean includeInAll) {
@@ -190,54 +172,48 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#value(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String value(Fieldable field) {
 		return field.stringValue();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueFromString(java.lang.String)
 	 */
 	@Override
 	public String valueFromString(String value) {
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
+	 * @see cn.com.rebirth.search.core.index.mapper.FieldMapper#valueAsString(org.apache.lucene.document.Fieldable)
 	 */
 	@Override
 	public String valueAsString(Fieldable field) {
 		return value(field);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#indexedValue(java.lang.String)
 	 */
 	@Override
 	public String indexedValue(String value) {
 		return value;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#customBoost()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#customBoost()
 	 */
 	@Override
 	protected boolean customBoost() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.summall.search.core.index.mapper.ParseContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#parseCreateField(cn.com.rebirth.search.core.index.mapper.ParseContext)
 	 */
 	@Override
 	protected Field parseCreateField(ParseContext context) throws IOException {
@@ -282,18 +258,16 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		return field;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#contentType()
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#contentType()
 	 */
 	@Override
 	protected String contentType() {
 		return CONTENT_TYPE;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.summall.search.core.index.mapper.Mapper, cn.com.summall.search.core.index.mapper.MergeContext)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#merge(cn.com.rebirth.search.core.index.mapper.Mapper, cn.com.rebirth.search.core.index.mapper.MergeContext)
 	 */
 	@Override
 	public void merge(Mapper mergeWith, MergeContext mergeContext) throws MergeMappingException {
@@ -307,9 +281,8 @@ public class StringFieldMapper extends AbstractFieldMapper<String> implements In
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.summall.search.commons.xcontent.XContentBuilder)
+	 * @see cn.com.rebirth.search.core.index.mapper.core.AbstractFieldMapper#doXContentBody(cn.com.rebirth.search.commons.xcontent.XContentBuilder)
 	 */
 	@Override
 	protected void doXContentBody(XContentBuilder builder) throws IOException {

@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistance.java 2012-3-29 15:01:42 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistance.java 2012-7-6 14:30:07 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.search.geo;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.DistanceUnit;
 
 /**
@@ -15,7 +15,7 @@ import cn.com.rebirth.commons.unit.DistanceUnit;
  */
 public enum GeoDistance {
 
-	/** The PLANE. */
+	/** The plane. */
 	PLANE() {
 		@Override
 		public double calculate(double sourceLatitude, double sourceLongitude, double targetLatitude,
@@ -36,7 +36,7 @@ public enum GeoDistance {
 		}
 	},
 
-	/** The FACTOR. */
+	/** The factor. */
 	FACTOR() {
 		@Override
 		public double calculate(double sourceLatitude, double sourceLongitude, double targetLatitude,
@@ -59,7 +59,7 @@ public enum GeoDistance {
 		}
 	},
 
-	/** The ARC. */
+	/** The arc. */
 	ARC() {
 		@Override
 		public double calculate(double sourceLatitude, double sourceLongitude, double targetLatitude,
@@ -194,7 +194,7 @@ public enum GeoDistance {
 		} else if ("factor".equals(s)) {
 			return FACTOR;
 		}
-		throw new RestartIllegalArgumentException("No geo distance for [" + s + "]");
+		throw new RebirthIllegalArgumentException("No geo distance for [" + s + "]");
 	}
 
 	/**
@@ -245,7 +245,7 @@ public enum GeoDistance {
 		Point bottomRight();
 	}
 
-	/** The ALWAY s_ instance. */
+	/** The always instance. */
 	public static AlwaysDistanceBoundingCheck ALWAYS_INSTANCE = new AlwaysDistanceBoundingCheck();
 
 	/**
@@ -256,7 +256,7 @@ public enum GeoDistance {
 	private static class AlwaysDistanceBoundingCheck implements DistanceBoundingCheck {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#isWithin(double, double)
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#isWithin(double, double)
 		 */
 		@Override
 		public boolean isWithin(double targetLatitude, double targetLongitude) {
@@ -264,7 +264,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#topLeft()
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#topLeft()
 		 */
 		@Override
 		public Point topLeft() {
@@ -272,7 +272,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#bottomRight()
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#bottomRight()
 		 */
 		@Override
 		public Point bottomRight() {
@@ -305,7 +305,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#isWithin(double, double)
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#isWithin(double, double)
 		 */
 		@Override
 		public boolean isWithin(double targetLatitude, double targetLongitude) {
@@ -314,7 +314,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#topLeft()
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#topLeft()
 		 */
 		@Override
 		public Point topLeft() {
@@ -322,7 +322,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#bottomRight()
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#bottomRight()
 		 */
 		@Override
 		public Point bottomRight() {
@@ -355,7 +355,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#isWithin(double, double)
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#isWithin(double, double)
 		 */
 		@Override
 		public boolean isWithin(double targetLatitude, double targetLongitude) {
@@ -364,7 +364,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#topLeft()
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#topLeft()
 		 */
 		@Override
 		public Point topLeft() {
@@ -372,7 +372,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#bottomRight()
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.DistanceBoundingCheck#bottomRight()
 		 */
 		@Override
 		public Point bottomRight() {
@@ -410,7 +410,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.FixedSourceDistance#calculate(double, double)
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.FixedSourceDistance#calculate(double, double)
 		 */
 		@Override
 		public double calculate(double targetLatitude, double targetLongitude) {
@@ -462,7 +462,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.FixedSourceDistance#calculate(double, double)
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.FixedSourceDistance#calculate(double, double)
 		 */
 		@Override
 		public double calculate(double targetLatitude, double targetLongitude) {
@@ -514,7 +514,7 @@ public enum GeoDistance {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.search.geo.GeoDistance.FixedSourceDistance#calculate(double, double)
+		 * @see cn.com.rebirth.search.core.index.search.geo.GeoDistance.FixedSourceDistance#calculate(double, double)
 		 */
 		@Override
 		public double calculate(double targetLatitude, double targetLongitude) {

@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RobinEngine.java 2012-3-29 15:02:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RobinEngine.java 2012-7-6 14:30:18 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.engine.robin;
@@ -36,7 +36,7 @@ import org.apache.lucene.util.UnicodeUtil;
 
 import cn.com.rebirth.commons.Unicode;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
@@ -263,7 +263,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#updateIndexingBufferSize(cn.com.summall.search.commons.unit.ByteSizeValue)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#updateIndexingBufferSize(cn.com.rebirth.commons.unit.ByteSizeValue)
 	 */
 	@Override
 	public void updateIndexingBufferSize(ByteSizeValue indexingBufferSize) {
@@ -295,7 +295,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#addFailedEngineListener(cn.com.summall.search.core.index.engine.Engine.FailedEngineListener)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#addFailedEngineListener(cn.com.rebirth.search.core.index.engine.Engine.FailedEngineListener)
 	 */
 	@Override
 	public void addFailedEngineListener(FailedEngineListener listener) {
@@ -303,7 +303,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#start()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#start()
 	 */
 	@Override
 	public void start() throws EngineException {
@@ -365,7 +365,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#defaultRefreshInterval()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#defaultRefreshInterval()
 	 */
 	@Override
 	public TimeValue defaultRefreshInterval() {
@@ -373,7 +373,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#enableGcDeletes(boolean)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#enableGcDeletes(boolean)
 	 */
 	@Override
 	public void enableGcDeletes(boolean enableGcDeletes) {
@@ -381,7 +381,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#get(cn.com.summall.search.core.index.engine.Engine.Get)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#get(cn.com.rebirth.search.core.index.engine.Engine.Get)
 	 */
 	public GetResult get(Get get) throws EngineException {
 		rwl.readLock().lock();
@@ -434,7 +434,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#create(cn.com.summall.search.core.index.engine.Engine.Create)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#create(cn.com.rebirth.search.core.index.engine.Engine.Create)
 	 */
 	@Override
 	public void create(Create create) throws EngineException {
@@ -564,7 +564,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#index(cn.com.summall.search.core.index.engine.Engine.Index)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#index(cn.com.rebirth.search.core.index.engine.Engine.Index)
 	 */
 	@Override
 	public void index(Index index) throws EngineException {
@@ -687,7 +687,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#delete(cn.com.summall.search.core.index.engine.Engine.Delete)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#delete(cn.com.rebirth.search.core.index.engine.Engine.Delete)
 	 */
 	@Override
 	public void delete(Delete delete) throws EngineException {
@@ -804,7 +804,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#delete(cn.com.summall.search.core.index.engine.Engine.DeleteByQuery)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#delete(cn.com.rebirth.search.core.index.engine.Engine.DeleteByQuery)
 	 */
 	@Override
 	public void delete(DeleteByQuery delete) throws EngineException {
@@ -835,7 +835,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#searcher()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#searcher()
 	 */
 	@Override
 	public Searcher searcher() throws EngineException {
@@ -845,7 +845,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#refreshNeeded()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#refreshNeeded()
 	 */
 	@Override
 	public boolean refreshNeeded() {
@@ -853,7 +853,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#possibleMergeNeeded()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#possibleMergeNeeded()
 	 */
 	@Override
 	public boolean possibleMergeNeeded() {
@@ -861,7 +861,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#refresh(cn.com.summall.search.core.index.engine.Engine.Refresh)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#refresh(cn.com.rebirth.search.core.index.engine.Engine.Refresh)
 	 */
 	@Override
 	public void refresh(Refresh refresh) throws EngineException {
@@ -909,7 +909,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#flush(cn.com.summall.search.core.index.engine.Engine.Flush)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#flush(cn.com.rebirth.search.core.index.engine.Engine.Flush)
 	 */
 	@Override
 	public void flush(Flush flush) throws EngineException {
@@ -1069,7 +1069,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#maybeMerge()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#maybeMerge()
 	 */
 	@Override
 	public void maybeMerge() throws EngineException {
@@ -1105,7 +1105,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#optimize(cn.com.summall.search.core.index.engine.Engine.Optimize)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#optimize(cn.com.rebirth.search.core.index.engine.Engine.Optimize)
 	 */
 	@Override
 	public void optimize(Optimize optimize) throws EngineException {
@@ -1160,7 +1160,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#snapshot(cn.com.summall.search.core.index.engine.Engine.SnapshotHandler)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#snapshot(cn.com.rebirth.search.core.index.engine.Engine.SnapshotHandler)
 	 */
 	@Override
 	public <T> T snapshot(SnapshotHandler<T> snapshotHandler) throws EngineException {
@@ -1187,7 +1187,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#recover(cn.com.summall.search.core.index.engine.Engine.RecoveryHandler)
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#recover(cn.com.rebirth.search.core.index.engine.Engine.RecoveryHandler)
 	 */
 	@Override
 	public void recover(RecoveryHandler recoveryHandler) throws EngineException {
@@ -1261,7 +1261,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.engine.Engine#segments()
+	 * @see cn.com.rebirth.search.core.index.engine.Engine#segments()
 	 */
 	@Override
 	public List<Segment> segments() {
@@ -1336,10 +1336,10 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.CloseableComponent#close()
+	 * @see cn.com.rebirth.search.commons.component.CloseableComponent#close()
 	 */
 	@Override
-	public void close() throws RestartException {
+	public void close() throws RebirthException {
 		rwl.writeLock().lock();
 		try {
 			innerClose();
@@ -1497,7 +1497,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	class ApplySettings implements IndexSettingsService.Listener {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -1585,7 +1585,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Searcher#reader()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Searcher#reader()
 		 */
 		@Override
 		public IndexReader reader() {
@@ -1593,7 +1593,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.engine.Engine.Searcher#searcher()
+		 * @see cn.com.rebirth.search.core.index.engine.Engine.Searcher#searcher()
 		 */
 		@Override
 		public ExtendedIndexSearcher searcher() {
@@ -1601,10 +1601,10 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lease.Releasable#release()
+		 * @see cn.com.rebirth.search.commons.lease.Releasable#release()
 		 */
 		@Override
-		public boolean release() throws RestartException {
+		public boolean release() throws RebirthException {
 			try {
 				manager.release(searcher);
 				return true;
@@ -1691,7 +1691,7 @@ public class RobinEngine extends AbstractIndexShardComponent implements Engine {
 	class RobinSearchFactory extends SearcherFactory {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.manager.SearcherFactory#newSearcher(org.apache.lucene.index.IndexReader)
+		 * @see cn.com.rebirth.search.commons.lucene.manager.SearcherFactory#newSearcher(org.apache.lucene.index.IndexReader)
 		 */
 		@Override
 		public IndexSearcher newSearcher(IndexReader reader) throws IOException {

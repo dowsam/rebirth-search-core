@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestClusterStateAction.java 2012-3-29 15:00:50 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestClusterStateAction.java 2012-7-6 14:30:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.cluster.state;
 
@@ -47,7 +46,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class RestClusterStateAction.
  *
@@ -55,11 +53,9 @@ import com.google.common.collect.ImmutableSet;
  */
 public class RestClusterStateAction extends BaseRestHandler {
 
-	
 	/** The settings filter. */
 	private final SettingsFilter settingsFilter;
 
-	
 	/**
 	 * Instantiates a new rest cluster state action.
 	 *
@@ -77,9 +73,8 @@ public class RestClusterStateAction extends BaseRestHandler {
 		this.settingsFilter = settingsFilter;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -110,7 +105,6 @@ public class RestClusterStateAction extends BaseRestHandler {
 						builder.field("master_node", state.nodes().masterNodeId());
 					}
 
-					
 					if (!clusterStateRequest.filterBlocks()) {
 						builder.startObject("blocks");
 
@@ -138,7 +132,6 @@ public class RestClusterStateAction extends BaseRestHandler {
 						builder.endObject();
 					}
 
-					
 					if (!clusterStateRequest.filterNodes()) {
 						builder.startObject("nodes");
 						for (DiscoveryNode node : state.nodes()) {
@@ -157,7 +150,6 @@ public class RestClusterStateAction extends BaseRestHandler {
 						builder.endObject();
 					}
 
-					
 					if (!clusterStateRequest.filterMetaData()) {
 						builder.startObject("metadata");
 
@@ -182,7 +174,7 @@ public class RestClusterStateAction extends BaseRestHandler {
 										mappingSource);
 								Map<String, Object> mapping = parser.map();
 								if (mapping.size() == 1 && mapping.containsKey(entry.getKey())) {
-									
+
 									mapping = (Map<String, Object>) mapping.get(entry.getKey());
 								}
 								builder.field(entry.getKey());
@@ -214,7 +206,7 @@ public class RestClusterStateAction extends BaseRestHandler {
 										mappingSource);
 								Map<String, Object> mapping = parser.map();
 								if (mapping.size() == 1 && mapping.containsKey(entry.getKey())) {
-									
+
 									mapping = (Map<String, Object>) mapping.get(entry.getKey());
 								}
 								builder.field(entry.getKey());
@@ -235,7 +227,6 @@ public class RestClusterStateAction extends BaseRestHandler {
 						builder.endObject();
 					}
 
-					
 					if (!clusterStateRequest.filterRoutingTable()) {
 						builder.startObject("routing_table");
 						builder.startObject("indices");
@@ -256,7 +247,6 @@ public class RestClusterStateAction extends BaseRestHandler {
 						builder.endObject();
 					}
 
-					
 					if (!clusterStateRequest.filterRoutingTable()) {
 						builder.startObject("routing_nodes");
 						builder.startArray("unassigned");

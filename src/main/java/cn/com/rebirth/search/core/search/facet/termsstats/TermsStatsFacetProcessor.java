@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsStatsFacetProcessor.java 2012-3-29 15:01:54 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsStatsFacetProcessor.java 2012-7-6 14:30:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.termsstats;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.search.facet.termsstats.longs.TermsStatsLongFa
 import cn.com.rebirth.search.core.search.facet.termsstats.strings.TermsStatsStringFacetCollector;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class TermsStatsFacetProcessor.
  *
@@ -33,7 +31,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class TermsStatsFacetProcessor extends AbstractComponent implements FacetProcessor {
 
-	
 	/**
 	 * Instantiates a new terms stats facet processor.
 	 *
@@ -45,18 +42,16 @@ public class TermsStatsFacetProcessor extends AbstractComponent implements Facet
 		InternalTermsStatsFacet.registerStreams();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#types()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#types()
 	 */
 	@Override
 	public String[] types() {
 		return new String[] { TermsStatsFacet.TYPE, "termsStats" };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public FacetCollector parse(String facetName, XContentParser parser, SearchContext context) throws IOException {
@@ -90,7 +85,7 @@ public class TermsStatsFacetProcessor extends AbstractComponent implements Facet
 					size = parser.intValue();
 				} else if ("all_terms".equals(currentFieldName) || "allTerms".equals(currentFieldName)) {
 					if (parser.booleanValue()) {
-						size = 0; 
+						size = 0;
 					}
 				} else if ("order".equals(currentFieldName) || "comparator".equals(currentFieldName)) {
 					comparatorType = TermsStatsFacet.ComparatorType.fromString(parser.text());
@@ -137,9 +132,8 @@ public class TermsStatsFacetProcessor extends AbstractComponent implements Facet
 				scriptLang, script, params);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {

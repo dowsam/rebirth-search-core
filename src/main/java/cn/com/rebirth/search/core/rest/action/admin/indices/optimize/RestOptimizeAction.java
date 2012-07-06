@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestOptimizeAction.java 2012-3-29 15:01:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestOptimizeAction.java 2012-7-6 14:30:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.optimize;
 
@@ -30,7 +29,6 @@ import static cn.com.rebirth.search.core.rest.RestStatus.BAD_REQUEST;
 import static cn.com.rebirth.search.core.rest.RestStatus.OK;
 import static cn.com.rebirth.search.core.rest.action.support.RestActions.buildBroadcastShardsHeader;
 
-
 /**
  * The Class RestOptimizeAction.
  *
@@ -38,7 +36,6 @@ import static cn.com.rebirth.search.core.rest.action.support.RestActions.buildBr
  */
 public class RestOptimizeAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest optimize action.
 	 *
@@ -56,9 +53,8 @@ public class RestOptimizeAction extends BaseRestHandler {
 		controller.registerHandler(GET, "/{index}/_optimize", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -71,12 +67,11 @@ public class RestOptimizeAction extends BaseRestHandler {
 			optimizeRequest.flush(request.paramAsBoolean("flush", optimizeRequest.flush()));
 			optimizeRequest.refresh(request.paramAsBoolean("refresh", optimizeRequest.refresh()));
 
-			
 			optimizeRequest.listenerThreaded(false);
 			BroadcastOperationThreading operationThreading = BroadcastOperationThreading.fromString(
 					request.param("operation_threading"), BroadcastOperationThreading.SINGLE_THREAD);
 			if (operationThreading == BroadcastOperationThreading.NO_THREADS) {
-				
+
 				operationThreading = BroadcastOperationThreading.THREAD_PER_SHARD;
 			}
 			optimizeRequest.operationThreading(operationThreading);

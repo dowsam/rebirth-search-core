@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HistogramFacetProcessor.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HistogramFacetProcessor.java 2012-7-6 14:29:54 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram;
 
@@ -30,7 +29,6 @@ import cn.com.rebirth.search.core.search.facet.histogram.unbounded.ValueHistogra
 import cn.com.rebirth.search.core.search.facet.histogram.unbounded.ValueScriptHistogramFacetCollector;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class HistogramFacetProcessor.
  *
@@ -38,7 +36,6 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class HistogramFacetProcessor extends AbstractComponent implements FacetProcessor {
 
-	
 	/**
 	 * Instantiates a new histogram facet processor.
 	 *
@@ -50,18 +47,16 @@ public class HistogramFacetProcessor extends AbstractComponent implements FacetP
 		InternalHistogramFacet.registerStreams();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#types()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#types()
 	 */
 	@Override
 	public String[] types() {
 		return new String[] { HistogramFacet.TYPE };
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.summall.search.commons.xcontent.XContentParser, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#parse(java.lang.String, cn.com.rebirth.search.commons.xcontent.XContentParser, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public FacetCollector parse(String facetName, XContentParser parser, SearchContext context) throws IOException {
@@ -153,14 +148,13 @@ public class HistogramFacetProcessor extends AbstractComponent implements FacetP
 		} else if (keyField.equals(valueField)) {
 			return new FullHistogramFacetCollector(facetName, keyField, interval, comparatorType, context);
 		} else {
-			
+
 			return new ValueHistogramFacetCollector(facetName, keyField, valueField, interval, comparatorType, context);
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
+	 * @see cn.com.rebirth.search.core.search.facet.FacetProcessor#reduce(java.lang.String, java.util.List)
 	 */
 	@Override
 	public Facet reduce(String name, List<Facet> facets) {

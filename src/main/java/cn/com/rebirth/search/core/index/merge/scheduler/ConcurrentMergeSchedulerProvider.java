@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ConcurrentMergeSchedulerProvider.java 2012-3-29 15:02:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ConcurrentMergeSchedulerProvider.java 2012-7-6 14:30:17 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.merge.scheduler;
 
@@ -25,7 +24,6 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 
-
 /**
  * The Class ConcurrentMergeSchedulerProvider.
  *
@@ -33,19 +31,15 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
  */
 public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponent implements MergeSchedulerProvider {
 
-	
 	/** The max thread count. */
 	private final int maxThreadCount;
 
-	
 	/** The max merge count. */
 	private final int maxMergeCount;
 
-	
 	/** The schedulers. */
 	private Set<CustomConcurrentMergeScheduler> schedulers = new CopyOnWriteArraySet<CustomConcurrentMergeScheduler>();
 
-	
 	/**
 	 * Instantiates a new concurrent merge scheduler provider.
 	 *
@@ -56,16 +50,14 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 	public ConcurrentMergeSchedulerProvider(ShardId shardId, @IndexSettings Settings indexSettings) {
 		super(shardId, indexSettings);
 
-		
 		this.maxThreadCount = componentSettings.getAsInt("max_thread_count",
 				Math.max(1, Math.min(3, Runtime.getRuntime().availableProcessors() / 2)));
 		this.maxMergeCount = componentSettings.getAsInt("max_merge_count", maxThreadCount + 2);
 		logger.debug("using [concurrent] merge scheduler with max_thread_count[{}]", maxThreadCount);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.merge.scheduler.MergeSchedulerProvider#newMergeScheduler()
+	 * @see cn.com.rebirth.search.core.index.merge.scheduler.MergeSchedulerProvider#newMergeScheduler()
 	 */
 	@Override
 	public MergeScheduler newMergeScheduler() {
@@ -76,9 +68,8 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 		return concurrentMergeScheduler;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.merge.scheduler.MergeSchedulerProvider#stats()
+	 * @see cn.com.rebirth.search.core.index.merge.scheduler.MergeSchedulerProvider#stats()
 	 */
 	@Override
 	public MergeStats stats() {
@@ -91,7 +82,6 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 		return mergeStats;
 	}
 
-	
 	/**
 	 * The Class CustomConcurrentMergeScheduler.
 	 *
@@ -99,15 +89,12 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 	 */
 	public static class CustomConcurrentMergeScheduler extends TrackingConcurrentMergeScheduler {
 
-		
 		/** The shard id. */
 		private final ShardId shardId;
 
-		
 		/** The provider. */
 		private final ConcurrentMergeSchedulerProvider provider;
 
-		
 		/**
 		 * Instantiates a new custom concurrent merge scheduler.
 		 *
@@ -119,23 +106,20 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 			this.provider = provider;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.ConcurrentMergeScheduler#merge(org.apache.lucene.index.IndexWriter)
 		 */
 		@Override
 		public void merge(IndexWriter writer) throws CorruptIndexException, IOException {
 			try {
-				
+
 				if (writer.getConfig().getMergePolicy() instanceof EnableMergePolicy) {
 					if (!((EnableMergePolicy) writer.getConfig().getMergePolicy()).isMergeEnabled()) {
 						return;
 					}
 				}
 			} catch (AlreadyClosedException e) {
-				
-				
-				
+
 				return;
 			}
 			try {
@@ -146,7 +130,6 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 			}
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.ConcurrentMergeScheduler#getMergeThread(org.apache.lucene.index.IndexWriter, org.apache.lucene.index.MergePolicy.OneMerge)
 		 */
@@ -157,7 +140,6 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 			return thread;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.ConcurrentMergeScheduler#handleMergeException(java.lang.Throwable)
 		 */
@@ -167,7 +149,6 @@ public class ConcurrentMergeSchedulerProvider extends AbstractIndexShardComponen
 			super.handleMergeException(exc);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.index.ConcurrentMergeScheduler#close()
 		 */

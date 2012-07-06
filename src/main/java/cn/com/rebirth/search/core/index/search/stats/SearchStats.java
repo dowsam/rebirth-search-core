@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchStats.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchStats.java 2012-7-6 14:29:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.stats;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 
-
 /**
  * The Class SearchStats.
  *
@@ -27,7 +25,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
  */
 public class SearchStats implements Streamable, ToXContent {
 
-	
 	/**
 	 * The Class Stats.
 	 *
@@ -35,31 +32,24 @@ public class SearchStats implements Streamable, ToXContent {
 	 */
 	public static class Stats implements Streamable, ToXContent {
 
-		
 		/** The query count. */
 		private long queryCount;
 
-		
 		/** The query time in millis. */
 		private long queryTimeInMillis;
 
-		
 		/** The query current. */
 		private long queryCurrent;
 
-		
 		/** The fetch count. */
 		private long fetchCount;
 
-		
 		/** The fetch time in millis. */
 		private long fetchTimeInMillis;
 
-		
 		/** The fetch current. */
 		private long fetchCurrent;
 
-		
 		/**
 		 * Instantiates a new stats.
 		 */
@@ -67,7 +57,6 @@ public class SearchStats implements Streamable, ToXContent {
 
 		}
 
-		
 		/**
 		 * Instantiates a new stats.
 		 *
@@ -88,7 +77,6 @@ public class SearchStats implements Streamable, ToXContent {
 			this.fetchCurrent = fetchCurrent;
 		}
 
-		
 		/**
 		 * Adds the.
 		 *
@@ -104,7 +92,6 @@ public class SearchStats implements Streamable, ToXContent {
 			fetchCurrent += stats.fetchCurrent;
 		}
 
-		
 		/**
 		 * Query count.
 		 *
@@ -114,7 +101,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return queryCount;
 		}
 
-		
 		/**
 		 * Gets the query count.
 		 *
@@ -124,7 +110,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return queryCount;
 		}
 
-		
 		/**
 		 * Query time.
 		 *
@@ -134,7 +119,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return new TimeValue(queryTimeInMillis);
 		}
 
-		
 		/**
 		 * Query time in millis.
 		 *
@@ -144,7 +128,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return queryTimeInMillis;
 		}
 
-		
 		/**
 		 * Gets the query time in millis.
 		 *
@@ -154,7 +137,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return queryTimeInMillis;
 		}
 
-		
 		/**
 		 * Query current.
 		 *
@@ -164,7 +146,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return queryCurrent;
 		}
 
-		
 		/**
 		 * Gets the query current.
 		 *
@@ -174,7 +155,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return queryCurrent;
 		}
 
-		
 		/**
 		 * Fetch count.
 		 *
@@ -184,7 +164,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return fetchCount;
 		}
 
-		
 		/**
 		 * Gets the fetch count.
 		 *
@@ -194,7 +173,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return fetchCount;
 		}
 
-		
 		/**
 		 * Fetch time.
 		 *
@@ -204,7 +182,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return new TimeValue(fetchTimeInMillis);
 		}
 
-		
 		/**
 		 * Fetch time in millis.
 		 *
@@ -214,7 +191,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return fetchTimeInMillis;
 		}
 
-		
 		/**
 		 * Gets the fetch time in millis.
 		 *
@@ -224,7 +200,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return fetchTimeInMillis;
 		}
 
-		
 		/**
 		 * Fetch current.
 		 *
@@ -234,7 +209,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return fetchCurrent;
 		}
 
-		
 		/**
 		 * Gets the fetch current.
 		 *
@@ -244,7 +218,6 @@ public class SearchStats implements Streamable, ToXContent {
 			return fetchCurrent;
 		}
 
-		
 		/**
 		 * Read stats.
 		 *
@@ -258,9 +231,8 @@ public class SearchStats implements Streamable, ToXContent {
 			return stats;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -273,9 +245,8 @@ public class SearchStats implements Streamable, ToXContent {
 			fetchCurrent = in.readVLong();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -288,9 +259,8 @@ public class SearchStats implements Streamable, ToXContent {
 			out.writeVLong(fetchCurrent);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+		 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 		 */
 		@Override
 		public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -308,16 +278,13 @@ public class SearchStats implements Streamable, ToXContent {
 		}
 	}
 
-	
 	/** The total stats. */
 	private Stats totalStats;
 
-	
 	/** The group stats. */
 	@Nullable
 	Map<String, Stats> groupStats;
 
-	
 	/**
 	 * Instantiates a new search stats.
 	 */
@@ -325,7 +292,6 @@ public class SearchStats implements Streamable, ToXContent {
 		totalStats = new Stats();
 	}
 
-	
 	/**
 	 * Instantiates a new search stats.
 	 *
@@ -337,7 +303,6 @@ public class SearchStats implements Streamable, ToXContent {
 		this.groupStats = groupStats;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -347,7 +312,6 @@ public class SearchStats implements Streamable, ToXContent {
 		add(searchStats, true);
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -374,7 +338,6 @@ public class SearchStats implements Streamable, ToXContent {
 		}
 	}
 
-	
 	/**
 	 * Total.
 	 *
@@ -384,7 +347,6 @@ public class SearchStats implements Streamable, ToXContent {
 		return this.totalStats;
 	}
 
-	
 	/**
 	 * Group stats.
 	 *
@@ -395,9 +357,8 @@ public class SearchStats implements Streamable, ToXContent {
 		return this.groupStats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
@@ -416,7 +377,6 @@ public class SearchStats implements Streamable, ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -424,48 +384,37 @@ public class SearchStats implements Streamable, ToXContent {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant SEARCH. */
 		static final XContentBuilderString SEARCH = new XContentBuilderString("search");
 
-		
 		/** The Constant GROUPS. */
 		static final XContentBuilderString GROUPS = new XContentBuilderString("groups");
 
-		
 		/** The Constant QUERY_TOTAL. */
 		static final XContentBuilderString QUERY_TOTAL = new XContentBuilderString("query_total");
 
-		
 		/** The Constant QUERY_TIME. */
 		static final XContentBuilderString QUERY_TIME = new XContentBuilderString("query_time");
 
-		
 		/** The Constant QUERY_TIME_IN_MILLIS. */
 		static final XContentBuilderString QUERY_TIME_IN_MILLIS = new XContentBuilderString("query_time_in_millis");
 
-		
 		/** The Constant QUERY_CURRENT. */
 		static final XContentBuilderString QUERY_CURRENT = new XContentBuilderString("query_current");
 
-		
 		/** The Constant FETCH_TOTAL. */
 		static final XContentBuilderString FETCH_TOTAL = new XContentBuilderString("fetch_total");
 
-		
 		/** The Constant FETCH_TIME. */
 		static final XContentBuilderString FETCH_TIME = new XContentBuilderString("fetch_time");
 
-		
 		/** The Constant FETCH_TIME_IN_MILLIS. */
 		static final XContentBuilderString FETCH_TIME_IN_MILLIS = new XContentBuilderString("fetch_time_in_millis");
 
-		
 		/** The Constant FETCH_CURRENT. */
 		static final XContentBuilderString FETCH_CURRENT = new XContentBuilderString("fetch_current");
 	}
 
-	
 	/**
 	 * Read search stats.
 	 *
@@ -479,9 +428,8 @@ public class SearchStats implements Streamable, ToXContent {
 		return searchStats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -495,9 +443,8 @@ public class SearchStats implements Streamable, ToXContent {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverClusterState.java 2012-3-29 15:00:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverClusterState.java 2012-7-6 14:29:53 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.cluster;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.river.routing.RiversRouting;
 
-
 /**
  * The Class RiverClusterState.
  *
@@ -20,15 +18,12 @@ import cn.com.rebirth.search.core.river.routing.RiversRouting;
  */
 public class RiverClusterState {
 
-	
 	/** The version. */
 	private final long version;
 
-	
 	/** The routing. */
 	private final RiversRouting routing;
 
-	
 	/**
 	 * Instantiates a new river cluster state.
 	 *
@@ -40,7 +35,6 @@ public class RiverClusterState {
 		this.routing = state.routing();
 	}
 
-	
 	/**
 	 * Instantiates a new river cluster state.
 	 *
@@ -52,7 +46,6 @@ public class RiverClusterState {
 		this.routing = routing;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -62,7 +55,6 @@ public class RiverClusterState {
 		return this.version;
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -72,7 +64,6 @@ public class RiverClusterState {
 		return routing;
 	}
 
-	
 	/**
 	 * Builder.
 	 *
@@ -82,7 +73,6 @@ public class RiverClusterState {
 		return new Builder();
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -90,15 +80,12 @@ public class RiverClusterState {
 	 */
 	public static class Builder {
 
-		
 		/** The version. */
 		private long version = 0;
 
-		
 		/** The routing. */
 		private RiversRouting routing = RiversRouting.EMPTY;
 
-		
 		/**
 		 * State.
 		 *
@@ -111,7 +98,6 @@ public class RiverClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -122,7 +108,6 @@ public class RiverClusterState {
 			return routing(builder.build());
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -134,7 +119,6 @@ public class RiverClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -144,7 +128,6 @@ public class RiverClusterState {
 			return new RiverClusterState(version, routing);
 		}
 
-		
 		/**
 		 * Read from.
 		 *
@@ -159,7 +142,6 @@ public class RiverClusterState {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *

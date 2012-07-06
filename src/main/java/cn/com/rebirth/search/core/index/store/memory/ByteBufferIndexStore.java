@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ByteBufferIndexStore.java 2012-3-29 15:02:31 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ByteBufferIndexStore.java 2012-7-6 14:29:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.store.memory;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.index.store.support.AbstractIndexStore;
 import cn.com.rebirth.search.core.monitor.jvm.JvmInfo;
 import cn.com.rebirth.search.core.monitor.jvm.JvmStats;
 
-
 /**
  * The Class ByteBufferIndexStore.
  *
@@ -27,11 +25,9 @@ import cn.com.rebirth.search.core.monitor.jvm.JvmStats;
  */
 public class ByteBufferIndexStore extends AbstractIndexStore {
 
-	
 	/** The direct. */
 	private final boolean direct;
 
-	
 	/**
 	 * Instantiates a new byte buffer index store.
 	 *
@@ -47,40 +43,36 @@ public class ByteBufferIndexStore extends AbstractIndexStore {
 		this.direct = byteBufferCache.direct();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#persistent()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#persistent()
 	 */
 	@Override
 	public boolean persistent() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#shardDirectory()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#shardDirectory()
 	 */
 	@Override
 	public Class<? extends DirectoryService> shardDirectory() {
 		return ByteBufferDirectoryService.class;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#backingStoreTotalSpace()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#backingStoreTotalSpace()
 	 */
 	@Override
 	public ByteSizeValue backingStoreTotalSpace() {
 		if (direct) {
-			
+
 			return new ByteSizeValue(-1, ByteSizeUnit.BYTES);
 		}
 		return JvmInfo.jvmInfo().mem().heapMax();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.store.IndexStore#backingStoreFreeSpace()
+	 * @see cn.com.rebirth.search.core.index.store.IndexStore#backingStoreFreeSpace()
 	 */
 	@Override
 	public ByteSizeValue backingStoreFreeSpace() {

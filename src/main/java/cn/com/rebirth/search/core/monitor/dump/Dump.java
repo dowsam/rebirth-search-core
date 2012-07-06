@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Dump.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Dump.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump;
 
@@ -11,7 +10,6 @@ import java.io.OutputStream;
 import java.io.Writer;
 import java.util.Map;
 
-
 /**
  * The Interface Dump.
  *
@@ -19,7 +17,6 @@ import java.util.Map;
  */
 public interface Dump {
 
-	
 	/**
 	 * Timestamp.
 	 *
@@ -27,7 +24,6 @@ public interface Dump {
 	 */
 	long timestamp();
 
-	
 	/**
 	 * Context.
 	 *
@@ -35,7 +31,6 @@ public interface Dump {
 	 */
 	Map<String, Object> context();
 
-	
 	/**
 	 * Cause.
 	 *
@@ -43,7 +38,6 @@ public interface Dump {
 	 */
 	String cause();
 
-	
 	/**
 	 * Creates the file.
 	 *
@@ -53,7 +47,6 @@ public interface Dump {
 	 */
 	File createFile(String name) throws DumpException;
 
-	
 	/**
 	 * Creates the file writer.
 	 *
@@ -63,7 +56,6 @@ public interface Dump {
 	 */
 	Writer createFileWriter(String name) throws DumpException;
 
-	
 	/**
 	 * Creates the file output stream.
 	 *
@@ -73,7 +65,6 @@ public interface Dump {
 	 */
 	OutputStream createFileOutputStream(String name) throws DumpException;
 
-	
 	/**
 	 * Files.
 	 *
@@ -81,7 +72,6 @@ public interface Dump {
 	 */
 	File[] files();
 
-	
 	/**
 	 * Finish.
 	 *

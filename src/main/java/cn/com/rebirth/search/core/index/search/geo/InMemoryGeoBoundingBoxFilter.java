@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InMemoryGeoBoundingBoxFilter.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InMemoryGeoBoundingBoxFilter.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.search.geo;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldData;
 import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldDataType;
 
-
 /**
  * The Class InMemoryGeoBoundingBoxFilter.
  *
@@ -25,23 +23,18 @@ import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldDataType;
  */
 public class InMemoryGeoBoundingBoxFilter extends Filter {
 
-	
 	/** The top left. */
 	private final Point topLeft;
 
-	
 	/** The bottom right. */
 	private final Point bottomRight;
 
-	
 	/** The field name. */
 	private final String fieldName;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/**
 	 * Instantiates a new in memory geo bounding box filter.
 	 *
@@ -58,7 +51,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		this.fieldDataCache = fieldDataCache;
 	}
 
-	
 	/**
 	 * Top left.
 	 *
@@ -68,7 +60,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		return topLeft;
 	}
 
-	
 	/**
 	 * Bottom right.
 	 *
@@ -78,7 +69,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		return bottomRight;
 	}
 
-	
 	/**
 	 * Field name.
 	 *
@@ -88,7 +78,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		return fieldName;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.Filter#getDocIdSet(org.apache.lucene.index.IndexReader)
 	 */
@@ -97,7 +86,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		final GeoPointFieldData fieldData = (GeoPointFieldData) fieldDataCache.cache(GeoPointFieldDataType.TYPE,
 				reader, fieldName);
 
-		
 		if (topLeft.lon > bottomRight.lon) {
 			return new Meridian180GeoBoundingBoxDocSet(reader.maxDoc(), fieldData, topLeft, bottomRight);
 		} else {
@@ -105,7 +93,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		}
 	}
 
-	
 	/**
 	 * The Class Meridian180GeoBoundingBoxDocSet.
 	 *
@@ -113,19 +100,15 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 	 */
 	public static class Meridian180GeoBoundingBoxDocSet extends GetDocSet {
 
-		
 		/** The field data. */
 		private final GeoPointFieldData fieldData;
 
-		
 		/** The top left. */
 		private final Point topLeft;
 
-		
 		/** The bottom right. */
 		private final Point bottomRight;
 
-		
 		/**
 		 * Instantiates a new meridian180 geo bounding box doc set.
 		 *
@@ -141,21 +124,17 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 			this.bottomRight = bottomRight;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.DocIdSet#isCacheable()
 		 */
 		@Override
 		public boolean isCacheable() {
-			
-			
-			
+
 			return false;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.docset.DocSet#get(int)
+		 * @see cn.com.rebirth.search.commons.lucene.docset.DocSet#get(int)
 		 */
 		@Override
 		public boolean get(int doc) {
@@ -186,7 +165,6 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 		}
 	}
 
-	
 	/**
 	 * The Class GeoBoundingBoxDocSet.
 	 *
@@ -194,19 +172,15 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 	 */
 	public static class GeoBoundingBoxDocSet extends GetDocSet {
 
-		
 		/** The field data. */
 		private final GeoPointFieldData fieldData;
 
-		
 		/** The top left. */
 		private final Point topLeft;
 
-		
 		/** The bottom right. */
 		private final Point bottomRight;
 
-		
 		/**
 		 * Instantiates a new geo bounding box doc set.
 		 *
@@ -222,21 +196,17 @@ public class InMemoryGeoBoundingBoxFilter extends Filter {
 			this.bottomRight = bottomRight;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see org.apache.lucene.search.DocIdSet#isCacheable()
 		 */
 		@Override
 		public boolean isCacheable() {
-			
-			
-			
+
 			return false;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.lucene.docset.DocSet#get(int)
+		 * @see cn.com.rebirth.search.commons.lucene.docset.DocSet#get(int)
 		 */
 		@Override
 		public boolean get(int doc) {

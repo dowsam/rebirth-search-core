@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core OsService.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core OsService.java 2012-7-6 14:29:08 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.os;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 
-
 /**
  * The Class OsService.
  *
@@ -19,23 +17,18 @@ import cn.com.rebirth.search.commons.inject.Inject;
  */
 public class OsService extends AbstractComponent {
 
-	
 	/** The probe. */
 	private final OsProbe probe;
 
-	
 	/** The info. */
 	private final OsInfo info;
 
-	
 	/** The refresh interval. */
 	private final TimeValue refreshInterval;
 
-	
 	/** The cached stats. */
 	private OsStats cachedStats;
 
-	
 	/**
 	 * Instantiates a new os service.
 	 *
@@ -56,7 +49,6 @@ public class OsService extends AbstractComponent {
 		logger.debug("Using probe [{}] with refresh_interval [{}]", probe, refreshInterval);
 	}
 
-	
 	/**
 	 * Info.
 	 *
@@ -66,7 +58,6 @@ public class OsService extends AbstractComponent {
 		return this.info;
 	}
 
-	
 	/**
 	 * Stats.
 	 *

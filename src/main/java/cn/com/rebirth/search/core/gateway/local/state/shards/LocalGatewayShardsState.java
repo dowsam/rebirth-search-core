@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalGatewayShardsState.java 2012-3-29 15:02:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalGatewayShardsState.java 2012-7-6 14:29:20 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway.local.state.shards;
 
@@ -45,7 +44,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import com.google.common.collect.Maps;
 import com.google.common.io.Closeables;
 
-
 /**
  * The Class LocalGatewayShardsState.
  *
@@ -53,15 +51,12 @@ import com.google.common.io.Closeables;
  */
 public class LocalGatewayShardsState extends AbstractComponent implements ClusterStateListener {
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/** The current state. */
 	private volatile Map<ShardId, ShardStateInfo> currentState = Maps.newHashMap();
 
-	
 	/**
 	 * Instantiates a new local gateway shards state.
 	 *
@@ -91,7 +86,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		}
 	}
 
-	
 	/**
 	 * Current started shards.
 	 *
@@ -101,9 +95,8 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		return this.currentState;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.summall.search.core.cluster.ClusterChangedEvent)
+	 * @see cn.com.rebirth.search.core.cluster.ClusterStateListener#clusterChanged(cn.com.rebirth.search.core.cluster.ClusterChangedEvent)
 	 */
 	@Override
 	public void clusterChanged(ClusterChangedEvent event) {
@@ -122,10 +115,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		Map<ShardId, ShardStateInfo> newState = Maps.newHashMap();
 		newState.putAll(this.currentState);
 
-		
-		
-		
-		
 		for (IndexRoutingTable indexRoutingTable : event.state().routingTable()) {
 			for (IndexShardRoutingTable indexShardRoutingTable : indexRoutingTable) {
 				if (indexShardRoutingTable.countWithState(ShardRoutingState.STARTED) == indexShardRoutingTable.size()) {
@@ -133,16 +122,16 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 				}
 			}
 		}
-		
+
 		for (ShardId shardId : currentState.keySet()) {
 			if (!event.state().metaData().hasIndex(shardId.index().name())) {
 				newState.remove(shardId);
 			}
 		}
-		
+
 		RoutingNode routingNode = event.state().readOnlyRoutingNodes().node(event.state().nodes().localNodeId());
 		if (routingNode != null) {
-			
+
 			for (MutableShardRouting shardRouting : routingNode) {
 				if (shardRouting.active()) {
 					newState.put(shardRouting.shardId(),
@@ -151,7 +140,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 			}
 		}
 
-		
 		for (Iterator<Map.Entry<ShardId, ShardStateInfo>> it = newState.entrySet().iterator(); it.hasNext();) {
 			Map.Entry<ShardId, ShardStateInfo> entry = it.next();
 			ShardId shardId = entry.getKey();
@@ -166,7 +154,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 						+ shardStateInfo.version + "]";
 			}
 
-			
 			if (writeReason == null) {
 				continue;
 			}
@@ -174,13 +161,11 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 			try {
 				writeShardState(writeReason, shardId, shardStateInfo, currentShardStateInfo);
 			} catch (Exception e) {
-				
-				
+
 				it.remove();
 			}
 		}
 
-		
 		for (Map.Entry<ShardId, ShardStateInfo> entry : currentState.entrySet()) {
 			ShardId shardId = entry.getKey();
 			if (!newState.containsKey(shardId)) {
@@ -191,7 +176,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		this.currentState = newState;
 	}
 
-	
 	/**
 	 * Load started shards.
 	 *
@@ -209,7 +193,7 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 				if (!shardStateDir.exists() || !shardStateDir.isDirectory()) {
 					continue;
 				}
-				
+
 				File[] stateFiles = shardStateDir.listFiles();
 				if (stateFiles == null) {
 					continue;
@@ -243,25 +227,23 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 					}
 				}
 			}
-			
+
 			if (highestShardState == null) {
 				continue;
 			}
 
 			shardsState.put(shardId, highestShardState);
 
-			
 			if (highestShardVersion > highestVersion) {
 				highestVersion = highestShardVersion;
 			}
 		}
-		
+
 		if (highestVersion != -1) {
 			currentState = shardsState;
 		}
 	}
 
-	
 	/**
 	 * Read shard state.
 	 *
@@ -300,7 +282,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		}
 	}
 
-	
 	/**
 	 * Write shard state.
 	 *
@@ -352,7 +333,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 				throw new IOException("failed to write shard state for " + shardId, lastFailure);
 			}
 
-			
 			if (previousStateInfo != null && previousStateInfo.version != shardStateInfo.version) {
 				for (File shardLocation : nodeEnv.shardLocations(shardId)) {
 					File stateFile = new File(new File(shardLocation, "_state"), "state-" + previousStateInfo.version);
@@ -364,7 +344,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		}
 	}
 
-	
 	/**
 	 * Delete shard state.
 	 *
@@ -381,7 +360,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 		}
 	}
 
-	
 	/**
 	 * Pre019 upgrade.
 	 *
@@ -409,7 +387,7 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 				}
 				long fileIndex = Long.parseLong(name.substring(name.indexOf('-') + 1));
 				if (fileIndex >= index) {
-					
+
 					try {
 						byte[] data = Streams.copyToByteArray(new FileInputStream(stateFile));
 						if (data.length == 0) {
@@ -437,13 +415,11 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 			writeShardState("upgrade", entry.getKey(), entry.getValue(), null);
 		}
 
-		
 		File backupFile = new File(latest.getParentFile(), "backup-" + latest.getName());
 		if (!latest.renameTo(backupFile)) {
 			throw new IOException("failed to rename old state to backup state [" + latest.getAbsolutePath() + "]");
 		}
 
-		
 		for (File dataLocation : nodeEnv.nodeDataLocations()) {
 			File stateLocation = new File(dataLocation, "_state");
 			if (!stateLocation.exists()) {
@@ -466,7 +442,6 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 				backupFile.getAbsolutePath());
 	}
 
-	
 	/**
 	 * Pre09 read state.
 	 *
@@ -490,7 +465,7 @@ public class LocalGatewayShardsState extends AbstractComponent implements Cluste
 			String currentFieldName = null;
 			XContentParser.Token token = parser.nextToken();
 			if (token == null) {
-				
+
 				return shardsState;
 			}
 			while ((token = parser.nextToken()) != XContentParser.Token.END_OBJECT) {

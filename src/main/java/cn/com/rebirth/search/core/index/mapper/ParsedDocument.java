@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ParsedDocument.java 2012-3-29 15:02:05 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ParsedDocument.java 2012-7-6 14:30:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.mapper;
 
@@ -12,7 +11,6 @@ import org.apache.lucene.document.Document;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
  * The Class ParsedDocument.
  *
@@ -20,238 +18,241 @@ import java.util.List;
  */
 public class ParsedDocument {
 
-    /** The uid. */
-    private final String uid;
+	/** The uid. */
+	private final String uid;
 
-    /** The id. */
-    private final String id;
+	/** The id. */
+	private final String id;
 
-    /** The type. */
-    private final String type;
+	/** The type. */
+	private final String type;
 
-    /** The routing. */
-    private final String routing;
+	/** The routing. */
+	private final String routing;
 
-    /** The timestamp. */
-    private final long timestamp;
+	/** The timestamp. */
+	private final long timestamp;
 
-    /** The ttl. */
-    private final long ttl;
+	/** The ttl. */
+	private final long ttl;
 
-    /** The documents. */
-    private final List<Document> documents;
+	/** The documents. */
+	private final List<Document> documents;
 
-    /** The analyzer. */
-    private final Analyzer analyzer;
+	/** The analyzer. */
+	private final Analyzer analyzer;
 
-    /** The source. */
-    private final byte[] source;
-    
-    /** The source offset. */
-    private final int sourceOffset;
-    
-    /** The source length. */
-    private final int sourceLength;
+	/** The source. */
+	private final byte[] source;
 
-    /** The mappers added. */
-    private boolean mappersAdded;
+	/** The source offset. */
+	private final int sourceOffset;
 
-    /** The parent. */
-    private String parent;
+	/** The source length. */
+	private final int sourceLength;
 
-    /**
-     * Instantiates a new parsed document.
-     *
-     * @param uid the uid
-     * @param id the id
-     * @param type the type
-     * @param routing the routing
-     * @param timestamp the timestamp
-     * @param ttl the ttl
-     * @param document the document
-     * @param analyzer the analyzer
-     * @param source the source
-     * @param mappersAdded the mappers added
-     */
-    public ParsedDocument(String uid, String id, String type, String routing, long timestamp, long ttl, Document document, Analyzer analyzer, byte[] source, boolean mappersAdded) {
-        this(uid, id, type, routing, timestamp, ttl, Arrays.asList(document), analyzer, source, 0, source.length, mappersAdded);
-    }
+	/** The mappers added. */
+	private boolean mappersAdded;
 
-    /**
-     * Instantiates a new parsed document.
-     *
-     * @param uid the uid
-     * @param id the id
-     * @param type the type
-     * @param routing the routing
-     * @param timestamp the timestamp
-     * @param ttl the ttl
-     * @param documents the documents
-     * @param analyzer the analyzer
-     * @param source the source
-     * @param sourceOffset the source offset
-     * @param sourceLength the source length
-     * @param mappersAdded the mappers added
-     */
-    public ParsedDocument(String uid, String id, String type, String routing, long timestamp, long ttl, List<Document> documents, Analyzer analyzer, byte[] source, int sourceOffset, int sourceLength, boolean mappersAdded) {
-        this.uid = uid;
-        this.id = id;
-        this.type = type;
-        this.routing = routing;
-        this.timestamp = timestamp;
-        this.ttl = ttl;
-        this.documents = documents;
-        this.source = source;
-        this.sourceOffset = sourceOffset;
-        this.sourceLength = sourceLength;
-        this.analyzer = analyzer;
-        this.mappersAdded = mappersAdded;
-    }
+	/** The parent. */
+	private String parent;
 
-    /**
-     * Uid.
-     *
-     * @return the string
-     */
-    public String uid() {
-        return this.uid;
-    }
+	/**
+	 * Instantiates a new parsed document.
+	 *
+	 * @param uid the uid
+	 * @param id the id
+	 * @param type the type
+	 * @param routing the routing
+	 * @param timestamp the timestamp
+	 * @param ttl the ttl
+	 * @param document the document
+	 * @param analyzer the analyzer
+	 * @param source the source
+	 * @param mappersAdded the mappers added
+	 */
+	public ParsedDocument(String uid, String id, String type, String routing, long timestamp, long ttl,
+			Document document, Analyzer analyzer, byte[] source, boolean mappersAdded) {
+		this(uid, id, type, routing, timestamp, ttl, Arrays.asList(document), analyzer, source, 0, source.length,
+				mappersAdded);
+	}
 
-    /**
-     * Id.
-     *
-     * @return the string
-     */
-    public String id() {
-        return this.id;
-    }
+	/**
+	 * Instantiates a new parsed document.
+	 *
+	 * @param uid the uid
+	 * @param id the id
+	 * @param type the type
+	 * @param routing the routing
+	 * @param timestamp the timestamp
+	 * @param ttl the ttl
+	 * @param documents the documents
+	 * @param analyzer the analyzer
+	 * @param source the source
+	 * @param sourceOffset the source offset
+	 * @param sourceLength the source length
+	 * @param mappersAdded the mappers added
+	 */
+	public ParsedDocument(String uid, String id, String type, String routing, long timestamp, long ttl,
+			List<Document> documents, Analyzer analyzer, byte[] source, int sourceOffset, int sourceLength,
+			boolean mappersAdded) {
+		this.uid = uid;
+		this.id = id;
+		this.type = type;
+		this.routing = routing;
+		this.timestamp = timestamp;
+		this.ttl = ttl;
+		this.documents = documents;
+		this.source = source;
+		this.sourceOffset = sourceOffset;
+		this.sourceLength = sourceLength;
+		this.analyzer = analyzer;
+		this.mappersAdded = mappersAdded;
+	}
 
-    /**
-     * Type.
-     *
-     * @return the string
-     */
-    public String type() {
-        return this.type;
-    }
+	/**
+	 * Uid.
+	 *
+	 * @return the string
+	 */
+	public String uid() {
+		return this.uid;
+	}
 
-    /**
-     * Routing.
-     *
-     * @return the string
-     */
-    public String routing() {
-        return this.routing;
-    }
+	/**
+	 * Id.
+	 *
+	 * @return the string
+	 */
+	public String id() {
+		return this.id;
+	}
 
-    /**
-     * Timestamp.
-     *
-     * @return the long
-     */
-    public long timestamp() {
-        return this.timestamp;
-    }
+	/**
+	 * Type.
+	 *
+	 * @return the string
+	 */
+	public String type() {
+		return this.type;
+	}
 
-    /**
-     * Ttl.
-     *
-     * @return the long
-     */
-    public long ttl() {
-        return this.ttl;
-    }
+	/**
+	 * Routing.
+	 *
+	 * @return the string
+	 */
+	public String routing() {
+		return this.routing;
+	}
 
-    /**
-     * Root doc.
-     *
-     * @return the document
-     */
-    public Document rootDoc() {
-        return documents.get(documents.size() - 1);
-    }
+	/**
+	 * Timestamp.
+	 *
+	 * @return the long
+	 */
+	public long timestamp() {
+		return this.timestamp;
+	}
 
-    /**
-     * Docs.
-     *
-     * @return the list
-     */
-    public List<Document> docs() {
-        return this.documents;
-    }
+	/**
+	 * Ttl.
+	 *
+	 * @return the long
+	 */
+	public long ttl() {
+		return this.ttl;
+	}
 
-    /**
-     * Analyzer.
-     *
-     * @return the analyzer
-     */
-    public Analyzer analyzer() {
-        return this.analyzer;
-    }
+	/**
+	 * Root doc.
+	 *
+	 * @return the document
+	 */
+	public Document rootDoc() {
+		return documents.get(documents.size() - 1);
+	}
 
-    /**
-     * Source.
-     *
-     * @return the byte[]
-     */
-    public byte[] source() {
-        return this.source;
-    }
+	/**
+	 * Docs.
+	 *
+	 * @return the list
+	 */
+	public List<Document> docs() {
+		return this.documents;
+	}
 
-    /**
-     * Source offset.
-     *
-     * @return the int
-     */
-    public int sourceOffset() {
-        return this.sourceOffset;
-    }
+	/**
+	 * Analyzer.
+	 *
+	 * @return the analyzer
+	 */
+	public Analyzer analyzer() {
+		return this.analyzer;
+	}
 
-    /**
-     * Source length.
-     *
-     * @return the int
-     */
-    public int sourceLength() {
-        return this.sourceLength;
-    }
+	/**
+	 * Source.
+	 *
+	 * @return the byte[]
+	 */
+	public byte[] source() {
+		return this.source;
+	}
 
-    /**
-     * Parent.
-     *
-     * @param parent the parent
-     * @return the parsed document
-     */
-    public ParsedDocument parent(String parent) {
-        this.parent = parent;
-        return this;
-    }
+	/**
+	 * Source offset.
+	 *
+	 * @return the int
+	 */
+	public int sourceOffset() {
+		return this.sourceOffset;
+	}
 
-    /**
-     * Parent.
-     *
-     * @return the string
-     */
-    public String parent() {
-        return this.parent;
-    }
+	/**
+	 * Source length.
+	 *
+	 * @return the int
+	 */
+	public int sourceLength() {
+		return this.sourceLength;
+	}
 
-    
-    /**
-     * Mappers added.
-     *
-     * @return true, if successful
-     */
-    public boolean mappersAdded() {
-        return mappersAdded;
-    }
+	/**
+	 * Parent.
+	 *
+	 * @param parent the parent
+	 * @return the parsed document
+	 */
+	public ParsedDocument parent(String parent) {
+		this.parent = parent;
+		return this;
+	}
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Document ").append("uid[").append(uid).append("] doc [").append(documents).append("]");
-        return sb.toString();
-    }
+	/**
+	 * Parent.
+	 *
+	 * @return the string
+	 */
+	public String parent() {
+		return this.parent;
+	}
+
+	/**
+	 * Mappers added.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean mappersAdded() {
+		return mappersAdded;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Document ").append("uid[").append(uid).append("] doc [").append(documents).append("]");
+		return sb.toString();
+	}
 }

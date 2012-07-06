@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardDeleteRequest.java 2012-3-29 15:00:46 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardDeleteRequest.java 2012-7-6 14:29:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete.index;
 
@@ -14,7 +13,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest;
 
-
 /**
  * The Class ShardDeleteRequest.
  *
@@ -22,27 +20,21 @@ import cn.com.rebirth.search.core.action.support.replication.ShardReplicationOpe
  */
 public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 
-	
 	/** The shard id. */
 	private int shardId;
 
-	
 	/** The type. */
 	private String type;
 
-	
 	/** The id. */
 	private String id;
 
-	
 	/** The refresh. */
 	private boolean refresh = false;
 
-	
 	/** The version. */
 	private long version;
 
-	
 	/**
 	 * Instantiates a new shard delete request.
 	 *
@@ -61,16 +53,14 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		this.version = request.version();
 	}
 
-	
 	/**
 	 * Instantiates a new shard delete request.
 	 */
 	ShardDeleteRequest() {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -84,7 +74,6 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -94,7 +83,6 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -104,7 +92,6 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		return this.type;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -114,7 +101,6 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		return this.id;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -124,7 +110,6 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -134,7 +119,6 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		this.version = version;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -144,9 +128,8 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		return this.version;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -158,9 +141,8 @@ public class ShardDeleteRequest extends ShardReplicationOperationRequest {
 		version = in.readLong();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

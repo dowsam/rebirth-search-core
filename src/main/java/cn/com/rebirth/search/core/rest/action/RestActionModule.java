@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestActionModule.java 2012-3-29 15:01:26 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestActionModule.java 2012-7-6 14:29:21 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action;
 
@@ -61,7 +60,6 @@ import cn.com.rebirth.search.core.rest.action.update.RestUpdateAction;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class RestActionModule.
  *
@@ -69,11 +67,9 @@ import com.google.common.collect.Lists;
  */
 public class RestActionModule extends AbstractModule {
 
-	
 	/** The rest plugins actions. */
 	private List<Class<? extends BaseRestHandler>> restPluginsActions = Lists.newArrayList();
 
-	
 	/**
 	 * Instantiates a new rest action module.
 	 *
@@ -83,9 +79,8 @@ public class RestActionModule extends AbstractModule {
 		this.restPluginsActions = restPluginsActions;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

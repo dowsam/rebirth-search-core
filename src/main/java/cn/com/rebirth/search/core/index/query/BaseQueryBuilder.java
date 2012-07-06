@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BaseQueryBuilder.java 2012-3-29 15:01:13 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BaseQueryBuilder.java 2012-7-6 14:29:55 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.XContentFactory;
 import cn.com.rebirth.search.commons.xcontent.XContentType;
 
-
 /**
  * The Class BaseQueryBuilder.
  *
@@ -21,7 +19,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentType;
  */
 public abstract class BaseQueryBuilder implements QueryBuilder {
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -37,18 +34,16 @@ public abstract class BaseQueryBuilder implements QueryBuilder {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryBuilder#buildAsBytes()
+	 * @see cn.com.rebirth.search.core.index.query.QueryBuilder#buildAsBytes()
 	 */
 	@Override
 	public BytesStream buildAsBytes() throws QueryBuilderException {
 		return buildAsBytes(XContentType.JSON);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.QueryBuilder#buildAsBytes(cn.com.summall.search.commons.xcontent.XContentType)
+	 * @see cn.com.rebirth.search.core.index.query.QueryBuilder#buildAsBytes(cn.com.rebirth.search.commons.xcontent.XContentType)
 	 */
 	@Override
 	public BytesStream buildAsBytes(XContentType contentType) throws QueryBuilderException {
@@ -61,9 +56,8 @@ public abstract class BaseQueryBuilder implements QueryBuilder {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -73,7 +67,6 @@ public abstract class BaseQueryBuilder implements QueryBuilder {
 		return builder;
 	}
 
-	
 	/**
 	 * Do x content.
 	 *

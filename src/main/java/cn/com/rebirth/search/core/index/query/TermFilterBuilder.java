@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermFilterBuilder.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermFilterBuilder.java 2012-7-6 14:29:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class TermFilterBuilder.
@@ -18,27 +16,21 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class TermFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The value. */
 	private final Object value;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The cache key. */
 	private String cacheKey;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new term filter builder.
 	 *
@@ -49,7 +41,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new term filter builder.
 	 *
@@ -60,7 +51,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new term filter builder.
 	 *
@@ -71,7 +61,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new term filter builder.
 	 *
@@ -82,7 +71,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new term filter builder.
 	 *
@@ -93,7 +81,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		this(name, (Object) value);
 	}
 
-	
 	/**
 	 * Instantiates a new term filter builder.
 	 *
@@ -105,7 +92,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		this.value = value;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -117,7 +103,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -129,7 +114,6 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Cache key.
 	 *
@@ -141,9 +125,8 @@ public class TermFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

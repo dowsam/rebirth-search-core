@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NotFilterBuilder.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NotFilterBuilder.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class NotFilterBuilder.
@@ -18,19 +16,15 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class NotFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The filter. */
 	private FilterBuilder filter;
 
-	
 	/** The cache. */
 	private Boolean cache;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new not filter builder.
 	 *
@@ -40,7 +34,6 @@ public class NotFilterBuilder extends BaseFilterBuilder {
 		this.filter = filter;
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -52,7 +45,6 @@ public class NotFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -64,9 +56,8 @@ public class NotFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

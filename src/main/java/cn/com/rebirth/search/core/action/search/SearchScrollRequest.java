@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SearchScrollRequest.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SearchScrollRequest.java 2012-7-6 14:30:11 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.search.Scroll;
 
-
 /**
  * The Class SearchScrollRequest.
  *
@@ -24,30 +22,24 @@ import cn.com.rebirth.search.core.search.Scroll;
  */
 public class SearchScrollRequest implements ActionRequest {
 
-	
 	/** The scroll id. */
 	private String scrollId;
 
-	
 	/** The scroll. */
 	private Scroll scroll;
 
-	
 	/** The listener threaded. */
 	private boolean listenerThreaded = false;
 
-	
 	/** The operation threading. */
 	private SearchOperationThreading operationThreading = SearchOperationThreading.THREAD_PER_SHARD;
 
-	
 	/**
 	 * Instantiates a new search scroll request.
 	 */
 	public SearchScrollRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new search scroll request.
 	 *
@@ -57,9 +49,8 @@ public class SearchScrollRequest implements ActionRequest {
 		this.scrollId = scrollId;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -70,7 +61,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -80,7 +70,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return this.operationThreading;
 	}
 
-	
 	/**
 	 * Operation threading.
 	 *
@@ -92,18 +81,16 @@ public class SearchScrollRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return listenerThreaded;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public SearchScrollRequest listenerThreaded(boolean threadedListener) {
@@ -111,7 +98,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Scroll id.
 	 *
@@ -121,7 +107,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return scrollId;
 	}
 
-	
 	/**
 	 * Scroll id.
 	 *
@@ -133,7 +118,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -143,7 +127,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return scroll;
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -155,7 +138,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -166,7 +148,6 @@ public class SearchScrollRequest implements ActionRequest {
 		return scroll(new Scroll(keepAlive));
 	}
 
-	
 	/**
 	 * Scroll.
 	 *
@@ -177,9 +158,8 @@ public class SearchScrollRequest implements ActionRequest {
 		return scroll(new Scroll(TimeValue.parseTimeValue(keepAlive, null)));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -190,9 +170,8 @@ public class SearchScrollRequest implements ActionRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

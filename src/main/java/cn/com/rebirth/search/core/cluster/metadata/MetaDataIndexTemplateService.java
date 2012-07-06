@@ -1,16 +1,15 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MetaDataIndexTemplateService.java 2012-3-29 15:02:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MetaDataIndexTemplateService.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.metadata;
 
 import java.util.Map;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.indices.IndexTemplateMissingException;
 import cn.com.rebirth.search.core.indices.InvalidIndexTemplateException;
 
 import com.google.common.collect.Maps;
-
 
 /**
  * The Class MetaDataIndexTemplateService.
@@ -93,11 +91,11 @@ public class MetaDataIndexTemplateService extends AbstractComponent {
 		request.settings(updatedSettingsBuilder.build());
 
 		if (request.name == null) {
-			listener.onFailure(new RestartIllegalArgumentException("index_template must provide a name"));
+			listener.onFailure(new RebirthIllegalArgumentException("index_template must provide a name"));
 			return;
 		}
 		if (request.template == null) {
-			listener.onFailure(new RestartIllegalArgumentException("index_template must provide a template"));
+			listener.onFailure(new RebirthIllegalArgumentException("index_template must provide a template"));
 			return;
 		}
 
@@ -147,9 +145,9 @@ public class MetaDataIndexTemplateService extends AbstractComponent {
 	 * Validate.
 	 *
 	 * @param request the request
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	private void validate(PutRequest request) throws RestartException {
+	private void validate(PutRequest request) throws RebirthException {
 		if (request.name.contains(" ")) {
 			throw new InvalidIndexTemplateException(request.name, "name must not contain a space");
 		}
@@ -217,25 +215,25 @@ public class MetaDataIndexTemplateService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	public static class PutRequest {
-		
+
 		/** The name. */
 		final String name;
-		
+
 		/** The cause. */
 		final String cause;
-		
+
 		/** The create. */
 		boolean create;
-		
+
 		/** The order. */
 		int order;
-		
+
 		/** The template. */
 		String template;
-		
+
 		/** The settings. */
 		Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
-		
+
 		/** The mappings. */
 		Map<String, String> mappings = Maps.newHashMap();
 
@@ -324,10 +322,10 @@ public class MetaDataIndexTemplateService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	public static class PutResponse {
-		
+
 		/** The acknowledged. */
 		private final boolean acknowledged;
-		
+
 		/** The template. */
 		private final IndexTemplateMetaData template;
 
@@ -367,7 +365,7 @@ public class MetaDataIndexTemplateService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	public static class RemoveRequest {
-		
+
 		/** The name. */
 		final String name;
 
@@ -387,7 +385,7 @@ public class MetaDataIndexTemplateService extends AbstractComponent {
 	 * @author l.xue.nong
 	 */
 	public static class RemoveResponse {
-		
+
 		/** The acknowledged. */
 		private final boolean acknowledged;
 

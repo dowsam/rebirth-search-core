@@ -1,17 +1,15 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TermsFacet.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TermsFacet.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.terms;
 
 import java.util.Comparator;
 import java.util.List;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.core.search.facet.Facet;
-
 
 /**
  * The Interface TermsFacet.
@@ -20,11 +18,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 
-	
 	/** The Constant TYPE. */
 	public static final String TYPE = "terms";
 
-	
 	/**
 	 * The Interface Entry.
 	 *
@@ -32,7 +28,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	public interface Entry extends Comparable<Entry> {
 
-		
 		/**
 		 * Term.
 		 *
@@ -40,7 +35,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 		 */
 		String term();
 
-		
 		/**
 		 * Gets the term.
 		 *
@@ -48,7 +42,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 		 */
 		String getTerm();
 
-		
 		/**
 		 * Term as number.
 		 *
@@ -56,7 +49,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 		 */
 		Number termAsNumber();
 
-		
 		/**
 		 * Gets the term as number.
 		 *
@@ -64,7 +56,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 		 */
 		Number getTermAsNumber();
 
-		
 		/**
 		 * Count.
 		 *
@@ -72,7 +63,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 		 */
 		int count();
 
-		
 		/**
 		 * Gets the count.
 		 *
@@ -81,7 +71,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 		int getCount();
 	}
 
-	
 	/**
 	 * The Enum ComparatorType.
 	 *
@@ -89,8 +78,7 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	public static enum ComparatorType {
 
-		
-		/** The COUNT. */
+		/** The count. */
 		COUNT((byte) 0, new Comparator<Entry>() {
 
 			@Override
@@ -106,8 +94,7 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			}
 		}),
 
-		
-		/** The REVERS e_ count. */
+		/** The reverse count. */
 		REVERSE_COUNT((byte) 1, new Comparator<Entry>() {
 
 			@Override
@@ -116,8 +103,7 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			}
 		}),
 
-		
-		/** The TERM. */
+		/** The term. */
 		TERM((byte) 2, new Comparator<Entry>() {
 
 			@Override
@@ -126,8 +112,7 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			}
 		}),
 
-		
-		/** The REVERS e_ term. */
+		/** The reverse term. */
 		REVERSE_TERM((byte) 3, new Comparator<Entry>() {
 
 			@Override
@@ -136,15 +121,12 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			}
 		});
 
-		
 		/** The id. */
 		private final byte id;
 
-		
 		/** The comparator. */
 		private final Comparator<Entry> comparator;
 
-		
 		/**
 		 * Instantiates a new comparator type.
 		 *
@@ -156,7 +138,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			this.comparator = comparator;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -166,7 +147,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			return this.id;
 		}
 
-		
 		/**
 		 * Comparator.
 		 *
@@ -176,7 +156,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			return comparator;
 		}
 
-		
 		/**
 		 * From id.
 		 *
@@ -193,11 +172,9 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			} else if (id == REVERSE_TERM.id()) {
 				return REVERSE_TERM;
 			}
-			throw new RestartIllegalArgumentException("No type argument match for terms facet comparator [" + id
-					+ "]");
+			throw new RebirthIllegalArgumentException("No type argument match for terms facet comparator [" + id + "]");
 		}
 
-		
 		/**
 		 * From string.
 		 *
@@ -214,12 +191,11 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 			} else if ("reverse_term".equals(type) || "reverseTerm".equals(type)) {
 				return REVERSE_TERM;
 			}
-			throw new RestartIllegalArgumentException("No type argument match for terms facet comparator ["
-					+ type + "]");
+			throw new RebirthIllegalArgumentException("No type argument match for terms facet comparator [" + type
+					+ "]");
 		}
 	}
 
-	
 	/**
 	 * Missing count.
 	 *
@@ -227,7 +203,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	long missingCount();
 
-	
 	/**
 	 * Gets the missing count.
 	 *
@@ -235,7 +210,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	long getMissingCount();
 
-	
 	/**
 	 * Total count.
 	 *
@@ -243,7 +217,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	long totalCount();
 
-	
 	/**
 	 * Gets the total count.
 	 *
@@ -251,7 +224,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	long getTotalCount();
 
-	
 	/**
 	 * Other count.
 	 *
@@ -259,7 +231,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	long otherCount();
 
-	
 	/**
 	 * Gets the other count.
 	 *
@@ -267,7 +238,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	long getOtherCount();
 
-	
 	/**
 	 * Entries.
 	 *
@@ -275,7 +245,6 @@ public interface TermsFacet extends Facet, Iterable<TermsFacet.Entry> {
 	 */
 	List<? extends TermsFacet.Entry> entries();
 
-	
 	/**
 	 * Gets the entries.
 	 *

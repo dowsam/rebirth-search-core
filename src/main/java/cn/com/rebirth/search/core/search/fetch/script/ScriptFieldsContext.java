@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptFieldsContext.java 2012-3-29 15:02:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptFieldsContext.java 2012-7-6 14:29:12 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch.script;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.script.SearchScript;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class ScriptFieldsContext.
  *
@@ -20,7 +18,6 @@ import com.google.common.collect.Lists;
  */
 public class ScriptFieldsContext {
 
-	
 	/**
 	 * The Class ScriptField.
 	 *
@@ -28,19 +25,15 @@ public class ScriptFieldsContext {
 	 */
 	public static class ScriptField {
 
-		
 		/** The name. */
 		private final String name;
 
-		
 		/** The script. */
 		private final SearchScript script;
 
-		
 		/** The ignore exception. */
 		private final boolean ignoreException;
 
-		
 		/**
 		 * Instantiates a new script field.
 		 *
@@ -54,7 +47,6 @@ public class ScriptFieldsContext {
 			this.ignoreException = ignoreException;
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -64,7 +56,6 @@ public class ScriptFieldsContext {
 			return name;
 		}
 
-		
 		/**
 		 * Script.
 		 *
@@ -74,7 +65,6 @@ public class ScriptFieldsContext {
 			return this.script;
 		}
 
-		
 		/**
 		 * Ignore exception.
 		 *
@@ -85,18 +75,15 @@ public class ScriptFieldsContext {
 		}
 	}
 
-	
 	/** The fields. */
 	private List<ScriptField> fields = Lists.newArrayList();
 
-	
 	/**
 	 * Instantiates a new script fields context.
 	 */
 	public ScriptFieldsContext() {
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -106,7 +93,6 @@ public class ScriptFieldsContext {
 		this.fields.add(field);
 	}
 
-	
 	/**
 	 * Fields.
 	 *

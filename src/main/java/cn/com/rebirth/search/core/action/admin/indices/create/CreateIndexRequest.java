@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CreateIndexRequest.java 2012-3-29 15:01:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CreateIndexRequest.java 2012-7-6 14:29:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.create;
 
@@ -13,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class CreateIndexRequest.
  *
@@ -35,34 +33,27 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class CreateIndexRequest extends MasterNodeOperationRequest {
 
-	
 	/** The cause. */
 	private String cause = "";
 
-	
 	/** The index. */
 	private String index;
 
-	
 	/** The settings. */
 	private Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-	
 	/** The mappings. */
 	private Map<String, String> mappings = newHashMap();
 
-	
 	/** The timeout. */
 	private TimeValue timeout = new TimeValue(10, TimeUnit.SECONDS);
 
-	
 	/**
 	 * Instantiates a new creates the index request.
 	 */
 	CreateIndexRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new creates the index request.
 	 *
@@ -72,7 +63,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		this(index, ImmutableSettings.Builder.EMPTY_SETTINGS);
 	}
 
-	
 	/**
 	 * Instantiates a new creates the index request.
 	 *
@@ -84,9 +74,8 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -97,7 +86,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -107,7 +95,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return index;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -119,7 +106,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -129,7 +115,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return settings;
 	}
 
-	
 	/**
 	 * Cause.
 	 *
@@ -139,7 +124,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return cause;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -151,7 +135,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -163,7 +146,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -175,7 +157,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -191,7 +172,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -209,7 +189,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -222,7 +201,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Cause.
 	 *
@@ -234,7 +212,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -246,12 +223,11 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		try {
 			mappings.put(type, source.string());
 		} catch (IOException e) {
-			throw new RestartIllegalArgumentException("Failed to build json for mapping request", e);
+			throw new RebirthIllegalArgumentException("Failed to build json for mapping request", e);
 		}
 		return this;
 	}
 
-	
 	/**
 	 * Mapping.
 	 *
@@ -260,7 +236,7 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 	 * @return the creates the index request
 	 */
 	public CreateIndexRequest mapping(String type, Map source) {
-		
+
 		if (source.size() != 1 || !source.containsKey(type)) {
 			source = MapBuilder.<String, Object> newMapBuilder().put(type, source).map();
 		}
@@ -273,7 +249,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/**
 	 * Mappings.
 	 *
@@ -283,7 +258,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this.mappings;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -293,7 +267,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return timeout;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -305,7 +278,6 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -316,9 +288,8 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return timeout(TimeValue.parseTimeValue(timeout, null));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#masterNodeTimeout(cn.com.summall.search.commons.unit.TimeValue)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#masterNodeTimeout(cn.com.rebirth.commons.unit.TimeValue)
 	 */
 	@Override
 	public CreateIndexRequest masterNodeTimeout(TimeValue timeout) {
@@ -326,9 +297,8 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -343,9 +313,8 @@ public class CreateIndexRequest extends MasterNodeOperationRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

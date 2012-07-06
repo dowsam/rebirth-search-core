@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalIndicesService.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalIndicesService.java 2012-7-6 14:29:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices;
 
@@ -23,8 +22,8 @@ import java.util.concurrent.Executors;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.CreationException;
@@ -83,7 +82,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.UnmodifiableIterator;
 
-
 /**
  * The Class InternalIndicesService.
  *
@@ -91,47 +89,36 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class InternalIndicesService extends AbstractLifecycleComponent<IndicesService> implements IndicesService {
 
-	
 	/** The node env. */
 	private final NodeEnvironment nodeEnv;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The indices lifecycle. */
 	private final InternalIndicesLifecycle indicesLifecycle;
 
-	
 	/** The indices analysis service. */
 	private final IndicesAnalysisService indicesAnalysisService;
 
-	
 	/** The indices store. */
 	private final IndicesStore indicesStore;
 
-	
 	/** The injector. */
 	private final Injector injector;
 
-	
 	/** The plugins service. */
 	private final PluginsService pluginsService;
 
-	
 	/** The indices injectors. */
 	private final Map<String, Injector> indicesInjectors = new HashMap<String, Injector>();
 
-	
 	/** The indices. */
 	private volatile ImmutableMap<String, IndexService> indices = ImmutableMap.of();
 
-	
 	/** The old shards stats. */
 	private final OldShardsStats oldShardsStats = new OldShardsStats();
 
-	
 	/**
 	 * Instantiates a new internal indices service.
 	 *
@@ -160,20 +147,18 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 		this.indicesLifecycle.addListener(oldShardsStats);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		ImmutableSet<String> indices = ImmutableSet.copyOf(this.indices.keySet());
 		final CountDownLatch latch = new CountDownLatch(indices.size());
 
@@ -199,36 +184,33 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			
+
 		} finally {
 			shardsStopExecutor.shutdown();
 			indicesStopExecutor.shutdown();
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 		injector.getInstance(RecoverySettings.class).close();
 		indicesStore.close();
 		indicesAnalysisService.close();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#indicesLifecycle()
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#indicesLifecycle()
 	 */
 	@Override
 	public IndicesLifecycle indicesLifecycle() {
 		return this.indicesLifecycle;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#stats(boolean)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#stats(boolean)
 	 */
 	@Override
 	public NodeIndicesStats stats(boolean includePrevious) {
@@ -268,16 +250,14 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 				mergeStats, refreshStats, flushStats);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#changesAllowed()
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#changesAllowed()
 	 */
 	public boolean changesAllowed() {
-		
+
 		return lifecycle.started();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -286,33 +266,29 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 		return indices.values().iterator();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#hasIndex(java.lang.String)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#hasIndex(java.lang.String)
 	 */
 	public boolean hasIndex(String index) {
 		return indices.containsKey(index);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#indices()
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#indices()
 	 */
 	public Set<String> indices() {
 		return newHashSet(indices.keySet());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#indexService(java.lang.String)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#indexService(java.lang.String)
 	 */
 	public IndexService indexService(String index) {
 		return indices.get(index);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#indexServiceSafe(java.lang.String)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#indexServiceSafe(java.lang.String)
 	 */
 	@Override
 	public IndexService indexServiceSafe(String index) throws IndexMissingException {
@@ -323,14 +299,13 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 		return indexService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#createIndex(java.lang.String, cn.com.summall.search.commons.settings.Settings, java.lang.String)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#createIndex(java.lang.String, cn.com.rebirth.commons.settings.Settings, java.lang.String)
 	 */
 	public synchronized IndexService createIndex(String sIndexName, Settings settings, String localNodeId)
-			throws RestartException {
+			throws RebirthException {
 		if (!lifecycle.started()) {
-			throw new RestartIllegalStateException("Can't create an index [" + sIndexName + "], node is closed");
+			throw new RebirthIllegalStateException("Can't create an index [" + sIndexName + "], node is closed");
 		}
 		Index index = new Index(sIndexName);
 		if (indicesInjectors.containsKey(index.name())) {
@@ -380,25 +355,22 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 		return indexService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#cleanIndex(java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#cleanIndex(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public synchronized void cleanIndex(String index, String reason) throws RestartException {
+	public synchronized void cleanIndex(String index, String reason) throws RebirthException {
 		deleteIndex(index, false, reason, null);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.indices.IndicesService#deleteIndex(java.lang.String, java.lang.String)
+	 * @see cn.com.rebirth.search.core.indices.IndicesService#deleteIndex(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public synchronized void deleteIndex(String index, String reason) throws RestartException {
+	public synchronized void deleteIndex(String index, String reason) throws RebirthException {
 		deleteIndex(index, true, reason, null);
 	}
 
-	
 	/**
 	 * Delete index.
 	 *
@@ -406,10 +378,10 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 	 * @param delete the delete
 	 * @param reason the reason
 	 * @param executor the executor
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	private void deleteIndex(String index, boolean delete, String reason, @Nullable Executor executor)
-			throws RestartException {
+			throws RebirthException {
 		Injector indexInjector;
 		IndexService indexService;
 		synchronized (this) {
@@ -456,7 +428,6 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 		}
 	}
 
-	
 	/**
 	 * The Class OldShardsStats.
 	 *
@@ -464,33 +435,26 @@ public class InternalIndicesService extends AbstractLifecycleComponent<IndicesSe
 	 */
 	static class OldShardsStats extends IndicesLifecycle.Listener {
 
-		
 		/** The search stats. */
 		final SearchStats searchStats = new SearchStats();
 
-		
 		/** The get stats. */
 		final GetStats getStats = new GetStats();
 
-		
 		/** The indexing stats. */
 		final IndexingStats indexingStats = new IndexingStats();
 
-		
 		/** The merge stats. */
 		final MergeStats mergeStats = new MergeStats();
 
-		
 		/** The refresh stats. */
 		final RefreshStats refreshStats = new RefreshStats();
 
-		
 		/** The flush stats. */
 		final FlushStats flushStats = new FlushStats();
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.indices.IndicesLifecycle.Listener#beforeIndexShardClosed(cn.com.summall.search.core.index.shard.ShardId, cn.com.summall.search.core.index.shard.service.IndexShard, boolean)
+		 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener#beforeIndexShardClosed(cn.com.rebirth.search.core.index.shard.ShardId, cn.com.rebirth.search.core.index.shard.service.IndexShard, boolean)
 		 */
 		@Override
 		public synchronized void beforeIndexShardClosed(ShardId shardId, @Nullable IndexShard indexShard, boolean delete) {

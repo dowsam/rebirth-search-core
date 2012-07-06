@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractCompoundWordTokenFilterFactory.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractCompoundWordTokenFilterFactory.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis.compound;
 
@@ -10,7 +9,7 @@ import java.util.Set;
 
 import org.apache.lucene.analysis.compound.CompoundWordTokenFilterBase;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
@@ -20,33 +19,26 @@ import cn.com.rebirth.search.core.index.analysis.AbstractTokenFilterFactory;
 import cn.com.rebirth.search.core.index.analysis.Analysis;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * A factory for creating AbstractCompoundWordTokenFilter objects.
  */
 public abstract class AbstractCompoundWordTokenFilterFactory extends AbstractTokenFilterFactory {
 
-	
 	/** The min word size. */
 	protected final int minWordSize;
 
-	
 	/** The min subword size. */
 	protected final int minSubwordSize;
 
-	
 	/** The max subword size. */
 	protected final int maxSubwordSize;
 
-	
 	/** The only longest match. */
 	protected final boolean onlyLongestMatch;
 
-	
 	/** The word list. */
 	protected final Set<?> wordList;
 
-	
 	/**
 	 * Instantiates a new abstract compound word token filter factory.
 	 *
@@ -67,7 +59,7 @@ public abstract class AbstractCompoundWordTokenFilterFactory extends AbstractTok
 		onlyLongestMatch = settings.getAsBoolean("only_longest_match", false);
 		wordList = Analysis.getWordSet(env, settings, "word_list", version);
 		if (wordList == null) {
-			throw new RestartIllegalArgumentException("word_list must be provided for [" + name
+			throw new RebirthIllegalArgumentException("word_list must be provided for [" + name
 					+ "], either as a path to a file, or directly");
 		}
 	}

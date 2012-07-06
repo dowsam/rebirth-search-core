@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ExistsFieldQueryExtension.java 2012-3-29 15:04:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ExistsFieldQueryExtension.java 2012-7-6 14:30:39 l.xue.nong$$
  */
-
 
 package org.apache.lucene.queryParser;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.index.mapper.MapperService;
 import cn.com.rebirth.search.core.index.query.QueryParseContext;
 import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 
-
 /**
  * The Class ExistsFieldQueryExtension.
  *
@@ -23,13 +21,11 @@ import cn.com.rebirth.search.core.index.query.support.QueryParsers;
  */
 public class ExistsFieldQueryExtension implements FieldQueryExtension {
 
-	
 	/** The Constant NAME. */
 	public static final String NAME = "_exists_";
 
-	
 	/* (non-Javadoc)
-	 * @see org.apache.lucene.queryParser.FieldQueryExtension#query(cn.com.summall.search.core.index.query.QueryParseContext, java.lang.String)
+	 * @see org.apache.lucene.queryParser.FieldQueryExtension#query(cn.com.rebirth.search.core.index.query.QueryParseContext, java.lang.String)
 	 */
 	@Override
 	public Query query(QueryParseContext parseContext, String queryText) {
@@ -45,7 +41,6 @@ public class ExistsFieldQueryExtension implements FieldQueryExtension {
 			filter = new TermRangeFilter(fieldName, null, null, true, true);
 		}
 
-		
 		filter = parseContext.cacheFilter(filter, null);
 
 		filter = QueryParsers.wrapSmartNameFilter(filter, smartNameFieldMappers, parseContext);

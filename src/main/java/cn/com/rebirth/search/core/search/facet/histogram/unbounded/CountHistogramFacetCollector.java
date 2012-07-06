@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core CountHistogramFacetCollector.java 2012-3-29 15:02:06 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core CountHistogramFacetCollector.java 2012-7-6 14:29:02 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram.unbounded;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.facet.histogram.HistogramFacet;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class CountHistogramFacetCollector.
  *
@@ -32,31 +30,24 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class CountHistogramFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index field name. */
 	private final String indexFieldName;
 
-	
 	/** The comparator type. */
 	private final HistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The field data type. */
 	private final FieldDataType fieldDataType;
 
-	
 	/** The field data. */
 	private NumericFieldData fieldData;
 
-	
 	/** The histo proc. */
 	private final HistogramProc histoProc;
 
-	
 	/**
 	 * Instantiates a new count histogram facet collector.
 	 *
@@ -77,7 +68,6 @@ public class CountHistogramFacetCollector extends AbstractFacetCollector {
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + fieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -90,34 +80,30 @@ public class CountHistogramFacetCollector extends AbstractFacetCollector {
 		histoProc = new HistogramProc(interval);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		fieldData.forEachValueInDoc(doc, histoProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		fieldData = (NumericFieldData) fieldDataCache.cache(fieldDataType, reader, indexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalCountHistogramFacet(facetName, comparatorType, histoProc.counts(), true);
 	}
 
-	
 	/**
 	 * Bucket.
 	 *
@@ -129,7 +115,6 @@ public class CountHistogramFacetCollector extends AbstractFacetCollector {
 		return (((long) (value / interval)) * interval);
 	}
 
-	
 	/**
 	 * The Class HistogramProc.
 	 *
@@ -137,15 +122,12 @@ public class CountHistogramFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class HistogramProc implements NumericFieldData.DoubleValueInDocProc {
 
-		
 		/** The interval. */
 		private final long interval;
 
-		
 		/** The counts. */
 		private final TLongLongHashMap counts = CacheRecycler.popLongLongMap();
 
-		
 		/**
 		 * Instantiates a new histogram proc.
 		 *
@@ -155,9 +137,8 @@ public class CountHistogramFacetCollector extends AbstractFacetCollector {
 			this.interval = interval;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {
@@ -165,7 +146,6 @@ public class CountHistogramFacetCollector extends AbstractFacetCollector {
 			counts.adjustOrPutValue(bucket, 1, 1);
 		}
 
-		
 		/**
 		 * Counts.
 		 *

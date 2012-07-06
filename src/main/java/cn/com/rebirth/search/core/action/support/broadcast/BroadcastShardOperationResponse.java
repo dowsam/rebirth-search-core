@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BroadcastShardOperationResponse.java 2012-3-29 15:02:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BroadcastShardOperationResponse.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.broadcast;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 
-
 /**
  * The Class BroadcastShardOperationResponse.
  *
@@ -20,15 +18,12 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public abstract class BroadcastShardOperationResponse implements Streamable {
 
-	
 	/** The index. */
 	String index;
 
-	
 	/** The shard id. */
 	int shardId;
 
-	
 	/**
 	 * Instantiates a new broadcast shard operation response.
 	 */
@@ -36,7 +31,6 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new broadcast shard operation response.
 	 *
@@ -48,7 +42,6 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 		this.shardId = shardId;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -58,7 +51,6 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 		return this.index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -68,7 +60,6 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 		return index();
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -78,7 +69,6 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 		return this.shardId;
 	}
 
-	
 	/**
 	 * Gets the shard id.
 	 *
@@ -88,9 +78,8 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 		return shardId();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -98,9 +87,8 @@ public abstract class BroadcastShardOperationResponse implements Streamable {
 		shardId = in.readVInt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

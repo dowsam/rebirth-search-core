@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchAction.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchAction.java 2012-7-6 14:30:30 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search;
 
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.transport.BaseTransportRequestHandler;
 import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportSearchAction.
  *
@@ -40,39 +38,30 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class TransportSearchAction extends TransportAction<SearchRequest, SearchResponse> {
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The dfs query then fetch action. */
 	private final TransportSearchDfsQueryThenFetchAction dfsQueryThenFetchAction;
 
-	
 	/** The query then fetch action. */
 	private final TransportSearchQueryThenFetchAction queryThenFetchAction;
 
-	
 	/** The dfs query and fetch action. */
 	private final TransportSearchDfsQueryAndFetchAction dfsQueryAndFetchAction;
 
-	
 	/** The query and fetch action. */
 	private final TransportSearchQueryAndFetchAction queryAndFetchAction;
 
-	
 	/** The scan action. */
 	private final TransportSearchScanAction scanAction;
 
-	
 	/** The count action. */
 	private final TransportSearchCountAction countAction;
 
-	
 	/** The optimize single shard. */
 	private final boolean optimizeSingleShard;
 
-	
 	/**
 	 * Instantiates a new transport search action.
 	 *
@@ -108,13 +97,12 @@ public class TransportSearchAction extends TransportAction<SearchRequest, Search
 		transportService.registerHandler(SearchAction.NAME, new TransportHandler());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(SearchRequest searchRequest, ActionListener<SearchResponse> listener) {
-		
+
 		if (optimizeSingleShard && searchRequest.searchType() != SCAN && searchRequest.searchType() != COUNT) {
 			try {
 				ClusterState clusterState = clusterService.state();
@@ -126,12 +114,11 @@ public class TransportSearchAction extends TransportAction<SearchRequest, Search
 						searchRequest.indices(), concreteIndices, searchRequest.queryHint(), routingMap,
 						searchRequest.preference());
 				if (shardCount == 1) {
-					
+
 					searchRequest.searchType(QUERY_AND_FETCH);
 				}
 			} catch (IndexMissingException e) {
-				
-				
+
 			} catch (Exception e) {
 				logger.debug("failed to optimize search type, continue as normal", e);
 			}
@@ -152,7 +139,6 @@ public class TransportSearchAction extends TransportAction<SearchRequest, Search
 		}
 	}
 
-	
 	/**
 	 * The Class TransportHandler.
 	 *
@@ -160,24 +146,22 @@ public class TransportSearchAction extends TransportAction<SearchRequest, Search
 	 */
 	private class TransportHandler extends BaseTransportRequestHandler<SearchRequest> {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public SearchRequest newInstance() {
 			return new SearchRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(SearchRequest request, final TransportChannel channel) throws Exception {
-			
+
 			request.listenerThreaded(false);
-			
+
 			if (request.operationThreading() == SearchOperationThreading.NO_THREADS) {
 				request.operationThreading(SearchOperationThreading.SINGLE_THREAD);
 			}
@@ -202,9 +186,8 @@ public class TransportSearchAction extends TransportAction<SearchRequest, Search
 			});
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {

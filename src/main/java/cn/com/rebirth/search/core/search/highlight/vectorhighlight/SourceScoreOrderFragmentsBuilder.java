@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SourceScoreOrderFragmentsBuilder.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SourceScoreOrderFragmentsBuilder.java 2012-7-6 14:29:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.highlight.vectorhighlight;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 import cn.com.rebirth.search.core.search.lookup.SearchLookup;
 
-
 /**
  * The Class SourceScoreOrderFragmentsBuilder.
  *
@@ -26,15 +24,12 @@ import cn.com.rebirth.search.core.search.lookup.SearchLookup;
  */
 public class SourceScoreOrderFragmentsBuilder extends ScoreOrderFragmentsBuilder {
 
-	
 	/** The mapper. */
 	private final FieldMapper mapper;
 
-	
 	/** The search context. */
 	private final SearchContext searchContext;
 
-	
 	/**
 	 * Instantiates a new source score order fragments builder.
 	 *
@@ -51,13 +46,12 @@ public class SourceScoreOrderFragmentsBuilder extends ScoreOrderFragmentsBuilder
 		this.searchContext = searchContext;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.search.vectorhighlight.BaseFragmentsBuilder#getFields(org.apache.lucene.index.IndexReader, int, java.lang.String)
 	 */
 	@Override
 	protected Field[] getFields(IndexReader reader, int docId, String fieldName) throws IOException {
-		
+
 		SearchLookup lookup = searchContext.lookup();
 		lookup.setNextReader(reader);
 		lookup.setNextDocId(docId);

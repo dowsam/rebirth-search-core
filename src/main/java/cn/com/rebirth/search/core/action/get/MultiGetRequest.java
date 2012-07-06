@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiGetRequest.java 2012-3-29 15:00:44 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiGetRequest.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.action.ActionRequest;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 
-
 /**
  * The Class MultiGetRequest.
  *
@@ -29,7 +27,6 @@ import cn.com.rebirth.search.core.action.ValidateActions;
  */
 public class MultiGetRequest implements ActionRequest {
 
-	
 	/**
 	 * The Class Item.
 	 *
@@ -37,27 +34,21 @@ public class MultiGetRequest implements ActionRequest {
 	 */
 	public static class Item implements Streamable {
 
-		
 		/** The index. */
 		private String index;
 
-		
 		/** The type. */
 		private String type;
 
-		
 		/** The id. */
 		private String id;
 
-		
 		/** The routing. */
 		private String routing;
 
-		
 		/** The fields. */
 		private String[] fields;
 
-		
 		/**
 		 * Instantiates a new item.
 		 */
@@ -65,7 +56,6 @@ public class MultiGetRequest implements ActionRequest {
 
 		}
 
-		
 		/**
 		 * Instantiates a new item.
 		 *
@@ -79,7 +69,6 @@ public class MultiGetRequest implements ActionRequest {
 			this.id = id;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -89,7 +78,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this.index;
 		}
 
-		
 		/**
 		 * Index.
 		 *
@@ -101,7 +89,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this;
 		}
 
-		
 		/**
 		 * Type.
 		 *
@@ -111,7 +98,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this.type;
 		}
 
-		
 		/**
 		 * Id.
 		 *
@@ -121,7 +107,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this.id;
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -133,7 +118,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this;
 		}
 
-		
 		/**
 		 * Routing.
 		 *
@@ -143,7 +127,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this.routing;
 		}
 
-		
 		/**
 		 * Fields.
 		 *
@@ -155,7 +138,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this;
 		}
 
-		
 		/**
 		 * Fields.
 		 *
@@ -165,7 +147,6 @@ public class MultiGetRequest implements ActionRequest {
 			return this.fields;
 		}
 
-		
 		/**
 		 * Read item.
 		 *
@@ -179,9 +160,8 @@ public class MultiGetRequest implements ActionRequest {
 			return item;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -202,9 +182,8 @@ public class MultiGetRequest implements ActionRequest {
 			}
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -233,27 +212,21 @@ public class MultiGetRequest implements ActionRequest {
 		}
 	}
 
-	
 	/** The listener threaded. */
 	private boolean listenerThreaded = false;
 
-	
 	/** The preference. */
 	String preference;
 
-	
 	/** The realtime. */
 	Boolean realtime;
 
-	
 	/** The refresh. */
 	boolean refresh;
 
-	
 	/** The items. */
 	List<Item> items = new ArrayList<Item>();
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -265,7 +238,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -279,18 +251,16 @@ public class MultiGetRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return listenerThreaded;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public MultiGetRequest listenerThreaded(boolean listenerThreaded) {
@@ -298,9 +268,8 @@ public class MultiGetRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -323,7 +292,6 @@ public class MultiGetRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -335,7 +303,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Preference.
 	 *
@@ -345,7 +312,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this.preference;
 	}
 
-	
 	/**
 	 * Realtime.
 	 *
@@ -355,7 +321,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this.realtime == null ? true : this.realtime;
 	}
 
-	
 	/**
 	 * Realtime.
 	 *
@@ -367,7 +332,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -377,7 +341,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -389,7 +352,6 @@ public class MultiGetRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -414,8 +376,7 @@ public class MultiGetRequest implements ActionRequest {
 					if ("docs".equals(currentFieldName)) {
 						while ((token = parser.nextToken()) != XContentParser.Token.END_ARRAY) {
 							if (token != XContentParser.Token.START_OBJECT) {
-								throw new RestartIllegalArgumentException(
-										"docs array element should include an object");
+								throw new RebirthIllegalArgumentException("docs array element should include an object");
 							}
 							String index = defaultIndex;
 							String type = defaultType;
@@ -456,8 +417,7 @@ public class MultiGetRequest implements ActionRequest {
 					} else if ("ids".equals(currentFieldName)) {
 						while ((token = parser.nextToken()) != XContentParser.Token.END_ARRAY) {
 							if (!token.isValue()) {
-								throw new RestartIllegalArgumentException(
-										"ids array element should only contain ids");
+								throw new RebirthIllegalArgumentException("ids array element should only contain ids");
 							}
 							add(new Item(defaultIndex, defaultType, parser.text()).fields(defaultFields));
 						}
@@ -469,9 +429,8 @@ public class MultiGetRequest implements ActionRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -493,9 +452,8 @@ public class MultiGetRequest implements ActionRequest {
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

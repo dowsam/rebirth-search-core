@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BulkItemRequest.java 2012-3-29 15:00:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BulkItemRequest.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionRequest;
 import cn.com.rebirth.search.core.action.delete.DeleteRequest;
 import cn.com.rebirth.search.core.action.index.IndexRequest;
 
-
 /**
  * The Class BulkItemRequest.
  *
@@ -23,15 +21,12 @@ import cn.com.rebirth.search.core.action.index.IndexRequest;
  */
 public class BulkItemRequest implements Streamable {
 
-	
 	/** The id. */
 	private int id;
 
-	
 	/** The request. */
 	private ActionRequest request;
 
-	
 	/**
 	 * Instantiates a new bulk item request.
 	 */
@@ -39,7 +34,6 @@ public class BulkItemRequest implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new bulk item request.
 	 *
@@ -51,7 +45,6 @@ public class BulkItemRequest implements Streamable {
 		this.request = request;
 	}
 
-	
 	/**
 	 * Id.
 	 *
@@ -61,7 +54,6 @@ public class BulkItemRequest implements Streamable {
 		return id;
 	}
 
-	
 	/**
 	 * Request.
 	 *
@@ -71,7 +63,6 @@ public class BulkItemRequest implements Streamable {
 		return request;
 	}
 
-	
 	/**
 	 * Read bulk item.
 	 *
@@ -85,9 +76,8 @@ public class BulkItemRequest implements Streamable {
 		return item;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -101,9 +91,8 @@ public class BulkItemRequest implements Streamable {
 		request.readFrom(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

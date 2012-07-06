@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core Index.java 2012-3-29 15:01:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core Index.java 2012-7-6 14:30:10 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 
-
 /**
  * The Class Index.
  *
@@ -21,15 +19,12 @@ import cn.com.rebirth.commons.io.stream.Streamable;
  */
 public class Index implements Serializable, Streamable {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7405960843215378369L;
-	
-	
+
 	/** The name. */
 	private String name;
 
-	
 	/**
 	 * Instantiates a new index.
 	 */
@@ -37,7 +32,6 @@ public class Index implements Serializable, Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new index.
 	 *
@@ -47,7 +41,6 @@ public class Index implements Serializable, Streamable {
 		this.name = name.intern();
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -57,7 +50,6 @@ public class Index implements Serializable, Streamable {
 		return this.name;
 	}
 
-	
 	/**
 	 * Gets the name.
 	 *
@@ -67,7 +59,6 @@ public class Index implements Serializable, Streamable {
 		return name();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -76,7 +67,6 @@ public class Index implements Serializable, Streamable {
 		return "Index [" + name + "]";
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -90,7 +80,6 @@ public class Index implements Serializable, Streamable {
 		return name.equals(index1.name);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -99,7 +88,6 @@ public class Index implements Serializable, Streamable {
 		return name.hashCode();
 	}
 
-	
 	/**
 	 * Read index name.
 	 *
@@ -113,18 +101,16 @@ public class Index implements Serializable, Streamable {
 		return index;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		name = in.readUTF().intern();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

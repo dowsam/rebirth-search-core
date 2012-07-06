@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FieldDataType.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FieldDataType.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.index.field.data.shorts.ShortFieldDataType;
 import cn.com.rebirth.search.core.index.field.data.strings.StringFieldDataType;
 import cn.com.rebirth.search.index.field.data.ExtendedFieldComparatorSource;
 
-
 /**
  * The Interface FieldDataType.
  *
@@ -30,7 +28,6 @@ import cn.com.rebirth.search.index.field.data.ExtendedFieldComparatorSource;
  */
 public interface FieldDataType<T extends FieldData> {
 
-	
 	/**
 	 * The Class DefaultTypes.
 	 *
@@ -38,36 +35,28 @@ public interface FieldDataType<T extends FieldData> {
 	 */
 	public static final class DefaultTypes {
 
-		
 		/** The Constant STRING. */
 		public static final StringFieldDataType STRING = new StringFieldDataType();
 
-		
 		/** The Constant BYTE. */
 		public static final ByteFieldDataType BYTE = new ByteFieldDataType();
 
-		
 		/** The Constant SHORT. */
 		public static final ShortFieldDataType SHORT = new ShortFieldDataType();
 
-		
 		/** The Constant INT. */
 		public static final IntFieldDataType INT = new IntFieldDataType();
 
-		
 		/** The Constant LONG. */
 		public static final LongFieldDataType LONG = new LongFieldDataType();
 
-		
 		/** The Constant FLOAT. */
 		public static final FloatFieldDataType FLOAT = new FloatFieldDataType();
 
-		
 		/** The Constant DOUBLE. */
 		public static final DoubleFieldDataType DOUBLE = new DoubleFieldDataType();
 	}
 
-	
 	/**
 	 * New field comparator source.
 	 *
@@ -77,7 +66,6 @@ public interface FieldDataType<T extends FieldData> {
 	 */
 	ExtendedFieldComparatorSource newFieldComparatorSource(FieldDataCache cache, @Nullable String missing);
 
-	
 	/**
 	 * Load.
 	 *

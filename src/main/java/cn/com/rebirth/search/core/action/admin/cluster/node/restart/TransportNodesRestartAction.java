@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportNodesRestartAction.java 2012-3-29 15:01:37 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportNodesRestartAction.java 2012-7-6 14:30:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.node.restart;
 
@@ -13,8 +12,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.node.Node;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
-
 /**
  * The Class TransportNodesRestartAction.
  *
@@ -39,19 +37,15 @@ public class TransportNodesRestartAction
 		extends
 		TransportNodesOperationAction<NodesRestartRequest, NodesRestartResponse, TransportNodesRestartAction.NodeRestartRequest, NodesRestartResponse.NodeRestartResponse> {
 
-	
 	/** The node. */
 	private final Node node;
 
-	
 	/** The disabled. */
 	private final boolean disabled;
 
-	
 	/** The restart requested. */
 	private AtomicBoolean restartRequested = new AtomicBoolean();
 
-	
 	/**
 	 * Instantiates a new transport nodes restart action.
 	 *
@@ -70,36 +64,32 @@ public class TransportNodesRestartAction
 		disabled = componentSettings.getAsBoolean("disabled", false);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#doExecute(cn.com.summall.search.core.action.support.nodes.NodesOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#doExecute(cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(NodesRestartRequest nodesRestartRequest, ActionListener<NodesRestartResponse> listener) {
-		listener.onFailure(new RestartIllegalStateException("restart is disabled (for now) ...."));
+		listener.onFailure(new RebirthIllegalStateException("restart is disabled (for now) ...."));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.GENERIC;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return NodesRestartAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newResponse(cn.com.summall.search.core.action.support.nodes.NodesOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newResponse(cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray)
 	 */
 	@Override
 	protected NodesRestartResponse newResponse(NodesRestartRequest nodesShutdownRequest, AtomicReferenceArray responses) {
@@ -114,51 +104,46 @@ public class TransportNodesRestartAction
 				nodeRestartResponses.toArray(new NodesRestartResponse.NodeRestartResponse[nodeRestartResponses.size()]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newRequest()
 	 */
 	@Override
 	protected NodesRestartRequest newRequest() {
 		return new NodesRestartRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest()
 	 */
 	@Override
 	protected NodeRestartRequest newNodeRequest() {
 		return new NodeRestartRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest(java.lang.String, cn.com.summall.search.core.action.support.nodes.NodesOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeRequest(java.lang.String, cn.com.rebirth.search.core.action.support.nodes.NodesOperationRequest)
 	 */
 	@Override
 	protected NodeRestartRequest newNodeRequest(String nodeId, NodesRestartRequest request) {
 		return new NodeRestartRequest(nodeId, request.delay);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#newNodeResponse()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#newNodeResponse()
 	 */
 	@Override
 	protected NodesRestartResponse.NodeRestartResponse newNodeResponse() {
 		return new NodesRestartResponse.NodeRestartResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#nodeOperation(cn.com.summall.search.core.action.support.nodes.NodeOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#nodeOperation(cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest)
 	 */
 	@Override
 	protected NodesRestartResponse.NodeRestartResponse nodeOperation(NodeRestartRequest request)
-			throws RestartException {
+			throws RebirthException {
 		if (disabled) {
-			throw new RestartIllegalStateException("Restart is disabled");
+			throw new RebirthIllegalStateException("Restart is disabled");
 		}
 		if (!restartRequested.compareAndSet(false, true)) {
 			return new NodesRestartResponse.NodeRestartResponse(clusterService.state().nodes().localNode());
@@ -195,16 +180,14 @@ public class TransportNodesRestartAction
 		return new NodesRestartResponse.NodeRestartResponse(clusterService.state().nodes().localNode());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.nodes.TransportNodesOperationAction#accumulateExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.nodes.TransportNodesOperationAction#accumulateExceptions()
 	 */
 	@Override
 	protected boolean accumulateExceptions() {
 		return false;
 	}
 
-	
 	/**
 	 * The Class NodeRestartRequest.
 	 *
@@ -212,18 +195,15 @@ public class TransportNodesRestartAction
 	 */
 	protected static class NodeRestartRequest extends NodeOperationRequest {
 
-		
 		/** The delay. */
 		TimeValue delay;
 
-		
 		/**
 		 * Instantiates a new node restart request.
 		 */
 		private NodeRestartRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new node restart request.
 		 *
@@ -235,9 +215,8 @@ public class TransportNodesRestartAction
 			this.delay = delay;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -245,9 +224,8 @@ public class TransportNodesRestartAction
 			delay = TimeValue.readTimeValue(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.nodes.NodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.nodes.NodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

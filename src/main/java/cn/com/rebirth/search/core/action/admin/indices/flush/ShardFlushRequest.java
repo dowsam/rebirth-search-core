@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardFlushRequest.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardFlushRequest.java 2012-7-6 14:30:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.flush;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest;
 
-
 /**
  * The Class ShardFlushRequest.
  *
@@ -20,26 +18,21 @@ import cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperati
  */
 class ShardFlushRequest extends BroadcastShardOperationRequest {
 
-	
 	/** The refresh. */
 	private boolean refresh;
 
-	
 	/** The full. */
 	private boolean full;
 
-	
 	/** The force. */
 	private boolean force;
 
-	
 	/**
 	 * Instantiates a new shard flush request.
 	 */
 	ShardFlushRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new shard flush request.
 	 *
@@ -54,7 +47,6 @@ class ShardFlushRequest extends BroadcastShardOperationRequest {
 		this.force = request.force();
 	}
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -64,7 +56,6 @@ class ShardFlushRequest extends BroadcastShardOperationRequest {
 		return this.refresh;
 	}
 
-	
 	/**
 	 * Full.
 	 *
@@ -74,7 +65,6 @@ class ShardFlushRequest extends BroadcastShardOperationRequest {
 		return this.full;
 	}
 
-	
 	/**
 	 * Force.
 	 *
@@ -84,9 +74,8 @@ class ShardFlushRequest extends BroadcastShardOperationRequest {
 		return this.force;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -96,9 +85,8 @@ class ShardFlushRequest extends BroadcastShardOperationRequest {
 		force = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

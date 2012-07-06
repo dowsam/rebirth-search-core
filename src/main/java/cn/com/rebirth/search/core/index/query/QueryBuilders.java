@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryBuilders.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryBuilders.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import cn.com.rebirth.commons.Nullable;
-
 
 /**
  * The Class QueryBuilders.
@@ -16,7 +14,6 @@ import cn.com.rebirth.commons.Nullable;
  */
 public abstract class QueryBuilders {
 
-	
 	/**
 	 * Match all query.
 	 *
@@ -26,7 +23,6 @@ public abstract class QueryBuilders {
 		return new MatchAllQueryBuilder();
 	}
 
-	
 	/**
 	 * Text.
 	 *
@@ -38,7 +34,6 @@ public abstract class QueryBuilders {
 		return textQuery(name, text);
 	}
 
-	
 	/**
 	 * Text query.
 	 *
@@ -50,7 +45,6 @@ public abstract class QueryBuilders {
 		return new TextQueryBuilder(name, text).type(TextQueryBuilder.Type.BOOLEAN);
 	}
 
-	
 	/**
 	 * Text phrase.
 	 *
@@ -62,7 +56,6 @@ public abstract class QueryBuilders {
 		return textPhraseQuery(name, text);
 	}
 
-	
 	/**
 	 * Text phrase query.
 	 *
@@ -74,7 +67,6 @@ public abstract class QueryBuilders {
 		return new TextQueryBuilder(name, text).type(TextQueryBuilder.Type.PHRASE);
 	}
 
-	
 	/**
 	 * Text phrase prefix.
 	 *
@@ -86,7 +78,6 @@ public abstract class QueryBuilders {
 		return textPhrasePrefixQuery(name, text);
 	}
 
-	
 	/**
 	 * Text phrase prefix query.
 	 *
@@ -98,7 +89,6 @@ public abstract class QueryBuilders {
 		return new TextQueryBuilder(name, text).type(TextQueryBuilder.Type.PHRASE_PREFIX);
 	}
 
-	
 	/**
 	 * Dis max query.
 	 *
@@ -108,7 +98,6 @@ public abstract class QueryBuilders {
 		return new DisMaxQueryBuilder();
 	}
 
-	
 	/**
 	 * Ids query.
 	 *
@@ -119,7 +108,6 @@ public abstract class QueryBuilders {
 		return new IdsQueryBuilder(types);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -131,7 +119,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -143,7 +130,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -155,7 +141,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -167,7 +152,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -179,7 +163,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -191,7 +174,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Term query.
 	 *
@@ -203,7 +185,6 @@ public abstract class QueryBuilders {
 		return new TermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Fuzzy query.
 	 *
@@ -215,7 +196,6 @@ public abstract class QueryBuilders {
 		return new FuzzyQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -227,7 +207,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -239,7 +218,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -251,7 +229,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -263,7 +240,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -275,7 +251,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -287,7 +262,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Field query.
 	 *
@@ -299,7 +273,6 @@ public abstract class QueryBuilders {
 		return new FieldQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Prefix query.
 	 *
@@ -311,7 +284,6 @@ public abstract class QueryBuilders {
 		return new PrefixQueryBuilder(name, prefix);
 	}
 
-	
 	/**
 	 * Range query.
 	 *
@@ -322,7 +294,6 @@ public abstract class QueryBuilders {
 		return new RangeQueryBuilder(name);
 	}
 
-	
 	/**
 	 * Wildcard query.
 	 *
@@ -334,7 +305,6 @@ public abstract class QueryBuilders {
 		return new WildcardQueryBuilder(name, query);
 	}
 
-	
 	/**
 	 * Query string.
 	 *
@@ -345,7 +315,6 @@ public abstract class QueryBuilders {
 		return new QueryStringQueryBuilder(queryString);
 	}
 
-	
 	/**
 	 * Boosting query.
 	 *
@@ -355,7 +324,6 @@ public abstract class QueryBuilders {
 		return new BoostingQueryBuilder();
 	}
 
-	
 	/**
 	 * Bool query.
 	 *
@@ -365,7 +333,6 @@ public abstract class QueryBuilders {
 		return new BoolQueryBuilder();
 	}
 
-	
 	/**
 	 * Span term query.
 	 *
@@ -377,7 +344,6 @@ public abstract class QueryBuilders {
 		return new SpanTermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Span term query.
 	 *
@@ -389,7 +355,6 @@ public abstract class QueryBuilders {
 		return new SpanTermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Span term query.
 	 *
@@ -401,7 +366,6 @@ public abstract class QueryBuilders {
 		return new SpanTermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Span term query.
 	 *
@@ -413,7 +377,6 @@ public abstract class QueryBuilders {
 		return new SpanTermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Span term query.
 	 *
@@ -425,7 +388,6 @@ public abstract class QueryBuilders {
 		return new SpanTermQueryBuilder(name, value);
 	}
 
-	
 	/**
 	 * Span first query.
 	 *
@@ -437,7 +399,6 @@ public abstract class QueryBuilders {
 		return new SpanFirstQueryBuilder(match, end);
 	}
 
-	
 	/**
 	 * Span near query.
 	 *
@@ -447,7 +408,6 @@ public abstract class QueryBuilders {
 		return new SpanNearQueryBuilder();
 	}
 
-	
 	/**
 	 * Span not query.
 	 *
@@ -457,7 +417,6 @@ public abstract class QueryBuilders {
 		return new SpanNotQueryBuilder();
 	}
 
-	
 	/**
 	 * Span or query.
 	 *
@@ -467,7 +426,6 @@ public abstract class QueryBuilders {
 		return new SpanOrQueryBuilder();
 	}
 
-	
 	/**
 	 * Field masking span query.
 	 *
@@ -479,7 +437,6 @@ public abstract class QueryBuilders {
 		return new FieldMaskingSpanQueryBuilder(query, field);
 	}
 
-	
 	/**
 	 * Filtered.
 	 *
@@ -491,7 +448,6 @@ public abstract class QueryBuilders {
 		return new FilteredQueryBuilder(queryBuilder, filterBuilder);
 	}
 
-	
 	/**
 	 * Filtered query.
 	 *
@@ -503,7 +459,6 @@ public abstract class QueryBuilders {
 		return new FilteredQueryBuilder(queryBuilder, filterBuilder);
 	}
 
-	
 	/**
 	 * Constant score query.
 	 *
@@ -514,7 +469,6 @@ public abstract class QueryBuilders {
 		return new ConstantScoreQueryBuilder(filterBuilder);
 	}
 
-	
 	/**
 	 * Custom boost factor query.
 	 *
@@ -525,7 +479,6 @@ public abstract class QueryBuilders {
 		return new CustomBoostFactorQueryBuilder(queryBuilder);
 	}
 
-	
 	/**
 	 * Custom score query.
 	 *
@@ -536,7 +489,6 @@ public abstract class QueryBuilders {
 		return new CustomScoreQueryBuilder(queryBuilder);
 	}
 
-	
 	/**
 	 * Custom filters score query.
 	 *
@@ -547,7 +499,6 @@ public abstract class QueryBuilders {
 		return new CustomFiltersScoreQueryBuilder(queryBuilder);
 	}
 
-	
 	/**
 	 * More like this query.
 	 *
@@ -558,7 +509,6 @@ public abstract class QueryBuilders {
 		return new MoreLikeThisQueryBuilder(fields);
 	}
 
-	
 	/**
 	 * More like this query.
 	 *
@@ -568,7 +518,6 @@ public abstract class QueryBuilders {
 		return new MoreLikeThisQueryBuilder();
 	}
 
-	
 	/**
 	 * Fuzzy like this query.
 	 *
@@ -579,7 +528,6 @@ public abstract class QueryBuilders {
 		return new FuzzyLikeThisQueryBuilder(fields);
 	}
 
-	
 	/**
 	 * Fuzzy like this query.
 	 *
@@ -589,7 +537,6 @@ public abstract class QueryBuilders {
 		return new FuzzyLikeThisQueryBuilder();
 	}
 
-	
 	/**
 	 * Fuzzy like this field query.
 	 *
@@ -600,7 +547,6 @@ public abstract class QueryBuilders {
 		return new FuzzyLikeThisFieldQueryBuilder(name);
 	}
 
-	
 	/**
 	 * More like this field query.
 	 *
@@ -611,7 +557,6 @@ public abstract class QueryBuilders {
 		return new MoreLikeThisFieldQueryBuilder(name);
 	}
 
-	
 	/**
 	 * Top children query.
 	 *
@@ -623,7 +568,6 @@ public abstract class QueryBuilders {
 		return new TopChildrenQueryBuilder(type, query);
 	}
 
-	
 	/**
 	 * Checks for child query.
 	 *
@@ -635,7 +579,6 @@ public abstract class QueryBuilders {
 		return new HasChildQueryBuilder(type, query);
 	}
 
-	
 	/**
 	 * Nested query.
 	 *
@@ -647,7 +590,6 @@ public abstract class QueryBuilders {
 		return new NestedQueryBuilder(path, query);
 	}
 
-	
 	/**
 	 * Nested query.
 	 *
@@ -659,7 +601,6 @@ public abstract class QueryBuilders {
 		return new NestedQueryBuilder(path, filter);
 	}
 
-	
 	/**
 	 * Terms query.
 	 *
@@ -671,7 +612,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms query.
 	 *
@@ -683,7 +623,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms query.
 	 *
@@ -695,7 +634,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms query.
 	 *
@@ -707,7 +645,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms query.
 	 *
@@ -719,7 +656,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * Terms query.
 	 *
@@ -731,7 +667,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * In query.
 	 *
@@ -743,7 +678,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * In query.
 	 *
@@ -755,7 +689,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * In query.
 	 *
@@ -767,7 +700,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * In query.
 	 *
@@ -779,7 +711,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * In query.
 	 *
@@ -791,7 +722,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * In query.
 	 *
@@ -803,7 +733,6 @@ public abstract class QueryBuilders {
 		return new TermsQueryBuilder(name, values);
 	}
 
-	
 	/**
 	 * Indices query.
 	 *
@@ -815,7 +744,6 @@ public abstract class QueryBuilders {
 		return new IndicesQueryBuilder(queryBuilder, indices);
 	}
 
-	
 	/**
 	 * Wrapper query.
 	 *
@@ -826,7 +754,6 @@ public abstract class QueryBuilders {
 		return new WrapperQueryBuilder(source);
 	}
 
-	
 	/**
 	 * Wrapper query.
 	 *
@@ -839,7 +766,6 @@ public abstract class QueryBuilders {
 		return new WrapperQueryBuilder(source, offset, length);
 	}
 
-	
 	/**
 	 * Instantiates a new query builders.
 	 */

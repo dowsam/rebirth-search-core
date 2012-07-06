@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesFilterBuilder.java 2012-3-29 15:00:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesFilterBuilder.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class IndicesFilterBuilder.
@@ -18,27 +16,21 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class IndicesFilterBuilder extends BaseFilterBuilder {
 
-	
 	/** The filter builder. */
 	private final FilterBuilder filterBuilder;
 
-	
 	/** The indices. */
 	private final String[] indices;
 
-	
 	/** The s no match filter. */
 	private String sNoMatchFilter;
 
-	
 	/** The no match filter. */
 	private FilterBuilder noMatchFilter;
 
-	
 	/** The filter name. */
 	private String filterName;
 
-	
 	/**
 	 * Instantiates a new indices filter builder.
 	 *
@@ -50,7 +42,6 @@ public class IndicesFilterBuilder extends BaseFilterBuilder {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * No match filter.
 	 *
@@ -62,7 +53,6 @@ public class IndicesFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * No match filter.
 	 *
@@ -74,7 +64,6 @@ public class IndicesFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Filter name.
 	 *
@@ -86,9 +75,8 @@ public class IndicesFilterBuilder extends BaseFilterBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseFilterBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

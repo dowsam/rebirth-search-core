@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MoreLikeThisRequestBuilder.java 2012-3-29 15:00:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MoreLikeThisRequestBuilder.java 2012-7-6 14:29:32 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.mlt;
 
 import java.util.Map;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.search.SearchResponse;
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.core.client.Client;
 import cn.com.rebirth.search.core.search.Scroll;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
 
-
 /**
  * The Class MoreLikeThisRequestBuilder.
  *
@@ -26,7 +24,6 @@ import cn.com.rebirth.search.core.search.builder.SearchSourceBuilder;
  */
 public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisRequest, SearchResponse> {
 
-	
 	/**
 	 * Instantiates a new more like this request builder.
 	 *
@@ -36,7 +33,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		super(client, new MoreLikeThisRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new more like this request builder.
 	 *
@@ -49,7 +45,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		super(client, new MoreLikeThisRequest(index).type(type).id(id));
 	}
 
-	
 	/**
 	 * Sets the field.
 	 *
@@ -61,7 +56,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the percent terms to match.
 	 *
@@ -73,7 +67,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the min term freq.
 	 *
@@ -85,7 +78,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Max query terms.
 	 *
@@ -97,7 +89,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the stop words.
 	 *
@@ -109,7 +100,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the min doc freq.
 	 *
@@ -121,7 +111,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the max doc freq.
 	 *
@@ -133,7 +122,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the min word len.
 	 *
@@ -145,7 +133,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the max word len.
 	 *
@@ -157,7 +144,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the boost terms.
 	 *
@@ -169,7 +155,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search source.
 	 *
@@ -181,7 +166,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search source.
 	 *
@@ -193,7 +177,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search source.
 	 *
@@ -205,7 +188,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search source.
 	 *
@@ -217,7 +199,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search source.
 	 *
@@ -229,7 +210,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search type.
 	 *
@@ -241,20 +221,18 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search type.
 	 *
 	 * @param searchType the search type
 	 * @return the more like this request builder
-	 * @throws SumMallSearchIllegalArgumentException the sum mall search illegal argument exception
+	 * @throws RebirthIllegalArgumentException the rebirth illegal argument exception
 	 */
-	public MoreLikeThisRequestBuilder setSearchType(String searchType) throws RestartIllegalArgumentException {
+	public MoreLikeThisRequestBuilder setSearchType(String searchType) throws RebirthIllegalArgumentException {
 		request.searchType(searchType);
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search indices.
 	 *
@@ -266,7 +244,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search types.
 	 *
@@ -278,7 +255,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search scroll.
 	 *
@@ -290,7 +266,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search size.
 	 *
@@ -302,7 +277,6 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/**
 	 * Sets the search from.
 	 *
@@ -314,9 +288,8 @@ public class MoreLikeThisRequestBuilder extends BaseRequestBuilder<MoreLikeThisR
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<SearchResponse> listener) {

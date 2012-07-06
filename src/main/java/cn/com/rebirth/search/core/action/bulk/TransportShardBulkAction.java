@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportShardBulkAction.java 2012-3-29 15:02:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportShardBulkAction.java 2012-7-6 14:29:36 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.bulk;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.Tuple;
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -45,7 +44,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class TransportShardBulkAction.
  *
@@ -54,11 +52,9 @@ import com.google.common.collect.Sets;
 public class TransportShardBulkAction extends
 		TransportShardReplicationOperationAction<BulkShardRequest, BulkShardRequest, BulkShardResponse> {
 
-	
 	/** The mapping updated action. */
 	private final MappingUpdatedAction mappingUpdatedAction;
 
-	
 	/**
 	 * Instantiates a new transport shard bulk action.
 	 *
@@ -78,100 +74,89 @@ public class TransportShardBulkAction extends
 		this.mappingUpdatedAction = mappingUpdatedAction;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.BULK;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkWriteConsistency()
 	 */
 	@Override
 	protected boolean checkWriteConsistency() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#transportOptions()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#transportOptions()
 	 */
 	@Override
 	protected TransportRequestOptions transportOptions() {
-		
+
 		return TransportRequestOptions.options().withCompress(true).withLowType();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newRequestInstance()
 	 */
 	@Override
 	protected BulkShardRequest newRequestInstance() {
 		return new BulkShardRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newReplicaRequestInstance()
 	 */
 	@Override
 	protected BulkShardRequest newReplicaRequestInstance() {
 		return new BulkShardRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#newResponseInstance()
 	 */
 	@Override
 	protected BulkShardResponse newResponseInstance() {
 		return new BulkShardResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return BulkAction.NAME + "/shard";
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, BulkShardRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.WRITE);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, BulkShardRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.WRITE, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest)
 	 */
 	@Override
 	protected ShardIterator shards(ClusterState clusterState, BulkShardRequest request) {
 		return clusterState.routingTable().index(request.index()).shard(request.shardId()).shardsIt();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnPrimary(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryOperationRequest)
 	 */
 	@Override
 	protected PrimaryResponse<BulkShardResponse, BulkShardRequest> shardOperationOnPrimary(ClusterState clusterState,
@@ -191,7 +176,6 @@ public class TransportShardBulkAction extends
 				IndexRequest indexRequest = (IndexRequest) item.request();
 				try {
 
-					
 					MappingMetaData mappingMd = clusterState.metaData().index(request.index())
 							.mapping(indexRequest.type());
 					if (mappingMd != null && mappingMd.routing().required()) {
@@ -222,10 +206,9 @@ public class TransportShardBulkAction extends
 						version = create.version();
 						op = create;
 					}
-					
+
 					indexRequest.version(version);
 
-					
 					if (op.parsedDoc().mappersAdded()) {
 						if (mappingsToUpdate == null) {
 							mappingsToUpdate = Sets.newHashSet();
@@ -233,7 +216,6 @@ public class TransportShardBulkAction extends
 						mappingsToUpdate.add(Tuple.create(indexRequest.index(), indexRequest.type()));
 					}
 
-					
 					if (Strings.hasLength(indexRequest.percolate())) {
 						if (ops == null) {
 							ops = new Engine.IndexingOperation[request.items().length];
@@ -241,18 +223,17 @@ public class TransportShardBulkAction extends
 						ops[i] = op;
 					}
 
-					
 					responses[i] = new BulkItemResponse(item.id(), indexRequest.opType().toString().toLowerCase(),
 							new IndexResponse(indexRequest.index(), indexRequest.type(), indexRequest.id(), version));
 				} catch (Exception e) {
-					
+
 					if (retryPrimaryException(e)) {
-						throw (RestartException) e;
+						throw (RebirthException) e;
 					}
 					responses[i] = new BulkItemResponse(item.id(), indexRequest.opType().toString().toLowerCase(),
 							new BulkItemResponse.Failure(indexRequest.index(), indexRequest.type(), indexRequest.id(),
 									ExceptionsHelper.detailedMessage(e)));
-					
+
 					request.items()[i] = null;
 				}
 			} else if (item.request() instanceof DeleteRequest) {
@@ -262,21 +243,20 @@ public class TransportShardBulkAction extends
 							.prepareDelete(deleteRequest.type(), deleteRequest.id(), deleteRequest.version())
 							.versionType(deleteRequest.versionType()).origin(Engine.Operation.Origin.PRIMARY);
 					indexShard.delete(delete);
-					
+
 					deleteRequest.version(delete.version());
 
-					
 					responses[i] = new BulkItemResponse(item.id(), "delete", new DeleteResponse(deleteRequest.index(),
 							deleteRequest.type(), deleteRequest.id(), delete.version(), delete.notFound()));
 				} catch (Exception e) {
-					
+
 					if (retryPrimaryException(e)) {
-						throw (RestartException) e;
+						throw (RebirthException) e;
 					}
 					responses[i] = new BulkItemResponse(item.id(), "delete", new BulkItemResponse.Failure(
 							deleteRequest.index(), deleteRequest.type(), deleteRequest.id(),
 							ExceptionsHelper.detailedMessage(e)));
-					
+
 					request.items()[i] = null;
 				}
 			}
@@ -292,16 +272,15 @@ public class TransportShardBulkAction extends
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 		BulkShardResponse response = new BulkShardResponse(new ShardId(request.index(), request.shardId()), responses);
 		return new PrimaryResponse<BulkShardResponse, BulkShardRequest>(shardRequest.request, response, ops);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#postPrimaryOperation(cn.com.summall.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryResponse)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#postPrimaryOperation(cn.com.rebirth.search.core.action.support.replication.ShardReplicationOperationRequest, cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.PrimaryResponse)
 	 */
 	@Override
 	protected void postPrimaryOperation(BulkShardRequest request,
@@ -315,12 +294,12 @@ public class TransportShardBulkAction extends
 			BulkItemRequest itemRequest = request.items()[i];
 			BulkItemResponse itemResponse = response.response().responses()[i];
 			if (itemResponse.failed()) {
-				
+
 				continue;
 			}
 			Engine.IndexingOperation op = ops[i];
 			if (op == null) {
-				continue; 
+				continue;
 			}
 			if (itemRequest.request() instanceof IndexRequest) {
 				IndexRequest indexRequest = (IndexRequest) itemRequest.request();
@@ -338,9 +317,8 @@ public class TransportShardBulkAction extends
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.summall.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction#shardOperationOnReplica(cn.com.rebirth.search.core.action.support.replication.TransportShardReplicationOperationAction.ReplicaOperationRequest)
 	 */
 	@Override
 	protected void shardOperationOnReplica(ReplicaOperationRequest shardRequest) {
@@ -371,7 +349,7 @@ public class TransportShardBulkAction extends
 						indexShard.create(create);
 					}
 				} catch (Exception e) {
-					
+
 				}
 			} else if (item.request() instanceof DeleteRequest) {
 				DeleteRequest deleteRequest = (DeleteRequest) item.request();
@@ -380,7 +358,7 @@ public class TransportShardBulkAction extends
 							deleteRequest.version()).origin(Engine.Operation.Origin.REPLICA);
 					indexShard.delete(delete);
 				} catch (Exception e) {
-					
+
 				}
 			}
 		}
@@ -389,12 +367,11 @@ public class TransportShardBulkAction extends
 			try {
 				indexShard.refresh(new Engine.Refresh(false));
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}
 
-	
 	/**
 	 * Update mapping on master.
 	 *
@@ -405,7 +382,7 @@ public class TransportShardBulkAction extends
 		try {
 			MapperService mapperService = indicesService.indexServiceSafe(index).mapperService();
 			final DocumentMapper documentMapper = mapperService.documentMapper(type);
-			if (documentMapper == null) { 
+			if (documentMapper == null) {
 				return;
 			}
 			documentMapper.refreshSource();
@@ -415,7 +392,7 @@ public class TransportShardBulkAction extends
 					new ActionListener<MappingUpdatedAction.MappingUpdatedResponse>() {
 						@Override
 						public void onResponse(MappingUpdatedAction.MappingUpdatedResponse mappingUpdatedResponse) {
-							
+
 						}
 
 						@Override
@@ -425,7 +402,7 @@ public class TransportShardBulkAction extends
 										+ "], type [" + type + "] and source ["
 										+ documentMapper.mappingSource().string() + "]", e);
 							} catch (IOException e1) {
-								
+
 							}
 						}
 					});

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexShardRoutingTable.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexShardRoutingTable.java 2012-7-6 14:28:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing;
 
@@ -27,7 +26,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.UnmodifiableIterator;
 
-
 /**
  * The Class IndexShardRoutingTable.
  *
@@ -35,43 +33,33 @@ import com.google.common.collect.UnmodifiableIterator;
  */
 public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 
-	
 	/** The shard id. */
 	final ShardId shardId;
 
-	
 	/** The primary. */
 	final ShardRouting primary;
 
-	
 	/** The primary as list. */
 	final ImmutableList<ShardRouting> primaryAsList;
 
-	
 	/** The replicas. */
 	final ImmutableList<ShardRouting> replicas;
 
-	
 	/** The shards. */
 	final ImmutableList<ShardRouting> shards;
 
-	
 	/** The active shards. */
 	final ImmutableList<ShardRouting> activeShards;
 
-	
 	/** The assigned shards. */
 	final ImmutableList<ShardRouting> assignedShards;
 
-	
 	/** The counter. */
 	final AtomicInteger counter;
 
-	
 	/** The allocated post api. */
 	final boolean allocatedPostApi;
 
-	
 	/**
 	 * Instantiates a new index shard routing table.
 	 *
@@ -115,7 +103,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		this.assignedShards = ImmutableList.copyOf(assignedShards);
 	}
 
-	
 	/**
 	 * Normalize versions.
 	 *
@@ -152,7 +139,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new IndexShardRoutingTable(shardId, ImmutableList.copyOf(shardRoutings), allocatedPostApi);
 	}
 
-	
 	/**
 	 * Allocated post api.
 	 *
@@ -162,7 +148,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return allocatedPostApi;
 	}
 
-	
 	/**
 	 * Shard id.
 	 *
@@ -172,7 +157,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return shardId;
 	}
 
-	
 	/**
 	 * Gets the shard id.
 	 *
@@ -182,7 +166,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return shardId();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -191,7 +174,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return shards.iterator();
 	}
 
-	
 	/**
 	 * Size.
 	 *
@@ -201,7 +183,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return shards.size();
 	}
 
-	
 	/**
 	 * Gets the size.
 	 *
@@ -211,7 +192,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return size();
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -221,7 +201,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -231,7 +210,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return shards();
 	}
 
-	
 	/**
 	 * Active shards.
 	 *
@@ -241,7 +219,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return this.activeShards;
 	}
 
-	
 	/**
 	 * Gets the active shards.
 	 *
@@ -251,7 +228,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return activeShards();
 	}
 
-	
 	/**
 	 * Assigned shards.
 	 *
@@ -261,7 +237,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return this.assignedShards;
 	}
 
-	
 	/**
 	 * Gets the assigned shards.
 	 *
@@ -271,7 +246,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return this.assignedShards;
 	}
 
-	
 	/**
 	 * Count with state.
 	 *
@@ -288,7 +262,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return count;
 	}
 
-	
 	/**
 	 * Shards random it.
 	 *
@@ -298,7 +271,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, shards, counter.getAndIncrement());
 	}
 
-	
 	/**
 	 * Shards it.
 	 *
@@ -308,7 +280,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, shards);
 	}
 
-	
 	/**
 	 * Shards it.
 	 *
@@ -319,7 +290,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, shards, index);
 	}
 
-	
 	/**
 	 * Active shards random it.
 	 *
@@ -329,7 +299,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, activeShards, counter.getAndIncrement());
 	}
 
-	
 	/**
 	 * Active shards it.
 	 *
@@ -339,7 +308,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, activeShards);
 	}
 
-	
 	/**
 	 * Active shards it.
 	 *
@@ -350,7 +318,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, activeShards, index);
 	}
 
-	
 	/**
 	 * Assigned shards random it.
 	 *
@@ -360,7 +327,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, assignedShards, counter.getAndIncrement());
 	}
 
-	
 	/**
 	 * Assigned shards it.
 	 *
@@ -370,7 +336,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, assignedShards);
 	}
 
-	
 	/**
 	 * Assigned shards it.
 	 *
@@ -381,7 +346,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, assignedShards, index);
 	}
 
-	
 	/**
 	 * Primary shard it.
 	 *
@@ -391,7 +355,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, primaryAsList);
 	}
 
-	
 	/**
 	 * Prefer node shards it.
 	 *
@@ -402,7 +365,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return preferNodeShardsIt(nodeId, shards);
 	}
 
-	
 	/**
 	 * Only node active shards it.
 	 *
@@ -411,7 +373,7 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 	 */
 	public ShardIterator onlyNodeActiveShardsIt(String nodeId) {
 		ArrayList<ShardRouting> ordered = new ArrayList<ShardRouting>(shards.size());
-		
+
 		for (int i = 0; i < shards.size(); i++) {
 			ShardRouting shardRouting = shards.get(i);
 			if (nodeId.equals(shardRouting.currentNodeId())) {
@@ -421,7 +383,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, ordered);
 	}
 
-	
 	/**
 	 * Prefer node active shards it.
 	 *
@@ -432,7 +393,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return preferNodeShardsIt(nodeId, activeShards);
 	}
 
-	
 	/**
 	 * Prefer node assigned shards it.
 	 *
@@ -443,7 +403,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return preferNodeShardsIt(nodeId, assignedShards);
 	}
 
-	
 	/**
 	 * Prefer node shards it.
 	 *
@@ -453,14 +412,14 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 	 */
 	private ShardIterator preferNodeShardsIt(String nodeId, ImmutableList<ShardRouting> shards) {
 		ArrayList<ShardRouting> ordered = new ArrayList<ShardRouting>(shards.size());
-		
+
 		int index = Math.abs(counter.getAndIncrement());
 		for (int i = 0; i < shards.size(); i++) {
 			int loc = (index + i) % shards.size();
 			ShardRouting shardRouting = shards.get(loc);
 			ordered.add(shardRouting);
 			if (nodeId.equals(shardRouting.currentNodeId())) {
-				
+
 				ordered.set(i, ordered.get(0));
 				ordered.set(0, shardRouting);
 			}
@@ -468,7 +427,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, ordered);
 	}
 
-	
 	/**
 	 * The Class AttributesKey.
 	 *
@@ -476,11 +434,9 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 	 */
 	static class AttributesKey {
 
-		
 		/** The attributes. */
 		final String[] attributes;
 
-		
 		/**
 		 * Instantiates a new attributes key.
 		 *
@@ -490,7 +446,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			this.attributes = attributes;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#hashCode()
 		 */
@@ -499,7 +454,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			return Arrays.hashCode(attributes);
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#equals(java.lang.Object)
 		 */
@@ -509,7 +463,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		}
 	}
 
-	
 	/**
 	 * The Class AttributesRoutings.
 	 *
@@ -517,19 +470,15 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 	 */
 	static class AttributesRoutings {
 
-		
 		/** The with same attribute. */
 		public final ImmutableList<ShardRouting> withSameAttribute;
 
-		
 		/** The without same attribute. */
 		public final ImmutableList<ShardRouting> withoutSameAttribute;
 
-		
 		/** The total size. */
 		public final int totalSize;
 
-		
 		/**
 		 * Instantiates a new attributes routings.
 		 *
@@ -544,15 +493,12 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		}
 	}
 
-	
 	/** The active shards by attributes. */
 	private volatile Map<AttributesKey, AttributesRoutings> activeShardsByAttributes = ImmutableMap.of();
 
-	
 	/** The shards by attribute mutex. */
 	private final Object shardsByAttributeMutex = new Object();
 
-	
 	/**
 	 * Prefer attributes active shards it.
 	 *
@@ -564,7 +510,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return preferAttributesActiveShardsIt(attributes, nodes, counter.incrementAndGet());
 	}
 
-	
 	/**
 	 * Prefer attributes active shards it.
 	 *
@@ -600,8 +545,7 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 						.immutableMap();
 			}
 		}
-		
-		
+
 		ArrayList<ShardRouting> ordered = new ArrayList<ShardRouting>(shardRoutings.totalSize);
 		index = Math.abs(index);
 		for (int i = 0; i < shardRoutings.withSameAttribute.size(); i++) {
@@ -618,7 +562,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return new PlainShardIterator(shardId, ordered);
 	}
 
-	
 	/**
 	 * Primary shard.
 	 *
@@ -628,7 +571,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return primary;
 	}
 
-	
 	/**
 	 * Replica shards.
 	 *
@@ -638,7 +580,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return this.replicas;
 	}
 
-	
 	/**
 	 * Shards with state.
 	 *
@@ -657,7 +598,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		return shards;
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -665,19 +605,15 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 	 */
 	public static class Builder {
 
-		
 		/** The shard id. */
 		private ShardId shardId;
 
-		
 		/** The shards. */
 		private final List<ShardRouting> shards;
 
-		
 		/** The allocated post api. */
 		private boolean allocatedPostApi;
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -689,7 +625,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			this.allocatedPostApi = indexShard.allocatedPostApi();
 		}
 
-		
 		/**
 		 * Instantiates a new builder.
 		 *
@@ -702,7 +637,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			this.allocatedPostApi = allocatedPostApi;
 		}
 
-		
 		/**
 		 * Adds the shard.
 		 *
@@ -711,8 +645,7 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 		 */
 		public Builder addShard(ImmutableShardRouting shardEntry) {
 			for (ShardRouting shard : shards) {
-				
-				
+
 				if (shard.assignedToNode() && shardEntry.assignedToNode()
 						&& shard.currentNodeId().equals(shardEntry.currentNodeId())) {
 					return this;
@@ -722,7 +655,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the shard.
 		 *
@@ -734,14 +666,13 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
 		 * @return the index shard routing table
 		 */
 		public IndexShardRoutingTable build() {
-			
+
 			if (!allocatedPostApi) {
 				for (ShardRouting shardRouting : shards) {
 					if (shardRouting.primary() && shardRouting.active()) {
@@ -752,7 +683,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			return new IndexShardRoutingTable(shardId, ImmutableList.copyOf(shards), allocatedPostApi);
 		}
 
-		
 		/**
 		 * Read from.
 		 *
@@ -765,7 +695,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			return readFromThin(in, index);
 		}
 
-		
 		/**
 		 * Read from thin.
 		 *
@@ -788,7 +717,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *
@@ -801,7 +729,6 @@ public class IndexShardRoutingTable implements Iterable<ShardRouting> {
 			writeToThin(indexShard, out);
 		}
 
-		
 		/**
 		 * Write to thin.
 		 *

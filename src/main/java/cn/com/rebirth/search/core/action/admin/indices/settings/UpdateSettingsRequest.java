@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core UpdateSettingsRequest.java 2012-3-29 15:01:20 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core UpdateSettingsRequest.java 2012-7-6 14:30:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.settings;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest;
 
-
 /**
  * The Class UpdateSettingsRequest.
  *
@@ -29,22 +27,18 @@ import cn.com.rebirth.search.core.action.support.master.MasterNodeOperationReque
  */
 public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 
-	
 	/** The indices. */
 	private String[] indices;
 
-	
 	/** The settings. */
 	private Settings settings = ImmutableSettings.Builder.EMPTY_SETTINGS;
 
-	
 	/**
 	 * Instantiates a new update settings request.
 	 */
 	UpdateSettingsRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new update settings request.
 	 *
@@ -54,7 +48,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		this.indices = indices;
 	}
 
-	
 	/**
 	 * Instantiates a new update settings request.
 	 *
@@ -66,9 +59,8 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -79,7 +71,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -89,7 +80,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return indices;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -99,7 +89,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return settings;
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -111,7 +100,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -123,7 +111,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -135,7 +122,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -147,7 +133,6 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/**
 	 * Settings.
 	 *
@@ -165,9 +150,8 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -179,9 +163,8 @@ public class UpdateSettingsRequest extends MasterNodeOperationRequest {
 		settings = ImmutableSettings.readSettingsFromStream(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.master.MasterNodeOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

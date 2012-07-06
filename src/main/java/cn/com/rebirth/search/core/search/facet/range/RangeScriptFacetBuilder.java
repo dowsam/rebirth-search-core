@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RangeScriptFacetBuilder.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RangeScriptFacetBuilder.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class RangeScriptFacetBuilder.
  *
@@ -27,27 +25,21 @@ import com.google.common.collect.Maps;
  */
 public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The lang. */
 	private String lang;
 
-	
 	/** The key script. */
 	private String keyScript;
 
-	
 	/** The value script. */
 	private String valueScript;
 
-	
 	/** The params. */
 	private Map<String, Object> params;
 
-	
 	/** The entries. */
 	private List<Entry> entries = Lists.newArrayList();
 
-	
 	/**
 	 * Instantiates a new range script facet builder.
 	 *
@@ -57,7 +49,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Lang.
 	 *
@@ -69,7 +60,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Key script.
 	 *
@@ -81,7 +71,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value script.
 	 *
@@ -93,7 +82,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Param.
 	 *
@@ -109,7 +97,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the range.
 	 *
@@ -122,7 +109,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the unbounded to.
 	 *
@@ -134,7 +120,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the unbounded from.
 	 *
@@ -146,18 +131,16 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	public RangeScriptFacetBuilder global(boolean global) {
 		super.global(global);
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public RangeScriptFacetBuilder scope(String scope) {
@@ -165,27 +148,24 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	public RangeScriptFacetBuilder facetFilter(FilterBuilder filter) {
 		this.facetFilter = filter;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public RangeScriptFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -235,7 +215,6 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Entry.
 	 *
@@ -243,15 +222,12 @@ public class RangeScriptFacetBuilder extends AbstractFacetBuilder {
 	 */
 	private static class Entry {
 
-		
 		/** The from. */
 		final double from;
 
-		
 		/** The to. */
 		final double to;
 
-		
 		/**
 		 * Instantiates a new entry.
 		 *

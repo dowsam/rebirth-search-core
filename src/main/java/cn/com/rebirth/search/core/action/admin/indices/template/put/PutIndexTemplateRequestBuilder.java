@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PutIndexTemplateRequestBuilder.java 2012-3-29 15:02:19 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PutIndexTemplateRequestBuilder.java 2012-7-6 14:30:39 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.template.put;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
 
-
 /**
  * The Class PutIndexTemplateRequestBuilder.
  *
@@ -24,7 +22,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
 public class PutIndexTemplateRequestBuilder extends
 		BaseIndicesRequestBuilder<PutIndexTemplateRequest, PutIndexTemplateResponse> {
 
-	
 	/**
 	 * Instantiates a new put index template request builder.
 	 *
@@ -34,7 +31,6 @@ public class PutIndexTemplateRequestBuilder extends
 		super(indicesClient, new PutIndexTemplateRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new put index template request builder.
 	 *
@@ -45,7 +41,6 @@ public class PutIndexTemplateRequestBuilder extends
 		super(indicesClient, new PutIndexTemplateRequest(name));
 	}
 
-	
 	/**
 	 * Sets the template.
 	 *
@@ -57,7 +52,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the order.
 	 *
@@ -69,7 +63,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the create.
 	 *
@@ -81,7 +74,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -93,7 +85,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -105,7 +96,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -117,7 +107,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the settings.
 	 *
@@ -129,7 +118,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the mapping.
 	 *
@@ -142,7 +130,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Cause.
 	 *
@@ -154,7 +141,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the mapping.
 	 *
@@ -167,7 +153,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Adds the mapping.
 	 *
@@ -180,7 +165,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -192,7 +176,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the timeout.
 	 *
@@ -204,7 +187,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -216,7 +198,6 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -228,9 +209,8 @@ public class PutIndexTemplateRequestBuilder extends
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<PutIndexTemplateResponse> listener) {

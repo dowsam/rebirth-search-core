@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalHistogramFacet.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalHistogramFacet.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.search.facet.histogram.bounded.InternalBounded
 import cn.com.rebirth.search.core.search.facet.histogram.unbounded.InternalCountHistogramFacet;
 import cn.com.rebirth.search.core.search.facet.histogram.unbounded.InternalFullHistogramFacet;
 
-
 /**
  * The Class InternalHistogramFacet.
  *
@@ -23,7 +21,6 @@ import cn.com.rebirth.search.core.search.facet.histogram.unbounded.InternalFullH
  */
 public abstract class InternalHistogramFacet implements HistogramFacet, InternalFacet {
 
-	
 	/**
 	 * Register streams.
 	 */
@@ -34,7 +31,6 @@ public abstract class InternalHistogramFacet implements HistogramFacet, Internal
 		InternalBoundedFullHistogramFacet.registerStreams();
 	}
 
-	
 	/**
 	 * Reduce.
 	 *

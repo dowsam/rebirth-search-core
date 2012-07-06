@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ShardDeleteResponse.java 2012-3-29 15:02:37 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ShardDeleteResponse.java 2012-7-6 14:29:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.delete.index;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.search.core.action.ActionResponse;
 
-
 /**
  * The Class ShardDeleteResponse.
  *
@@ -21,22 +19,18 @@ import cn.com.rebirth.search.core.action.ActionResponse;
  */
 public class ShardDeleteResponse implements ActionResponse, Streamable {
 
-	
 	/** The version. */
 	private long version;
 
-	
 	/** The not found. */
 	private boolean notFound;
 
-	
 	/**
 	 * Instantiates a new shard delete response.
 	 */
 	public ShardDeleteResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new shard delete response.
 	 *
@@ -48,7 +42,6 @@ public class ShardDeleteResponse implements ActionResponse, Streamable {
 		this.notFound = notFound;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -58,7 +51,6 @@ public class ShardDeleteResponse implements ActionResponse, Streamable {
 		return version;
 	}
 
-	
 	/**
 	 * Not found.
 	 *
@@ -68,9 +60,8 @@ public class ShardDeleteResponse implements ActionResponse, Streamable {
 		return notFound;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -78,9 +69,8 @@ public class ShardDeleteResponse implements ActionResponse, Streamable {
 		notFound = in.readBoolean();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

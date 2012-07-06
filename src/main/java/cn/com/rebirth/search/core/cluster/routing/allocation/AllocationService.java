@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AllocationService.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AllocationService.java 2012-7-6 14:29:30 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation;
 
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.node.settings.NodeSettingsService;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class AllocationService.
  *
@@ -41,15 +39,12 @@ import com.google.common.collect.Lists;
  */
 public class AllocationService extends AbstractComponent {
 
-	
 	/** The allocation deciders. */
 	private final AllocationDeciders allocationDeciders;
 
-	
 	/** The shards allocators. */
 	private final ShardsAllocators shardsAllocators;
 
-	
 	/**
 	 * Instantiates a new allocation service.
 	 */
@@ -57,7 +52,6 @@ public class AllocationService extends AbstractComponent {
 		this(ImmutableSettings.Builder.EMPTY_SETTINGS);
 	}
 
-	
 	/**
 	 * Instantiates a new allocation service.
 	 *
@@ -68,7 +62,6 @@ public class AllocationService extends AbstractComponent {
 				ImmutableSettings.Builder.EMPTY_SETTINGS)), new ShardsAllocators(settings));
 	}
 
-	
 	/**
 	 * Instantiates a new allocation service.
 	 *
@@ -83,7 +76,6 @@ public class AllocationService extends AbstractComponent {
 		this.shardsAllocators = shardsAllocators;
 	}
 
-	
 	/**
 	 * Apply started shards.
 	 *
@@ -94,7 +86,7 @@ public class AllocationService extends AbstractComponent {
 	public RoutingAllocation.Result applyStartedShards(ClusterState clusterState,
 			List<? extends ShardRouting> startedShards) {
 		RoutingNodes routingNodes = clusterState.routingNodes();
-		
+
 		Collections.shuffle(routingNodes.unassigned());
 		StartedRerouteAllocation allocation = new StartedRerouteAllocation(allocationDeciders, routingNodes,
 				clusterState.nodes(), startedShards);
@@ -108,7 +100,6 @@ public class AllocationService extends AbstractComponent {
 				.validateRaiseException(clusterState.metaData()), allocation.explanation());
 	}
 
-	
 	/**
 	 * Apply failed shard.
 	 *
@@ -118,7 +109,7 @@ public class AllocationService extends AbstractComponent {
 	 */
 	public RoutingAllocation.Result applyFailedShard(ClusterState clusterState, ShardRouting failedShard) {
 		RoutingNodes routingNodes = clusterState.routingNodes();
-		
+
 		Collections.shuffle(routingNodes.unassigned());
 		FailedRerouteAllocation allocation = new FailedRerouteAllocation(allocationDeciders, routingNodes,
 				clusterState.nodes(), failedShard);
@@ -132,7 +123,6 @@ public class AllocationService extends AbstractComponent {
 				.validateRaiseException(clusterState.metaData()), allocation.explanation());
 	}
 
-	
 	/**
 	 * Reroute.
 	 *
@@ -141,7 +131,7 @@ public class AllocationService extends AbstractComponent {
 	 */
 	public RoutingAllocation.Result reroute(ClusterState clusterState) {
 		RoutingNodes routingNodes = clusterState.routingNodes();
-		
+
 		Collections.shuffle(routingNodes.unassigned());
 		RoutingAllocation allocation = new RoutingAllocation(allocationDeciders, routingNodes, clusterState.nodes());
 		if (!reroute(allocation)) {
@@ -151,7 +141,6 @@ public class AllocationService extends AbstractComponent {
 				.validateRaiseException(clusterState.metaData()), allocation.explanation());
 	}
 
-	
 	/**
 	 * Reroute with no reassign.
 	 *
@@ -160,19 +149,16 @@ public class AllocationService extends AbstractComponent {
 	 */
 	public RoutingAllocation.Result rerouteWithNoReassign(ClusterState clusterState) {
 		RoutingNodes routingNodes = clusterState.routingNodes();
-		
+
 		Collections.shuffle(routingNodes.unassigned());
 		RoutingAllocation allocation = new RoutingAllocation(allocationDeciders, routingNodes, clusterState.nodes());
 		Iterable<DiscoveryNode> dataNodes = allocation.nodes().dataNodes().values();
 		boolean changed = false;
-		
+
 		changed |= deassociateDeadNodes(allocation.routingNodes(), dataNodes);
 
-		
 		applyNewNodes(allocation.routingNodes(), dataNodes);
 
-		
-		
 		changed |= electPrimaries(allocation.routingNodes());
 
 		if (!changed) {
@@ -182,7 +168,6 @@ public class AllocationService extends AbstractComponent {
 				.validateRaiseException(clusterState.metaData()), allocation.explanation());
 	}
 
-	
 	/**
 	 * Reroute.
 	 *
@@ -193,33 +178,26 @@ public class AllocationService extends AbstractComponent {
 		Iterable<DiscoveryNode> dataNodes = allocation.nodes().dataNodes().values();
 
 		boolean changed = false;
-		
+
 		changed |= deassociateDeadNodes(allocation.routingNodes(), dataNodes);
 
-		
 		applyNewNodes(allocation.routingNodes(), dataNodes);
 
-		
-		
 		changed |= electPrimaries(allocation.routingNodes());
 
-		
 		if (allocation.routingNodes().hasUnassigned()) {
 			changed |= shardsAllocators.allocateUnassigned(allocation);
-			
+
 			changed |= electPrimaries(allocation.routingNodes());
 		}
 
-		
 		changed |= moveShards(allocation);
 
-		
 		changed |= shardsAllocators.rebalance(allocation);
 
 		return changed;
 	}
 
-	
 	/**
 	 * Move shards.
 	 *
@@ -229,7 +207,6 @@ public class AllocationService extends AbstractComponent {
 	private boolean moveShards(RoutingAllocation allocation) {
 		boolean changed = false;
 
-		
 		List<MutableShardRouting> shards = new ArrayList<MutableShardRouting>();
 		int index = 0;
 		boolean found = true;
@@ -246,7 +223,7 @@ public class AllocationService extends AbstractComponent {
 		}
 		for (int i = 0; i < shards.size(); i++) {
 			MutableShardRouting shardRouting = shards.get(i);
-			
+
 			if (!shardRouting.started()) {
 				continue;
 			}
@@ -266,7 +243,6 @@ public class AllocationService extends AbstractComponent {
 		return changed;
 	}
 
-	
 	/**
 	 * Elect primaries.
 	 *
@@ -278,7 +254,7 @@ public class AllocationService extends AbstractComponent {
 		for (MutableShardRouting shardEntry : routingNodes.unassigned()) {
 			if (shardEntry.primary() && !shardEntry.assignedToNode()) {
 				boolean elected = false;
-				
+
 				for (RoutingNode routingNode : routingNodes.nodesToShards().values()) {
 
 					for (MutableShardRouting shardEntry2 : routingNode.shards()) {
@@ -303,7 +279,6 @@ public class AllocationService extends AbstractComponent {
 		return changed;
 	}
 
-	
 	/**
 	 * Apply new nodes.
 	 *
@@ -319,7 +294,6 @@ public class AllocationService extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Deassociate dead nodes.
 	 *
@@ -339,12 +313,10 @@ public class AllocationService extends AbstractComponent {
 					.hasNext();) {
 				MutableShardRouting shardRoutingEntry = shardsIterator.next();
 				if (shardRoutingEntry.assignedToNode()) {
-					
-					
+
 					boolean relocating = shardRoutingEntry.relocating();
 					String relocatingNodeId = shardRoutingEntry.relocatingNodeId();
-					
-					
+
 					boolean isRelocationDestinationShard = relocatingNodeId != null && shardRoutingEntry.initializing();
 
 					boolean currentNodeIsDead = false;
@@ -361,7 +333,6 @@ public class AllocationService extends AbstractComponent {
 						shardsIterator.remove();
 					}
 
-					
 					if (relocating && !liveNodeIds.contains(relocatingNodeId)) {
 						nodeIdsToRemove.add(relocatingNodeId);
 						if (!currentNodeIsDead) {
@@ -383,7 +354,6 @@ public class AllocationService extends AbstractComponent {
 		return changed;
 	}
 
-	
 	/**
 	 * Apply started shards.
 	 *
@@ -393,11 +363,10 @@ public class AllocationService extends AbstractComponent {
 	 */
 	private boolean applyStartedShards(RoutingNodes routingNodes, Iterable<? extends ShardRouting> startedShardEntries) {
 		boolean dirty = false;
-		
+
 		for (ShardRouting startedShard : startedShardEntries) {
 			assert startedShard.state() == ShardRoutingState.INITIALIZING;
 
-			
 			String relocatingNodeId = null;
 
 			RoutingNode currentRoutingNode = routingNodes.nodesToShards().get(startedShard.currentNodeId());
@@ -413,10 +382,6 @@ public class AllocationService extends AbstractComponent {
 					}
 				}
 			}
-
-			
-			
-			
 
 			if (relocatingNodeId == null)
 				continue;
@@ -439,7 +404,6 @@ public class AllocationService extends AbstractComponent {
 		return dirty;
 	}
 
-	
 	/**
 	 * Apply failed shard.
 	 *
@@ -476,7 +440,7 @@ public class AllocationService extends AbstractComponent {
 		RoutingNode currentRoutingNode = allocation.routingNodes().nodesToShards().get(nodeId);
 
 		if (currentRoutingNode == null) {
-			
+
 			return false;
 		}
 
@@ -499,18 +463,12 @@ public class AllocationService extends AbstractComponent {
 			return false;
 		}
 
-		
 		allocation.addIgnoreShardForNode(failedShard.shardId(), failedShard.currentNodeId());
 
-		
 		if (inRelocation) {
-			return true; 
+			return true;
 		}
 
-		
-		
-		
-		
 		List<MutableShardRouting> shardsToMove = Lists.newArrayList();
 		for (Iterator<MutableShardRouting> it = allocation.routingNodes().unassigned().iterator(); it.hasNext();) {
 			MutableShardRouting shardRouting = it.next();
@@ -523,7 +481,6 @@ public class AllocationService extends AbstractComponent {
 			allocation.routingNodes().unassigned().addAll(shardsToMove);
 		}
 
-		
 		allocation
 				.routingNodes()
 				.unassigned()

@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GatewayAllocator.java 2012-3-29 15:01:03 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GatewayAllocator.java 2012-7-6 14:30:04 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.allocator;
 
 import cn.com.rebirth.search.core.cluster.routing.allocation.FailedRerouteAllocation;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAllocation;
-
 
 /**
  * The Interface GatewayAllocator.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.StartedRerouteAlloc
  */
 public interface GatewayAllocator {
 
-	
 	/**
 	 * Apply started shards.
 	 *
@@ -26,7 +23,6 @@ public interface GatewayAllocator {
 	 */
 	void applyStartedShards(StartedRerouteAllocation allocation);
 
-	
 	/**
 	 * Apply failed shards.
 	 *
@@ -34,7 +30,6 @@ public interface GatewayAllocator {
 	 */
 	void applyFailedShards(FailedRerouteAllocation allocation);
 
-	
 	/**
 	 * Allocate unassigned.
 	 *

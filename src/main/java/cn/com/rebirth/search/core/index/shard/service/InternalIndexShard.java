@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InternalIndexShard.java 2012-3-29 15:02:07 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InternalIndexShard.java 2012-7-6 14:29:42 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.shard.service;
 
@@ -24,9 +23,9 @@ import org.apache.lucene.util.ThreadInterruptedException;
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -85,7 +84,6 @@ import cn.com.rebirth.search.core.indices.InternalIndicesLifecycle;
 import cn.com.rebirth.search.core.indices.recovery.RecoveryStatus;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class InternalIndexShard.
  *
@@ -93,115 +91,87 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class InternalIndexShard extends AbstractIndexShardComponent implements IndexShard {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The index settings service. */
 	private final IndexSettingsService indexSettingsService;
 
-	
 	/** The mapper service. */
 	private final MapperService mapperService;
 
-	
 	/** The query parser service. */
 	private final IndexQueryParserService queryParserService;
 
-	
 	/** The index cache. */
 	private final IndexCache indexCache;
 
-	
 	/** The indices lifecycle. */
 	private final InternalIndicesLifecycle indicesLifecycle;
 
-	
 	/** The store. */
 	private final Store store;
 
-	
 	/** The merge scheduler. */
 	private final MergeSchedulerProvider mergeScheduler;
 
-	
 	/** The engine. */
 	private final Engine engine;
 
-	
 	/** The translog. */
 	private final Translog translog;
 
-	
 	/** The index aliases service. */
 	private final IndexAliasesService indexAliasesService;
 
-	
 	/** The indexing service. */
 	private final ShardIndexingService indexingService;
 
-	
 	/** The search service. */
 	private final ShardSearchService searchService;
 
-	
 	/** The get service. */
 	private final ShardGetService getService;
 
-	
 	/** The mutex. */
 	private final Object mutex = new Object();
 
-	
 	/** The check index on startup. */
 	private final boolean checkIndexOnStartup;
 
-	
 	/** The check index took. */
 	private long checkIndexTook = 0;
 
-	
 	/** The state. */
 	private volatile IndexShardState state;
 
-	
 	/** The refresh interval. */
 	private TimeValue refreshInterval;
 
-	
 	/** The merge interval. */
 	private final TimeValue mergeInterval;
 
-	
 	/** The refresh scheduled future. */
 	private volatile ScheduledFuture refreshScheduledFuture;
 
-	
 	/** The merge schedule future. */
 	private volatile ScheduledFuture mergeScheduleFuture;
 
-	
 	/** The shard routing. */
 	private volatile ShardRouting shardRouting;
 
-	
 	/** The peer recovery status. */
 	private RecoveryStatus peerRecoveryStatus;
 
-	
 	/** The apply refresh settings. */
 	private ApplyRefreshSettings applyRefreshSettings = new ApplyRefreshSettings();
 
-	
 	/** The refresh metric. */
 	private final MeanMetric refreshMetric = new MeanMetric();
 
-	
 	/** The flush metric. */
 	private final MeanMetric flushMetric = new MeanMetric();
 
-	
 	/**
 	 * Instantiates a new internal index shard.
 	 *
@@ -257,7 +227,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		this.checkIndexOnStartup = indexSettings.getAsBoolean("index.shard.check_on_startup", false);
 	}
 
-	
 	/**
 	 * Merge scheduler.
 	 *
@@ -267,7 +236,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this.mergeScheduler;
 	}
 
-	
 	/**
 	 * Store.
 	 *
@@ -277,7 +245,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this.store;
 	}
 
-	
 	/**
 	 * Engine.
 	 *
@@ -287,7 +254,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return engine;
 	}
 
-	
 	/**
 	 * Translog.
 	 *
@@ -297,42 +263,37 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return translog;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#indexingService()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#indexingService()
 	 */
 	public ShardIndexingService indexingService() {
 		return this.indexingService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#getService()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#getService()
 	 */
 	@Override
 	public ShardGetService getService() {
 		return this.getService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#searchService()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#searchService()
 	 */
 	@Override
 	public ShardSearchService searchService() {
 		return this.searchService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#routingEntry()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#routingEntry()
 	 */
 	@Override
 	public ShardRouting routingEntry() {
 		return this.shardRouting;
 	}
 
-	
 	/**
 	 * Routing entry.
 	 *
@@ -342,14 +303,14 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 	public InternalIndexShard routingEntry(ShardRouting shardRouting) {
 		ShardRouting currentRouting = this.shardRouting;
 		if (!shardRouting.shardId().equals(shardId())) {
-			throw new RestartIllegalArgumentException("Trying to set a routing entry with shardId ["
+			throw new RebirthIllegalArgumentException("Trying to set a routing entry with shardId ["
 					+ shardRouting.shardId() + "] on a shard with shardId [" + shardId() + "]");
 		}
 		if (currentRouting != null) {
 			if (!shardRouting.primary() && currentRouting.primary()) {
 				logger.warn("suspect illegal state: trying to move shard from primary mode to backup mode");
 			}
-			
+
 			if (currentRouting.equals(shardRouting)) {
 				return this;
 			}
@@ -359,7 +320,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this;
 	}
 
-	
 	/**
 	 * Recovering.
 	 *
@@ -392,7 +352,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/**
 	 * Relocated.
 	 *
@@ -411,7 +370,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this;
 	}
 
-	
 	/**
 	 * Start.
 	 *
@@ -445,33 +403,30 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#state()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#state()
 	 */
 	@Override
 	public IndexShardState state() {
 		return state;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#prepareCreate(cn.com.summall.search.core.index.mapper.SourceToParse)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#prepareCreate(cn.com.rebirth.search.core.index.mapper.SourceToParse)
 	 */
 	@Override
-	public Engine.Create prepareCreate(SourceToParse source) throws RestartException {
+	public Engine.Create prepareCreate(SourceToParse source) throws RebirthException {
 		long startTime = System.nanoTime();
 		DocumentMapper docMapper = mapperService.documentMapperWithAutoCreate(source.type());
 		ParsedDocument doc = docMapper.parse(source);
 		return new Engine.Create(docMapper, docMapper.uidMapper().term(doc.uid()), doc).startTime(startTime);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#create(cn.com.summall.search.core.index.engine.Engine.Create)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#create(cn.com.rebirth.search.core.index.engine.Engine.Create)
 	 */
 	@Override
-	public ParsedDocument create(Engine.Create create) throws RestartException {
+	public ParsedDocument create(Engine.Create create) throws RebirthException {
 		writeAllowed();
 		create = indexingService.preCreate(create);
 		if (logger.isTraceEnabled()) {
@@ -483,24 +438,22 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return create.parsedDoc();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#prepareIndex(cn.com.summall.search.core.index.mapper.SourceToParse)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#prepareIndex(cn.com.rebirth.search.core.index.mapper.SourceToParse)
 	 */
 	@Override
-	public Engine.Index prepareIndex(SourceToParse source) throws RestartException {
+	public Engine.Index prepareIndex(SourceToParse source) throws RebirthException {
 		long startTime = System.nanoTime();
 		DocumentMapper docMapper = mapperService.documentMapperWithAutoCreate(source.type());
 		ParsedDocument doc = docMapper.parse(source);
 		return new Engine.Index(docMapper, docMapper.uidMapper().term(doc.uid()), doc).startTime(startTime);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#index(cn.com.summall.search.core.index.engine.Engine.Index)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#index(cn.com.rebirth.search.core.index.engine.Engine.Index)
 	 */
 	@Override
-	public ParsedDocument index(Engine.Index index) throws RestartException {
+	public ParsedDocument index(Engine.Index index) throws RebirthException {
 		writeAllowed();
 		index = indexingService.preIndex(index);
 		try {
@@ -517,23 +470,21 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return index.parsedDoc();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#prepareDelete(java.lang.String, java.lang.String, long)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#prepareDelete(java.lang.String, java.lang.String, long)
 	 */
 	@Override
-	public Engine.Delete prepareDelete(String type, String id, long version) throws RestartException {
+	public Engine.Delete prepareDelete(String type, String id, long version) throws RebirthException {
 		long startTime = System.nanoTime();
 		DocumentMapper docMapper = mapperService.documentMapperWithAutoCreate(type);
 		return new Engine.Delete(type, id, docMapper.uidMapper().term(type, id)).version(version).startTime(startTime);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#delete(cn.com.summall.search.core.index.engine.Engine.Delete)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#delete(cn.com.rebirth.search.core.index.engine.Engine.Delete)
 	 */
 	@Override
-	public void delete(Engine.Delete delete) throws RestartException {
+	public void delete(Engine.Delete delete) throws RebirthException {
 		writeAllowed();
 		delete = indexingService.preDelete(delete);
 		try {
@@ -549,13 +500,12 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		indexingService.postDelete(delete);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#prepareDeleteByQuery(cn.com.summall.search.commons.BytesHolder, java.lang.String[], java.lang.String[])
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#prepareDeleteByQuery(cn.com.rebirth.commons.BytesHolder, java.lang.String[], java.lang.String[])
 	 */
 	@Override
 	public Engine.DeleteByQuery prepareDeleteByQuery(BytesHolder querySource, @Nullable String[] filteringAliases,
-			String... types) throws RestartException {
+			String... types) throws RebirthException {
 		long startTime = System.nanoTime();
 		if (types == null) {
 			types = Strings.EMPTY_ARRAY;
@@ -568,15 +518,14 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return new Engine.DeleteByQuery(query, querySource, filteringAliases, aliasFilter, types).startTime(startTime);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#deleteByQuery(cn.com.summall.search.core.index.engine.Engine.DeleteByQuery)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#deleteByQuery(cn.com.rebirth.search.core.index.engine.Engine.DeleteByQuery)
 	 */
 	@Override
-	public void deleteByQuery(Engine.DeleteByQuery deleteByQuery) throws RestartException {
+	public void deleteByQuery(Engine.DeleteByQuery deleteByQuery) throws RebirthException {
 		writeAllowed();
 		if (mapperService.hasNested()) {
-			
+
 			IncludeAllChildrenQuery nestedQuery = new IncludeAllChildrenQuery(deleteByQuery.query(), indexCache
 					.filter().cache(NonNestedDocsFilter.INSTANCE));
 			deleteByQuery = new Engine.DeleteByQuery(nestedQuery, deleteByQuery.source(),
@@ -591,33 +540,30 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		indexingService.postDeleteByQuery(deleteByQuery);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#get(cn.com.summall.search.core.index.engine.Engine.Get)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#get(cn.com.rebirth.search.core.index.engine.Engine.Get)
 	 */
 	@Override
-	public Engine.GetResult get(Engine.Get get) throws RestartException {
+	public Engine.GetResult get(Engine.Get get) throws RebirthException {
 		readAllowed();
 		return engine.get(get);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#count(float, byte[], java.lang.String[], java.lang.String[])
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#count(float, byte[], java.lang.String[], java.lang.String[])
 	 */
 	@Override
 	public long count(float minScore, byte[] querySource, @Nullable String[] filteringAliases, String... types)
-			throws RestartException {
+			throws RebirthException {
 		return count(minScore, querySource, 0, querySource.length, filteringAliases, types);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#count(float, byte[], int, int, java.lang.String[], java.lang.String[])
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#count(float, byte[], int, int, java.lang.String[], java.lang.String[])
 	 */
 	@Override
 	public long count(float minScore, byte[] querySource, int querySourceOffset, int querySourceLength,
-			@Nullable String[] filteringAliases, String... types) throws RestartException {
+			@Nullable String[] filteringAliases, String... types) throws RebirthException {
 		readAllowed();
 		Query query;
 		if (querySourceLength == 0) {
@@ -630,9 +576,7 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 				QueryParseContext.removeTypes();
 			}
 		}
-		
-		
-		
+
 		query = filterQueryIfNeeded(query, types);
 		Filter aliasFilter = indexAliasesService.aliasFilter(filteringAliases);
 		Engine.Searcher searcher = engine.searcher();
@@ -643,18 +587,17 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 			}
 			return count;
 		} catch (IOException e) {
-			throw new RestartException("Failed to count query [" + query + "]", e);
+			throw new RebirthException("Failed to count query [" + query + "]", e);
 		} finally {
 			searcher.release();
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#refresh(cn.com.summall.search.core.index.engine.Engine.Refresh)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#refresh(cn.com.rebirth.search.core.index.engine.Engine.Refresh)
 	 */
 	@Override
-	public void refresh(Engine.Refresh refresh) throws RestartException {
+	public void refresh(Engine.Refresh refresh) throws RebirthException {
 		verifyStarted();
 		if (logger.isTraceEnabled()) {
 			logger.trace("refresh with {}", refresh);
@@ -664,27 +607,24 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		refreshMetric.inc(System.nanoTime() - time);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#refreshStats()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#refreshStats()
 	 */
 	@Override
 	public RefreshStats refreshStats() {
 		return new RefreshStats(refreshMetric.count(), TimeUnit.NANOSECONDS.toMillis(refreshMetric.sum()));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#flushStats()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#flushStats()
 	 */
 	@Override
 	public FlushStats flushStats() {
 		return new FlushStats(flushMetric.count(), TimeUnit.NANOSECONDS.toMillis(flushMetric.sum()));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#docStats()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#docStats()
 	 */
 	@Override
 	public DocsStats docStats() {
@@ -701,36 +641,32 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#indexingStats(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#indexingStats(java.lang.String[])
 	 */
 	@Override
 	public IndexingStats indexingStats(String... types) {
 		return indexingService.stats(types);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#searchStats(java.lang.String[])
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#searchStats(java.lang.String[])
 	 */
 	@Override
 	public SearchStats searchStats(String... groups) {
 		return searchService.stats(groups);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#getStats()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#getStats()
 	 */
 	@Override
 	public GetStats getStats() {
 		return getService.stats();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#storeStats()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#storeStats()
 	 */
 	@Override
 	public StoreStats storeStats() {
@@ -741,21 +677,19 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#mergeStats()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#mergeStats()
 	 */
 	@Override
 	public MergeStats mergeStats() {
 		return mergeScheduler.stats();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#flush(cn.com.summall.search.core.index.engine.Engine.Flush)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#flush(cn.com.rebirth.search.core.index.engine.Engine.Flush)
 	 */
 	@Override
-	public void flush(Engine.Flush flush) throws RestartException {
+	public void flush(Engine.Flush flush) throws RebirthException {
 		verifyStartedOrRecovering();
 		if (logger.isTraceEnabled()) {
 			logger.trace("flush with {}", flush);
@@ -765,12 +699,11 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		flushMetric.inc(System.nanoTime() - time);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#optimize(cn.com.summall.search.core.index.engine.Engine.Optimize)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#optimize(cn.com.rebirth.search.core.index.engine.Engine.Optimize)
 	 */
 	@Override
-	public void optimize(Engine.Optimize optimize) throws RestartException {
+	public void optimize(Engine.Optimize optimize) throws RebirthException {
 		verifyStarted();
 		if (logger.isTraceEnabled()) {
 			logger.trace("optimize with {}", optimize);
@@ -778,23 +711,21 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		engine.optimize(optimize);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#snapshot(cn.com.summall.search.core.index.engine.Engine.SnapshotHandler)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#snapshot(cn.com.rebirth.search.core.index.engine.Engine.SnapshotHandler)
 	 */
 	@Override
 	public <T> T snapshot(Engine.SnapshotHandler<T> snapshotHandler) throws EngineException {
-		IndexShardState state = this.state; 
-		
+		IndexShardState state = this.state;
+
 		if (state != IndexShardState.STARTED && state != IndexShardState.RELOCATED && state != IndexShardState.CLOSED) {
 			throw new IllegalIndexShardStateException(shardId, state, "snapshot is not allowed");
 		}
 		return engine.snapshot(snapshotHandler);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#recover(cn.com.summall.search.core.index.engine.Engine.RecoveryHandler)
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#recover(cn.com.rebirth.search.core.index.engine.Engine.RecoveryHandler)
 	 */
 	@Override
 	public void recover(Engine.RecoveryHandler recoveryHandler) throws EngineException {
@@ -802,9 +733,8 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		engine.recover(recoveryHandler);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#searcher()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#searcher()
 	 */
 	@Override
 	public Engine.Searcher searcher() {
@@ -812,7 +742,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return engine.searcher();
 	}
 
-	
 	/**
 	 * Close.
 	 *
@@ -836,7 +765,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/**
 	 * Check index took.
 	 *
@@ -846,27 +774,24 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this.checkIndexTook;
 	}
 
-	
 	/**
 	 * Perform recovery prepare for translog.
 	 *
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void performRecoveryPrepareForTranslog() throws RestartException {
+	public void performRecoveryPrepareForTranslog() throws RebirthException {
 		if (state != IndexShardState.RECOVERING) {
 			throw new IndexShardNotRecoveringException(shardId, state);
 		}
-		
+
 		if (checkIndexOnStartup) {
 			checkIndex(true);
 		}
-		
-		
+
 		engine.enableGcDeletes(false);
 		engine.start();
 	}
 
-	
 	/**
 	 * Peer recovery status.
 	 *
@@ -876,32 +801,30 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		return this.peerRecoveryStatus;
 	}
 
-	
 	/**
 	 * Perform recovery finalization.
 	 *
 	 * @param withFlush the with flush
 	 * @param peerRecoveryStatus the peer recovery status
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	public void performRecoveryFinalization(boolean withFlush, RecoveryStatus peerRecoveryStatus)
-			throws RestartException {
+			throws RebirthException {
 		performRecoveryFinalization(withFlush);
 		this.peerRecoveryStatus = peerRecoveryStatus;
 	}
 
-	
 	/**
 	 * Perform recovery finalization.
 	 *
 	 * @param withFlush the with flush
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void performRecoveryFinalization(boolean withFlush) throws RestartException {
+	public void performRecoveryFinalization(boolean withFlush) throws RebirthException {
 		if (withFlush) {
 			engine.flush(new Engine.Flush());
 		}
-		
+
 		translog.clearUnreferenced();
 		engine.refresh(new Engine.Refresh(true));
 		synchronized (mutex) {
@@ -913,14 +836,13 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		engine.enableGcDeletes(true);
 	}
 
-	
 	/**
 	 * Perform recovery operation.
 	 *
 	 * @param operation the operation
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void performRecoveryOperation(Translog.Operation operation) throws RestartException {
+	public void performRecoveryOperation(Translog.Operation operation) throws RebirthException {
 		if (state != IndexShardState.RECOVERING) {
 			throw new IndexShardNotRecoveringException(shardId, state);
 		}
@@ -954,18 +876,18 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 						deleteByQuery.types()));
 				break;
 			default:
-				throw new RestartIllegalStateException("No operation defined for [" + operation + "]");
+				throw new RebirthIllegalStateException("No operation defined for [" + operation + "]");
 			}
-		} catch (RestartException e) {
+		} catch (RebirthException e) {
 			boolean hasIgnoreOnRecoveryException = false;
-			RestartException current = e;
+			RebirthException current = e;
 			while (true) {
 				if (current instanceof IgnoreOnRecoveryEngineException) {
 					hasIgnoreOnRecoveryException = true;
 					break;
 				}
-				if (current.getCause() instanceof RestartException) {
-					current = (RestartException) current.getCause();
+				if (current.getCause() instanceof RebirthException) {
+					current = (RebirthException) current.getCause();
 				} else {
 					break;
 				}
@@ -976,31 +898,28 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.shard.service.IndexShard#ignoreRecoveryAttempt()
+	 * @see cn.com.rebirth.search.core.index.shard.service.IndexShard#ignoreRecoveryAttempt()
 	 */
 	public boolean ignoreRecoveryAttempt() {
-		IndexShardState state = state(); 
+		IndexShardState state = state();
 		return state == IndexShardState.RECOVERING || state == IndexShardState.STARTED
 				|| state == IndexShardState.RELOCATED || state == IndexShardState.CLOSED;
 	}
 
-	
 	/**
 	 * Read allowed.
 	 *
 	 * @throws IllegalIndexShardStateException the illegal index shard state exception
 	 */
 	public void readAllowed() throws IllegalIndexShardStateException {
-		IndexShardState state = this.state; 
+		IndexShardState state = this.state;
 		if (state != IndexShardState.STARTED && state != IndexShardState.RELOCATED) {
 			throw new IllegalIndexShardStateException(shardId, state,
 					"Read operations only allowed when started/relocated");
 		}
 	}
 
-	
 	/**
 	 * Write allowed.
 	 *
@@ -1010,34 +929,31 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		verifyStartedOrRecovering();
 	}
 
-	
 	/**
 	 * Verify started or recovering.
 	 *
 	 * @throws IllegalIndexShardStateException the illegal index shard state exception
 	 */
 	private void verifyStartedOrRecovering() throws IllegalIndexShardStateException {
-		IndexShardState state = this.state; 
+		IndexShardState state = this.state;
 		if (state != IndexShardState.STARTED && state != IndexShardState.RECOVERING) {
 			throw new IllegalIndexShardStateException(shardId, state,
 					"write operation only allowed when started/recovering");
 		}
 	}
 
-	
 	/**
 	 * Verify started.
 	 *
 	 * @throws IllegalIndexShardStateException the illegal index shard state exception
 	 */
 	private void verifyStarted() throws IllegalIndexShardStateException {
-		IndexShardState state = this.state; 
+		IndexShardState state = this.state;
 		if (state != IndexShardState.STARTED) {
 			throw new IndexShardNotStartedException(shardId, state);
 		}
 	}
 
-	
 	/**
 	 * Start scheduled tasks if needed.
 	 */
@@ -1048,9 +964,7 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		} else {
 			logger.debug("scheduled refresher disabled");
 		}
-		
-		
-		
+
 		if (mergeInterval.millis() > 0) {
 			mergeScheduleFuture = threadPool.schedule(mergeInterval, ThreadPool.Names.SAME, new EngineMerger());
 			logger.debug("scheduling optimizer / merger every {}", mergeInterval);
@@ -1059,7 +973,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/**
 	 * Filter query if needed.
 	 *
@@ -1079,7 +992,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		IndexMetaData.addDynamicSettings("index.refresh_interval");
 	}
 
-	
 	/**
 	 * The Class ApplyRefreshSettings.
 	 *
@@ -1087,9 +999,8 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 	 */
 	private class ApplyRefreshSettings implements IndexSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.index.settings.IndexSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -1116,7 +1027,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/**
 	 * The Class EngineRefresher.
 	 *
@@ -1124,13 +1034,12 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 	 */
 	private class EngineRefresher implements Runnable {
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
 		public void run() {
-			
+
 			if (!engine().refreshNeeded()) {
 				synchronized (mutex) {
 					if (state != IndexShardState.CLOSED) {
@@ -1147,14 +1056,14 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 							refresh(new Engine.Refresh(false));
 						}
 					} catch (EngineClosedException e) {
-						
+
 					} catch (RefreshFailedEngineException e) {
 						if (e.getCause() instanceof InterruptedException) {
-							
+
 						} else if (e.getCause() instanceof ClosedByInterruptException) {
-							
+
 						} else if (e.getCause() instanceof ThreadInterruptedException) {
-							
+
 						} else {
 							if (state != IndexShardState.CLOSED) {
 								logger.warn("Failed to perform scheduled engine refresh", e);
@@ -1176,7 +1085,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/**
 	 * The Class EngineMerger.
 	 *
@@ -1184,7 +1092,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 	 */
 	private class EngineMerger implements Runnable {
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
@@ -1204,16 +1111,16 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 					try {
 						engine.maybeMerge();
 					} catch (EngineClosedException e) {
-						
+
 					} catch (OptimizeFailedEngineException e) {
 						if (e.getCause() instanceof EngineClosedException) {
-							
+
 						} else if (e.getCause() instanceof InterruptedException) {
-							
+
 						} else if (e.getCause() instanceof ClosedByInterruptException) {
-							
+
 						} else if (e.getCause() instanceof ThreadInterruptedException) {
-							
+
 						} else {
 							if (state != IndexShardState.CLOSED) {
 								logger.warn("Failed to perform scheduled engine optimize/merge", e);
@@ -1235,7 +1142,6 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 		}
 	}
 
-	
 	/**
 	 * Check index.
 	 *
@@ -1257,7 +1163,7 @@ public class InternalIndexShard extends AbstractIndexShardComponent implements I
 			CheckIndex.Status status = checkIndex.checkIndex();
 			if (!status.clean) {
 				if (state == IndexShardState.CLOSED) {
-					
+
 					return;
 				}
 				logger.warn("check index [failure]\n{}", new String(os.underlyingBytes(), 0, os.size()));

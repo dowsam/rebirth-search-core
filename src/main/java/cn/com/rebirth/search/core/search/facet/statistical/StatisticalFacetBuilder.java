@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core StatisticalFacetBuilder.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core StatisticalFacetBuilder.java 2012-7-6 14:30:38 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.statistical;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.search.core.index.query.FilterBuilder;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilderException;
 import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
-
 /**
  * The Class StatisticalFacetBuilder.
  *
@@ -21,15 +19,12 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
  */
 public class StatisticalFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The fields names. */
 	private String[] fieldsNames;
 
-	
 	/** The field name. */
 	private String fieldName;
 
-	
 	/**
 	 * Instantiates a new statistical facet builder.
 	 *
@@ -39,7 +34,6 @@ public class StatisticalFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -51,7 +45,6 @@ public class StatisticalFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fields.
 	 *
@@ -63,18 +56,16 @@ public class StatisticalFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	public StatisticalFacetBuilder global(boolean global) {
 		super.global(global);
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public StatisticalFacetBuilder scope(String scope) {
@@ -82,27 +73,24 @@ public class StatisticalFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	public StatisticalFacetBuilder facetFilter(FilterBuilder filter) {
 		this.facetFilter = filter;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public StatisticalFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {

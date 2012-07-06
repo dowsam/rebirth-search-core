@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesStatusResponse.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesStatusResponse.java 2012-7-6 14:29:56 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
@@ -32,7 +31,6 @@ import cn.com.rebirth.search.core.index.refresh.RefreshStats;
 
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class IndicesStatusResponse.
  *
@@ -40,22 +38,18 @@ import com.google.common.collect.Sets;
  */
 public class IndicesStatusResponse extends BroadcastOperationResponse implements ToXContent {
 
-	
 	/** The shards. */
 	protected ShardStatus[] shards;
 
-	
 	/** The indices status. */
 	private Map<String, IndexStatus> indicesStatus;
 
-	
 	/**
 	 * Instantiates a new indices status response.
 	 */
 	IndicesStatusResponse() {
 	}
 
-	
 	/**
 	 * Instantiates a new indices status response.
 	 *
@@ -72,7 +66,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		this.shards = shards;
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -82,7 +75,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -92,7 +84,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return this.shards;
 	}
 
-	
 	/**
 	 * Gets the at.
 	 *
@@ -103,7 +94,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return shards[position];
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -114,7 +104,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return indices().get(index);
 	}
 
-	
 	/**
 	 * Gets the indices.
 	 *
@@ -124,7 +113,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return indices();
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -154,9 +142,8 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return indicesStatus;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -167,9 +154,8 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -180,16 +166,14 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
 		return toXContent(builder, params, null);
 	}
 
-	
 	/**
 	 * To x content.
 	 *
@@ -379,7 +363,6 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -387,150 +370,114 @@ public class IndicesStatusResponse extends BroadcastOperationResponse implements
 	 */
 	static final class Fields {
 
-		
 		/** The Constant INDICES. */
 		static final XContentBuilderString INDICES = new XContentBuilderString("indices");
 
-		
 		/** The Constant INDEX. */
 		static final XContentBuilderString INDEX = new XContentBuilderString("index");
 
-		
 		/** The Constant PRIMARY_SIZE. */
 		static final XContentBuilderString PRIMARY_SIZE = new XContentBuilderString("primary_size");
 
-		
 		/** The Constant PRIMARY_SIZE_IN_BYTES. */
 		static final XContentBuilderString PRIMARY_SIZE_IN_BYTES = new XContentBuilderString("primary_size_in_bytes");
 
-		
 		/** The Constant SIZE. */
 		static final XContentBuilderString SIZE = new XContentBuilderString("size");
 
-		
 		/** The Constant SIZE_IN_BYTES. */
 		static final XContentBuilderString SIZE_IN_BYTES = new XContentBuilderString("size_in_bytes");
 
-		
 		/** The Constant TRANSLOG. */
 		static final XContentBuilderString TRANSLOG = new XContentBuilderString("translog");
 
-		
 		/** The Constant OPERATIONS. */
 		static final XContentBuilderString OPERATIONS = new XContentBuilderString("operations");
 
-		
 		/** The Constant DOCS. */
 		static final XContentBuilderString DOCS = new XContentBuilderString("docs");
 
-		
 		/** The Constant NUM_DOCS. */
 		static final XContentBuilderString NUM_DOCS = new XContentBuilderString("num_docs");
 
-		
 		/** The Constant MAX_DOC. */
 		static final XContentBuilderString MAX_DOC = new XContentBuilderString("max_doc");
 
-		
 		/** The Constant DELETED_DOCS. */
 		static final XContentBuilderString DELETED_DOCS = new XContentBuilderString("deleted_docs");
 
-		
 		/** The Constant SHARDS. */
 		static final XContentBuilderString SHARDS = new XContentBuilderString("shards");
 
-		
 		/** The Constant ROUTING. */
 		static final XContentBuilderString ROUTING = new XContentBuilderString("routing");
 
-		
 		/** The Constant STATE. */
 		static final XContentBuilderString STATE = new XContentBuilderString("state");
 
-		
 		/** The Constant PRIMARY. */
 		static final XContentBuilderString PRIMARY = new XContentBuilderString("primary");
 
-		
 		/** The Constant NODE. */
 		static final XContentBuilderString NODE = new XContentBuilderString("node");
 
-		
 		/** The Constant RELOCATING_NODE. */
 		static final XContentBuilderString RELOCATING_NODE = new XContentBuilderString("relocating_node");
 
-		
 		/** The Constant SHARD. */
 		static final XContentBuilderString SHARD = new XContentBuilderString("shard");
 
-		
 		/** The Constant ID. */
 		static final XContentBuilderString ID = new XContentBuilderString("id");
 
-		
 		/** The Constant PEER_RECOVERY. */
 		static final XContentBuilderString PEER_RECOVERY = new XContentBuilderString("peer_recovery");
 
-		
 		/** The Constant STAGE. */
 		static final XContentBuilderString STAGE = new XContentBuilderString("stage");
 
-		
 		/** The Constant START_TIME_IN_MILLIS. */
 		static final XContentBuilderString START_TIME_IN_MILLIS = new XContentBuilderString("start_time_in_millis");
 
-		
 		/** The Constant TIME. */
 		static final XContentBuilderString TIME = new XContentBuilderString("time");
 
-		
 		/** The Constant TIME_IN_MILLIS. */
 		static final XContentBuilderString TIME_IN_MILLIS = new XContentBuilderString("time_in_millis");
 
-		
 		/** The Constant PROGRESS. */
 		static final XContentBuilderString PROGRESS = new XContentBuilderString("progress");
 
-		
 		/** The Constant REUSED_SIZE. */
 		static final XContentBuilderString REUSED_SIZE = new XContentBuilderString("reused_size");
 
-		
 		/** The Constant REUSED_SIZE_IN_BYTES. */
 		static final XContentBuilderString REUSED_SIZE_IN_BYTES = new XContentBuilderString("reused_size_in_bytes");
 
-		
 		/** The Constant EXPECTED_RECOVERED_SIZE. */
 		static final XContentBuilderString EXPECTED_RECOVERED_SIZE = new XContentBuilderString(
 				"expected_recovered_size");
 
-		
 		/** The Constant EXPECTED_RECOVERED_SIZE_IN_BYTES. */
 		static final XContentBuilderString EXPECTED_RECOVERED_SIZE_IN_BYTES = new XContentBuilderString(
 				"expected_recovered_size_in_bytes");
 
-		
 		/** The Constant RECOVERED_SIZE. */
 		static final XContentBuilderString RECOVERED_SIZE = new XContentBuilderString("recovered_size");
 
-		
 		/** The Constant RECOVERED_SIZE_IN_BYTES. */
 		static final XContentBuilderString RECOVERED_SIZE_IN_BYTES = new XContentBuilderString(
 				"recovered_size_in_bytes");
 
-		
 		/** The Constant RECOVERED. */
 		static final XContentBuilderString RECOVERED = new XContentBuilderString("recovered");
 
-		
 		/** The Constant GATEWAY_RECOVERY. */
 		static final XContentBuilderString GATEWAY_RECOVERY = new XContentBuilderString("gateway_recovery");
 
-		
 		/** The Constant GATEWAY_SNAPSHOT. */
 		static final XContentBuilderString GATEWAY_SNAPSHOT = new XContentBuilderString("gateway_snapshot");
 
-		
 		/** The Constant EXPECTED_OPERATIONS. */
 		static final XContentBuilderString EXPECTED_OPERATIONS = new XContentBuilderString("expected_operations");
 	}

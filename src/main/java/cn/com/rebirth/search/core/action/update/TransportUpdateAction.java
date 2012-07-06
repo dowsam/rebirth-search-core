@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportUpdateAction.java 2012-3-29 15:02:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportUpdateAction.java 2012-7-6 14:30:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.update;
 
@@ -11,8 +10,8 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.collect.Tuple;
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.inject.Inject;
@@ -54,7 +53,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.ImmutableList;
 
-
 /**
  * The Class TransportUpdateAction.
  *
@@ -62,23 +60,18 @@ import com.google.common.collect.ImmutableList;
  */
 public class TransportUpdateAction extends TransportInstanceSingleOperationAction<UpdateRequest, UpdateResponse> {
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/** The delete action. */
 	private final TransportDeleteAction deleteAction;
 
-	
 	/** The index action. */
 	private final TransportIndexAction indexAction;
 
-	
 	/** The script service. */
 	private final ScriptService scriptService;
 
-	
 	/**
 	 * Instantiates a new transport update action.
 	 *
@@ -102,63 +95,56 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 		this.scriptService = scriptService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return UpdateAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.INDEX;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#newRequest()
 	 */
 	@Override
 	protected UpdateRequest newRequest() {
 		return new UpdateRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#newResponse()
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#newResponse()
 	 */
 	@Override
 	protected UpdateResponse newResponse() {
 		return new UpdateResponse();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, UpdateRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.WRITE);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, UpdateRequest request) {
 		return state.blocks().indexBlockedException(ClusterBlockLevel.WRITE, request.index());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#retryOnFailure(java.lang.Throwable)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#retryOnFailure(java.lang.Throwable)
 	 */
 	@Override
 	protected boolean retryOnFailure(Throwable e) {
@@ -169,12 +155,11 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest)
 	 */
 	@Override
-	protected ShardIterator shards(ClusterState clusterState, UpdateRequest request) throws RestartException {
+	protected ShardIterator shards(ClusterState clusterState, UpdateRequest request) throws RebirthException {
 		if (request.shardId() != -1) {
 			return clusterState.routingTable().index(request.index()).shard(request.shardId()).primaryShardIt();
 		}
@@ -189,27 +174,25 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 		return new PlainShardIterator(shardIterator.shardId(), ImmutableList.<ShardRouting> of());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#shardOperation(cn.com.summall.search.core.action.support.single.instance.InstanceShardOperationRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.single.instance.TransportInstanceSingleOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.single.instance.InstanceShardOperationRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void shardOperation(final UpdateRequest request, final ActionListener<UpdateResponse> listener)
-			throws RestartException {
+			throws RebirthException {
 		shardOperation(request, listener, 0);
 	}
 
-	
 	/**
 	 * Shard operation.
 	 *
 	 * @param request the request
 	 * @param listener the listener
 	 * @param retryCount the retry count
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
 	protected void shardOperation(final UpdateRequest request, final ActionListener<UpdateResponse> listener,
-			final int retryCount) throws RestartException {
+			final int retryCount) throws RebirthException {
 		IndexService indexService = indicesService.indexServiceSafe(request.index());
 		IndexShard indexShard = indexService.shardSafe(request.shardId());
 
@@ -220,7 +203,6 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 				new String[] { SourceFieldMapper.NAME, RoutingFieldMapper.NAME, ParentFieldMapper.NAME,
 						TTLFieldMapper.NAME }, true);
 
-		
 		if (!getResult.exists()) {
 			listener.onFailure(new DocumentMissingException(new ShardId(request.index(), request.shardId()), request
 					.type(), request.id()));
@@ -228,7 +210,7 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 		}
 
 		if (getResult.internalSourceRef() == null) {
-			
+
 			listener.onFailure(new DocumentSourceMissingException(new ShardId(request.index(), request.shardId()),
 					request.type(), request.id()));
 			return;
@@ -246,10 +228,10 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 					.executable(request.scriptLang, request.script, request.scriptParams);
 			script.setNextVar("ctx", ctx);
 			script.run();
-			
+
 			ctx = (Map<String, Object>) script.unwrap(ctx);
 		} catch (Exception e) {
-			throw new RestartIllegalArgumentException("failed to execute script", e);
+			throw new RebirthIllegalArgumentException("failed to execute script", e);
 		}
 
 		String operation = (String) ctx.get("op");
@@ -265,21 +247,18 @@ public class TransportUpdateAction extends TransportInstanceSingleOperationActio
 		}
 		source = (Map<String, Object>) ctx.get("_source");
 
-		
 		String routing = getResult.fields().containsKey(RoutingFieldMapper.NAME) ? getResult
 				.field(RoutingFieldMapper.NAME).value().toString() : null;
 		String parent = getResult.fields().containsKey(ParentFieldMapper.NAME) ? getResult
 				.field(ParentFieldMapper.NAME).value().toString() : null;
-		
+
 		if (ttl == null) {
 			ttl = getResult.fields().containsKey(TTLFieldMapper.NAME) ? (Long) getResult.field(TTLFieldMapper.NAME)
 					.value() : null;
 			if (ttl != null) {
-				ttl = ttl - (System.currentTimeMillis() - getDate); 
+				ttl = ttl - (System.currentTimeMillis() - getDate);
 			}
 		}
-
-		
 
 		if (operation == null || "index".equals(operation)) {
 			IndexRequest indexRequest = Requests.indexRequest(request.index()).type(request.type()).id(request.id())

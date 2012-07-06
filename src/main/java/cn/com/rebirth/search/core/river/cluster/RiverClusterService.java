@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverClusterService.java 2012-3-29 15:01:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverClusterService.java 2012-7-6 14:29:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.cluster;
 
@@ -14,14 +13,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.concurrent.EsExecutors;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterState;
 import cn.com.rebirth.search.core.transport.TransportService;
-
 
 /**
  * The Class RiverClusterService.
@@ -30,27 +28,21 @@ import cn.com.rebirth.search.core.transport.TransportService;
  */
 public class RiverClusterService extends AbstractLifecycleComponent<RiverClusterService> {
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The publish action. */
 	private final PublishRiverClusterStateAction publishAction;
 
-	
 	/** The cluster state listeners. */
 	private final List<RiverClusterStateListener> clusterStateListeners = new CopyOnWriteArrayList<RiverClusterStateListener>();
 
-	
 	/** The update tasks executor. */
 	private volatile ExecutorService updateTasksExecutor;
 
-	
 	/** The cluster state. */
 	private volatile RiverClusterState clusterState = RiverClusterState.builder().build();
 
-	
 	/**
 	 * Instantiates a new river cluster service.
 	 *
@@ -67,39 +59,35 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 				new UpdateClusterStateListener());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		this.updateTasksExecutor = newSingleThreadExecutor(EsExecutors.daemonThreadFactory(settings,
 				"riverClusterService#updateTask"));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		updateTasksExecutor.shutdown();
 		try {
 			updateTasksExecutor.awaitTermination(10, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			
+
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -109,7 +97,6 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 		clusterStateListeners.add(listener);
 	}
 
-	
 	/**
 	 * Removes the.
 	 *
@@ -119,7 +106,6 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 		clusterStateListeners.remove(listener);
 	}
 
-	
 	/**
 	 * Submit state update task.
 	 *
@@ -150,10 +136,10 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 				}
 				if (previousClusterState != clusterState) {
 					if (clusterService.state().nodes().localNodeMaster()) {
-						
+
 						clusterState = new RiverClusterState(clusterState.version() + 1, clusterState);
 					} else {
-						
+
 						if (clusterState.version() < previousClusterState.version()) {
 							logger.debug("got old cluster state [" + clusterState.version() + "<"
 									+ previousClusterState.version() + "] from source [" + source + "], ignoring");
@@ -176,7 +162,6 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 						listener.riverClusterChanged(clusterChangedEvent);
 					}
 
-					
 					if (clusterService.state().nodes().localNodeMaster()) {
 						publishAction.publish(clusterState);
 					}
@@ -189,7 +174,6 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 		});
 	}
 
-	
 	/**
 	 * The listener interface for receiving updateClusterState events.
 	 * The class that is interested in processing a updateClusterState
@@ -203,9 +187,8 @@ public class RiverClusterService extends AbstractLifecycleComponent<RiverCluster
 	 */
 	private class UpdateClusterStateListener implements PublishRiverClusterStateAction.NewClusterStateListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.river.cluster.PublishRiverClusterStateAction.NewClusterStateListener#onNewClusterState(cn.com.summall.search.core.river.cluster.RiverClusterState)
+		 * @see cn.com.rebirth.search.core.river.cluster.PublishRiverClusterStateAction.NewClusterStateListener#onNewClusterState(cn.com.rebirth.search.core.river.cluster.RiverClusterState)
 		 */
 		@Override
 		public void onNewClusterState(final RiverClusterState clusterState) {

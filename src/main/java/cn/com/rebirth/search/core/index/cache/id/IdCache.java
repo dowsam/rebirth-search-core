@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IdCache.java 2012-3-29 15:00:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IdCache.java 2012-7-6 14:29:26 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.cache.id;
 
@@ -11,7 +10,6 @@ import org.apache.lucene.index.IndexReader;
 import cn.com.rebirth.search.commons.component.CloseableComponent;
 import cn.com.rebirth.search.core.index.IndexComponent;
 
-
 /**
  * The Interface IdCache.
  *
@@ -19,13 +17,11 @@ import cn.com.rebirth.search.core.index.IndexComponent;
  */
 public interface IdCache extends IndexComponent, CloseableComponent, Iterable<IdReaderCache> {
 
-	
 	/**
 	 * Clear.
 	 */
 	void clear();
 
-	
 	/**
 	 * Clear.
 	 *
@@ -33,7 +29,6 @@ public interface IdCache extends IndexComponent, CloseableComponent, Iterable<Id
 	 */
 	void clear(IndexReader reader);
 
-	
 	/**
 	 * Refresh.
 	 *
@@ -42,7 +37,6 @@ public interface IdCache extends IndexComponent, CloseableComponent, Iterable<Id
 	 */
 	void refresh(IndexReader[] readers) throws Exception;
 
-	
 	/**
 	 * Reader.
 	 *

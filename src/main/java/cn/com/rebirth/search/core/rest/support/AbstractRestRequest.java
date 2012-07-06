@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AbstractRestRequest.java 2012-3-29 15:01:22 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AbstractRestRequest.java 2012-7-6 14:30:22 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.rest.support;
 
 import cn.com.rebirth.commons.Booleans;
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.core.rest.RestRequest;
@@ -20,7 +20,7 @@ import cn.com.rebirth.search.core.rest.RestRequest;
 public abstract class AbstractRestRequest implements RestRequest {
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#path()
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#path()
 	 */
 	@Override
 	public final String path() {
@@ -28,7 +28,7 @@ public abstract class AbstractRestRequest implements RestRequest {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsFloat(java.lang.String, float)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsFloat(java.lang.String, float)
 	 */
 	@Override
 	public float paramAsFloat(String key, float defaultValue) {
@@ -39,13 +39,13 @@ public abstract class AbstractRestRequest implements RestRequest {
 		try {
 			return Float.parseFloat(sValue);
 		} catch (NumberFormatException e) {
-			throw new RestartIllegalArgumentException("Failed to parse float parameter [" + key
-					+ "] with value [" + sValue + "]", e);
+			throw new RebirthIllegalArgumentException("Failed to parse float parameter [" + key + "] with value ["
+					+ sValue + "]", e);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsInt(java.lang.String, int)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsInt(java.lang.String, int)
 	 */
 	@Override
 	public int paramAsInt(String key, int defaultValue) {
@@ -56,13 +56,13 @@ public abstract class AbstractRestRequest implements RestRequest {
 		try {
 			return Integer.parseInt(sValue);
 		} catch (NumberFormatException e) {
-			throw new RestartIllegalArgumentException("Failed to parse int parameter [" + key + "] with value ["
+			throw new RebirthIllegalArgumentException("Failed to parse int parameter [" + key + "] with value ["
 					+ sValue + "]", e);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsLong(java.lang.String, long)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsLong(java.lang.String, long)
 	 */
 	@Override
 	public long paramAsLong(String key, long defaultValue) {
@@ -73,13 +73,13 @@ public abstract class AbstractRestRequest implements RestRequest {
 		try {
 			return Long.parseLong(sValue);
 		} catch (NumberFormatException e) {
-			throw new RestartIllegalArgumentException("Failed to parse int parameter [" + key + "] with value ["
+			throw new RebirthIllegalArgumentException("Failed to parse int parameter [" + key + "] with value ["
 					+ sValue + "]", e);
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsBoolean(java.lang.String, boolean)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsBoolean(java.lang.String, boolean)
 	 */
 	@Override
 	public boolean paramAsBoolean(String key, boolean defaultValue) {
@@ -87,7 +87,7 @@ public abstract class AbstractRestRequest implements RestRequest {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsBooleanOptional(java.lang.String, java.lang.Boolean)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsBooleanOptional(java.lang.String, java.lang.Boolean)
 	 */
 	@Override
 	public Boolean paramAsBooleanOptional(String key, Boolean defaultValue) {
@@ -99,7 +99,7 @@ public abstract class AbstractRestRequest implements RestRequest {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsTime(java.lang.String, cn.com.summall.search.commons.unit.TimeValue)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsTime(java.lang.String, cn.com.rebirth.commons.unit.TimeValue)
 	 */
 	@Override
 	public TimeValue paramAsTime(String key, TimeValue defaultValue) {
@@ -107,7 +107,7 @@ public abstract class AbstractRestRequest implements RestRequest {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsSize(java.lang.String, cn.com.summall.search.commons.unit.ByteSizeValue)
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsSize(java.lang.String, cn.com.rebirth.commons.unit.ByteSizeValue)
 	 */
 	@Override
 	public ByteSizeValue paramAsSize(String key, ByteSizeValue defaultValue) {
@@ -115,7 +115,7 @@ public abstract class AbstractRestRequest implements RestRequest {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestRequest#paramAsStringArray(java.lang.String, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.rest.RestRequest#paramAsStringArray(java.lang.String, java.lang.String[])
 	 */
 	@Override
 	public String[] paramAsStringArray(String key, String[] defaultValue) {

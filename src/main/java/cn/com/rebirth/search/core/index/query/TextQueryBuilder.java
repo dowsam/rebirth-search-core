@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TextQueryBuilder.java 2012-3-29 15:02:35 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TextQueryBuilder.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-
 
 /**
  * The Class TextQueryBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class TextQueryBuilder extends BaseQueryBuilder {
 
-	
 	/**
 	 * The Enum Operator.
 	 *
@@ -26,16 +23,13 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 	 */
 	public static enum Operator {
 
-		
-		/** The OR. */
+		/** The or. */
 		OR,
 
-		
-		/** The AND. */
+		/** The and. */
 		AND
 	}
 
-	
 	/**
 	 * The Enum Type.
 	 *
@@ -43,60 +37,46 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 	 */
 	public static enum Type {
 
-		
-		/** The BOOLEAN. */
+		/** The boolean. */
 		BOOLEAN,
 
-		
-		/** The PHRASE. */
+		/** The phrase. */
 		PHRASE,
 
-		
-		/** The PHRAS e_ prefix. */
+		/** The phrase prefix. */
 		PHRASE_PREFIX
 	}
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/** The text. */
 	private final Object text;
 
-	
 	/** The type. */
 	private Type type;
 
-	
 	/** The operator. */
 	private Operator operator;
 
-	
 	/** The analyzer. */
 	private String analyzer;
 
-	
 	/** The boost. */
 	private Float boost;
 
-	
 	/** The slop. */
 	private Integer slop;
 
-	
 	/** The fuzziness. */
 	private String fuzziness;
 
-	
 	/** The prefix length. */
 	private Integer prefixLength;
 
-	
 	/** The max expansions. */
 	private Integer maxExpansions;
 
-	
 	/**
 	 * Instantiates a new text query builder.
 	 *
@@ -108,7 +88,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		this.text = text;
 	}
 
-	
 	/**
 	 * Type.
 	 *
@@ -120,7 +99,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Operator.
 	 *
@@ -132,7 +110,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Analyzer.
 	 *
@@ -144,7 +121,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -156,7 +132,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Slop.
 	 *
@@ -168,7 +143,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Fuzziness.
 	 *
@@ -180,7 +154,6 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Max expansions.
 	 *
@@ -192,9 +165,8 @@ public class TextQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public void doXContent(XContentBuilder builder, Params params) throws IOException {

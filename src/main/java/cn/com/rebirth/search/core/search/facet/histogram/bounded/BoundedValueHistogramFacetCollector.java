@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core BoundedValueHistogramFacetCollector.java 2012-3-29 15:01:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core BoundedValueHistogramFacetCollector.java 2012-7-6 14:29:20 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.histogram.bounded;
 
@@ -21,7 +20,6 @@ import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.facet.histogram.HistogramFacet;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class BoundedValueHistogramFacetCollector.
  *
@@ -29,43 +27,33 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The key index field name. */
 	private final String keyIndexFieldName;
 
-	
 	/** The value index field name. */
 	private final String valueIndexFieldName;
 
-	
 	/** The interval. */
 	private final long interval;
 
-	
 	/** The comparator type. */
 	private final HistogramFacet.ComparatorType comparatorType;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The key field data type. */
 	private final FieldDataType keyFieldDataType;
 
-	
 	/** The key field data. */
 	private NumericFieldData keyFieldData;
 
-	
 	/** The value field data type. */
 	private final FieldDataType valueFieldDataType;
 
-	
 	/** The histo proc. */
 	private final HistogramProc histoProc;
 
-	
 	/**
 	 * Instantiates a new bounded value histogram facet collector.
 	 *
@@ -90,7 +78,6 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + keyFieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -117,18 +104,16 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 		histoProc = new HistogramProc(from, to, interval, offset, size);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
 		keyFieldData.forEachValueInDoc(doc, histoProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
@@ -137,9 +122,8 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 				valueIndexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
@@ -147,7 +131,6 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 				histoProc.size, histoProc.entries, true);
 	}
 
-	
 	/**
 	 * The Class HistogramProc.
 	 *
@@ -155,39 +138,30 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 	 */
 	public static class HistogramProc implements NumericFieldData.LongValueInDocProc {
 
-		
 		/** The from. */
 		final long from;
 
-		
 		/** The to. */
 		final long to;
 
-		
 		/** The interval. */
 		final long interval;
 
-		
 		/** The offset. */
 		final long offset;
 
-		
 		/** The size. */
 		final int size;
 
-		
 		/** The entries. */
 		final Object[] entries;
 
-		
 		/** The value field data. */
 		NumericFieldData valueFieldData;
 
-		
 		/** The value aggregator. */
 		final ValueAggregator valueAggregator = new ValueAggregator();
 
-		
 		/**
 		 * Instantiates a new histogram proc.
 		 *
@@ -206,13 +180,12 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 			this.entries = CacheRecycler.popObjectArray(size);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.LongValueInDocProc#onValue(int, long)
 		 */
 		@Override
 		public void onValue(int docId, long value) {
-			if (value <= from || value > to) { 
+			if (value <= from || value > to) {
 				return;
 			}
 			int index = ((int) ((value + offset) / interval));
@@ -227,7 +200,6 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 			valueFieldData.forEachValueInDoc(docId, valueAggregator);
 		}
 
-		
 		/**
 		 * The Class ValueAggregator.
 		 *
@@ -235,13 +207,11 @@ public class BoundedValueHistogramFacetCollector extends AbstractFacetCollector 
 		 */
 		public static class ValueAggregator implements NumericFieldData.DoubleValueInDocProc {
 
-			
 			/** The entry. */
 			InternalBoundedFullHistogramFacet.FullEntry entry;
 
-			
 			/* (non-Javadoc)
-			 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+			 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 			 */
 			@Override
 			public void onValue(int docId, double value) {

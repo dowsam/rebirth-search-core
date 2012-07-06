@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryFetchSearchResult.java 2012-3-29 15:01:02 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryFetchSearchResult.java 2012-7-6 14:29:57 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.fetch;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.core.search.SearchShardTarget;
 import cn.com.rebirth.search.core.search.query.QuerySearchResult;
 import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
 
-
 /**
  * The Class QueryFetchSearchResult.
  *
@@ -23,15 +21,12 @@ import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
  */
 public class QueryFetchSearchResult implements Streamable, QuerySearchResultProvider, FetchSearchResultProvider {
 
-	
 	/** The query result. */
 	private QuerySearchResult queryResult;
 
-	
 	/** The fetch result. */
 	private FetchSearchResult fetchResult;
 
-	
 	/**
 	 * Instantiates a new query fetch search result.
 	 */
@@ -39,7 +34,6 @@ public class QueryFetchSearchResult implements Streamable, QuerySearchResultProv
 
 	}
 
-	
 	/**
 	 * Instantiates a new query fetch search result.
 	 *
@@ -51,25 +45,22 @@ public class QueryFetchSearchResult implements Streamable, QuerySearchResultProv
 		this.fetchResult = fetchResult;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhaseResult#id()
+	 * @see cn.com.rebirth.search.core.search.SearchPhaseResult#id()
 	 */
 	public long id() {
 		return queryResult.id();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhaseResult#shardTarget()
+	 * @see cn.com.rebirth.search.core.search.SearchPhaseResult#shardTarget()
 	 */
 	public SearchShardTarget shardTarget() {
 		return queryResult.shardTarget();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.SearchPhaseResult#shardTarget(cn.com.summall.search.core.search.SearchShardTarget)
+	 * @see cn.com.rebirth.search.core.search.SearchPhaseResult#shardTarget(cn.com.rebirth.search.core.search.SearchShardTarget)
 	 */
 	@Override
 	public void shardTarget(SearchShardTarget shardTarget) {
@@ -77,32 +68,28 @@ public class QueryFetchSearchResult implements Streamable, QuerySearchResultProv
 		fetchResult.shardTarget(shardTarget);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.query.QuerySearchResultProvider#includeFetch()
+	 * @see cn.com.rebirth.search.core.search.query.QuerySearchResultProvider#includeFetch()
 	 */
 	@Override
 	public boolean includeFetch() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.query.QuerySearchResultProvider#queryResult()
+	 * @see cn.com.rebirth.search.core.search.query.QuerySearchResultProvider#queryResult()
 	 */
 	public QuerySearchResult queryResult() {
 		return queryResult;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.fetch.FetchSearchResultProvider#fetchResult()
+	 * @see cn.com.rebirth.search.core.search.fetch.FetchSearchResultProvider#fetchResult()
 	 */
 	public FetchSearchResult fetchResult() {
 		return fetchResult;
 	}
 
-	
 	/**
 	 * Read query fetch search result.
 	 *
@@ -116,9 +103,8 @@ public class QueryFetchSearchResult implements Streamable, QuerySearchResultProv
 		return result;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -126,9 +112,8 @@ public class QueryFetchSearchResult implements Streamable, QuerySearchResultProv
 		fetchResult = FetchSearchResult.readFetchSearchResult(in);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {

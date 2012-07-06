@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core MultiGetRequestBuilder.java 2012-3-29 15:02:33 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core MultiGetRequestBuilder.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.get;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;
 
-
 /**
  * The Class MultiGetRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.Client;
  */
 public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, MultiGetResponse> {
 
-	
 	/**
 	 * Instantiates a new multi get request builder.
 	 *
@@ -29,7 +26,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		super(client, new MultiGetRequest());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -43,7 +39,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -59,7 +54,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -75,7 +69,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -87,7 +80,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Sets the preference.
 	 *
@@ -99,7 +91,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Sets the refresh.
 	 *
@@ -111,7 +102,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Sets the realtime.
 	 *
@@ -123,7 +113,6 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/**
 	 * Sets the listener threaded.
 	 *
@@ -135,9 +124,8 @@ public class MultiGetRequestBuilder extends BaseRequestBuilder<MultiGetRequest, 
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.BaseRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<MultiGetResponse> listener) {

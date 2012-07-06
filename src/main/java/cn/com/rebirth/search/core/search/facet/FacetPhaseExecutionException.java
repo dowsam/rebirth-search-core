@@ -1,27 +1,22 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core FacetPhaseExecutionException.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core FacetPhaseExecutionException.java 2012-7-6 14:28:50 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet;
 
-import cn.com.rebirth.commons.exception.RestartException;
-
-
+import cn.com.rebirth.commons.exception.RebirthException;
 
 /**
  * The Class FacetPhaseExecutionException.
  *
  * @author l.xue.nong
  */
-public class FacetPhaseExecutionException extends RestartException {
+public class FacetPhaseExecutionException extends RebirthException {
 
-	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -976905987152946672L;
 
-	
 	/**
 	 * Instantiates a new facet phase execution exception.
 	 *
@@ -32,7 +27,6 @@ public class FacetPhaseExecutionException extends RestartException {
 		super("Facet [" + facetName + "]: " + msg);
 	}
 
-	
 	/**
 	 * Instantiates a new facet phase execution exception.
 	 *

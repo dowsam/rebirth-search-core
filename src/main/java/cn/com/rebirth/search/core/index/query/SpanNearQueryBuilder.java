@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SpanNearQueryBuilder.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SpanNearQueryBuilder.java 2012-7-6 14:30:03 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class SpanNearQueryBuilder.
  *
@@ -19,27 +17,21 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class SpanNearQueryBuilder extends BaseQueryBuilder implements SpanQueryBuilder {
 
-	
 	/** The clauses. */
 	private ArrayList<SpanQueryBuilder> clauses = new ArrayList<SpanQueryBuilder>();
 
-	
 	/** The slop. */
 	private int slop = -1;
 
-	
 	/** The in order. */
 	private Boolean inOrder;
 
-	
 	/** The collect payloads. */
 	private Boolean collectPayloads;
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/**
 	 * Clause.
 	 *
@@ -51,7 +43,6 @@ public class SpanNearQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		return this;
 	}
 
-	
 	/**
 	 * Slop.
 	 *
@@ -63,7 +54,6 @@ public class SpanNearQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		return this;
 	}
 
-	
 	/**
 	 * In order.
 	 *
@@ -75,7 +65,6 @@ public class SpanNearQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		return this;
 	}
 
-	
 	/**
 	 * Collect payloads.
 	 *
@@ -87,7 +76,6 @@ public class SpanNearQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -99,9 +87,8 @@ public class SpanNearQueryBuilder extends BaseQueryBuilder implements SpanQueryB
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

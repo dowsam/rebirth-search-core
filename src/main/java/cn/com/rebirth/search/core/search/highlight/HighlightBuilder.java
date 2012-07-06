@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HighlightBuilder.java 2012-3-29 15:01:24 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HighlightBuilder.java 2012-7-6 14:28:58 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.highlight;
 
@@ -15,7 +14,6 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
 
-
 /**
  * The Class HighlightBuilder.
  *
@@ -23,35 +21,27 @@ import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
  */
 public class HighlightBuilder implements ToXContent {
 
-	
 	/** The fields. */
 	private List<Field> fields;
 
-	
 	/** The tags schema. */
 	private String tagsSchema;
 
-	
 	/** The pre tags. */
 	private String[] preTags;
 
-	
 	/** The post tags. */
 	private String[] postTags;
 
-	
 	/** The order. */
 	private String order;
 
-	
 	/** The encoder. */
 	private String encoder;
 
-	
 	/** The require field match. */
 	private Boolean requireFieldMatch;
 
-	
 	/**
 	 * Field.
 	 *
@@ -66,7 +56,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -82,7 +71,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -99,7 +87,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -118,7 +105,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -133,7 +119,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Tags schema.
 	 *
@@ -145,7 +130,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Encoder.
 	 *
@@ -157,7 +141,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Pre tags.
 	 *
@@ -169,7 +152,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Post tags.
 	 *
@@ -181,7 +163,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Order.
 	 *
@@ -193,7 +174,6 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/**
 	 * Require field match.
 	 *
@@ -205,9 +185,8 @@ public class HighlightBuilder implements ToXContent {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -256,7 +235,6 @@ public class HighlightBuilder implements ToXContent {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Field.
 	 *
@@ -264,27 +242,21 @@ public class HighlightBuilder implements ToXContent {
 	 */
 	public static class Field {
 
-		
 		/** The name. */
 		final String name;
 
-		
 		/** The fragment size. */
 		int fragmentSize = -1;
 
-		
 		/** The fragment offset. */
 		int fragmentOffset = -1;
 
-		
 		/** The num of fragments. */
 		int numOfFragments = -1;
 
-		
 		/** The require field match. */
 		Boolean requireFieldMatch;
 
-		
 		/**
 		 * Instantiates a new field.
 		 *
@@ -294,7 +266,6 @@ public class HighlightBuilder implements ToXContent {
 			this.name = name;
 		}
 
-		
 		/**
 		 * Name.
 		 *
@@ -304,7 +275,6 @@ public class HighlightBuilder implements ToXContent {
 			return name;
 		}
 
-		
 		/**
 		 * Fragment size.
 		 *
@@ -316,7 +286,6 @@ public class HighlightBuilder implements ToXContent {
 			return this;
 		}
 
-		
 		/**
 		 * Fragment offset.
 		 *
@@ -328,7 +297,6 @@ public class HighlightBuilder implements ToXContent {
 			return this;
 		}
 
-		
 		/**
 		 * Num of fragments.
 		 *
@@ -340,7 +308,6 @@ public class HighlightBuilder implements ToXContent {
 			return this;
 		}
 
-		
 		/**
 		 * Require field match.
 		 *

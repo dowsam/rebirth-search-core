@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SingleValueByteFieldData.java 2012-3-29 15:01:04 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SingleValueByteFieldData.java 2012-7-6 14:29:35 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.field.data.bytes;
 
 import cn.com.rebirth.commons.thread.ThreadLocals;
 import cn.com.rebirth.search.commons.RamUsage;
 import cn.com.rebirth.search.core.index.field.data.doubles.DoubleFieldData;
-
 
 /**
  * The Class SingleValueByteFieldData.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.index.field.data.doubles.DoubleFieldData;
  */
 public class SingleValueByteFieldData extends ByteFieldData {
 
-	
 	/** The doubles values cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<double[]>> doublesValuesCache = new ThreadLocal<ThreadLocals.CleanableValue<double[]>>() {
 		@Override
@@ -27,7 +24,6 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		}
 	};
 
-	
 	/** The values cache. */
 	private ThreadLocal<ThreadLocals.CleanableValue<byte[]>> valuesCache = new ThreadLocal<ThreadLocals.CleanableValue<byte[]>>() {
 		@Override
@@ -36,12 +32,9 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		}
 	};
 
-	
-	
 	/** The ordinals. */
 	private final int[] ordinals;
 
-	
 	/**
 	 * Instantiates a new single value byte field data.
 	 *
@@ -54,36 +47,32 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		this.ordinals = ordinals;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.bytes.ByteFieldData#computeSizeInBytes()
+	 * @see cn.com.rebirth.search.core.index.field.data.bytes.ByteFieldData#computeSizeInBytes()
 	 */
 	@Override
 	protected long computeSizeInBytes() {
 		return super.computeSizeInBytes() + RamUsage.NUM_BYTES_INT * ordinals.length + RamUsage.NUM_BYTES_ARRAY_HEADER;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#multiValued()
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#multiValued()
 	 */
 	@Override
 	public boolean multiValued() {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#hasValue(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#hasValue(int)
 	 */
 	@Override
 	public boolean hasValue(int docId) {
 		return ordinals[docId] != 0;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.StringValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.StringValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, StringValueInDocProc proc) {
@@ -95,9 +84,8 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		proc.onValue(docId, Byte.toString(values[loc]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, DoubleValueInDocProc proc) {
@@ -108,9 +96,8 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		proc.onValue(docId, values[loc]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.LongValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.LongValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, LongValueInDocProc proc) {
@@ -121,9 +108,8 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		proc.onValue(docId, values[loc]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingDoubleValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, MissingDoubleValueInDocProc proc) {
@@ -135,9 +121,8 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		proc.onValue(docId, values[loc]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.NumericFieldData.MissingLongValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, MissingLongValueInDocProc proc) {
@@ -149,9 +134,8 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		proc.onValue(docId, values[loc]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.bytes.ByteFieldData#forEachValueInDoc(int, cn.com.summall.search.core.index.field.data.bytes.ByteFieldData.ValueInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.bytes.ByteFieldData#forEachValueInDoc(int, cn.com.rebirth.search.core.index.field.data.bytes.ByteFieldData.ValueInDocProc)
 	 */
 	@Override
 	public void forEachValueInDoc(int docId, ValueInDocProc proc) {
@@ -163,27 +147,24 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		proc.onValue(docId, values[loc]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.summall.search.core.index.field.data.FieldData.OrdinalInDocProc)
+	 * @see cn.com.rebirth.search.core.index.field.data.FieldData#forEachOrdinalInDoc(int, cn.com.rebirth.search.core.index.field.data.FieldData.OrdinalInDocProc)
 	 */
 	@Override
 	public void forEachOrdinalInDoc(int docId, OrdinalInDocProc proc) {
 		proc.onOrdinal(docId, ordinals[docId]);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.bytes.ByteFieldData#value(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.bytes.ByteFieldData#value(int)
 	 */
 	@Override
 	public byte value(int docId) {
 		return values[ordinals[docId]];
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.NumericFieldData#doubleValues(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData#doubleValues(int)
 	 */
 	@Override
 	public double[] doubleValues(int docId) {
@@ -196,9 +177,8 @@ public class SingleValueByteFieldData extends ByteFieldData {
 		return ret;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.field.data.bytes.ByteFieldData#values(int)
+	 * @see cn.com.rebirth.search.core.index.field.data.bytes.ByteFieldData#values(int)
 	 */
 	@Override
 	public byte[] values(int docId) {

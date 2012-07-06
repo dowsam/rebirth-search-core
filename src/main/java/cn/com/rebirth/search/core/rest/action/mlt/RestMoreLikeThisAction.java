@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestMoreLikeThisAction.java 2012-3-29 15:02:49 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestMoreLikeThisAction.java 2012-7-6 14:29:49 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.mlt;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.rest.RestRequest.Method;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 import cn.com.rebirth.search.core.search.Scroll;
 
-
 /**
  * The Class RestMoreLikeThisAction.
  *
@@ -37,7 +35,6 @@ import cn.com.rebirth.search.core.search.Scroll;
  */
 public class RestMoreLikeThisAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest more like this action.
 	 *
@@ -52,9 +49,8 @@ public class RestMoreLikeThisAction extends BaseRestHandler {
 		controller.registerHandler(Method.POST, "/{index}/{type}/{id}/_mlt", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {

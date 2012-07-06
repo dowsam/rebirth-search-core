@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterState.java 2012-3-29 15:02:53 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterState.java 2012-7-6 14:29:01 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster;
 
@@ -23,7 +22,6 @@ import cn.com.rebirth.search.core.cluster.routing.RoutingTable;
 import cn.com.rebirth.search.core.cluster.routing.allocation.AllocationExplanation;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 
-
 /**
  * The Class ClusterState.
  *
@@ -31,36 +29,27 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
  */
 public class ClusterState {
 
-	
 	/** The version. */
 	private final long version;
 
-	
 	/** The routing table. */
 	private final RoutingTable routingTable;
 
-	
 	/** The nodes. */
 	private final DiscoveryNodes nodes;
 
-	
 	/** The meta data. */
 	private final MetaData metaData;
 
-	
 	/** The blocks. */
 	private final ClusterBlocks blocks;
 
-	
 	/** The allocation explanation. */
 	private final AllocationExplanation allocationExplanation;
 
-	
-	
 	/** The routing nodes. */
 	private volatile RoutingNodes routingNodes;
 
-	
 	/**
 	 * Instantiates a new cluster state.
 	 *
@@ -72,7 +61,6 @@ public class ClusterState {
 				.allocationExplanation());
 	}
 
-	
 	/**
 	 * Instantiates a new cluster state.
 	 *
@@ -93,7 +81,6 @@ public class ClusterState {
 		this.allocationExplanation = allocationExplanation;
 	}
 
-	
 	/**
 	 * Version.
 	 *
@@ -103,7 +90,6 @@ public class ClusterState {
 		return this.version;
 	}
 
-	
 	/**
 	 * Gets the version.
 	 *
@@ -113,7 +99,6 @@ public class ClusterState {
 		return version();
 	}
 
-	
 	/**
 	 * Nodes.
 	 *
@@ -123,7 +108,6 @@ public class ClusterState {
 		return this.nodes;
 	}
 
-	
 	/**
 	 * Gets the nodes.
 	 *
@@ -133,7 +117,6 @@ public class ClusterState {
 		return nodes();
 	}
 
-	
 	/**
 	 * Meta data.
 	 *
@@ -143,7 +126,6 @@ public class ClusterState {
 		return this.metaData;
 	}
 
-	
 	/**
 	 * Gets the meta data.
 	 *
@@ -153,7 +135,6 @@ public class ClusterState {
 		return metaData();
 	}
 
-	
 	/**
 	 * Routing table.
 	 *
@@ -163,7 +144,6 @@ public class ClusterState {
 		return routingTable;
 	}
 
-	
 	/**
 	 * Gets the routing table.
 	 *
@@ -173,7 +153,6 @@ public class ClusterState {
 		return routingTable();
 	}
 
-	
 	/**
 	 * Routing nodes.
 	 *
@@ -183,7 +162,6 @@ public class ClusterState {
 		return routingTable.routingNodes(this);
 	}
 
-	
 	/**
 	 * Gets the routing nodes.
 	 *
@@ -193,7 +171,6 @@ public class ClusterState {
 		return readOnlyRoutingNodes();
 	}
 
-	
 	/**
 	 * Blocks.
 	 *
@@ -203,7 +180,6 @@ public class ClusterState {
 		return this.blocks;
 	}
 
-	
 	/**
 	 * Gets the blocks.
 	 *
@@ -213,7 +189,6 @@ public class ClusterState {
 		return blocks;
 	}
 
-	
 	/**
 	 * Allocation explanation.
 	 *
@@ -223,7 +198,6 @@ public class ClusterState {
 		return this.allocationExplanation;
 	}
 
-	
 	/**
 	 * Gets the allocation explanation.
 	 *
@@ -233,7 +207,6 @@ public class ClusterState {
 		return allocationExplanation();
 	}
 
-	
 	/**
 	 * Read only routing nodes.
 	 *
@@ -247,7 +220,6 @@ public class ClusterState {
 		return routingNodes;
 	}
 
-	
 	/**
 	 * Builder.
 	 *
@@ -257,7 +229,6 @@ public class ClusterState {
 		return new Builder();
 	}
 
-	
 	/**
 	 * New cluster state builder.
 	 *
@@ -267,7 +238,6 @@ public class ClusterState {
 		return new Builder();
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -275,31 +245,24 @@ public class ClusterState {
 	 */
 	public static class Builder {
 
-		
 		/** The version. */
 		private long version = 0;
 
-		
 		/** The meta data. */
 		private MetaData metaData = MetaData.EMPTY_META_DATA;
 
-		
 		/** The routing table. */
 		private RoutingTable routingTable = RoutingTable.EMPTY_ROUTING_TABLE;
 
-		
 		/** The nodes. */
 		private DiscoveryNodes nodes = DiscoveryNodes.EMPTY_NODES;
 
-		
 		/** The blocks. */
 		private ClusterBlocks blocks = ClusterBlocks.EMPTY_CLUSTER_BLOCK;
 
-		
 		/** The allocation explanation. */
 		private AllocationExplanation allocationExplanation = AllocationExplanation.EMPTY;
 
-		
 		/**
 		 * Nodes.
 		 *
@@ -310,7 +273,6 @@ public class ClusterState {
 			return nodes(nodesBuilder.build());
 		}
 
-		
 		/**
 		 * Nodes.
 		 *
@@ -322,7 +284,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Routing table.
 		 *
@@ -333,7 +294,6 @@ public class ClusterState {
 			return routingTable(routingTable.build());
 		}
 
-		
 		/**
 		 * Routing result.
 		 *
@@ -346,7 +306,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Routing table.
 		 *
@@ -358,7 +317,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Meta data.
 		 *
@@ -369,7 +327,6 @@ public class ClusterState {
 			return metaData(metaDataBuilder.build());
 		}
 
-		
 		/**
 		 * Meta data.
 		 *
@@ -381,7 +338,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Blocks.
 		 *
@@ -392,7 +348,6 @@ public class ClusterState {
 			return blocks(blocksBuilder.build());
 		}
 
-		
 		/**
 		 * Blocks.
 		 *
@@ -404,7 +359,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Allocation explanation.
 		 *
@@ -416,7 +370,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Version.
 		 *
@@ -428,7 +381,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * State.
 		 *
@@ -445,7 +397,6 @@ public class ClusterState {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -455,7 +406,6 @@ public class ClusterState {
 			return new ClusterState(version, metaData, routingTable, nodes, blocks, allocationExplanation);
 		}
 
-		
 		/**
 		 * To bytes.
 		 *
@@ -474,7 +424,6 @@ public class ClusterState {
 			}
 		}
 
-		
 		/**
 		 * From bytes.
 		 *
@@ -487,7 +436,6 @@ public class ClusterState {
 			return readFrom(new BytesStreamInput(data, false), localNode);
 		}
 
-		
 		/**
 		 * Write to.
 		 *
@@ -504,7 +452,6 @@ public class ClusterState {
 			state.allocationExplanation().writeTo(out);
 		}
 
-		
 		/**
 		 * Read from.
 		 *

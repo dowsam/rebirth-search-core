@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportIndicesStatsAction.java 2012-3-29 15:01:21 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportIndicesStatsAction.java 2012-7-6 14:29:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.stats;
 
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.settings.Settings;
@@ -36,7 +35,6 @@ import cn.com.rebirth.search.core.transport.TransportService;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class TransportIndicesStatsAction.
  *
@@ -46,11 +44,9 @@ public class TransportIndicesStatsAction
 		extends
 		TransportBroadcastOperationAction<IndicesStatsRequest, IndicesStats, TransportIndicesStatsAction.IndexShardStatsRequest, ShardStats> {
 
-	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
-	
 	/**
 	 * Instantiates a new transport indices stats action.
 	 *
@@ -67,45 +63,40 @@ public class TransportIndicesStatsAction
 		this.indicesService = indicesService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
 		return ThreadPool.Names.MANAGEMENT;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
 		return IndicesStatsAction.NAME;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
 	 */
 	@Override
 	protected IndicesStatsRequest newRequest() {
 		return new IndicesStatsRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#ignoreNonActiveExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#ignoreNonActiveExceptions()
 	 */
 	@Override
 	protected boolean ignoreNonActiveExceptions() {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected GroupShardsIterator shards(ClusterState clusterState, IndicesStatsRequest request,
@@ -113,18 +104,16 @@ public class TransportIndicesStatsAction
 		return clusterState.routingTable().allAssignedShardsGrouped(concreteIndices, true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, IndicesStatsRequest request) {
 		return state.blocks().globalBlockedException(ClusterBlockLevel.METADATA);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, IndicesStatsRequest request,
@@ -132,9 +121,8 @@ public class TransportIndicesStatsAction
 		return state.blocks().indicesBlockedException(ClusterBlockLevel.METADATA, concreteIndices);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected IndicesStats newResponse(IndicesStatsRequest request, AtomicReferenceArray shardsResponses,
@@ -146,7 +134,7 @@ public class TransportIndicesStatsAction
 		for (int i = 0; i < shardsResponses.length(); i++) {
 			Object shardResponse = shardsResponses.get(i);
 			if (shardResponse == null) {
-				
+
 			} else if (shardResponse instanceof BroadcastShardOperationFailedException) {
 				failedShards++;
 				if (shardFailures == null) {
@@ -163,39 +151,35 @@ public class TransportIndicesStatsAction
 				successfulShards, failedShards, shardFailures);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
 	 */
 	@Override
 	protected IndexShardStatsRequest newShardRequest() {
 		return new IndexShardStatsRequest();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected IndexShardStatsRequest newShardRequest(ShardRouting shard, IndicesStatsRequest request) {
 		return new IndexShardStatsRequest(shard.index(), shard.id(), request);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
 	 */
 	@Override
 	protected ShardStats newShardResponse() {
 		return new ShardStats();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest)
 	 */
 	@Override
-	protected ShardStats shardOperation(IndexShardStatsRequest request) throws RestartException {
+	protected ShardStats shardOperation(IndexShardStatsRequest request) throws RebirthException {
 		InternalIndexService indexService = (InternalIndexService) indicesService.indexServiceSafe(request.index());
 		InternalIndexShard indexShard = (InternalIndexShard) indexService.shardSafe(request.shardId());
 		ShardStats stats = new ShardStats(indexShard.routingEntry());
@@ -228,7 +212,6 @@ public class TransportIndicesStatsAction
 		return stats;
 	}
 
-	
 	/**
 	 * The Class IndexShardStatsRequest.
 	 *
@@ -236,18 +219,15 @@ public class TransportIndicesStatsAction
 	 */
 	public static class IndexShardStatsRequest extends BroadcastShardOperationRequest {
 
-		
 		/** The request. */
 		IndicesStatsRequest request;
 
-		
 		/**
 		 * Instantiates a new index shard stats request.
 		 */
 		IndexShardStatsRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new index shard stats request.
 		 *
@@ -260,9 +240,8 @@ public class TransportIndicesStatsAction
 			this.request = request;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
@@ -271,9 +250,8 @@ public class TransportIndicesStatsAction
 			request.readFrom(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {

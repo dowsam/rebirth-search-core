@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexModule.java 2012-3-29 15:01:12 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexModule.java 2012-7-6 14:30:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index;
 
@@ -12,7 +11,6 @@ import cn.com.rebirth.search.core.index.service.IndexService;
 import cn.com.rebirth.search.core.index.service.InternalIndexService;
 import cn.com.rebirth.search.core.jmx.JmxService;
 
-
 /**
  * The Class IndexModule.
  *
@@ -20,11 +18,9 @@ import cn.com.rebirth.search.core.jmx.JmxService;
  */
 public class IndexModule extends AbstractModule {
 
-	
 	/** The settings. */
 	private final Settings settings;
 
-	
 	/**
 	 * Instantiates a new index module.
 	 *
@@ -34,9 +30,8 @@ public class IndexModule extends AbstractModule {
 		this.settings = settings;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {

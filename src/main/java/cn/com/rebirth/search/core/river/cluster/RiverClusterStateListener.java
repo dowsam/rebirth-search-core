@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverClusterStateListener.java 2012-3-29 15:01:58 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverClusterStateListener.java 2012-7-6 14:30:43 l.xue.nong$$
  */
 
-
 package cn.com.rebirth.search.core.river.cluster;
-
 
 /**
  * The listener interface for receiving riverClusterState events.
@@ -20,10 +18,10 @@ package cn.com.rebirth.search.core.river.cluster;
  */
 public interface RiverClusterStateListener {
 
-    /**
-     * River cluster changed.
-     *
-     * @param event the event
-     */
-    void riverClusterChanged(RiverClusterChangedEvent event);
+	/**
+	 * River cluster changed.
+	 *
+	 * @param event the event
+	 */
+	void riverClusterChanged(RiverClusterChangedEvent event);
 }

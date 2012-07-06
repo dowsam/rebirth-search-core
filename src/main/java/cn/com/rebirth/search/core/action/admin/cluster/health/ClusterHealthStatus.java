@@ -1,14 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterHealthStatus.java 2012-3-29 15:01:23 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterHealthStatus.java 2012-7-6 14:30:28 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.health;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-
-
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 
 /**
  * The Enum ClusterHealthStatus.
@@ -17,23 +14,18 @@ import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
  */
 public enum ClusterHealthStatus {
 
-	
-	/** The GREEN. */
+	/** The green. */
 	GREEN((byte) 0),
 
-	
-	/** The YELLOW. */
+	/** The yellow. */
 	YELLOW((byte) 1),
 
-	
-	/** The RED. */
+	/** The red. */
 	RED((byte) 2);
 
-	
 	/** The value. */
 	private byte value;
 
-	
 	/**
 	 * Instantiates a new cluster health status.
 	 *
@@ -43,7 +35,6 @@ public enum ClusterHealthStatus {
 		this.value = value;
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -53,7 +44,6 @@ public enum ClusterHealthStatus {
 		return value;
 	}
 
-	
 	/**
 	 * From value.
 	 *
@@ -69,7 +59,7 @@ public enum ClusterHealthStatus {
 		case 2:
 			return RED;
 		default:
-			throw new RestartIllegalArgumentException("No cluster health status for value [" + value + "]");
+			throw new RebirthIllegalArgumentException("No cluster health status for value [" + value + "]");
 		}
 	}
 }

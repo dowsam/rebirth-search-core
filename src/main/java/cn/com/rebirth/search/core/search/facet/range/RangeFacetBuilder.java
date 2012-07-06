@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RangeFacetBuilder.java 2012-3-29 15:01:18 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RangeFacetBuilder.java 2012-7-6 14:29:10 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * The Class RangeFacetBuilder.
  *
@@ -25,19 +23,15 @@ import com.google.common.collect.Lists;
  */
 public class RangeFacetBuilder extends AbstractFacetBuilder {
 
-	
 	/** The key field name. */
 	private String keyFieldName;
 
-	
 	/** The value field name. */
 	private String valueFieldName;
 
-	
 	/** The entries. */
 	private List<Entry> entries = Lists.newArrayList();
 
-	
 	/**
 	 * Instantiates a new range facet builder.
 	 *
@@ -47,7 +41,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		super(name);
 	}
 
-	
 	/**
 	 * Field.
 	 *
@@ -60,7 +53,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Key field.
 	 *
@@ -72,7 +64,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Value field.
 	 *
@@ -84,7 +75,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the range.
 	 *
@@ -97,7 +87,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the range.
 	 *
@@ -110,7 +99,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the unbounded to.
 	 *
@@ -122,7 +110,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the unbounded to.
 	 *
@@ -134,7 +121,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the unbounded from.
 	 *
@@ -146,7 +132,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Adds the unbounded from.
 	 *
@@ -158,18 +143,16 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#global(boolean)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#global(boolean)
 	 */
 	public RangeFacetBuilder global(boolean global) {
 		super.global(global);
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#scope(java.lang.String)
 	 */
 	@Override
 	public RangeFacetBuilder scope(String scope) {
@@ -177,27 +160,24 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.summall.search.core.index.query.FilterBuilder)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#facetFilter(cn.com.rebirth.search.core.index.query.FilterBuilder)
 	 */
 	public RangeFacetBuilder facetFilter(FilterBuilder filter) {
 		this.facetFilter = filter;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder#nested(java.lang.String)
 	 */
 	public RangeFacetBuilder nested(String nested) {
 		this.nested = nested;
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -244,7 +224,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Entry.
 	 *
@@ -252,23 +231,18 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 	 */
 	static class Entry {
 
-		
 		/** The from. */
 		double from = Double.NEGATIVE_INFINITY;
 
-		
 		/** The to. */
 		double to = Double.POSITIVE_INFINITY;
 
-		
 		/** The from as string. */
 		String fromAsString;
 
-		
 		/** The to as string. */
 		String toAsString;
 
-		
 		/**
 		 * Instantiates a new entry.
 		 *
@@ -280,7 +254,6 @@ public class RangeFacetBuilder extends AbstractFacetBuilder {
 			this.toAsString = toAsString;
 		}
 
-		
 		/**
 		 * Instantiates a new entry.
 		 *

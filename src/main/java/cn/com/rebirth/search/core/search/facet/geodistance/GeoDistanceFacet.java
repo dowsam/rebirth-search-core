@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GeoDistanceFacet.java 2012-3-29 15:01:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GeoDistanceFacet.java 2012-7-6 14:30:26 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.geodistance;
 
 import java.util.List;
 
 import cn.com.rebirth.search.core.search.facet.Facet;
-
 
 /**
  * The Interface GeoDistanceFacet.
@@ -18,11 +16,9 @@ import cn.com.rebirth.search.core.search.facet.Facet;
  */
 public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry> {
 
-	
 	/** The Constant TYPE. */
 	public static final String TYPE = "geo_distance";
 
-	
 	/**
 	 * Entries.
 	 *
@@ -30,7 +26,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 	 */
 	List<Entry> entries();
 
-	
 	/**
 	 * Gets the entries.
 	 *
@@ -38,7 +33,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 	 */
 	List<Entry> getEntries();
 
-	
 	/**
 	 * The Class Entry.
 	 *
@@ -46,46 +40,36 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 	 */
 	public class Entry {
 
-		
 		/** The from. */
 		double from = Double.NEGATIVE_INFINITY;
 
-		
 		/** The to. */
 		double to = Double.POSITIVE_INFINITY;
 
-		
 		/** The count. */
 		long count;
 
-		
 		/** The total count. */
 		long totalCount;
 
-		
 		/** The total. */
 		double total;
 
-		
 		/** The min. */
 		double min = Double.POSITIVE_INFINITY;
 
-		
 		/** The max. */
 		double max = Double.NEGATIVE_INFINITY;
 
-		
 		/** The found in doc. */
 		boolean foundInDoc = false;
 
-		
 		/**
 		 * Instantiates a new entry.
 		 */
 		Entry() {
 		}
 
-		
 		/**
 		 * Instantiates a new entry.
 		 *
@@ -107,7 +91,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			this.max = max;
 		}
 
-		
 		/**
 		 * From.
 		 *
@@ -117,7 +100,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.from;
 		}
 
-		
 		/**
 		 * Gets the from.
 		 *
@@ -127,7 +109,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return from();
 		}
 
-		
 		/**
 		 * To.
 		 *
@@ -137,7 +118,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.to;
 		}
 
-		
 		/**
 		 * Gets the to.
 		 *
@@ -147,7 +127,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return to();
 		}
 
-		
 		/**
 		 * Count.
 		 *
@@ -157,7 +136,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.count;
 		}
 
-		
 		/**
 		 * Gets the count.
 		 *
@@ -167,7 +145,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return count();
 		}
 
-		
 		/**
 		 * Total count.
 		 *
@@ -177,7 +154,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.totalCount;
 		}
 
-		
 		/**
 		 * Gets the total count.
 		 *
@@ -187,7 +163,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.totalCount;
 		}
 
-		
 		/**
 		 * Total.
 		 *
@@ -197,7 +172,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.total;
 		}
 
-		
 		/**
 		 * Gets the total.
 		 *
@@ -207,7 +181,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return total();
 		}
 
-		
 		/**
 		 * Mean.
 		 *
@@ -220,7 +193,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return total / totalCount;
 		}
 
-		
 		/**
 		 * Gets the mean.
 		 *
@@ -230,7 +202,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return mean();
 		}
 
-		
 		/**
 		 * Min.
 		 *
@@ -240,7 +211,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.min;
 		}
 
-		
 		/**
 		 * Gets the min.
 		 *
@@ -250,7 +220,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.min;
 		}
 
-		
 		/**
 		 * Max.
 		 *
@@ -260,7 +229,6 @@ public interface GeoDistanceFacet extends Facet, Iterable<GeoDistanceFacet.Entry
 			return this.max;
 		}
 
-		
 		/**
 		 * Gets the max.
 		 *

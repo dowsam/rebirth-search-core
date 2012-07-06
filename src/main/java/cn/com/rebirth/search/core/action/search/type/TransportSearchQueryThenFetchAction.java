@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportSearchQueryThenFetchAction.java 2012-3-29 15:02:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportSearchQueryThenFetchAction.java 2012-7-6 14:29:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.search.type;
 
@@ -33,7 +32,6 @@ import cn.com.rebirth.search.core.search.query.QuerySearchResult;
 import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
 import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
-
 /**
  * The Class TransportSearchQueryThenFetchAction.
  *
@@ -41,7 +39,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
  */
 public class TransportSearchQueryThenFetchAction extends TransportSearchTypeAction {
 
-	
 	/**
 	 * Instantiates a new transport search query then fetch action.
 	 *
@@ -59,16 +56,14 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 		super(settings, threadPool, clusterService, transportSearchCache, searchService, searchPhaseController);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.TransportAction#doExecute(cn.com.summall.search.core.action.ActionRequest, cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.support.TransportAction#doExecute(cn.com.rebirth.search.core.action.ActionRequest, cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(SearchRequest searchRequest, ActionListener<SearchResponse> listener) {
 		new AsyncAction(searchRequest, listener).start();
 	}
 
-	
 	/**
 	 * The Class AsyncAction.
 	 *
@@ -76,19 +71,15 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 	 */
 	private class AsyncAction extends BaseAsyncAction<QuerySearchResult> {
 
-		
 		/** The query results. */
 		private final Map<SearchShardTarget, QuerySearchResultProvider> queryResults = searchCache.obtainQueryResults();
 
-		
 		/** The fetch results. */
 		private final Map<SearchShardTarget, FetchSearchResult> fetchResults = searchCache.obtainFetchResults();
 
-		
 		/** The doc ids to load. */
 		private volatile Map<SearchShardTarget, ExtTIntArrayList> docIdsToLoad;
 
-		
 		/**
 		 * Instantiates a new async action.
 		 *
@@ -99,18 +90,16 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 			super(request, listener);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#firstPhaseName()
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#firstPhaseName()
 		 */
 		@Override
 		protected String firstPhaseName() {
 			return "query";
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#sendExecuteFirstPhase(cn.com.summall.search.core.cluster.node.DiscoveryNode, cn.com.summall.search.core.search.internal.InternalSearchRequest, cn.com.summall.search.core.search.action.SearchServiceListener)
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#sendExecuteFirstPhase(cn.com.rebirth.search.core.cluster.node.DiscoveryNode, cn.com.rebirth.search.core.search.internal.InternalSearchRequest, cn.com.rebirth.search.core.search.action.SearchServiceListener)
 		 */
 		@Override
 		protected void sendExecuteFirstPhase(DiscoveryNode node, InternalSearchRequest request,
@@ -118,18 +107,16 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 			searchService.sendExecuteQuery(node, request, listener);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#processFirstPhaseResult(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.search.SearchPhaseResult)
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#processFirstPhaseResult(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.search.SearchPhaseResult)
 		 */
 		@Override
 		protected void processFirstPhaseResult(ShardRouting shard, QuerySearchResult result) {
 			queryResults.put(result.shardTarget(), result);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#moveToSecondPhase()
+		 * @see cn.com.rebirth.search.core.action.search.type.TransportSearchTypeAction.BaseAsyncAction#moveToSecondPhase()
 		 */
 		@Override
 		protected void moveToSecondPhase() {
@@ -195,7 +182,6 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 			}
 		}
 
-		
 		/**
 		 * Execute fetch.
 		 *
@@ -230,7 +216,6 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 			});
 		}
 
-		
 		/**
 		 * Finish him.
 		 */
@@ -251,7 +236,6 @@ public class TransportSearchQueryThenFetchAction extends TransportSearchTypeActi
 			}
 		}
 
-		
 		/**
 		 * Inner finish him.
 		 *

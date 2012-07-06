@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TopChildrenQuery.java 2012-3-29 15:01:57 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TopChildrenQuery.java 2012-7-6 14:30:21 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.index.search.child;
@@ -26,8 +26,8 @@ import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.Weight;
 import org.apache.lucene.util.ToStringUtils;
 
-import cn.com.rebirth.commons.exception.RestartIllegalArgumentException;
-import cn.com.rebirth.commons.exception.RestartIllegalStateException;
+import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
+import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.search.commons.BytesWrap;
 import cn.com.rebirth.search.commons.lucene.search.EmptyScorer;
 import cn.com.rebirth.search.core.search.internal.ScopePhase;
@@ -51,13 +51,13 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	 */
 	public static enum ScoreType {
 
-		/** The MAX. */
+		/** The max. */
 		MAX,
 
-		/** The AVG. */
+		/** The avg. */
 		AVG,
 
-		/** The SUM. */
+		/** The sum. */
 		SUM;
 
 		/**
@@ -74,7 +74,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 			} else if ("sum".equals(type)) {
 				return SUM;
 			}
-			throw new RestartIllegalArgumentException("No score type for child query [" + type + "] found");
+			throw new RebirthIllegalArgumentException("No score type for child query [" + type + "] found");
 		}
 	}
 
@@ -128,7 +128,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase#query()
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase#query()
 	 */
 	@Override
 	public Query query() {
@@ -136,7 +136,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase#scope()
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase#scope()
 	 */
 	@Override
 	public String scope() {
@@ -144,7 +144,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase#clear()
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase#clear()
 	 */
 	@Override
 	public void clear() {
@@ -153,7 +153,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase.TopDocsPhase#numHits()
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase.TopDocsPhase#numHits()
 	 */
 	@Override
 	public int numHits() {
@@ -161,7 +161,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase.TopDocsPhase#factor()
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase.TopDocsPhase#factor()
 	 */
 	@Override
 	public int factor() {
@@ -169,7 +169,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase.TopDocsPhase#incrementalFactor()
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase.TopDocsPhase#incrementalFactor()
 	 */
 	@Override
 	public int incrementalFactor() {
@@ -177,7 +177,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.internal.ScopePhase.TopDocsPhase#processResults(org.apache.lucene.search.TopDocs, cn.com.summall.search.core.search.internal.SearchContext)
+	 * @see cn.com.rebirth.search.core.search.internal.ScopePhase.TopDocsPhase#processResults(org.apache.lucene.search.TopDocs, cn.com.rebirth.search.core.search.internal.SearchContext)
 	 */
 	@Override
 	public void processResults(TopDocs topDocs, SearchContext context) {
@@ -462,7 +462,7 @@ public class TopChildrenQuery extends Query implements ScopePhase.TopDocsPhase {
 			} else if (scoreType == ScoreType.SUM) {
 				return docs[index].sumScores;
 			}
-			throw new RestartIllegalStateException("No support for score type [" + scoreType + "]");
+			throw new RebirthIllegalStateException("No support for score type [" + scoreType + "]");
 		}
 	}
 }

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SimpleDumpGenerator.java 2012-3-29 15:01:15 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SimpleDumpGenerator.java 2012-7-6 14:30:13 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class SimpleDumpGenerator.
  *
@@ -25,15 +23,12 @@ import com.google.common.collect.ImmutableMap;
  */
 public class SimpleDumpGenerator implements DumpGenerator {
 
-	
 	/** The dump location. */
 	private final File dumpLocation;
 
-	
 	/** The contributors. */
 	private final ImmutableMap<String, DumpContributor> contributors;
 
-	
 	/**
 	 * Instantiates a new simple dump generator.
 	 *
@@ -45,18 +40,16 @@ public class SimpleDumpGenerator implements DumpGenerator {
 		this.contributors = ImmutableMap.copyOf(contributors);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.DumpGenerator#generateDump(java.lang.String, java.util.Map)
+	 * @see cn.com.rebirth.search.core.monitor.dump.DumpGenerator#generateDump(java.lang.String, java.util.Map)
 	 */
 	public Result generateDump(String cause, @Nullable Map<String, Object> context)
 			throws DumpGenerationFailedException {
 		return generateDump(cause, context, contributors.keySet().toArray(new String[contributors.size()]));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.dump.DumpGenerator#generateDump(java.lang.String, java.util.Map, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.monitor.dump.DumpGenerator#generateDump(java.lang.String, java.util.Map, java.lang.String[])
 	 */
 	public Result generateDump(String cause, @Nullable Map<String, Object> context, String... contributors)
 			throws DumpGenerationFailedException {

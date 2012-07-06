@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiverIndexName.java 2012-3-29 15:01:01 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiverIndexName.java 2012-7-6 14:30:29 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river;
 
@@ -17,8 +16,6 @@ import java.lang.annotation.Target;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.BindingAnnotation;
 
-
-
 /**
  * The Interface RiverIndexName.
  *
@@ -30,7 +27,6 @@ import cn.com.rebirth.search.commons.inject.BindingAnnotation;
 @Documented
 public @interface RiverIndexName {
 
-	
 	/**
 	 * The Class Conf.
 	 *
@@ -38,11 +34,9 @@ public @interface RiverIndexName {
 	 */
 	static class Conf {
 
-		
 		/** The Constant DEFAULT_INDEX_NAME. */
 		public static final String DEFAULT_INDEX_NAME = "_river";
 
-		
 		/**
 		 * Index name.
 		 *

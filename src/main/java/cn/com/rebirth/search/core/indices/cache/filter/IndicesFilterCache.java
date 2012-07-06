@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesFilterCache.java 2012-3-29 15:00:51 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesFilterCache.java 2012-7-6 14:30:33 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.indices.cache.filter;
 
@@ -30,7 +29,6 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class IndicesFilterCache.
  *
@@ -39,23 +37,18 @@ import com.google.common.collect.ImmutableMap;
 public class IndicesFilterCache extends AbstractComponent implements
 		RemovalListener<WeightedFilterCache.FilterCacheKey, FilterCacheValue<DocSet>> {
 
-	
 	/** The cache. */
 	private Cache<WeightedFilterCache.FilterCacheKey, FilterCacheValue<DocSet>> cache;
 
-	
 	/** The size. */
 	private volatile String size;
 
-	
 	/** The size in bytes. */
 	private volatile long sizeInBytes;
 
-	
 	/** The expire. */
 	private volatile TimeValue expire;
 
-	
 	/** The removal listeners. */
 	private volatile Map<String, RemovalListener<WeightedFilterCache.FilterCacheKey, FilterCacheValue<DocSet>>> removalListeners = ImmutableMap
 			.of();
@@ -64,7 +57,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		MetaData.addDynamicSettings("indices.cache.filter.size", "indices.cache.filter.expire");
 	}
 
-	
 	/**
 	 * The Class ApplySettings.
 	 *
@@ -72,9 +64,8 @@ public class IndicesFilterCache extends AbstractComponent implements
 	 */
 	class ApplySettings implements NodeSettingsService.Listener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.summall.search.commons.settings.Settings)
+		 * @see cn.com.rebirth.search.core.node.settings.NodeSettingsService.Listener#onRefreshSettings(cn.com.rebirth.commons.settings.Settings)
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
@@ -102,7 +93,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new indices filter cache.
 	 *
@@ -121,7 +111,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		nodeSettingsService.addListener(new ApplySettings());
 	}
 
-	
 	/**
 	 * Builds the cache.
 	 */
@@ -130,7 +119,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 				.newBuilder().removalListener(this).maximumWeight(sizeInBytes)
 				.weigher(new WeightedFilterCache.FilterCacheValueWeigher());
 
-		
 		cacheBuilder.concurrencyLevel(8);
 
 		if (expire != null) {
@@ -142,7 +130,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		cache = cacheBuilder.build();
 	}
 
-	
 	/**
 	 * Compute size in bytes.
 	 */
@@ -155,7 +142,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		}
 	}
 
-	
 	/**
 	 * Adds the removal listener.
 	 *
@@ -167,7 +153,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		removalListeners = MapBuilder.newMapBuilder(removalListeners).put(index, listener).immutableMap();
 	}
 
-	
 	/**
 	 * Removes the removal listener.
 	 *
@@ -177,7 +162,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		removalListeners = MapBuilder.newMapBuilder(removalListeners).remove(index).immutableMap();
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -185,7 +169,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		cache.invalidateAll();
 	}
 
-	
 	/**
 	 * Cache.
 	 *
@@ -195,7 +178,6 @@ public class IndicesFilterCache extends AbstractComponent implements
 		return this.cache;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see com.google.common.cache.RemovalListener#onRemoval(com.google.common.cache.RemovalNotification)
 	 */

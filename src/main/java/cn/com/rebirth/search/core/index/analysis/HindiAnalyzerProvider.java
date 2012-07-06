@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core HindiAnalyzerProvider.java 2012-3-29 15:02:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core HindiAnalyzerProvider.java 2012-7-6 14:28:48 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.analysis;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 
-
 /**
  * The Class HindiAnalyzerProvider.
  *
@@ -24,11 +22,9 @@ import cn.com.rebirth.search.core.index.settings.IndexSettings;
  */
 public class HindiAnalyzerProvider extends AbstractIndexAnalyzerProvider<HindiAnalyzer> {
 
-	
 	/** The analyzer. */
 	private final HindiAnalyzer analyzer;
 
-	
 	/**
 	 * Instantiates a new hindi analyzer provider.
 	 *
@@ -46,9 +42,8 @@ public class HindiAnalyzerProvider extends AbstractIndexAnalyzerProvider<HindiAn
 				version), Analysis.parseStemExclusion(settings, CharArraySet.EMPTY_SET));
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.analysis.AnalyzerProvider#get()
+	 * @see cn.com.rebirth.search.core.index.analysis.AnalyzerProvider#get()
 	 */
 	@Override
 	public HindiAnalyzer get() {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core NodeIndexDeletedAction.java 2012-3-29 15:02:43 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core NodeIndexDeletedAction.java 2012-7-6 14:30:34 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster.action.index;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class NodeIndexDeletedAction.
  *
@@ -34,23 +32,18 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class NodeIndexDeletedAction extends AbstractComponent {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The listeners. */
 	private final List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
-	
 	/**
 	 * Instantiates a new node index deleted action.
 	 *
@@ -70,7 +63,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 				new NodeIndexDeletedTransportHandler());
 	}
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -80,7 +72,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 		listeners.add(listener);
 	}
 
-	
 	/**
 	 * Removes the.
 	 *
@@ -90,15 +81,14 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 		listeners.remove(listener);
 	}
 
-	
 	/**
 	 * Node index deleted.
 	 *
 	 * @param index the index
 	 * @param nodeId the node id
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public void nodeIndexDeleted(final String index, final String nodeId) throws RestartException {
+	public void nodeIndexDeleted(final String index, final String nodeId) throws RebirthException {
 		DiscoveryNodes nodes = clusterService.state().nodes();
 		if (nodes.localNodeMaster()) {
 			threadPool.generic().execute(new Runnable() {
@@ -114,7 +104,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * Inner node index deleted.
 	 *
@@ -127,7 +116,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Interface Listener.
 	 *
@@ -135,7 +123,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 	 */
 	public static interface Listener {
 
-		
 		/**
 		 * On node index deleted.
 		 *
@@ -145,7 +132,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 		void onNodeIndexDeleted(String index, String nodeId);
 	}
 
-	
 	/**
 	 * The Class NodeIndexDeletedTransportHandler.
 	 *
@@ -153,22 +139,19 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 	 */
 	private class NodeIndexDeletedTransportHandler extends BaseTransportRequestHandler<NodeIndexDeletedMessage> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "cluster/nodeIndexDeleted";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public NodeIndexDeletedMessage newInstance() {
 			return new NodeIndexDeletedMessage();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(NodeIndexDeletedMessage message, TransportChannel channel) throws Exception {
@@ -176,9 +159,8 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 			channel.sendResponse(VoidStreamable.INSTANCE);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
@@ -186,7 +168,6 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class NodeIndexDeletedMessage.
 	 *
@@ -194,22 +175,18 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 	 */
 	private static class NodeIndexDeletedMessage implements Streamable {
 
-		
 		/** The index. */
 		String index;
 
-		
 		/** The node id. */
 		String nodeId;
 
-		
 		/**
 		 * Instantiates a new node index deleted message.
 		 */
 		private NodeIndexDeletedMessage() {
 		}
 
-		
 		/**
 		 * Instantiates a new node index deleted message.
 		 *
@@ -221,9 +198,8 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 			this.nodeId = nodeId;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -231,9 +207,8 @@ public class NodeIndexDeletedAction extends AbstractComponent {
 			out.writeUTF(nodeId);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {

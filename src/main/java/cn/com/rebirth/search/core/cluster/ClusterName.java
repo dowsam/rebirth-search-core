@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterName.java 2012-3-29 15:01:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterName.java 2012-7-6 14:29:40 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.cluster;
 
@@ -13,7 +12,6 @@ import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.settings.Settings;
 
-
 /**
  * The Class ClusterName.
  *
@@ -21,19 +19,15 @@ import cn.com.rebirth.commons.settings.Settings;
  */
 public class ClusterName implements Streamable {
 
-	
 	/** The Constant SETTING. */
 	public static final String SETTING = "cluster.name";
 
-	
 	/** The Constant DEFAULT. */
 	public static final ClusterName DEFAULT = new ClusterName("restartsearch".intern());
 
-	
 	/** The value. */
 	private String value;
 
-	
 	/**
 	 * Cluster name from settings.
 	 *
@@ -44,7 +38,6 @@ public class ClusterName implements Streamable {
 		return new ClusterName(settings.get("cluster.name", ClusterName.DEFAULT.value()));
 	}
 
-	
 	/**
 	 * Instantiates a new cluster name.
 	 */
@@ -52,7 +45,6 @@ public class ClusterName implements Streamable {
 
 	}
 
-	
 	/**
 	 * Instantiates a new cluster name.
 	 *
@@ -62,7 +54,6 @@ public class ClusterName implements Streamable {
 		this.value = value.intern();
 	}
 
-	
 	/**
 	 * Value.
 	 *
@@ -72,7 +63,6 @@ public class ClusterName implements Streamable {
 		return this.value;
 	}
 
-	
 	/**
 	 * Read cluster name.
 	 *
@@ -86,25 +76,22 @@ public class ClusterName implements Streamable {
 		return clusterName;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		value = in.readUTF().intern();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
 		out.writeUTF(value);
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -123,7 +110,6 @@ public class ClusterName implements Streamable {
 		return true;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -132,7 +118,6 @@ public class ClusterName implements Streamable {
 		return value != null ? value.hashCode() : 0;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterStateRequestBuilder.java 2012-3-29 15:01:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterStateRequestBuilder.java 2012-7-6 14:29:44 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.cluster.state;
 
@@ -11,7 +10,6 @@ import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.cluster.support.BaseClusterRequestBuilder;
 import cn.com.rebirth.search.core.client.ClusterAdminClient;
 
-
 /**
  * The Class ClusterStateRequestBuilder.
  *
@@ -19,7 +17,6 @@ import cn.com.rebirth.search.core.client.ClusterAdminClient;
  */
 public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<ClusterStateRequest, ClusterStateResponse> {
 
-	
 	/**
 	 * Instantiates a new cluster state request builder.
 	 *
@@ -29,7 +26,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		super(clusterClient, new ClusterStateRequest());
 	}
 
-	
 	/**
 	 * Sets the filter all.
 	 *
@@ -40,7 +36,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter blocks.
 	 *
@@ -52,7 +47,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter meta data.
 	 *
@@ -64,7 +58,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter nodes.
 	 *
@@ -76,7 +69,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter routing table.
 	 *
@@ -88,7 +80,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter indices.
 	 *
@@ -100,7 +91,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the filter index templates.
 	 *
@@ -112,7 +102,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -124,7 +113,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the master node timeout.
 	 *
@@ -136,7 +124,6 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/**
 	 * Sets the local.
 	 *
@@ -148,9 +135,8 @@ public class ClusterStateRequestBuilder extends BaseClusterRequestBuilder<Cluste
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.cluster.support.BaseClusterRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.cluster.support.BaseClusterRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<ClusterStateResponse> listener) {

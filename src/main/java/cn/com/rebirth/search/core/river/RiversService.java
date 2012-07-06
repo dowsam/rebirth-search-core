@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiversService.java 2012-3-29 15:02:09 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiversService.java 2012-7-6 14:28:52 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river;
 
@@ -11,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
@@ -43,7 +42,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class RiversService.
  *
@@ -51,39 +49,30 @@ import com.google.common.collect.Maps;
  */
 public class RiversService extends AbstractLifecycleComponent<RiversService> {
 
-	
 	/** The river index name. */
 	private final String riverIndexName;
 
-	
 	/** The client. */
 	private Client client;
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The types registry. */
 	private final RiversTypesRegistry typesRegistry;
 
-	
 	/** The injector. */
 	private final Injector injector;
 
-	
 	/** The rivers injectors. */
 	private final Map<RiverName, Injector> riversInjectors = Maps.newHashMap();
 
-	
 	/** The rivers. */
 	private volatile ImmutableMap<RiverName, River> rivers = ImmutableMap.of();
 
-	
 	/**
 	 * Instantiates a new rivers service.
 	 *
@@ -108,20 +97,18 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 		riverClusterService.add(new ApplyRivers());
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		ImmutableSet<RiverName> indices = ImmutableSet.copyOf(this.rivers.keySet());
 		final CountDownLatch latch = new CountDownLatch(indices.size());
 		for (final RiverName riverName : indices) {
@@ -142,28 +129,25 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 		try {
 			latch.await();
 		} catch (InterruptedException e) {
-			
+
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/**
 	 * Creates the river.
 	 *
 	 * @param riverName the river name
 	 * @param settings the settings
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public synchronized void createRiver(RiverName riverName, Map<String, Object> settings)
-			throws RestartException {
+	public synchronized void createRiver(RiverName riverName, Map<String, Object> settings) throws RebirthException {
 		if (riversInjectors.containsKey(riverName)) {
 			logger.warn("ignoring river [{}][{}] creation, already exists", riverName.type(), riverName.name());
 			return;
@@ -182,8 +166,6 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 			River river = indexInjector.getInstance(River.class);
 			rivers = MapBuilder.newMapBuilder(rivers).put(riverName, river).immutableMap();
 
-			
-			
 			river.start();
 
 			XContentBuilder builder = XContentFactory.jsonBuilder().startObject();
@@ -220,14 +202,13 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 		}
 	}
 
-	
 	/**
 	 * Close river.
 	 *
 	 * @param riverName the river name
-	 * @throws SumMallSearchException the sum mall search exception
+	 * @throws RebirthException the rebirth exception
 	 */
-	public synchronized void closeRiver(RiverName riverName) throws RestartException {
+	public synchronized void closeRiver(RiverName riverName) throws RebirthException {
 		Injector riverInjector;
 		River river;
 		synchronized (this) {
@@ -247,7 +228,6 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 		Injectors.close(injector);
 	}
 
-	
 	/**
 	 * The Class ApplyRivers.
 	 *
@@ -255,36 +235,34 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 	 */
 	private class ApplyRivers implements RiverClusterStateListener {
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.river.cluster.RiverClusterStateListener#riverClusterChanged(cn.com.summall.search.core.river.cluster.RiverClusterChangedEvent)
+		 * @see cn.com.rebirth.search.core.river.cluster.RiverClusterStateListener#riverClusterChanged(cn.com.rebirth.search.core.river.cluster.RiverClusterChangedEvent)
 		 */
 		@Override
 		public void riverClusterChanged(RiverClusterChangedEvent event) {
 			DiscoveryNode localNode = clusterService.localNode();
 			RiverClusterState state = event.state();
 
-			
 			for (final RiverName riverName : rivers.keySet()) {
 				RiverRouting routing = state.routing().routing(riverName);
 				if (routing == null || !localNode.equals(routing.node())) {
-					
+
 					closeRiver(riverName);
-					
+
 					try {
 						client.prepareGet(riverIndexName, riverName.name(), "_meta").setListenerThreaded(true)
 								.execute(new ActionListener<GetResponse>() {
 									@Override
 									public void onResponse(GetResponse getResponse) {
 										if (!getResponse.exists()) {
-											
+
 											client.admin().indices().prepareDeleteMapping(riverIndexName)
 													.setType(riverName.name())
 													.execute(new ActionListener<DeleteMappingResponse>() {
 														@Override
 														public void onResponse(
 																DeleteMappingResponse deleteMappingResponse) {
-															
+
 														}
 
 														@Override
@@ -304,7 +282,7 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 									}
 								});
 					} catch (IndexMissingException e) {
-						
+
 					} catch (Exception e) {
 						logger.warn("unexpected failure when trying to verify river [{}] deleted", e, riverName.name());
 					}
@@ -312,15 +290,15 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 			}
 
 			for (final RiverRouting routing : state.routing()) {
-				
+
 				if (routing.node() == null) {
 					continue;
 				}
-				
+
 				if (!routing.node().equals(localNode)) {
 					continue;
 				}
-				
+
 				if (rivers.containsKey(routing.riverName())) {
 					continue;
 				}
@@ -330,7 +308,7 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 							public void onResponse(GetResponse getResponse) {
 								if (!rivers.containsKey(routing.riverName())) {
 									if (getResponse.exists()) {
-										
+
 										createRiver(routing.riverName(), getResponse.sourceAsMap());
 									}
 								}
@@ -338,9 +316,7 @@ public class RiversService extends AbstractLifecycleComponent<RiversService> {
 
 							@Override
 							public void onFailure(Throwable e) {
-								
-								
-								
+
 								Throwable failure = ExceptionsHelper.unwrapCause(e);
 								if ((failure instanceof NoShardAvailableActionException)
 										|| (failure instanceof ClusterBlockException)

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestCreateIndexAction.java 2012-3-29 15:02:29 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestCreateIndexAction.java 2012-7-6 14:29:30 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.create;
 
@@ -29,7 +28,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestCreateIndexAction.
  *
@@ -37,7 +35,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestCreateIndexAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest create index action.
 	 *
@@ -52,9 +49,8 @@ public class RestCreateIndexAction extends BaseRestHandler {
 		controller.registerHandler(RestRequest.Method.POST, "/{index}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@SuppressWarnings({ "unchecked" })
 	@Override
@@ -82,7 +78,7 @@ public class RestCreateIndexAction extends BaseRestHandler {
 						}
 					}
 					if (!found) {
-						
+
 						createIndexRequest.settings(source);
 					}
 				} catch (Exception e) {
@@ -94,7 +90,7 @@ public class RestCreateIndexAction extends BaseRestHandler {
 					return;
 				}
 			} else {
-				
+
 				try {
 					createIndexRequest.settings(request.contentAsString());
 				} catch (Exception e) {

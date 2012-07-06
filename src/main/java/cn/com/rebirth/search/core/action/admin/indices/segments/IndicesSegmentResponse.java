@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndicesSegmentResponse.java 2012-3-29 15:02:41 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndicesSegmentResponse.java 2012-7-6 14:29:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.segments;
 
@@ -26,7 +25,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-
 /**
  * The Class IndicesSegmentResponse.
  *
@@ -34,15 +32,12 @@ import com.google.common.collect.Sets;
  */
 public class IndicesSegmentResponse extends BroadcastOperationResponse implements ToXContent {
 
-	
 	/** The shards. */
 	private ShardSegments[] shards;
 
-	
 	/** The indices segments. */
 	private Map<String, IndexSegments> indicesSegments;
 
-	
 	/**
 	 * Instantiates a new indices segment response.
 	 */
@@ -50,7 +45,6 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 
 	}
 
-	
 	/**
 	 * Instantiates a new indices segment response.
 	 *
@@ -67,7 +61,6 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 		this.shards = shards;
 	}
 
-	
 	/**
 	 * Gets the indices.
 	 *
@@ -77,7 +70,6 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 		return this.indices();
 	}
 
-	
 	/**
 	 * Indices.
 	 *
@@ -107,9 +99,8 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 		return indicesSegments;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
@@ -120,9 +111,8 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -133,9 +123,8 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 		}
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.xcontent.ToXContent#toXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.commons.xcontent.ToXContent#toXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
@@ -189,7 +178,6 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 		return builder;
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -197,71 +185,54 @@ public class IndicesSegmentResponse extends BroadcastOperationResponse implement
 	 */
 	static final class Fields {
 
-		
 		/** The Constant INDICES. */
 		static final XContentBuilderString INDICES = new XContentBuilderString("indices");
 
-		
 		/** The Constant SHARDS. */
 		static final XContentBuilderString SHARDS = new XContentBuilderString("shards");
 
-		
 		/** The Constant ROUTING. */
 		static final XContentBuilderString ROUTING = new XContentBuilderString("routing");
 
-		
 		/** The Constant STATE. */
 		static final XContentBuilderString STATE = new XContentBuilderString("state");
 
-		
 		/** The Constant PRIMARY. */
 		static final XContentBuilderString PRIMARY = new XContentBuilderString("primary");
 
-		
 		/** The Constant NODE. */
 		static final XContentBuilderString NODE = new XContentBuilderString("node");
 
-		
 		/** The Constant RELOCATING_NODE. */
 		static final XContentBuilderString RELOCATING_NODE = new XContentBuilderString("relocating_node");
 
-		
 		/** The Constant SEGMENTS. */
 		static final XContentBuilderString SEGMENTS = new XContentBuilderString("segments");
 
-		
 		/** The Constant GENERATION. */
 		static final XContentBuilderString GENERATION = new XContentBuilderString("generation");
 
-		
 		/** The Constant NUM_COMMITTED_SEGMENTS. */
 		static final XContentBuilderString NUM_COMMITTED_SEGMENTS = new XContentBuilderString("num_committed_segments");
 
-		
 		/** The Constant NUM_SEARCH_SEGMENTS. */
 		static final XContentBuilderString NUM_SEARCH_SEGMENTS = new XContentBuilderString("num_search_segments");
 
-		
 		/** The Constant NUM_DOCS. */
 		static final XContentBuilderString NUM_DOCS = new XContentBuilderString("num_docs");
 
-		
 		/** The Constant DELETED_DOCS. */
 		static final XContentBuilderString DELETED_DOCS = new XContentBuilderString("deleted_docs");
 
-		
 		/** The Constant SIZE. */
 		static final XContentBuilderString SIZE = new XContentBuilderString("size");
 
-		
 		/** The Constant SIZE_IN_BYTES. */
 		static final XContentBuilderString SIZE_IN_BYTES = new XContentBuilderString("size_in_bytes");
 
-		
 		/** The Constant COMMITTED. */
 		static final XContentBuilderString COMMITTED = new XContentBuilderString("committed");
 
-		
 		/** The Constant SEARCH. */
 		static final XContentBuilderString SEARCH = new XContentBuilderString("search");
 	}

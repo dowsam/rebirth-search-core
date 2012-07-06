@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexStatus.java 2012-3-29 15:01:25 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexStatus.java 2012-7-6 14:29:59 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.status;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.index.refresh.RefreshStats;
 
 import com.google.common.collect.Maps;
 
-
 /**
  * The Class IndexStatus.
  *
@@ -27,15 +25,12 @@ import com.google.common.collect.Maps;
  */
 public class IndexStatus implements Iterable<IndexShardStatus> {
 
-	
 	/** The index. */
 	private final String index;
 
-	
 	/** The index shards. */
 	private final Map<Integer, IndexShardStatus> indexShards;
 
-	
 	/**
 	 * Instantiates a new index status.
 	 *
@@ -61,7 +56,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		}
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -71,7 +65,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return this.index;
 	}
 
-	
 	/**
 	 * Gets the index.
 	 *
@@ -81,7 +74,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return index();
 	}
 
-	
 	/**
 	 * Shards.
 	 *
@@ -91,7 +83,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return this.indexShards;
 	}
 
-	
 	/**
 	 * Gets the shards.
 	 *
@@ -101,7 +92,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return shards();
 	}
 
-	
 	/**
 	 * Primary store size.
 	 *
@@ -123,7 +113,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return new ByteSizeValue(bytes);
 	}
 
-	
 	/**
 	 * Gets the primary store size.
 	 *
@@ -133,7 +122,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return primaryStoreSize();
 	}
 
-	
 	/**
 	 * Store size.
 	 *
@@ -155,7 +143,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return new ByteSizeValue(bytes);
 	}
 
-	
 	/**
 	 * Gets the store size.
 	 *
@@ -165,7 +152,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return storeSize();
 	}
 
-	
 	/**
 	 * Translog operations.
 	 *
@@ -184,7 +170,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return translogOperations;
 	}
 
-	
 	/**
 	 * Gets the translog operations.
 	 *
@@ -194,11 +179,9 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return translogOperations();
 	}
 
-	
 	/** The docs. */
 	private transient DocsStatus docs;
 
-	
 	/**
 	 * Docs.
 	 *
@@ -224,7 +207,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return docs;
 	}
 
-	
 	/**
 	 * Gets the docs.
 	 *
@@ -234,7 +216,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return docs();
 	}
 
-	
 	/**
 	 * Merge stats.
 	 *
@@ -248,7 +229,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return mergeStats;
 	}
 
-	
 	/**
 	 * Gets the merge stats.
 	 *
@@ -258,7 +238,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return this.mergeStats();
 	}
 
-	
 	/**
 	 * Refresh stats.
 	 *
@@ -272,7 +251,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return refreshStats;
 	}
 
-	
 	/**
 	 * Gets the refresh stats.
 	 *
@@ -282,7 +260,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return refreshStats();
 	}
 
-	
 	/**
 	 * Flush stats.
 	 *
@@ -296,7 +273,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return flushStats;
 	}
 
-	
 	/**
 	 * Gets the flush stats.
 	 *
@@ -306,7 +282,6 @@ public class IndexStatus implements Iterable<IndexShardStatus> {
 		return flushStats();
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */

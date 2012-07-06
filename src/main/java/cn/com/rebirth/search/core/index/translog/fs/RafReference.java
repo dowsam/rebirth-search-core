@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RafReference.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RafReference.java 2012-7-6 14:29:19 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.translog.fs;
 
@@ -13,7 +12,6 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 /**
  * The Class RafReference.
  *
@@ -21,83 +19,82 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class RafReference {
 
-    /** The file. */
-    private final File file;
+	/** The file. */
+	private final File file;
 
-    /** The raf. */
-    private final RandomAccessFile raf;
+	/** The raf. */
+	private final RandomAccessFile raf;
 
-    /** The channel. */
-    private final FileChannel channel;
+	/** The channel. */
+	private final FileChannel channel;
 
-    /** The ref count. */
-    private final AtomicInteger refCount = new AtomicInteger();
+	/** The ref count. */
+	private final AtomicInteger refCount = new AtomicInteger();
 
-    /**
-     * Instantiates a new raf reference.
-     *
-     * @param file the file
-     * @throws FileNotFoundException the file not found exception
-     */
-    public RafReference(File file) throws FileNotFoundException {
-        this.file = file;
-        this.raf = new RandomAccessFile(file, "rw");
-        this.channel = raf.getChannel();
-        this.refCount.incrementAndGet();
-    }
+	/**
+	 * Instantiates a new raf reference.
+	 *
+	 * @param file the file
+	 * @throws FileNotFoundException the file not found exception
+	 */
+	public RafReference(File file) throws FileNotFoundException {
+		this.file = file;
+		this.raf = new RandomAccessFile(file, "rw");
+		this.channel = raf.getChannel();
+		this.refCount.incrementAndGet();
+	}
 
-    /**
-     * File.
-     *
-     * @return the file
-     */
-    public File file() {
-        return this.file;
-    }
+	/**
+	 * File.
+	 *
+	 * @return the file
+	 */
+	public File file() {
+		return this.file;
+	}
 
-    /**
-     * Channel.
-     *
-     * @return the file channel
-     */
-    public FileChannel channel() {
-        return this.channel;
-    }
+	/**
+	 * Channel.
+	 *
+	 * @return the file channel
+	 */
+	public FileChannel channel() {
+		return this.channel;
+	}
 
-    /**
-     * Raf.
-     *
-     * @return the random access file
-     */
-    public RandomAccessFile raf() {
-        return this.raf;
-    }
+	/**
+	 * Raf.
+	 *
+	 * @return the random access file
+	 */
+	public RandomAccessFile raf() {
+		return this.raf;
+	}
 
-    
-    /**
-     * Increase ref count.
-     *
-     * @return true, if successful
-     */
-    public boolean increaseRefCount() {
-        return refCount.incrementAndGet() > 1;
-    }
+	/**
+	 * Increase ref count.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean increaseRefCount() {
+		return refCount.incrementAndGet() > 1;
+	}
 
-    /**
-     * Decrease ref count.
-     *
-     * @param delete the delete
-     */
-    public void decreaseRefCount(boolean delete) {
-        if (refCount.decrementAndGet() <= 0) {
-            try {
-                raf.close();
-                if (delete) {
-                    file.delete();
-                }
-            } catch (IOException e) {
-                
-            }
-        }
-    }
+	/**
+	 * Decrease ref count.
+	 *
+	 * @param delete the delete
+	 */
+	public void decreaseRefCount(boolean delete) {
+		if (refCount.decrementAndGet() <= 0) {
+			try {
+				raf.close();
+				if (delete) {
+					file.delete();
+				}
+			} catch (IOException e) {
+
+			}
+		}
+	}
 }

@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core QueryBuilder.java 2012-3-29 15:01:55 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core QueryBuilder.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
 import cn.com.rebirth.search.commons.io.BytesStream;
 import cn.com.rebirth.search.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.commons.xcontent.XContentType;
-
 
 /**
  * The Interface QueryBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.commons.xcontent.XContentType;
  */
 public interface QueryBuilder extends ToXContent {
 
-	
 	/**
 	 * Builds the as bytes.
 	 *
@@ -27,7 +24,6 @@ public interface QueryBuilder extends ToXContent {
 	 */
 	BytesStream buildAsBytes() throws QueryBuilderException;
 
-	
 	/**
 	 * Builds the as bytes.
 	 *

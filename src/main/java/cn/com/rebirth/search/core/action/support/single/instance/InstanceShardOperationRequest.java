@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core InstanceShardOperationRequest.java 2012-3-29 15:02:34 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core InstanceShardOperationRequest.java 2012-7-6 14:29:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.support.single.instance;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.action.ActionRequest;
 import cn.com.rebirth.search.core.action.ActionRequestValidationException;
 import cn.com.rebirth.search.core.action.ValidateActions;
 
-
 /**
  * The Class InstanceShardOperationRequest.
  *
@@ -24,34 +22,27 @@ import cn.com.rebirth.search.core.action.ValidateActions;
  */
 public abstract class InstanceShardOperationRequest implements ActionRequest {
 
-	
 	/** The Constant DEFAULT_TIMEOUT. */
 	public static final TimeValue DEFAULT_TIMEOUT = new TimeValue(1, TimeUnit.MINUTES);
 
-	
 	/** The timeout. */
 	protected TimeValue timeout = DEFAULT_TIMEOUT;
 
-	
 	/** The index. */
 	protected String index;
-	
-	
+
 	/** The shard id. */
 	protected int shardId = -1;
 
-	
 	/** The threaded listener. */
 	private boolean threadedListener = false;
 
-	
 	/**
 	 * Instantiates a new instance shard operation request.
 	 */
 	protected InstanceShardOperationRequest() {
 	}
 
-	
 	/**
 	 * Instantiates a new instance shard operation request.
 	 *
@@ -61,7 +52,6 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		this.index = index;
 	}
 
-	
 	/**
 	 * Timeout.
 	 *
@@ -71,9 +61,8 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		return timeout;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#validate()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#validate()
 	 */
 	@Override
 	public ActionRequestValidationException validate() {
@@ -84,7 +73,6 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		return validationException;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -94,7 +82,6 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		return index;
 	}
 
-	
 	/**
 	 * Index.
 	 *
@@ -106,18 +93,16 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded()
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded()
 	 */
 	@Override
 	public boolean listenerThreaded() {
 		return threadedListener;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.ActionRequest#listenerThreaded(boolean)
+	 * @see cn.com.rebirth.search.core.action.ActionRequest#listenerThreaded(boolean)
 	 */
 	@Override
 	public InstanceShardOperationRequest listenerThreaded(boolean threadedListener) {
@@ -125,21 +110,19 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 	 */
 	@Override
 	public void readFrom(StreamInput in) throws IOException {
 		index = in.readUTF();
 		shardId = in.readInt();
 		timeout = TimeValue.readTimeValue(in);
-		
+
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+	 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 	 */
 	@Override
 	public void writeTo(StreamOutput out) throws IOException {
@@ -148,7 +131,6 @@ public abstract class InstanceShardOperationRequest implements ActionRequest {
 		timeout.writeTo(out);
 	}
 
-	
 	/**
 	 * Before local fork.
 	 */

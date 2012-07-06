@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core LocalGatewayModule.java 2012-3-29 15:02:48 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core LocalGatewayModule.java 2012-7-6 14:29:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.gateway.local;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.gateway.local.state.meta.TransportNodesListGat
 import cn.com.rebirth.search.core.gateway.local.state.shards.LocalGatewayShardsState;
 import cn.com.rebirth.search.core.gateway.local.state.shards.TransportNodesListGatewayStartedShards;
 
-
 /**
  * The Class LocalGatewayModule.
  *
@@ -24,9 +22,8 @@ import cn.com.rebirth.search.core.gateway.local.state.shards.TransportNodesListG
  */
 public class LocalGatewayModule extends AbstractModule implements PreProcessModule {
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.AbstractModule#configure()
+	 * @see cn.com.rebirth.search.commons.inject.AbstractModule#configure()
 	 */
 	@Override
 	protected void configure() {
@@ -37,9 +34,8 @@ public class LocalGatewayModule extends AbstractModule implements PreProcessModu
 		bind(TransportNodesListGatewayStartedShards.class).asEagerSingleton();
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.inject.PreProcessModule#processModule(cn.com.summall.search.commons.inject.Module)
+	 * @see cn.com.rebirth.search.commons.inject.PreProcessModule#processModule(cn.com.rebirth.search.commons.inject.Module)
 	 */
 	@Override
 	public void processModule(Module module) {

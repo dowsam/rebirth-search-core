@@ -1,7 +1,8 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core TransportGatewaySnapshotAction.java 2012-3-29 15:01:08 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core TransportGatewaySnapshotAction.java 2012-7-6 14:30:15 l.xue.nong$$
  */
+
 
 
 package cn.com.rebirth.search.core.action.admin.indices.gateway.snapshot;
@@ -9,7 +10,7 @@ package cn.com.rebirth.search.core.action.admin.indices.gateway.snapshot;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
@@ -30,6 +31,7 @@ import cn.com.rebirth.search.core.transport.TransportService;
 import com.google.common.collect.Lists;
 
 
+
 /**
  * The Class TransportGatewaySnapshotAction.
  *
@@ -40,9 +42,11 @@ public class TransportGatewaySnapshotAction
 		TransportBroadcastOperationAction<GatewaySnapshotRequest, GatewaySnapshotResponse, ShardGatewaySnapshotRequest, ShardGatewaySnapshotResponse> {
 
 	
+	
 	/** The indices service. */
 	private final IndicesService indicesService;
 
+	
 	
 	/**
 	 * Instantiates a new transport gateway snapshot action.
@@ -61,8 +65,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#executor()
 	 */
 	@Override
 	protected String executor() {
@@ -70,8 +75,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#transportAction()
 	 */
 	@Override
 	protected String transportAction() {
@@ -79,8 +85,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newRequest()
 	 */
 	@Override
 	protected GatewaySnapshotRequest newRequest() {
@@ -88,8 +95,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#ignoreNonActiveExceptions()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#ignoreNonActiveExceptions()
 	 */
 	@Override
 	protected boolean ignoreNonActiveExceptions() {
@@ -97,8 +105,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.summall.search.core.cluster.ClusterState)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newResponse(cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.util.concurrent.atomic.AtomicReferenceArray, cn.com.rebirth.search.core.cluster.ClusterState)
 	 */
 	@Override
 	protected GatewaySnapshotResponse newResponse(GatewaySnapshotRequest request, AtomicReferenceArray shardsResponses,
@@ -125,8 +134,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest()
 	 */
 	@Override
 	protected ShardGatewaySnapshotRequest newShardRequest() {
@@ -134,8 +144,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.summall.search.core.cluster.routing.ShardRouting, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardRequest(cn.com.rebirth.search.core.cluster.routing.ShardRouting, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ShardGatewaySnapshotRequest newShardRequest(ShardRouting shard, GatewaySnapshotRequest request) {
@@ -143,8 +154,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#newShardResponse()
 	 */
 	@Override
 	protected ShardGatewaySnapshotResponse newShardResponse() {
@@ -152,12 +164,13 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.summall.search.core.action.support.broadcast.BroadcastShardOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shardOperation(cn.com.rebirth.search.core.action.support.broadcast.BroadcastShardOperationRequest)
 	 */
 	@Override
 	protected ShardGatewaySnapshotResponse shardOperation(ShardGatewaySnapshotRequest request)
-			throws RestartException {
+			throws RebirthException {
 		IndexShardGatewayService shardGatewayService = indicesService.indexServiceSafe(request.index())
 				.shardInjectorSafe(request.shardId()).getInstance(IndexShardGatewayService.class);
 		shardGatewayService.snapshot("api");
@@ -165,8 +178,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#shards(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected GroupShardsIterator shards(ClusterState clusterState, GatewaySnapshotRequest request,
@@ -175,8 +189,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest)
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkGlobalBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest)
 	 */
 	@Override
 	protected ClusterBlockException checkGlobalBlock(ClusterState state, GatewaySnapshotRequest request) {
@@ -184,8 +199,9 @@ public class TransportGatewaySnapshotAction
 	}
 
 	
+	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.summall.search.core.cluster.ClusterState, cn.com.summall.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
+	 * @see cn.com.rebirth.search.core.action.support.broadcast.TransportBroadcastOperationAction#checkRequestBlock(cn.com.rebirth.search.core.cluster.ClusterState, cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationRequest, java.lang.String[])
 	 */
 	@Override
 	protected ClusterBlockException checkRequestBlock(ClusterState state, GatewaySnapshotRequest request,

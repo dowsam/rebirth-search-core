@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core PublishRiverClusterStateAction.java 2012-3-29 15:02:28 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core PublishRiverClusterStateAction.java 2012-7-6 14:30:45 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.cluster;
 
@@ -24,7 +23,6 @@ import cn.com.rebirth.search.core.transport.TransportException;
 import cn.com.rebirth.search.core.transport.TransportService;
 import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
 
-
 /**
  * The Class PublishRiverClusterStateAction.
  *
@@ -32,7 +30,6 @@ import cn.com.rebirth.search.core.transport.VoidTransportResponseHandler;
  */
 public class PublishRiverClusterStateAction extends AbstractComponent {
 
-	
 	/**
 	 * The listener interface for receiving newClusterState events.
 	 * The class that is interested in processing a newClusterState
@@ -46,7 +43,6 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 	 */
 	public static interface NewClusterStateListener {
 
-		
 		/**
 		 * On new cluster state.
 		 *
@@ -55,19 +51,15 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 		void onNewClusterState(RiverClusterState clusterState);
 	}
 
-	
 	/** The transport service. */
 	private final TransportService transportService;
 
-	
 	/** The cluster service. */
 	private final ClusterService clusterService;
 
-	
 	/** The listener. */
 	private final NewClusterStateListener listener;
 
-	
 	/**
 	 * Instantiates a new publish river cluster state action.
 	 *
@@ -86,7 +78,6 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 				new PublishClusterStateRequestHandler());
 	}
 
-	
 	/**
 	 * Close.
 	 */
@@ -94,7 +85,6 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 		transportService.removeHandler(PublishClusterStateRequestHandler.ACTION);
 	}
 
-	
 	/**
 	 * Publish.
 	 *
@@ -104,13 +94,9 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 		final DiscoveryNodes discoNodes = clusterService.state().nodes();
 		for (final DiscoveryNode node : discoNodes) {
 			if (node.equals(discoNodes.localNode())) {
-				
+
 				continue;
 			}
-
-			
-			
-			
 
 			if (!node.masterNode() && !RiverNodeHelper.isRiverNode(node)) {
 				continue;
@@ -128,7 +114,6 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PublishClusterStateRequest.
 	 *
@@ -136,18 +121,15 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 	 */
 	private class PublishClusterStateRequest implements Streamable {
 
-		
 		/** The cluster state. */
 		private RiverClusterState clusterState;
 
-		
 		/**
 		 * Instantiates a new publish cluster state request.
 		 */
 		private PublishClusterStateRequest() {
 		}
 
-		
 		/**
 		 * Instantiates a new publish cluster state request.
 		 *
@@ -157,18 +139,16 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 			this.clusterState = clusterState;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#readFrom(cn.com.summall.search.commons.io.stream.StreamInput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#readFrom(cn.com.rebirth.commons.io.stream.StreamInput)
 		 */
 		@Override
 		public void readFrom(StreamInput in) throws IOException {
 			clusterState = RiverClusterState.Builder.readFrom(in);
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.commons.io.stream.Streamable#writeTo(cn.com.summall.search.commons.io.stream.StreamOutput)
+		 * @see cn.com.rebirth.commons.io.stream.Streamable#writeTo(cn.com.rebirth.commons.io.stream.StreamOutput)
 		 */
 		@Override
 		public void writeTo(StreamOutput out) throws IOException {
@@ -176,7 +156,6 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 		}
 	}
 
-	
 	/**
 	 * The Class PublishClusterStateRequestHandler.
 	 *
@@ -184,31 +163,27 @@ public class PublishRiverClusterStateAction extends AbstractComponent {
 	 */
 	private class PublishClusterStateRequestHandler extends BaseTransportRequestHandler<PublishClusterStateRequest> {
 
-		
 		/** The Constant ACTION. */
 		static final String ACTION = "river/state/publish";
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#newInstance()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#newInstance()
 		 */
 		@Override
 		public PublishClusterStateRequest newInstance() {
 			return new PublishClusterStateRequest();
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#executor()
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#executor()
 		 */
 		@Override
 		public String executor() {
 			return ThreadPool.Names.SAME;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.transport.TransportRequestHandler#messageReceived(cn.com.summall.search.commons.io.stream.Streamable, cn.com.summall.search.core.transport.TransportChannel)
+		 * @see cn.com.rebirth.search.core.transport.TransportRequestHandler#messageReceived(cn.com.rebirth.commons.io.stream.Streamable, cn.com.rebirth.search.core.transport.TransportChannel)
 		 */
 		@Override
 		public void messageReceived(PublishClusterStateRequest request, TransportChannel channel) throws Exception {

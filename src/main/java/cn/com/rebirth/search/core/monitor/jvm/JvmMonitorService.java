@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core JvmMonitorService.java 2012-3-29 15:00:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core JvmMonitorService.java 2012-7-6 14:30:02 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.jvm;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
 import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
@@ -27,7 +26,6 @@ import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
-
 /**
  * The Class JvmMonitorService.
  *
@@ -35,31 +33,24 @@ import com.google.common.collect.ImmutableSet;
  */
 public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorService> {
 
-	
 	/** The thread pool. */
 	private final ThreadPool threadPool;
 
-	
 	/** The dump monitor service. */
 	private final DumpMonitorService dumpMonitorService;
 
-	
 	/** The enabled. */
 	private final boolean enabled;
 
-	
 	/** The interval. */
 	private final TimeValue interval;
 
-	
 	/** The gc thresholds. */
 	private final ImmutableMap<String, GcThreshold> gcThresholds;
 
-	
 	/** The scheduled future. */
 	private volatile ScheduledFuture scheduledFuture;
 
-	
 	/**
 	 * The Class GcThreshold.
 	 *
@@ -67,23 +58,18 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 	 */
 	static class GcThreshold {
 
-		
 		/** The name. */
 		public final String name;
 
-		
 		/** The warn threshold. */
 		public final long warnThreshold;
 
-		
 		/** The info threshold. */
 		public final long infoThreshold;
 
-		
 		/** The debug threshold. */
 		public final long debugThreshold;
 
-		
 		/**
 		 * Instantiates a new gc threshold.
 		 *
@@ -99,7 +85,6 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 			this.debugThreshold = debugThreshold;
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
@@ -110,7 +95,6 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 		}
 	}
 
-	
 	/**
 	 * Instantiates a new jvm monitor service.
 	 *
@@ -154,39 +138,35 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		if (!enabled) {
 			return;
 		}
 		scheduledFuture = threadPool.scheduleWithFixedDelay(new JvmMonitor(), interval);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		if (!enabled) {
 			return;
 		}
 		scheduledFuture.cancel(true);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
-	
 	/**
 	 * The Class JvmMonitor.
 	 *
@@ -194,36 +174,30 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 	 */
 	private class JvmMonitor implements Runnable {
 
-		
 		/** The last jvm stats. */
 		private JvmStats lastJvmStats = JvmStats.jvmStats();
 
-		
 		/** The seq. */
 		private long seq = 0;
 
-		
 		/** The last seen deadlocks. */
 		private final Set<DeadlockAnalyzer.Deadlock> lastSeenDeadlocks = new HashSet<DeadlockAnalyzer.Deadlock>();
 
-		
 		/**
 		 * Instantiates a new jvm monitor.
 		 */
 		public JvmMonitor() {
 		}
 
-		
 		/* (non-Javadoc)
 		 * @see java.lang.Runnable#run()
 		 */
 		@Override
 		public void run() {
-			
+
 			monitorLongGc();
 		}
 
-		
 		/**
 		 * Monitor long gc.
 		 */
@@ -235,7 +209,6 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 				GarbageCollector gc = currentJvmStats.gc().collectors()[i];
 				GarbageCollector prevGc = lastJvmStats.gc.collectors[i];
 
-				
 				long collections = gc.collectionCount - prevGc.collectionCount;
 				if (collections == 0) {
 					continue;
@@ -253,10 +226,10 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 				if (gc.lastGc() != null && prevGc.lastGc() != null) {
 					GarbageCollector.LastGc lastGc = gc.lastGc();
 					if (lastGc.startTime == prevGc.lastGc().startTime()) {
-						
+
 						continue;
 					}
-					
+
 					if (lastGc.duration().hoursFrac() > 1) {
 						continue;
 					}
@@ -266,7 +239,6 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 			lastJvmStats = currentJvmStats;
 		}
 
-		
 		/**
 		 * Monitor deadlock.
 		 */
@@ -276,8 +248,8 @@ public class JvmMonitorService extends AbstractLifecycleComponent<JvmMonitorServ
 				ImmutableSet<DeadlockAnalyzer.Deadlock> asSet = new ImmutableSet.Builder<DeadlockAnalyzer.Deadlock>()
 						.add(deadlocks).build();
 				if (!asSet.equals(lastSeenDeadlocks)) {
-					DumpGenerator.Result genResult = dumpMonitorService.generateDump("deadlock", null, SummaryDumpContributor.SUMMARY,
-							ThreadDumpContributor.THREAD_DUMP);
+					DumpGenerator.Result genResult = dumpMonitorService.generateDump("deadlock", null,
+							SummaryDumpContributor.SUMMARY, ThreadDumpContributor.THREAD_DUMP);
 					StringBuilder sb = new StringBuilder("Detected Deadlock(s)");
 					for (DeadlockAnalyzer.Deadlock deadlock : asSet) {
 						sb.append("\n   ----> ").append(deadlock);

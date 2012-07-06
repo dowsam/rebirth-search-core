@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ScriptStatisticalFacetCollector.java 2012-3-29 15:02:00 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ScriptStatisticalFacetCollector.java 2012-7-6 14:30:23 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.statistical;
 
@@ -17,7 +16,6 @@ import cn.com.rebirth.search.core.search.facet.AbstractFacetCollector;
 import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class ScriptStatisticalFacetCollector.
  *
@@ -25,31 +23,24 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class ScriptStatisticalFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The script. */
 	private final SearchScript script;
 
-	
 	/** The min. */
 	private double min = Double.POSITIVE_INFINITY;
 
-	
 	/** The max. */
 	private double max = Double.NEGATIVE_INFINITY;
 
-	
 	/** The total. */
 	private double total = 0;
 
-	
 	/** The sum of squares. */
 	private double sumOfSquares = 0.0;
 
-	
 	/** The count. */
 	private long count;
 
-	
 	/**
 	 * Instantiates a new script statistical facet collector.
 	 *
@@ -65,9 +56,8 @@ public class ScriptStatisticalFacetCollector extends AbstractFacetCollector {
 		this.script = context.scriptService().search(context.lookup(), scriptLang, script, params);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -84,27 +74,24 @@ public class ScriptStatisticalFacetCollector extends AbstractFacetCollector {
 		count++;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#setScorer(org.apache.lucene.search.Scorer)
 	 */
 	@Override
 	public void setScorer(Scorer scorer) throws IOException {
 		script.setScorer(scorer);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		script.setNextReader(reader);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {

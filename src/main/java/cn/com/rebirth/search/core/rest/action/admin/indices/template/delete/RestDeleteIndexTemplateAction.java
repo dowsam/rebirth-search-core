@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RestDeleteIndexTemplateAction.java 2012-3-29 15:01:56 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RestDeleteIndexTemplateAction.java 2012-7-6 14:29:00 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.template.delete;
 
@@ -26,7 +25,6 @@ import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
-
 /**
  * The Class RestDeleteIndexTemplateAction.
  *
@@ -34,7 +32,6 @@ import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
  */
 public class RestDeleteIndexTemplateAction extends BaseRestHandler {
 
-	
 	/**
 	 * Instantiates a new rest delete index template action.
 	 *
@@ -48,9 +45,8 @@ public class RestDeleteIndexTemplateAction extends BaseRestHandler {
 		controller.registerHandler(RestRequest.Method.DELETE, "/_template/{name}", this);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.rest.RestHandler#handleRequest(cn.com.summall.search.core.rest.RestRequest, cn.com.summall.search.core.rest.RestChannel)
+	 * @see cn.com.rebirth.search.core.rest.RestHandler#handleRequest(cn.com.rebirth.search.core.rest.RestRequest, cn.com.rebirth.search.core.rest.RestChannel)
 	 */
 	@Override
 	public void handleRequest(final RestRequest request, final RestChannel channel) {
@@ -81,7 +77,6 @@ public class RestDeleteIndexTemplateAction extends BaseRestHandler {
 				});
 	}
 
-	
 	/**
 	 * The Class Fields.
 	 *
@@ -89,11 +84,9 @@ public class RestDeleteIndexTemplateAction extends BaseRestHandler {
 	 */
 	static final class Fields {
 
-		
 		/** The Constant OK. */
 		static final XContentBuilderString OK = new XContentBuilderString("ok");
 
-		
 		/** The Constant ACKNOWLEDGED. */
 		static final XContentBuilderString ACKNOWLEDGED = new XContentBuilderString("acknowledged");
 	}

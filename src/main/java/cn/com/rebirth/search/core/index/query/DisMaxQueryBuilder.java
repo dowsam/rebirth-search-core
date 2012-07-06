@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core DisMaxQueryBuilder.java 2012-3-29 15:01:17 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core DisMaxQueryBuilder.java 2012-7-6 14:29:14 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.index.query;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 
 import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 
-
 /**
  * The Class DisMaxQueryBuilder.
  *
@@ -21,19 +19,15 @@ import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
  */
 public class DisMaxQueryBuilder extends BaseQueryBuilder {
 
-	
 	/** The queries. */
 	private ArrayList<QueryBuilder> queries = newArrayList();
 
-	
 	/** The boost. */
 	private float boost = -1;
 
-	
 	/** The tie breaker. */
 	private float tieBreaker = -1;
 
-	
 	/**
 	 * Adds the.
 	 *
@@ -45,7 +39,6 @@ public class DisMaxQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Boost.
 	 *
@@ -57,7 +50,6 @@ public class DisMaxQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/**
 	 * Tie breaker.
 	 *
@@ -69,9 +61,8 @@ public class DisMaxQueryBuilder extends BaseQueryBuilder {
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.summall.search.commons.xcontent.XContentBuilder, cn.com.summall.search.commons.xcontent.ToXContent.Params)
+	 * @see cn.com.rebirth.search.core.index.query.BaseQueryBuilder#doXContent(cn.com.rebirth.search.commons.xcontent.XContentBuilder, cn.com.rebirth.search.commons.xcontent.ToXContent.Params)
 	 */
 	@Override
 	protected void doXContent(XContentBuilder builder, Params params) throws IOException {

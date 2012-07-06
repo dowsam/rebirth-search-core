@@ -1,6 +1,6 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core IndexingMemoryController.java 2012-3-29 15:02:32 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core IndexingMemoryController.java 2012-7-6 14:29:51 l.xue.nong$$
  */
 
 package cn.com.rebirth.search.core.indices.memory;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 
-import cn.com.rebirth.commons.exception.RestartException;
+import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
@@ -122,20 +122,20 @@ public class IndexingMemoryController extends AbstractLifecycleComponent<Indexin
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStart()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStart()
 	 */
 	@Override
-	protected void doStart() throws RestartException {
+	protected void doStart() throws RebirthException {
 		indicesService.indicesLifecycle().addListener(listener);
 
 		this.scheduler = threadPool.scheduleWithFixedDelay(new ShardsIndicesStatusChecker(), interval);
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doStop()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doStop()
 	 */
 	@Override
-	protected void doStop() throws RestartException {
+	protected void doStop() throws RebirthException {
 		indicesService.indicesLifecycle().removeListener(listener);
 		if (scheduler != null) {
 			scheduler.cancel(false);
@@ -144,10 +144,10 @@ public class IndexingMemoryController extends AbstractLifecycleComponent<Indexin
 	}
 
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.commons.component.AbstractLifecycleComponent#doClose()
+	 * @see cn.com.rebirth.search.commons.component.AbstractLifecycleComponent#doClose()
 	 */
 	@Override
-	protected void doClose() throws RestartException {
+	protected void doClose() throws RebirthException {
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class IndexingMemoryController extends AbstractLifecycleComponent<Indexin
 	class Listener extends cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener {
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.indices.IndicesLifecycle.Listener#afterIndexShardCreated(cn.com.summall.search.core.index.shard.service.IndexShard)
+		 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener#afterIndexShardCreated(cn.com.rebirth.search.core.index.shard.service.IndexShard)
 		 */
 		@Override
 		public void afterIndexShardCreated(IndexShard indexShard) {
@@ -246,7 +246,7 @@ public class IndexingMemoryController extends AbstractLifecycleComponent<Indexin
 		}
 
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.indices.IndicesLifecycle.Listener#afterIndexShardClosed(cn.com.summall.search.core.index.shard.ShardId, boolean)
+		 * @see cn.com.rebirth.search.core.indices.IndicesLifecycle.Listener#afterIndexShardClosed(cn.com.rebirth.search.core.index.shard.ShardId, boolean)
 		 */
 		@Override
 		public void afterIndexShardClosed(ShardId shardId, boolean delete) {

@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core ClusterDumpContributor.java 2012-3-29 15:01:16 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core ClusterDumpContributor.java 2012-7-6 14:30:46 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.dump.cluster;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.monitor.dump.Dump;
 import cn.com.rebirth.search.core.monitor.dump.DumpContributionFailedException;
 import cn.com.rebirth.search.core.monitor.dump.DumpContributor;
 
-
 /**
  * The Class ClusterDumpContributor.
  *
@@ -27,59 +25,53 @@ import cn.com.rebirth.search.core.monitor.dump.DumpContributor;
  */
 public class ClusterDumpContributor implements DumpContributor {
 
-    
-    /** The Constant CLUSTER. */
-    public static final String CLUSTER = "cluster";
+	/** The Constant CLUSTER. */
+	public static final String CLUSTER = "cluster";
 
-    
-    /** The name. */
-    private final String name;
+	/** The name. */
+	private final String name;
 
-    
-    /** The cluster service. */
-    private final ClusterService clusterService;
+	/** The cluster service. */
+	private final ClusterService clusterService;
 
-    
-    /**
-     * Instantiates a new cluster dump contributor.
-     *
-     * @param clusterService the cluster service
-     * @param name the name
-     * @param settings the settings
-     */
-    @Inject
-    public ClusterDumpContributor(ClusterService clusterService, @Assisted String name, @Assisted Settings settings) {
-        this.clusterService = clusterService;
-        this.name = name;
-    }
+	/**
+	 * Instantiates a new cluster dump contributor.
+	 *
+	 * @param clusterService the cluster service
+	 * @param name the name
+	 * @param settings the settings
+	 */
+	@Inject
+	public ClusterDumpContributor(ClusterService clusterService, @Assisted String name, @Assisted Settings settings) {
+		this.clusterService = clusterService;
+		this.name = name;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.monitor.dump.DumpContributor#getName()
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.monitor.dump.DumpContributor#getName()
+	 */
+	@Override
+	public String getName() {
+		return name;
+	}
 
-    
-    /* (non-Javadoc)
-     * @see cn.com.summall.search.core.monitor.dump.DumpContributor#contribute(cn.com.summall.search.core.monitor.dump.Dump)
-     */
-    @Override
-    public void contribute(Dump dump) throws DumpContributionFailedException {
-        ClusterState clusterState = clusterService.state();
-        DiscoveryNodes nodes = clusterState.nodes();
-        RoutingTable routingTable = clusterState.routingTable();
+	/* (non-Javadoc)
+	 * @see cn.com.rebirth.search.core.monitor.dump.DumpContributor#contribute(cn.com.rebirth.search.core.monitor.dump.Dump)
+	 */
+	@Override
+	public void contribute(Dump dump) throws DumpContributionFailedException {
+		ClusterState clusterState = clusterService.state();
+		DiscoveryNodes nodes = clusterState.nodes();
+		RoutingTable routingTable = clusterState.routingTable();
 
-        PrintWriter writer = new PrintWriter(dump.createFileWriter("cluster.txt"));
+		PrintWriter writer = new PrintWriter(dump.createFileWriter("cluster.txt"));
 
-        writer.println("===== CLUSTER NODES ======");
-        writer.print(nodes.prettyPrint());
+		writer.println("===== CLUSTER NODES ======");
+		writer.print(nodes.prettyPrint());
 
-        writer.println("===== ROUTING TABLE ======");
-        writer.print(routingTable.prettyPrint());
+		writer.println("===== ROUTING TABLE ======");
+		writer.print(routingTable.prettyPrint());
 
-        writer.close();
-    }
+		writer.close();
+	}
 }

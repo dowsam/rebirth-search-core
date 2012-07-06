@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RiversRouting.java 2012-3-29 15:02:11 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RiversRouting.java 2012-7-6 14:30:37 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.river.routing;
 
@@ -16,7 +15,6 @@ import cn.com.rebirth.search.core.river.RiverName;
 
 import com.google.common.collect.ImmutableMap;
 
-
 /**
  * The Class RiversRouting.
  *
@@ -24,15 +22,12 @@ import com.google.common.collect.ImmutableMap;
  */
 public class RiversRouting implements Iterable<RiverRouting> {
 
-	
 	/** The Constant EMPTY. */
 	public static final RiversRouting EMPTY = RiversRouting.builder().build();
 
-	
 	/** The rivers. */
 	private final ImmutableMap<RiverName, RiverRouting> rivers;
 
-	
 	/**
 	 * Instantiates a new rivers routing.
 	 *
@@ -42,7 +37,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 		this.rivers = rivers;
 	}
 
-	
 	/**
 	 * Checks if is empty.
 	 *
@@ -52,7 +46,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 		return rivers.isEmpty();
 	}
 
-	
 	/**
 	 * Routing.
 	 *
@@ -63,7 +56,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 		return rivers.get(riverName);
 	}
 
-	
 	/**
 	 * Checks for river by name.
 	 *
@@ -79,7 +71,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 		return false;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
@@ -88,7 +79,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 		return rivers.values().iterator();
 	}
 
-	
 	/**
 	 * Builder.
 	 *
@@ -98,7 +88,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 		return new Builder();
 	}
 
-	
 	/**
 	 * The Class Builder.
 	 *
@@ -106,11 +95,9 @@ public class RiversRouting implements Iterable<RiverRouting> {
 	 */
 	public static class Builder {
 
-		
 		/** The rivers. */
 		private MapBuilder<RiverName, RiverRouting> rivers = MapBuilder.newMapBuilder();
 
-		
 		/**
 		 * Routing.
 		 *
@@ -122,7 +109,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Put.
 		 *
@@ -134,7 +120,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the.
 		 *
@@ -146,7 +131,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Removes the.
 		 *
@@ -158,7 +142,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Remote.
 		 *
@@ -174,7 +157,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return this;
 		}
 
-		
 		/**
 		 * Builds the.
 		 *
@@ -184,7 +166,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return new RiversRouting(rivers.immutableMap());
 		}
 
-		
 		/**
 		 * Read from.
 		 *
@@ -201,7 +182,6 @@ public class RiversRouting implements Iterable<RiverRouting> {
 			return builder.build();
 		}
 
-		
 		/**
 		 * Write to.
 		 *

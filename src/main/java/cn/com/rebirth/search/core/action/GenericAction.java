@@ -1,13 +1,11 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core GenericAction.java 2012-3-29 15:01:10 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core GenericAction.java 2012-7-6 14:30:15 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action;
 
 import cn.com.rebirth.search.core.transport.TransportRequestOptions;
-
 
 /**
  * The Class GenericAction.
@@ -18,11 +16,9 @@ import cn.com.rebirth.search.core.transport.TransportRequestOptions;
  */
 public abstract class GenericAction<Request extends ActionRequest, Response extends ActionResponse> {
 
-	
 	/** The name. */
 	private final String name;
 
-	
 	/**
 	 * Instantiates a new generic action.
 	 *
@@ -32,7 +28,6 @@ public abstract class GenericAction<Request extends ActionRequest, Response exte
 		this.name = name;
 	}
 
-	
 	/**
 	 * Name.
 	 *
@@ -42,7 +37,6 @@ public abstract class GenericAction<Request extends ActionRequest, Response exte
 		return this.name;
 	}
 
-	
 	/**
 	 * New response.
 	 *
@@ -50,7 +44,6 @@ public abstract class GenericAction<Request extends ActionRequest, Response exte
 	 */
 	public abstract Response newResponse();
 
-	
 	/**
 	 * Options.
 	 *
@@ -60,7 +53,6 @@ public abstract class GenericAction<Request extends ActionRequest, Response exte
 		return TransportRequestOptions.EMPTY;
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
@@ -69,7 +61,6 @@ public abstract class GenericAction<Request extends ActionRequest, Response exte
 		return name.equals(((GenericAction) o).name());
 	}
 
-	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

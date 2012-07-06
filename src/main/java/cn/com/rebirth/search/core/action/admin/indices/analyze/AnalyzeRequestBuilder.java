@@ -1,15 +1,13 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core AnalyzeRequestBuilder.java 2012-3-29 15:02:38 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core AnalyzeRequestBuilder.java 2012-7-6 14:30:43 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.action.admin.indices.analyze;
 
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;
-
 
 /**
  * The Class AnalyzeRequestBuilder.
@@ -18,7 +16,6 @@ import cn.com.rebirth.search.core.client.IndicesAdminClient;
  */
 public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequest, AnalyzeResponse> {
 
-	
 	/**
 	 * Instantiates a new analyze request builder.
 	 *
@@ -28,7 +25,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		super(indicesClient, new AnalyzeRequest());
 	}
 
-	
 	/**
 	 * Instantiates a new analyze request builder.
 	 *
@@ -40,7 +36,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		super(indicesClient, new AnalyzeRequest(index, text));
 	}
 
-	
 	/**
 	 * Sets the index.
 	 *
@@ -52,7 +47,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the analyzer.
 	 *
@@ -64,7 +58,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the field.
 	 *
@@ -76,7 +69,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the tokenizer.
 	 *
@@ -88,7 +80,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the token filters.
 	 *
@@ -100,7 +91,6 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		return this;
 	}
 
-	
 	/**
 	 * Sets the prefer local.
 	 *
@@ -112,9 +102,8 @@ public class AnalyzeRequestBuilder extends BaseIndicesRequestBuilder<AnalyzeRequ
 		return this;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.summall.search.core.action.ActionListener)
+	 * @see cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder#doExecute(cn.com.rebirth.search.core.action.ActionListener)
 	 */
 	@Override
 	protected void doExecute(ActionListener<AnalyzeResponse> listener) {

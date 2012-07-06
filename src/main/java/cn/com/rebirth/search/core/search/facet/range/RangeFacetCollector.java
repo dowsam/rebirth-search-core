@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core RangeFacetCollector.java 2012-3-29 15:02:45 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core RangeFacetCollector.java 2012-7-6 14:29:25 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.search.facet.range;
 
@@ -19,7 +18,6 @@ import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetPhaseExecutionException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
-
 /**
  * The Class RangeFacetCollector.
  *
@@ -27,31 +25,24 @@ import cn.com.rebirth.search.core.search.internal.SearchContext;
  */
 public class RangeFacetCollector extends AbstractFacetCollector {
 
-	
 	/** The index field name. */
 	private final String indexFieldName;
 
-	
 	/** The field data cache. */
 	private final FieldDataCache fieldDataCache;
 
-	
 	/** The field data type. */
 	private final FieldDataType fieldDataType;
 
-	
 	/** The field data. */
 	private NumericFieldData fieldData;
 
-	
 	/** The entries. */
 	private final RangeFacet.Entry[] entries;
 
-	
 	/** The range proc. */
 	private final RangeProc rangeProc;
 
-	
 	/**
 	 * Instantiates a new range facet collector.
 	 *
@@ -70,7 +61,6 @@ public class RangeFacetCollector extends AbstractFacetCollector {
 			throw new FacetPhaseExecutionException(facetName, "No mapping found for field [" + fieldName + "]");
 		}
 
-		
 		if (smartMappers.explicitTypeInNameWithDocMapper()) {
 			setFilter(context.filterCache().cache(smartMappers.docMapper().typeFilter()));
 		}
@@ -81,18 +71,16 @@ public class RangeFacetCollector extends AbstractFacetCollector {
 		rangeProc = new RangeProc(entries);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doSetNextReader(org.apache.lucene.index.IndexReader, int)
 	 */
 	@Override
 	protected void doSetNextReader(IndexReader reader, int docBase) throws IOException {
 		fieldData = (NumericFieldData) fieldDataCache.cache(fieldDataType, reader, indexFieldName);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.AbstractFacetCollector#doCollect(int)
+	 * @see cn.com.rebirth.search.core.search.facet.AbstractFacetCollector#doCollect(int)
 	 */
 	@Override
 	protected void doCollect(int doc) throws IOException {
@@ -102,16 +90,14 @@ public class RangeFacetCollector extends AbstractFacetCollector {
 		fieldData.forEachValueInDoc(doc, rangeProc);
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.search.facet.FacetCollector#facet()
+	 * @see cn.com.rebirth.search.core.search.facet.FacetCollector#facet()
 	 */
 	@Override
 	public Facet facet() {
 		return new InternalRangeFacet(facetName, entries);
 	}
 
-	
 	/**
 	 * The Class RangeProc.
 	 *
@@ -119,11 +105,9 @@ public class RangeFacetCollector extends AbstractFacetCollector {
 	 */
 	public static class RangeProc implements NumericFieldData.DoubleValueInDocProc {
 
-		
 		/** The entries. */
 		private final RangeFacet.Entry[] entries;
 
-		
 		/**
 		 * Instantiates a new range proc.
 		 *
@@ -133,9 +117,8 @@ public class RangeFacetCollector extends AbstractFacetCollector {
 			this.entries = entries;
 		}
 
-		
 		/* (non-Javadoc)
-		 * @see cn.com.summall.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
+		 * @see cn.com.rebirth.search.core.index.field.data.NumericFieldData.DoubleValueInDocProc#onValue(int, double)
 		 */
 		@Override
 		public void onValue(int docId, double value) {

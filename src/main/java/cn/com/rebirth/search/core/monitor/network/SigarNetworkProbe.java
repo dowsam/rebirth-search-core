@@ -1,8 +1,7 @@
 /*
- * Copyright (c) 2005-2012 www.summall.com.cn All rights reserved
- * Info:summall-search-core SigarNetworkProbe.java 2012-3-29 15:02:20 l.xue.nong$$
+ * Copyright (c) 2005-2012 www.china-cti.com All rights reserved
+ * Info:rebirth-search-core SigarNetworkProbe.java 2012-7-6 14:29:22 l.xue.nong$$
  */
-
 
 package cn.com.rebirth.search.core.monitor.network;
 
@@ -18,7 +17,6 @@ import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.core.monitor.sigar.SigarService;
 
-
 /**
  * The Class SigarNetworkProbe.
  *
@@ -26,11 +24,9 @@ import cn.com.rebirth.search.core.monitor.sigar.SigarService;
  */
 public class SigarNetworkProbe extends AbstractComponent implements NetworkProbe {
 
-	
 	/** The sigar service. */
 	private final SigarService sigarService;
 
-	
 	/**
 	 * Instantiates a new sigar network probe.
 	 *
@@ -43,9 +39,8 @@ public class SigarNetworkProbe extends AbstractComponent implements NetworkProbe
 		this.sigarService = sigarService;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.network.NetworkProbe#networkInfo()
+	 * @see cn.com.rebirth.search.core.monitor.network.NetworkProbe#networkInfo()
 	 */
 	@Override
 	public NetworkInfo networkInfo() {
@@ -58,15 +53,14 @@ public class SigarNetworkProbe extends AbstractComponent implements NetworkProbe
 			networkInfo.primary = new NetworkInfo.Interface(netInterfaceConfig.getName(),
 					netInterfaceConfig.getAddress(), netInterfaceConfig.getHwaddr());
 		} catch (SigarException e) {
-			
+
 		}
 
 		return networkInfo;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.network.NetworkProbe#networkStats()
+	 * @see cn.com.rebirth.search.core.monitor.network.NetworkProbe#networkStats()
 	 */
 	@Override
 	public synchronized NetworkStats networkStats() {
@@ -89,15 +83,14 @@ public class SigarNetworkProbe extends AbstractComponent implements NetworkProbe
 			stats.tcp.inErrs = tcp.getInErrs();
 			stats.tcp.outRsts = tcp.getOutRsts();
 		} catch (SigarException e) {
-			
+
 		}
 
 		return stats;
 	}
 
-	
 	/* (non-Javadoc)
-	 * @see cn.com.summall.search.core.monitor.network.NetworkProbe#ifconfig()
+	 * @see cn.com.rebirth.search.core.monitor.network.NetworkProbe#ifconfig()
 	 */
 	@Override
 	public String ifconfig() {
@@ -135,8 +128,8 @@ public class SigarNetworkProbe extends AbstractComponent implements NetworkProbe
 					bcast = "  Bcast:" + ifconfig.getBroadcast();
 				}
 
-				sb.append("\t" + "inet addr:" + ifconfig.getAddress() + ptp + 
-						bcast + "  Mask:" + ifconfig.getNetmask()).append('\n');
+				sb.append("\t" + "inet addr:" + ifconfig.getAddress() + ptp + bcast + "  Mask:" + ifconfig.getNetmask())
+						.append('\n');
 
 				sb.append(
 						"\t" + NetFlags.getIfFlagsString(flags) + " MTU:" + ifconfig.getMtu() + "  Metric:"
