@@ -5,5 +5,4 @@ echo [INFO] Please add "-Declipse.workspace=<path-to-eclipse-workspace>" at end 
 cd %~dp0
 cd ..
 call mvn eclipse:clean eclipse:eclipse
-cd bin
 pause

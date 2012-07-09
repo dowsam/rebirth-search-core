@@ -271,7 +271,6 @@ public class InternalSearchHit implements SearchHit {
 	/* (non-Javadoc)
 	 * @see cn.com.rebirth.search.core.search.SearchHit#sourceAsMap()
 	 */
-	@SuppressWarnings({ "unchecked" })
 	@Override
 	public Map<String, Object> sourceAsMap() throws RebirthParseException {
 		if (source == null) {
@@ -854,7 +853,7 @@ public class InternalSearchHit implements SearchHit {
 				if (sortValue == null) {
 					out.writeByte((byte) 0);
 				} else {
-					Class type = sortValue.getClass();
+					Class<?> type = sortValue.getClass();
 					if (type == String.class) {
 						out.writeByte((byte) 1);
 						out.writeUTF((String) sortValue);
