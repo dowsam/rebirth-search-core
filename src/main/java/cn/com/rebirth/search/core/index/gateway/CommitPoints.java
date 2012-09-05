@@ -11,10 +11,10 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentFactory;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentFactory;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentType;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;

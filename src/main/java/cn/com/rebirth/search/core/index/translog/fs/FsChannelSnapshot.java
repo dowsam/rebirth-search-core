@@ -12,8 +12,8 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 import cn.com.rebirth.commons.exception.RebirthException;
-import cn.com.rebirth.search.commons.io.FileChannelInputStream;
-import cn.com.rebirth.search.commons.io.stream.BytesStreamInput;
+import cn.com.rebirth.commons.io.FileChannelInputStream;
+import cn.com.rebirth.commons.io.stream.BytesStreamInput;
 import cn.com.rebirth.search.core.index.translog.Translog;
 import cn.com.rebirth.search.core.index.translog.TranslogStreams;
 

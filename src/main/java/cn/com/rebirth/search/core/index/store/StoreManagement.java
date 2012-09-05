@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.index.store;
 
 import java.io.IOException;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.jmx.MBean;
 import cn.com.rebirth.search.core.jmx.ManagedAttribute;

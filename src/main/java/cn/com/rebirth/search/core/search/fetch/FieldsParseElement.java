@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.search.fetch;
 
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.script.SearchScript;
 import cn.com.rebirth.search.core.search.SearchParseElement;
 import cn.com.rebirth.search.core.search.fetch.script.ScriptFieldsContext;

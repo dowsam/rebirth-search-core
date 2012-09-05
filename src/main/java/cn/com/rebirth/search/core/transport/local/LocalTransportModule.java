@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.transport.local;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.jmx.JmxService;
 import cn.com.rebirth.search.core.transport.Transport;
 

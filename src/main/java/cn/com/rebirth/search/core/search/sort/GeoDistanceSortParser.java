@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.search.sort;
 import org.apache.lucene.search.SortField;
 
 import cn.com.rebirth.commons.unit.DistanceUnit;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldMapper;
 import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 import cn.com.rebirth.search.core.index.search.geo.GeoDistanceDataComparator;

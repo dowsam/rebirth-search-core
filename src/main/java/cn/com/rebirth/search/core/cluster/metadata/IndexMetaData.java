@@ -11,19 +11,19 @@ import java.util.HashSet;
 import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.Preconditions;
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.compress.CompressedString;
 import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.regex.Regex;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.Preconditions;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentFactory;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentFactory;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.cluster.block.ClusterBlock;
 import cn.com.rebirth.search.core.cluster.block.ClusterBlockLevel;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNodeFilters;
@@ -237,13 +237,13 @@ public class IndexMetaData {
 
 		this.aliases = aliases;
 
-		ImmutableMap<String, String> includeMap = settings.getByPrefix("index.routing.allocation.include.").getAsMap();
+		Map<String, String> includeMap = settings.getByPrefix("index.routing.allocation.include.").getAsMap();
 		if (includeMap.isEmpty()) {
 			includeFilters = null;
 		} else {
 			includeFilters = DiscoveryNodeFilters.buildFromKeyValue(includeMap);
 		}
-		ImmutableMap<String, String> excludeMap = settings.getByPrefix("index.routing.allocation.exclude.").getAsMap();
+		Map<String, String> excludeMap = settings.getByPrefix("index.routing.allocation.exclude.").getAsMap();
 		if (excludeMap.isEmpty()) {
 			excludeFilters = null;
 		} else {

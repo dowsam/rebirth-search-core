@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.rest;
 import java.util.List;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.rest.action.RestActionModule;
 
 import com.google.common.collect.Lists;

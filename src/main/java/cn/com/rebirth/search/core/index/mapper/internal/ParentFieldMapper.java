@@ -18,8 +18,8 @@ import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.lucene.Lucene;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.mapper.InternalMapper;
 import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;

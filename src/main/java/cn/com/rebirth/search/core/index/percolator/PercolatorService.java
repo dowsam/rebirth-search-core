@@ -17,7 +17,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Scorer;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.DeletionAwareConstantScoreQuery;
 import cn.com.rebirth.search.commons.lucene.search.TermFilter;
 import cn.com.rebirth.search.core.index.AbstractIndexComponent;

@@ -10,7 +10,7 @@ import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.AbstractIndexComponent;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.cache.query.parser.QueryParserCache;

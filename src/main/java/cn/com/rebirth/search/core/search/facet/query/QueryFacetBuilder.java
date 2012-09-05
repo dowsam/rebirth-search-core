@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.search.facet.query;
 
 import java.io.IOException;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.query.FilterBuilder;
 import cn.com.rebirth.search.core.index.query.QueryBuilder;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilderException;

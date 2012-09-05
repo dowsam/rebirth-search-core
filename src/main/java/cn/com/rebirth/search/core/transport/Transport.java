@@ -7,8 +7,8 @@ package cn.com.rebirth.search.core.transport;
 
 import java.io.IOException;
 
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.commons.io.stream.Streamable;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.commons.transport.BoundTransportAddress;
 import cn.com.rebirth.search.commons.transport.TransportAddress;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;

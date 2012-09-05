@@ -7,9 +7,9 @@ package cn.com.rebirth.search.core.node.internal;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.Tuple;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.Names;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.cluster.ClusterName;
 import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.env.FailedToResolveConfigException;

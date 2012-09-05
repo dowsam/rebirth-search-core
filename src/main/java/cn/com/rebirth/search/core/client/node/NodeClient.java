@@ -9,7 +9,8 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.Action;
 import cn.com.rebirth.search.core.action.ActionFuture;
 import cn.com.rebirth.search.core.action.ActionListener;
@@ -21,7 +22,6 @@ import cn.com.rebirth.search.core.action.support.TransportAction;
 import cn.com.rebirth.search.core.client.AdminClient;
 import cn.com.rebirth.search.core.client.internal.InternalClient;
 import cn.com.rebirth.search.core.client.support.AbstractClient;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 import com.google.common.collect.ImmutableMap;
 

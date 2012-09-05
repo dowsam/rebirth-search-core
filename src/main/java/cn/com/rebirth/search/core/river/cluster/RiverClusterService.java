@@ -12,11 +12,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterState;
 import cn.com.rebirth.search.core.transport.TransportService;

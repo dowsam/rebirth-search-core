@@ -5,8 +5,8 @@
 
 package cn.com.rebirth.search.core.transport;
 
-import cn.com.rebirth.search.commons.io.stream.VoidStreamable;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
+import cn.com.rebirth.commons.io.stream.VoidStreamable;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 
 /**
  * The Class VoidTransportResponseHandler.

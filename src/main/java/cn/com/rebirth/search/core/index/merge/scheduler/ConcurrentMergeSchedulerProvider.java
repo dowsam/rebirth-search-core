@@ -17,7 +17,7 @@ import org.apache.lucene.index.TrackingConcurrentMergeScheduler;
 import org.apache.lucene.store.AlreadyClosedException;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.merge.MergeStats;
 import cn.com.rebirth.search.core.index.merge.policy.EnableMergePolicy;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;

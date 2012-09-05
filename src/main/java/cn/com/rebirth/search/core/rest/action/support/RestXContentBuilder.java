@@ -8,15 +8,15 @@ package cn.com.rebirth.search.core.rest.action.support;
 import java.io.IOException;
 
 import cn.com.rebirth.commons.compress.lzf.LZF;
+import cn.com.rebirth.commons.io.stream.BytesStreamInput;
 import cn.com.rebirth.commons.io.stream.CachedStreamInput;
+import cn.com.rebirth.commons.io.stream.CachedStreamOutput;
 import cn.com.rebirth.commons.io.stream.LZFStreamInput;
-import cn.com.rebirth.search.commons.io.stream.BytesStreamInput;
-import cn.com.rebirth.search.commons.io.stream.CachedStreamOutput;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentFactory;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentFactory;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentType;
 import cn.com.rebirth.search.core.rest.RestRequest;
 
 /**

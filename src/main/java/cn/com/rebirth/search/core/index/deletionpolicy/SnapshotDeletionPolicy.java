@@ -15,8 +15,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.lucene.index.IndexCommit;
 import org.apache.lucene.index.IndexDeletionPolicy;
 
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.name.Named;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.name.Named;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.IndexShardComponent;
 

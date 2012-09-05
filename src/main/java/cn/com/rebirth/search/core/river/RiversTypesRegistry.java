@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.river;
 
-import cn.com.rebirth.search.commons.inject.Module;
+import cn.com.rebirth.core.inject.Module;
 
 import com.google.common.collect.ImmutableMap;
 

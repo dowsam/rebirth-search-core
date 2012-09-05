@@ -16,10 +16,10 @@ import org.apache.lucene.document.Fieldable;
 
 import cn.com.rebirth.commons.Booleans;
 import cn.com.rebirth.commons.Strings;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.commons.lucene.Lucene;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;
 import cn.com.rebirth.search.core.index.mapper.ParseContext;

@@ -11,7 +11,7 @@ import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.search.SearchParseElement;
 import cn.com.rebirth.search.core.search.SearchParseException;

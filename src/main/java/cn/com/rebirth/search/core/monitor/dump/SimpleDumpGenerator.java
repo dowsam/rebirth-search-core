@@ -11,7 +11,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.search.commons.io.FileSystemUtils;
+import cn.com.rebirth.commons.io.FileSystemUtils;
+import cn.com.rebirth.core.monitor.dump.DumpContributionFailedException;
+import cn.com.rebirth.core.monitor.dump.DumpContributor;
+import cn.com.rebirth.core.monitor.dump.DumpGenerationFailedException;
+import cn.com.rebirth.core.monitor.dump.DumpGenerator;
+import cn.com.rebirth.core.monitor.dump.SimpleDump;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 
 import com.google.common.collect.ImmutableMap;

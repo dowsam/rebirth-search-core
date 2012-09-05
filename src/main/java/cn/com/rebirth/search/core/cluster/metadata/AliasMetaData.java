@@ -12,10 +12,10 @@ import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.compress.CompressedString;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentFactory;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentFactory;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.RestartGenerationException;
 
 /**

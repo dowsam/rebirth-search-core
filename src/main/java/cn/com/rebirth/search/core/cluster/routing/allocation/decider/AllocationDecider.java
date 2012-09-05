@@ -5,8 +5,8 @@
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.core.cluster.routing.RoutingNode;
 import cn.com.rebirth.search.core.cluster.routing.ShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;

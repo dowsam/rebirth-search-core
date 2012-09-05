@@ -12,9 +12,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import jsr166y.LinkedTransferQueue;
 import cn.com.rebirth.commons.collect.Tuple;
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.search.ReduceSearchPhaseException;
 import cn.com.rebirth.search.core.action.search.SearchOperationThreading;
@@ -32,7 +33,6 @@ import cn.com.rebirth.search.core.search.controller.SearchPhaseController;
 import cn.com.rebirth.search.core.search.controller.ShardDoc;
 import cn.com.rebirth.search.core.search.fetch.QueryFetchSearchResult;
 import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class TransportSearchScrollQueryAndFetchAction.

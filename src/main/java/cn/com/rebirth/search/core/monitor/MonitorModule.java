@@ -5,10 +5,10 @@
 
 package cn.com.rebirth.search.core.monitor;
 
+import static cn.com.rebirth.core.monitor.dump.heap.HeapDumpContributor.HEAP_DUMP;
+import static cn.com.rebirth.core.monitor.dump.summary.SummaryDumpContributor.SUMMARY;
+import static cn.com.rebirth.core.monitor.dump.thread.ThreadDumpContributor.THREAD_DUMP;
 import static cn.com.rebirth.search.core.monitor.dump.cluster.ClusterDumpContributor.CLUSTER;
-import static cn.com.rebirth.search.core.monitor.dump.heap.HeapDumpContributor.HEAP_DUMP;
-import static cn.com.rebirth.search.core.monitor.dump.summary.SummaryDumpContributor.SUMMARY;
-import static cn.com.rebirth.search.core.monitor.dump.thread.ThreadDumpContributor.THREAD_DUMP;
 
 import java.util.Map;
 
@@ -16,35 +16,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Scopes;
-import cn.com.rebirth.search.commons.inject.assistedinject.FactoryProvider;
-import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
-import cn.com.rebirth.search.core.monitor.dump.DumpContributorFactory;
-import cn.com.rebirth.search.core.monitor.dump.DumpMonitorService;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Scopes;
+import cn.com.rebirth.core.inject.assistedinject.FactoryProvider;
+import cn.com.rebirth.core.inject.multibindings.MapBinder;
+import cn.com.rebirth.core.monitor.dump.DumpContributorFactory;
+import cn.com.rebirth.core.monitor.dump.DumpMonitorService;
+import cn.com.rebirth.core.monitor.dump.heap.HeapDumpContributor;
+import cn.com.rebirth.core.monitor.dump.summary.SummaryDumpContributor;
+import cn.com.rebirth.core.monitor.dump.thread.ThreadDumpContributor;
+import cn.com.rebirth.core.monitor.fs.FsProbe;
+import cn.com.rebirth.core.monitor.fs.FsService;
+import cn.com.rebirth.core.monitor.jvm.JvmMonitorService;
+import cn.com.rebirth.core.monitor.jvm.JvmService;
+import cn.com.rebirth.core.monitor.network.JmxNetworkProbe;
+import cn.com.rebirth.core.monitor.network.NetworkProbe;
+import cn.com.rebirth.core.monitor.network.NetworkService;
+import cn.com.rebirth.core.monitor.network.SigarNetworkProbe;
+import cn.com.rebirth.core.monitor.os.JmxOsProbe;
+import cn.com.rebirth.core.monitor.os.OsProbe;
+import cn.com.rebirth.core.monitor.os.OsService;
+import cn.com.rebirth.core.monitor.os.SigarOsProbe;
+import cn.com.rebirth.core.monitor.process.JmxProcessProbe;
+import cn.com.rebirth.core.monitor.process.ProcessProbe;
+import cn.com.rebirth.core.monitor.process.ProcessService;
+import cn.com.rebirth.core.monitor.process.SigarProcessProbe;
+import cn.com.rebirth.core.monitor.sigar.SigarService;
 import cn.com.rebirth.search.core.monitor.dump.cluster.ClusterDumpContributor;
-import cn.com.rebirth.search.core.monitor.dump.heap.HeapDumpContributor;
-import cn.com.rebirth.search.core.monitor.dump.summary.SummaryDumpContributor;
-import cn.com.rebirth.search.core.monitor.dump.thread.ThreadDumpContributor;
-import cn.com.rebirth.search.core.monitor.fs.FsProbe;
-import cn.com.rebirth.search.core.monitor.fs.FsService;
-import cn.com.rebirth.search.core.monitor.fs.JmxFsProbe;
-import cn.com.rebirth.search.core.monitor.fs.SigarFsProbe;
-import cn.com.rebirth.search.core.monitor.jvm.JvmMonitorService;
-import cn.com.rebirth.search.core.monitor.jvm.JvmService;
-import cn.com.rebirth.search.core.monitor.network.JmxNetworkProbe;
-import cn.com.rebirth.search.core.monitor.network.NetworkProbe;
-import cn.com.rebirth.search.core.monitor.network.NetworkService;
-import cn.com.rebirth.search.core.monitor.network.SigarNetworkProbe;
-import cn.com.rebirth.search.core.monitor.os.JmxOsProbe;
-import cn.com.rebirth.search.core.monitor.os.OsProbe;
-import cn.com.rebirth.search.core.monitor.os.OsService;
-import cn.com.rebirth.search.core.monitor.os.SigarOsProbe;
-import cn.com.rebirth.search.core.monitor.process.JmxProcessProbe;
-import cn.com.rebirth.search.core.monitor.process.ProcessProbe;
-import cn.com.rebirth.search.core.monitor.process.ProcessService;
-import cn.com.rebirth.search.core.monitor.process.SigarProcessProbe;
-import cn.com.rebirth.search.core.monitor.sigar.SigarService;
+import cn.com.rebirth.search.core.monitor.fs.SearchJmxFsProbe;
+import cn.com.rebirth.search.core.monitor.fs.SearchSigarFsProbe;
 
 /**
  * The Class MonitorModule.
@@ -93,7 +93,7 @@ public class MonitorModule extends AbstractModule {
 				bind(ProcessProbe.class).to(SigarProcessProbe.class).asEagerSingleton();
 				bind(OsProbe.class).to(SigarOsProbe.class).asEagerSingleton();
 				bind(NetworkProbe.class).to(SigarNetworkProbe.class).asEagerSingleton();
-				bind(FsProbe.class).to(SigarFsProbe.class).asEagerSingleton();
+				bind(FsProbe.class).to(SearchSigarFsProbe.class).asEagerSingleton();
 				sigarLoaded = true;
 			}
 		} catch (Throwable e) {
@@ -101,11 +101,10 @@ public class MonitorModule extends AbstractModule {
 			logger.trace("failed to load sigar", e);
 		}
 		if (!sigarLoaded) {
-
 			bind(ProcessProbe.class).to(JmxProcessProbe.class).asEagerSingleton();
 			bind(OsProbe.class).to(JmxOsProbe.class).asEagerSingleton();
 			bind(NetworkProbe.class).to(JmxNetworkProbe.class).asEagerSingleton();
-			bind(FsProbe.class).to(JmxFsProbe.class).asEagerSingleton();
+			bind(FsProbe.class).to(SearchJmxFsProbe.class).asEagerSingleton();
 		}
 
 		bind(ProcessService.class).asEagerSingleton();

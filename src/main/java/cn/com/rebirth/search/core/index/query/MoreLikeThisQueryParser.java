@@ -12,9 +12,9 @@ import java.util.Set;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.search.Query;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.MoreLikeThisQuery;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

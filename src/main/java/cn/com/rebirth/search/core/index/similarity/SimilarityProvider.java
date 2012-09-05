@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.index.similarity;
 
 import org.apache.lucene.search.Similarity;
 
-import cn.com.rebirth.search.commons.inject.Provider;
+import cn.com.rebirth.core.inject.Provider;
 import cn.com.rebirth.search.core.index.IndexComponent;
 
 /**

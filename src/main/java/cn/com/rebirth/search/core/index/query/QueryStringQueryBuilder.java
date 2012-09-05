@@ -12,7 +12,7 @@ import gnu.trove.map.hash.TObjectFloatHashMap;
 import java.io.IOException;
 import java.util.List;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 /**
  * The Class QueryStringQueryBuilder.

@@ -8,8 +8,8 @@ package cn.com.rebirth.search.core.river;
 import java.util.Map;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Module;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Module;
 import cn.com.rebirth.search.core.river.cluster.RiverClusterService;
 import cn.com.rebirth.search.core.river.routing.RiversRouter;
 

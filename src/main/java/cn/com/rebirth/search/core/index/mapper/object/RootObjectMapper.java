@@ -15,9 +15,9 @@ import java.util.Set;
 
 import cn.com.rebirth.commons.joda.FormatDateTimeFormatter;
 import cn.com.rebirth.commons.joda.Joda;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.mapper.ContentPath;
 import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;

@@ -10,7 +10,7 @@ import java.util.Map;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;

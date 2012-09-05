@@ -12,7 +12,7 @@ import org.apache.lucene.document.Field;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.joda.FormatDateTimeFormatter;
 import cn.com.rebirth.commons.joda.Joda;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.mapper.ContentPath;
 import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;

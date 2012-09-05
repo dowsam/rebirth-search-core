@@ -8,10 +8,10 @@ package cn.com.rebirth.search.core.script;
 import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.search.lookup.SearchLookup;
 
 import com.google.common.collect.ImmutableMap;

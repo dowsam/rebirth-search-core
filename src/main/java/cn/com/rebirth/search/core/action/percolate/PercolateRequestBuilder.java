@@ -7,8 +7,8 @@ package cn.com.rebirth.search.core.action.percolate;
 
 import java.util.Map;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentType;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;
 import cn.com.rebirth.search.core.client.Client;

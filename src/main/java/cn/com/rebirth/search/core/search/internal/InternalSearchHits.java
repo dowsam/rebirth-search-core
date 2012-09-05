@@ -15,13 +15,12 @@ import java.util.Map;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.thread.ThreadLocals;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
-import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.core.search.SearchHit;
 import cn.com.rebirth.search.core.search.SearchHits;
 import cn.com.rebirth.search.core.search.SearchShardTarget;
-import cn.com.rebirth.search.core.search.internal.InternalSearchHits.StreamContext;
 
 import com.google.common.collect.Iterators;
 

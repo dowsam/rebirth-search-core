@@ -10,8 +10,8 @@ import org.apache.lucene.analysis.snowball.SnowballFilter;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 

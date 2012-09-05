@@ -7,8 +7,8 @@ package cn.com.rebirth.search.core.action;
 
 import java.util.Map;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.multibindings.MapBinder;
 import cn.com.rebirth.search.core.action.admin.cluster.health.ClusterHealthAction;
 import cn.com.rebirth.search.core.action.admin.cluster.health.TransportClusterHealthAction;
 import cn.com.rebirth.search.core.action.admin.cluster.node.info.NodesInfoAction;

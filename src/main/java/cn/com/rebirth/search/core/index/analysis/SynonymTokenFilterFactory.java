@@ -23,8 +23,8 @@ import org.apache.lucene.analysis.synonym.WordnetSynonymParser;
 
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.assistedinject.Assisted;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.assistedinject.Assisted;
 import cn.com.rebirth.search.commons.lucene.Lucene;
 import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.Index;

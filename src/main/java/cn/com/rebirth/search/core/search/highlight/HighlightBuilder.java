@@ -10,9 +10,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.io.IOException;
 import java.util.List;
 
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 /**
  * The Class HighlightBuilder.

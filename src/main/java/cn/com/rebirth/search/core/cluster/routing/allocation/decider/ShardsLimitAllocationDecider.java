@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 import java.util.List;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.metadata.IndexMetaData;
 import cn.com.rebirth.search.core.cluster.routing.MutableShardRouting;
 import cn.com.rebirth.search.core.cluster.routing.RoutingNode;

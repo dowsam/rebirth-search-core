@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.com.rebirth.commons.exception.RebirthException;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.search.SearchHitField;
 import cn.com.rebirth.search.core.search.SearchParseElement;
 import cn.com.rebirth.search.core.search.fetch.FetchSubPhase;

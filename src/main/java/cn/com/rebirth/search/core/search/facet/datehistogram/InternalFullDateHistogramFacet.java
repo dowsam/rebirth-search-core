@@ -17,9 +17,9 @@ import java.util.List;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.trove.ExtTLongObjectHashMap;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.commons.CacheRecycler;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.core.search.facet.Facet;
 
 /**

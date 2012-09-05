@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.action.mlt;
 import java.util.Map;
 
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.search.SearchResponse;
 import cn.com.rebirth.search.core.action.search.SearchType;

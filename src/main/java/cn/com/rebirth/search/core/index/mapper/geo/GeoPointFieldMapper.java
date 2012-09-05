@@ -17,9 +17,9 @@ import org.apache.lucene.document.Field;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 import cn.com.rebirth.search.core.index.mapper.ContentPath;
 import cn.com.rebirth.search.core.index.mapper.FieldMapperListener;

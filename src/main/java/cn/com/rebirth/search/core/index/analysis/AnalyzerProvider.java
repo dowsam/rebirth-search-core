@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.index.analysis;
 
 import org.apache.lucene.analysis.Analyzer;
 
-import cn.com.rebirth.search.commons.inject.Provider;
+import cn.com.rebirth.core.inject.Provider;
 import cn.com.rebirth.search.index.analysis.AnalyzerScope;
 
 /**

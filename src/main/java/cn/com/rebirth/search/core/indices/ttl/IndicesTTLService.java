@@ -15,12 +15,12 @@ import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Scorer;
 
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.uid.UidField;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.bulk.BulkRequestBuilder;

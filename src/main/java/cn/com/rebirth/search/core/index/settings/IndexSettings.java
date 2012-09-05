@@ -13,7 +13,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import cn.com.rebirth.search.commons.inject.BindingAnnotation;
+import cn.com.rebirth.core.inject.BindingAnnotation;
 
 /**
  * The Interface IndexSettings.

@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.index.cache.id;
 
 import org.apache.lucene.index.IndexReader;
 
-import cn.com.rebirth.search.commons.component.CloseableComponent;
+import cn.com.rebirth.commons.component.CloseableComponent;
 import cn.com.rebirth.search.core.index.IndexComponent;
 
 /**

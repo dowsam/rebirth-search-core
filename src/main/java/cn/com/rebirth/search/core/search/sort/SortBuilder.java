@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.search.sort;
 
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.ToXContent;
 
 /**
  * The Class SortBuilder.

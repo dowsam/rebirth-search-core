@@ -5,9 +5,9 @@
 
 package cn.com.rebirth.search.core.search;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.inject.SpawnModules;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Module;
+import cn.com.rebirth.core.inject.SpawnModules;
 import cn.com.rebirth.search.core.search.action.SearchServiceTransportAction;
 import cn.com.rebirth.search.core.search.controller.SearchPhaseController;
 import cn.com.rebirth.search.core.search.dfs.DfsPhase;

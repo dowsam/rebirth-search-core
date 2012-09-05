@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.search.facet.termsstats;
 import java.io.IOException;
 import java.util.Map;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilderException;
 import cn.com.rebirth.search.core.search.facet.AbstractFacetBuilder;
 

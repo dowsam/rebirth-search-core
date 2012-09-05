@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.metrics.CounterMetric;
 import cn.com.rebirth.search.commons.metrics.MeanMetric;
 import cn.com.rebirth.search.core.index.engine.Engine;

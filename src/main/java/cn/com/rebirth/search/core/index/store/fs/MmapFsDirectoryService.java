@@ -11,9 +11,9 @@ import java.io.IOException;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.MMapDirectory;
 
+import cn.com.rebirth.commons.io.FileSystemUtils;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.io.FileSystemUtils;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.store.IndexStore;

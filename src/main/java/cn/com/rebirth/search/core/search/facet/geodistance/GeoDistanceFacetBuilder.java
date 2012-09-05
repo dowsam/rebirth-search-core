@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.com.rebirth.commons.unit.DistanceUnit;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.query.FilterBuilder;
 import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 import cn.com.rebirth.search.core.search.builder.SearchSourceBuilderException;

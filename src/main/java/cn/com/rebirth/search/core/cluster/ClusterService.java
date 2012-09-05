@@ -5,9 +5,9 @@
 
 package cn.com.rebirth.search.core.cluster;
 
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.core.cluster.block.ClusterBlock;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.cluster.routing.operation.OperationRouting;

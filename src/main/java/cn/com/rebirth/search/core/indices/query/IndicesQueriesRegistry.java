@@ -9,7 +9,7 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.index.query.AndFilterParser;
 import cn.com.rebirth.search.core.index.query.BoolFilterParser;

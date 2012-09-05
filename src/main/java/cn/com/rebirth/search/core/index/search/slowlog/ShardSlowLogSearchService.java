@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentHelper;
+import cn.com.rebirth.commons.xcontent.XContentHelper;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.metadata.IndexMetaData;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.settings.IndexSettingsService;

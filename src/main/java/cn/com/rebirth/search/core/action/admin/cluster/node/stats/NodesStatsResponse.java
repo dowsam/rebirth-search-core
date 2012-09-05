@@ -10,8 +10,8 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.support.nodes.NodesOperationResponse;
 import cn.com.rebirth.search.core.cluster.ClusterName;
 

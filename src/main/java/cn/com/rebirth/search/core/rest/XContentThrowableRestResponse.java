@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.rest;
 import java.io.IOException;
 
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
 /**

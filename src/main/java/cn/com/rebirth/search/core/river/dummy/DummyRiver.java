@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.river.dummy;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.river.AbstractRiverComponent;
 import cn.com.rebirth.search.core.river.River;
 import cn.com.rebirth.search.core.river.RiverName;

@@ -7,8 +7,8 @@ package cn.com.rebirth.search.core.search.facet;
 
 import java.util.List;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.multibindings.Multibinder;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.multibindings.Multibinder;
 import cn.com.rebirth.search.core.search.facet.datehistogram.DateHistogramFacetProcessor;
 import cn.com.rebirth.search.core.search.facet.filter.FilterFacetProcessor;
 import cn.com.rebirth.search.core.search.facet.geodistance.GeoDistanceFacetProcessor;

@@ -12,12 +12,12 @@ import org.apache.lucene.store.bytebuffer.ByteBufferAllocator;
 import org.apache.lucene.store.bytebuffer.CachingByteBufferAllocator;
 import org.apache.lucene.store.bytebuffer.PlainByteBufferAllocator;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
+import cn.com.rebirth.core.inject.Inject;
 
 /**
  * The Class ByteBufferCache.

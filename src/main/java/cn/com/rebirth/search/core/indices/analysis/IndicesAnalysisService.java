@@ -89,15 +89,15 @@ import org.apache.lucene.analysis.sv.SwedishAnalyzer;
 import org.apache.lucene.analysis.th.ThaiAnalyzer;
 import org.apache.lucene.analysis.tr.TurkishAnalyzer;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
 import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
 import cn.com.rebirth.commons.regex.Regex;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.Lucene;
 import cn.com.rebirth.search.commons.lucene.analysis.HTMLStripCharFilter;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.index.analysis.CharFilterFactory;
 import cn.com.rebirth.search.core.index.analysis.CharFilterFactoryFactory;
 import cn.com.rebirth.search.core.index.analysis.PreBuiltAnalyzerProviderFactory;

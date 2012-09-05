@@ -7,9 +7,9 @@ package cn.com.rebirth.search.core.indices;
 
 import java.util.Set;
 
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.core.index.service.IndexService;
 
 /**

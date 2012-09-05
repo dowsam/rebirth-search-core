@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.client.transport;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.client.transport.support.InternalTransportAdminClient;
 import cn.com.rebirth.search.core.client.transport.support.InternalTransportClient;
 import cn.com.rebirth.search.core.client.transport.support.InternalTransportClusterAdminClient;

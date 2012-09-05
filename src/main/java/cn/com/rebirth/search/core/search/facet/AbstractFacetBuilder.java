@@ -7,9 +7,8 @@ package cn.com.rebirth.search.core.search.facet;
 
 import java.io.IOException;
 
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.query.FilterBuilder;
 import cn.com.rebirth.search.core.search.internal.ContextIndexSearcher;
 

@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.index.query;
 import java.io.IOException;
 import java.util.List;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;
 import cn.com.rebirth.search.core.index.search.geo.Point;
 

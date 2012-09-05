@@ -10,7 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 /**
  * The Class DisMaxQueryBuilder.

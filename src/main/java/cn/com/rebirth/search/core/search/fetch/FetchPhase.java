@@ -16,7 +16,7 @@ import org.apache.lucene.document.Fieldable;
 import org.apache.lucene.index.IndexReader;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.document.ResetFieldSelector;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.mapper.DocumentMapper;

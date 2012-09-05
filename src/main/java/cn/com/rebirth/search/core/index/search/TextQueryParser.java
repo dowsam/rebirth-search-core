@@ -28,7 +28,7 @@ import org.apache.lucene.search.TermQuery;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
-import cn.com.rebirth.search.commons.io.FastStringReader;
+import cn.com.rebirth.commons.io.FastStringReader;
 import cn.com.rebirth.search.commons.lucene.search.MatchNoDocsQuery;
 import cn.com.rebirth.search.commons.lucene.search.MultiPhrasePrefixQuery;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;

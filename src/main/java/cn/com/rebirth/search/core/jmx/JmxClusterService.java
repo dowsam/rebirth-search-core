@@ -14,9 +14,9 @@ import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.core.cluster.ClusterChangedEvent;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterStateListener;

@@ -12,10 +12,9 @@ import java.util.Set;
 
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
-import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.core.action.ShardOperationFailedException;
 import cn.com.rebirth.search.core.action.support.broadcast.BroadcastOperationResponse;
 import cn.com.rebirth.search.core.cluster.ClusterState;

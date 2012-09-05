@@ -10,7 +10,7 @@ import java.util.Map;
 import org.apache.lucene.search.FieldComparatorSource;
 import org.apache.lucene.search.SortField;
 
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.field.function.sort.DoubleFieldsFunctionDataComparator;
 import cn.com.rebirth.search.core.index.field.function.sort.StringFieldsFunctionDataComparator;
 import cn.com.rebirth.search.core.script.SearchScript;

@@ -7,9 +7,9 @@ package cn.com.rebirth.search.core.index.settings;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.AbstractIndexComponent;
 import cn.com.rebirth.search.core.index.Index;
 

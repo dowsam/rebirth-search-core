@@ -9,10 +9,10 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Scopes;
-import cn.com.rebirth.search.commons.inject.assistedinject.FactoryProvider;
-import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Scopes;
+import cn.com.rebirth.core.inject.assistedinject.FactoryProvider;
+import cn.com.rebirth.core.inject.multibindings.MapBinder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

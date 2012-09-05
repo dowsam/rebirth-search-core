@@ -22,8 +22,8 @@ import org.jboss.netty.handler.codec.http.HttpMethod;
 import org.jboss.netty.handler.codec.http.HttpResponseStatus;
 import org.jboss.netty.handler.codec.http.HttpVersion;
 
-import cn.com.rebirth.search.commons.io.stream.CachedStreamOutput;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.io.stream.CachedStreamOutput;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.http.HttpChannel;
 import cn.com.rebirth.search.core.http.HttpException;
 import cn.com.rebirth.search.core.rest.RestResponse;

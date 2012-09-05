@@ -14,7 +14,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.TotalHitCountCollector;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.Lucene;
 import cn.com.rebirth.search.commons.lucene.search.DeletionAwareConstantScoreQuery;
 import cn.com.rebirth.search.commons.lucene.search.Queries;

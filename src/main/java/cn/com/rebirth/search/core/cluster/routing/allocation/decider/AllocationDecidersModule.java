@@ -8,8 +8,8 @@ package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 import java.util.List;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.multibindings.Multibinder;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.multibindings.Multibinder;
 
 import com.google.common.collect.Lists;
 

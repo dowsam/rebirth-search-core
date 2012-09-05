@@ -34,6 +34,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.store.AlreadyClosedException;
 import org.apache.lucene.util.UnicodeUtil;
 
+import cn.com.rebirth.commons.Preconditions;
 import cn.com.rebirth.commons.Unicode;
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.exception.RebirthException;
@@ -41,9 +42,9 @@ import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.Preconditions;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.commons.bloom.BloomFilter;
-import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.Lucene;
 import cn.com.rebirth.search.commons.lucene.manager.SearcherFactory;
 import cn.com.rebirth.search.commons.lucene.manager.SearcherManager;
@@ -84,7 +85,6 @@ import cn.com.rebirth.search.core.index.similarity.SimilarityService;
 import cn.com.rebirth.search.core.index.store.Store;
 import cn.com.rebirth.search.core.index.translog.Translog;
 import cn.com.rebirth.search.core.index.translog.TranslogStreams;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class RobinEngine.

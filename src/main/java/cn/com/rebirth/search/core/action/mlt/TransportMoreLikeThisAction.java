@@ -22,7 +22,8 @@ import org.apache.lucene.index.Term;
 
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.get.GetRequest;
 import cn.com.rebirth.search.core.action.get.GetResponse;
@@ -43,7 +44,6 @@ import cn.com.rebirth.search.core.index.mapper.internal.SourceFieldMapper;
 import cn.com.rebirth.search.core.index.query.BoolQueryBuilder;
 import cn.com.rebirth.search.core.index.query.MoreLikeThisFieldQueryBuilder;
 import cn.com.rebirth.search.core.indices.IndicesService;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.BaseTransportRequestHandler;
 import cn.com.rebirth.search.core.transport.TransportChannel;
 import cn.com.rebirth.search.core.transport.TransportService;

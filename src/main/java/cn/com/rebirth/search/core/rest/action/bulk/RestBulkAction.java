@@ -5,12 +5,18 @@
 
 package cn.com.rebirth.search.core.rest.action.bulk;
 
+import static cn.com.rebirth.search.core.rest.RestRequest.Method.POST;
+import static cn.com.rebirth.search.core.rest.RestRequest.Method.PUT;
+import static cn.com.rebirth.search.core.rest.RestStatus.BAD_REQUEST;
+import static cn.com.rebirth.search.core.rest.RestStatus.OK;
+import static cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder.restContentBuilder;
+
 import java.io.IOException;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilderString;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
 import cn.com.rebirth.search.core.action.bulk.BulkItemResponse;
@@ -26,11 +32,6 @@ import cn.com.rebirth.search.core.rest.RestController;
 import cn.com.rebirth.search.core.rest.RestRequest;
 import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
-import static cn.com.rebirth.search.core.rest.RestRequest.Method.POST;
-import static cn.com.rebirth.search.core.rest.RestRequest.Method.PUT;
-import static cn.com.rebirth.search.core.rest.RestStatus.BAD_REQUEST;
-import static cn.com.rebirth.search.core.rest.RestStatus.OK;
-import static cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder.restContentBuilder;
 
 /**
  * The Class RestBulkAction.

@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.search;
 
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 /**

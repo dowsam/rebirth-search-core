@@ -8,8 +8,8 @@ package cn.com.rebirth.search.core.action.admin.indices.mapping.put;
 import java.util.Map;
 
 import cn.com.rebirth.commons.unit.TimeValue;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.Required;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.support.BaseIndicesRequestBuilder;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;

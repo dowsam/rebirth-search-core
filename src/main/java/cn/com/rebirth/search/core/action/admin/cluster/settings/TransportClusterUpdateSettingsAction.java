@@ -10,9 +10,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.support.master.TransportMasterNodeOperationAction;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterState;
@@ -22,7 +23,6 @@ import cn.com.rebirth.search.core.cluster.block.ClusterBlocks;
 import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 import cn.com.rebirth.search.core.cluster.routing.allocation.AllocationService;
 import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
 /**

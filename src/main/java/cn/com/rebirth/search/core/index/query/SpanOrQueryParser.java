@@ -15,8 +15,8 @@ import org.apache.lucene.search.spans.SpanOrQuery;
 import org.apache.lucene.search.spans.SpanQuery;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 
 /**
  * The Class SpanOrQueryParser.

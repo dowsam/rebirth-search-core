@@ -11,9 +11,9 @@ import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.Filter;
 import org.apache.lucene.search.FilterClause;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.XBooleanFilter;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter;
 
 /**

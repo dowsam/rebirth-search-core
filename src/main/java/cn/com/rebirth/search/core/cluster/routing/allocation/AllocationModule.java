@@ -6,9 +6,9 @@
 package cn.com.rebirth.search.core.cluster.routing.allocation;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.inject.SpawnModules;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Module;
+import cn.com.rebirth.core.inject.SpawnModules;
 import cn.com.rebirth.search.core.cluster.routing.allocation.allocator.ShardsAllocatorModule;
 import cn.com.rebirth.search.core.cluster.routing.allocation.decider.AllocationDecidersModule;
 

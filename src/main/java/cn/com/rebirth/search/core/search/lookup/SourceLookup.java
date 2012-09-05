@@ -15,8 +15,8 @@ import org.apache.lucene.document.Fieldable;
 import org.apache.lucene.index.IndexReader;
 
 import cn.com.rebirth.commons.exception.RebirthParseException;
-import cn.com.rebirth.search.commons.xcontent.XContentHelper;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
+import cn.com.rebirth.commons.xcontent.XContentHelper;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.mapper.internal.SourceFieldMapper;
 import cn.com.rebirth.search.core.index.mapper.internal.SourceFieldSelector;
 

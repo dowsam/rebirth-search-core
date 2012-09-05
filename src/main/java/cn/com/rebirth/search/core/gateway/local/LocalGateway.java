@@ -9,12 +9,12 @@ import gnu.trove.map.hash.TObjectIntHashMap;
 
 import java.util.Set;
 
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.io.FileSystemUtils;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.io.FileSystemUtils;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.Module;
 import cn.com.rebirth.search.core.action.FailedNodeException;
 import cn.com.rebirth.search.core.cluster.ClusterChangedEvent;
 import cn.com.rebirth.search.core.cluster.ClusterService;

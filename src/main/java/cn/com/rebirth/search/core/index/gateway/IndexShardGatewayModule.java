@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.index.gateway;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 
 /**
  * The Class IndexShardGatewayModule.

@@ -11,7 +11,7 @@ import java.util.Map;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.ToXContent;
 import cn.com.rebirth.search.core.index.analysis.AnalysisService;
 
 import com.google.common.collect.ImmutableMap;

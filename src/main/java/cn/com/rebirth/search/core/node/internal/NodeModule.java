@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.node.internal;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.node.Node;
 import cn.com.rebirth.search.core.node.service.NodeService;
 import cn.com.rebirth.search.core.node.settings.NodeSettingsService;

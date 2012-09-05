@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.search.facet;
 import java.io.IOException;
 import java.util.List;
 
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 /**

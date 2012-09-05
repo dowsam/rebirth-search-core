@@ -12,9 +12,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import cn.com.rebirth.commons.Strings;
+import cn.com.rebirth.commons.io.Streams;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.io.Streams;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.cluster.ClusterName;
 
 /**

@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.index.gateway.fs;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.index.gateway.IndexGateway;
 
 /**

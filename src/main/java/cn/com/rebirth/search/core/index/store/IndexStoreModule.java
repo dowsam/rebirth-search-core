@@ -9,10 +9,10 @@ import org.apache.lucene.store.MMapDirectory;
 import org.apache.lucene.util.Constants;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.inject.Modules;
-import cn.com.rebirth.search.commons.inject.SpawnModules;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Module;
+import cn.com.rebirth.core.inject.Modules;
+import cn.com.rebirth.core.inject.SpawnModules;
 import cn.com.rebirth.search.core.index.store.fs.MmapFsIndexStoreModule;
 import cn.com.rebirth.search.core.index.store.fs.NioFsIndexStoreModule;
 import cn.com.rebirth.search.core.index.store.fs.SimpleFsIndexStoreModule;

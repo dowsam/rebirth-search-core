@@ -15,11 +15,11 @@ import org.apache.lucene.search.Filter;
 import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.function.BoostScoreFunction;
 import cn.com.rebirth.search.commons.lucene.search.function.FiltersFunctionScoreQuery;
 import cn.com.rebirth.search.commons.lucene.search.function.ScoreFunction;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.script.SearchScript;
 
 /**

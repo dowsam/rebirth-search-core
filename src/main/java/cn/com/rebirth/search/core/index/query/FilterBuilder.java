@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.index.query;
 
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.ToXContent;
 
 /**
  * The Interface FilterBuilder.

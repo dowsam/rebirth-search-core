@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import org.apache.lucene.search.BooleanClause;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 /**
  * The Class BoolFilterBuilder.

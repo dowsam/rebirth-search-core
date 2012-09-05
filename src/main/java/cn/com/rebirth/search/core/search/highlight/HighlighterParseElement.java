@@ -9,8 +9,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.List;
 
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.commons.lucene.search.vectorhighlight.SimpleBoundaryScanner2;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.search.SearchParseElement;
 import cn.com.rebirth.search.core.search.SearchParseException;
 import cn.com.rebirth.search.core.search.internal.SearchContext;

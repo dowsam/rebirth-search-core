@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.action.support;
 
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 
 /**
  * The Class PlainListenableActionFuture.

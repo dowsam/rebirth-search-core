@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.search.facet;
 import java.util.Set;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 
 import com.google.common.collect.ImmutableMap;
 

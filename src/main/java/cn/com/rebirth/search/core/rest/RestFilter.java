@@ -5,8 +5,8 @@
 
 package cn.com.rebirth.search.core.rest;
 
+import cn.com.rebirth.commons.component.CloseableComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
-import cn.com.rebirth.search.commons.component.CloseableComponent;
 
 /**
  * The Class RestFilter.

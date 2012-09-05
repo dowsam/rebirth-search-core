@@ -9,8 +9,8 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentType;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;

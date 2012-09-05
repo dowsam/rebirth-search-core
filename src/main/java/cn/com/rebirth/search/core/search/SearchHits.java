@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.search;
 
 import cn.com.rebirth.commons.io.stream.Streamable;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.ToXContent;
 
 /**
  * The Interface SearchHits.

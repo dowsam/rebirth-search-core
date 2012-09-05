@@ -7,7 +7,8 @@ package cn.com.rebirth.search.core.action.delete;
 
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.create.CreateIndexRequest;
 import cn.com.rebirth.search.core.action.admin.indices.create.CreateIndexResponse;
@@ -28,7 +29,6 @@ import cn.com.rebirth.search.core.index.engine.Engine;
 import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 import cn.com.rebirth.search.core.indices.IndexAlreadyExistsException;
 import cn.com.rebirth.search.core.indices.IndicesService;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
 /**

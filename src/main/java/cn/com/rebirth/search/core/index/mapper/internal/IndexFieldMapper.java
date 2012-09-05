@@ -14,9 +14,9 @@ import org.apache.lucene.document.Fieldable;
 import org.apache.lucene.index.Term;
 
 import cn.com.rebirth.commons.Strings;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.commons.lucene.Lucene;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.mapper.InternalMapper;
 import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperBuilders;

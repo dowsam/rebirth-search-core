@@ -7,10 +7,10 @@ package cn.com.rebirth.search.core.index.query;
 
 import java.io.IOException;
 
-import cn.com.rebirth.search.commons.io.BytesStream;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentFactory;
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.io.BytesStream;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentFactory;
+import cn.com.rebirth.commons.xcontent.XContentType;
 
 /**
  * The Class BaseQueryBuilder.

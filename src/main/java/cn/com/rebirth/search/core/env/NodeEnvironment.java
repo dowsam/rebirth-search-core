@@ -13,12 +13,12 @@ import java.util.Set;
 import org.apache.lucene.store.Lock;
 import org.apache.lucene.store.NativeFSLockFactory;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
+import cn.com.rebirth.commons.io.FileSystemUtils;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.io.FileSystemUtils;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.shard.ShardId;
@@ -172,9 +172,6 @@ public class NodeEnvironment extends AbstractComponent {
 	 * @return the file[]
 	 */
 	public File[] nodeDataLocations() {
-		if (nodeFiles == null || locks == null) {
-			throw new RebirthIllegalStateException("node is not configured to store local location");
-		}
 		return nodeFiles;
 	}
 

@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.client;
 
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.xcontent.XContentType;
 import cn.com.rebirth.search.core.action.admin.cluster.health.ClusterHealthRequest;
 import cn.com.rebirth.search.core.action.admin.cluster.node.info.NodesInfoRequest;
 import cn.com.rebirth.search.core.action.admin.cluster.node.restart.NodesRestartRequest;

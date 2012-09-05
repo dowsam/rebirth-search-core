@@ -8,11 +8,12 @@ package cn.com.rebirth.search.core.gateway;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.cluster.ClusterChangedEvent;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterState;
@@ -32,7 +33,6 @@ import cn.com.rebirth.search.core.cluster.routing.allocation.RoutingAllocation;
 import cn.com.rebirth.search.core.discovery.Discovery;
 import cn.com.rebirth.search.core.discovery.DiscoveryService;
 import cn.com.rebirth.search.core.rest.RestStatus;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class GatewayService.

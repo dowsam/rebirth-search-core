@@ -17,10 +17,10 @@ import org.apache.lucene.search.Query;
 
 import cn.com.rebirth.commons.BytesHolder;
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.component.CloseableComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.component.CloseableComponent;
 import cn.com.rebirth.search.commons.lease.Releasable;
 import cn.com.rebirth.search.commons.lucene.uid.UidField;
 import cn.com.rebirth.search.core.index.VersionType;

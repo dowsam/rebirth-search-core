@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.search.sort;
 import java.io.IOException;
 
 import cn.com.rebirth.commons.unit.DistanceUnit;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 
 /**

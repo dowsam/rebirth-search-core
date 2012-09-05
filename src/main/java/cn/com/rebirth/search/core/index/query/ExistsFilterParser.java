@@ -10,8 +10,8 @@ import java.io.IOException;
 import org.apache.lucene.search.Filter;
 import org.apache.lucene.search.TermRangeFilter;
 
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.mapper.MapperService;
 import cn.com.rebirth.search.core.index.query.support.QueryParsers;
 

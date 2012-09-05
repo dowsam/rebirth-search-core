@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.index.cache.filter;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.Filter;
 
-import cn.com.rebirth.search.commons.component.CloseableComponent;
+import cn.com.rebirth.commons.component.CloseableComponent;
 import cn.com.rebirth.search.core.index.IndexComponent;
 
 /**

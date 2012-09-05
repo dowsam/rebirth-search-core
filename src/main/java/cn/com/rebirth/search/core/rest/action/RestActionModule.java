@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.rest.action;
 
 import java.util.List;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.rest.BaseRestHandler;
 import cn.com.rebirth.search.core.rest.action.admin.cluster.health.RestClusterHealthAction;
 import cn.com.rebirth.search.core.rest.action.admin.cluster.node.info.RestNodesInfoAction;

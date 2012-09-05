@@ -5,12 +5,17 @@
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.mapping.get;
 
+import static cn.com.rebirth.search.core.rest.RestRequest.Method.GET;
+import static cn.com.rebirth.search.core.rest.RestStatus.OK;
+import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
+import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitTypes;
+
 import java.io.IOException;
 import java.util.Set;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.cluster.state.ClusterStateRequest;
 import cn.com.rebirth.search.core.action.admin.cluster.state.ClusterStateResponse;
@@ -31,11 +36,6 @@ import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
 import com.google.common.collect.ImmutableSet;
-
-import static cn.com.rebirth.search.core.rest.RestRequest.Method.GET;
-import static cn.com.rebirth.search.core.rest.RestStatus.OK;
-import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
-import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitTypes;
 
 /**
  * The Class RestGetMappingAction.

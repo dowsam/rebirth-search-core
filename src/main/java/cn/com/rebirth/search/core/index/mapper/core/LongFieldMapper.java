@@ -19,10 +19,10 @@ import org.apache.lucene.util.NumericUtils;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.Strings;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.commons.Numbers;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
-import cn.com.rebirth.search.commons.xcontent.support.XContentMapValues;
 import cn.com.rebirth.search.core.index.analysis.NumericLongAnalyzer;
 import cn.com.rebirth.search.core.index.cache.field.data.FieldDataCache;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;

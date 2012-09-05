@@ -43,7 +43,7 @@ import org.apache.lucene.search.vectorhighlight.SimpleFragmentsBuilder;
 import org.apache.lucene.search.vectorhighlight.SingleFragListBuilder;
 
 import cn.com.rebirth.commons.exception.RebirthException;
-import cn.com.rebirth.search.commons.io.FastStringReader;
+import cn.com.rebirth.commons.io.FastStringReader;
 import cn.com.rebirth.search.commons.lucene.document.SingleFieldSelector;
 import cn.com.rebirth.search.commons.lucene.search.function.FiltersFunctionScoreQuery;
 import cn.com.rebirth.search.commons.lucene.search.function.FunctionScoreQuery;

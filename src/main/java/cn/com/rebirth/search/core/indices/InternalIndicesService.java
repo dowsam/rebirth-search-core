@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.indices;
 
 import static cn.com.rebirth.commons.collect.MapBuilder.newMapBuilder;
-import static cn.com.rebirth.search.commons.settings.ImmutableSettings.settingsBuilder;
+import static cn.com.rebirth.commons.settings.ImmutableSettings.settingsBuilder;
 import static cn.com.rebirth.search.core.cluster.metadata.IndexMetaData.SETTING_NUMBER_OF_REPLICAS;
 import static cn.com.rebirth.search.core.cluster.metadata.IndexMetaData.SETTING_NUMBER_OF_SHARDS;
 import static com.google.common.collect.Maps.newHashMap;
@@ -21,17 +21,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.exception.RebirthIllegalStateException;
+import cn.com.rebirth.commons.io.FileSystemUtils;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
-import cn.com.rebirth.search.commons.inject.CreationException;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.Injector;
-import cn.com.rebirth.search.commons.inject.Injectors;
-import cn.com.rebirth.search.commons.inject.ModulesBuilder;
-import cn.com.rebirth.search.commons.io.FileSystemUtils;
+import cn.com.rebirth.core.inject.CreationException;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.Injector;
+import cn.com.rebirth.core.inject.Injectors;
+import cn.com.rebirth.core.inject.ModulesBuilder;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.env.NodeEnvironment;
 import cn.com.rebirth.search.core.gateway.Gateway;
 import cn.com.rebirth.search.core.index.CloseableIndexComponent;
@@ -76,7 +77,6 @@ import cn.com.rebirth.search.core.indices.recovery.RecoverySettings;
 import cn.com.rebirth.search.core.indices.store.IndicesStore;
 import cn.com.rebirth.search.core.plugins.IndexPluginsModule;
 import cn.com.rebirth.search.core.plugins.PluginsService;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;

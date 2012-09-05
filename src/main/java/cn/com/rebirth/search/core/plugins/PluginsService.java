@@ -21,13 +21,13 @@ import java.util.Properties;
 import java.util.Set;
 
 import cn.com.rebirth.commons.collect.MapBuilder;
+import cn.com.rebirth.commons.component.AbstractComponent;
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.Module;
 import cn.com.rebirth.search.core.env.Environment;
 import cn.com.rebirth.search.core.index.CloseableIndexComponent;
 

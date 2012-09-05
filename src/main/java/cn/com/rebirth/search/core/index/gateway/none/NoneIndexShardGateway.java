@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.index.gateway.none;
 import java.io.IOException;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.gateway.none.NoneGateway;
 import cn.com.rebirth.search.core.index.gateway.IndexShardGateway;
 import cn.com.rebirth.search.core.index.gateway.IndexShardGatewayRecoveryException;

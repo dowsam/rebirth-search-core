@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.transport;
 
 import cn.com.rebirth.commons.io.stream.Streamable;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 
 /**
  * The Class FutureTransportResponseHandler.

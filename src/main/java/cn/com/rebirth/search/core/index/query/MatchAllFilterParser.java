@@ -10,9 +10,9 @@ import java.io.IOException;
 import org.apache.lucene.search.Filter;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.Queries;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 
 /**
  * The Class MatchAllFilterParser.

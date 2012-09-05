@@ -8,9 +8,9 @@ package cn.com.rebirth.search.core.rest.action.percolate;
 import java.io.IOException;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilderString;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.percolate.PercolateRequest;
 import cn.com.rebirth.search.core.action.percolate.PercolateResponse;
@@ -19,10 +19,10 @@ import cn.com.rebirth.search.core.rest.BaseRestHandler;
 import cn.com.rebirth.search.core.rest.RestChannel;
 import cn.com.rebirth.search.core.rest.RestController;
 import cn.com.rebirth.search.core.rest.RestRequest;
+import cn.com.rebirth.search.core.rest.RestRequest.Method;
 import cn.com.rebirth.search.core.rest.RestStatus;
 import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
-import cn.com.rebirth.search.core.rest.RestRequest.Method;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
 
 /**

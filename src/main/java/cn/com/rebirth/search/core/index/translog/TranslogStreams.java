@@ -7,9 +7,9 @@ package cn.com.rebirth.search.core.index.translog;
 
 import java.io.IOException;
 
+import cn.com.rebirth.commons.io.stream.BytesStreamInput;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
-import cn.com.rebirth.search.commons.io.stream.BytesStreamInput;
 
 /**
  * The Class TranslogStreams.

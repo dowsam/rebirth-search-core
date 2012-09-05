@@ -10,9 +10,9 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.exception.RebirthIllegalArgumentException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.multibindings.MapBinder;
-import cn.com.rebirth.search.commons.inject.multibindings.Multibinder;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.multibindings.MapBinder;
+import cn.com.rebirth.core.inject.multibindings.Multibinder;
 import cn.com.rebirth.search.core.script.mvel.MvelScriptEngineService;
 
 import com.google.common.collect.Lists;

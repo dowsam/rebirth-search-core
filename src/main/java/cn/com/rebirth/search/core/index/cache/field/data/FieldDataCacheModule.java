@@ -6,8 +6,8 @@
 package cn.com.rebirth.search.core.index.cache.field.data;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Scopes;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Scopes;
 import cn.com.rebirth.search.core.index.cache.field.data.resident.ResidentFieldDataCache;
 
 /**

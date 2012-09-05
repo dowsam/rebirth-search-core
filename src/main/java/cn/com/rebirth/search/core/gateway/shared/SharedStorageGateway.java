@@ -11,11 +11,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import cn.com.rebirth.commons.StopWatch;
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.concurrent.EsExecutors;
 import cn.com.rebirth.commons.exception.ExceptionsHelper;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.cluster.ClusterChangedEvent;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.cluster.ClusterState;
@@ -23,7 +24,6 @@ import cn.com.rebirth.search.core.cluster.ClusterStateListener;
 import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 import cn.com.rebirth.search.core.gateway.Gateway;
 import cn.com.rebirth.search.core.gateway.GatewayException;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class SharedStorageGateway.

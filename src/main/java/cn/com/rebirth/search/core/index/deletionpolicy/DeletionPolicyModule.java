@@ -8,8 +8,8 @@ package cn.com.rebirth.search.core.index.deletionpolicy;
 import org.apache.lucene.index.IndexDeletionPolicy;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.name.Names;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.name.Names;
 
 /**
  * The Class DeletionPolicyModule.

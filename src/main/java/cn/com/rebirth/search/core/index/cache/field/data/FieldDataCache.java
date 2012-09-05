@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import org.apache.lucene.index.IndexReader;
 
-import cn.com.rebirth.search.commons.component.CloseableComponent;
+import cn.com.rebirth.commons.component.CloseableComponent;
 import cn.com.rebirth.search.core.index.IndexComponent;
 import cn.com.rebirth.search.core.index.field.data.FieldData;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;

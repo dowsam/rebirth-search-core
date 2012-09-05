@@ -16,8 +16,8 @@ import org.apache.lucene.document.Field;
 
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.settings.Settings;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.commons.lucene.all.AllEntries;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.analysis.AnalysisService;
 import cn.com.rebirth.search.core.index.mapper.object.RootObjectMapper;
 

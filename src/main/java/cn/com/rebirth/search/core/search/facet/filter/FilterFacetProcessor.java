@@ -10,10 +10,10 @@ import java.util.List;
 
 import org.apache.lucene.search.Filter;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.FacetCollector;
 import cn.com.rebirth.search.core.search.facet.FacetProcessor;

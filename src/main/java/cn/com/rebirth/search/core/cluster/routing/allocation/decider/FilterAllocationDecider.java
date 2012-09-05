@@ -5,8 +5,10 @@
 
 package cn.com.rebirth.search.core.cluster.routing.allocation.decider;
 
+import java.util.Map;
+
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.metadata.IndexMetaData;
 import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNodeFilters;
@@ -44,14 +46,14 @@ public class FilterAllocationDecider extends AllocationDecider {
 	@Inject
 	public FilterAllocationDecider(Settings settings, NodeSettingsService nodeSettingsService) {
 		super(settings);
-		ImmutableMap<String, String> includeMap = settings.getByPrefix("cluster.routing.allocation.include.")
+		Map<String, String> includeMap = settings.getByPrefix("cluster.routing.allocation.include.")
 				.getAsMap();
 		if (includeMap.isEmpty()) {
 			clusterIncludeFilters = null;
 		} else {
 			clusterIncludeFilters = DiscoveryNodeFilters.buildFromKeyValue(includeMap);
 		}
-		ImmutableMap<String, String> excludeMap = settings.getByPrefix("cluster.routing.allocation.exclude.")
+		Map<String, String> excludeMap = settings.getByPrefix("cluster.routing.allocation.exclude.")
 				.getAsMap();
 		if (excludeMap.isEmpty()) {
 			clusterExcludeFilters = null;
@@ -124,12 +126,12 @@ public class FilterAllocationDecider extends AllocationDecider {
 		 */
 		@Override
 		public void onRefreshSettings(Settings settings) {
-			ImmutableMap<String, String> includeMap = settings.getByPrefix("cluster.routing.allocation.include.")
+			Map<String, String> includeMap = settings.getByPrefix("cluster.routing.allocation.include.")
 					.getAsMap();
 			if (!includeMap.isEmpty()) {
 				clusterIncludeFilters = DiscoveryNodeFilters.buildFromKeyValue(includeMap);
 			}
-			ImmutableMap<String, String> excludeMap = settings.getByPrefix("cluster.routing.allocation.exclude.")
+			Map<String, String> excludeMap = settings.getByPrefix("cluster.routing.allocation.exclude.")
 					.getAsMap();
 			if (!excludeMap.isEmpty()) {
 				clusterExcludeFilters = DiscoveryNodeFilters.buildFromKeyValue(excludeMap);

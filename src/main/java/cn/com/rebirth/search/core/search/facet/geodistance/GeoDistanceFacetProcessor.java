@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.DistanceUnit;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.mapper.geo.GeoPointFieldMapper;
 import cn.com.rebirth.search.core.index.search.geo.GeoDistance;
 import cn.com.rebirth.search.core.index.search.geo.GeoHashUtils;

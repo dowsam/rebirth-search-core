@@ -9,7 +9,7 @@ import java.util.Map;
 
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.ToXContent.Params;
 
 /**
  * The Interface RestRequest.

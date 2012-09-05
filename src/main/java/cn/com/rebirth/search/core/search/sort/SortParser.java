@@ -7,7 +7,7 @@ package cn.com.rebirth.search.core.search.sort;
 
 import org.apache.lucene.search.SortField;
 
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.search.internal.SearchContext;
 
 /**

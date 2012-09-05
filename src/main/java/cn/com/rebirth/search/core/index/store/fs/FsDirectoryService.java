@@ -17,8 +17,8 @@ import org.apache.lucene.store.NativeFSLockFactory;
 import org.apache.lucene.store.NoLockFactory;
 import org.apache.lucene.store.SimpleFSLockFactory;
 
+import cn.com.rebirth.commons.io.FileSystemUtils;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.io.FileSystemUtils;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;
 import cn.com.rebirth.search.core.index.shard.ShardId;

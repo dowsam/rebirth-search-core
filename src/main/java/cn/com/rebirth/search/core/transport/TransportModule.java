@@ -6,10 +6,10 @@
 package cn.com.rebirth.search.core.transport;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.inject.Modules;
-import cn.com.rebirth.search.commons.inject.SpawnModules;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Module;
+import cn.com.rebirth.core.inject.Modules;
+import cn.com.rebirth.core.inject.SpawnModules;
 import cn.com.rebirth.search.core.jmx.JmxService;
 import cn.com.rebirth.search.core.transport.local.LocalTransportModule;
 import cn.com.rebirth.search.core.transport.netty.NettyTransportModule;

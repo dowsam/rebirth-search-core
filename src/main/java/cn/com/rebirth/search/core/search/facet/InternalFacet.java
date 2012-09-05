@@ -10,7 +10,7 @@ import java.io.IOException;
 import cn.com.rebirth.commons.collect.MapBuilder;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.Streamable;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.ToXContent;
 
 import com.google.common.collect.ImmutableMap;
 

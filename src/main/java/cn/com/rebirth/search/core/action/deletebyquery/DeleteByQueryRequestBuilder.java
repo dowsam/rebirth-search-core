@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.action.deletebyquery;
 import java.util.Map;
 
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.WriteConsistencyLevel;
 import cn.com.rebirth.search.core.action.support.BaseRequestBuilder;

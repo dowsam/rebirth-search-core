@@ -22,10 +22,10 @@ import org.apache.lucene.search.TopFieldDocs;
 import org.apache.lucene.util.PriorityQueue;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.trove.ExtTIntArrayList;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.search.SearchShardTarget;
 import cn.com.rebirth.search.core.search.dfs.AggregatedDfs;
 import cn.com.rebirth.search.core.search.dfs.DfsSearchResult;

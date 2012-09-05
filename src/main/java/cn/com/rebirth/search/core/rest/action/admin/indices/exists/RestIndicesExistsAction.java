@@ -5,9 +5,13 @@
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.exists;
 
+import static cn.com.rebirth.search.core.rest.RestRequest.Method.HEAD;
+import static cn.com.rebirth.search.core.rest.RestStatus.NOT_FOUND;
+import static cn.com.rebirth.search.core.rest.RestStatus.OK;
+import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.settings.SettingsFilter;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.settings.SettingsFilter;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.exists.IndicesExistsRequest;
 import cn.com.rebirth.search.core.action.admin.indices.exists.IndicesExistsResponse;
@@ -18,9 +22,6 @@ import cn.com.rebirth.search.core.rest.RestController;
 import cn.com.rebirth.search.core.rest.RestRequest;
 import cn.com.rebirth.search.core.rest.StringRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
-import static cn.com.rebirth.search.core.rest.RestRequest.Method.HEAD;
-import static cn.com.rebirth.search.core.rest.RestStatus.*;
-import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
 
 /**
  * The Class RestIndicesExistsAction.

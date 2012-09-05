@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.transport.netty;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.jmx.MBean;
 import cn.com.rebirth.search.core.jmx.ManagedAttribute;
 import cn.com.rebirth.search.core.transport.Transport;

@@ -5,8 +5,8 @@
 
 package cn.com.rebirth.search.core.node;
 
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
 import cn.com.rebirth.search.core.node.internal.InternalNode;
 
 /**

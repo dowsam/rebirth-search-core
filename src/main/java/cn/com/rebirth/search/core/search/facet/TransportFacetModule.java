@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.search.facet;
 
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 import cn.com.rebirth.search.core.search.facet.datehistogram.InternalDateHistogramFacet;
 import cn.com.rebirth.search.core.search.facet.filter.InternalFilterFacet;
 import cn.com.rebirth.search.core.search.facet.geodistance.InternalGeoDistanceFacet;

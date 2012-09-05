@@ -5,9 +5,9 @@
 
 package cn.com.rebirth.search.core.client.node;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.client.AdminClient;
 import cn.com.rebirth.search.core.client.ClusterAdminClient;
 import cn.com.rebirth.search.core.client.IndicesAdminClient;

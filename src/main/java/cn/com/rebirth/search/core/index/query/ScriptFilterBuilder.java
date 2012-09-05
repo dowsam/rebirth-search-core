@@ -10,7 +10,7 @@ import static com.google.common.collect.Maps.newHashMap;
 import java.io.IOException;
 import java.util.Map;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 /**
  * The Class ScriptFilterBuilder.

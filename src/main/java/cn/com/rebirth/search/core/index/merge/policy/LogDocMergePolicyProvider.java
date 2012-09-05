@@ -15,10 +15,10 @@ import org.apache.lucene.index.LogDocMergePolicy;
 import org.apache.lucene.index.SegmentInfo;
 import org.apache.lucene.index.SegmentInfos;
 
+import cn.com.rebirth.commons.Preconditions;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.Preconditions;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.cluster.metadata.IndexMetaData;
 import cn.com.rebirth.search.core.index.settings.IndexSettingsService;
 import cn.com.rebirth.search.core.index.shard.AbstractIndexShardComponent;

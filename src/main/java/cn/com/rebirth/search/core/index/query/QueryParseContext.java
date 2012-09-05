@@ -19,7 +19,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Similarity;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.analysis.AnalysisService;
 import cn.com.rebirth.search.core.index.cache.IndexCache;

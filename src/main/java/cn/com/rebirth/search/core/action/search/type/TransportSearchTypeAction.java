@@ -16,6 +16,7 @@ import jsr166y.LinkedTransferQueue;
 import cn.com.rebirth.commons.Nullable;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.trove.ExtTIntArrayList;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.search.ReduceSearchPhaseException;
 import cn.com.rebirth.search.core.action.search.SearchOperationThreading;
@@ -40,7 +41,6 @@ import cn.com.rebirth.search.core.search.controller.SearchPhaseController;
 import cn.com.rebirth.search.core.search.controller.ShardDoc;
 import cn.com.rebirth.search.core.search.internal.InternalSearchRequest;
 import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class TransportSearchTypeAction.

@@ -6,12 +6,12 @@
 package cn.com.rebirth.search.core.jmx;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.TypeLiteral;
-import cn.com.rebirth.search.commons.inject.matcher.Matchers;
-import cn.com.rebirth.search.commons.inject.spi.InjectionListener;
-import cn.com.rebirth.search.commons.inject.spi.TypeEncounter;
-import cn.com.rebirth.search.commons.inject.spi.TypeListener;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.TypeLiteral;
+import cn.com.rebirth.core.inject.matcher.Matchers;
+import cn.com.rebirth.core.inject.spi.InjectionListener;
+import cn.com.rebirth.core.inject.spi.TypeEncounter;
+import cn.com.rebirth.core.inject.spi.TypeListener;
 import cn.com.rebirth.search.core.jmx.action.GetJmxServiceUrlAction;
 
 /**

@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.apache.lucene.util.UnicodeUtil;
 
 import cn.com.rebirth.commons.thread.ThreadLocals;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 /**
  * The Class XContentRestResponse.

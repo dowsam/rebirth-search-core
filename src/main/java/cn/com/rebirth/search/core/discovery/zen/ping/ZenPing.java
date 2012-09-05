@@ -10,12 +10,12 @@ import static cn.com.rebirth.search.core.cluster.node.DiscoveryNode.readNode;
 
 import java.io.IOException;
 
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.core.cluster.ClusterName;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.discovery.zen.DiscoveryNodesProvider;

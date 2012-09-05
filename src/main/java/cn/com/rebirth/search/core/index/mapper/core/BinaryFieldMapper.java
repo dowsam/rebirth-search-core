@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.index.mapper.core;
 
-import static cn.com.rebirth.search.commons.xcontent.support.XContentMapValues.nodeBooleanValue;
+import static cn.com.rebirth.commons.xcontent.support.XContentMapValues.nodeBooleanValue;
 import static cn.com.rebirth.search.core.index.mapper.MapperBuilders.binaryField;
 import static cn.com.rebirth.search.core.index.mapper.core.TypeParsers.parseField;
 
@@ -19,12 +19,12 @@ import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.compress.lzf.LZF;
 import cn.com.rebirth.commons.compress.lzf.LZFDecoder;
 import cn.com.rebirth.commons.exception.RebirthParseException;
+import cn.com.rebirth.commons.io.stream.CachedStreamOutput;
+import cn.com.rebirth.commons.io.stream.LZFStreamOutput;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.commons.Base64;
-import cn.com.rebirth.search.commons.io.stream.CachedStreamOutput;
-import cn.com.rebirth.search.commons.io.stream.LZFStreamOutput;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.mapper.Mapper;
 import cn.com.rebirth.search.core.index.mapper.MapperParsingException;
 import cn.com.rebirth.search.core.index.mapper.MergeContext;

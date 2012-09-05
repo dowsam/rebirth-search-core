@@ -19,9 +19,9 @@ import org.mvel2.compiler.ExecutableStatement;
 import org.mvel2.integration.impl.MapVariableResolverFactory;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.math.UnboxedMathUtils;
 import cn.com.rebirth.search.core.script.ExecutableScript;
 import cn.com.rebirth.search.core.script.ScriptEngineService;

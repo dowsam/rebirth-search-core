@@ -5,11 +5,10 @@
 	<parent>
 		<groupId>cn.com.rebirth</groupId>
 		<artifactId>rebirth-parent</artifactId>
-		<version>0.0.1.RC1-SNAPSHOT</version>
+		<version>0.0.2.RC5.SNAPSHOT</version>
 	</parent>
 	<artifactId>rebirth-search-core</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1.RC1-SNAPSHOT</version>
 	<name>Rebirth :: Module :: rebirth-search-core</name>
 
 	<dependencies>
@@ -31,6 +30,11 @@
 		<dependency>
 			<groupId>cn.com.rebirth</groupId>
 			<artifactId>rebirth-commons</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>cn.com.rebirth</groupId>
+			<artifactId>rebirth-core</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -79,7 +83,6 @@
 		<dependency>
 			<groupId>org.fusesource</groupId>
 			<artifactId>sigar</artifactId>
-			<version>1.6.4</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>

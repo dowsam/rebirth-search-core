@@ -5,8 +5,8 @@
 
 package cn.com.rebirth.search.core.client.internal;
 
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.client.ClusterAdminClient;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Interface InternalClusterAdminClient.

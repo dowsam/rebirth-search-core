@@ -6,8 +6,8 @@
 package cn.com.rebirth.search.core.index.cache.query.parser;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Scopes;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Scopes;
 import cn.com.rebirth.search.core.index.cache.query.parser.resident.ResidentQueryParserCache;
 
 /**

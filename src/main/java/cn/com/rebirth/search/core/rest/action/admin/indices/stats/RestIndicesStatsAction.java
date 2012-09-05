@@ -5,12 +5,18 @@
 
 package cn.com.rebirth.search.core.rest.action.admin.indices.stats;
 
+import static cn.com.rebirth.search.core.rest.RestRequest.Method.GET;
+import static cn.com.rebirth.search.core.rest.RestStatus.OK;
+import static cn.com.rebirth.search.core.rest.action.support.RestActions.buildBroadcastShardsHeader;
+import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitIndices;
+import static cn.com.rebirth.search.core.rest.action.support.RestActions.splitTypes;
+
 import java.io.IOException;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.stats.IndicesStats;
 import cn.com.rebirth.search.core.action.admin.indices.stats.IndicesStatsRequest;
@@ -23,9 +29,6 @@ import cn.com.rebirth.search.core.rest.RestRequest;
 import cn.com.rebirth.search.core.rest.XContentRestResponse;
 import cn.com.rebirth.search.core.rest.XContentThrowableRestResponse;
 import cn.com.rebirth.search.core.rest.action.support.RestXContentBuilder;
-import static cn.com.rebirth.search.core.rest.RestRequest.Method.GET;
-import static cn.com.rebirth.search.core.rest.RestStatus.OK;
-import static cn.com.rebirth.search.core.rest.action.support.RestActions.*;
 
 /**
  * The Class RestIndicesStatsAction.

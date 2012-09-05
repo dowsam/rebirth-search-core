@@ -5,7 +5,7 @@
 
 package cn.com.rebirth.search.core.http;
 
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.commons.transport.BoundTransportAddress;
 
 /**

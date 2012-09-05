@@ -6,8 +6,8 @@
 package cn.com.rebirth.search.core.index.cache.field.data.soft;
 
 import cn.com.rebirth.commons.settings.Settings;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.cache.CacheBuilderHelper;
-import cn.com.rebirth.search.commons.inject.Inject;
 import cn.com.rebirth.search.commons.metrics.CounterMetric;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.cache.field.data.support.AbstractConcurrentMapFieldDataCache;

@@ -5,9 +5,9 @@
 
 package cn.com.rebirth.search.core.index.query;
 
-import cn.com.rebirth.search.commons.io.BytesStream;
-import cn.com.rebirth.search.commons.xcontent.ToXContent;
-import cn.com.rebirth.search.commons.xcontent.XContentType;
+import cn.com.rebirth.commons.io.BytesStream;
+import cn.com.rebirth.commons.xcontent.ToXContent;
+import cn.com.rebirth.commons.xcontent.XContentType;
 
 /**
  * The Interface QueryBuilder.

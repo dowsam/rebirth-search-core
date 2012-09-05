@@ -10,8 +10,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
 import cn.com.rebirth.search.core.cluster.metadata.MetaData;
 import cn.com.rebirth.search.core.cluster.node.DiscoveryNode;
 import cn.com.rebirth.search.core.node.settings.NodeSettingsService;

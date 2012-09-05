@@ -23,9 +23,9 @@ import org.apache.lucene.search.TermRangeFilter;
 import org.apache.lucene.search.TermRangeQuery;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.commons.lucene.Lucene;
 import cn.com.rebirth.search.commons.lucene.search.TermFilter;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.index.mapper.FieldMapperListener;

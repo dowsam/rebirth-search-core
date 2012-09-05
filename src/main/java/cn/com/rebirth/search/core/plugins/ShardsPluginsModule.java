@@ -9,11 +9,11 @@ import java.util.Collection;
 import java.util.List;
 
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
-import cn.com.rebirth.search.commons.inject.Module;
-import cn.com.rebirth.search.commons.inject.Modules;
-import cn.com.rebirth.search.commons.inject.PreProcessModule;
-import cn.com.rebirth.search.commons.inject.SpawnModules;
+import cn.com.rebirth.core.inject.AbstractModule;
+import cn.com.rebirth.core.inject.Module;
+import cn.com.rebirth.core.inject.Modules;
+import cn.com.rebirth.core.inject.PreProcessModule;
+import cn.com.rebirth.core.inject.SpawnModules;
 
 import com.google.common.collect.Lists;
 

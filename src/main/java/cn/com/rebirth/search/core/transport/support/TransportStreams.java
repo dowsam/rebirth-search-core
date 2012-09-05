@@ -7,9 +7,9 @@ package cn.com.rebirth.search.core.transport.support;
 
 import java.io.IOException;
 
+import cn.com.rebirth.commons.io.stream.CachedStreamOutput;
+import cn.com.rebirth.commons.io.stream.HandlesStreamOutput;
 import cn.com.rebirth.commons.io.stream.Streamable;
-import cn.com.rebirth.search.commons.io.stream.CachedStreamOutput;
-import cn.com.rebirth.search.commons.io.stream.HandlesStreamOutput;
 import cn.com.rebirth.search.core.transport.TransportRequestOptions;
 import cn.com.rebirth.search.core.transport.TransportResponseOptions;
 

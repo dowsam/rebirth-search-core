@@ -8,7 +8,7 @@ package cn.com.rebirth.search.core.index.query;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 
 import com.google.common.collect.Lists;
 

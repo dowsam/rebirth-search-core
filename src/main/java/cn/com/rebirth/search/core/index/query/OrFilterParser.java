@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 import org.apache.lucene.search.Filter;
 
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.search.OrFilter;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
 import cn.com.rebirth.search.core.index.cache.filter.support.CacheKeyFilter;
 
 /**

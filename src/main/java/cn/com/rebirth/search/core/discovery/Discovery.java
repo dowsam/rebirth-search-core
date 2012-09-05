@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.discovery;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.search.core.cluster.ClusterState;
 import cn.com.rebirth.search.core.cluster.block.ClusterBlock;
 import cn.com.rebirth.search.core.cluster.block.ClusterBlockLevel;

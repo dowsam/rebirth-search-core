@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.index.service;
 
 import cn.com.rebirth.commons.exception.RebirthException;
-import cn.com.rebirth.search.commons.inject.Injector;
+import cn.com.rebirth.core.inject.Injector;
 import cn.com.rebirth.search.core.index.IndexComponent;
 import cn.com.rebirth.search.core.index.IndexShardMissingException;
 import cn.com.rebirth.search.core.index.aliases.IndexAliasesService;

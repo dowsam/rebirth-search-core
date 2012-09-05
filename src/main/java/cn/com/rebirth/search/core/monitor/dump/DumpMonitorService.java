@@ -5,24 +5,29 @@
 
 package cn.com.rebirth.search.core.monitor.dump;
 
-import static cn.com.rebirth.search.core.monitor.dump.heap.HeapDumpContributor.HEAP_DUMP;
-import static cn.com.rebirth.search.core.monitor.dump.summary.SummaryDumpContributor.SUMMARY;
-import static cn.com.rebirth.search.core.monitor.dump.thread.ThreadDumpContributor.THREAD_DUMP;
+import static cn.com.rebirth.core.monitor.dump.heap.HeapDumpContributor.HEAP_DUMP;
+import static cn.com.rebirth.core.monitor.dump.summary.SummaryDumpContributor.SUMMARY;
+import static cn.com.rebirth.core.monitor.dump.thread.ThreadDumpContributor.THREAD_DUMP;
 import static com.google.common.collect.Maps.newHashMap;
 
 import java.io.File;
 import java.util.Map;
 
 import cn.com.rebirth.commons.Nullable;
+import cn.com.rebirth.commons.component.AbstractComponent;
+import cn.com.rebirth.commons.settings.ImmutableSettings;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.settings.ImmutableSettings;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.monitor.dump.DumpContributor;
+import cn.com.rebirth.core.monitor.dump.DumpContributorFactory;
+import cn.com.rebirth.core.monitor.dump.DumpGenerationFailedException;
+import cn.com.rebirth.core.monitor.dump.DumpGenerator;
+import cn.com.rebirth.core.monitor.dump.SimpleDumpGenerator;
+import cn.com.rebirth.core.monitor.dump.heap.HeapDumpContributor;
+import cn.com.rebirth.core.monitor.dump.summary.SummaryDumpContributor;
+import cn.com.rebirth.core.monitor.dump.thread.ThreadDumpContributor;
 import cn.com.rebirth.search.core.cluster.ClusterService;
 import cn.com.rebirth.search.core.env.Environment;
-import cn.com.rebirth.search.core.monitor.dump.heap.HeapDumpContributor;
-import cn.com.rebirth.search.core.monitor.dump.summary.SummaryDumpContributor;
-import cn.com.rebirth.search.core.monitor.dump.thread.ThreadDumpContributor;
 
 /**
  * The Class DumpMonitorService.

@@ -11,13 +11,10 @@ import java.util.List;
 
 import cn.com.rebirth.commons.io.stream.StreamInput;
 import cn.com.rebirth.commons.io.stream.StreamOutput;
-import cn.com.rebirth.search.commons.io.Streams;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilderString;
-import cn.com.rebirth.search.commons.xcontent.ToXContent.Params;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilderString;
 import cn.com.rebirth.search.core.search.facet.Facet;
 import cn.com.rebirth.search.core.search.facet.InternalFacet;
-import cn.com.rebirth.search.core.search.facet.InternalFacet.Stream;
 
 import com.google.common.collect.ImmutableList;
 

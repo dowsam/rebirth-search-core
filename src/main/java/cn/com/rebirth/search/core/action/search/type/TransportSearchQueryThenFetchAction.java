@@ -10,7 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.trove.ExtTIntArrayList;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.search.ReduceSearchPhaseException;
 import cn.com.rebirth.search.core.action.search.SearchOperationThreading;
@@ -30,7 +31,6 @@ import cn.com.rebirth.search.core.search.internal.InternalSearchRequest;
 import cn.com.rebirth.search.core.search.internal.InternalSearchResponse;
 import cn.com.rebirth.search.core.search.query.QuerySearchResult;
 import cn.com.rebirth.search.core.search.query.QuerySearchResultProvider;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class TransportSearchQueryThenFetchAction.

@@ -15,7 +15,7 @@ import org.apache.lucene.search.Filter;
 import cn.com.rebirth.commons.concurrent.ConcurrentCollections;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.commons.lucene.docset.DocSet;
 import cn.com.rebirth.search.commons.lucene.search.NoCacheFilter;
 import cn.com.rebirth.search.commons.metrics.CounterMetric;

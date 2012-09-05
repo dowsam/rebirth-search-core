@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 import cn.com.rebirth.commons.Strings;
 import cn.com.rebirth.commons.collect.MapBuilder;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.mapper.ContentPath;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.index.mapper.FieldMapperListener;

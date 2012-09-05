@@ -8,15 +8,15 @@ package cn.com.rebirth.search.core.index.store.memory;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeUnit;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.monitor.jvm.JvmInfo;
+import cn.com.rebirth.core.monitor.jvm.JvmStats;
 import cn.com.rebirth.search.core.cache.memory.ByteBufferCache;
 import cn.com.rebirth.search.core.index.Index;
 import cn.com.rebirth.search.core.index.service.IndexService;
 import cn.com.rebirth.search.core.index.settings.IndexSettings;
 import cn.com.rebirth.search.core.index.store.DirectoryService;
 import cn.com.rebirth.search.core.index.store.support.AbstractIndexStore;
-import cn.com.rebirth.search.core.monitor.jvm.JvmInfo;
-import cn.com.rebirth.search.core.monitor.jvm.JvmStats;
 
 /**
  * The Class ByteBufferIndexStore.

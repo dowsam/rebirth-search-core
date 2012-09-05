@@ -5,11 +5,11 @@
 
 package cn.com.rebirth.search.core.gateway.none;
 
+import cn.com.rebirth.commons.component.AbstractLifecycleComponent;
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractLifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.inject.Module;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.inject.Module;
 import cn.com.rebirth.search.core.cluster.ClusterState;
 import cn.com.rebirth.search.core.gateway.Gateway;
 import cn.com.rebirth.search.core.gateway.GatewayException;

@@ -7,9 +7,9 @@ package cn.com.rebirth.search.core.plugins;
 
 import java.util.Collection;
 
+import cn.com.rebirth.commons.component.LifecycleComponent;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.LifecycleComponent;
-import cn.com.rebirth.search.commons.inject.Module;
+import cn.com.rebirth.core.inject.Module;
 import cn.com.rebirth.search.core.index.CloseableIndexComponent;
 
 /**

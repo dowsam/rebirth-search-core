@@ -10,7 +10,8 @@ import java.util.concurrent.ScheduledFuture;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.commons.unit.ByteSizeValue;
 import cn.com.rebirth.commons.unit.TimeValue;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.cluster.metadata.IndexMetaData;
 import cn.com.rebirth.search.core.index.CloseableIndexComponent;
 import cn.com.rebirth.search.core.index.deletionpolicy.SnapshotIndexCommit;
@@ -28,7 +29,6 @@ import cn.com.rebirth.search.core.index.shard.ShardId;
 import cn.com.rebirth.search.core.index.shard.service.IndexShard;
 import cn.com.rebirth.search.core.index.shard.service.InternalIndexShard;
 import cn.com.rebirth.search.core.index.translog.Translog;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Class IndexShardGatewayService.

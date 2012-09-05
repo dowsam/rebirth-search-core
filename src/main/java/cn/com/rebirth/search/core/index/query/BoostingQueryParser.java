@@ -10,8 +10,8 @@ import java.io.IOException;
 import org.apache.lucene.search.BoostingQuery;
 import org.apache.lucene.search.Query;
 
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 
 /**
  * The Class BoostingQueryParser.

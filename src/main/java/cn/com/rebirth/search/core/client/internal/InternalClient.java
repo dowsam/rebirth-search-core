@@ -5,8 +5,8 @@
 
 package cn.com.rebirth.search.core.client.internal;
 
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.client.Client;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 
 /**
  * The Interface InternalClient.

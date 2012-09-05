@@ -6,7 +6,7 @@
 package cn.com.rebirth.search.core.env;
 
 import cn.com.rebirth.commons.Nullable;
-import cn.com.rebirth.search.commons.inject.AbstractModule;
+import cn.com.rebirth.core.inject.AbstractModule;
 
 /**
  * The Class NodeEnvironmentModule.

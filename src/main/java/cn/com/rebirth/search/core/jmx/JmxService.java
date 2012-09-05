@@ -20,9 +20,9 @@ import javax.management.remote.JMXServiceURL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cn.com.rebirth.commons.PortsRange;
 import cn.com.rebirth.commons.settings.Settings;
 import cn.com.rebirth.search.commons.network.NetworkService;
-import cn.com.rebirth.search.commons.transport.PortsRange;
 
 /**
  * The Class JmxService.

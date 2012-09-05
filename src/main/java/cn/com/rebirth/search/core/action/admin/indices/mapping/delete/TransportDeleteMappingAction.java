@@ -10,7 +10,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import cn.com.rebirth.commons.exception.RebirthException;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.inject.Inject;
+import cn.com.rebirth.core.inject.Inject;
+import cn.com.rebirth.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.action.ActionListener;
 import cn.com.rebirth.search.core.action.admin.indices.refresh.RefreshResponse;
 import cn.com.rebirth.search.core.action.admin.indices.refresh.TransportRefreshAction;
@@ -25,7 +26,6 @@ import cn.com.rebirth.search.core.cluster.block.ClusterBlockLevel;
 import cn.com.rebirth.search.core.cluster.metadata.MetaDataMappingService;
 import cn.com.rebirth.search.core.index.query.FilterBuilders;
 import cn.com.rebirth.search.core.index.query.QueryBuilders;
-import cn.com.rebirth.search.core.threadpool.ThreadPool;
 import cn.com.rebirth.search.core.transport.TransportService;
 
 /**

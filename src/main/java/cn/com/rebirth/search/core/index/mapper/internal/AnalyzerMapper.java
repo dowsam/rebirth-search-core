@@ -11,7 +11,7 @@ import java.util.Map;
 import org.apache.lucene.analysis.Analyzer;
 
 import cn.com.rebirth.commons.Strings;
-import cn.com.rebirth.search.commons.xcontent.XContentBuilder;
+import cn.com.rebirth.commons.xcontent.XContentBuilder;
 import cn.com.rebirth.search.core.index.mapper.FieldMapperListener;
 import cn.com.rebirth.search.core.index.mapper.InternalMapper;
 import cn.com.rebirth.search.core.index.mapper.Mapper;

@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import cn.com.rebirth.commons.component.AbstractComponent;
 import cn.com.rebirth.commons.regex.Regex;
 import cn.com.rebirth.commons.settings.Settings;
-import cn.com.rebirth.search.commons.component.AbstractComponent;
-import cn.com.rebirth.search.commons.inject.Inject;
-import cn.com.rebirth.search.commons.xcontent.XContentParser;
+import cn.com.rebirth.commons.xcontent.XContentParser;
+import cn.com.rebirth.core.inject.Inject;
 import cn.com.rebirth.search.core.index.field.data.FieldDataType;
 import cn.com.rebirth.search.core.index.mapper.FieldMapper;
 import cn.com.rebirth.search.core.index.mapper.ip.IpFieldMapper;
